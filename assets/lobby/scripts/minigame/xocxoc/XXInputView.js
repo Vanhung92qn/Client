@@ -1,0 +1,733 @@
+/**
+ * Created by Welcome on 5/28/2019.
+ */
+
+const players = require('PlayerData').players;
+
+(function () {
+    cc.XXInputView = cc.Class({
+        "extends": cc.Component,
+        properties: {
+            nodeParentChip: cc.Node,
+
+            btnBetVals: [cc.Button],
+            btnChips: [cc.Button],
+
+            btnX2: cc.Button,
+            spriteX2: {
+                default: null,
+                type: cc.Sprite,
+                tooltip: 'Sprite cua icon X2 (con cua btnX2). Tu doi spriteFrame khi on/off.'
+            },
+            sfX2: {
+                default: [],
+                type: [cc.SpriteFrame],
+                tooltip: '2 sprite frame: [0] = on (sang), [1] = off (toi/disabled)'
+            },
+
+            btnRepeat: cc.Button,
+            spriteRepeat: {
+                default: null,
+                type: cc.Sprite,
+                tooltip: 'Sprite cua icon Repeat (con cua btnRepeat).'
+            },
+            sfRepeat: {
+                default: [],
+                type: [cc.SpriteFrame],
+                tooltip: '2 sprite frame: [0] = on, [1] = off'
+            },
+
+            spriteNan: cc.Sprite,
+
+            //totalBet các cửa
+            lbTotalBets: [cc.Label],
+
+            //totalBet các cửa của user
+            lbTotalUserBets: [cc.Label],
+        },
+
+        onLoad: function () {
+            cc.XXController.getInstance().setXXInputView(this);
+
+            //danh dau che do Nan
+            this.isNan = false;
+            cc.XXController.getInstance().setIsNan(this.isNan);
+
+            this.nodeChipPress = [];
+            var self = this;
+            this.btnChips.forEach(function (btnChip) {
+                self.nodeChipPress.push(btnChip.node.getChildByName('chip_press'));
+            });
+
+//toa do X, Y cua tam o BET + bai rai chip ±N quanh tam
+            //  Sau khi swap button data trong Cocos editor (2026-05-16):
+            //    [0] Le 1:2      = gate 1 (Odd)         button data="0"
+            //    [1] Le 3 DEN    = gate 2 (ThreeUp)     button data="1" (truoc data "3 trang")
+            //    [2] Le 3 TRANG  = gate 3 (ThreeDown)   button data="2" (truoc data "3 den")
+            //    [3] Chan 1:2    = gate 4 (Even)        button data="3"
+            //    [4] Chan 4 DEN  = gate 5 (FourUp)      button data="4" (truoc data "4 trang")
+            //    [5] Chan 4 TRANG= gate 6 (FourDown)    button data="5" (truoc data "4 den")
+            //
+            //  Vi tri = vi tri visual cua button TUONG UNG (button "3 den" nam o cho cu Le3D).
+            //  centerXs/Ys da swap [1]<->[2] va [4]<->[5] de chip dap dung tai button.
+            //                Le1:2  Le3D    Le3T   Chan1:2 Chan4D  Chan4T
+            var centerXs = [   290,   125,  -118,    -290,    360,   -360];
+            var centerYs = [    85,   -90,   -90,      85,    -90,    -90];
+            var scatter = 30;   //bai rai chip ±30 px quanh tam
+            this.minXs = centerXs.map(function (x) { return x - scatter; });
+            this.maxXs = centerXs.map(function (x) { return x + scatter; });
+            this.minYs = centerYs.map(function (y) { return y - scatter; });
+            this.maxYs = centerYs.map(function (y) { return y + scatter; });
+
+            //vi tri dealer
+            this.rootDealerPos = cc.v2(0, 136);
+
+            //index chip
+            this.chipIndex = 1;
+
+            //mang cac gia tri Bet (map voi button)
+            this.betVals = [1000, 5000, 10000, 100000, 500000];
+            this.processBetValUI();
+
+            //reset lastBetData
+            cc.XXController.getInstance().setLastBetData(null);
+
+            //reset totalBetUI
+            this.resetTotalBetUI();
+
+            //thoi gian giua cac lan dat (minisecond)
+            this.timePerBet = 100;
+
+            this.currentState = -1;
+
+            //arr timeout reBet
+            this.timeouts = [];
+
+            //Vi tri cua groupUser
+            this.posGroupUser = cc.v2(420, 250);
+
+            this.initGateChip();
+            cc.XXController.getInstance().initLogBet();
+        },
+        initGateChip: function () {
+            //Chip cua tung gate
+            this.gateChips = [];
+            //Khoi tao gateChip tung cua
+            for (let i = 1; i <= 6; i++) {
+                this.gateChips[i] = [];
+            }
+        },
+
+        //HubOn - PlayerBet
+        playerBet: function (info) {
+            //dam bao joinGame xong moi xu ly - tranh loi server neu bi
+            if (cc.XXController.getInstance().getPositions()) {
+                var accID = info[0];
+                var amount = info[1];
+                var gate = info[2];
+                var chip = info[3];
+
+                cc.XXController.getInstance().updateChip(accID, chip);
+
+                this.playFxUserBet(
+                    cc.XXController.getInstance().getIndexUIBetByAccID(accID),
+                    gate,
+                    this.getChipIndexFromValue(amount),
+                    true
+                );
+
+                //them tong dat o cac cua
+                this.totalBets[gate - 1] += amount;
+                this.lbTotalBets[gate - 1].string = cc.Tool.getInstance().formatNumber(this.totalBets[gate - 1]);
+
+                //them tong dat o cac cua (cua user)
+                if (accID === cc.LoginController.getInstance().getUserId()) {
+                    cc.XXController.getInstance().setLogBet({
+                        'AccountID': accID,
+                        'Amount': amount,
+                        'Gate': gate
+                    });
+                    this.totalUserBets[gate - 1] += amount;
+                    this.lbTotalUserBets[gate - 1].string = cc.Tool.getInstance().formatNumber(this.totalUserBets[gate - 1]);
+                    this.lbTotalUserBets[gate - 1].node.parent.active = true;
+
+                    cc.DDNA.getInstance().betSummary(cc.DDNAGame.XOC_XOC, amount, cc.XXController.getInstance().getSID());
+                }
+            }
+        },
+
+        reBet: function (betLog, isX2) {
+            var self = this;
+            var totalBet = 0;
+
+            //tinh truoc tong tien de kiem tra balance
+            //duyet qua cac luot bet
+            betLog.forEach(function (bet) {
+                totalBet += bet.Amount;
+            });
+            if (isX2) {
+                totalBet *= 2;
+            }
+
+            // console.log('reBet totalBet: ' + totalBet);
+            // console.log('reBet Số dư: ' + cc.BalanceController.getInstance().getBalance());
+
+            //kiem tra so du du ko? -> ko đủ return luôn
+            if (totalBet > cc.BalanceController.getInstance().getBalance()) {
+                cc.PopupController.getInstance().showMessage('Số dư không đủ.');
+                return;
+            }
+
+            //GỘP CHIP BET LẠI
+
+            //tính tông số chip đặt các cửa
+            var ODD = 0;
+            var THREE_UP = 0;
+            var THREE_DOWN = 0;
+            var EVEN = 0;
+            var FOUR_UP = 0;
+            var FOUR_DOWN = 0;
+            //duyet qua cac luot bet
+            betLog.forEach(function (bet) {
+                switch (bet.Gate) {
+                    case cc.XXGate.ODD:
+                        ODD += bet.Amount;
+                        break;
+                    case cc.XXGate.THREE_UP:
+                        THREE_UP += bet.Amount;
+                        break;
+                    case cc.XXGate.THREE_DOWN:
+                        THREE_DOWN += bet.Amount;
+                        break;
+                    case cc.XXGate.EVEN:
+                        EVEN += bet.Amount;
+                        break;
+                    case cc.XXGate.FOUR_UP:
+                        FOUR_UP += bet.Amount;
+                        break;
+                    case cc.XXGate.FOUR_DOWN:
+                        FOUR_DOWN += bet.Amount;
+                        break;
+                }
+            });
+
+            var bet500 = 0; //đếm số bet
+            var bet100 = 0; //đếm số bet
+            var bet10 = 0; //đếm số bet
+            var bet5 = 0; //đếm số bet
+            var bet1 = 0; //đếm số bet
+
+            //tổng số chip đặt các cửa
+            var gates = [ODD, THREE_UP, THREE_DOWN, EVEN, FOUR_UP, FOUR_DOWN];
+            //luu lai gia tri Bet da toi uu
+            var bets = [];
+
+            for (var i = 0; i < 6; i++) {
+                bet500 = 0; //đếm số bet
+                bet100 = 0; //đếm số bet
+                bet10 = 0; //đếm số bet
+                bet5 = 0; //đếm số bet
+                bet1 = 0; //đếm số bet
+
+                totalBet = gates[i];
+                if (isX2) {
+                    totalBet *= 2;
+                }
+                // console.log('totalBet: ', totalBet);
+
+                bet500 = Math.floor(totalBet / 500000);
+                // console.log('bet500: ' + bet500, i);
+                totalBet = totalBet - (bet500 * 500000);
+
+                if (totalBet > 0) {
+                    bet100 = Math.floor(totalBet / 100000);
+                    // console.log('bet100: ' + bet100, i);
+                    totalBet = totalBet - (bet100 * 100000);
+                }
+
+                if (totalBet > 0) {
+                    bet10 = Math.floor(totalBet / 10000);
+                    // console.log('bet10: ' + bet10, i);
+                    totalBet = totalBet - (bet10 * 10000);
+                }
+
+                if (totalBet > 0) {
+                    bet5 = Math.floor(totalBet / 5000);
+                    // console.log('bet5: ' + bet5, i);
+                    totalBet = totalBet - (bet5 * 5000);
+                }
+
+                if (totalBet > 0) {
+                    bet1 = Math.floor(totalBet / 1000);
+                    // console.log('bet1: ' + bet1, i);
+                }
+
+                for (var j = 0; j < bet500; j++) {
+                    bets.push({
+                        'Gate': i + 1,
+                        'Amount': 500000,
+                    });
+                }
+
+                for (j = 0; j < bet100; j++) {
+                    bets.push({
+                        'Gate': i + 1,
+                        'Amount': 100000,
+                    });
+                }
+
+                for (j = 0; j < bet10; j++) {
+                    bets.push({
+                        'Gate': i + 1,
+                        'Amount': 10000,
+                    });
+                }
+
+                for (j = 0; j < bet5; j++) {
+                    bets.push({
+                        'Gate': i + 1,
+                        'Amount': 5000,
+                    });
+                }
+
+                for (j = 0; j < bet1; j++) {
+                    bets.push({
+                        'Gate': i + 1,
+                        'Amount': 1000,
+                    });
+                }
+            }
+
+            this.count = 0;
+            //duyet qua cac luot bet
+
+            this.timeouts = [];
+            bets.forEach(function (bet) {
+                self.timeouts.push(
+                    setTimeout(function () {
+                        if (self.currentState === cc.XXState.BETTING) {
+                            self.sendRequestReBet(bet);
+                        }
+                    }, self.timePerBet * self.count)
+                );
+
+                self.count++;
+            });
+
+        },
+
+        sendRequestReBet: function (bet) {
+            //kiem tra so du
+            if (cc.BalanceController.getInstance().getBalance() < bet.Amount) {
+                cc.PopupController.getInstance().showMessage('Số dư không đủ');
+                return;
+            } else {
+                //send request
+                cc.XXController.getInstance().sendRequestOnHub(cc.MethodHubName.BET, bet.Amount, bet.Gate);
+            }
+        },
+
+        showLastInput: function (info) {
+            // console.log('XXInput showLastInput');
+            var self = this;
+            var betLogs = info;
+            //duyet qua betLog của tat ca player
+            betLogs.forEach(function (betLog) {
+                //duyet qua cac luot bet cua player
+                betLog.forEach(function (bet) {
+                    self.playFxUserBet(
+                        cc.XXController.getInstance().getIndexUIBetByAccID(bet.AccountID),
+                        bet.BetSide,
+                        self.getChipIndexFromValue(bet.BetValue),
+                        false
+                    );
+
+                    //them tong dat o cac cua
+                    self.totalBets[bet.BetSide - 1] += bet.BetValue;
+                    self.lbTotalBets[bet.BetSide - 1].string = cc.Tool.getInstance().formatNumber(self.totalBets[bet.BetSide - 1]);
+
+                    //them tong dat o cac cua (cua user)
+                    if (bet.AccountID === cc.LoginController.getInstance().getUserId()) {
+                        cc.XXController.getInstance().setLogBet({
+                            'AccountID': bet.AccountID,
+                            'Amount': bet.BetValue,
+                            'Gate': bet.BetSide
+                        });
+                        self.totalUserBets[bet.BetSide - 1] += bet.BetValue;
+                        self.lbTotalUserBets[bet.BetSide - 1].string = cc.Tool.getInstance().formatNumber(self.totalUserBets[bet.BetSide - 1]);
+                        self.lbTotalUserBets[bet.BetSide - 1].node.parent.active = true;
+                    }
+                })
+            });
+        },
+
+
+        //lay ve player bet
+        getPlayerBets: function () {
+            return players;
+        },
+
+        //lay ve index loai Chip bet
+        getChipIndexFromValue: function (betVal) {
+            var index = 0;
+            var length = this.betVals.length;
+            for (var i = 0; i < length; i++) {
+                if (betVal === this.betVals[i]) {
+                    index = i;
+                    break;
+                }
+            }
+            return index;
+        },
+
+        //tat/bat cac button chuc nang
+        activeAllButtonBet: function (enable) {
+            this.btnBetVals.forEach(function (btnBet) {
+                btnBet.interactable = enable;
+            });
+            this._setBtnX2(enable);
+            this._setBtnRepeat(enable);
+        },
+
+        //Toggle btnX2: doi sprite frame + interactable (sfX2[0]=on, sfX2[1]=off)
+        _setBtnX2: function (on) {
+            if (this.btnX2) this.btnX2.interactable = !!on;
+            if (this.spriteX2 && this.sfX2 && this.sfX2.length >= 2) {
+                this.spriteX2.spriteFrame = on ? this.sfX2[0] : this.sfX2[1];
+            }
+        },
+
+        _setBtnRepeat: function (on) {
+            if (this.btnRepeat) this.btnRepeat.interactable = !!on;
+            if (this.spriteRepeat && this.sfRepeat && this.sfRepeat.length >= 2) {
+                this.spriteRepeat.spriteFrame = on ? this.sfRepeat[0] : this.sfRepeat[1];
+            }
+        },
+
+        //button bet val đang chon ko click duoc
+        processBetValUI: function () {
+            for (var i = 0; i < 5; i++) {
+                this.btnChips[i].interactable = true;
+                this.nodeChipPress[i].active = false;
+            }
+
+            this.btnChips[this.chipIndex].interactable = false;
+            this.nodeChipPress[this.chipIndex].active = true;
+        },
+
+        //reset mang chip cac player
+        resetInput: function () {
+            // console.log('XXInput resetInput');
+            players.forEach(function (player) {
+                player.chips = [];
+            });
+        },
+
+        clearAllTimeOut: function () {
+            this.timeouts.forEach(function (timeOut) {
+                clearTimeout(timeOut);
+            });
+            this.timeouts = [];
+        },
+
+        resetTotalBetUI: function () {
+            this.totalBets = [0, 0, 0, 0, 0, 0];
+            this.totalUserBets = [0, 0, 0, 0, 0, 0];
+
+            this.lbTotalBets.forEach(function (lbTotalBet) {
+                lbTotalBet.string = '';
+            });
+
+            this.lbTotalUserBets.forEach(function (lbTotalUserBet) {
+                lbTotalUserBet.node.parent.active = false;
+            });
+        },
+        betOfAccount: function (data) {
+
+        },
+        //save lai du lieu last bet
+        saveLastBetData: function () {
+            /*var betLog = [];
+            var uID = cc.LoginController.getInstance().getUserId();
+            var player = players[0];
+            // chipItem.betIndex = betIndex;
+            // chipItem.gate = gate;
+            // chipItem.playerId = playerId;
+            var self = this;
+            player.chips.forEach(function (chip) {
+                betLog.push(
+                    {
+                        'AccountID': uID,
+                        'Amount': self.betVals[chip.chipIndex],
+                        'Gate': chip.gate
+                    }
+                );
+            });*/
+            let logBet = [...cc.XXController.getInstance().getLogBet()];
+
+            cc.XXController.getInstance().setLastBetData(logBet);
+        },
+
+        updateInput: function (state) {
+            //check state de xu ly hien thi
+            switch (state) {
+                //giai doan dat cuoc
+                case cc.XXState.BETTING: //54
+                    if (this.currentState !== state) {
+                        this.clearAllTimeOut();
+                        this.resetInput();
+                        this.resetTotalBetUI();
+                        this.activeAllButtonBet(true);
+                    }
+
+                    break;
+                //giai doan mo bat
+                case cc.XXState.OPEN_PLATE:
+                    if (this.currentState !== state) {
+                        this.clearAllTimeOut();
+                        this.activeAllButtonBet(false);
+                        this.saveLastBetData();
+                    }
+                    break;
+
+                //giai doan ket qua
+                case cc.XXState.SHOW_RESULT: //15
+                    if (this.currentState !== state) {
+                        this.activeAllButtonBet(false);
+                    }
+                    break;
+
+                //giai doan cho phien moi
+                case cc.XXState.WAITING:
+                    if (this.currentState !== state) {
+                        this.resetInput();
+                        this.activeAllButtonBet(false);
+                        //Khoi tao logBet moi
+                        cc.XXController.getInstance().initLogBet();
+                    }
+                    break;
+                //xoc dia
+                case cc.XXState.SHAKING:
+                    if (this.currentState !== state) {
+                        this.resetTotalBetUI();
+                        this.resetInput();
+                        this.activeAllButtonBet(false);
+                    }
+                    break;
+            }
+
+            //luu lai state hien tai
+            this.currentState = state;
+        },
+        //Lay danh sach chip tung gate
+        getGateChips: function () {
+            return this.gateChips;
+        },
+        //hieu ung chip khi 1 user bet
+        playFxUserBet: function (playerId, gate, chipIndex, isMove) {
+            cc.AudioController.getInstance().playSound(cc.AudioTypes.CHIP_BET);
+
+            var betIndex = gate - 1;
+            var minX = this.minXs[betIndex];
+            var maxX = this.maxXs[betIndex];
+            var minY = this.minYs[betIndex];
+            var maxY = this.maxYs[betIndex];
+
+            var x = minX + Math.floor(Math.random() * (Math.abs(maxX - minX)));
+            var y = minY + Math.floor(Math.random() * (Math.abs(maxY - minY)));
+
+            var nodeChip = cc.XXController.getInstance().createChip();
+            nodeChip.parent = this.nodeParentChip;
+
+            let nodePosition = null;
+            if (playerId != -1) {
+                nodePosition = players[playerId].position;
+            } else {
+                nodePosition = this.posGroupUser;
+            }
+            nodeChip.position = nodePosition;//players[playerId].position;
+
+            var chipItem = nodeChip.getComponent(cc.XXChipItem);
+            //set vi tri bet
+            chipItem.betIndex = betIndex;
+            chipItem.gate = gate;
+            chipItem.playerId = playerId;
+            chipItem.position = nodePosition;
+
+            //players[playerId].chips.push(chipItem);
+
+            chipItem.setChip(chipIndex);
+
+            if (isMove) {
+                chipItem.moveTo(cc.v2(x, y));
+            } else {
+                chipItem.setPosition(cc.v2(x, y));
+            }
+            //Push chipItem vao mang
+            this.gateChips[gate].push(chipItem);
+        },
+
+        //hieu ung chip bay tu dealer -> ra ban
+        playFxDealerPay: function (chipBet) {
+            var self = this;
+
+            var nodeChip = cc.XXController.getInstance().createChip();
+            nodeChip.parent = self.nodeParentChip;
+            nodeChip.position = self.rootDealerPos; //vi tri dealer
+            var chipItem = nodeChip.getComponent(cc.XXChipItem);
+            chipItem.betIndex = chipBet.betIndex;
+            chipItem.playerId = chipBet.playerId;
+            chipItem.position = chipBet.position;
+            //set loai chip theo ChipIndex luc bet
+            chipItem.setChip(chipBet.chipIndex);
+            this.gateChips[chipBet.gate].push(chipItem);
+
+            //push chung chip pay vao chip bet
+            //players[chipBet.playerId].chips.push(chipItem);
+
+            //di chuyen den vi tri chip dang bet
+            var indexBet = chipBet.betIndex;
+            var minX = self.minXs[indexBet];
+            var maxX = self.maxXs[indexBet];
+            var minY = self.minYs[indexBet];
+            var maxY = self.maxYs[indexBet];
+
+            var x = minX + Math.floor(Math.random() * (Math.abs(maxX - minX)));
+            var y = minY + Math.floor(Math.random() * (Math.abs(maxY - minY)));
+
+            chipItem.moveTo(cc.v2(x, y));
+
+        },
+
+        //hieu ung chip bay tu ban -> den nguoi choi win
+        playFxPay: function (chipBet) {
+            // let positionEnd = null;
+            // if(chipBet.playerId != -1) {
+            //     positionEnd = players[chipBet.playerId].position
+            // }else {
+            //     positionEnd = this.posGroupUser;
+            // }
+            //chipBet.moveToEnd(players[chipBet.playerId].position);
+            chipBet.moveToEnd(chipBet.position);
+        },
+
+        //hieu ung chip bay tu ban -> ve dealer
+        playFxLost: function (chipBet) {
+            //chip bet -> bay ve dealer
+            chipBet.moveToEnd(this.rootDealerPos);
+
+            // var self = this;
+            // var chipBets = players[playerId].chips;
+            // chipBets.forEach(function (chipBet) {
+            //     //chip bet -> bay ve dealer
+            //     chipBet.moveToEnd(self.rootDealerPos);
+            // });
+        },
+
+        //chon muc bet
+        betValueClicked: function (event, data) {
+            cc.AudioController.getInstance().playSound(cc.AudioTypes.CHIP_SELECT);
+            this.chipIndex = parseInt(data.toString());
+            this.processBetValUI();
+        },
+
+        //dat cua
+        //  Mapping index <-> cua:
+        //    [0] LE 1:2     [1] LE 3 trang 1:4    [2] LE 3 den 1:4
+        //    [3] CHAN 1:2   [4] CHAN 4 trang 1:16 [5] CHAN 4 den 1:16
+        //
+        //  Rule: CHI block giua "LE 1:2" (index 0) va "CHAN 1:2" (index 3).
+        //  Cac cua 1:4 va 1:16 (1, 2, 4, 5) LUON cho phep (khong block).
+        betClicked: function (event, data) {
+            if (cc.XXController.getInstance().getTime() <= 3) {
+                cc.PopupController.getInstance().showMessage('Đã hết thời gian đặt cửa.');
+                cc.XXController.getInstance().activeAllButtonBet(false);
+                return;
+            }
+
+            this.indexBet = parseInt(data.toString());
+            var betVal = this.betVals[this.chipIndex];
+
+            // Block chi giua 2 cua 1:2
+            if (this.indexBet === 0 && this._hasBetChan12) {
+                cc.PopupController.getInstance().showMessage('Đã đặt CHẴN 1:2 - không thể đặt LẺ 1:2 trong cùng phiên.');
+                return;
+            }
+            if (this.indexBet === 3 && this._hasBetLe12) {
+                cc.PopupController.getInstance().showMessage('Đã đặt LẺ 1:2 - không thể đặt CHẴN 1:2 trong cùng phiên.');
+                return;
+            }
+
+            //kiem tra so du
+            if (cc.BalanceController.getInstance().getBalance() < betVal) {
+                cc.PopupController.getInstance().showMessage('Số dư không đủ');
+                return;
+            } else {
+                //send request
+                cc.XXController.getInstance().sendRequestOnHub(cc.MethodHubName.BET, betVal, this.indexBet + 1);
+
+                // Track 2 cua 1:2 da dat (chi 2 cua nay co rang buoc voi nhau)
+                if (this.indexBet === 0) this._hasBetLe12 = true;
+                if (this.indexBet === 3) this._hasBetChan12 = true;
+
+                //dat -> tat luon nut X2 + reBet
+                this._setBtnX2(false);
+                this._setBtnRepeat(false);
+            }
+        },
+
+        //tat/bat che do Nan
+        nanClicked: function () {
+            this.isNan = !this.isNan;
+            if (this.isNan) {
+                this.spriteNan.spriteFrame = cc.XXController.getInstance().getNans()[0];
+            } else {
+                this.spriteNan.spriteFrame = cc.XXController.getInstance().getNans()[1];
+            }
+
+            cc.XXController.getInstance().setIsNan(this.isNan);
+        },
+
+        x2Clicked: function () {
+            if (cc.XXController.getInstance().getTime() <= 3) {
+                cc.PopupController.getInstance().showMessage('Đã hết thời gian đặt cửa.');
+                cc.XXController.getInstance().activeAllButtonBet(false);
+                return;
+            }
+
+            var lastBetData = cc.XXController.getInstance().getLastBetData();
+            if (lastBetData && lastBetData.length > 0) {
+                this.reBet(lastBetData, true);
+                this._setBtnX2(false);
+                this._setBtnRepeat(false);
+            } else {
+                cc.PopupController.getInstance().showSlotsMessage('Không có dữ liệu đặt của phiên trước.');
+            }
+        },
+
+        repeatClicked: function () {
+            if (cc.XXController.getInstance().getTime() <= 3) {
+                cc.PopupController.getInstance().showMessage('Đã hết thời gian đặt cửa.');
+                cc.XXController.getInstance().activeAllButtonBet(false);
+                return;
+            }
+
+            var lastBetData = cc.XXController.getInstance().getLastBetData();
+            if (lastBetData && lastBetData.length > 0) {
+                this.reBet(lastBetData);
+                this._setBtnX2(false);
+                this._setBtnRepeat(false);
+            } else {
+                cc.PopupController.getInstance().showSlotsMessage('Không có dữ liệu đặt của phiên trước.');
+            }
+        },
+
+        //clear all chip
+        clearAllChip: function() {
+            this.nodeParentChip.removeAllChildren(true);
+            // Reset 2 lock 1:2 - phien moi co the dat lai LE 1:2 hoac CHAN 1:2.
+            this._hasBetLe12 = false;
+            this._hasBetChan12 = false;
+        }
+    });
+}).call(this);

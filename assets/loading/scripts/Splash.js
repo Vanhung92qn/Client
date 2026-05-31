@@ -1,0 +1,412 @@
+
+cc.Class({
+    extends: cc.Component,
+    properties: {
+        messageLabel: cc.Label,
+        // LabelVersion: cc.Label,
+        manifestUrl: {
+            default: null,
+            type: cc.Asset,
+        },
+        retryButtonNode: cc.Node,
+        updateProgressBar: cc.ProgressBar,
+        // star: cc.Node,
+        _am: null,
+        _updating: false,
+        _canRetry: false,
+        _storagePath: "",
+    },
+
+    onLoad: function () {
+        this.isLoadScene = false;
+        this.isLoadConfig = false;
+        this._bootT0 = Date.now();
+        this._bundleStats = {};
+        this._bootLog('SCENE_ONLOAD', { ua: navigator.userAgent, online: navigator.onLine });
+        this._installNetTap();
+        this.initOneSign();
+        // cc.sys.isBrowser ? this.loadAssets() : (this.initHotUpdate(), this.checkUpdate());
+        this.loadAssets();
+    },
+
+    // ═══════════════════════════════════════════════════════════════
+    //  BOOT LOG  (chi co tac dung tu khi onLoad chay → MainGame visible)
+    //  Doc: F12 → Console → filter "[BOOT]"
+    //  Lay tat ca log: copy(window.__BOOT_LOG__)  → paste cho ai can audit
+    // ═══════════════════════════════════════════════════════════════
+    _bootLog: function (tag, data) {
+        var t = Date.now() - (this._bootT0 || Date.now());
+        var line = { t: t + 'ms', tag: tag };
+        if (data) {
+            for (var k in data) line[k] = data[k];
+        }
+        if (typeof window !== 'undefined') {
+            window.__BOOT_LOG__ = window.__BOOT_LOG__ || [];
+            window.__BOOT_LOG__.push(line);
+        }
+        console.log('[BOOT]', JSON.stringify(line));
+    },
+
+    // Hook XHR + Image fetch o DOM level → bat MOI HTTP request Cocos thuc su lam
+    _installNetTap: function () {
+        var self = this;
+        if (typeof window === 'undefined' || window.__BOOT_NET_TAP__) return;
+        window.__BOOT_NET_TAP__ = true;
+
+        try {
+            var XO = XMLHttpRequest.prototype.open;
+            var XS = XMLHttpRequest.prototype.send;
+            XMLHttpRequest.prototype.open = function (method, url) {
+                this.__bootUrl = String(url);
+                this.__bootT0 = Date.now();
+                return XO.apply(this, arguments);
+            };
+            XMLHttpRequest.prototype.send = function () {
+                var xhr = this;
+                xhr.addEventListener('loadend', function () {
+                    var size = 0;
+                    try {
+                        if (xhr.response && xhr.response.byteLength) size = xhr.response.byteLength;
+                        else if (xhr.responseText) size = xhr.responseText.length;
+                        else size = parseInt(xhr.getResponseHeader('content-length') || 0, 10);
+                    } catch (e) {}
+                    self._bootLog('NET_XHR', {
+                        url: String(xhr.__bootUrl || '').split('/').slice(-3).join('/'),
+                        dt: (Date.now() - xhr.__bootT0) + 'ms',
+                        size: size,
+                        status: xhr.status
+                    });
+                });
+                return XS.apply(this, arguments);
+            };
+        } catch (e) {}
+
+        try {
+            var srcDesc = Object.getOwnPropertyDescriptor(HTMLImageElement.prototype, 'src');
+            if (srcDesc && srcDesc.set) {
+                var origSet = srcDesc.set;
+                Object.defineProperty(HTMLImageElement.prototype, 'src', {
+                    configurable: true,
+                    enumerable: true,
+                    get: srcDesc.get,
+                    set: function (v) {
+                        var t0 = Date.now();
+                        this.__bootImgUrl = String(v);
+                        var img = this;
+                        this.addEventListener('load', function _onLoad() {
+                            img.removeEventListener('load', _onLoad);
+                            self._bootLog('NET_IMG', {
+                                url: String(img.__bootImgUrl).split('/').slice(-3).join('/'),
+                                dt: (Date.now() - t0) + 'ms',
+                                w: img.naturalWidth,
+                                h: img.naturalHeight
+                            });
+                        });
+                        origSet.call(this, v);
+                    }
+                });
+            }
+        } catch (e) {}
+
+        self._bootLog('NET_TAP_INSTALLED');
+    },
+
+    _bundleStat: function (name) {
+        var b = cc.assetManager.getBundle(name);
+        if (!b) return { exists: 0 };
+        var stat = { exists: 1, name: b.name };
+        try {
+            var cfg = b.config || b._config;
+            if (cfg) {
+                var paths = cfg.paths;
+                stat.paths = paths ? Object.keys(paths.map || paths).length : 0;
+                if (cfg.uuids) stat.uuids = cfg.uuids.length || Object.keys(cfg.uuids).length;
+            }
+        } catch (e) {}
+        return stat;
+    },
+
+    initOneSign: function () {
+        this.checkPlugin() && (
+            sdkbox.PluginOneSignal.init(),
+            sdkbox.PluginOneSignal.setListener({
+                onSendTag: function (t, e, i) { },
+                onGetTags: function (t) { },
+                onIdsAvailable: function (t, e) { },
+                onPostNotification: function (t, e) { },
+                onNotification: function (t, e, i) { }
+            })
+        );
+    },
+
+    checkPlugin: function () {
+        if (typeof sdkbox === 'undefined') {
+            console.log('sdkbox is undefined');
+            return false;
+        }
+        if (typeof sdkbox.PluginOneSignal === 'undefined') {
+            console.log('sdkbox.PluginOneSignal is undefined');
+            return false;
+        }
+        return true;
+    },
+
+    loadAssets: function () {
+        this.updateProgress(0);
+        this.messageLabel.string = "Đang tải dữ liệu...";
+        var self = this;
+        self._bootLog('LOAD_ASSETS_START');
+        setTimeout(function () {
+            self.loadLobbyBundle();
+        }, 100);
+    },
+
+    // ─────────────────────────────────────────────────────
+    //  BƯỚC 1: Load song song common + prefabs + lobby
+    //  → Tránh lazy round-trip khi MainGame ref asset trong common/prefabs
+    // ─────────────────────────────────────────────────────
+    loadLobbyBundle: function () {
+        var self = this;
+        // 'minigame_ui' (4.5MB) la UI shared cho tat ca minigame (TaiXiu, BauCua,
+        // Sicbo, XocXoc, ...). Prefab game ref asset trong day -> phai load TRUOC
+        // khi load bundle game. Preload o landing 1 lan -> moi game open instant.
+        var bundleNames = ['common', 'prefabs', 'lobby', 'minigame_ui'];
+        var loaded = 0;
+        var failed = false;
+        var batchT0 = Date.now();
+
+        self.messageLabel.string = "Đang tải dữ liệu...";
+        self._bootLog('BUNDLE_BATCH_START', { bundles: bundleNames.join(',') });
+
+        bundleNames.forEach(function (name) {
+            if (cc.assetManager.getBundle(name)) {
+                loaded++;
+                self._bootLog('BUNDLE_CACHED', { name: name });
+                if (loaded === bundleNames.length && !failed) self.loadScene();
+                return;
+            }
+            var t0 = Date.now();
+            self._bootLog('BUNDLE_LOAD_BEGIN', { name: name });
+            // Dung BundleControl de support CDN remote bundle (kem cache-bust hash).
+            // Fallback ve cc.assetManager.loadBundle khi ASSET_CDN_URL rong.
+            cc.BundleControl.getInstance().loadBundle(name, function (err) {
+                if (failed) return;
+                if (err) {
+                    failed = true;
+                    self._bootLog('BUNDLE_LOAD_FAIL', { name: name, dt: (Date.now() - t0) + 'ms', err: String(err).slice(0, 120) });
+                    self.messageLabel.string = "⚠ Lỗi tải dữ liệu!\nVui lòng thử lại.";
+                    if (self.retryButtonNode) self.retryButtonNode.active = true;
+                    return;
+                }
+                loaded++;
+                self._bootLog('BUNDLE_LOAD_OK', {
+                    name: name,
+                    dt: (Date.now() - t0) + 'ms',
+                    progress: loaded + '/' + bundleNames.length,
+                    stat: self._bundleStat(name)
+                });
+                if (loaded === bundleNames.length) {
+                    self._bootLog('BUNDLE_BATCH_DONE', { dt: (Date.now() - batchT0) + 'ms' });
+                    self.loadScene();
+                }
+            });
+        });
+    },
+
+    // ─────────────────────────────────────────────────────
+    //  BƯỚC 2: Preload + Load MainGame scene (qua bundle reference)
+    // ─────────────────────────────────────────────────────
+    loadScene: function () {
+        var self = this;
+        var lobby = cc.assetManager.getBundle('lobby');
+        if (!lobby) {
+            self._bootLog('LOAD_SCENE_NO_BUNDLE');
+            return;
+        }
+
+        self.messageLabel.string = "Đang tải màn hình chính...";
+        // Bo preloadScene (double work). Pattern SunWin: loadScene → runScene.
+        self._bootLog('LOAD_SCENE_BEGIN', { scene: 'MainGame' });
+        var loadT0 = Date.now();
+        var lastPct = -1;
+
+        lobby.loadScene("MainGame", function (completed, total) {
+            var sceneProgress = total ? completed / total : 0;
+            var pct10 = Math.floor(sceneProgress * 10) * 10;
+            if (pct10 !== lastPct) {
+                lastPct = pct10;
+                self._bootLog('SCENE_PROGRESS', { pct: pct10 + '%', completed: completed, total: total });
+            }
+            self.onProgress(completed, total);
+        }, function (err, scene) {
+            if (err) {
+                self._bootLog('LOAD_SCENE_FAIL', { err: String(err).slice(0, 120), dt: (Date.now() - loadT0) + 'ms' });
+                return;
+            }
+            self._bootLog('LOAD_SCENE_DONE', { dt: (Date.now() - loadT0) + 'ms' });
+            cc.director.runScene(scene);
+            self._bootLog('RUN_SCENE_DONE', { totalSinceOnLoad: (Date.now() - self._bootT0) + 'ms' });
+        });
+    },
+
+    onProgress: function (completedCount, totalCount) {
+        var phantram = ((completedCount / totalCount) * 100) >> 0;
+        this.messageLabel.string = "Đang tải dữ liệu " + phantram + "%";
+        this.updateProgress(phantram);
+    },
+
+    onLoaded: function () {
+        // [DEPRECATED] thay bằng callback nội tuyến trong loadScene().
+        // Giữ stub để không break reference cũ nếu có nơi gọi.
+    },
+
+    onDestroy: function () {
+        if (this._updateListener) {
+            this._am.setEventCallback(null);
+            this._updateListener = null;
+        }
+    },
+
+    // ─────────────────────────────────────────────────────
+    //  HOT UPDATE (Native build — giữ nguyên logic cũ)
+    // ─────────────────────────────────────────────────────
+    initHotUpdate: function () {
+        this.updateProgress(0);
+        this._storagePath = (jsb.fileUtils ? jsb.fileUtils.getWritablePath() : "/") + "remote-assets";
+        this._am = new jsb.AssetsManager("", this._storagePath, this.versionCompareHandle);
+        this._am.setVerifyCallback(function (t, e) { return true; }.bind(this));
+        if (cc.sys.os === cc.sys.OS_ANDROID) this._am.setMaxConcurrentTask(2);
+    },
+
+    checkUpdate: function () {
+        if (this._updating) {
+            this.messageLabel.string = "Đang kiểm tra phiên bản ...";
+            return;
+        }
+        if (this._am.getState() === jsb.AssetsManager.State.UNINITED) {
+            this._am.loadLocalManifest(this.manifestUrl.nativeUrl);
+        }
+        this._am.setEventCallback(this.checkCb.bind(this));
+        this._am.checkUpdate();
+        this._updating = true;
+    },
+
+    hotUpdate: function () {
+        if (this._am && !this._updating) {
+            this._am.setEventCallback(this.updateCb.bind(this));
+            if (this._am.getState() === jsb.AssetsManager.State.UNINITED) {
+                this._am.loadLocalManifest(this.manifestUrl.nativeUrl);
+            }
+            this._failCount = 0;
+            this._am.update();
+            this._updating = true;
+        }
+    },
+
+    retry: function () {
+        if (!this._updating && this._canRetry) {
+            this.retryButtonNode.active = false;
+            this._canRetry = false;
+            this.messageLabel.string = "Thử lại ...";
+            this._am.downloadFailedAssets();
+        }
+    },
+
+    checkCb: function (t) {
+        var e = false, i = false;
+        switch (t.getEventCode()) {
+            case jsb.EventAssetsManager.ERROR_NO_LOCAL_MANIFEST:
+                this.messageLabel.string = "Không tìm thấy Hot Update ...";
+                break;
+            case jsb.EventAssetsManager.ERROR_DOWNLOAD_MANIFEST:
+            case jsb.EventAssetsManager.ERROR_PARSE_MANIFEST:
+                this.messageLabel.string = "Tải manifest thất bại ...";
+                break;
+            case jsb.EventAssetsManager.ALREADY_UP_TO_DATE:
+                this.updateProgress(100);
+                this.messageLabel.string = "Phiên bản mới nhất ...";
+                e = true;
+                break;
+            case jsb.EventAssetsManager.NEW_VERSION_FOUND:
+                this.messageLabel.string = "Tìm thấy phiên bản mới...";
+                this.updateProgress(0);
+                i = true;
+                break;
+            default:
+                return;
+        }
+        this._am.setEventCallback(null);
+        this._checkListener = null;
+        this._updating = false;
+        if (i) this.hotUpdate();
+        if (e) this.loadLobbyBundle(); // ← Sau HotUpdate cũng phải load lobby bundle
+    },
+
+    updateCb: function (event) {
+        var needRestart = false, failed = false;
+        switch (event.getEventCode()) {
+            case jsb.EventAssetsManager.ERROR_NO_LOCAL_MANIFEST:
+                this.retryButtonNode.active = true;
+                failed = true;
+                break;
+            case jsb.EventAssetsManager.UPDATE_PROGRESSION:
+                var pct = (event.getPercent() * 100) >> 0;
+                this.updateProgress(pct);
+                this.messageLabel.string = pct + "%";
+                break;
+            case jsb.EventAssetsManager.ERROR_DOWNLOAD_MANIFEST:
+            case jsb.EventAssetsManager.ERROR_PARSE_MANIFEST:
+                this.retryButtonNode.active = true;
+                failed = true;
+                break;
+            case jsb.EventAssetsManager.UPDATE_FINISHED:
+                this.messageLabel.string = "Cập nhật hoàn tất!";
+                needRestart = true;
+                break;
+            case jsb.EventAssetsManager.UPDATE_FAILED:
+                this.retryButtonNode.active = true;
+                this._updating = false;
+                this._canRetry = true;
+                break;
+            case jsb.EventAssetsManager.ERROR_UPDATING:
+            case jsb.EventAssetsManager.ERROR_DECOMPRESS:
+                this.messageLabel.string = event.getMessage();
+                break;
+        }
+        if (failed) {
+            this._am.setEventCallback(null);
+            this._updateListener = null;
+            this._updating = false;
+        }
+        if (needRestart) {
+            this._am.setEventCallback(null);
+            this._updateListener = null;
+            var searchPaths = jsb.fileUtils.getSearchPaths();
+            var newPaths = this._am.getLocalManifest().getSearchPaths();
+            Array.prototype.unshift.apply(searchPaths, newPaths);
+            cc.sys.localStorage.setItem('HotUpdateSearchPaths', JSON.stringify(searchPaths));
+            jsb.fileUtils.setSearchPaths(searchPaths);
+            cc.audioEngine.stopAll();
+            cc.game.restart();
+        }
+    },
+
+    onRetryClick: function () {
+        this.retry();
+        cc.sys.isBrowser ? this.loadLobbyBundle() : (this.initHotUpdate(), this.checkUpdate());
+    },
+
+    versionCompareHandle: function (t, e) {
+        var i = t.split("."), o = e.split(".");
+        for (var n = 0; n < i.length; ++n) {
+            var s = parseInt(i[n]), a = parseInt(o[n] || 0);
+            if (s !== a) return s - a;
+        }
+        return o.length > i.length ? -1 : 0;
+    },
+
+    updateProgress: function (progress) {
+        this.updateProgressBar.progress = progress / 100;
+       // if (this.star) this.star.position = cc.v2(progress, 0);
+    },
+});
