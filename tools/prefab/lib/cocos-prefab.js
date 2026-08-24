@@ -566,6 +566,63 @@ function folderMeta(folderUuid) {
   };
 }
 
+/**
+ * Noi dung .meta cho mot file ANH moi them vao project.
+ *
+ * Moi anh sinh ra HAI uuid: uuid cua TEXTURE (o ngoai) va uuid cua
+ * SPRITE-FRAME (trong subMetas). cc.Sprite dung cai thu hai — nham la anh
+ * khong hien ra.
+ *
+ * Dat trimType = 'none' de sprite-frame lay tron anh: khoi phai tinh
+ * trimX/trimY/offset cho khop, ma tinh sai thi anh bi lech hoac cat cut.
+ *
+ * @param {string} texUuid   uuid texture
+ * @param {string} frameUuid uuid sprite-frame
+ * @param {string} frameName ten sprite-frame, theo quy uoc = ten file khong duoi
+ * @param {number} width
+ * @param {number} height
+ */
+function imageMeta(texUuid, frameUuid, frameName, width, height) {
+  return {
+    ver: '2.3.7',
+    uuid: texUuid,
+    importer: 'texture',
+    type: 'sprite',
+    wrapMode: 'clamp',
+    filterMode: 'bilinear',
+    premultiplyAlpha: false,
+    genMipmaps: false,
+    packable: true,
+    width: width,
+    height: height,
+    platformSettings: {},
+    subMetas: {
+      [frameName]: {
+        ver: '1.0.6',
+        uuid: frameUuid,
+        importer: 'sprite-frame',
+        rawTextureUuid: texUuid,
+        trimType: 'none',
+        trimThreshold: 1,
+        rotated: false,
+        offsetX: 0,
+        offsetY: 0,
+        trimX: 0,
+        trimY: 0,
+        width: width,
+        height: height,
+        rawWidth: width,
+        rawHeight: height,
+        borderTop: 0,
+        borderBottom: 0,
+        borderLeft: 0,
+        borderRight: 0,
+        subMetas: {},
+      },
+    },
+  };
+}
+
 /** Noi dung file .js.meta di kem script. */
 function scriptMeta(scriptUuid) {
   return {
@@ -600,5 +657,6 @@ module.exports = {
   prefabMeta,
   scriptMeta,
   folderMeta,
+  imageMeta,
   color4,
 };
