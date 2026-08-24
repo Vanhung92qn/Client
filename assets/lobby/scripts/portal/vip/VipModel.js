@@ -41,6 +41,30 @@ function formatNumber(n) {
 }
 
 /**
+ * Rut gon tien cho vua o hep: 5.000.000 -> "5tr", 20.000.000.000 -> "20 tỷ".
+ * Dung o cho chi can nhin luot; cho nao can so chinh xac thi dung formatNumber.
+ */
+function formatShort(n) {
+  const v = Math.floor(Number(n) || 0);
+  if (v >= 1000000000) {
+    const t = v / 1000000000;
+    return (t % 1 === 0 ? t : t.toFixed(1)) + ' tỷ';
+  }
+  if (v >= 1000000) {
+    const t = v / 1000000;
+    return (t % 1 === 0 ? t : t.toFixed(1)) + 'tr';
+  }
+  if (v >= 1000) return Math.round(v / 1000) + 'k';
+  return String(v);
+}
+
+/** Doi DIEM sang tien cuoc tuong ung: 1 diem = 1.000d */
+const VND_PER_POINT = 1000;
+function pointToMoney(point) {
+  return (Number(point) || 0) * VND_PER_POINT;
+}
+
+/**
  * @typedef {object} VipRank
  * @property {number}  rankId
  * @property {string}  name
@@ -71,6 +95,11 @@ function parse(res) {
       vpRequired: Number(r.VipPoint) || 0,
       reward: Number(r.RefundAmount) || 0,
       claimed: Number(r.RedeemStatus) === 1,
+      // Tu 2026-08-25 server tra ve them. Client cu khong doc cung khong sao.
+      requiredDeposit: Number(r.RequiredDeposit) || 0,
+      monthlyReward: Number(r.MonthlyReward) || 0,
+      rakebackPercent: Number(r.RakebackPercent) || 0,
+      groupName: r.GroupName || '',
       reached: false, // dien o duoi
     }))
     .filter((r) => r.rankId > 0)
@@ -133,7 +162,10 @@ function parse(res) {
 
 module.exports = {
   MAX_RANK,
+  VND_PER_POINT,
   rankName,
   formatNumber,
+  formatShort,
+  pointToMoney,
   parse,
 };

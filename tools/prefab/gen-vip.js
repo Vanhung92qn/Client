@@ -105,74 +105,63 @@ const IMG = A.spriteFrames({
   btnNhanDis: 'lobby/images/image_nohu/GateImages/Vip/nhan-btn-disable.png',
 });
 
-/**
- * Icon 15 bac.
- *
- * KHONG dung bo lobby/images/image_nohu/GateImages/Vip/vipN.png: bo do da
- * ve san chu "VIP3" va so moc "500" NGAY TRONG ANH, lai la anh doc. Dat
- * canh label thi chu chong len chu, nhin rat roi (da thay khi test).
- *
- * Bo duoi day la huy hieu SACH, khong chu, dung phong cach voi nhau:
- *   bac 1-5   common/images/VIP/vipN.png        76x63
- *   bac 6-10  common/images/VIP/icon_vN.png     ~60x62
- *   bac 11-15 CHUA CO — tam dung lai icon bac 10, cho anh moi.
- */
 /** So bac VIP — phai trung MAX_RANK trong VipModel.js va bang PrivilegeType. */
 const RANK_COUNT = 30;
 
-/** 15 huy hieu goc, xep theo do hoanh trang tang dan. */
+/*
+ * Luu y ve anh: KHONG dung bo lobby/images/image_nohu/GateImages/Vip/vipN.png.
+ * Bo do da ve san chu "VIP3" va so moc "500" NGAY TRONG ANH, lai la anh doc —
+ * dat canh label thi chu chong len chu (da thay khi test tren may).
+ * Bo dung o day la huy hieu SACH, khong chu.
+ */
+
+/**
+ * Huy hieu cho tung bac, anh xa 1-1: BADGES[0] la bac 1, BADGES[29] la bac 30.
+ * Bac 1-5 dung bo vipN.png co san, tu bac 6 tro len dung icon_vN.png.
+ */
 const BADGES = [
   'common/images/VIP/vip1.png',
   'common/images/VIP/vip2.png',
   'common/images/VIP/vip3.png',
   'common/images/VIP/vip4.png',
   'common/images/VIP/vip5.png',
-  'common/images/VIP/icon_v6.png',
-  'common/images/VIP/icon_v7.png',
-  'common/images/VIP/icon_v8.png',
-  'common/images/VIP/icon_v9.png',
-  'common/images/VIP/icon_v10.png',
-  'common/images/VIP/icon_v11.png',
-  'common/images/VIP/icon_v12.png',
-  'common/images/VIP/icon_v13.png',
-  'common/images/VIP/icon_v14.png',
-  'common/images/VIP/icon_v15.png',
 ];
+for (let i = 6; i <= 30; i++) {
+  BADGES.push(`common/images/VIP/icon_v${i}.png`);
+}
 
 /**
  * Anh cho 30 bac.
  *
- * Hien moi co 15 huy hieu, nen MOI HUY HIEU DUNG CHO HAI BAC lien tiep
- * (bac 1-2 dung huy hieu 1, bac 29-30 dung huy hieu 15). Cach nay van giu
- * duoc cam giac tang tien deu dan, hon han viec lay dai mot anh cho ca
- * doan cuoi.
- *
- * Khi co du 30 huy hieu rieng: them icon_v16..icon_v30 vao BADGES roi
- * doi ham map ben duoi thanh anh xa 1-1.
+ * Bac nao chua co anh rieng thi lay tam anh cua bac GAN NHAT phia duoi da
+ * co — nhu vay thu tu tang tien van dung, chi la hai bac lien tiep trong
+ * giong nhau. Them anh dung ten icon_vN.png vao common/images/VIP roi chay
+ * lai gen-vip.js la tu dong thay.
  */
 const RANK_ICONS = (() => {
-  const frames = [];
-  const missing = [];
-  for (const p of BADGES) {
-    try {
-      frames.push(A.spriteFrame(p));
-    } catch (e) {
-      missing.push(p);
-      frames.push(null);
-    }
-  }
-  if (missing.length) {
-    console.log(`  ! thieu ${missing.length} huy hieu goc:`);
-    for (const m of missing) console.log(`      ${m}`);
-  }
-
   const list = [];
+  const missing = [];
+  let lastGood = null;
+
   for (let rank = 1; rank <= RANK_COUNT; rank++) {
-    const idx = Math.min(frames.length - 1, Math.floor((rank - 1) / 2));
-    const uuid = frames[idx];
+    const p = BADGES[rank - 1];
+    let uuid = null;
+    try {
+      uuid = A.spriteFrame(p);
+      lastGood = uuid;
+    } catch (e) {
+      missing.push(`bac ${rank}: ${p}`);
+      uuid = lastGood; // dung anh cua bac ngay truoc
+    }
     list.push(uuid ? { __uuid__: uuid } : null);
   }
-  console.log(`  i ${RANK_COUNT} bac dung ${frames.length} huy hieu (moi cai cho 2 bac)`);
+
+  if (missing.length) {
+    console.log(`  ! ${missing.length} bac chua co anh rieng, tam dung anh bac lien truoc:`);
+    for (const m of missing) console.log(`      ${m}`);
+  } else {
+    console.log(`  i du ${RANK_COUNT} huy hieu rieng cho ${RANK_COUNT} bac`);
+  }
   return list;
 })();
 
@@ -592,7 +581,7 @@ const TAB_TITLES = ['HẠNG VIP', 'VIPPOINT', 'HOÀN TRẢ', 'LÌ XÌ'];
 // chua co backend nen ben trong hien phan giai thich, khong hien so gia.
 const TAB_ENABLED = [true, true, true, true];
 
-function buildPopup(uuidScript) {
+function buildPopup(uuidScript, uuidHelp) {
   const tabW = 236;
   const tabH = 56;
   const gap = 12;
@@ -651,6 +640,20 @@ function buildPopup(uuidScript) {
           P.button({ transition: 3, zoomScale: 1.1 }),
         ]),
 
+        // Nut "?" — mo bang giai thich cach tinh diem
+        P.node('btnHelp', {
+          size: [48, 48],
+          pos: [W_POPUP / 2 - 104, H_POPUP / 2 - 34],
+          ref: 'btnHelp',
+        }, [
+          P.node('lb', { size: [48, 44], color: C_GOLD }, [], [
+            P.label('?', { size: 30, overflow: 1 }),
+          ]),
+        ], [
+          P.sprite(IMG.bgPopup, { type: 1, sizeMode: 0 }),
+          P.button({ transition: 3, zoomScale: 1.12 }),
+        ]),
+
         P.node('tabbar', { size: [totalW, tabH], pos: [0, H_POPUP / 2 - 110] }, tabs),
 
         P.node('content', {
@@ -665,6 +668,9 @@ function buildPopup(uuidScript) {
           ]),
         ]),
       ]),
+
+      // ── Bang giai thich, phu len tren cung, an san ──
+      buildHelpPanel(uuidHelp),
     ],
     [
       P.script(uuidScript, {
@@ -673,6 +679,79 @@ function buildPopup(uuidScript) {
         tabButtons: [P.ref('tab0'), P.ref('tab1'), P.ref('tab2'), P.ref('tab3')],
         nodeLoading: P.ref('loading'),
         btnClose: P.ref('btnClose'),
+        btnHelp: P.ref('btnHelp'),
+        nodeHelp: P.ref('help'),
+      }),
+    ]
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────
+// Bang giai thich cach tinh diem (nam trong VipPopup, an san)
+// ─────────────────────────────────────────────────────────────────
+
+function buildHelpPanel(uuidScript) {
+  const boxW = 720;
+  const boxH = 500;
+  const viewH = boxH - 92;
+
+  return P.node(
+    'help',
+    { size: [W_POPUP, H_POPUP], active: false, ref: 'help' },
+    [
+      // Nen mo — bam ra ngoai hop la dong
+      P.node('dim', { size: [2000, 1400], color: [0, 0, 0], opacity: 190, ref: 'helpDim' }, [], [
+        P.sprite(IMG.bgPopup, { type: 1, sizeMode: 0 }),
+      ]),
+
+      P.node('box', { size: [boxW, boxH] }, [
+        P.node('bg', { size: [boxW, boxH] }, [], [
+          P.sprite(IMG.bgPopup, { type: 1, sizeMode: 0 }),
+        ]),
+
+        P.node('lbTitle', { size: [boxW - 40, 44], pos: [0, boxH / 2 - 34], color: C_GOLD }, [], [
+          P.label('CÁCH TÍNH VIPPOINT', { size: 25, overflow: 1 }),
+        ]),
+
+        P.node('btnClose', {
+          size: [52, 53],
+          pos: [boxW / 2 - 30, boxH / 2 - 28],
+          ref: 'helpClose',
+        }, [], [
+          P.sprite(IMG.btnClose, { sizeMode: 0 }),
+          P.button({ transition: 3, zoomScale: 1.1 }),
+        ]),
+
+        // Noi dung dai -> cho vao ScrollView de cuon duoc
+        P.node('scroll', { size: [boxW - 56, viewH], pos: [0, -30], ref: 'helpScroll' }, [
+          P.node('view', { size: [boxW - 56, viewH], ref: 'helpView' }, [
+            P.node(
+              'content',
+              { size: [boxW - 76, 900], pos: [0, viewH / 2], anchor: [0.5, 1], ref: 'helpContent' },
+              [
+                P.node('lb', {
+                  size: [boxW - 96, 880],
+                  pos: [0, -440],
+                  ref: 'lbHelp',
+                  color: C_WHITE,
+                }, [], [
+                  P.label('', { size: 18, hAlign: 0, vAlign: 0, wrap: true, overflow: 0, lineHeight: 27 }),
+                ]),
+              ]
+            ),
+          ], [
+            P.mask({ type: 0 }),
+          ]),
+        ], [
+          P.scrollView({ vertical: true, horizontal: false, content: P.ref('helpContent') }),
+        ]),
+      ]),
+    ],
+    [
+      P.script(uuidScript, {
+        lbContent: P.refComp('lbHelp', 'cc.Label'),
+        nodeClose: P.ref('helpClose'),
+        nodeDim: P.ref('helpDim'),
       }),
     ]
   );
@@ -700,6 +779,7 @@ function main() {
   const sRakeTab = scriptUuid(path.join('tabs', 'VipRakebackTab.js'));
   const sLixiTab = scriptUuid(path.join('tabs', 'VipLixiTab.js'));
   const sPopup = scriptUuid('VipPopup.js');
+  const sHelp = scriptUuid('VipHelpPanel.js');
   // Hai file duoi khong phai component nhung van can .meta de Cocos import
   scriptUuid('VipService.js');
   scriptUuid('VipModel.js');
@@ -718,7 +798,7 @@ function main() {
   writePrefab(path.join('tabs', 'VipPointTab.prefab'), buildPointTab(sPointTab), uPointTab);
   writePrefab(path.join('tabs', 'VipRakebackTab.prefab'), buildRakebackTab(sRakeTab), uRakeTab);
   writePrefab(path.join('tabs', 'VipLixiTab.prefab'), buildLixiTab(sLixiTab), uLixiTab);
-  writePrefab('VipPopup.prefab', buildPopup(sPopup), uPopup);
+  writePrefab('VipPopup.prefab', buildPopup(sPopup, sHelp), uPopup);
 
   console.log('---------------------');
   console.log('Xong.');

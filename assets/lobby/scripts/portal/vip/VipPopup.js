@@ -51,6 +51,10 @@ const VipPopup = cc.Class({
     /** Hien khi dang nap tab / dang goi API. */
     nodeLoading: cc.Node,
     btnClose: cc.Node,
+    /** Nut "?" mo bang giai thich cach tinh diem. */
+    btnHelp: cc.Node,
+    /** Bang giai thich (VipHelpPanel), an san. */
+    nodeHelp: cc.Node,
   },
 
   onLoad() {
@@ -62,6 +66,10 @@ const VipPopup = cc.Class({
 
     if (this.btnClose) {
       this.btnClose.on(cc.Node.EventType.TOUCH_END, this.close, this);
+    }
+
+    if (this.btnHelp) {
+      this.btnHelp.on(cc.Node.EventType.TOUCH_END, this.toggleHelp, this);
     }
 
     TAB.ORDER.forEach((tabId, i) => {
@@ -156,6 +164,39 @@ const VipPopup = cc.Class({
     if (this.nodeLoading) {
       this.nodeLoading.active = this._loadingCount > 0;
     }
+  },
+
+  // ───────────────────────────────────────────────────────────────
+  // Bang giai thich cach tinh diem
+  // ───────────────────────────────────────────────────────────────
+
+  /**
+   * Mo/dong bang "?". Truyen so lieu that vao de vi du trong bang khop
+   * voi bac ke tiep cua chinh nguoi dang xem, thay vi mot vi du chung chung.
+   */
+  toggleHelp() {
+    if (!this.nodeHelp) return;
+    const panel = this.nodeHelp.getComponent('VipHelpPanel');
+    if (!panel) return;
+
+    if (this.nodeHelp.active) {
+      panel.hide();
+      return;
+    }
+
+    // Lay tu cache neu co, khong doi mang cham lam nut bam khong an
+    const VipService = require('VipService');
+    const VipModel = require('VipModel');
+    panel.show(null);
+    VipService.getUserVp()
+      .then((res) => {
+        if (this.nodeHelp && this.nodeHelp.isValid && this.nodeHelp.active) {
+          panel.show(VipModel.parse(res));
+        }
+      })
+      .catch(() => {
+        /* khong lay duoc so lieu thi van hien phan giai thich chung */
+      });
   },
 
   // ───────────────────────────────────────────────────────────────
