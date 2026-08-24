@@ -511,6 +511,7 @@ function main() {
   scriptUuid('VipService.js');
   scriptUuid('VipModel.js');
   scriptUuid('VipTabs.js');
+  scriptUuid('VipOpenButton.js');
 
   const uItem = prefabUuid(path.join('items', 'VipRankItem.prefab'));
   const uRankTab = prefabUuid(path.join('tabs', 'VipRankTab.prefab'));

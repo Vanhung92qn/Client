@@ -472,6 +472,29 @@ var netConfig = require("NetConfig");
       this.nodeAccountView = null;
     },
 
+    /**
+     * Mo popup VIP (prefabs/portal/vip/VipPopup).
+     * Gan thang ham nay vao Click Events cua bat ky nut nao trong lobby:
+     *   Target = node co LobbyView, Component = LobbyView,
+     *   Handler = openVipPopupClicked
+     * Popup tu nap prefab nen khong phai keo prefab vao property nao ca.
+     */
+    openVipPopupClicked: function () {
+      var self = this;
+      require('VipPopup')
+        .open(this.node)
+        .then(function (node) {
+          node.zIndex = cc.NoteDepth.POPUP_PORTAL;
+          self.nodeVipPopup = node;
+        })
+        .catch(function (err) {
+          cc.error('[LobbyView] Khong mo duoc popup VIP:', err);
+          cc.PopupController.getInstance().showMessageError(
+            'Không mở được trang VIP, vui lòng thử lại.'
+          );
+        });
+    },
+
     createSecurityView: function () {
       this.nodeSecurityView = this.createView(this.prefabSecurityView);
       //hide cac node o lobby
