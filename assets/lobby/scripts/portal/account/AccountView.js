@@ -75,6 +75,15 @@
         },
 
         activeTab(tabName) {
+            // Tab VIP da duoc tach ra thanh popup rieng
+            // (prefabs/portal/vip/VipPopup + scripts/portal/vip/).
+            // Node nodeVIP cu van con trong accountViewNew3.prefab nhung
+            // khong con duoc mo nua — xoa han khi da chay on dinh.
+            if (tabName === cc.AccountTab.VIP) {
+                this._openVipPopup();
+                return;
+            }
+
             var nextNode = this._getTabNode(tabName);
             if (!nextNode) return;
             for (var i = 0; i < this.allTabNodes.length; i++) {
@@ -83,6 +92,26 @@
             nextNode.active = true;
             this.nodeTabActive = nextNode;
             this.currentTab = tabName;
+        },
+
+        /**
+         * Mo popup VIP moi va dong man Tai khoan lai.
+         * Popup duoc tha vao cung node cha voi AccountView de giu nguyen
+         * thu tu hien thi, khong bi lobby de len tren.
+         */
+        _openVipPopup: function () {
+            var parent = this.node.parent;
+            require('VipPopup').open(parent)
+                .then(function (node) {
+                    node.zIndex = cc.NoteDepth.POPUP_PORTAL;
+                })
+                .catch(function (err) {
+                    cc.error('[AccountView] Khong mo duoc popup VIP:', err);
+                    cc.PopupController.getInstance().showMessageError(
+                        'Không mở được trang VIP, vui lòng thử lại.'
+                    );
+                });
+            cc.LobbyController.getInstance().destroyAccountView();
         },
 		  quickLogoutClicked: function () {
             if (this.isCardGame) {
