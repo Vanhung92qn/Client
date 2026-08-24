@@ -73,7 +73,9 @@ module.exports = cc.Class({
     this.lbRankName.string = vip.currentRankName;
     this._setRankIcon(this.spIconRank, vip.currentRankId);
 
-    this.lbVpAccumulated.string = VipModel.formatNumber(vip.vpAccumulated);
+    // Gop so va chu vao mot label de khong dam vao icon ben canh
+    this.lbVpAccumulated.string =
+      `${VipModel.formatNumber(vip.vpAccumulated)} VP tích luỹ`;
 
     if (vip.next) {
       this.barProgress.progress = vip.progress;
@@ -98,7 +100,12 @@ module.exports = cc.Class({
       node.parent = this.nodeListContent;
       const item = node.getComponent('VipRankItem');
       if (item) {
-        item.setData(rank, this._iconOf(rank.rankId), () => this._onClaimed());
+        item.setData(
+          rank,
+          this._iconOf(rank.rankId),
+          () => this._onClaimed(),
+          vip.vpAccumulated
+        );
       }
       this._items.push(node);
     }

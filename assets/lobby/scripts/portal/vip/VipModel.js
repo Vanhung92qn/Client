@@ -91,13 +91,15 @@ function parse(res) {
   const next = ranks.find((r) => r.rankId > currentRankId) || null;
   const current = ranks.find((r) => r.rankId === currentRankId) || null;
 
-  const currentFloor = current ? current.vpRequired : 0;
   let progress = 1;
   let vpToNext = 0;
   if (next) {
-    const span = next.vpRequired - currentFloor;
     vpToNext = Math.max(0, next.vpRequired - vpAccumulated);
-    progress = span > 0 ? (vpAccumulated - currentFloor) / span : 0;
+    // Do tu 0 chu KHONG tu moc bac hien tai, de khop voi nhan
+    // "513 / 1.000 VP" hien ngay tren thanh. Neu do tu moc bac thi
+    // nhan bao 513/1.000 (nhin nhu quá nua) ma thanh moi chay 2,6%
+    // — nguoi choi tuong bi loi.
+    progress = next.vpRequired > 0 ? vpAccumulated / next.vpRequired : 0;
     progress = Math.min(1, Math.max(0, progress));
   }
 

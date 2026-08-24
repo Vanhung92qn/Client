@@ -35,21 +35,22 @@ const BY_ID = {
     component: 'VipPointTab',
     enabled: true,
   },
-  // Hai tab duoi da co cho san trong UI nhung chua co backend.
-  // Bat len khi API tuong ung san sang.
+  // Hai tab duoi da co prefab + script RIENG, mo vao xem duoc, nhung chua
+  // co backend nen tam hien phan giai thich thay vi so lieu gia.
+  // Xem ghi chu nghiep vu can chot trong tung file script truoc khi lam SP.
   [ID.RAKEBACK]: {
     id: ID.RAKEBACK,
     title: 'HOÀN TRẢ',
     prefab: 'portal/vip/tabs/VipRakebackTab',
     component: 'VipRakebackTab',
-    enabled: false,
+    enabled: true,
   },
   [ID.LIXI]: {
     id: ID.LIXI,
     title: 'LÌ XÌ',
     prefab: 'portal/vip/tabs/VipLixiTab',
     component: 'VipLixiTab',
-    enabled: false,
+    enabled: true,
   },
 };
 

@@ -105,25 +105,55 @@ const IMG = A.spriteFrames({
   btnNhanDis: 'lobby/images/image_nohu/GateImages/Vip/nhan-btn-disable.png',
 });
 
-/** Icon 15 bac: bac 1 nam o common, bac 2-15 nam o GateImages. */
+/**
+ * Icon 15 bac.
+ *
+ * KHONG dung bo lobby/images/image_nohu/GateImages/Vip/vipN.png: bo do da
+ * ve san chu "VIP3" va so moc "500" NGAY TRONG ANH, lai la anh doc. Dat
+ * canh label thi chu chong len chu, nhin rat roi (da thay khi test).
+ *
+ * Bo duoi day la huy hieu SACH, khong chu, dung phong cach voi nhau:
+ *   bac 1-5   common/images/VIP/vipN.png        76x63
+ *   bac 6-10  common/images/VIP/icon_vN.png     ~60x62
+ *   bac 11-15 CHUA CO — tam dung lai icon bac 10, cho anh moi.
+ */
+const RANK_ICON_PATHS = [
+  'common/images/VIP/vip1.png',
+  'common/images/VIP/vip2.png',
+  'common/images/VIP/vip3.png',
+  'common/images/VIP/vip4.png',
+  'common/images/VIP/vip5.png',
+  'common/images/VIP/icon_v6.png',
+  'common/images/VIP/icon_v7.png',
+  'common/images/VIP/icon_v8.png',
+  'common/images/VIP/icon_v9.png',
+  'common/images/VIP/icon_v10.png',
+  // 11-15: thay bang anh rieng khi co
+  'common/images/VIP/icon_v11.png',
+  'common/images/VIP/icon_v12.png',
+  'common/images/VIP/icon_v13.png',
+  'common/images/VIP/icon_v14.png',
+  'common/images/VIP/icon_v15.png',
+];
+
 const RANK_ICONS = (() => {
   const list = [];
-  const paths = [];
-  paths.push('common/images/VIP/vip1.png');
-  for (let i = 2; i <= 15; i++) {
-    paths.push(`lobby/images/image_nohu/GateImages/Vip/vip${i}.png`);
-  }
+  const fallback = 'common/images/VIP/icon_v10.png';
   const missing = [];
-  for (const p of paths) {
+  for (const p of RANK_ICON_PATHS) {
     try {
       list.push({ __uuid__: A.spriteFrame(p) });
     } catch (e) {
       missing.push(p);
-      list.push(null);
+      try {
+        list.push({ __uuid__: A.spriteFrame(fallback) });
+      } catch (e2) {
+        list.push(null);
+      }
     }
   }
   if (missing.length) {
-    console.log(`  ! thieu ${missing.length} icon bac, se de trong:`);
+    console.log(`  ! ${missing.length} icon chua co, tam dung icon_v10 thay the:`);
     for (const m of missing) console.log(`      ${m}`);
   }
   return list;
@@ -215,19 +245,19 @@ function buildRankTab(uuidScript, uuidItemPrefab) {
           P.sprite(IMG.borderNho, { type: 1, sizeMode: 0 }),
         ]),
 
-        P.node('iconRank', { size: [84, 84], pos: [-430, 0], ref: 'iconRank' }, [], [
+        // Icon chiem tu -478 den -402; chu bat dau tu -380 nen khong cham nhau.
+        P.node('iconRank', { size: [76, 76], pos: [-440, 0], ref: 'iconRank' }, [], [
           P.sprite(RANK_ICONS[0] ? RANK_ICONS[0].__uuid__ : null, { sizeMode: 0 }),
         ]),
 
-        P.node('lbRankName', { size: [200, 40], pos: [-300, 32], ref: 'lbRankName', color: C_GOLD }, [], [
+        P.node('lbRankName', { size: [230, 42], pos: [-265, 26], ref: 'lbRankName', color: C_GOLD }, [], [
           P.label('VIP 1', { size: 30, hAlign: 0, overflow: 1 }),
         ]),
 
-        P.node('lbVpAccumulated', { size: [240, 30], pos: [-290, -8], ref: 'lbVpAcc', color: C_WHITE }, [], [
-          P.label('0', { size: 22, hAlign: 0, overflow: 1 }),
-        ]),
-        P.node('lbVpAccCaption', { size: [240, 24], pos: [-292, -36], color: C_DIM }, [], [
-          P.label('VP tích luỹ', { size: 16, hAlign: 0, overflow: 1 }),
+        // Gop so va chu vao MOT label ("513 VP tích luỹ") — truoc day tach
+        // lam hai node canh nhau nen de dam vao icon.
+        P.node('lbVpAccumulated', { size: [230, 32], pos: [-265, -14], ref: 'lbVpAcc', color: C_WHITE }, [], [
+          P.label('0 VP tích luỹ', { size: 19, hAlign: 0, overflow: 1 }),
         ]),
 
         // Thanh tien do
@@ -392,6 +422,148 @@ function buildPointTab(uuidScript) {
 }
 
 // ─────────────────────────────────────────────────────────────────
+// Prefab: VipRakebackTab — Hoan tra cuoc (chua co backend)
+// ─────────────────────────────────────────────────────────────────
+
+function buildRakebackTab(uuidScript) {
+  /** Mot o so lieu nho. */
+  const cell = (name, refName, caption, x, y, w) =>
+    P.node('cell' + name, { size: [w, 92], pos: [x, y] }, [
+      P.node('bg', { size: [w, 92] }, [], [
+        P.sprite(IMG.borderNho, { type: 1, sizeMode: 0 }),
+      ]),
+      P.node('lbValue', { size: [w - 24, 36], pos: [0, 12], ref: refName, color: C_WHITE }, [], [
+        P.label('—', { size: 26, overflow: 1 }),
+      ]),
+      P.node('lbCaption', { size: [w - 24, 24], pos: [0, -26], color: C_DIM }, [], [
+        P.label(caption, { size: 16, overflow: 1 }),
+      ]),
+    ]);
+
+  return P.node(
+    'VipRakebackTab',
+    { size: [W_TAB, H_TAB] },
+    [
+      // ── Phan so lieu, an di khi chua co API ──
+      P.node('content', { size: [W_TAB, H_TAB], active: false, ref: 'content' }, [
+        P.node('hero', { size: [940, 150], pos: [0, 130] }, [
+          P.node('bg', { size: [940, 150] }, [], [
+            P.sprite(IMG.borderNho, { type: 1, sizeMode: 0 }),
+          ]),
+          P.node('icon', { size: [78, 68], pos: [-380, 16] }, [], [
+            P.sprite(IMG.treasure, { sizeMode: 0 }),
+          ]),
+          P.node('lbAmount', { size: [520, 56], pos: [40, 22], ref: 'lbAmount', color: C_GOLD }, [], [
+            P.label('0', { size: 44, overflow: 1 }),
+          ]),
+          P.node('lbCaption', { size: [820, 26], pos: [0, -44], color: C_DIM }, [], [
+            P.label('Tiền hoàn trả kỳ này', { size: 18, overflow: 1 }),
+          ]),
+        ]),
+
+        cell('Rate', 'lbRate', 'Tỷ lệ hoàn theo hạng', -310, 0, 300),
+        cell('Period', 'lbPeriod', 'Kỳ hoàn trả', 0, 0, 300),
+        cell('Bet', 'lbTotalBet', 'Tổng cược trong kỳ', 310, 0, 300),
+
+        P.node('btnClaim', { size: [124, 44], pos: [0, -110], ref: 'claim' }, [
+          P.node('lbClaim', { size: [124, 40], ref: 'lbClaim' }, [], [
+            P.label('Nhận', { size: 20, overflow: 1 }),
+          ]),
+        ], [
+          P.sprite(IMG.btnNhan, { sizeMode: 0 }),
+          P.button({ transition: 3, normal: IMG.btnNhan, disabled: IMG.btnNhanDis }),
+        ]),
+      ]),
+
+      // ── Man hinh "chua co" ──
+      P.node('notReady', { size: [900, 200], pos: [0, 20], ref: 'notReady' }, [
+        P.node('icon', { size: [78, 68], pos: [0, 60] }, [], [
+          P.sprite(IMG.treasure, { sizeMode: 0 }),
+        ]),
+        P.node('lb', { size: [860, 110], pos: [0, -30], ref: 'lbNotReady', color: C_DIM }, [], [
+          P.label('', { size: 20, wrap: true, overflow: 0 }),
+        ]),
+      ]),
+    ],
+    [
+      P.script(uuidScript, {
+        lbAmount: P.refComp('lbAmount', 'cc.Label'),
+        lbRate: P.refComp('lbRate', 'cc.Label'),
+        lbPeriod: P.refComp('lbPeriod', 'cc.Label'),
+        lbTotalBet: P.refComp('lbTotalBet', 'cc.Label'),
+        nodeClaim: P.ref('claim'),
+        lbClaim: P.refComp('lbClaim', 'cc.Label'),
+        nodeNotReady: P.ref('notReady'),
+        lbNotReady: P.refComp('lbNotReady', 'cc.Label'),
+        nodeContent: P.ref('content'),
+      }),
+    ]
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────
+// Prefab: VipLixiTab — Li xi / hong bao (chua co backend)
+// ─────────────────────────────────────────────────────────────────
+
+function buildLixiTab(uuidScript) {
+  const listW = 960;
+  const listH = 300;
+
+  return P.node(
+    'VipLixiTab',
+    { size: [W_TAB, H_TAB] },
+    [
+      P.node('content', { size: [W_TAB, H_TAB], active: false, ref: 'content' }, [
+        P.node('lbCount', { size: [900, 34], pos: [0, 190], ref: 'lbCount', color: C_GOLD }, [], [
+          P.label('Bạn có 0 hồng bao chưa mở', { size: 22, overflow: 1 }),
+        ]),
+
+        P.node('scroll', { size: [listW, listH], pos: [0, 0], ref: 'scroll' }, [
+          P.node('view', { size: [listW, listH], ref: 'view' }, [
+            P.node(
+              'listContent',
+              { size: [listW, 0], pos: [0, listH / 2], anchor: [0.5, 1], ref: 'listContent' },
+              [],
+              [
+                P.layout({
+                  layoutType: 2,
+                  resize: 1,
+                  spacingY: 10,
+                  padding: { T: 6, B: 6 },
+                  size: [listW, 0],
+                }),
+              ]
+            ),
+          ], [
+            P.mask({ type: 0 }),
+          ]),
+        ], [
+          P.scrollView({ vertical: true, horizontal: false, content: P.ref('listContent') }),
+        ]),
+      ]),
+
+      P.node('notReady', { size: [900, 200], pos: [0, 20], ref: 'notReady' }, [
+        P.node('icon', { size: [84, 61], pos: [0, 60] }, [], [
+          P.sprite(IMG.iconThe, { sizeMode: 0 }),
+        ]),
+        P.node('lb', { size: [860, 110], pos: [0, -30], ref: 'lbNotReady', color: C_DIM }, [], [
+          P.label('', { size: 20, wrap: true, overflow: 0 }),
+        ]),
+      ]),
+    ],
+    [
+      P.script(uuidScript, {
+        nodeListContent: P.ref('listContent'),
+        lbCount: P.refComp('lbCount', 'cc.Label'),
+        nodeNotReady: P.ref('notReady'),
+        lbNotReady: P.refComp('lbNotReady', 'cc.Label'),
+        nodeContent: P.ref('content'),
+      }),
+    ]
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────
 // Prefab: VipPopup — khung ngoai
 // ─────────────────────────────────────────────────────────────────
 
@@ -399,7 +571,9 @@ const W_POPUP = 1100;
 const H_POPUP = 620;
 
 const TAB_TITLES = ['HẠNG VIP', 'VIPPOINT', 'HOÀN TRẢ', 'LÌ XÌ'];
-const TAB_ENABLED = [true, true, false, false];
+// Ca 4 tab deu mo duoc. Hai tab cuoi da co prefab + script rieng nhung
+// chua co backend nen ben trong hien phan giai thich, khong hien so gia.
+const TAB_ENABLED = [true, true, true, true];
 
 function buildPopup(uuidScript) {
   const tabW = 236;
@@ -506,6 +680,8 @@ function main() {
   const sItem = scriptUuid(path.join('items', 'VipRankItem.js'));
   const sRankTab = scriptUuid(path.join('tabs', 'VipRankTab.js'));
   const sPointTab = scriptUuid(path.join('tabs', 'VipPointTab.js'));
+  const sRakeTab = scriptUuid(path.join('tabs', 'VipRakebackTab.js'));
+  const sLixiTab = scriptUuid(path.join('tabs', 'VipLixiTab.js'));
   const sPopup = scriptUuid('VipPopup.js');
   // Hai file duoi khong phai component nhung van can .meta de Cocos import
   scriptUuid('VipService.js');
@@ -516,11 +692,15 @@ function main() {
   const uItem = prefabUuid(path.join('items', 'VipRankItem.prefab'));
   const uRankTab = prefabUuid(path.join('tabs', 'VipRankTab.prefab'));
   const uPointTab = prefabUuid(path.join('tabs', 'VipPointTab.prefab'));
+  const uRakeTab = prefabUuid(path.join('tabs', 'VipRakebackTab.prefab'));
+  const uLixiTab = prefabUuid(path.join('tabs', 'VipLixiTab.prefab'));
   const uPopup = prefabUuid('VipPopup.prefab');
 
   writePrefab(path.join('items', 'VipRankItem.prefab'), buildRankItem(sItem), uItem);
   writePrefab(path.join('tabs', 'VipRankTab.prefab'), buildRankTab(sRankTab, uItem), uRankTab);
   writePrefab(path.join('tabs', 'VipPointTab.prefab'), buildPointTab(sPointTab), uPointTab);
+  writePrefab(path.join('tabs', 'VipRakebackTab.prefab'), buildRakebackTab(sRakeTab), uRakeTab);
+  writePrefab(path.join('tabs', 'VipLixiTab.prefab'), buildLixiTab(sLixiTab), uLixiTab);
   writePrefab('VipPopup.prefab', buildPopup(sPopup), uPopup);
 
   console.log('---------------------');

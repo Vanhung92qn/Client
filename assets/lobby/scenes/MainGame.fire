@@ -60612,11 +60612,11 @@
   {
     "__type__": "cc.ClickEvent",
     "target": {
-      "__id__": 1161
+      "__id__": 4
     },
     "component": "",
-    "_componentId": "d0aa7oYq2NOlqpuHO1fQVO5",
-    "handler": "vipClicked",
+    "_componentId": "2a420qeAGJAN5CQHMpCOjDb",
+    "handler": "openVipPopupClicked",
     "customEventData": ""
   },
   {
