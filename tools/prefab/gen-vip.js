@@ -117,7 +117,11 @@ const IMG = A.spriteFrames({
  *   bac 6-10  common/images/VIP/icon_vN.png     ~60x62
  *   bac 11-15 CHUA CO — tam dung lai icon bac 10, cho anh moi.
  */
-const RANK_ICON_PATHS = [
+/** So bac VIP — phai trung MAX_RANK trong VipModel.js va bang PrivilegeType. */
+const RANK_COUNT = 30;
+
+/** 15 huy hieu goc, xep theo do hoanh trang tang dan. */
+const BADGES = [
   'common/images/VIP/vip1.png',
   'common/images/VIP/vip2.png',
   'common/images/VIP/vip3.png',
@@ -128,7 +132,6 @@ const RANK_ICON_PATHS = [
   'common/images/VIP/icon_v8.png',
   'common/images/VIP/icon_v9.png',
   'common/images/VIP/icon_v10.png',
-  // 11-15: thay bang anh rieng khi co
   'common/images/VIP/icon_v11.png',
   'common/images/VIP/icon_v12.png',
   'common/images/VIP/icon_v13.png',
@@ -136,26 +139,40 @@ const RANK_ICON_PATHS = [
   'common/images/VIP/icon_v15.png',
 ];
 
+/**
+ * Anh cho 30 bac.
+ *
+ * Hien moi co 15 huy hieu, nen MOI HUY HIEU DUNG CHO HAI BAC lien tiep
+ * (bac 1-2 dung huy hieu 1, bac 29-30 dung huy hieu 15). Cach nay van giu
+ * duoc cam giac tang tien deu dan, hon han viec lay dai mot anh cho ca
+ * doan cuoi.
+ *
+ * Khi co du 30 huy hieu rieng: them icon_v16..icon_v30 vao BADGES roi
+ * doi ham map ben duoi thanh anh xa 1-1.
+ */
 const RANK_ICONS = (() => {
-  const list = [];
-  const fallback = 'common/images/VIP/icon_v10.png';
+  const frames = [];
   const missing = [];
-  for (const p of RANK_ICON_PATHS) {
+  for (const p of BADGES) {
     try {
-      list.push({ __uuid__: A.spriteFrame(p) });
+      frames.push(A.spriteFrame(p));
     } catch (e) {
       missing.push(p);
-      try {
-        list.push({ __uuid__: A.spriteFrame(fallback) });
-      } catch (e2) {
-        list.push(null);
-      }
+      frames.push(null);
     }
   }
   if (missing.length) {
-    console.log(`  ! ${missing.length} icon chua co, tam dung icon_v10 thay the:`);
+    console.log(`  ! thieu ${missing.length} huy hieu goc:`);
     for (const m of missing) console.log(`      ${m}`);
   }
+
+  const list = [];
+  for (let rank = 1; rank <= RANK_COUNT; rank++) {
+    const idx = Math.min(frames.length - 1, Math.floor((rank - 1) / 2));
+    const uuid = frames[idx];
+    list.push(uuid ? { __uuid__: uuid } : null);
+  }
+  console.log(`  i ${RANK_COUNT} bac dung ${frames.length} huy hieu (moi cai cho 2 bac)`);
   return list;
 })();
 

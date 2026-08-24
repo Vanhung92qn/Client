@@ -19,8 +19,12 @@
 
 'use strict';
 
-/** So bac VIP toi da hien co (bang PrivilegeType co 15 dong). */
-const MAX_RANK = 15;
+/**
+ * So bac VIP toi da. Tu 2026-08-25 la 30 bac (truoc do 15).
+ * Phai trung so dong trong bang PrivilegeType, xem migration
+ * Database/BettingGameCore/_migrations/2026-08-25_vip_30_ranks.sql
+ */
+const MAX_RANK = 30;
 
 /** Ten hien thi cua mot bac. */
 function rankName(rankId) {
