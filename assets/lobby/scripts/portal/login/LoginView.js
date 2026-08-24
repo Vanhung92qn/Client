@@ -158,7 +158,7 @@ var netConfig = require('NetConfig');
             cc.LoginController.getInstance().setUsername(this.username);
             cc.LoginController.getInstance().setPassword(this.password);
 
-            cc.PopupController.getInstance().showBusy();
+            cc.PopupController.getInstance().showBusy(true);   // LoadingOverlay muot cho login
 
             var loginCommand = new cc.LoginCommand;
             loginCommand.execute(this);
@@ -236,6 +236,10 @@ var netConfig = require('NetConfig');
             if (response.Token) {
                 cc.ServerConnector.getInstance().setToken(response.Token);
             }
+            // [TỐC ĐỘ #3] Login đã trả ConnectionToken -> lưu để portalNegotiate mở thẳng PortalHub, bỏ negotiate.
+            if (response.ConnectionToken) {
+                cc.LoginController.getInstance().setPortalConnectionToken(response.ConnectionToken);
+            }
             cc.LoginController.getInstance().setLoginResponse(response.AccountInfo);
             cc.LoginController.getInstance().setNextVPResponse(response.NextVIP);
             cc.LoginController.getInstance().setNickname(response.AccountInfo.AccountName);
@@ -252,10 +256,11 @@ var netConfig = require('NetConfig');
                 //cc.LobbyController.getInstance().loginSuccess();
                 //cc.LobbyController.getInstance().destroyLoginView();
             } else {
-                // cc.LobbyController.getInstance().loginSuccess();
-                var getAccountInfoCommand = new cc.GetAccountInfoCommand;
-                getAccountInfoCommand.execute(this);
+                // [TỐC ĐỘ #2] Response Login ĐÃ chứa đủ AccountInfo/NextVIP/TopVP/Balance (đã set ở trên)
+                // -> vào sảnh LUÔN, bỏ round-trip GetAccountInfo thừa (~0.5-1s).
+                // [P1] destroyLoginView TRƯỚC loginSuccess: deactivate popup ngay, không lộ ~1s trên mobile.
                 cc.LobbyController.getInstance().destroyLoginView();
+                cc.LobbyController.getInstance().loginSuccess();
             }
         },
 

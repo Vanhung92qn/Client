@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "74177a42-2844-4e1e-b2c9-19d9971141d8",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 707,
+  "height": 215,
+  "platformSettings": {},
+  "subMetas": {
+    "icon_cowboy2": {
+      "ver": "1.0.6",
+      "uuid": "1b6e7b60-bf1b-4c93-a760-9959d873af02",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "74177a42-2844-4e1e-b2c9-19d9971141d8",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 707,
+      "height": 215,
+      "rawWidth": 707,
+      "rawHeight": 215,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

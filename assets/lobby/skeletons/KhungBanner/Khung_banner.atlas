@@ -1,0 +1,27 @@
+
+Khung_banner.png
+size: 630,243
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+elight
+  rotate: false
+  xy: 350, 188
+  size: 99, 41
+  orig: 109, 43
+  offset: 5, 0
+  index: -1
+longlight
+  rotate: false
+  xy: 3, 232
+  size: 624, 8
+  orig: 624, 8
+  offset: 0, 0
+  index: -1
+vienbanner
+  rotate: true
+  xy: 3, 3
+  size: 226, 344
+  orig: 228, 346
+  offset: 1, 1
+  index: -1

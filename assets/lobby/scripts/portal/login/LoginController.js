@@ -42,7 +42,19 @@ import BroadcastReceiver from "../../shootFish/common/BroadcastReceiver";
             return this.otpView = otpView;
         };
 
+        // [STATE MACHINE] 5 auth view (login/register/nickname/otp/forgotpass) LOAI TRU NHAU.
+        // Hien 1 cai -> AN het cac cai con lai. Truoc day toggle thu cong tung cho -> register->nickname
+        // quen showRegister(false) -> register con phia sau. Tap trung hoa o day -> mot mach, khong tai phat.
+        LoginController.prototype._hideAuthExcept = function (keep) {
+            if (this.loginView      && keep !== this.loginView)      this.loginView.showLogin(false);
+            if (this.registerView   && keep !== this.registerView)   this.registerView.showRegister(false);
+            if (this.nicknameView   && keep !== this.nicknameView)   this.nicknameView.showNickname(false);
+            if (this.otpView        && keep !== this.otpView)        this.otpView.showOTP(false);
+            if (this.forgotPassView && keep !== this.forgotPassView) this.forgotPassView.showForgotPass(false);
+        };
+
         LoginController.prototype.showLogin = function (enable) {
+            if (enable) this._hideAuthExcept(this.loginView);
             return this.loginView.showLogin(enable);
         };
 
@@ -51,20 +63,29 @@ import BroadcastReceiver from "../../shootFish/common/BroadcastReceiver";
         };
 
         LoginController.prototype.showRegister = function (enable) {
+            if (enable) this._hideAuthExcept(this.registerView);
             return this.registerView.showRegister(enable);
         };
 
         LoginController.prototype.showForgotPass = function (enable) {
+            if (!this.forgotPassView) {
+                // Prefab chua co component ForgotPassView (chua dung form Quen mat khau) -> khong crash, chi bao.
+                console.warn('[LoginController] Chua co ForgotPassView trong loginView.prefab -> can dung form Quen mat khau roi wire component ForgotPassView.');
+                if (enable) cc.PopupController.getInstance().showMessage('Chức năng Quên mật khẩu chưa được cấu hình.');
+                return;
+            }
+            if (enable) this._hideAuthExcept(this.forgotPassView);
             return this.forgotPassView.showForgotPass(enable);
         };
 
         LoginController.prototype.showNickname = function (enable) {
+            if (enable) this._hideAuthExcept(this.nicknameView);
             return this.nicknameView.showNickname(enable);
         };
 
         LoginController.prototype.showOTP = function (enable) {
+            if (enable) this._hideAuthExcept(this.otpView);
             this.otpView.showOTP(enable);
-
             //this.stayOnTop(!enable);
         };
 
@@ -161,6 +182,16 @@ import BroadcastReceiver from "../../shootFish/common/BroadcastReceiver";
 
         LoginController.prototype.setTopVPResponse = function (nextVPResponse) {
             return this.topVPResponse = nextVPResponse;
+        };
+
+        // [TỐC ĐỘ #3] ConnectionToken do Login/CreateAccount trả -> portalNegotiate dùng để mở thẳng
+        // PortalHub (bỏ GET /signalr/negotiate). Dùng 1 lần: consume xong set null, reconnect dùng this.connectionToken.
+        LoginController.prototype.setPortalConnectionToken = function (token) {
+            return this.portalConnectionToken = token;
+        };
+
+        LoginController.prototype.getPortalConnectionToken = function () {
+            return this.portalConnectionToken;
         };
 
         return LoginController;

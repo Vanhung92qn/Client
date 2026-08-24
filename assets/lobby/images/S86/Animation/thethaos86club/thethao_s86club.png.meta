@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "6e8c771b-14ee-4af3-aad1-59ffe2882213",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 2011,
+  "height": 884,
+  "platformSettings": {},
+  "subMetas": {
+    "thethao_s86club": {
+      "ver": "1.0.6",
+      "uuid": "df61028a-c4af-4e58-a337-6f6ec0848a73",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "6e8c771b-14ee-4af3-aad1-59ffe2882213",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 2,
+      "trimY": 2,
+      "width": 2007,
+      "height": 880,
+      "rawWidth": 2011,
+      "rawHeight": 884,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

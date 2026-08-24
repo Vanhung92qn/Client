@@ -117,6 +117,10 @@
         //Bau cua
         NOTIFY_CHANGE_PHRASE:"notifyChangePhrase",
 
+        //Da Ga (Chicken Fight)
+        FIGHTING: 'fighting',
+        END_FIGHTING: 'endFighting',
+
         //portal
         TOPUP_CARD: 'topupCard',
         EFFECT_JACKPOT_ALL: 'effectJackpotAll',
@@ -147,7 +151,17 @@
         //XocDia Jackpot Hoang Kim Long
         SLOT_RESULT:  'slotResult',   //mini-slot 4 dice 1..6 (push truoc khi mo bat)
         JACKPOT_HIT:  'jackpotHit',   //no hu - list winners + award
-        JACKPOT_INFO: 'jackpotInfo'   //pool info push khi user PlayNow (sync ban dau)
+        JACKPOT_INFO: 'jackpotInfo',   //pool info push khi user PlayNow (sync ban dau)
+
+        //Aviator (115) - crash game
+        BET_LIST: 'playerBetList',
+        PLAYER_CASH_OUT: 'playerCashOut',
+        CASH_OUT_SUCCESS: 'cashoutSuccess',
+        UPDATE_MULTIPLIER: 'updateMultiplier',
+        JACKPOT_WINNER: 'jackpotWinner',   //no hu - hieu ung ca phong (Amount, WinnersJson [{a,w}])
+        JACKPOT_AWARD: 'jackpotAward',      //no hu - unicast rieng nguoi trung (Share, Balance)
+        FEATHER_DROP: 'featherDrop',       //HOA PHUNG: long vu roi (FeatherCount) - engine ban kenh phoenix_feather
+        FLYING_EVENT: 'flyingEvent'        //HOA PHUNG: bien dao bay (cL,aL,bId,aId) - engine ban kenh phoenix_flight
 
     });
 

@@ -1,0 +1,96 @@
+headerbar.png
+size: 1676,396
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+as_chay
+  rotate: false
+  xy: 868, 308
+  size: 427, 30
+  orig: 427, 30
+  offset: 0, 0
+  index: -1
+asnhay
+  rotate: false
+  xy: 760, 308
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+domroi
+  rotate: false
+  xy: 2, 2
+  size: 298, 145
+  orig: 298, 145
+  offset: 0, 0
+  index: -1
+f1
+  rotate: false
+  xy: 2, 149
+  size: 555, 85
+  orig: 555, 85
+  offset: 0, 0
+  index: -1
+f2
+  rotate: false
+  xy: 2, 308
+  size: 636, 69
+  orig: 636, 69
+  offset: 0, 0
+  index: -1
+light
+  rotate: false
+  xy: 640, 308
+  size: 57, 56
+  orig: 57, 56
+  offset: 0, 0
+  index: -1
+lightdai
+  rotate: false
+  xy: 302, 2
+  size: 1280, 115
+  orig: 1280, 115
+  offset: 0, 0
+  index: -1
+lixi
+  rotate: false
+  xy: 802, 308
+  size: 28, 35
+  orig: 28, 35
+  offset: 0, 0
+  index: -1
+longden
+  rotate: false
+  xy: 734, 308
+  size: 24, 42
+  orig: 24, 42
+  offset: 0, 0
+  index: -1
+nen
+  rotate: false
+  xy: 2, 236
+  size: 1671, 70
+  orig: 1671, 70
+  offset: 0, 0
+  index: -1
+phao
+  rotate: false
+  xy: 832, 308
+  size: 34, 33
+  orig: 34, 33
+  offset: 0, 0
+  index: -1
+treo
+  rotate: false
+  xy: 699, 308
+  size: 33, 42
+  orig: 33, 42
+  offset: 0, 0
+  index: -1
+vangnen
+  rotate: false
+  xy: 2, 379
+  size: 1671, 13
+  orig: 1671, 13
+  offset: 0, 0
+  index: -1

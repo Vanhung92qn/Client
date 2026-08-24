@@ -1,0 +1,153 @@
+
+HongBao.png
+size: 512,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+C1
+  rotate: true
+  xy: 495, 492
+  size: 18, 12
+  orig: 21, 14
+  offset: 2, 1
+  index: -1
+Star
+  rotate: false
+  xy: 412, 324
+  size: 37, 34
+  orig: 39, 37
+  offset: 1, 1
+  index: -1
+as
+  rotate: false
+  xy: 2, 310
+  size: 201, 200
+  orig: 222, 224
+  offset: 11, 11
+  index: -1
+bao
+  rotate: false
+  xy: 334, 404
+  size: 108, 61
+  orig: 110, 64
+  offset: 1, 1
+  index: -1
+bao1
+  rotate: false
+  xy: 329, 363
+  size: 86, 39
+  orig: 88, 41
+  offset: 1, 1
+  index: -1
+bg
+  rotate: false
+  xy: 334, 467
+  size: 159, 43
+  orig: 161, 45
+  offset: 1, 1
+  index: -1
+c2
+  rotate: true
+  xy: 495, 476
+  size: 14, 15
+  orig: 16, 17
+  offset: 1, 1
+  index: -1
+c3
+  rotate: true
+  xy: 273, 319
+  size: 120, 33
+  orig: 122, 35
+  offset: 1, 1
+  index: -1
+c4
+  rotate: true
+  xy: 308, 359
+  size: 24, 19
+  orig: 27, 21
+  offset: 2, 1
+  index: -1
+c5
+  rotate: true
+  xy: 495, 460
+  size: 14, 15
+  orig: 16, 17
+  offset: 1, 1
+  index: -1
+cay
+  rotate: false
+  xy: 205, 375
+  size: 66, 64
+  orig: 68, 66
+  offset: 1, 1
+  index: -1
+hong
+  rotate: false
+  xy: 205, 441
+  size: 127, 69
+  orig: 131, 73
+  offset: 2, 2
+  index: -1
+hong1
+  rotate: true
+  xy: 444, 360
+  size: 105, 48
+  orig: 107, 50
+  offset: 1, 1
+  index: -1
+lixi1
+  rotate: true
+  xy: 417, 384
+  size: 18, 23
+  orig: 20, 25
+  offset: 1, 1
+  index: -1
+lixi2
+  rotate: true
+  xy: 308, 413
+  size: 26, 20
+  orig: 28, 22
+  offset: 1, 1
+  index: -1
+lixi3
+  rotate: true
+  xy: 308, 385
+  size: 26, 19
+  orig: 28, 21
+  offset: 1, 1
+  index: -1
+lixi4
+  rotate: false
+  xy: 494, 424
+  size: 16, 34
+  orig: 18, 36
+  offset: 1, 1
+  index: -1
+lixiLon1
+  rotate: true
+  xy: 451, 324
+  size: 34, 37
+  orig: 36, 39
+  offset: 1, 1
+  index: -1
+lixiLon2
+  rotate: false
+  xy: 370, 324
+  size: 40, 37
+  orig: 42, 39
+  offset: 1, 1
+  index: -1
+lixiLon3
+  rotate: false
+  xy: 329, 322
+  size: 39, 39
+  orig: 41, 41
+  offset: 1, 1
+  index: -1
+tuitien
+  rotate: true
+  xy: 205, 315
+  size: 58, 64
+  orig: 60, 66
+  offset: 1, 1
+  index: -1

@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "41a57466-78d8-4567-8776-1f2440d4e7bc",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 1089,
+  "height": 573,
+  "platformSettings": {},
+  "subMetas": {
+    "Aviator_Faq_newJackpot2": {
+      "ver": "1.0.6",
+      "uuid": "6997a56f-4d64-46d8-b4ec-5ef7534e457c",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "41a57466-78d8-4567-8776-1f2440d4e7bc",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -68,
+      "offsetY": 97.5,
+      "trimX": 2,
+      "trimY": 33,
+      "width": 949,
+      "height": 312,
+      "rawWidth": 1089,
+      "rawHeight": 573,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

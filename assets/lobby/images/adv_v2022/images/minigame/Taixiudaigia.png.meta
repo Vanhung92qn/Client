@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "40227955-eab8-4f7c-9420-7fc6aaac4eb8",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 105,
+  "height": 68,
+  "platformSettings": {},
+  "subMetas": {
+    "Taixiudaigia": {
+      "ver": "1.0.6",
+      "uuid": "aff222b9-57a2-446b-9b4e-445e9c186826",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "40227955-eab8-4f7c-9420-7fc6aaac4eb8",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 11,
+      "trimY": 0,
+      "width": 83,
+      "height": 68,
+      "rawWidth": 105,
+      "rawHeight": 68,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

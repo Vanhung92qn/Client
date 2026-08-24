@@ -8,10 +8,10 @@
         properties: {
             // nodeIconFxs: [cc.Node],
             // nodeIconMGFxs: [cc.Node],
-            //icons: [cc.SpriteFrame],
-           // fsIcons: [cc.SpriteFrame],
+            icons: [cc.SpriteFrame],
+            fsIcons: [cc.SpriteFrame],
             skeletonDataIcons: [sp.SkeletonData],
-           // skeletonDataIconsFs: [sp.SkeletonData],
+            skeletonDataIconsFs: [sp.SkeletonData],
         },
 
         onLoad: function () {

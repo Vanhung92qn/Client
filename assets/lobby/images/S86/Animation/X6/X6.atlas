@@ -1,0 +1,34 @@
+
+X6.png
+size: 256,128
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+1
+  rotate: false
+  xy: 2, 44
+  size: 103, 80
+  orig: 103, 80
+  offset: 0, 0
+  index: -1
+2
+  rotate: false
+  xy: 107, 81
+  size: 59, 43
+  orig: 59, 43
+  offset: 0, 0
+  index: -1
+6
+  rotate: true
+  xy: 168, 86
+  size: 38, 48
+  orig: 38, 48
+  offset: 0, 0
+  index: -1
+X
+  rotate: true
+  xy: 2, 2
+  size: 40, 47
+  orig: 40, 47
+  offset: 0, 0
+  index: -1

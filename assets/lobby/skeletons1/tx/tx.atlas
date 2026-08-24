@@ -1,0 +1,104 @@
+
+tx.png
+size: 401,399
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+1_star
+  rotate: false
+  xy: 257, 17
+  size: 53, 50
+  orig: 53, 53
+  offset: 0, 1
+  index: -1
+bg
+  rotate: false
+  xy: 2, 45
+  size: 172, 352
+  orig: 174, 354
+  offset: 1, 1
+  index: -1
+boad1
+  rotate: true
+  xy: 363, 217
+  size: 180, 29
+  orig: 182, 31
+  offset: 1, 1
+  index: -1
+boar2
+  rotate: false
+  xy: 2, 14
+  size: 180, 29
+  orig: 182, 31
+  offset: 1, 1
+  index: -1
+boar3
+  rotate: false
+  xy: 295, 69
+  size: 7, 328
+  orig: 9, 330
+  offset: 1, 1
+  index: -1
+boar4
+  rotate: false
+  xy: 304, 70
+  size: 7, 327
+  orig: 9, 329
+  offset: 1, 1
+  index: -1
+den
+  rotate: false
+  xy: 312, 39
+  size: 27, 27
+  orig: 29, 29
+  offset: 1, 1
+  index: -1
+dice_1
+  rotate: false
+  xy: 184, 19
+  size: 71, 73
+  orig: 73, 75
+  offset: 1, 1
+  index: -1
+dice_2
+  rotate: false
+  xy: 313, 68
+  size: 64, 80
+  orig: 66, 82
+  offset: 1, 1
+  index: -1
+dice_3
+  rotate: false
+  xy: 353, 167
+  size: 46, 48
+  orig: 54, 61
+  offset: 7, 12
+  index: -1
+frame1
+  rotate: true
+  xy: 313, 150
+  size: 72, 38
+  orig: 72, 38
+  offset: 0, 0
+  index: -1
+frame_jp
+  rotate: true
+  xy: 313, 224
+  size: 173, 48
+  orig: 175, 50
+  offset: 1, 1
+  index: -1
+taixiu_text
+  rotate: true
+  xy: 176, 94
+  size: 303, 117
+  orig: 303, 117
+  offset: 0, 0
+  index: -1
+trang
+  rotate: false
+  xy: 341, 39
+  size: 27, 27
+  orig: 29, 29
+  offset: 1, 1
+  index: -1

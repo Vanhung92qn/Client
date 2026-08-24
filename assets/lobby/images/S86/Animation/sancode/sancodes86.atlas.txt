@@ -1,0 +1,13 @@
+
+sancodes86.png
+size: 665,516
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+sancode
+  rotate: false
+  xy: 2, 2
+  size: 661, 512
+  orig: 661, 512
+  offset: 0, 0
+  index: -1

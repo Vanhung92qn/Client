@@ -13,7 +13,12 @@
 
             itemTemplate: cc.Prefab,
             contentBetted: cc.Node,
-            contentBetting: cc.Node
+            contentBetting: cc.Node,
+
+            //Label "Ban chua dat lenh nao" - keo Node Label (da set san text) vao trong editor.
+            //De trong cung khong sao (code co guard null).
+            lbEmptyBetted: cc.Node,
+            lbEmptyBetting: cc.Node
         },
         onLoad: function () {
             this.controller = cc.LodeController.getInstance();
@@ -28,7 +33,9 @@
         onEnable: function () {
             this.bettingOnDayCommand = new cc.LodeBettingOnDayCommand();
             this.isEnableBetted = true;
-            this.onReloadDataBetting();
+            //Mac dinh mo tab Ket qua
+            this.onLoadResult();
+            this.refreshEmptyState();
         },
         enableNodeBetted: function (enable) {
             this.isEnableBetted = enable;
@@ -83,6 +90,7 @@
             data.map(betItem => {
                 this.initItemBettedUI(betItem);
             }, this);
+            this.refreshEmptyState();
         },
         updateListBetted: function (betItem) {
             try {
@@ -91,9 +99,7 @@
 
             }
             this.initItemBettedUI(betItem);
-        },
-        updateListBetting: function (betItem) {
-            this.initItemBettingUI(betItem);
+            this.refreshEmptyState();
         },
         onGetBettingOnDayResponse: function (data) {
             if (data) {
@@ -103,6 +109,7 @@
                     this.initItemBettingUI(betItem);
                 }, this)
             }
+            this.refreshEmptyState();
         },
         //Khoi tao item UI cho tab da dat
         initItemBettedUI: function (betItem) {
@@ -127,6 +134,20 @@
         //Cap nhat danh sach
         updateListBetting: function (data) {
             this.initItemBettingUI(data);
+            this.refreshEmptyState();
+        },
+        //An/hien label "Ban chua dat lenh nao" theo danh sach co rong khong (ca Da dat & Dang dat)
+        refreshEmptyState: function () {
+            if (this.lbEmptyBetted && this.contentBetted) {
+                this.lbEmptyBetted.active = (this.contentBetted.childrenCount === 0);
+            }
+            if (this.lbEmptyBetting && this.contentBetting) {
+                this.lbEmptyBetting.active = (this.contentBetting.childrenCount === 0);
+            }
+        },
+        //Nut Sieu Toc - tinh nang dang phat trien
+        onClickSieuToc: function () {
+            cc.PopupController.getInstance().showMessage("Tính năng đang phát triển");
         },
         //Hien thi tab da dat
         onReloadDataBetted: function () {

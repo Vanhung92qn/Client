@@ -104,8 +104,6 @@ import Configs from "../shootFish/common/Configs";
                 request = cc.loader.getXMLHttpRequest();
                 var urlRequest = 'https://' + subdomain + host + '/' + url;
 
-                // var sendDate = (new Date()).getTime();
-
                 if (Debug) {
                     console.log('sendRequestPOST');
                     console.log(urlRequest);
@@ -159,11 +157,12 @@ import Configs from "../shootFish/common/Configs";
 
                         //moi them -> sau nay sua parse JSON o day luon
                         var obj = JSON.parse(request.responseText);
-                        if (obj.ResponseCode === -1001) {
+                        // [LOGOUT FIX] Chỉ bật popup "đăng nhập lại" khi ĐANG đăng nhập. Sau khi đăng xuất
+                        // (loginState=false) các request muộn/null-token trả -1001 KHÔNG được tự bật popup.
+                        if (obj.ResponseCode === -1001
+                            && cc.LoginController && cc.LoginController.getInstance().getLoginState()) {
                             cc.PopupController.getInstance().showPopupRequireLogin(cc.HubError.ERROR_1001_NOT_AUTHENTICATE);
                         }
-                        // var receiveDate = (new Date()).getTime();
-                        // cc.DDNA.getInstance().logAPI(subdomain, url, receiveDate - sendDate);
 
                         return callback(request.responseText);
                     }

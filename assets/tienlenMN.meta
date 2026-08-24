@@ -1,0 +1,13 @@
+{
+  "ver": "1.1.3",
+  "uuid": "03b0a6e7-3253-4c0e-a2a2-c5a18166aa8d",
+  "importer": "folder",
+  "isBundle": true,
+  "bundleName": "tienlenMN",
+  "priority": 1,
+  "compressionType": {},
+  "optimizeHotUpdate": {},
+  "inlineSpriteFrames": {},
+  "isRemoteBundle": {},
+  "subMetas": {}
+}

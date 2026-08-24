@@ -1,0 +1,97 @@
+
+LittleIcon.png
+size: 784, 346
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+bingo_光圈
+  rotate: false
+  xy: 338, 90
+  size: 255, 255
+  orig: 255, 255
+  offset: 0, 0
+  index: -1
+bingo_背景光
+  rotate: true
+  xy: 1, 11
+  size: 334, 335
+  orig: 334, 335
+  offset: 0, 0
+  index: -1
+抽包去_內框
+  rotate: true
+  xy: 595, 91
+  size: 42, 150
+  orig: 42, 150
+  offset: 0, 0
+  index: -1
+抽包去_刷光
+  rotate: true
+  xy: 338, 21
+  size: 67, 244
+  orig: 67, 244
+  offset: 0, 0
+  index: -1
+抽包去_邊框
+  rotate: false
+  xy: 741, 193
+  size: 42, 152
+  orig: 42, 152
+  offset: 0, 0
+  index: -1
+樂抽_紅包
+  rotate: true
+  xy: 595, 188
+  size: 157, 144
+  orig: 157, 144
+  offset: 0, 0
+  index: -1
+樂抽_紅包袋口
+  rotate: false
+  xy: 584, 1
+  size: 123, 87
+  orig: 123, 87
+  offset: 0, 0
+  index: -1
+樂抽_錢幣_1
+  rotate: true
+  xy: 709, 42
+  size: 47, 46
+  orig: 47, 46
+  offset: 0, 0
+  index: -1
+樂抽_錢幣_2
+  rotate: false
+  xy: 709, 8
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+樂抽_錢幣_3
+  rotate: false
+  xy: 709, 135
+  size: 51, 51
+  orig: 51, 51
+  offset: 0, 0
+  index: -1
+樂抽_錢幣_4
+  rotate: false
+  xy: 595, 142
+  size: 45, 44
+  orig: 45, 44
+  offset: 0, 0
+  index: -1
+樂抽_錢幣_5
+  rotate: false
+  xy: 642, 146
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+樂抽_錢幣_6
+  rotate: false
+  xy: 747, 97
+  size: 36, 36
+  orig: 36, 36
+  offset: 0, 0
+  index: -1

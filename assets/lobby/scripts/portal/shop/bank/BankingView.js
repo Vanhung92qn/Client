@@ -632,7 +632,8 @@ var helper = require('Helper');
 
             this.VarNguoigui = this.lbInfoBankDesc.string;
             this.VarAmount = helper.getOnlyNumberInString(this.editBoxValue.string);
-            this.VarCodeValue = this.editBoxnoidung.string;
+            // Noi dung chuyen khoan = ma tu sinh hien tren man hinh (khop addInfo QR). Truoc day gui editBoxnoidung (rong) -> backend bao "Du lieu gui len khong dung".
+            this.VarCodeValue = this.lbInfoBankDesc.string;
             this.VarBankName = this.lbSelectedBank.string;
 
             var Naptienbanking = new cc.Naptienbanking;

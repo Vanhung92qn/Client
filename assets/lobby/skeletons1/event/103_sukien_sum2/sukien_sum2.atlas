@@ -1,0 +1,97 @@
+
+sukien_sum2.png
+size: 1483,1537
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Layer 3
+  rotate: true
+  xy: 742, 2
+  size: 786, 196
+  orig: 788, 198
+  offset: 1, 1
+  index: -1
+Shape 2
+  rotate: true
+  xy: 1255, 609
+  size: 366, 221
+  orig: 368, 223
+  offset: 1, 1
+  index: -1
+Shape 2 copy
+  rotate: true
+  xy: 1255, 241
+  size: 366, 221
+  orig: 368, 223
+  offset: 1, 1
+  index: -1
+chaomung
+  rotate: false
+  xy: 2, 30
+  size: 705, 62
+  orig: 707, 64
+  offset: 1, 1
+  index: -1
+girl
+  rotate: false
+  xy: 806, 977
+  size: 614, 558
+  orig: 614, 558
+  offset: 0, 0
+  index: -1
+hopqua_phai
+  rotate: false
+  xy: 1167, 77
+  size: 164, 162
+  orig: 166, 164
+  offset: 1, 1
+  index: -1
+hopqua_trai
+  rotate: false
+  xy: 1333, 88
+  size: 148, 151
+  orig: 150, 153
+  offset: 1, 1
+  index: -1
+star
+  rotate: true
+  xy: 940, 109
+  size: 866, 225
+  orig: 868, 227
+  offset: 1, 1
+  index: -1
+tex2
+  rotate: true
+  xy: 1211, 390
+  size: 585, 42
+  orig: 587, 44
+  offset: 1, 1
+  index: -1
+tex3
+  rotate: true
+  xy: 1167, 276
+  size: 699, 42
+  orig: 701, 44
+  offset: 1, 1
+  index: -1
+tex4
+  rotate: false
+  xy: 2, 94
+  size: 724, 73
+  orig: 726, 76
+  offset: 1, 2
+  index: -1
+tron_1
+  rotate: false
+  xy: 2, 790
+  size: 802, 745
+  orig: 804, 747
+  offset: 1, 1
+  index: -1
+tron_2
+  rotate: false
+  xy: 2, 169
+  size: 738, 619
+  orig: 740, 621
+  offset: 1, 1
+  index: -1

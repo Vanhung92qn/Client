@@ -10,7 +10,7 @@
         }
 
         GetTKHistoryCommand.prototype.execute = function (controller) {
-            var url = 'api/tayduky/GetHistory?top=50';
+            var url = 'api/tamquoc/GetHistory?top=50';
 
             return cc.ServerConnector.getInstance().sendRequest(cc.SubdomainName.THREE_KINGDOM, url, function (response) {
                 var obj = JSON.parse(response);

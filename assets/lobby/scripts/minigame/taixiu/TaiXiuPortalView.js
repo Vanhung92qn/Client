@@ -142,7 +142,7 @@ var timeAll=60;
         reconnect: function () {
             // console.log('luckyDiceHub reconnect');
             this.lastTimeReconnect = (new Date()).getTime();
-            this.luckyDiceHub.connect(this, cc.HubName.LuckyDice, this.connectionToken, true);
+            this.luckyDiceHub.connect(this, cc.HubName.LuckyDiceHub, this.connectionToken, true);
             timeAll = 60;
         },
 

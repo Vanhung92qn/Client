@@ -1,0 +1,41 @@
+
+taixiuspine.png
+size: 1024,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+as
+  rotate: false
+  xy: 2, 443
+  size: 573, 577
+  orig: 573, 577
+  offset: 0, 0
+  index: -1
+as copy
+  rotate: false
+  xy: 2, 2
+  size: 155, 214
+  orig: 155, 214
+  offset: 0, 0
+  index: -1
+particle
+  rotate: false
+  xy: 335, 289
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+tai1
+  rotate: false
+  xy: 2, 218
+  size: 331, 223
+  orig: 331, 223
+  offset: 0, 0
+  index: -1
+xiu1
+  rotate: false
+  xy: 577, 797
+  size: 331, 223
+  orig: 331, 223
+  offset: 0, 0
+  index: -1

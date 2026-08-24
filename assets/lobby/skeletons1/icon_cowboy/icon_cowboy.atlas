@@ -1,0 +1,453 @@
+
+icon_cowboy.png
+size: 1054,415
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Group 20 copy 4
+  rotate: true
+  xy: 617, 5
+  size: 179, 17
+  orig: 181, 19
+  offset: 1, 1
+  index: -1
+arm_L
+  rotate: true
+  xy: 667, 2
+  size: 49, 124
+  orig: 49, 124
+  offset: 0, 0
+  index: -1
+arm_R
+  rotate: true
+  xy: 721, 294
+  size: 119, 87
+  orig: 120, 88
+  offset: 0, 1
+  index: -1
+bg1
+  rotate: false
+  xy: 333, 4
+  size: 186, 170
+  orig: 186, 170
+  offset: 0, 0
+  index: -1
+blur
+  rotate: false
+  xy: 333, 176
+  size: 193, 237
+  orig: 195, 239
+  offset: 1, 1
+  index: -1
+body
+  rotate: false
+  xy: 56, 80
+  size: 184, 333
+  orig: 184, 334
+  offset: 0, 1
+  index: -1
+cape_1
+  rotate: true
+  xy: 667, 53
+  size: 131, 84
+  orig: 132, 85
+  offset: 0, 1
+  index: -1
+capoe_2
+  rotate: true
+  xy: 528, 186
+  size: 227, 191
+  orig: 228, 192
+  offset: 0, 1
+  index: -1
+cowboy
+  rotate: true
+  xy: 242, 90
+  size: 323, 89
+  orig: 323, 89
+  offset: 0, 0
+  index: -1
+fire
+  rotate: false
+  xy: 764, 198
+  size: 94, 94
+  orig: 94, 96
+  offset: 0, 0
+  index: -1
+fire_00
+  rotate: false
+  xy: 139, 11
+  size: 67, 67
+  orig: 67, 67
+  offset: 0, 0
+  index: -1
+fire_02
+  rotate: false
+  xy: 208, 11
+  size: 67, 67
+  orig: 67, 67
+  offset: 0, 0
+  index: -1
+fire_04
+  rotate: false
+  xy: 846, 129
+  size: 67, 67
+  orig: 67, 67
+  offset: 0, 0
+  index: -1
+fire_06
+  rotate: false
+  xy: 810, 346
+  size: 67, 67
+  orig: 67, 67
+  offset: 0, 0
+  index: -1
+fire_08
+  rotate: false
+  xy: 847, 60
+  size: 67, 67
+  orig: 67, 67
+  offset: 0, 0
+  index: -1
+fire_10
+  rotate: false
+  xy: 916, 346
+  size: 67, 67
+  orig: 67, 67
+  offset: 0, 0
+  index: -1
+fire_12
+  rotate: false
+  xy: 985, 346
+  size: 67, 67
+  orig: 67, 67
+  offset: 0, 0
+  index: -1
+fire_14
+  rotate: false
+  xy: 916, 277
+  size: 67, 67
+  orig: 67, 67
+  offset: 0, 0
+  index: -1
+fire_16
+  rotate: false
+  xy: 985, 277
+  size: 67, 67
+  orig: 67, 67
+  offset: 0, 0
+  index: -1
+fire_18
+  rotate: false
+  xy: 860, 208
+  size: 67, 67
+  orig: 67, 67
+  offset: 0, 0
+  index: -1
+fire_20
+  rotate: false
+  xy: 915, 139
+  size: 67, 67
+  orig: 67, 67
+  offset: 0, 0
+  index: -1
+fire_22
+  rotate: false
+  xy: 929, 208
+  size: 67, 67
+  orig: 67, 67
+  offset: 0, 0
+  index: -1
+fire_24
+  rotate: false
+  xy: 984, 139
+  size: 67, 67
+  orig: 67, 67
+  offset: 0, 0
+  index: -1
+fire_26
+  rotate: false
+  xy: 916, 70
+  size: 67, 67
+  orig: 67, 67
+  offset: 0, 0
+  index: -1
+fire_28
+  rotate: false
+  xy: 985, 70
+  size: 67, 67
+  orig: 67, 67
+  offset: 0, 0
+  index: -1
+frame1
+  rotate: false
+  xy: 2, 13
+  size: 93, 12
+  orig: 95, 14
+  offset: 1, 1
+  index: -1
+frame2
+  rotate: false
+  xy: 521, 102
+  size: 5, 72
+  orig: 7, 74
+  offset: 1, 1
+  index: -1
+frame3
+  rotate: false
+  xy: 753, 66
+  size: 92, 19
+  orig: 95, 21
+  offset: 2, 1
+  index: -1
+framebig
+  rotate: false
+  xy: 753, 87
+  size: 91, 99
+  orig: 93, 101
+  offset: 1, 1
+  index: -1
+hair1
+  rotate: true
+  xy: 97, 9
+  size: 69, 40
+  orig: 70, 41
+  offset: 0, 1
+  index: -1
+hair2
+  rotate: true
+  xy: 56, 49
+  size: 29, 37
+  orig: 32, 39
+  offset: 1, 1
+  index: -1
+hat
+  rotate: true
+  xy: 721, 188
+  size: 104, 41
+  orig: 105, 42
+  offset: 0, 1
+  index: -1
+highlight
+  rotate: true
+  xy: 528, 2
+  size: 182, 45
+  orig: 184, 47
+  offset: 1, 1
+  index: -1
+hole
+  rotate: false
+  xy: 636, 14
+  size: 26, 24
+  orig: 26, 24
+  offset: 0, 0
+  index: -1
+huyenthoai
+  rotate: true
+  xy: 575, 3
+  size: 181, 40
+  orig: 183, 42
+  offset: 1, 1
+  index: -1
+light
+  rotate: true
+  xy: 636, 40
+  size: 144, 29
+  orig: 146, 31
+  offset: 1, 1
+  index: -1
+stroke2
+  rotate: false
+  xy: 2, 27
+  size: 52, 386
+  orig: 52, 386
+  offset: 0, 0
+  index: -1
+
+icon_cowboy2.png
+size: 707,215
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+fx/impact_01
+  rotate: false
+  xy: 267, 19
+  size: 91, 70
+  orig: 193, 193
+  offset: 64, 66
+  index: -1
+fx/impact_02
+  rotate: false
+  xy: 600, 10
+  size: 105, 86
+  orig: 193, 193
+  offset: 53, 59
+  index: -1
+fx/impact_03
+  rotate: true
+  xy: 597, 98
+  size: 115, 108
+  orig: 193, 193
+  offset: 47, 44
+  index: -1
+fx/impact_04
+  rotate: true
+  xy: 487, 94
+  size: 119, 108
+  orig: 193, 193
+  offset: 43, 44
+  index: -1
+fx/impact_05
+  rotate: true
+  xy: 267, 91
+  size: 122, 111
+  orig: 193, 193
+  offset: 42, 39
+  index: -1
+fx/impact_06
+  rotate: true
+  xy: 154, 90
+  size: 123, 111
+  orig: 193, 193
+  offset: 40, 39
+  index: -1
+fx/impact_07
+  rotate: true
+  xy: 380, 91
+  size: 122, 105
+  orig: 193, 193
+  offset: 39, 45
+  index: -1
+fx/impact_08
+  rotate: false
+  xy: 411, 64
+  size: 25, 25
+  orig: 193, 193
+  offset: 115, 71
+  index: -1
+fx/light
+  rotate: false
+  xy: 2, 14
+  size: 144, 29
+  orig: 146, 31
+  offset: 1, 1
+  index: -1
+fx/particle
+  rotate: false
+  xy: 2, 45
+  size: 150, 168
+  orig: 150, 185
+  offset: 0, 0
+  index: -1
+fx/smoke_
+  rotate: true
+  xy: 487, 37
+  size: 55, 111
+  orig: 55, 111
+  offset: 0, 0
+  index: -1
+fx/smoke_00
+  rotate: false
+  xy: 188, 2
+  size: 6, 14
+  orig: 28, 56
+  offset: 6, 0
+  index: -1
+fx/smoke_01
+  rotate: true
+  xy: 148, 2
+  size: 14, 38
+  orig: 28, 56
+  offset: 2, 1
+  index: -1
+fx/smoke_02
+  rotate: false
+  xy: 456, 46
+  size: 20, 43
+  orig: 28, 56
+  offset: 0, 1
+  index: -1
+fx/smoke_03
+  rotate: true
+  xy: 360, 13
+  size: 22, 48
+  orig: 28, 56
+  offset: 1, 1
+  index: -1
+fx/smoke_04
+  rotate: false
+  xy: 232, 12
+  size: 23, 50
+  orig: 28, 56
+  offset: 1, 1
+  index: -1
+fx/smoke_05
+  rotate: true
+  xy: 210, 64
+  size: 24, 51
+  orig: 28, 56
+  offset: 1, 1
+  index: -1
+fx/smoke_06
+  rotate: false
+  xy: 205, 8
+  size: 25, 53
+  orig: 28, 56
+  offset: 1, 1
+  index: -1
+fx/smoke_07
+  rotate: true
+  xy: 154, 63
+  size: 25, 54
+  orig: 28, 56
+  offset: 2, 1
+  index: -1
+fx/smoke_08
+  rotate: true
+  xy: 148, 18
+  size: 25, 55
+  orig: 28, 56
+  offset: 3, 1
+  index: -1
+fx/smoke_09
+  rotate: false
+  xy: 385, 50
+  size: 24, 39
+  orig: 28, 56
+  offset: 3, 1
+  index: -1
+fx/smoke_10
+  rotate: false
+  xy: 360, 47
+  size: 23, 42
+  orig: 28, 56
+  offset: 4, 1
+  index: -1
+fx/smoke_11
+  rotate: true
+  xy: 456, 12
+  size: 23, 43
+  orig: 28, 56
+  offset: 4, 1
+  index: -1
+fx/smoke_12
+  rotate: true
+  xy: 501, 12
+  size: 23, 43
+  orig: 28, 56
+  offset: 4, 1
+  index: -1
+fx/smoke_13
+  rotate: true
+  xy: 410, 14
+  size: 21, 44
+  orig: 28, 56
+  offset: 5, 1
+  index: -1
+fx/smoke_14
+  rotate: true
+  xy: 546, 12
+  size: 23, 43
+  orig: 28, 56
+  offset: 4, 3
+  index: -1

@@ -14,6 +14,8 @@
 
         MONKEY: 'ĐUA KHỈ',
         DRAGON_TIGER: 'Rồng Hổ',
+        CHICKEN_FIGHT: 'Đá Gà',
+        XENG_777: 'Xèng 777',
         XOC_XOC: 'Xóc Đĩa',
 
         BLOCK_BUSTER: 'Siêu Xe',

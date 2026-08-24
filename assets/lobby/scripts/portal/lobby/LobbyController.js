@@ -200,10 +200,11 @@
 
             // return this.lobbyView.createShopView();
             console.log("createShopCastOutView:"+startTab);
-            if (startTab === cc.ShopTab.TOPUP || startTab === cc.ShopTab.BANK || startTab === cc.ShopTab.LOAN || startTab === cc.ShopTab.MOMO
+            if (startTab === cc.ShopTab.MENU
+                || startTab === cc.ShopTab.TOPUP || startTab === cc.ShopTab.BANK || startTab === cc.ShopTab.LOAN || startTab === cc.ShopTab.MOMO
                 || startTab === cc.ShopTab.TRANSFER || startTab === cc.ShopTab.REDEEM_REWARD) {
                 return this.lobbyView.createShopCastOutView();
-				
+
             } else {
                 //return this.lobbyView.createShopView();
             }

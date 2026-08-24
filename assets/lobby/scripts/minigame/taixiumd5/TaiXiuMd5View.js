@@ -16,11 +16,11 @@
 
             cc.TaiXiuMd5Controller.getInstance().setTaiXiuMd5View(this);
 
-            console.log('[TXMD5-DEBUG] View.onLoad: about to call connectHubTxMd5Authorize');
+            // [noise-off] console.log('[TXMD5-DEBUG] View.onLoad: about to call connectHubTxMd5Authorize');
             var authorized = cc.TaiXiuMd5Controller.getInstance().connectHubTxMd5Authorize();
-            console.log('[TXMD5-DEBUG] View.onLoad: connectHubTxMd5Authorize returned', authorized);
+            // [noise-off] console.log('[TXMD5-DEBUG] View.onLoad: connectHubTxMd5Authorize returned', authorized);
             if (authorized) {
-                console.log('[TXMD5-DEBUG] View.onLoad: calling sendRequestOnHub(ENTER_LOBBY)');
+                // [noise-off] console.log('[TXMD5-DEBUG] View.onLoad: calling sendRequestOnHub(ENTER_LOBBY)');
                 cc.TaiXiuMd5Controller.getInstance().sendRequestOnHub(cc.MethodHubName.ENTER_LOBBY);
             }
         },

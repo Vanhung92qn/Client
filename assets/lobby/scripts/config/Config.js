@@ -10,7 +10,7 @@ var netConfig = require('NetConfig');
     Z_INDEX = 10;
     MIN_VIP_SHOW_CHAT = 0; //rank toi thieu show VIP khi chat
 
-    var GROUP_TELE_XVIDEOS = 'https://t.me/CSKH_S86';
+    var GROUP_TELE_XVIDEOS = 'https://t.me/CSKHSUMCLUBNL';
 
     var GROUP_FB_B1 = 'https://www.facebook.com/s86club.game';
     var FANPAGE_FB_B1 = 'https://www.facebook.com/s86club.game';
@@ -24,9 +24,9 @@ var netConfig = require('NetConfig');
     var GROUP_FB_B4 = 'https://www.facebook.com/s86club.game';
     var FANPAGE_FB_B4 = 'https://www.facebook.com/s86club.game';
 
-    var TELE_HOTRO = 'https://t.me/CSKH_S86';
-    var TAI_OTP_X6 = 'https://t.me/s86club_bot';
-	var LIVE_CHAT = 'https://t.me/CSKH_S86';
+    var TELE_HOTRO = 'https://t.me/CSKHSUMCLUBNL';
+    var TAI_OTP_X6 = 'https://t.me/sumclubxacminhsdt_bot';
+	var LIVE_CHAT = 'https://t.me/CSKHSUMCLUBNL';
 
     var DOWNLOAD_URL_B1 = 'https://bay789x.me/go88kstore.apk';
     var DOWNLOAD_URL_B2 = 'https://bay789x.me/go88kstore.apk';
@@ -365,6 +365,10 @@ var netConfig = require('NetConfig');
                     return cc.GameName.MONKEY;
                 case cc.GameId.DRAGON_TIGER:
                     return cc.GameName.DRAGON_TIGER;
+                case cc.GameId.CHICKEN_FIGHT:
+                    return cc.GameName.CHICKEN_FIGHT;
+                case cc.GameId.XENG_777:
+                    return cc.GameName.XENG_777;
                 case cc.GameId.XOC_XOC:
                     return cc.GameName.XOC_XOC;
                 case cc.GameId.BACCARAT:
@@ -433,6 +437,14 @@ var netConfig = require('NetConfig');
                     return cc.SubdomainName.MONKEY;
                 case cc.HubName.DragonTigerHub:
                     return cc.SubdomainName.DRAGON_TIGER;
+                case cc.HubName.ChickenFightHub:
+                    return cc.SubdomainName.CHICKEN_FIGHT;
+                case cc.HubName.Xeng777Hub:
+                    return cc.SubdomainName.XENG_777;
+                case cc.HubName.AviatorHub:
+                    return cc.SubdomainName.AVIATOR;
+                case cc.HubName.PhoenixHub:
+                    return cc.SubdomainName.PHOENIX;
                 case cc.HubName.XocXocHub:
                     return cc.SubdomainName.XOC_XOC;
                 case cc.HubName.BauCuaHub:

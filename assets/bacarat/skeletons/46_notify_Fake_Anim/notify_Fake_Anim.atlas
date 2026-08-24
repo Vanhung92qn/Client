@@ -1,0 +1,27 @@
+
+notify_Fake_Anim.png
+size: 873,101
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Frame01
+  rotate: false
+  xy: 2, 27
+  size: 713, 72
+  orig: 713, 72
+  offset: 0, 0
+  index: -1
+Frame02
+  rotate: false
+  xy: 717, 49
+  size: 154, 50
+  orig: 154, 50
+  offset: 0, 0
+  index: -1
+effect
+  rotate: true
+  xy: 717, 2
+  size: 45, 72
+  orig: 45, 72
+  offset: 0, 0
+  index: -1

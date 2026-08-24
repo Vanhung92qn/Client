@@ -1,0 +1,13 @@
+{
+  "ver": "1.1.3",
+  "uuid": "7d9eebcd-e0a2-49a4-967b-993015131a18",
+  "importer": "folder",
+  "isBundle": true,
+  "bundleName": "taixiu",
+  "priority": 1,
+  "compressionType": {},
+  "optimizeHotUpdate": {},
+  "inlineSpriteFrames": {},
+  "isRemoteBundle": {},
+  "subMetas": {}
+}

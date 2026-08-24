@@ -1,0 +1,97 @@
+
+HoanTra.png
+size: 512,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Hoan
+  rotate: true
+  xy: 296, 287
+  size: 87, 34
+  orig: 89, 36
+  offset: 1, 1
+  index: -1
+Star
+  rotate: false
+  xy: 332, 336
+  size: 42, 38
+  orig: 44, 41
+  offset: 1, 1
+  index: -1
+as
+  rotate: false
+  xy: 2, 137
+  size: 228, 237
+  orig: 231, 241
+  offset: 1, 2
+  index: -1
+bg
+  rotate: false
+  xy: 151, 85
+  size: 155, 50
+  orig: 157, 52
+  offset: 1, 1
+  index: -1
+c1
+  rotate: false
+  xy: 232, 209
+  size: 26, 26
+  orig: 28, 28
+  offset: 1, 1
+  index: -1
+c2
+  rotate: false
+  xy: 332, 303
+  size: 34, 31
+  orig: 36, 34
+  offset: 1, 1
+  index: -1
+c3
+  rotate: true
+  xy: 282, 211
+  size: 26, 36
+  orig: 28, 38
+  offset: 1, 1
+  index: -1
+c4
+  rotate: true
+  xy: 260, 185
+  size: 24, 26
+  orig: 26, 28
+  offset: 1, 1
+  index: -1
+c5
+  rotate: true
+  xy: 82, 71
+  size: 64, 67
+  orig: 66, 69
+  offset: 1, 1
+  index: -1
+chest
+  rotate: false
+  xy: 2, 64
+  size: 78, 71
+  orig: 80, 73
+  offset: 1, 1
+  index: -1
+muiten1
+  rotate: true
+  xy: 282, 239
+  size: 46, 66
+  orig: 48, 68
+  offset: 1, 1
+  index: -1
+muiten2
+  rotate: true
+  xy: 232, 317
+  size: 57, 62
+  orig: 59, 65
+  offset: 1, 2
+  index: -1
+tra
+  rotate: true
+  xy: 232, 237
+  size: 78, 48
+  orig: 80, 50
+  offset: 1, 1
+  index: -1

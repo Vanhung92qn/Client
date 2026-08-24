@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "78cabcf5-e700-4e02-b5ed-98dedcdab41d",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 982,
+  "height": 576,
+  "platformSettings": {},
+  "subMetas": {
+    "Lobby_icon_ransanho": {
+      "ver": "1.0.6",
+      "uuid": "bb213897-a86f-4ca0-82c1-e61328b46745",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "78cabcf5-e700-4e02-b5ed-98dedcdab41d",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 2,
+      "trimY": 2,
+      "width": 978,
+      "height": 572,
+      "rawWidth": 982,
+      "rawHeight": 576,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

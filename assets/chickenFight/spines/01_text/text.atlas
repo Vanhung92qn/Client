@@ -1,0 +1,55 @@
+
+text.png
+size: 736,736
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Shuffle_a01
+  rotate: false
+  xy: 2, 462
+  size: 468, 134
+  orig: 468, 134
+  offset: 0, 0
+  index: -1
+Shuffle_a01_blur
+  rotate: false
+  xy: 2, 6
+  size: 544, 134
+  orig: 544, 134
+  offset: 0, 0
+  index: -1
+Shuffle_wwww
+  rotate: true
+  xy: 472, 257
+  size: 339, 63
+  orig: 339, 63
+  offset: 0, 0
+  index: -1
+Start_a01
+  rotate: false
+  xy: 2, 326
+  size: 468, 134
+  orig: 468, 134
+  offset: 0, 0
+  index: -1
+Start_a01_blur
+  rotate: true
+  xy: 600, 142
+  size: 590, 134
+  orig: 590, 134
+  offset: 0, 0
+  index: -1
+Stop_a01
+  rotate: false
+  xy: 2, 190
+  size: 468, 134
+  orig: 468, 134
+  offset: 0, 0
+  index: -1
+Stop_a01_blur
+  rotate: false
+  xy: 2, 598
+  size: 596, 134
+  orig: 596, 134
+  offset: 0, 0
+  index: -1

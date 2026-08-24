@@ -1,4 +1,109 @@
 
+// ── FIX "Request Desktop Website": iPhone/iPad gửi UA Macintosh → cc.sys.isMobile=FALSE ──
+//  Khi bật "Request Desktop Website" (hoặc 1 số webview), iOS gửi UA "Macintosh..." → Cocos
+//  vẫn nhận đúng os = iOS (qua maxTouchPoints) NHƯNG cc.sys.isMobile = false. Mà TOÀN BỘ cơ
+//  chế xoay đều khoá theo isMobile:
+//    • main.js boot: `if(cc.sys.isMobile) setOrientation(LANDSCAPE)` → BỊ BỎ QUA.
+//    • engine _initFrameSize: `!cc.sys.isMobile || ...` → luôn nhánh KHÔNG xoay.
+//    • _forceLandscape.apply(): `if(!cc.sys.isMobile) return` → thoát.
+//  → Đã nhận diện là thiết bị cảm ứng iOS/Android thì ÉP isMobile = true (đặt SỚM NHẤT,
+//  trước mọi logic xoay). Mac thật (os = OSX, không cảm ứng) KHÔNG bị ảnh hưởng.
+(function _fixDesktopUAisMobile() {
+    try {
+        if (typeof cc === 'undefined' || !cc.sys) return;
+        var s = cc.sys;
+        if ((s.os === s.OS_IOS || s.os === s.OS_ANDROID) && !s.isMobile) {
+            s.isMobile = true;
+            console.log('[LoadingView] forced cc.sys.isMobile=true (touch ' + s.os + ' + UA desktop) → mở khoá xoay ngang');
+        }
+    } catch (e) { /* noop */ }
+})();
+
+// ── FIX iOS WebP (chạy MODULE-LEVEL = sớm nhất, trước khi scene đầu deserialize) ──
+// Cocos 2.4 detect webp bằng canvas.toDataURL('image/webp') = test ENCODE.
+// Safari/iOS DECODE (hiển thị) webp tốt từ iOS 14+ nhưng KHÔNG encode được qua
+// toDataURL → engine nhận nhầm "không hỗ trợ webp" → deserializer bỏ webp texture
+// (dòng:  if(".webp"===ext && !cc.sys.capabilities.webp) continue) → lỗi
+// "Can't find a texture format supported" → đứng loading. iOS >=14 decode webp OK
+// → ép cờ = true. Chỉ động iOS (Android/desktop tự detect đúng vì Chrome encode được).
+(function _fixIOSWebpSupport() {
+    try {
+        if (!cc || !cc.sys || cc.sys.os !== cc.sys.OS_IOS) return;
+        if (!cc.sys.capabilities || cc.sys.capabilities.webp) return;
+        var m = String((typeof navigator !== 'undefined' && navigator.userAgent) || '').match(/OS (\d+)[_.]/);
+        var major = m ? parseInt(m[1], 10) : 99;   // không rõ phiên bản → coi như đời mới (đa số là vậy)
+        if (major >= 14) {
+            cc.sys.capabilities.webp = true;
+            console.log('[LoadingView] iOS webp forced ON (decode OK on iOS ' + (m ? m[1] : '?') + ', toDataURL false-negative)');
+        }
+    } catch (e) { /* noop */ }
+})();
+
+// ── ÉP XOAY NGANG (auto-rotate) cho WEB MOBILE — chạy MODULE-LEVEL, bền qua mọi scene ──
+//  Game thiết kế landscape. Cocos web mặc định cc.view._orientation = ORIENTATION_AUTO
+//  (= 3, chứa bit PORTRAIT=1). Cầm DỌC → _initFrameSize coi như "khớp portrait" → KHÔNG
+//  xoay → game bị fit nhỏ (đúng hiện tượng bẹp dí). Đặt _orientation = LANDSCAPE (=2) →
+//  cầm dọc, engine TỰ: đảo frame landscape + cc.game.container.transform = rotate(90deg)
+//  + margin-left bù vị trí + _isRotated=true → convertToLocationInView TỰ ánh xạ lại toạ
+//  độ chạm. Render + input đều là code GỐC engine nên chắc chắn khớp (không patch tay).
+//
+//  Vì sao lần trước (gọi 1 phát trong onLoad) không ăn:
+//   • setOrientation → setDesignResolutionSize gọi _initFrameSize TRỰC TIẾP (không "ẩn
+//     container trước khi đo" như _resizeEvent) → phép đo frame dễ sai.
+//   • Scene mới (loading → MainGame) gọi setDesignResolutionSize có thể trúng nhánh
+//     `_resizing || _initFrameSize()` → BỎ QUA xoay.
+//  Fix: set _orientation sớm + ÉP áp lại bằng _resizeEvent(true) (đường đo SẠCH) ngay,
+//  SAU MỖI scene, và khi xoay máy. Log [BOOT] FORCE_LANDSCAPE {isRotated} để soi F12.
+(function _setupForceLandscape() {
+    try {
+        if (typeof cc === 'undefined' || !cc.view || !cc.macro || cc.sys.isNative) return;
+        var L = cc.macro.ORIENTATION_LANDSCAPE;
+        if (!L || typeof cc.view.setOrientation !== 'function') return;
+
+        function apply(why) {
+            try {
+                if (!cc.sys.isMobile) return;                       // chỉ mobile mới xoay
+                var ds = cc.view._originalDesignResolutionSize;
+                if (!ds || !ds.width) return;                       // design res chưa sẵn sàng
+                if (cc.view._orientation !== L) cc.view._orientation = L;  // bật cờ trực tiếp...
+                if (cc.view._resizeEvent) cc.view._resizeEvent(true);      // ...để _resizeEvent(true) lo phần đo SẠCH + áp (tránh 1 lượt đo không-sạch của setOrientation)
+                var info = {
+                    tag: 'FORCE_LANDSCAPE', why: why,
+                    isRotated: cc.view._isRotated, orient: cc.view._orientation,
+                    win: window.innerWidth + 'x' + window.innerHeight
+                };
+                if (window.__BOOT_LOG__) window.__BOOT_LOG__.push(info);
+                console.log('[BOOT]', JSON.stringify(info));
+            } catch (e) { console.warn('[FORCE_LANDSCAPE]', e); }
+        }
+
+        // 1) set + áp ngay khi design res sẵn sàng (chờ tối đa ~1s)
+        var n = 0;
+        (function waitInit() {
+            var ds = cc.view._originalDesignResolutionSize;
+            if (ds && ds.width) { apply('init'); }
+            else if (n++ < 60) setTimeout(waitInit, 16);
+            else { try { cc.view._orientation = L; } catch (e) {} }  // ít nhất bật cờ cho resize sau
+        })();
+
+        // 2) áp lại SAU MỖI scene (loading → MainGame → ...) — chống scene reset layout
+        if (cc.director && cc.Director && cc.Director.EVENT_AFTER_SCENE_LAUNCH) {
+            cc.director.on(cc.Director.EVENT_AFTER_SCENE_LAUNCH, function () { apply('scene'); });
+        }
+        // 3) áp lại khi xoay máy (Safari đôi khi cần kick sau orientationchange)
+        window.addEventListener('orientationchange', function () {
+            setTimeout(function () { apply('orient'); }, 150);
+        });
+        // 4) iOS Safari nhiều khi CHỈ bắn 'resize' (URL bar co/giãn) chứ không 'orientationchange'
+        //    → debounce 200ms để không spam _resizeEvent trong lúc animation thanh địa chỉ.
+        var _rzT = null;
+        window.addEventListener('resize', function () {
+            if (_rzT) clearTimeout(_rzT);
+            _rzT = setTimeout(function () { _rzT = null; apply('resize'); }, 200);
+        });
+    } catch (e) { /* noop */ }
+})();
+
 var netConfig = require('NetConfig');
 (function () {
     cc.LoadingView = cc.Class({
@@ -17,6 +122,18 @@ var netConfig = require('NetConfig');
 
         onLoad: function () {
             this._bootT0 = Date.now();
+            // Ẩn màn loading HTML (#splash trong index.html) khi scene loading game đã lên
+            // → tránh splash z-index cao che game; búng thanh % lên 100% rồi fade mượt.
+            try {
+                if (typeof window !== 'undefined' && window.__scProg) { clearInterval(window.__scProg); window.__scProg = null; }
+                var _bar = document.querySelector('#splash-bar>span'), _pct = document.getElementById('splash-pct');
+                if (_bar) _bar.style.width = '100%';
+                if (_pct) _pct.textContent = 'ĐANG TẢI 100%';
+                var _sp = document.getElementById('splash');
+                if (_sp) { _sp.style.opacity = '0'; setTimeout(function () { _sp.style.display = 'none'; }, 500); }
+            } catch (e) {}
+            this._tuneDownloader();
+            this._tuneMemory();
             this._installNetTap();
             this._bootLog('SCENE_ONLOAD', { ua: navigator.userAgent, online: navigator.onLine });
             // cc.debug.setDisplayStats(true);
@@ -52,6 +169,56 @@ var netConfig = require('NetConfig');
                     this.hotUpdate.init();
                 }
             }
+        },
+
+        // ─────────────────────────────────────────────────────
+        //  [P0] Tăng song song tải asset (giống Sunwin: maxConcurrency = 16).
+        //  Mặc định Cocos 2.4 web chỉ tải ~6 request/lượt → sảnh có hàng chục
+        //  PNG rời bị xếp hàng (waterfall) làm thanh loading lâu. Đặt 1 lần ở
+        //  đây (script chạy sớm nhất) → áp dụng cho MỌI load sau: 4 bundle boot,
+        //  scene MainGame, và các bundle game khi mở. An toàn: browser vẫn tự
+        //  giới hạn theo HTTP/2 multiplex; 16 là giá trị Sunwin đang dùng.
+        // ─────────────────────────────────────────────────────
+        _tuneDownloader: function () {
+            try {
+                var dl = cc.assetManager && cc.assetManager.downloader;
+                if (!dl) return;
+                dl.maxConcurrency = cc.sys.isNative ? 24 : 16;
+                dl.maxRequestsPerFrame = 64;
+                this._bootLog('DOWNLOADER_TUNED', {
+                    maxConcurrency: dl.maxConcurrency,
+                    maxRequestsPerFrame: dl.maxRequestsPerFrame
+                });
+            } catch (e) {
+                console.warn('[LoadingView] _tuneDownloader fail:', e);
+            }
+        },
+
+        // ─────────────────────────────────────────────────────
+        //  [iOS RAM] Giảm áp lực bộ nhớ GPU (fix crash/reload + giật + nóng máy iOS).
+        //  - Dynamic Atlas runtime mặc định 5 trang × 2048² × 4 = 80MB VRAM; static .pac
+        //    đã batching (packable:false) nên hạ xuống 1 trang × 1024² = 4MB là đủ.
+        //  - CLEANUP_IMAGE_CACHE: free bitmap nguồn sau khi upload GPU → bớt spike decode.
+        //  (Việc giải phóng VRAM game khi đổi game nằm ở LobbyView.destroyDynamicView +
+        //   BundleLoader.releaseUnusedAssets.)
+        // ─────────────────────────────────────────────────────
+        _tuneMemory: function () {
+            try {
+                if (cc.dynamicAtlasManager) {
+                    try { cc.dynamicAtlasManager.maxAtlasCount = 1; } catch (e) {}
+                    try { cc.dynamicAtlasManager.textureSize = 1024; } catch (e) {}
+                }
+                // [iOS BLACK-TEX] Engine build (7ff4a) KHÔNG có handler webglcontextlost/restored.
+                // Nếu cleanup=true → ảnh nguồn bị xoá ngay sau khi up GPU → khi iOS đẩy texture khỏi
+                // GPU/mất context dưới áp lực RAM (vào game nặng MD5) thì KHÔNG up lại được → đen vĩnh
+                // viễn. Giữ mặc định engine (false) để texture bị đẩy còn nguồn up lại. (Fix RAM F5 nằm
+                // ở releaseGame/releaseUnusedAssets/removeBundle, KHÔNG phải cờ này.)
+                if (cc.macro) cc.macro.CLEANUP_IMAGE_CACHE = false;
+                this._bootLog && this._bootLog('MEMORY_TUNED', {
+                    dynAtlasMax: cc.dynamicAtlasManager ? cc.dynamicAtlasManager.maxAtlasCount : null,
+                    dynAtlasSize: cc.dynamicAtlasManager ? cc.dynamicAtlasManager.textureSize : null
+                });
+            } catch (e) { console.warn('[LoadingView] _tuneMemory fail:', e); }
         },
 
         onGetConfigResponse: function (response) {

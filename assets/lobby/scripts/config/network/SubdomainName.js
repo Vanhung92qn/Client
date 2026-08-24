@@ -20,6 +20,10 @@
         MONKEY: 'monkey.',
         XOC_XOC: 'xocdia.',
         DRAGON_TIGER: "dragon.",
+        CHICKEN_FIGHT: 'chickenfight.',
+        XENG_777: 'xeng777.',
+        AVIATOR: 'aviator.',
+        PHOENIX: 'phoenix.',
         BACCARAT: 'baccarat.',
         BAUCUA: 'baucua.',
 

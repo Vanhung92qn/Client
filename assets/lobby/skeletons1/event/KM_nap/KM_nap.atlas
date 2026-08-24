@@ -1,0 +1,160 @@
+
+KM_nap.png
+size: 204,267
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+box
+  rotate: false
+  xy: 98, 191
+  size: 78, 74
+  orig: 78, 74
+  offset: 0, 0
+  index: -1
+coin2
+  rotate: false
+  xy: 83, 148
+  size: 13, 11
+  orig: 13, 11
+  offset: 0, 0
+  index: -1
+coin3
+  rotate: false
+  xy: 83, 161
+  size: 13, 12
+  orig: 13, 12
+  offset: 0, 0
+  index: -1
+coin4
+  rotate: false
+  xy: 150, 146
+  size: 14, 11
+  orig: 14, 11
+  offset: 0, 0
+  index: -1
+coin_a
+  rotate: false
+  xy: 83, 93
+  size: 48, 47
+  orig: 48, 47
+  offset: 0, 0
+  index: -1
+coin_b
+  rotate: false
+  xy: 98, 142
+  size: 50, 47
+  orig: 50, 47
+  offset: 0, 0
+  index: -1
+detail_a
+  rotate: true
+  xy: 119, 49
+  size: 42, 28
+  orig: 42, 28
+  offset: 0, 0
+  index: -1
+detail_b
+  rotate: true
+  xy: 79, 28
+  size: 23, 36
+  orig: 23, 36
+  offset: 0, 0
+  index: -1
+eff_particle
+  rotate: false
+  xy: 79, 53
+  size: 38, 38
+  orig: 38, 38
+  offset: 0, 0
+  index: -1
+frame_ad1
+  rotate: false
+  xy: 181, 145
+  size: 21, 24
+  orig: 21, 24
+  offset: 0, 0
+  index: -1
+frame_ad2
+  rotate: false
+  xy: 62, 2
+  size: 56, 24
+  orig: 56, 24
+  offset: 0, 0
+  index: -1
+frame_ad3
+  rotate: false
+  xy: 2, 2
+  size: 58, 24
+  orig: 58, 24
+  offset: 0, 0
+  index: -1
+frame_ad4
+  rotate: true
+  xy: 150, 159
+  size: 30, 24
+  orig: 30, 24
+  offset: 0, 0
+  index: -1
+frame_elip
+  rotate: false
+  xy: 2, 94
+  size: 79, 79
+  orig: 79, 79
+  offset: 0, 0
+  index: -1
+frame_point
+  rotate: true
+  xy: 178, 171
+  size: 94, 24
+  orig: 94, 24
+  offset: 0, 0
+  index: -1
+fx
+  rotate: false
+  xy: 2, 175
+  size: 94, 90
+  orig: 94, 90
+  offset: 0, 0
+  index: -1
+khuyen
+  rotate: false
+  xy: 2, 61
+  size: 75, 31
+  orig: 75, 31
+  offset: 0, 0
+  index: -1
+khuyen_ad
+  rotate: false
+  xy: 2, 28
+  size: 75, 31
+  orig: 75, 31
+  offset: 0, 0
+  index: -1
+mai
+  rotate: true
+  xy: 149, 51
+  size: 42, 30
+  orig: 42, 30
+  offset: 0, 0
+  index: -1
+mai_ad
+  rotate: true
+  xy: 151, 7
+  size: 42, 30
+  orig: 42, 30
+  offset: 0, 0
+  index: -1
+nap
+  rotate: true
+  xy: 133, 95
+  size: 45, 29
+  orig: 45, 29
+  offset: 0, 0
+  index: -1
+nap_ad
+  rotate: true
+  xy: 120, 2
+  size: 45, 29
+  orig: 45, 29
+  offset: 0, 0
+  index: -1

@@ -30,7 +30,8 @@
             // 🧠 BUNDLE CACHE SYSTEM (Production-Ready Memory Management)
             // ═══════════════════════════════════════════════════════════════
             this._lastUsed = {};           // bundleName → timestamp(ms) khi được dùng lần cuối
-            this._idleThreshold = 120000;  // 120s không dùng → auto release (2 phút)
+            this._activeGame = null;       // bundle game ĐANG mở → GC né, không release (tránh vỡ game)
+            this._idleThreshold = 45000;   // 45s không dùng → auto release (giảm từ 120s: iOS RAM)
             this._gcInterval = 30000;      // Check GC mỗi 30s
             this._gcScheduled = false;     // Flag để tránh schedule nhiều lần
             
@@ -56,7 +57,8 @@
         //   [GAME] BUNDLE_DONE <label> +Xms (OK|ERR)
         //   Lay full log: copy(JSON.stringify(window.__GAME_LOG__, null, 2))
         // ─────────────────────────────────────────────────────
-        BundleLoader.prototype.loadGame = function (gameId, callback) {
+        //  onProgress(frac 0..1): tiến độ pha tải BUNDLE (deps+game). Tùy chọn.
+        BundleLoader.prototype.loadGame = function (gameId, callback, onProgress) {
             var config = cc.GameBundleConfig.getByGameId(gameId);
             if (!config) {
                 var errMsg = '[BundleLoader] Không tìm thấy config cho gameId: ' + gameId;
@@ -64,6 +66,7 @@
                 callback && callback(new Error(errMsg), null);
                 return;
             }
+            this._activeGame = config.bundleName;   // đánh dấu game đang mở → GC né
 
             var self = this;
             var label = config.label;
@@ -92,21 +95,25 @@
                 callback && callback(err, bundle);
             };
 
-            if (deps.length > 0) {
-                this._loadBundlesSequential(deps, function (err) {
-                    if (err) { onAllDone(err, null); return; }
-                    if (logEnabled) {
-                        var dtDeps = Date.now() - t0;
-                        console.log('[GAME] DEPS_DONE', label, '+' + dtDeps + 'ms');
-                        if (typeof window !== 'undefined') {
-                            window.__GAME_LOG__.push({ t: dtDeps, tag: 'DEPS_DONE', game: label, deps: deps });
-                        }
+            // [#1] Tải deps + bundle game SONG SONG (trước đây tuần tự) → cold-open
+            //  nhanh hơn (deps không phải chờ nhau). silent=true: không hiện busy
+            //  spinner ở đây vì LobbyView đã có thanh loading THẬT (tránh 2 chỉ báo).
+            var all = deps.concat([bundleName]);
+            var loadedCount = 0;
+            this._loadBundlesParallel(all, function (err) {
+                if (err) { onAllDone(err, null); return; }
+                if (logEnabled) {
+                    var dtDeps = Date.now() - t0;
+                    console.log('[GAME] DEPS_DONE', label, '+' + dtDeps + 'ms (parallel)');
+                    if (typeof window !== 'undefined') {
+                        window.__GAME_LOG__.push({ t: dtDeps, tag: 'DEPS_DONE', game: label, deps: deps });
                     }
-                    self._loadSingleBundle(bundleName, onAllDone);
-                });
-            } else {
-                this._loadSingleBundle(bundleName, onAllDone);
-            }
+                }
+                onAllDone(null, cc.assetManager.getBundle(bundleName));
+            }, function () {
+                loadedCount++;
+                onProgress && onProgress(loadedCount / all.length);
+            }, true);
         };
 
         // Mac dinh BAT log. Opt-out: ?gamelog=0 hoac localStorage 'gamelog' = '0'.
@@ -147,21 +154,36 @@
         // ─────────────────────────────────────────────────────
         //  PUBLIC: Preload bundle ngầm, không block luồng chính
         // ─────────────────────────────────────────────────────
-        BundleLoader.prototype.preloadGame = function (gameId) {
+        //  [#1] Preload ngầm (deps + bundle game), KHÔNG hiện UI, không block.
+        //  Lúc user đứng ở Lobby → kéo sẵn game hay chơi → khi bấm, thanh loading
+        //  lần 2 gần như tức thì (chỉ còn instantiate). done() gọi khi xong (tùy chọn).
+        //  Sửa: trước đây bỏ qua deps + bypass BundleControl → nay tải đủ deps qua
+        //  BundleControl (giống loadGame) để prefetch THỰC SỰ dùng được.
+        BundleLoader.prototype.preloadGame = function (gameId, done) {
             var config = cc.GameBundleConfig.getByGameId(gameId);
-            if (!config) return;
-            if (cc.assetManager.getBundle(config.bundleName)) return; // Đã có rồi
+            if (!config) { done && done(); return; }
+            if (cc.assetManager.getBundle(config.bundleName)) { this._markUsed(config.bundleName); done && done(); return; }
 
-            console.log('[BundleLoader] Preloading: ' + config.bundleName);
-            cc.assetManager.loadBundle(config.bundleName, function (err, bundle) {
-                if (err) {
-                    console.warn('[BundleLoader] Preload thất bại: ' + config.bundleName, err);
-                    return;
-                }
-                this._bundles[config.bundleName] = bundle;
-                this._markUsed(config.bundleName);  // ✅ Mark as used khi preload
-                console.log('[BundleLoader] Preload xong: ' + config.bundleName);
-            }.bind(this));
+            var self = this;
+            var all = (config.deps || []).concat([config.bundleName]);
+            console.log('[BundleLoader] Prefetch (ngầm): ' + config.bundleName);
+            this._loadBundlesParallel(all, function (err) {
+                if (err) console.warn('[BundleLoader] Prefetch lỗi: ' + config.bundleName, err);
+                else { self._markUsed(config.bundleName); console.log('[BundleLoader] Prefetch xong: ' + config.bundleName); }
+                done && done();
+            }, null, true /* silent */);
+        };
+
+        //  [#1] Prefetch nhiều game LẦN LƯỢT (1 cái/lần, tránh bão hòa băng thông).
+        //  Bỏ qua game đã có. Gọi lúc Lobby rảnh. Danh sách nên theo analytics.
+        BundleLoader.prototype.preloadGames = function (gameIds) {
+            if (!gameIds || !gameIds.length) return;
+            var self = this, i = 0;
+            function next() {
+                if (i >= gameIds.length) return;
+                self.preloadGame(gameIds[i++], next);
+            }
+            next();
         };
 
         // ─────────────────────────────────────────────────────
@@ -236,13 +258,16 @@
             for (var bundleName in this._lastUsed) {
                 if (!this._lastUsed.hasOwnProperty(bundleName)) continue;
                 
+                // Game ĐANG mở → KHÔNG release (tránh free texture đang dùng → vỡ game)
+                if (bundleName === this._activeGame) continue;
+
                 // Kiểm tra bundle có thật sự tồn tại không
                 var bundle = cc.assetManager.getBundle(bundleName);
                 if (!bundle) {
                     delete this._lastUsed[bundleName];
                     continue;
                 }
-                
+
                 // Nếu idle quá lâu → release
                 var idleTime = now - this._lastUsed[bundleName];
                 if (idleTime > this._idleThreshold) {
@@ -300,7 +325,9 @@
         // ─────────────────────────────────────────────────────
         //  PRIVATE: Load một bundle, có cache check
         // ─────────────────────────────────────────────────────
-        BundleLoader.prototype._loadSingleBundle = function (bundleName, callback) {
+        //  silent = true → KHÔNG hiện busy spinner (dùng khi caller có thanh loading
+        //  riêng, hoặc khi prefetch ngầm). Mặc định false (giữ hành vi cũ).
+        BundleLoader.prototype._loadSingleBundle = function (bundleName, callback, silent) {
             // Kiểm tra cache
             var cached = cc.assetManager.getBundle(bundleName);
             if (cached) {
@@ -311,7 +338,7 @@
             }
 
             console.log('[BundleLoader] Loading bundle: ' + bundleName + '...');
-            cc.PopupController.getInstance().showBusy();
+            if (!silent) cc.PopupController.getInstance().showBusy();
 
             // Dung BundleControl: support CDN remote bundle voi cache-bust hash
             // (fallback cc.assetManager.loadBundle khi ASSET_CDN_URL rong).
@@ -319,7 +346,7 @@
                 ? cc.BundleControl.getInstance()
                 : { loadBundle: function (n, cb) { cc.assetManager.loadBundle(n, cb); } };
             loader.loadBundle(bundleName, function (err, bundle) {
-                cc.PopupController.getInstance().hideBusy();
+                if (!silent) cc.PopupController.getInstance().hideBusy();
 
                 if (err) {
                     console.error('[BundleLoader] FAILED: ' + bundleName, err);
@@ -357,14 +384,42 @@
         };
 
         // ─────────────────────────────────────────────────────
+        //  [#1] PRIVATE: Load danh sách bundles SONG SONG (cold-open nhanh hơn).
+        //  callback(err) khi TẤT CẢ xong (hoặc lỗi đầu tiên). onEach(name) gọi
+        //  mỗi khi 1 bundle xong (để báo progress). silent: không hiện busy.
+        // ─────────────────────────────────────────────────────
+        BundleLoader.prototype._loadBundlesParallel = function (bundleNames, callback, onEach, silent) {
+            if (!bundleNames || !bundleNames.length) { callback && callback(null); return; }
+            var self = this;
+            var remaining = bundleNames.length;
+            var errored = false;
+            bundleNames.forEach(function (name) {
+                self._loadSingleBundle(name, function (err) {
+                    if (errored) return;
+                    if (err) { errored = true; callback && callback(err); return; }
+                    onEach && onEach(name);
+                    remaining--;
+                    if (remaining === 0) callback && callback(null);
+                }, silent);
+            });
+        };
+
+        // ─────────────────────────────────────────────────────
         //  PRIVATE: Release một bundle
         // ─────────────────────────────────────────────────────
         BundleLoader.prototype._releaseSingleBundle = function (bundleName) {
             var bundle = cc.assetManager.getBundle(bundleName);
             if (bundle) {
+                // QUAN TRỌNG (fix iOS RAM): removeBundle CHỈ xoá index, KHÔNG free texture.
+                // Phải releaseUnusedAssets() TRƯỚC → giải phóng VRAM. Ref-count aware →
+                // KHÔNG đụng texture còn dùng (game active / shared deps còn ref) → an toàn.
+                // Nếu không, VRAM tích luỹ qua mỗi game → iOS Safari kill tab + reload.
+                try { if (bundle.releaseUnusedAssets) bundle.releaseUnusedAssets(); } catch (e) { console.warn('[BundleLoader] releaseUnusedAssets fail ' + bundleName, e); }
                 cc.assetManager.removeBundle(bundle);
                 delete this._bundles[bundleName];
-                console.log('[BundleLoader] Released: ' + bundleName);
+                delete this._lastUsed[bundleName];
+                if (this._activeGame === bundleName) this._activeGame = null;
+                console.log('[BundleLoader] Released (free VRAM): ' + bundleName);
             }
         };
 

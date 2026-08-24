@@ -52,11 +52,6 @@
         hideTitleChooseNumber: function () {
             this.lbChooseNumber.node.active = false;
         },
-        //Validate so luong so dc chon theo tung loai
-        isValidNumberBetOfType: function () {
-            let numberChooses = cc.LodeController.getInstance().getNumberChooses();
-            return (total < this.numberChoose);
-        },
         unChooseNumberBefore: function () {
             let numberChooses = cc.LodeController.getInstance().getNumberChooses();
             let totalChoose = numberChooses.length;
@@ -139,6 +134,23 @@
         enableNodeConfirm: function (enable) {
             this.nodeConfirmBet.active = enable;
         },
+        //Xac nhan CHON SO xong -> tra mang so ve panel dat cuoc ben LoDeLobby (gan vao btnOk)
+        onConfirmSelection: function () {
+            let numberChooses = cc.LodeController.getInstance().getNumberChooses();
+            if (!numberChooses || numberChooses.length === 0) {
+                return this.showNotify("VUI LÒNG CHỌN SỐ!");
+            }
+            let arrTypeXien = [cc.LodeType.XIEN2, cc.LodeType.XIEN3, cc.LodeType.XIEN4];
+            if (arrTypeXien.includes(this.typeBet) && numberChooses.length < this.numberChoose) {
+                return this.showNotify("VUI LÒNG CHỌN " + this.numberChoose + " SỐ!");
+            }
+            let panel = cc.LodeController.getInstance().getActiveBetPanel();
+            if (panel) {
+                //Truyen so THO (chua format); panel tu format theo loai cuoc cua no
+                panel.onNumbersChosen(numberChooses);
+            }
+            this.onCancelClicked();
+        },
         //Mo popup xac nhan dat cuoc
         openConfirmBet: function () {
             let arrTypeXien = [cc.LodeType.XIEN2, cc.LodeType.XIEN3, cc.LodeType.XIEN4];
@@ -148,7 +160,7 @@
             if (numberChooses.length === 0) {
                 return this.showNotify("VUI LÒNG CHỌN SỐ!");
             }
-            if (betValue.length == 0 || isNaN(betValue)) {
+            if (isNaN(betValue)) {
                 return this.showNotify("VUI LÒNG NHẬP TIỀN CƯỢC!");
             }
             if (betValue < 1000 && this.typeBet === cc.LodeType.DE) {
@@ -167,7 +179,7 @@
             this.userBet = betValue;
             let totalBet = (arrTypeXien.includes(this.typeBet)) ? betValue : betValue * numberChooses.length;
             //Kiem tra so du
-            if (betValue > cc.BalanceController.getInstance().getBalance()) {
+            if (totalBet > cc.BalanceController.getInstance().getBalance()) {
                 return this.showNotify("SỐ DƯ KHÔNG ĐỦ!");
             }
 
@@ -209,8 +221,10 @@
             var delay = 0.12;
             cc.director.getScheduler().schedule(function () {
                 self.animation.stop();
-                cc.LodePopupController.getInstance().destroyHistoryView();
-                this.node.removeFromParent();
+                //destroy dung node Choose qua LodeView (truoc day goi nham destroyHistoryView)
+                var lodeView = cc.LodeController.getInstance().LodeView;
+                if (lodeView) { lodeView.destroyChooseView(); }
+                else { self.node.removeFromParent(); }
             }, this, 1, 0, delay, false);
         },
         showNotify: function (message) {

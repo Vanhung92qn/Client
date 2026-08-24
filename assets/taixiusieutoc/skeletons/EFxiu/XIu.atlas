@@ -1,0 +1,48 @@
+
+XIu.png
+size: 671,278
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+1
+  rotate: true
+  xy: 537, 106
+  size: 170, 114
+  orig: 204, 137
+  offset: 15, 12
+  index: -1
+2
+  rotate: true
+  xy: 537, 106
+  size: 170, 114
+  orig: 204, 137
+  offset: 15, 12
+  index: -1
+Blur
+  rotate: false
+  xy: 2, 2
+  size: 273, 274
+  orig: 295, 293
+  offset: 11, 10
+  index: -1
+Lighht2
+  rotate: false
+  xy: 537, 36
+  size: 67, 68
+  orig: 73, 72
+  offset: 3, 2
+  index: -1
+Light
+  rotate: false
+  xy: 606, 41
+  size: 63, 63
+  orig: 103, 138
+  offset: 20, 42
+  index: -1
+Light1
+  rotate: true
+  xy: 277, 17
+  size: 259, 258
+  orig: 311, 301
+  offset: 26, 22
+  index: -1

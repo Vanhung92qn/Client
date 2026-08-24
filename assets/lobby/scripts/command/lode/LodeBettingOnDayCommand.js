@@ -11,7 +11,7 @@
         }
 
         LodeBettingOnDayCommand.prototype.execute = function (controller, bettingType) {
-            let url = '/api/Xoso/GetBettingOnDay?bettingType='+bettingType;
+            let url = 'api/Xoso/GetBettingOnDay?bettingType='+bettingType;
             let subDomainName = cc.SubdomainName.LODE;
             return cc.ServerConnector.getInstance().sendRequest(subDomainName, url, function (response) {
                 var obj = JSON.parse(response);

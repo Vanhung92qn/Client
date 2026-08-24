@@ -1,0 +1,118 @@
+
+TLMN.png
+size: 427,427
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+BG2
+  rotate: false
+  xy: 2, 246
+  size: 179, 179
+  orig: 179, 179
+  offset: 0, 0
+  index: -1
+bai1
+  rotate: true
+  xy: 183, 170
+  size: 112, 132
+  orig: 114, 134
+  offset: 1, 1
+  index: -1
+bai2
+  rotate: false
+  xy: 315, 308
+  size: 89, 117
+  orig: 91, 119
+  offset: 1, 1
+  index: -1
+bai3
+  rotate: true
+  xy: 192, 3
+  size: 111, 133
+  orig: 113, 135
+  offset: 1, 1
+  index: -1
+bai4
+  rotate: false
+  xy: 183, 284
+  size: 130, 141
+  orig: 132, 143
+  offset: 1, 1
+  index: -1
+chat1
+  rotate: false
+  xy: 327, 2
+  size: 27, 28
+  orig: 29, 30
+  offset: 1, 1
+  index: -1
+chat2
+  rotate: true
+  xy: 404, 260
+  size: 18, 21
+  orig: 22, 23
+  offset: 2, 1
+  index: -1
+chat3
+  rotate: false
+  xy: 317, 179
+  size: 35, 35
+  orig: 37, 37
+  offset: 1, 1
+  index: -1
+chat4
+  rotate: false
+  xy: 354, 188
+  size: 26, 26
+  orig: 28, 28
+  offset: 1, 1
+  index: -1
+khung1
+  rotate: false
+  xy: 2, 5
+  size: 188, 28
+  orig: 190, 30
+  offset: 1, 1
+  index: -1
+khung2
+  rotate: false
+  xy: 2, 35
+  size: 188, 31
+  orig: 190, 33
+  offset: 1, 1
+  index: -1
+khung3
+  rotate: false
+  xy: 406, 280
+  size: 9, 145
+  orig: 11, 147
+  offset: 1, 1
+  index: -1
+khung4
+  rotate: false
+  xy: 327, 32
+  size: 9, 145
+  orig: 11, 147
+  offset: 1, 1
+  index: -1
+light_cycle
+  rotate: false
+  xy: 2, 68
+  size: 178, 176
+  orig: 216, 214
+  offset: 15, 15
+  index: -1
+logo
+  rotate: false
+  xy: 182, 116
+  size: 141, 52
+  orig: 143, 54
+  offset: 1, 1
+  index: -1
+star
+  rotate: true
+  xy: 317, 216
+  size: 90, 85
+  orig: 90, 86
+  offset: 0, 0
+  index: -1

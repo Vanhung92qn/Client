@@ -2,12 +2,30 @@
 var BrowserUtil = require('BrowserUtil');
 var helper = require('Helper');
 // vn1102 coder
+
+// === CHINH KICH THUOC DONG NGAN HANG O DAY (px) ===
+var BANK_ROW_HEIGHT = 50;   // chieu cao moi dong -> QUYET DINH khoang cach giua cac ten NH (nho lai = sat lai)
+var BANK_ROW_SPACING = 5;   // khe ho them giua 2 dong
+
+// Danh sach ngan hang cho man RUT (rut THU CONG - CSKH duyet tay).
+// Them/bot/doi ten ngan hang: CHI sua mang nay, list tu sinh bang code (renderBankList).
+var BANK_LIST = [
+    'Vietcombank', 'Techcombank', 'BIDV', 'VietinBank', 'MB Bank', 'ACB',
+    'VPBank', 'Agribank', 'Sacombank', 'TPBank', 'SHB', 'VIB', 'HDBank',
+    'OCB', 'MSB', 'SeABank', 'Eximbank', 'LPBank', 'Nam A Bank', 'ABBANK',
+    'Bac A Bank', 'PVcomBank', 'SCB', 'DongA Bank', 'KienlongBank',
+    'SaigonBank', 'VietABank', 'BaoVietBank', 'NCB', 'PGBank', 'BVBank',
+    'VietBank', 'GPBank', 'OceanBank', 'CBBank'
+];
+
 cc.Class({
     extends: cc.Component,
 
     properties: {
         animationMenuBank: cc.Animation,
         moreHinhThuc: cc.Node,
+        bankContent: cc.Node,   // node 'content' chua item ngan hang (content cua ScrollView 'view')
+        bankItem: cc.Node,      // 1 item MAU (co Label ten 'name'); code clone ra ca list
         labelHinhthuc: cc.Label,
         hinhThuc: '',
         // editBank:   cc.EditBox,
@@ -46,6 +64,12 @@ cc.Class({
         this.timerConfirm = 0;
         this.timePerConfirm = 60;
         this.processTimeConfirm();
+        this.renderBankList();
+        // Format so tien LIVE: 2000000 -> 2,000,000 (noi bang code, khong can wire trong scene).
+        if (this.editRut && this.editRut.node) {
+            this.editRut.node.off('text-changed', this.onChangermoney, this);
+            this.editRut.node.on('text-changed', this.onChangermoney, this);
+        }
     },
     activeTimeConfirm: function () {
         this.isTimerConfirm = true;
@@ -78,6 +102,7 @@ cc.Class({
     },
     onDisable: function () {
         cc.sys.isBrowser && this.removeEvent();
+        if (this.editRut && this.editRut.node) this.editRut.node.off('text-changed', this.onChangermoney, this);
         this.moreHinhThuc.active = false;
         this.clean();
     },
@@ -86,17 +111,63 @@ cc.Class({
         this.audioClick.loop = false;
         this.audioClick.play();
     },
+    // Sinh danh sach ngan hang tu BANK_LIST bang code: chi can 1 item mau (bankItem).
+    renderBankList: function () {
+        if (!this.bankContent || !this.bankItem) return;   // chua gan node -> bo qua, khong crash
+        var self = this;
+        // Tach item mau ra khoi content 1 lan, giu lam khuon (khong bi xoa khi removeAllChildren).
+        if (this.bankItem.parent) {
+            this.bankItem.active = false;
+            this.bankItem.removeFromParent(false);
+        }
+        this.bankContent.removeAllChildren();
+        // EP Layout DOC len content -> item khong bi don 1 cuc. Force ca khi da co Layout sai kieu.
+        var layout = this.bankContent.getComponent(cc.Layout) || this.bankContent.addComponent(cc.Layout);
+        layout.enabled = true;
+        layout.type = cc.Layout.Type.VERTICAL;
+        layout.resizeMode = cc.Layout.ResizeMode.CONTAINER;
+        layout.verticalDirection = cc.Layout.VerticalDirection.TOP_TO_BOTTOM;
+        layout.spacingY = BANK_ROW_SPACING;                // khe ho giua 2 dong (chinh o dau file)
+        BANK_LIST.forEach(function (name) {
+            var item = cc.instantiate(self.bankItem);
+            item.active = true;
+            item.name = name;
+            item.setPosition(0, 0);                        // reset vi tri de Layout tu xep
+            item.height = BANK_ROW_HEIGHT;                 // EP chieu cao dong -> QUYET DINH khoang cach (chinh o dau file)
+            var w = item.getComponent(cc.Widget);          // Widget GHIM item 1 cho -> tat di de Layout xep
+            if (w) w.enabled = false;
+            self.setItemLabel(item, name);
+            var btn = item.getComponent(cc.Button);
+            if (btn) btn.clickEvents = [];                 // bo click cu (neu co) de tranh goi nham handler
+            item.off(cc.Node.EventType.TOUCH_END);
+            item.on(cc.Node.EventType.TOUCH_END, function () { self.selectBank(name); }, self);
+            self.bankContent.addChild(item);
+        });
+        layout.updateLayout();                             // ep xep lai NGAY trong frame nay
+    },
+    setItemLabel: function (item, text) {
+        var labelNode = item.getChildByName('name');
+        var lb = labelNode ? labelNode.getComponent(cc.Label) : item.getComponentInChildren(cc.Label);
+        if (lb) lb.string = text;
+    },
+    // Chon 1 ngan hang tu list code sinh ra.
+    selectBank: function (bankName) {
+        if (this.labelHinhthuc) this.labelHinhthuc.string = bankName;
+        this.bankSelect = bankName;
+        if (this.moreHinhThuc) this.moreHinhThuc.active = false;
+        if (this.audioClick) { this.audioClick.loop = false; this.audioClick.play(); }
+    },
+    // Legacy: item dat tay cu. List gio sinh bang code nen ham nay chi con lam SAFETY.
+    // Guard: bo qua khi bi goi sai (vd gan nham vao su kien EditBox -> khong co event.target).
     hinhThucSelect: function (event, select) {
+        if (!event || !event.target || !event.target.parent) return;
+        var self = this;
         event.target.parent.children.forEach(function (obj) {
             if (obj.name === select) {
-                obj.children[0].active = true;
-                this.labelHinhthuc.string = obj.children[1].getComponent(cc.Label).string;
-                this.bankSelect = select;
-            } else {
-                obj.children[0].active = true;
+                var nameNode = obj.getChildByName('name');
+                self.selectBank(nameNode ? nameNode.getComponent(cc.Label).string : select);
             }
-            this.moreHinhThuc.active = false;
-        }.bind(this));
+        });
     },
     clickruttien: function () {
         if (this.bankSelect.length == 0) {
@@ -131,7 +202,12 @@ cc.Class({
         }
     },
     chatbot: function () {
-        cc.sys.openURL("https://t.me/CSKH_S86");
+        cc.sys.openURL("https://t.me/CSKHSUMCLUBNL");
+    },
+    // Mo lich su RUT tien Bank. Tro nut "Lich su rut" -> Component CasoutBankView -> Handler historyClicked.
+    historyClicked: function () {
+        cc.Tool.getInstance().setItem('@bankHistoryType', 'RUT');   // bao HistoryView load lich su RUT (khong phai nap)
+        cc.LobbyController.getInstance().createHistoryView(cc.HistoryTab.BANK);
     },
     removeEvent: function () {
         for (var t in this.editboxs) {
@@ -165,9 +241,11 @@ cc.Class({
     clean: function () {
         this.editRut.string = '';
     },
-    onChangermoney: function (value = 0) {
-        value = helper.numberWithCommas(this.editRut.string);
-        this.editRut.string = value == 0 ? "" : value;
+    // Format so tien nhap thanh 2,000,000. Luon strip ve so truoc roi cham phay lai (chiu ca khi da co phay).
+    onChangermoney: function () {
+        if (!this.editRut) return;
+        var raw = helper.getOnlyNumberInString(this.editRut.string);   // bo dau phay/ky tu -> chi con so
+        this.editRut.string = raw ? helper.numberWithCommas(raw) : '';
     },
     getOTPClicked: function () {
         // this.activeTimeOTPButton();
@@ -232,8 +310,8 @@ cc.Class({
     },
 
     onTotalAmount: function () {
-        let coin = this.editRut.string;
-        coin = parseFloat(coin);
-        this.CoinCasout.string = helper.numberWithCommas(coin);
+        if (!this.CoinCasout || !this.editRut) return;   // CoinCasout chua gan -> bo qua, khong crash
+        var coin = parseFloat(this.editRut.string);
+        this.CoinCasout.string = isNaN(coin) ? '' : helper.numberWithCommas(coin);
     }
 });

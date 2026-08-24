@@ -26,7 +26,7 @@ var timeAll=60;
             this.lastTimeReconnect = (new Date()).getTime();
 
             this.isAuthorized = false;
-            console.log('[TXMD5-DEBUG] PortalView.onLoad: hub=', !!this.Md5luckyDiceHub, 'isAuthorized=', this.isAuthorized);
+            // [noise-off] console.log('[TXMD5-DEBUG] PortalView.onLoad: hub=', !!this.Md5luckyDiceHub, 'isAuthorized=', this.isAuthorized);
             this.connectHubTxMd5();
         },
 
@@ -114,7 +114,7 @@ var timeAll=60;
         },
 
         connectHubTxMd5Authorize: function () {
-            console.log('[TXMD5-DEBUG] connectHubTxMd5Authorize: isAuthorized=', this.isAuthorized, 'hub=', !!this.Md5luckyDiceHub);
+            // [noise-off] console.log('[TXMD5-DEBUG] connectHubTxMd5Authorize: isAuthorized=', this.isAuthorized, 'hub=', !!this.Md5luckyDiceHub);
             if (!this.isAuthorized) {
                 if (this.Md5luckyDiceHub) {
                     this.Md5luckyDiceHub.disconnect();
@@ -123,13 +123,13 @@ var timeAll=60;
                 this.lastTimeReconnect = (new Date()).getTime();
                 this.isAuthorized = true;
                 //cc.PopupController.getInstance().showBusy();
-                console.log('[TXMD5-DEBUG] connectHubTxMd5Authorize: starting NegotiateCommand, returning false');
+                // [noise-off] console.log('[TXMD5-DEBUG] connectHubTxMd5Authorize: starting NegotiateCommand, returning false');
                 var md5luckyDiceNegotiateCommand = new cc.Md5LuckyDiceNegotiateCommand;
                 md5luckyDiceNegotiateCommand.execute(this);
 
                 return false;
             } else {
-                console.log('[TXMD5-DEBUG] connectHubTxMd5Authorize: already authorized, returning true (hub exists?', !!this.Md5luckyDiceHub, ')');
+                // [noise-off] console.log('[TXMD5-DEBUG] connectHubTxMd5Authorize: already authorized, returning true (hub exists?', !!this.Md5luckyDiceHub, ')');
                 return true;
             }
         },
@@ -138,7 +138,7 @@ var timeAll=60;
             //console.log('connectHubTxMd5');
             //cc.PopupController.getInstance().showBusy();
             this.isAuthorized = false;
-            console.log('[TXMD5-DEBUG] connectHubTxMd5: starting NegotiateCommand (unauth flow)');
+            // [noise-off] console.log('[TXMD5-DEBUG] connectHubTxMd5: starting NegotiateCommand (unauth flow)');
             var md5luckyDiceNegotiateCommand = new cc.Md5LuckyDiceNegotiateCommand;
             md5luckyDiceNegotiateCommand.execute(this);
         },
@@ -151,9 +151,9 @@ var timeAll=60;
         },
 
         sendRequestOnHub: function (method, data1, data2) {
-            console.log('[TXMD5-DEBUG] sendRequestOnHub: method=', method, 'hub=', !!this.Md5luckyDiceHub, 'isAuthorized=', this.isAuthorized);
+            // [noise-off] console.log('[TXMD5-DEBUG] sendRequestOnHub: method=', method, 'hub=', !!this.Md5luckyDiceHub, 'isAuthorized=', this.isAuthorized);
             if (!this.Md5luckyDiceHub) {
-                console.error('[TXMD5-DEBUG] sendRequestOnHub: hub is undefined! method=', method, 'isAuthorized=', this.isAuthorized, 'connectionToken=', this.connectionToken);
+                // [noise-off] console.error('[TXMD5-DEBUG] sendRequestOnHub: hub is undefined! method=', method, 'isAuthorized=', this.isAuthorized, 'connectionToken=', this.connectionToken);
                 return;
             }
             switch (method) {
@@ -170,11 +170,11 @@ var timeAll=60;
         },
 
         onLuckyDiceNegotiateResponse: function (response) {
-            console.log('[TXMD5-DEBUG] onLuckyDiceNegotiateResponse: token=', response && response.ConnectionToken && response.ConnectionToken.substring(0, 8) + '...');
+            // [noise-off] console.log('[TXMD5-DEBUG] onLuckyDiceNegotiateResponse: token=', response && response.ConnectionToken && response.ConnectionToken.substring(0, 8) + '...');
             this.connectionToken = response.ConnectionToken;
             this.Md5luckyDiceHub = new cc.Hub;
             this.Md5luckyDiceHub.connect(this, cc.HubName.Md5LuckyDiceHub, response.ConnectionToken);
-            console.log('[TXMD5-DEBUG] onLuckyDiceNegotiateResponse: hub created, connect() called');
+            // [noise-off] console.log('[TXMD5-DEBUG] onLuckyDiceNegotiateResponse: hub created, connect() called');
         },
 
         onHubMessage: function (response) {
@@ -301,7 +301,7 @@ var timeAll=60;
         },
 
         onHubOpen: function () {
-            console.log('[TXMD5-DEBUG] onHubOpen: isAuthorized=', this.isAuthorized, 'hub=', !!this.Md5luckyDiceHub);
+            // [noise-off] console.log('[TXMD5-DEBUG] onHubOpen: isAuthorized=', this.isAuthorized, 'hub=', !!this.Md5luckyDiceHub);
             cc.PopupController.getInstance().hideBusy();
             if (this.isAuthorized) {
                 this.sendRequestOnHub(cc.MethodHubName.ENTER_LOBBY);
@@ -310,7 +310,7 @@ var timeAll=60;
         },
 
         onHubClose: function () {
-            console.log('[TXMD5-DEBUG] onHubClose: isAuthorized=', this.isAuthorized);
+            // [noise-off] console.log('[TXMD5-DEBUG] onHubClose: isAuthorized=', this.isAuthorized);
             cc.TaiXiuMd5Controller.getInstance().reset();
             //reconnect
             // console.log((new Date()).getTime() - this.lastTimeReconnect);
@@ -322,7 +322,7 @@ var timeAll=60;
         },
 
         onHubError: function (err) {
-            console.error('[TXMD5-DEBUG] onHubError:', err);
+            // [noise-off] console.error('[TXMD5-DEBUG] onHubError:', err);
         },
     });
 }).call(this);

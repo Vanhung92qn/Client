@@ -1,0 +1,62 @@
+
+DangKy.png
+size: 359,158
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+4_btnrut
+  rotate: false
+  xy: 3, 3
+  size: 201, 73
+  orig: 203, 75
+  offset: 1, 1
+  index: -1
+4_ruttien
+  rotate: true
+  xy: 321, 38
+  size: 117, 35
+  orig: 163, 40
+  offset: 24, 2
+  index: -1
+Arrow_Tribal_01
+  rotate: false
+  xy: 304, 10
+  size: 21, 25
+  orig: 21, 25
+  offset: 0, 0
+  index: -1
+Glow_Rectangle_Gradient_01
+  rotate: false
+  xy: 242, 20
+  size: 30, 30
+  orig: 32, 32
+  offset: 1, 1
+  index: -1
+Gradient_01_X_Edgemask_02
+  rotate: false
+  xy: 207, 18
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Triangle_01
+  rotate: false
+  xy: 275, 27
+  size: 26, 23
+  orig: 26, 26
+  offset: 0, 1
+  index: -1
+Water_Threshold_01
+  rotate: false
+  xy: 214, 53
+  size: 104, 102
+  orig: 128, 128
+  offset: 12, 17
+  index: -1
+glitchbtn
+  rotate: false
+  xy: 3, 79
+  size: 208, 76
+  orig: 208, 76
+  offset: 0, 0
+  index: -1

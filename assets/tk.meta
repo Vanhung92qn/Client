@@ -1,0 +1,13 @@
+{
+  "ver": "1.1.3",
+  "uuid": "e9d789ed-3a57-4707-a526-30becf03b60a",
+  "importer": "folder",
+  "isBundle": true,
+  "bundleName": "tk",
+  "priority": 1,
+  "compressionType": {},
+  "optimizeHotUpdate": {},
+  "inlineSpriteFrames": {},
+  "isRemoteBundle": {},
+  "subMetas": {}
+}

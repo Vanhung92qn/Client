@@ -1,0 +1,34 @@
+
+vong quay anim.png
+size: 2048,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+5_star
+  rotate: false
+  xy: 2, 2
+  size: 198, 196
+  orig: 198, 196
+  offset: 0, 0
+  index: -1
+den3
+  rotate: false
+  xy: 603, 319
+  size: 551, 551
+  orig: 551, 551
+  offset: 0, 0
+  index: -1
+den4
+  rotate: false
+  xy: 1156, 319
+  size: 551, 551
+  orig: 551, 551
+  offset: 0, 0
+  index: -1
+vong
+  rotate: false
+  xy: 2, 200
+  size: 599, 670
+  orig: 599, 670
+  offset: 0, 0
+  index: -1

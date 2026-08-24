@@ -1,0 +1,41 @@
+
+logomd5.png
+size: 429,279
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+choigame
+  rotate: false
+  xy: 2, 27
+  size: 231, 67
+  orig: 234, 69
+  offset: 1, 1
+  index: -1
+vang
+  rotate: true
+  xy: 355, 8
+  size: 269, 72
+  orig: 271, 79
+  offset: 1, 1
+  index: -1
+vang_phai
+  rotate: false
+  xy: 2, 96
+  size: 312, 84
+  orig: 314, 91
+  offset: 1, 1
+  index: -1
+vang_trai
+  rotate: false
+  xy: 2, 182
+  size: 351, 95
+  orig: 353, 103
+  offset: 1, 1
+  index: -1
+vuong_mien
+  rotate: false
+  xy: 235, 2
+  size: 98, 92
+  orig: 102, 96
+  offset: 2, 2
+  index: -1

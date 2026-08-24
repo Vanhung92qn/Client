@@ -1,42 +1,41 @@
 # ─────────────────────────────────────────────────────────────────
-# Whitelist .gitignore — chỉ track file *.js (script Cocos).
-# Mọi thứ khác (asset, .meta, .ts, .prefab, image, font, audio...)
-# bị ignore. Khi cần track 1 file ngoại lệ thì thêm `!path/to/file`
-# ở cuối file này.
+# .gitignore — Cocos Creator 2.4.10 (project "Roy88")
+#
+# Nguyen tac: TRACK toan bo SOURCE (assets/, settings/, build-templates/,
+# tools/, project.json...). Chi ignore thu muc do Cocos Creator SINH RA
+# hoac trang thai rieng cua tung may.
+#
+# Muc dich: `git pull` ve may local la mo duoc ngay bang Cocos Creator.
+# => KHONG duoc them bat ky pattern nao cham vao assets/.
 # ─────────────────────────────────────────────────────────────────
 
-# Ignore tất cả mặc định
-*
-
-# Cho phép git duyệt vào folder con (nếu không sẽ skip toàn bộ folder)
-!*/
-
-# Cho phép file .js
-!*.js
-
-# Cho phép script PowerShell trong tools/
-!tools/*.ps1
-!tools/*.md
-
-# Cho phép chính .gitignore
-!.gitignore
-
-# ─── Loại trừ build cache + IDE + thư mục lớn của Cocos ───────
+# ===== Cocos Creator sinh ra (import cache / build output) =====
 library/
-local/
 temp/
 build/
-settings/
-native/
-.vscode/
-.cursor/
-.idea/
+.import/
+.cache/
+
+# ===== Trang thai rieng cua tung may (layout editor, node tree...) =====
+local/
+
+# ===== Node =====
 node_modules/
+npm-debug.log*
+yarn-error.log
 
-# Log + file rác hệ điều hành
+# ===== IDE / Editor =====
+.vscode/
+.idea/
+.cursor/
+*.swp
+*~
+
+# ===== Log & rac he dieu hanh =====
 *.log
+console_logger.txt
 .DS_Store
-ehthumbs.db
 Thumbs.db
-
-# touched at 2026-05-03 22:34:42
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/

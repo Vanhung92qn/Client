@@ -1,0 +1,167 @@
+
+icon_sicbo.png
+size: 586,534
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+BG2
+  rotate: false
+  xy: 2, 155
+  size: 105, 377
+  orig: 184, 377
+  offset: 0, 0
+  index: -1
+MD5
+  rotate: true
+  xy: 408, 58
+  size: 118, 46
+  orig: 118, 46
+  offset: 0, 0
+  index: -1
+boad1
+  rotate: true
+  xy: 408, 178
+  size: 193, 31
+  orig: 195, 33
+  offset: 1, 1
+  index: -1
+boar2
+  rotate: true
+  xy: 441, 178
+  size: 193, 31
+  orig: 195, 33
+  offset: 1, 1
+  index: -1
+boar3
+  rotate: false
+  xy: 388, 21
+  size: 8, 350
+  orig: 10, 353
+  offset: 1, 1
+  index: -1
+boar4
+  rotate: false
+  xy: 398, 21
+  size: 8, 350
+  orig: 10, 352
+  offset: 1, 1
+  index: -1
+bowl
+  rotate: false
+  xy: 109, 318
+  size: 209, 214
+  orig: 209, 214
+  offset: 0, 0
+  index: -1
+dice1
+  rotate: false
+  xy: 2, 6
+  size: 141, 147
+  orig: 141, 147
+  offset: 0, 0
+  index: -1
+fx
+  rotate: false
+  xy: 320, 373
+  size: 161, 159
+  orig: 161, 159
+  offset: 0, 0
+  index: -1
+fx_2
+  rotate: false
+  xy: 145, 23
+  size: 124, 135
+  orig: 125, 135
+  offset: 0, 0
+  index: -1
+light
+  rotate: false
+  xy: 456, 2
+  size: 60, 61
+  orig: 60, 61
+  offset: 0, 0
+  index: -1
+lightbeam
+  rotate: false
+  xy: 408, 20
+  size: 36, 36
+  orig: 36, 36
+  offset: 0, 0
+  index: -1
+logo
+  rotate: true
+  xy: 280, 27
+  size: 289, 106
+  orig: 343, 126
+  offset: 27, 10
+  index: -1
+logo/Layer 1 copy
+  rotate: true
+  xy: 534, 212
+  size: 49, 50
+  orig: 51, 54
+  offset: 1, 3
+  index: -1
+logo/Layer 1 copy 2
+  rotate: true
+  xy: 534, 263
+  size: 78, 50
+  orig: 80, 54
+  offset: 1, 3
+  index: -1
+logo/Layer 1 copy 3
+  rotate: true
+  xy: 518, 16
+  size: 88, 52
+  orig: 88, 54
+  offset: 0, 1
+  index: -1
+logo/Layer 1 copy 4
+  rotate: true
+  xy: 510, 106
+  size: 104, 52
+  orig: 104, 54
+  offset: 0, 1
+  index: -1
+logo/Layer 1 copy 5
+  rotate: true
+  xy: 456, 65
+  size: 111, 52
+  orig: 112, 54
+  offset: 0, 1
+  index: -1
+logo/Layer 1 copy 6
+  rotate: false
+  xy: 483, 343
+  size: 92, 52
+  orig: 93, 54
+  offset: 0, 1
+  index: -1
+logo/Layer 1 copy 7
+  rotate: false
+  xy: 320, 319
+  size: 60, 52
+  orig: 61, 54
+  offset: 0, 1
+  index: -1
+logo_bg
+  rotate: true
+  xy: 483, 397
+  size: 135, 97
+  orig: 135, 97
+  offset: 0, 0
+  index: -1
+plate
+  rotate: false
+  xy: 109, 160
+  size: 169, 156
+  orig: 169, 156
+  offset: 0, 0
+  index: -1
+x88
+  rotate: true
+  xy: 474, 239
+  size: 102, 58
+  orig: 103, 58
+  offset: 1, 0
+  index: -1

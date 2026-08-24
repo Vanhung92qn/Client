@@ -55,7 +55,13 @@ var netConfig = require('NetConfig');
 
                     if (isReconnect) {
                         url = url.replace('/signalr/connect?', '/signalr/reconnect?');
-                    } else {
+                    } else if (hubName !== cc.HubName.PortalHub
+                            && hubName !== cc.HubName.LuckyDiceHub
+                            && hubName !== cc.HubName.Md5LuckyDiceHub
+                            && hubName !== cc.HubName.LuckyDiceSieuTocHub) {
+                        // [TỐC ĐỘ #1] Hub realtime sảnh (Portal + các strip Tài Xỉu) connect NGẦM - KHÔNG khoá spinner.
+                        // Spinner chỉ dành cho hub GAME (vào bàn chơi) mới cần chờ.
+                        // (Fix logout: connectHubTx reconnect TX guest async -> nodeBusy kẹt đè popup, nuốt nút X.)
                         cc.PopupController.getInstance().showBusy();
                     }
 
@@ -324,6 +330,9 @@ var netConfig = require('NetConfig');
                 case cc.HubName.ThreeCardsHub:
                     data.A = [betValue]; //amount
                     break;
+                case cc.HubName.AviatorHub:
+                    data.A = [betValue, betSide ? betSide : 0]; //[amount, autoCashoutAt]; 0 = khong auto
+                    break;
                 //case cc.HubName.Md5LuckyDiceHub:
                     //data.A = [betValue, betSide, cc.Config.getInstance().getDeviceType()];
                     //break;
@@ -581,7 +590,9 @@ var netConfig = require('NetConfig');
         };
 
         Hub.prototype.send = function (data) {
-            if (this.netControl) {
+            // Chi send khi socket OPEN (readyState===1). Tranh nem 'WebSocket is already in CLOSING or CLOSED state'
+            // khi timer/ping/action ban tin sau luc socket da dong (reconnect lo viec tao lai socket).
+            if (this.netControl && this.netControl.readyState === 1) {
                 data.H = this.hubName;
                 data.I = this.ID;
                 this.ID++;
@@ -595,6 +606,10 @@ var netConfig = require('NetConfig');
             this.controller.onHubOpen();
             cc.PopupController.getInstance().hideBusy();
 
+            // Phase 2 hardening: reset bo dem dead-link cho ket noi moi
+            this.missedPong = 0;
+            this.recvSinceCheck = false;
+
             var self = this;
             self.pingPong();
             this.interval = setInterval(function () {
@@ -605,15 +620,27 @@ var netConfig = require('NetConfig');
             // cc.DDNA.getInstance().logAPI(cc.Config.getInstance().getSubDomainByHub(this.hubName), 'connect', receiveDate - this.sendDate);
         };
 
+        // Phase 2 hardening: go handler + null netControl de khong de lai socket chet.
+        // Reconnect se tao socket moi sach; send() (readyState guard) tranh ban tin tren socket chet.
+        Hub.prototype._detachSocket = function () {
+            if (this.netControl) {
+                this.netControl.onopen = null;
+                this.netControl.onclose = null;
+                this.netControl.onmessage = null;
+                this.netControl.onerror = null;
+                this.netControl = null;
+            }
+        };
+
         Hub.prototype.onClose = function () {
             // console.log(this.hubName + ' onHubClose');
-
-            this.controller.onHubClose();
-
             if (this.interval) {
                 clearInterval(this.interval);
             }
-
+            // Null TRUOC onHubClose: onHubClose co the reconnect dong bo (gan netControl moi) -> null sau se xoa nham socket moi.
+            // (onError luon keo theo onClose nen don dep tap trung o day la du.)
+            this._detachSocket();
+            this.controller.onHubClose();
             cc.PopupController.getInstance().hideBusy();
         };
 
@@ -634,6 +661,7 @@ var netConfig = require('NetConfig');
         Hub.prototype.onMessage = function (obj) {
             // console.log(this.hubName + ' onMessage: ' + obj.data);
             var response = JSON.parse(obj.data);
+            this.recvSinceCheck = true; // Phase 2 hardening: co traffic vao -> link con song (ke ca SignalR keepalive / ping completion)
 
             this.controller.onHubMessage(response);
 
@@ -694,7 +722,12 @@ var netConfig = require('NetConfig');
                         break;
 
                     case -1001:
-                        cc.PopupController.getInstance().showPopupRequireLogin(cc.HubError.ERROR_1001_NOT_AUTHENTICATE);
+                        // [LOGOUT FIX] -1001 từ HUB (vd TX reconnect bằng token null sau khi đăng xuất) KHÔNG
+                        // được bật popup "đăng nhập lại" khi đã đăng xuất (loginState=false). Cùng nguyên tắc
+                        // với guard ở ServerConnector (HTTP). Đang đăng nhập mà -1001 thật thì vẫn bật.
+                        if (cc.LoginController && cc.LoginController.getInstance().getLoginState()) {
+                            cc.PopupController.getInstance().showPopupRequireLogin(cc.HubError.ERROR_1001_NOT_AUTHENTICATE);
+                        }
                         break;
                     case -1002:
                         cc.PopupController.getInstance().showMessageError(cc.HubError.ERROR_1002_PLAYER_NULL);
@@ -746,14 +779,29 @@ var netConfig = require('NetConfig');
         };
 
         Hub.prototype.checkPingPong = function () {
-            if (!this.isPingPong) {
-                //ko phan hoi
-                // console.log(this.hubName + ' lostConnection');
-                //cc.PopupController.getInstance().showPopupLostConnection();
+            // Phase 2 hardening: phat hien dead-link (vd Cloudflare drop am socket).
+            // Link con song neu nhan duoc pong (isPingPong) HOAC co bat ky traffic vao trong chu ky
+            // (recvSinceCheck) - an toan cho ca game khong route pong, vi completion cua ping cung la traffic vao.
+            var alive = this.isPingPong || this.recvSinceCheck;
+            this.recvSinceCheck = false;
+            if (alive) {
+                this.missedPong = 0;
                 this.pingPong();
             } else {
-                //ok -> check tiep
-                this.pingPong();
+                this.missedPong = (this.missedPong || 0) + 1;
+                if (this.missedPong >= 2) {
+                    // >=2 chu ky (~10s) khong pong & khong traffic -> link chet -> dong socket de kich hoat
+                    // onClose -> controller.onHubClose -> reconnect (khong cho OS TCP timeout vai phut).
+                    // console.log(this.hubName + ' dead-link -> force reconnect');
+                    this.missedPong = 0;
+                    if (this.interval) { clearInterval(this.interval); }
+                    if (this.netControl) {
+                        try { this.netControl.close(); } catch (e) {}
+                    }
+                } else {
+                    // thu ping lai 1 lan nua truoc khi ket luan chet
+                    this.pingPong();
+                }
             }
         };
 
@@ -762,6 +810,23 @@ var netConfig = require('NetConfig');
                 //ok
                 this.isPingPong = true;
             }
+        };
+
+        // Aviator Cashout (khong tham so)
+        Hub.prototype.cashout = function () {
+            var data = {
+                M: cc.MethodHubName.CASH_OUT,
+            };
+            this.send(data);
+        };
+
+        // Hoa Phung: xin danh sach Nguoi trong phong (goi khi MO panel, khong poll).
+        // Server tra ve qua response.R = {Total, Users:[{AccountID,Nickname,Avatar}]}.
+        Hub.prototype.getUserInRoom = function () {
+            var data = {
+                M: cc.MethodHubName.GET_USER_IN_ROOM,
+            };
+            this.send(data);
         };
 
         return Hub;

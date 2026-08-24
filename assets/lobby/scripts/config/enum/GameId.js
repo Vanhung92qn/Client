@@ -25,6 +25,10 @@
         MONKEY: '90',
         GAINHAY: '17', // gai nhảy
         DRAGON_TIGER: '14',
+        CHICKEN_FIGHT: '110', // Đá Gà
+        XENG_777: '109', // Xèng 777
+        AVIATOR: '115', // Aviator (crash game)
+        PHOENIX: '116', // Hỏa Phụng (crash game phượng hoàng)
         BACCARAT: '19',
 
         BA_CAY: '51',

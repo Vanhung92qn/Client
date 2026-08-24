@@ -1,0 +1,48 @@
+
+redbag.png
+size: 1024,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+img_red envelope_light_01
+  rotate: false
+  xy: 2, 514
+  size: 346, 314
+  orig: 346, 314
+  offset: 0, 0
+  index: -1
+抽紅包_開紅包_光芒
+  rotate: false
+  xy: 2, 205
+  size: 174, 307
+  orig: 174, 307
+  offset: 0, 0
+  index: -1
+抽紅包_關紅包_光芒
+  rotate: false
+  xy: 350, 590
+  size: 174, 238
+  orig: 174, 238
+  offset: 0, 0
+  index: -1
+紅包袋
+  rotate: false
+  xy: 2, 2
+  size: 146, 201
+  orig: 146, 201
+  offset: 0, 0
+  index: -1
+開紅包
+  rotate: false
+  xy: 178, 403
+  size: 146, 109
+  orig: 146, 109
+  offset: 0, 0
+  index: -1
+關紅包
+  rotate: false
+  xy: 526, 740
+  size: 151, 88
+  orig: 151, 88
+  offset: 0, 0
+  index: -1

@@ -21,6 +21,8 @@
             this.totalPages = this.pageView.content.children.length;
             this.currentPageIndex = this.pageView.getCurrentPageIndex();
 
+            if (this.totalPages <= 1) return;   // 1 banner -> khong tu truot qua lai
+
             var self = this;
             cc.director.getScheduler().schedule(this.switchPage, this, self.timePerPage, cc.macro.REPEAT_FOREVER, 0, false);
         },

@@ -71,7 +71,7 @@ var slotsConfig = require('SlotsConfig');
 
             //neu la freespin mode thi lay icon freespin
             if (this.freeSpinController && this.freeSpinController.getStateFreeSpin()) {
-                var length = this.skeletonDataIcons.length;
+                var length = this.fsIcons.length;
                 do {
                     var iconId = Math.floor((Math.random() * length) + 1);
                 }
@@ -79,7 +79,7 @@ var slotsConfig = require('SlotsConfig');
 
                 this.setIcon(parseInt(indexIcon.toString()), iconId);
             } else {
-                length = this.skeletonDataIcons.length;
+                length = this.icons.length;
                 iconId = Math.floor((Math.random() * length));
 
                 this.setIcon(parseInt(indexIcon.toString()), iconId);
@@ -87,12 +87,35 @@ var slotsConfig = require('SlotsConfig');
         },
 
         setIcon: function (indexIcon, iconId) {
-            
-            this.skeletonIcons[indexIcon].node.active = true;
-            this.spriteIcons[indexIcon].enabled = false;
+            if (this.freeSpinController && this.freeSpinController.getStateFreeSpin()) {
+                if (iconId >= 4 && iconId <= 6) {
+                    this.skeletonIcons[indexIcon].node.active = true;
+                    this.spriteIcons[indexIcon].enabled = false;
 
-            this.skeletonIcons[indexIcon].skeletonData = this.skeletonDataIcons[iconId - 1];
-            this.skeletonIcons[indexIcon].setAnimation(0, 'animation', true);
+                    this.skeletonIcons[indexIcon].skeletonData = this.skeletonDataIconsFs[iconId - 1];
+                    this.skeletonIcons[indexIcon].setAnimation(0, 'stay', true);
+                } else {
+
+                    this.skeletonIcons[indexIcon].node.active = false;
+                    this.spriteIcons[indexIcon].enabled = true;
+                    this.spriteIcons[indexIcon].spriteFrame = this.fsIcons[iconId - 1];
+                }
+            } else {
+                if (iconId <= 6) {
+                    this.skeletonIcons[indexIcon].node.active = true;
+                    this.spriteIcons[indexIcon].enabled = false;
+
+                    if (this.skeletonDataIcons[iconId - 1]) {
+                        this.skeletonIcons[indexIcon].skeletonData = this.skeletonDataIcons[iconId - 1];
+                        this.skeletonIcons[indexIcon].setAnimation(0, 'stay', true);
+                    }
+                } else {
+                    this.skeletonIcons[indexIcon].node.active = false;
+                    this.spriteIcons[indexIcon].enabled = true;
+
+                    this.spriteIcons[indexIcon].spriteFrame = this.icons[iconId - 1];
+                }
+            }
         },
 
         //set du lieu tu server

@@ -1,0 +1,83 @@
+
+Logo_Sum.png
+size: 544,208
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+BG
+  rotate: false
+  xy: 2, 2
+  size: 203, 203
+  orig: 203, 203
+  offset: 0, 0
+  index: -1
+Card
+  rotate: false
+  xy: 413, 20
+  size: 63, 65
+  orig: 63, 65
+  offset: 0, 0
+  index: -1
+Club
+  rotate: true
+  xy: 207, 17
+  size: 188, 64
+  orig: 188, 64
+  offset: 0, 0
+  index: -1
+Club_ef
+  rotate: true
+  xy: 273, 115
+  size: 90, 55
+  orig: 90, 55
+  offset: 0, 0
+  index: -1
+M
+  rotate: true
+  xy: 336, 40
+  size: 81, 75
+  orig: 81, 75
+  offset: 0, 0
+  index: -1
+M_ef
+  rotate: true
+  xy: 393, 124
+  size: 81, 75
+  orig: 81, 75
+  offset: 0, 0
+  index: -1
+S
+  rotate: false
+  xy: 273, 31
+  size: 61, 82
+  orig: 61, 82
+  offset: 0, 0
+  index: -1
+S_ef
+  rotate: false
+  xy: 330, 123
+  size: 61, 82
+  orig: 61, 82
+  offset: 0, 0
+  index: -1
+Sparkle
+  rotate: false
+  xy: 478, 21
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+U
+  rotate: true
+  xy: 470, 147
+  size: 58, 72
+  orig: 58, 72
+  offset: 0, 0
+  index: -1
+U_ef
+  rotate: true
+  xy: 470, 87
+  size: 58, 72
+  orig: 58, 72
+  offset: 0, 0
+  index: -1

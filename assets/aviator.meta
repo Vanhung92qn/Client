@@ -1,0 +1,13 @@
+{
+  "ver": "1.1.3",
+  "uuid": "95bacace-777d-4714-bca1-c361c86df8a3",
+  "importer": "folder",
+  "isBundle": true,
+  "bundleName": "aviator",
+  "priority": "5",
+  "compressionType": {},
+  "optimizeHotUpdate": {},
+  "inlineSpriteFrames": {},
+  "isRemoteBundle": {},
+  "subMetas": {}
+}

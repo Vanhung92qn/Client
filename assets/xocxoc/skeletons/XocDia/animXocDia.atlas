@@ -1,0 +1,20 @@
+
+animXocDia.png
+size: 284,112
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+chen
+  rotate: false
+  xy: 164, 2
+  size: 116, 106
+  orig: 116, 106
+  offset: 0, 0
+  index: -1
+dia
+  rotate: false
+  xy: 2, 6
+  size: 160, 102
+  orig: 160, 102
+  offset: 0, 0
+  index: -1

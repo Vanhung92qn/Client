@@ -1,0 +1,152 @@
+headerlogo.png
+size: 504,336
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+as_chay
+  rotate: false
+  xy: 2, 304
+  size: 427, 30
+  orig: 427, 30
+  offset: 0, 0
+  index: -1
+cucvang
+  rotate: false
+  xy: 431, 304
+  size: 29, 26
+  orig: 29, 26
+  offset: 0, 0
+  index: -1
+dauran
+  rotate: false
+  xy: 385, 114
+  size: 49, 45
+  orig: 49, 45
+  offset: 0, 0
+  index: -1
+dautt
+  rotate: false
+  xy: 312, 114
+  size: 71, 53
+  orig: 71, 53
+  offset: 0, 0
+  index: -1
+efx_may_trai_0
+  rotate: false
+  xy: 252, 232
+  size: 106, 32
+  orig: 106, 32
+  offset: 0, 0
+  index: -1
+efx_may_trai_1
+  rotate: false
+  xy: 360, 232
+  size: 106, 32
+  orig: 106, 32
+  offset: 0, 0
+  index: -1
+efx_may_trai_2
+  rotate: false
+  xy: 2, 270
+  size: 106, 32
+  orig: 106, 32
+  offset: 0, 0
+  index: -1
+efx_may_trai_3
+  rotate: false
+  xy: 110, 270
+  size: 106, 32
+  orig: 106, 32
+  offset: 0, 0
+  index: -1
+efx_may_trai_4
+  rotate: false
+  xy: 218, 270
+  size: 106, 32
+  orig: 106, 32
+  offset: 0, 0
+  index: -1
+efx_mayphai_0
+  rotate: false
+  xy: 2, 194
+  size: 123, 36
+  orig: 123, 36
+  offset: 0, 0
+  index: -1
+efx_mayphai_1
+  rotate: false
+  xy: 127, 194
+  size: 123, 36
+  orig: 123, 36
+  offset: 0, 0
+  index: -1
+efx_mayphai_2
+  rotate: false
+  xy: 252, 194
+  size: 123, 36
+  orig: 123, 36
+  offset: 0, 0
+  index: -1
+efx_mayphai_3
+  rotate: false
+  xy: 377, 194
+  size: 123, 36
+  orig: 123, 36
+  offset: 0, 0
+  index: -1
+efx_mayphai_4
+  rotate: false
+  xy: 2, 232
+  size: 123, 36
+  orig: 123, 36
+  offset: 0, 0
+  index: -1
+may trai
+  rotate: false
+  xy: 326, 270
+  size: 106, 32
+  orig: 106, 32
+  offset: 0, 0
+  index: -1
+mayphai
+  rotate: false
+  xy: 127, 232
+  size: 123, 36
+  orig: 123, 36
+  offset: 0, 0
+  index: -1
+nen
+  rotate: false
+  xy: 2, 2
+  size: 477, 110
+  orig: 477, 110
+  offset: 0, 0
+  index: -1
+non
+  rotate: false
+  xy: 2, 114
+  size: 80, 78
+  orig: 80, 78
+  offset: 0, 0
+  index: -1
+sang
+  rotate: false
+  xy: 160, 114
+  size: 57, 56
+  orig: 57, 56
+  offset: 0, 0
+  index: -1
+thanran
+  rotate: false
+  xy: 219, 114
+  size: 91, 54
+  orig: 91, 54
+  offset: 0, 0
+  index: -1
+thantt
+  rotate: false
+  xy: 84, 114
+  size: 74, 64
+  orig: 74, 64
+  offset: 0, 0
+  index: -1

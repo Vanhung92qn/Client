@@ -1,0 +1,37 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "openSettingMenu",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.25,
+  "sample": 60,
+  "speed": 0.5,
+  "wrapMode": 1,
+  "curveData": {
+    "props": {
+      "y": [
+        {
+          "frame": 0,
+          "value": 0
+        }
+      ],
+      "opacity": [
+        {
+          "frame": 0,
+          "value": 255
+        }
+      ],
+      "x": [
+        {
+          "frame": 0,
+          "value": -392.616
+        },
+        {
+          "frame": 0.25,
+          "value": -49
+        }
+      ]
+    }
+  },
+  "events": []
+}

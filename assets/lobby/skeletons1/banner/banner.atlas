@@ -1,0 +1,216 @@
+
+banner.png
+size: 808,269
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+1_densang
+  rotate: false
+  xy: 297, 17
+  size: 15, 15
+  orig: 17, 17
+  offset: 1, 1
+  index: -1
+1_dentat
+  rotate: false
+  xy: 616, 32
+  size: 11, 11
+  orig: 13, 13
+  offset: 1, 1
+  index: -1
+1_star
+  rotate: false
+  xy: 612, 118
+  size: 74, 69
+  orig: 74, 74
+  offset: 0, 2
+  index: -1
+BG2
+  rotate: true
+  xy: 2, 70
+  size: 197, 334
+  orig: 197, 334
+  offset: 0, 0
+  index: -1
+firework/firework_00
+  rotate: false
+  xy: 783, 247
+  size: 20, 20
+  orig: 99, 85
+  offset: 39, 39
+  index: -1
+firework/firework_01
+  rotate: false
+  xy: 532, 110
+  size: 25, 26
+  orig: 99, 85
+  offset: 37, 36
+  index: -1
+firework/firework_02
+  rotate: false
+  xy: 297, 34
+  size: 34, 34
+  orig: 99, 85
+  offset: 32, 32
+  index: -1
+firework/firework_03
+  rotate: true
+  xy: 572, 2
+  size: 41, 42
+  orig: 99, 85
+  offset: 29, 28
+  index: -1
+firework/firework_04
+  rotate: false
+  xy: 700, 4
+  size: 48, 49
+  orig: 99, 85
+  offset: 25, 24
+  index: -1
+firework/firework_05
+  rotate: false
+  xy: 476, 81
+  size: 54, 55
+  orig: 99, 85
+  offset: 22, 21
+  index: -1
+firework/firework_06
+  rotate: false
+  xy: 646, 55
+  size: 61, 61
+  orig: 99, 85
+  offset: 19, 18
+  index: -1
+firework/firework_07
+  rotate: true
+  xy: 2, 2
+  size: 66, 65
+  orig: 99, 85
+  offset: 17, 15
+  index: -1
+firework/firework_08
+  rotate: false
+  xy: 688, 118
+  size: 68, 69
+  orig: 99, 85
+  offset: 16, 13
+  index: -1
+firework/firework_09
+  rotate: false
+  xy: 572, 45
+  size: 72, 71
+  orig: 99, 85
+  offset: 15, 11
+  index: -1
+firework/firework_10
+  rotate: true
+  xy: 497, 5
+  size: 74, 73
+  orig: 99, 85
+  offset: 14, 9
+  index: -1
+firework/firework_11
+  rotate: true
+  xy: 421, 2
+  size: 77, 74
+  orig: 99, 85
+  offset: 13, 8
+  index: -1
+firework/firework_12
+  rotate: false
+  xy: 701, 192
+  size: 80, 75
+  orig: 99, 85
+  offset: 12, 7
+  index: -1
+firework/firework_13
+  rotate: false
+  xy: 338, 2
+  size: 81, 77
+  orig: 99, 85
+  offset: 11, 6
+  index: -1
+firework/firework_14
+  rotate: false
+  xy: 485, 138
+  size: 84, 79
+  orig: 99, 85
+  offset: 10, 4
+  index: -1
+firework/firework_15
+  rotate: false
+  xy: 616, 189
+  size: 83, 78
+  orig: 99, 85
+  offset: 10, 5
+  index: -1
+logo_card1
+  rotate: false
+  xy: 709, 63
+  size: 45, 53
+  orig: 46, 53
+  offset: 0, 0
+  index: -1
+logo_card2
+  rotate: true
+  xy: 646, 2
+  size: 51, 52
+  orig: 51, 52
+  offset: 0, 0
+  index: -1
+logo_card3
+  rotate: false
+  xy: 756, 68
+  size: 50, 48
+  orig: 50, 49
+  offset: 0, 1
+  index: -1
+logo_club
+  rotate: true
+  xy: 758, 118
+  size: 72, 48
+  orig: 74, 50
+  offset: 1, 1
+  index: -1
+logo_diamond
+  rotate: false
+  xy: 338, 150
+  size: 145, 117
+  orig: 147, 119
+  offset: 1, 1
+  index: -1
+logo_king
+  rotate: true
+  xy: 571, 129
+  size: 88, 39
+  orig: 90, 41
+  offset: 1, 1
+  index: -1
+logo_rubbon
+  rotate: false
+  xy: 485, 219
+  size: 129, 48
+  orig: 131, 50
+  offset: 1, 1
+  index: -1
+logo_sum
+  rotate: false
+  xy: 338, 81
+  size: 136, 67
+  orig: 138, 69
+  offset: 1, 1
+  index: -1
+text2
+  rotate: false
+  xy: 185, 9
+  size: 110, 59
+  orig: 111, 59
+  offset: 1, 0
+  index: -1
+text_stroke
+  rotate: false
+  xy: 69, 5
+  size: 114, 63
+  orig: 115, 63
+  offset: 1, 0
+  index: -1

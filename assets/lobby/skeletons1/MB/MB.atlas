@@ -1,0 +1,111 @@
+
+MB.png
+size: 463,463
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+10
+  rotate: false
+  xy: 287, 149
+  size: 91, 104
+  orig: 93, 106
+  offset: 1, 1
+  index: -1
+A
+  rotate: false
+  xy: 183, 147
+  size: 102, 106
+  orig: 104, 108
+  offset: 1, 1
+  index: -1
+J
+  rotate: false
+  xy: 218, 50
+  size: 76, 95
+  orig: 78, 97
+  offset: 1, 1
+  index: -1
+K
+  rotate: false
+  xy: 296, 43
+  size: 92, 104
+  orig: 94, 106
+  offset: 1, 1
+  index: -1
+Q
+  rotate: false
+  xy: 380, 176
+  size: 76, 95
+  orig: 78, 97
+  offset: 1, 1
+  index: -1
+aura
+  rotate: false
+  xy: 256, 298
+  size: 165, 163
+  orig: 167, 165
+  offset: 1, 1
+  index: -1
+bg
+  rotate: false
+  xy: 2, 143
+  size: 179, 179
+  orig: 181, 181
+  offset: 1, 1
+  index: -1
+board1
+  rotate: true
+  xy: 423, 273
+  size: 188, 34
+  orig: 190, 36
+  offset: 1, 1
+  index: -1
+board2
+  rotate: false
+  xy: 183, 255
+  size: 188, 41
+  orig: 190, 43
+  offset: 1, 1
+  index: -1
+board3
+  rotate: true
+  xy: 2, 19
+  size: 8, 148
+  orig: 10, 150
+  offset: 1, 1
+  index: -1
+board4
+  rotate: true
+  xy: 2, 9
+  size: 8, 148
+  orig: 10, 151
+  offset: 1, 1
+  index: -1
+dragon
+  rotate: false
+  xy: 2, 324
+  size: 252, 137
+  orig: 253, 137
+  offset: 0, 0
+  index: -1
+light
+  rotate: true
+  xy: 203, 2
+  size: 46, 47
+  orig: 78, 78
+  offset: 16, 16
+  index: -1
+maubinh
+  rotate: false
+  xy: 2, 79
+  size: 214, 62
+  orig: 216, 64
+  offset: 1, 1
+  index: -1
+maubinh1
+  rotate: false
+  xy: 2, 29
+  size: 199, 48
+  orig: 201, 50
+  offset: 1, 1
+  index: -1

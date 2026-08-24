@@ -21,6 +21,12 @@
             this.audioPool = audioPool;
         };
 
+        // Trả pool âm thanh của game đang active (AudioPoolChickenFight/...). Một số game (Đá gà) gọi trực tiếp
+        // các method enableXxx của pool. Additive — không đổi hành vi game khác.
+        AudioController.prototype.getAudioPool = function () {
+            return this.audioPool;
+        };
+
         AudioController.prototype.playSound = function (clipType) {
             if (!this.soundState) return;
             var audioClip = this.audioPool.getAudioClip(clipType);

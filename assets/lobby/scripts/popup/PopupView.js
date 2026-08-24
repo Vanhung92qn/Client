@@ -138,12 +138,35 @@ var netConfig = require('NetConfig');
             }
         },
 
-        showBusy: function () {
-            this.nodeBusy.active = true;
+        showBusy: function (big) {
+            // [DELAYED-SHOW] KHÔNG hiện loading NGAY. Chỉ hiện nếu thao tác kéo dài > 300ms.
+            // Login/đăng ký/SAI-mật-khẩu/captcha ~200ms < 300ms -> hideBusy gọi trước -> KHÔNG hiện gì
+            // => hết "nháy overlay" + hết "loading rồi mới báo lỗi". Chậm thật (>300ms) mới hiện loading.
+            this._busyBig = big;
+            if (this._busyDelayT) clearTimeout(this._busyDelayT);
+            var self = this;
+            this._busyDelayT = setTimeout(function () {
+                self._busyDelayT = null;
+                self._reallyShowBusy(self._busyBig);
+            }, 300);
+        },
+
+        _reallyShowBusy: function (big) {
+            // [LoadingOverlay] TẮT (false) -> dùng spinner nhỏ nodeBusy. Loading giờ rất ngắn + delayed-show
+            // nên hầu như không hiện gì; khi nào cần overlay lại thì đổi true.
+            var USE_OVERLAY = false;
+            if (USE_OVERLAY && big && cc.LoadingOverlay) {
+                cc.LoadingOverlay.show();
+            } else {
+                this.nodeBusy.active = true;   // spinner nho cu
+            }
         },
 
         hideBusy: function () {
+            // [DELAYED-SHOW] huỷ hẹn hiện: thao tác xong TRƯỚC 300ms -> loading chưa kịp hiện -> ko nháy.
+            if (this._busyDelayT) { clearTimeout(this._busyDelayT); this._busyDelayT = null; }
             this.nodeBusy.active = false;
+            if (cc.LoadingOverlay) cc.LoadingOverlay.hide();
         },
 
         showMessage: function (message, code) {

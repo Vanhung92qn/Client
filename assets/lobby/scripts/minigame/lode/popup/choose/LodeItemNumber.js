@@ -39,6 +39,8 @@
                 if(!cc.LodeController.getInstance().isMaxChoose()) {
                     cc.LodeController.getInstance().setNumberChooses(this.numberValue);
                 }else {
+                    //Da chon du so: tra isChoose ve false cho khop voi mang (so nay KHONG duoc them)
+                    this.isChoose = false;
                     this.spriteNumber.spriteFrame = this.sfUnChoose;
                 }
             }else {

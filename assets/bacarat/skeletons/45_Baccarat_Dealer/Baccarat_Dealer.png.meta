@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "f3dbb396-eb93-4347-9c4b-6c2f8c5a465d",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 520,
+  "height": 256,
+  "platformSettings": {},
+  "subMetas": {
+    "Baccarat_Dealer": {
+      "ver": "1.0.6",
+      "uuid": "d9cc9615-cd15-4d42-bbe0-6c0107e57ce6",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "f3dbb396-eb93-4347-9c4b-6c2f8c5a465d",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 2,
+      "trimY": 2,
+      "width": 516,
+      "height": 252,
+      "rawWidth": 520,
+      "rawHeight": 256,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

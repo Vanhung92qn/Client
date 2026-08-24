@@ -1,0 +1,76 @@
+
+Fx.png
+size: 1024,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+att_lig
+  rotate: true
+  xy: 0, 0
+  size: 205, 275
+  orig: 205, 275
+  offset: 0, 0
+  index: -1
+att_line01
+  rotate: false
+  xy: 298, 184
+  size: 297, 23
+  orig: 297, 23
+  offset: 0, 0
+  index: -1
+bg_lig
+  rotate: false
+  xy: 298, 309
+  size: 366, 199
+  orig: 366, 200
+  offset: 0, 0
+  index: -1
+img_Crit
+  rotate: false
+  xy: 665, 295
+  size: 220, 86
+  orig: 220, 86
+  offset: 0, 0
+  index: -1
+img_Miss
+  rotate: true
+  xy: 902, 317
+  size: 191, 100
+  orig: 191, 100
+  offset: 0, 0
+  index: -1
+lig01
+  rotate: false
+  xy: 276, 34
+  size: 176, 149
+  orig: 177, 150
+  offset: 0, 0
+  index: -1
+lig02
+  rotate: false
+  xy: 298, 208
+  size: 235, 100
+  orig: 240, 100
+  offset: 2, 0
+  index: -1
+lig_B
+  rotate: false
+  xy: 0, 206
+  size: 297, 302
+  orig: 297, 302
+  offset: 0, 0
+  index: -1
+miss_01
+  rotate: true
+  xy: 453, 32
+  size: 151, 100
+  orig: 154, 100
+  offset: 1, 0
+  index: -1
+miss_02
+  rotate: false
+  xy: 665, 382
+  size: 236, 126
+  orig: 236, 126
+  offset: 0, 0
+  index: -1

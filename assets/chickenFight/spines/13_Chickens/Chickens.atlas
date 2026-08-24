@@ -1,0 +1,727 @@
+
+Chickens.png
+size: 2048,2048
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+A01
+  rotate: false
+  xy: 342, 423
+  size: 77, 82
+  orig: 130, 139
+  offset: 20, 35
+  index: -1
+A02
+  rotate: true
+  xy: 1297, 1544
+  size: 97, 83
+  orig: 130, 139
+  offset: 11, 36
+  index: -1
+B01
+  rotate: false
+  xy: 586, 1251
+  size: 130, 139
+  orig: 130, 139
+  offset: 0, 0
+  index: -1
+B02
+  rotate: false
+  xy: 1232, 1262
+  size: 123, 91
+  orig: 130, 139
+  offset: 5, 30
+  index: -1
+img_shadow
+  rotate: true
+  xy: 381, 1215
+  size: 153, 78
+  orig: 153, 78
+  offset: 0, 0
+  index: -1
+右腿布_1紅
+  rotate: true
+  xy: 1541, 1561
+  size: 29, 47
+  orig: 29, 47
+  offset: 0, 0
+  index: -1
+右腿布_5紫
+  rotate: false
+  xy: 356, 1493
+  size: 31, 51
+  orig: 31, 51
+  offset: 0, 0
+  index: -1
+右腿布_綠
+  rotate: false
+  xy: 1297, 1512
+  size: 20, 31
+  orig: 20, 31
+  offset: 0, 0
+  index: -1
+右腿布_藍
+  rotate: true
+  xy: 748, 1502
+  size: 22, 32
+  orig: 22, 32
+  offset: 0, 0
+  index: -1
+右腿布_金
+  rotate: false
+  xy: 1908, 1859
+  size: 20, 34
+  orig: 20, 34
+  offset: 0, 0
+  index: -1
+右雞腳_暗黃
+  rotate: false
+  xy: 853, 1243
+  size: 113, 135
+  orig: 114, 135
+  offset: 0, 0
+  index: -1
+右雞腳_橘1
+  rotate: false
+  xy: 105, 0
+  size: 101, 120
+  orig: 101, 121
+  offset: 0, 1
+  index: -1
+右雞腳_白
+  rotate: true
+  xy: 954, 1502
+  size: 100, 107
+  orig: 100, 107
+  offset: 0, 0
+  index: -1
+右雞腳_黃
+  rotate: true
+  xy: 819, 960
+  size: 74, 111
+  orig: 74, 112
+  offset: 0, 1
+  index: -1
+右雞腳_黑
+  rotate: true
+  xy: 583, 979
+  size: 72, 118
+  orig: 72, 118
+  offset: 0, 0
+  index: -1
+右雞腿_1白
+  rotate: false
+  xy: 1541, 1591
+  size: 83, 131
+  orig: 83, 131
+  offset: 0, 0
+  index: -1
+右雞腿_橘紅
+  rotate: false
+  xy: 1148, 1370
+  size: 87, 127
+  orig: 88, 127
+  offset: 1, 0
+  index: -1
+右雞腿_橘黑
+  rotate: false
+  xy: 1787, 1703
+  size: 141, 148
+  orig: 142, 148
+  offset: 0, 0
+  index: -1
+右雞腿_黑2
+  rotate: false
+  xy: 1932, 1678
+  size: 116, 124
+  orig: 117, 125
+  offset: 0, 1
+  index: -1
+右雞腿_黑白
+  rotate: true
+  xy: 402, 64
+  size: 67, 86
+  orig: 69, 86
+  offset: 0, 0
+  index: -1
+左腳_肉
+  rotate: true
+  xy: 702, 973
+  size: 67, 116
+  orig: 68, 117
+  offset: 1, 1
+  index: -1
+左腿布_1紅
+  rotate: false
+  xy: 175, 1143
+  size: 27, 40
+  orig: 27, 40
+  offset: 0, 0
+  index: -1
+左腿布_5紫
+  rotate: false
+  xy: 1309, 1821
+  size: 31, 51
+  orig: 32, 51
+  offset: 1, 0
+  index: -1
+左腿布_綠
+  rotate: false
+  xy: 748, 1525
+  size: 23, 33
+  orig: 23, 34
+  offset: 0, 1
+  index: -1
+左腿布_金
+  rotate: true
+  xy: 1019, 1604
+  size: 20, 33
+  orig: 21, 33
+  offset: 1, 0
+  index: -1
+左雞布_藍
+  rotate: false
+  xy: 1908, 1894
+  size: 20, 42
+  orig: 20, 42
+  offset: 0, 0
+  index: -1
+左雞腳_暗黃
+  rotate: false
+  xy: 1236, 1354
+  size: 93, 143
+  orig: 94, 144
+  offset: 0, 1
+  index: -1
+左雞腳_橘1
+  rotate: true
+  xy: 848, 1138
+  size: 104, 125
+  orig: 104, 125
+  offset: 0, 0
+  index: -1
+左雞腳_白
+  rotate: true
+  xy: 941, 1044
+  size: 90, 109
+  orig: 90, 110
+  offset: 0, 1
+  index: -1
+左雞腳_黃
+  rotate: false
+  xy: 342, 506
+  size: 91, 134
+  orig: 91, 135
+  offset: 0, 1
+  index: -1
+左雞腳_黑
+  rotate: true
+  xy: 586, 1160
+  size: 90, 134
+  orig: 90, 135
+  offset: 0, 1
+  index: -1
+左雞腿_1白
+  rotate: false
+  xy: 378, 984
+  size: 90, 127
+  orig: 90, 127
+  offset: 0, 0
+  index: -1
+左雞腿_橘紅
+  rotate: false
+  xy: 1536, 1723
+  size: 88, 149
+  orig: 88, 149
+  offset: 0, 0
+  index: -1
+左雞腿_橘黑
+  rotate: true
+  xy: 904, 1379
+  size: 122, 114
+  orig: 124, 114
+  offset: 1, 0
+  index: -1
+左雞腿_米
+  rotate: false
+  xy: 460, 1116
+  size: 125, 105
+  orig: 125, 105
+  offset: 0, 0
+  index: -1
+左雞腿_黑2
+  rotate: false
+  xy: 1195, 1498
+  size: 101, 126
+  orig: 101, 127
+  offset: 0, 1
+  index: -1
+左雞腿_黑白
+  rotate: true
+  xy: 583, 907
+  size: 71, 100
+  orig: 72, 100
+  offset: 0, 0
+  index: -1
+眼_1黃
+  rotate: false
+  xy: 1235, 1627
+  size: 18, 14
+  orig: 18, 14
+  offset: 0, 0
+  index: -1
+眼_3紅
+  rotate: true
+  xy: 765, 1790
+  size: 21, 14
+  orig: 21, 14
+  offset: 0, 0
+  index: -1
+眼_3綠
+  rotate: false
+  xy: 1051, 1120
+  size: 18, 14
+  orig: 18, 14
+  offset: 0, 0
+  index: -1
+眼_4閉
+  rotate: false
+  xy: 504, 1779
+  size: 14, 10
+  orig: 14, 10
+  offset: 0, 0
+  index: -1
+雞刀_1鐵灰
+  rotate: true
+  xy: 420, 423
+  size: 82, 36
+  orig: 82, 42
+  offset: 0, 6
+  index: -1
+雞刀_3金
+  rotate: false
+  xy: 250, 1743
+  size: 88, 35
+  orig: 88, 35
+  offset: 0, 0
+  index: -1
+雞刀_鐵白
+  rotate: false
+  xy: 207, 16
+  size: 88, 47
+  orig: 88, 47
+  offset: 0, 0
+  index: -1
+雞尾_4黑綠
+  rotate: false
+  xy: 1633, 1852
+  size: 274, 196
+  orig: 274, 197
+  offset: 0, 1
+  index: -1
+雞尾_5黑
+  rotate: false
+  xy: 765, 1812
+  size: 274, 236
+  orig: 275, 237
+  offset: 0, 1
+  index: -1
+雞尾_橘紅
+  rotate: true
+  xy: 0, 1365
+  size: 370, 171
+  orig: 371, 172
+  offset: 0, 1
+  index: -1
+雞尾_白黑
+  rotate: false
+  xy: 1309, 1873
+  size: 323, 175
+  orig: 324, 176
+  offset: 0, 1
+  index: -1
+雞尾_米
+  rotate: false
+  xy: 790, 1603
+  size: 228, 208
+  orig: 228, 209
+  offset: 0, 1
+  index: -1
+雞翅合_2金橘
+  rotate: false
+  xy: 1019, 1625
+  size: 215, 183
+  orig: 215, 183
+  offset: 0, 0
+  index: -1
+雞翅合_3橘紅
+  rotate: false
+  xy: 410, 1373
+  size: 166, 171
+  orig: 166, 171
+  offset: 0, 0
+  index: -1
+雞翅合_4黑
+  rotate: true
+  xy: 203, 972
+  size: 211, 174
+  orig: 211, 174
+  offset: 0, 0
+  index: -1
+雞翅合_米
+  rotate: false
+  xy: 175, 1184
+  size: 205, 184
+  orig: 205, 184
+  offset: 0, 0
+  index: -1
+雞翅合_金
+  rotate: true
+  xy: 208, 641
+  size: 205, 160
+  orig: 205, 160
+  offset: 0, 0
+  index: -1
+雞翅和_白
+  rotate: true
+  xy: 212, 423
+  size: 217, 129
+  orig: 217, 129
+  offset: 0, 0
+  index: -1
+雞翅開_2金橘
+  rotate: false
+  xy: 250, 1779
+  size: 253, 269
+  orig: 253, 269
+  offset: 0, 0
+  index: -1
+雞翅開_3橘紅
+  rotate: false
+  xy: 0, 1736
+  size: 249, 312
+  orig: 250, 313
+  offset: 0, 1
+  index: -1
+雞翅開_5黑
+  rotate: false
+  xy: 504, 1790
+  size: 260, 258
+  orig: 261, 258
+  offset: 0, 0
+  index: -1
+雞翅開_特白
+  rotate: true
+  xy: 1040, 1809
+  size: 239, 268
+  orig: 240, 268
+  offset: 0, 0
+  index: -1
+雞翅開_米
+  rotate: false
+  xy: 0, 844
+  size: 202, 259
+  orig: 202, 259
+  offset: 0, 0
+  index: -1
+雞背_5黑
+  rotate: true
+  xy: 172, 1492
+  size: 243, 183
+  orig: 243, 183
+  offset: 0, 0
+  index: -1
+雞背_橘紅
+  rotate: true
+  xy: 1625, 1705
+  size: 146, 161
+  orig: 146, 162
+  offset: 0, 1
+  index: -1
+雞背_特白
+  rotate: false
+  xy: 172, 1369
+  size: 237, 122
+  orig: 237, 122
+  offset: 0, 0
+  index: -1
+雞背_白黑
+  rotate: true
+  xy: 1235, 1642
+  size: 166, 145
+  orig: 166, 146
+  offset: 0, 1
+  index: -1
+雞背_米
+  rotate: true
+  xy: 203, 847
+  size: 124, 157
+  orig: 125, 158
+  offset: 0, 1
+  index: -1
+雞背_黃
+  rotate: true
+  xy: 1381, 1557
+  size: 153, 159
+  orig: 153, 160
+  offset: 0, 1
+  index: -1
+雞胸_4橘金
+  rotate: true
+  xy: 0, 356
+  size: 234, 211
+  orig: 235, 211
+  offset: 0, 0
+  index: -1
+雞胸_5黑
+  rotate: true
+  xy: 0, 591
+  size: 252, 207
+  orig: 252, 207
+  offset: 0, 0
+  index: -1
+雞胸_橘紅
+  rotate: true
+  xy: 0, 121
+  size: 234, 211
+  orig: 235, 211
+  offset: 0, 0
+  index: -1
+雞胸_特白
+  rotate: true
+  xy: 0, 1104
+  size: 260, 174
+  orig: 260, 175
+  offset: 0, 1
+  index: -1
+雞胸_米
+  rotate: true
+  xy: 561, 1559
+  size: 230, 228
+  orig: 231, 229
+  offset: 0, 1
+  index: -1
+雞脖上_1白
+  rotate: false
+  xy: 0, 0
+  size: 104, 120
+  orig: 104, 120
+  offset: 0, 0
+  index: -1
+雞脖上_4橘金
+  rotate: false
+  xy: 974, 1135
+  size: 109, 125
+  orig: 110, 125
+  offset: 0, 0
+  index: -1
+雞脖上_5黑
+  rotate: false
+  xy: 1929, 1803
+  size: 119, 133
+  orig: 120, 133
+  offset: 0, 0
+  index: -1
+雞脖上_橘金
+  rotate: false
+  xy: 469, 998
+  size: 113, 117
+  orig: 113, 118
+  offset: 0, 1
+  index: -1
+雞脖上_特白
+  rotate: false
+  xy: 1062, 1498
+  size: 132, 126
+  orig: 133, 126
+  offset: 0, 0
+  index: -1
+雞脖上_米
+  rotate: false
+  xy: 1932, 1460
+  size: 116, 92
+  orig: 116, 93
+  offset: 0, 1
+  index: -1
+雞脖上_紅
+  rotate: true
+  xy: 586, 1052
+  size: 107, 122
+  orig: 107, 122
+  offset: 0, 0
+  index: -1
+雞脖上炸_1白
+  rotate: false
+  xy: 1625, 1571
+  size: 161, 133
+  orig: 162, 134
+  offset: 0, 1
+  index: -1
+雞脖上炸_4橘金
+  rotate: false
+  xy: 212, 64
+  size: 189, 167
+  orig: 189, 167
+  offset: 0, 0
+  index: -1
+雞脖上炸_5黑
+  rotate: true
+  xy: 356, 1545
+  size: 233, 204
+  orig: 234, 204
+  offset: 0, 0
+  index: -1
+雞脖上炸_橘金
+  rotate: false
+  xy: 1381, 1711
+  size: 154, 161
+  orig: 155, 162
+  offset: 0, 1
+  index: -1
+雞脖上炸_特白1
+  rotate: false
+  xy: 1787, 1543
+  size: 144, 159
+  orig: 145, 159
+  offset: 0, 0
+  index: -1
+雞脖上炸_米
+  rotate: false
+  xy: 212, 232
+  size: 186, 190
+  orig: 187, 190
+  offset: 0, 0
+  index: -1
+雞脖上炸_紅
+  rotate: false
+  xy: 577, 1391
+  size: 170, 167
+  orig: 171, 168
+  offset: 0, 1
+  index: -1
+雞脖下_1白
+  rotate: false
+  xy: 709, 1041
+  size: 115, 103
+  orig: 122, 107
+  offset: 3, 3
+  index: -1
+雞脖下_4橘金
+  rotate: true
+  xy: 721, 1145
+  size: 107, 126
+  orig: 108, 126
+  offset: 0, 0
+  index: -1
+雞脖下_5黑
+  rotate: false
+  xy: 825, 1035
+  size: 115, 102
+  orig: 116, 102
+  offset: 0, 0
+  index: -1
+雞脖下_橘金
+  rotate: false
+  xy: 460, 1222
+  size: 125, 150
+  orig: 125, 151
+  offset: 0, 1
+  index: -1
+雞脖下_米
+  rotate: false
+  xy: 1096, 1267
+  size: 135, 102
+  orig: 136, 103
+  offset: 0, 1
+  index: -1
+雞脖下_紅
+  rotate: false
+  xy: 1932, 1553
+  size: 116, 124
+  orig: 117, 125
+  offset: 0, 1
+  index: -1
+雞脖下下_1白
+  rotate: false
+  xy: 1908, 1937
+  size: 140, 111
+  orig: 140, 111
+  offset: 0, 0
+  index: -1
+雞脖下下_4橘金
+  rotate: false
+  xy: 748, 1379
+  size: 155, 122
+  orig: 155, 122
+  offset: 0, 0
+  index: -1
+雞脖下下_5黑
+  rotate: false
+  xy: 790, 1502
+  size: 163, 100
+  orig: 163, 100
+  offset: 0, 0
+  index: -1
+雞脖下下_橘金
+  rotate: true
+  xy: 717, 1253
+  size: 125, 135
+  orig: 125, 135
+  offset: 0, 0
+  index: -1
+雞脖下下_米
+  rotate: false
+  xy: 967, 1261
+  size: 128, 110
+  orig: 129, 110
+  offset: 0, 0
+  index: -1
+雞脖下下_紅
+  rotate: true
+  xy: 1019, 1372
+  size: 125, 128
+  orig: 125, 129
+  offset: 0, 1
+  index: -1
+雞頭_1大紅
+  rotate: true
+  xy: 402, 132
+  size: 100, 81
+  orig: 100, 81
+  offset: 0, 0
+  index: -1
+雞頭_2橘紅
+  rotate: false
+  xy: 684, 908
+  size: 88, 64
+  orig: 88, 68
+  offset: 0, 4
+  index: -1
+雞頭_3深紅
+  rotate: false
+  xy: 475, 927
+  size: 107, 70
+  orig: 107, 70
+  offset: 0, 0
+  index: -1
+雞頭_特橘紅
+  rotate: true
+  xy: 381, 1112
+  size: 102, 78
+  orig: 102, 78
+  offset: 0, 0
+  index: -1
+雞頭_特白A
+  rotate: false
+  xy: 399, 233
+  size: 88, 79
+  orig: 88, 79
+  offset: 0, 0
+  index: -1
+雞頭_黑白
+  rotate: true
+  xy: 399, 313
+  size: 109, 75
+  orig: 109, 75
+  offset: 0, 0
+  index: -1

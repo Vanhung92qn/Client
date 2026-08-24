@@ -1,0 +1,97 @@
+
+poker.png
+size: 425,425
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+A1
+  rotate: false
+  xy: 226, 126
+  size: 111, 127
+  orig: 111, 127
+  offset: 0, 0
+  index: -1
+A2
+  rotate: true
+  xy: 226, 22
+  size: 102, 126
+  orig: 103, 126
+  offset: 0, 0
+  index: -1
+aura
+  rotate: false
+  xy: 2, 273
+  size: 229, 150
+  orig: 231, 152
+  offset: 1, 1
+  index: -1
+bg
+  rotate: false
+  xy: 2, 92
+  size: 179, 179
+  orig: 181, 181
+  offset: 1, 1
+  index: -1
+board1
+  rotate: false
+  xy: 2, 2
+  size: 188, 34
+  orig: 190, 36
+  offset: 1, 1
+  index: -1
+board2
+  rotate: true
+  xy: 183, 83
+  size: 188, 41
+  orig: 190, 43
+  offset: 1, 1
+  index: -1
+board3
+  rotate: false
+  xy: 405, 275
+  size: 8, 148
+  orig: 10, 150
+  offset: 1, 1
+  index: -1
+board4
+  rotate: false
+  xy: 415, 275
+  size: 8, 148
+  orig: 10, 151
+  offset: 1, 1
+  index: -1
+coin
+  rotate: false
+  xy: 233, 295
+  size: 170, 128
+  orig: 171, 129
+  offset: 0, 1
+  index: -1
+light
+  rotate: false
+  xy: 354, 84
+  size: 46, 47
+  orig: 78, 78
+  offset: 16, 16
+  index: -1
+poker
+  rotate: false
+  xy: 2, 38
+  size: 171, 52
+  orig: 173, 54
+  offset: 1, 1
+  index: -1
+poker1
+  rotate: false
+  xy: 233, 255
+  size: 156, 38
+  orig: 158, 40
+  offset: 1, 1
+  index: -1
+shadowna1
+  rotate: false
+  xy: 339, 133
+  size: 73, 120
+  orig: 73, 121
+  offset: 0, 1
+  index: -1

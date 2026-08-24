@@ -1,0 +1,55 @@
+
+avaitor.png
+size: 382,670
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+6 anh sang_
+  rotate: false
+  xy: 281, 459
+  size: 85, 105
+  orig: 95, 117
+  offset: 5, 6
+  index: -1
+6 hanh tinh
+  rotate: true
+  xy: 199, 114
+  size: 133, 136
+  orig: 134, 136
+  offset: 1, 0
+  index: -1
+6 logo
+  rotate: false
+  xy: 3, 567
+  size: 315, 100
+  orig: 315, 101
+  offset: 0, 1
+  index: -1
+6 may bay
+  rotate: false
+  xy: 3, 397
+  size: 275, 167
+  orig: 287, 178
+  offset: 6, 6
+  index: -1
+6 tia lua
+  rotate: false
+  xy: 199, 7
+  size: 136, 104
+  orig: 159, 128
+  offset: 11, 13
+  index: -1
+6 vong sang
+  rotate: false
+  xy: 199, 250
+  size: 180, 144
+  orig: 189, 147
+  offset: 8, 1
+  index: -1
+bg_123
+  rotate: false
+  xy: 3, 3
+  size: 193, 391
+  orig: 195, 393
+  offset: 1, 1
+  index: -1

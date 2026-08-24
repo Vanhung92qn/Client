@@ -140,6 +140,21 @@ if (-not $DryRun -and $needsRewrite) {
     Write-Host "      web.config OK" -ForegroundColor Green
 }
 
+# ─── Step 2.5: Inject Loading + Orientation + Fullscreen vao index.html ──
+# index.html Cocos sinh ra van dung #splash mac dinh + favicon Cocos.
+# Chen them man loading dep + xoay ngang + fullscreen, GIU NGUYEN hash boot
+# (main.<hash>.js...) -> khong anh huong CDN. Idempotent.
+Write-Host ""
+Write-Host "[2.5] Inject Loading/Orientation/Fullscreen -> index.html..." -ForegroundColor Cyan
+$injectScript = Join-Path $scriptDir 'Inject-Screen.ps1'
+if ($DryRun) {
+    Write-Host "      [DRYRUN] would run Inject-Screen.ps1 on $indexHtml" -ForegroundColor Gray
+} elseif (Test-Path $injectScript) {
+    & $injectScript -IndexPath $indexHtml
+} else {
+    Write-Host "      WARNING: khong thay Inject-Screen.ps1 (bo qua chen man loading)" -ForegroundColor Yellow
+}
+
 # ─── Step 3: Copy main package -> C:\IIS\Game ───────────────────────
 Write-Host ""
 Write-Host "[3/3] Copy main package -> $GamePath..." -ForegroundColor Cyan
@@ -152,7 +167,9 @@ $mainFiles = @(
     '*.js'   # main.*.js + cocos2d-js-min.*.js + physics-min.*.js
 )
 $mainFolders = @(
-    'src'    # src/settings.<hash>.js + src/assets/<bundle>/scripts/.../plugin.js
+    'src',    # src/settings.<hash>.js + src/assets/<bundle>/scripts/.../plugin.js
+    'splash', # splash/splash.png (anh loading - index.html tham chieu)
+    'fsc'     # fsc/sc-fullscreen.js + fsc/swipe.gif (index.html load truc tiep - vuot fullscreen)
 )
 
 # Backup truoc
@@ -195,6 +212,24 @@ foreach ($folder in $mainFolders) {
         & robocopy.exe @rcArgs | Out-Null
         $count = (Get-ChildItem -Path $dstFolder -Recurse -File).Count
         Write-Host ("      mirrored folder: {0}/ ({1} files)" -f $folder, $count) -ForegroundColor Green
+    }
+}
+
+# ─── Step 3.5: Alias icon khong-hash ────────────────────────────────
+# Inject-Screen (index.html) tham chieu 'favicon.ico' + 'apple-touch-icon.png'
+# (KHONG hash). Cocos chi build ban hash -> tao alias tu ban hash trong build.
+if (-not $DryRun) {
+    $favSrc = Get-ChildItem -Path $BuildPath -Filter 'favicon.*.ico' -File -ErrorAction SilentlyContinue |
+              Sort-Object Name | Select-Object -First 1
+    if ($favSrc) {
+        Copy-Item -Path $favSrc.FullName -Destination (Join-Path $GamePath 'favicon.ico') -Force
+        Write-Host ("      alias: favicon.ico <- {0}" -f $favSrc.Name) -ForegroundColor Green
+    }
+    $atiSrc = Get-ChildItem -Path $BuildPath -Filter 'apple-touch-icon.*.png' -File -ErrorAction SilentlyContinue |
+              Sort-Object Name | Select-Object -First 1
+    if ($atiSrc) {
+        Copy-Item -Path $atiSrc.FullName -Destination (Join-Path $GamePath 'apple-touch-icon.png') -Force
+        Write-Host ("      alias: apple-touch-icon.png <- {0}" -f $atiSrc.Name) -ForegroundColor Green
     }
 }
 

@@ -1,0 +1,90 @@
+
+sieuxe.png
+size: 463,346
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+aura
+  rotate: false
+  xy: 2, 160
+  size: 195, 184
+  orig: 197, 186
+  offset: 1, 1
+  index: -1
+bg
+  rotate: false
+  xy: 199, 165
+  size: 179, 179
+  orig: 181, 181
+  offset: 1, 1
+  index: -1
+blur
+  rotate: false
+  xy: 400, 17
+  size: 31, 19
+  orig: 31, 19
+  offset: 0, 0
+  index: -1
+board1
+  rotate: false
+  xy: 2, 2
+  size: 188, 34
+  orig: 190, 36
+  offset: 1, 1
+  index: -1
+board2
+  rotate: false
+  xy: 210, 14
+  size: 188, 41
+  orig: 190, 43
+  offset: 1, 1
+  index: -1
+board3
+  rotate: false
+  xy: 443, 196
+  size: 8, 148
+  orig: 10, 150
+  offset: 1, 1
+  index: -1
+board4
+  rotate: false
+  xy: 453, 196
+  size: 8, 148
+  orig: 10, 151
+  offset: 1, 1
+  index: -1
+car
+  rotate: false
+  xy: 2, 38
+  size: 206, 120
+  orig: 206, 121
+  offset: 0, 1
+  index: -1
+light
+  rotate: false
+  xy: 346, 111
+  size: 46, 47
+  orig: 78, 78
+  offset: 16, 16
+  index: -1
+sieuxe
+  rotate: true
+  xy: 380, 160
+  size: 184, 61
+  orig: 186, 63
+  offset: 1, 1
+  index: -1
+sieuxe1
+  rotate: true
+  xy: 400, 38
+  size: 120, 35
+  orig: 120, 35
+  offset: 0, 0
+  index: -1
+smoke
+  rotate: false
+  xy: 210, 57
+  size: 134, 106
+  orig: 138, 138
+  offset: 2, 30
+  index: -1

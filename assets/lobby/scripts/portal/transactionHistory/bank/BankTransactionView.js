@@ -24,8 +24,14 @@
     },
 
     getBankTransactionList: function () {
-      var bankHistoryCommand = new cc.BankHistoryCommand();
-      bankHistoryCommand.execute(this);
+      // Mo tu form RUT (co co '@bankHistoryType'='RUT') -> lich su rut; mac dinh -> lich su nap.
+      var type = cc.Tool.getInstance().getItem('@bankHistoryType');
+      cc.Tool.getInstance().setItem('@bankHistoryType', null);
+      if (type === 'RUT') {
+        new cc.BankHistoryRutCommand().execute(this);
+      } else {
+        new cc.BankHistoryCommand().execute(this);
+      }
     },
 
     onBankHistoryResponse: function (response) {

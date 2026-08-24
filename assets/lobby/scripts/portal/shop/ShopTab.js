@@ -17,6 +17,7 @@
         VIETTEL_PAY: 'VIETTEL_PAY',
         CODEPAY: 'CODEPAY',
         USDT: 'USDT',
+        MENU: 'MENU',   // mo man rut -> hien menu chon loai rut (khong nhay thang 1 tab)
     });
 
 }).call(this);

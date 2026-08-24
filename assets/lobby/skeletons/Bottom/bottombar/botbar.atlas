@@ -1,0 +1,47 @@
+botbar.png
+size: 1908,208
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+chay
+  rotate: false
+  xy: 1459, 134
+  size: 410, 47
+  orig: 410, 47
+  offset: 0, 0
+  index: -1
+f1
+  rotate: false
+  xy: 2, 134
+  size: 636, 69
+  orig: 636, 69
+  offset: 0, 0
+  index: -1
+f2
+  rotate: false
+  xy: 640, 134
+  size: 636, 69
+  orig: 636, 69
+  offset: 0, 0
+  index: -1
+f3
+  rotate: false
+  xy: 1278, 134
+  size: 179, 50
+  orig: 179, 50
+  offset: 0, 0
+  index: -1
+loe
+  rotate: false
+  xy: 1871, 134
+  size: 32, 38
+  orig: 32, 38
+  offset: 0, 0
+  index: -1
+nen
+  rotate: false
+  xy: 2, 2
+  size: 1756, 130
+  orig: 1756, 130
+  offset: 0, 0
+  index: -1

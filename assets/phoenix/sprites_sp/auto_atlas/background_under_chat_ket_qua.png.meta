@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "6ce2f0c0-ff58-4ae8-9322-3cdc23560e55",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 111,
+  "height": 54,
+  "platformSettings": {},
+  "subMetas": {
+    "background_under_chat_ket_qua": {
+      "ver": "1.0.6",
+      "uuid": "5fcefacb-a58b-4870-a80b-eed2bd244721",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "6ce2f0c0-ff58-4ae8-9322-3cdc23560e55",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 111,
+      "height": 54,
+      "rawWidth": 111,
+      "rawHeight": 54,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

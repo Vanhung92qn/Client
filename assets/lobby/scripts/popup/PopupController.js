@@ -44,8 +44,8 @@
             return this.popupView.init();
         };
 
-        PopupController.prototype.showBusy = function () {
-            return this.popupView.showBusy();
+        PopupController.prototype.showBusy = function (big) {
+            return this.popupView.showBusy(big);
         };
 
         PopupController.prototype.hideBusy = function () {

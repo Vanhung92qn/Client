@@ -78,10 +78,6 @@
                 return this.numberChoose.pop();
             }
         };
-        LodeController.prototype.isValidNumberBetOfType = function (number) {
-            return this.chooseView.isValidNumberBetOfType();
-        };
-
         LodeController.prototype.unChooseNumberBefore = function () {
             return this.chooseView.unChooseNumberBefore();
         };
@@ -110,6 +106,28 @@
         };
         LodeController.prototype.getCurrPharse = function () {
             return this.currPharse;
+        };
+
+        //Panel dat cuoc dang mo popup chon so (cau noi popup -> panel)
+        LodeController.prototype.setActiveBetPanel = function (panel) {
+            return (this.activeBetPanel = panel);
+        };
+        LodeController.prototype.getActiveBetPanel = function () {
+            return this.activeBetPanel;
+        };
+
+        //Luu he so theo gateId (tu LstGateInfo server gui ve) de panel tinh tien thang
+        LodeController.prototype.setMultipliers = function (data) {
+            this.multipliers = {};
+            if (data) {
+                data.map(function (d) {
+                    this.multipliers[parseInt(d.GateID)] = parseFloat(d.Multiplier);
+                }, this);
+            }
+            return this.multipliers;
+        };
+        LodeController.prototype.getMultiplier = function (gateId) {
+            return this.multipliers ? this.multipliers[gateId] : 0;
         };
         return LodeController;
     })();

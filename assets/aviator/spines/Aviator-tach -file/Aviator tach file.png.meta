@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "18359acc-f23e-4218-a9e4-8c29c2809196",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 1916,
+  "height": 480,
+  "platformSettings": {},
+  "subMetas": {
+    "Aviator tach file": {
+      "ver": "1.0.6",
+      "uuid": "214714e0-b46f-473b-997f-914670315801",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "18359acc-f23e-4218-a9e4-8c29c2809196",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -0.5,
+      "offsetY": 0,
+      "trimX": 2,
+      "trimY": 2,
+      "width": 1911,
+      "height": 476,
+      "rawWidth": 1916,
+      "rawHeight": 480,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

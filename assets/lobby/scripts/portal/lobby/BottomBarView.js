@@ -95,7 +95,7 @@ var netConfig = require('NetConfig');
         
         casoutClicked: function () {
                 if (cc.LoginController.getInstance().checkLogin()) {
-                  cc.LobbyController.getInstance().createShopCastOutView(cc.ShopTab.BANK);
+                  cc.LobbyController.getInstance().createShopCastOutView(cc.ShopTab.MENU);
                   cc.DDNA.getInstance().shopEntered(cc.DDNAShopName.CASH_OUT);
                   cc.DDNA.getInstance().uiInteraction(cc.DDNAUILocation.PORTAL, 'BANK', cc.DDNAUIType.BUTTON);
                   this.AudioNapRut.loop = false;

@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "c67c5f18-2664-4672-b583-d08b40a45bc6",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 138,
+  "height": 33,
+  "platformSettings": {},
+  "subMetas": {
+    "tau cuu sinh 2": {
+      "ver": "1.0.6",
+      "uuid": "87d3b314-7f0a-4afc-91d4-bd2b591fbac9",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "c67c5f18-2664-4672-b583-d08b40a45bc6",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 138,
+      "height": 33,
+      "rawWidth": 138,
+      "rawHeight": 33,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

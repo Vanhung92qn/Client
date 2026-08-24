@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "7cd4abdd-3173-4ff5-b81c-84d2bd0c859e",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 31,
+  "height": 32,
+  "platformSettings": {},
+  "subMetas": {
+    "Icon_Tai_16": {
+      "ver": "1.0.6",
+      "uuid": "4029115e-bbf3-45c6-b333-271914a63466",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "7cd4abdd-3173-4ff5-b81c-84d2bd0c859e",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 31,
+      "height": 32,
+      "rawWidth": 31,
+      "rawHeight": 32,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

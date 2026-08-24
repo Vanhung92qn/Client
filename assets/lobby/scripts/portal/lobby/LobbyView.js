@@ -12,6 +12,7 @@ var netConfig = require("NetConfig");
       //prefab portal
 
       prefabLoginView: cc.Prefab,
+      prefabLoadingOverlay: cc.Prefab,   // ← KÉO LoadingOverlay.prefab vào ô này (trên LobbyView ở scene MainGame)
       prefabAccountView: cc.Prefab,
 
       prefabShopTopupViewBank: cc.Prefab,
@@ -62,6 +63,8 @@ var netConfig = require("NetConfig");
       progressBaccarat: cc.ProgressBar,
       progressBauCua: cc.ProgressBar,
       progressLoDe: cc.ProgressBar,
+      progressAviator: cc.ProgressBar,   // man loading Aviator (keo node o prefab LobbyView)
+      progressPhoenix: cc.ProgressBar,   // man loading Hoa Phung (chua gan node o prefab -> fallback spinner)
       lbLoadingTK: cc.Label,
       lbLoadingAquarium: cc.Label,
       lbLoadingDragonBall: cc.Label,
@@ -72,6 +75,9 @@ var netConfig = require("NetConfig");
       lbLoadingXocXoc: cc.Label,
       lbLoadingBauCua: cc.Label,
       lbLoadingLoDe: cc.Label,
+      // Aviator: label % — CHA cua no chinh la node man loading (_startGameLoadingBar bat/tat qua lb.node.parent)
+      lbLoadingAviator: cc.Label,
+      lbLoadingPhoenix: cc.Label,
 
       //minigame
       lbLoadingTaiXiu: cc.Label,
@@ -114,8 +120,6 @@ var netConfig = require("NetConfig");
       CasinoLive: cc.Node,
       nodeEventTop: cc.Node,
       nodeguest: cc.Node,
-      editBoxUsernameGuest: cc.EditBox,
-      editBoxPasswordGuest: cc.EditBox,
       //Esports
       lbJpbaucua: cc.Label,
       lbJpxocdia: cc.Label,
@@ -142,6 +146,8 @@ var netConfig = require("NetConfig");
       this.nodeguest.active = true;
       this.nodemanutab.active = false;
       cc.LobbyController.getInstance().setLobbyView(this);
+      this._initLoadingOverlay();      // dựng LoadingOverlay 1 lần từ prefab (không cần node sẵn trong scene)
+      this._scheduleIdlePrefetch();   // [#1] kéo sẵn vài game hay chơi khi Lobby rảnh
       this.nodeTaiXiu = null;
       this.nodeTaiXiuMd5 = null;
       this.nodeTaiXiuSieuToc = null;
@@ -222,7 +228,7 @@ var netConfig = require("NetConfig");
     CongDongTeleGram: function () {
       this.AudioClick.loop = false;
       this.AudioClick.play();
-      cc.sys.openURL("https://t.me/s86club");
+      cc.sys.openURL("https://t.me/CSKHSUMCLUBNL");
     },
 
     onLogoutClicked: function () {
@@ -303,7 +309,7 @@ var netConfig = require("NetConfig");
     },
 
     destroyX2PopupView: function () {
-      if (this.nodeX2Popup) this.nodeX2Popup.destroy();
+      if (this.nodeX2Popup && this.nodeX2Popup.isValid) this.nodeX2Popup.destroy(); this.nodeX2Popup = null;
     },
 
     createX2RewardView: function () {
@@ -311,7 +317,7 @@ var netConfig = require("NetConfig");
     },
 
     destroyX2RewardView: function () {
-      if (this.nodeX2Reward) this.nodeX2Reward.destroy();
+      if (this.nodeX2Reward && this.nodeX2Reward.isValid) this.nodeX2Reward.destroy(); this.nodeX2Reward = null;
     },
 
     //event san KHO BAU
@@ -324,7 +330,7 @@ var netConfig = require("NetConfig");
     },
 
     destroyEventPopupView: function () {
-      if (this.nodeEventPopup) this.nodeEventPopup.destroy();
+      if (this.nodeEventPopup && this.nodeEventPopup.isValid) this.nodeEventPopup.destroy(); this.nodeEventPopup = null;
     },
 
     //event san KHO BAU
@@ -333,7 +339,7 @@ var netConfig = require("NetConfig");
     },
 
     destroyTreasureView: function () {
-      if (this.nodeTreasureView) this.nodeTreasureView.destroy();
+      if (this.nodeTreasureView && this.nodeTreasureView.isValid) this.nodeTreasureView.destroy(); this.nodeTreasureView = null;
     },
 
     //buy carrot
@@ -342,7 +348,7 @@ var netConfig = require("NetConfig");
     },
 
     destroyBuyCarrotView: function () {
-      if (this.nodeBuyCarrotView) this.nodeBuyCarrotView.destroy();
+      if (this.nodeBuyCarrotView && this.nodeBuyCarrotView.isValid) this.nodeBuyCarrotView.destroy(); this.nodeBuyCarrotView = null;
     },
 
     //chon qua vat ly
@@ -351,7 +357,7 @@ var netConfig = require("NetConfig");
     },
 
     destroyTreasureGiftView: function () {
-      if (this.nodeTreasureGiftView) this.nodeTreasureGiftView.destroy();
+      if (this.nodeTreasureGiftView && this.nodeTreasureGiftView.isValid) this.nodeTreasureGiftView.destroy(); this.nodeTreasureGiftView = null;
     },
 
     //carrot daily bonus popup
@@ -362,8 +368,7 @@ var netConfig = require("NetConfig");
     },
 
     destroyCarrotDailyBonusView: function () {
-      if (this.nodeCarrotDailyBonusView)
-        this.nodeCarrotDailyBonusView.destroy();
+      if (this.nodeCarrotDailyBonusView && this.nodeCarrotDailyBonusView.isValid) this.nodeCarrotDailyBonusView.destroy(); this.nodeCarrotDailyBonusView = null;
     },
 
     //treasure rule popup
@@ -372,7 +377,7 @@ var netConfig = require("NetConfig");
     },
 
     destroyTreasureRuleView: function () {
-      if (this.nodeTreasureRuleView) this.nodeTreasureRuleView.destroy();
+      if (this.nodeTreasureRuleView && this.nodeTreasureRuleView.isValid) this.nodeTreasureRuleView.destroy(); this.nodeTreasureRuleView = null;
     },
 
     //treasure top popup
@@ -381,7 +386,7 @@ var netConfig = require("NetConfig");
     },
 
     destroyTreasureTopView: function () {
-      if (this.nodeTreasureTopView) this.nodeTreasureTopView.destroy();
+      if (this.nodeTreasureTopView && this.nodeTreasureTopView.isValid) this.nodeTreasureTopView.destroy(); this.nodeTreasureTopView = null;
     },
 
     //Fx
@@ -390,7 +395,7 @@ var netConfig = require("NetConfig");
     },
 
     destroyFxSummonDragon: function () {
-      if (this.nodeFxSummonDragon) this.nodeFxSummonDragon.destroy();
+      if (this.nodeFxSummonDragon && this.nodeFxSummonDragon.isValid) this.nodeFxSummonDragon.destroy(); this.nodeFxSummonDragon = null;
     },
     //end fx
 
@@ -404,7 +409,13 @@ var netConfig = require("NetConfig");
     },
 
     destroyLoginView: function () {
-      if (this.nodeLoginView) this.nodeLoginView.destroy();
+      // [P1] active=false NGAY trước khi destroy: Cocos 2.4 hoãn destroy() tới cuối frame,
+      // trên mobile (30fps + burst loginSuccess) popup còn render ~1s -> tắt render ngay frame này.
+      if (this.nodeLoginView && this.nodeLoginView.isValid) {
+        this.nodeLoginView.active = false;
+        this.nodeLoginView.destroy();
+      }
+      this.nodeLoginView = null;
     },
 
     // createVQMMView: function () {
@@ -442,7 +453,7 @@ var netConfig = require("NetConfig");
 
       //cc.BannerController.getInstance().switchPage();
 
-      if (this.nodeHistoryView) this.nodeHistoryView.destroy();
+      if (this.nodeHistoryView && this.nodeHistoryView.isValid) this.nodeHistoryView.destroy(); this.nodeHistoryView = null;
     },
 
     createAccountView: function () {
@@ -457,7 +468,8 @@ var netConfig = require("NetConfig");
       //cc.BannerController.getInstance().switchPage();
 
       cc.LobbyController.getInstance().refreshAccountInfo();
-      if (this.nodeAccountView) this.nodeAccountView.destroy();
+      if (this.nodeAccountView && this.nodeAccountView.isValid) this.nodeAccountView.destroy();  // .isValid: tranh destroy lan 2
+      this.nodeAccountView = null;
     },
 
     createSecurityView: function () {
@@ -468,7 +480,7 @@ var netConfig = require("NetConfig");
 
     destroySecurityView: function () {
       cc.LobbyController.getInstance().refreshAccountInfo();
-      if (this.nodeSecurityView) this.nodeSecurityView.destroy();
+      if (this.nodeSecurityView && this.nodeSecurityView.isValid) this.nodeSecurityView.destroy(); this.nodeSecurityView = null;
     },
 
     createPopupUpdateUserPassView: function () {
@@ -479,7 +491,7 @@ var netConfig = require("NetConfig");
 
     destroyPopupUpdateUserPassView: function () {
       cc.LobbyController.getInstance().refreshAccountInfo();
-      if (this.nodePopupUpdateUserPass) this.nodePopupUpdateUserPass.destroy();
+      if (this.nodePopupUpdateUserPass && this.nodePopupUpdateUserPass.isValid) this.nodePopupUpdateUserPass.destroy(); this.nodePopupUpdateUserPass = null;
     },
 
     createShopTopupView: function () {
@@ -501,7 +513,7 @@ var netConfig = require("NetConfig");
       //cc.BannerController.getInstance().switchPage();
 
       cc.LobbyController.getInstance().refreshAccountInfo();
-      if (this.nodeShopTopupView) this.nodeShopTopupView.destroy();
+      if (this.nodeShopTopupView && this.nodeShopTopupView.isValid) this.nodeShopTopupView.destroy(); this.nodeShopTopupView = null;
       //hide cac node o lobby
     },
 
@@ -524,16 +536,23 @@ var netConfig = require("NetConfig");
     loginGuestClicked: function () {
       this.AudioClick.loop = false;
       this.AudioClick.play();
-
-      var username = this.editBoxUsernameGuest ? this.editBoxUsernameGuest.string : '';
-      var password = this.editBoxPasswordGuest ? this.editBoxPasswordGuest.string : '';
-
+      // Đã bỏ 2 box guest tự điền -> chỉ mở login view (không auto-fill nữa).
       this.createLoginView();
-      var loginView = this.nodeLoginView && this.nodeLoginView.getComponent(cc.LoginView);
-      if (!loginView) return;
+    },
 
-      if (username !== '') loginView.editBoxUsername.string = username;
-      if (password !== '') loginView.editBoxPassword.string = password;
+    // Mở QUÊN MẬT KHẨU thẳng từ màn lobby (chưa đăng nhập, chưa mở popup nào).
+    // Tạo loginView (chứa ForgotPassView) rồi showForgotPass -> state-machine tự ẩn login/register/...,
+    // chỉ hiện đúng màn quên mật khẩu.
+    forgotPassGuestClicked: function () {
+      this.AudioClick.loop = false;
+      this.AudioClick.play();
+      this.createLoginView();
+      // Đợi 1 nhịp: createLoginView vừa tạo node nhưng onLoad các sub-view (ForgotPassView.setForgotPassView)
+      // CHƯA chạy trong frame này -> gọi showForgotPass ngay sẽ 'forgotPassView undefined'. scheduleOnce(0)
+      // cho onLoad chạy xong (đăng ký vào LoginController) rồi mới show.
+      this.scheduleOnce(function () {
+        cc.LoginController.getInstance().showForgotPass(true);
+      }, 0);
     },
 
 
@@ -543,7 +562,7 @@ var netConfig = require("NetConfig");
       //cc.BannerController.getInstance().switchPage();
 
       cc.LobbyController.getInstance().refreshAccountInfo();
-      if (this.nodeShopCastOutView) this.nodeShopCastOutView.destroy();
+      if (this.nodeShopCastOutView && this.nodeShopCastOutView.isValid) this.nodeShopCastOutView.destroy(); this.nodeShopCastOutView = null;
       //hide cac node o lobby
     },
 
@@ -571,7 +590,7 @@ var netConfig = require("NetConfig");
       //cc.BannerController.getInstance().switchPage();
 
       cc.LobbyController.getInstance().refreshAccountInfo();
-      if (this.nodeShopView) this.nodeShopView.destroy();
+      if (this.nodeShopView && this.nodeShopView.isValid) this.nodeShopView.destroy(); this.nodeShopView = null;
       //hide cac node o lobby
     },
 
@@ -595,7 +614,7 @@ var netConfig = require("NetConfig");
       this.createView(this.prefabMoveBB);
     },
     destroyMoveBBView: function () {
-      if (this.prefabMoveBB) this.prefabMoveBB.destroy();
+      if (this.prefabMoveBB && this.prefabMoveBB.isValid) this.prefabMoveBB.destroy(); this.prefabMoveBB = null;
     },
 
     createBlockBBView: function () {
@@ -621,6 +640,13 @@ var netConfig = require("NetConfig");
         MAP[cc.GameId.TAI_XIU_MD5]      = { node: 'nodeTaiXiuMd5',      popup: true,  progress: 'progressTaiXiuMd5',      label: 'lbLoadingTaiXiuMd5',      name: 'Tài Xỉu MD5' };
         MAP[cc.GameId.TAI_XIU_SIEU_TOC] = { node: 'nodeTaiXiuSieuToc',  popup: true,  progress: 'progressTaiXiuSieuToc',  label: 'lbLoadingTaiXiuSieuToc',  name: 'Tài Xỉu Siêu Tốc' };
         MAP[cc.GameId.SICBO]            = { node: 'nodeSicbo',          popup: true,  progress: null,                     label: 'lbLoadingSicbo',          name: 'Sicbo' };
+        MAP[cc.GameId.CHICKEN_FIGHT]    = { node: 'nodeSlotsView',      popup: false, progress: null,                     label: null,                      name: 'Đá Gà' };  // full-screen như DragonTiger (cha) → backClicked(null)→default destroy nodeSlotsView + ẩn lobby
+        MAP[cc.GameId.XENG_777]         = { node: 'nodeXeng777',        popup: true,  progress: null,                     label: null,                      name: 'Xèng 777' };  // popup như SicBo (cha) → backClicked phải destroyDynamicView(XENG_777)
+        // full-screen → backClicked(null)→default destroy nodeSlotsView.
+        // progress+label KHAC null => co man loading rieng (giong XocXoc/BauCua). De null la _startGameLoadingBar
+        // thoat ngay (`if (!pb && !lb) return`) -> vao game khong thay gi, day la loi cau hinh cu.
+        MAP[cc.GameId.AVIATOR]          = { node: 'nodeSlotsView',      popup: false, progress: 'progressAviator',        label: 'lbLoadingAviator',        name: 'Aviator' };
+        MAP[cc.GameId.PHOENIX]          = { node: 'nodeSlotsView',      popup: false, progress: 'progressPhoenix',        label: 'lbLoadingPhoenix',        name: 'Hoa Phung' };
         MAP[cc.GameId.MINI_POKER]       = { node: 'nodeMiniPoker',      popup: true,  progress: 'progressMiniPoker',      label: 'lbLoadingMiniPoker',      name: 'Mini Poker' };
         MAP[cc.GameId.SEVEN77]          = { node: 'node777',            popup: true,  progress: 'progress777',            label: 'lbLoading777',            name: '777' };
         MAP[cc.GameId.BLOCK_BUSTER]     = { node: 'nodeTQ',             popup: true,  progress: 'progressTQ',             label: 'lbLoadingTQ',             name: 'Tam Quốc' };
@@ -645,37 +671,77 @@ var netConfig = require("NetConfig");
       return MAP[gameId] || null;
     },
 
-    // Loading bar 2 pha:
-    //  Pha 1 (0 → 80%): tang 0.025/100ms (~3.2s) trong khi bundle + prefab fetch.
-    //  Pha 2 (80% → 95%): crawl 0.005/200ms (~6s) phong khi bundle qua cham, KHONG bao gio
-    //                     reach 100% qua fake tick. 100% chi set khi createView thuc su xong.
-    //  Tranh "lua visual": user thay 100% roi cho 5-10s nua.
+    // Dựng LoadingOverlay 1 LẦN từ prefab (lobby/prefabs/LoadingOverlay) — KHÔNG cần đặt node sẵn
+    // trong scene MainGame. Component LoadingOverlay.js (onLoad) tự đăng ký cc.LoadingOverlay + tự ẩn.
+    _initLoadingOverlay: function () {
+      if (cc.LoadingOverlay) return;                       // đã có rồi
+      if (!this.prefabLoadingOverlay) { console.warn('[LobbyView] CHUA keo prefab LoadingOverlay vao property prefabLoadingOverlay!'); return; }
+      var node = cc.instantiate(this.prefabLoadingOverlay);
+      node.parent = (cc.Canvas.instance && cc.Canvas.instance.node) || cc.find('Canvas') || this.node;  // node render gốc -> trên cùng
+      // component LoadingOverlay.js (onLoad) tự đăng ký cc.LoadingOverlay + tự ẩn
+    },
+
+    // [#1] Thanh loading MƯỢT (sửa "khựng 95%"). Tiến độ THẬT chỉ đặt _barTarget;
+    //  mỗi frame thanh BÒ tới target (bắt kịp mượt). Khi asset nặng làm target
+    //  đứng (hay gây cảm giác đơ), thanh vẫn bò CHẬM tới ~97% → KHÔNG bao giờ
+    //  đứng hình. _stopGameLoadingBar snap 100% khi game thật sự dựng xong.
     _startGameLoadingBar: function (cfg) {
       if (!cfg) return;
       var pb = cfg.progress ? this[cfg.progress] : null;
       var lb = cfg.label    ? this[cfg.label]    : null;
       if (!pb && !lb) return;
-
+      this._barCfg = cfg; this._barShown = 0; this._barTarget = 0;
       if (lb && lb.node && lb.node.parent) lb.node.parent.active = true;
       if (lb) lb.string = "0%";
       if (pb) pb.progress = 0;
+      if (this._barAnim) this.unschedule(this._barAnim);
+      var self = this;
+      this._barAnim = function () { self._barAnimTick(); };
+      this.schedule(this._barAnim, 0.03);   // ~33fps
+    },
 
-      if (this._loadingTick) {
-        this.unschedule(this._loadingTick);
-        this._loadingTick = null;
-      }
-      var p = 0;
-      this._loadingTick = function () {
-        if (p < 0.8) {
-          p += 0.025;       // pha 1: smooth len 80%
-        } else if (p < 0.95) {
-          p += 0.005;       // pha 2: crawl 80-95%, chua bao gio het
+    // Tiến độ THẬT (0..1) → chỉ nâng target; phần hiển thị do _barAnimTick lo.
+    _setGameLoadingBar: function (cfg, p) {
+      p = Math.max(0, Math.min(1, p));
+      if (p > (this._barTarget || 0)) this._barTarget = p;
+    },
+
+    _barAnimTick: function () {
+      var cfg = this._barCfg; if (!cfg) return;
+      var t = this._barTarget || 0, s = this._barShown || 0;
+      if (s < t) s += Math.max((t - s) * 0.18, 0.004);   // bắt kịp target mượt
+      else if (s < 0.97) s += 0.0035;                      // target đứng → bò chậm (chống đơ)
+      if (s > 0.97) s = 0.97;                               // không tự lên 100; chờ _stop snap
+      // (Bản cũ: `else if (t < 0.95 && s < 0.97)`. Khi s đuổi kịp t VÀ t đã = 0.95 thì KHÔNG nhánh nào
+      //  chạy -> thanh ĐỨNG HÌNH ở 95%. Mà t chạm 0.95 là lúc Cocos báo finished==total — nó đếm SỐ
+      //  ASSET chứ không đếm byte, nên PNG lớn báo "xong" khi còn đang decode -> game nặng (Aviator 23MB)
+      //  kẹt 95% vài giây rồi mới nhảy 100%. Bỏ `t < 0.95` -> luôn bò tới trần 97%, không bao giờ đứng.)
+      this._barShown = s;
+      var pb = cfg.progress ? this[cfg.progress] : null;
+      var lb = cfg.label    ? this[cfg.label]    : null;
+      if (pb) pb.progress = s;
+      if (lb) lb.string = Math.round(s * 100) + "%";
+    },
+
+    // [#1] Prefetch ngầm vài game hay chơi sau khi Lobby hiện ~5s (lúc rảnh) → thanh
+    //  loading lần 2 của các game đó gần như tức thì (chỉ còn instantiate). Tải 1
+    //  game/lần (không bão hòa băng thông), bỏ qua nếu đang mở game.
+    //  ⚠️ Danh sách nên theo analytics (game nhiều người chơi nhất). Nếu lo tốn data
+    //  mobile, có thể gate theo wifi hoặc tắt hẳn dòng preloadGames bên dưới.
+    _scheduleIdlePrefetch: function () {
+      // [#1] TẮT mặc định để cô lập & test sạch. Khi muốn bật prefetch (production,
+      //  có CDN ổn định), đổi PREFETCH_ENABLED = true. KHÔNG nên bật trong editor
+      //  preview (bundle có thể tải lỗi → retry storm).
+      var PREFETCH_ENABLED = false;
+      if (!PREFETCH_ENABLED) return;
+      var self = this;
+      this.scheduleOnce(function () {
+        if (self.isLoading) return;  // user đang mở game → nhường băng thông
+        var BL = cc.BundleLoader && cc.BundleLoader.getInstance && cc.BundleLoader.getInstance();
+        if (BL && BL.preloadGames) {
+          BL.preloadGames([cc.GameId.TAI_XIU, cc.GameId.BAUCUA]);
         }
-        // Khong tang sau 0.95. Cho _stopGameLoadingBar(cfg, true) set 1.0.
-        if (pb) pb.progress = p;
-        if (lb) lb.string = Math.round(p * 100) + "%";
-      };
-      this.schedule(this._loadingTick, 0.1);
+      }, 5);
     },
 
     _stopGameLoadingBar: function (cfg, isSuccess) {
@@ -683,10 +749,8 @@ var netConfig = require("NetConfig");
       var pb = cfg.progress ? this[cfg.progress] : null;
       var lb = cfg.label    ? this[cfg.label]    : null;
 
-      if (this._loadingTick) {
-        this.unschedule(this._loadingTick);
-        this._loadingTick = null;
-      }
+      if (this._barAnim) { this.unschedule(this._barAnim); this._barAnim = null; }
+      this._barCfg = null;
 
       if (isSuccess) {
         if (pb) pb.progress = 1;
@@ -776,7 +840,11 @@ var netConfig = require("NetConfig");
         var prefabPath = cc.GameBundleConfig.getMainPrefab(gameId);
         self._gameLog('PREFAB_LOAD_BEGIN', gameLabel, tStart, { path: prefabPath });
         var tPrefab = Date.now();
-        bundle.load(prefabPath, cc.Prefab, function (err2, prefab) {
+        // [#1] onProgress THẬT cho pha prefab/asset: map 35% → 95% (chừa 95→100%
+        //  cho bước instantiate). bundle.load(path, type, onProgress, onComplete).
+        bundle.load(prefabPath, cc.Prefab, function (finished, total) {
+          self._setGameLoadingBar(cfg, 0.35 + 0.60 * (total ? finished / total : 0));
+        }, function (err2, prefab) {
           self.isLoading = false;
 
           if (err2) {
@@ -808,6 +876,9 @@ var netConfig = require("NetConfig");
             self._gameLog('OPEN_TOTAL', gameLabel, tStart, { popup: !!cfg.popup, name: cfg.name });
           }, 16);
         });
+      }, function (frac) {
+        // [#1] progress pha BUNDLE (deps+game) → map 0% → 35%
+        self._setGameLoadingBar(cfg, frac * 0.35);
       });
     },
 
@@ -1603,23 +1674,23 @@ var netConfig = require("NetConfig");
 
       switch (gameId) {
         case cc.GameId.EVENT_TREASURE:
-          if (this.nodeTreasureView) {
+          if (this.nodeTreasureView && this.nodeTreasureView.isValid) {
             this.nodeTreasureView.destroy();
             this.nodeTreasureView = null;
           }
 
-          if (this.nodeTreasureGiftView) {
+          if (this.nodeTreasureGiftView && this.nodeTreasureGiftView.isValid) {
             this.nodeTreasureGiftView.destroy();
             this.nodeTreasureGiftView = null;
           }
 
-          if (this.nodeBuyCarrotView) {
+          if (this.nodeBuyCarrotView && this.nodeBuyCarrotView.isValid) {
             this.nodeBuyCarrotView.destroy();
             this.nodeBuyCarrotView = null;
           }
           break;
         case cc.GameId.TAI_XIU:
-          if (this.nodeTaiXiu) {
+          if (this.nodeTaiXiu && this.nodeTaiXiu.isValid) {
             this.nodeTaiXiu.destroy();
             this.nodeTaiXiu = null;
           }
@@ -1632,56 +1703,70 @@ var netConfig = require("NetConfig");
           this.showLobbyAfterMinigame();
           break;
         case cc.GameId.TAI_XIU_MD5:
-          if (this.nodeTaiXiuMd5) {
+          if (this.nodeTaiXiuMd5 && this.nodeTaiXiuMd5.isValid) {
             this.nodeTaiXiuMd5.destroy();
             this.nodeTaiXiuMd5 = null;
           }
           this.showLobbyAfterMinigame();
           break;
         case cc.GameId.TAI_XIU_SIEU_TOC:
-          if (this.nodeTaiXiuSieuToc) {
+          if (this.nodeTaiXiuSieuToc && this.nodeTaiXiuSieuToc.isValid) {
             this.nodeTaiXiuSieuToc.destroy();
             this.nodeTaiXiuSieuToc = null;
           }
           this.showLobbyAfterMinigame();
           break;
         case cc.GameId.SICBO:
-          if (this.nodeSicbo) {
+          if (this.nodeSicbo && this.nodeSicbo.isValid) {
             this.nodeSicbo.destroy();
             this.nodeSicbo = null;
           }
           this.showLobbyAfterMinigame();
           break;
+        case cc.GameId.CHICKEN_FIGHT:
+          if (this.nodeChickenFight && this.nodeChickenFight.isValid) {
+            this.nodeChickenFight.destroy();
+            this.nodeChickenFight = null;
+          }
+          this.showLobbyAfterMinigame();
+          break;
+        case cc.GameId.XENG_777:
+          if (this.nodeXeng777 && this.nodeXeng777.isValid) {
+            this.nodeXeng777.destroy();
+            this.nodeXeng777 = null;
+          }
+          this.showLobbyAfterMinigame();
+          break;
         case cc.GameId.MINI_POKER:
-          if (this.nodeMiniPoker) {
+          if (this.nodeMiniPoker && this.nodeMiniPoker.isValid) {
             this.nodeMiniPoker.destroy();
             this.nodeMiniPoker = null;
           }
           this.showLobbyAfterMinigame();
           break;
         case cc.GameId.SEVEN77:
-          if (this.node777) {
+          if (this.node777 && this.node777.isValid) {
             this.node777.destroy();
             this.node777 = null;
           }
           this.showLobbyAfterMinigame();
           break;
         case cc.GameId.BLOCK_BUSTER:
-          if (this.nodeTQ) {
+          if (this.nodeTQ && this.nodeTQ.isValid) {
             this.nodeTQ.destroy();
             this.nodeTQ = null;
           }
           this.showLobbyAfterMinigame();
           break;
         case cc.GameId.LUCKY_WILD:
-          if (this.nodeLW) {
+          if (this.nodeLW && this.nodeLW.isValid) {
             this.nodeLW.destroy();
             this.nodeLW = null;
           }
           this.showLobbyAfterMinigame();
           break;
         case cc.GameId.ESPORTS:
-          if (this.nodeEsport) {
+          if (this.nodeEsport && this.nodeEsport.isValid) {
             this.nodeEsport.destroy();
             this.nodeEsport = null;
           }
@@ -1694,17 +1779,17 @@ var netConfig = require("NetConfig");
           //cc.BannerController.getInstance().switchPage();
 
           //mac dinh se là cac game slots
-          if (this.nodeSlotsView) {
+          if (this.nodeSlotsView && this.nodeSlotsView.isValid) {
             this.nodeSlotsView.destroy();
             this.nodeSlotsView = null;
           }
 
-          if (this.nodeEventView) {
+          if (this.nodeEventView && this.nodeEventView.isValid) {
             this.nodeEventView.destroy();
             this.nodeEventView = null;
           }
 
-          if (this.nodeEventViewTopVP) {
+          if (this.nodeEventViewTopVP && this.nodeEventViewTopVP.isValid) {
             this.nodeEventViewTopVP.destroy();
             this.nodeEventViewTopVP = null;
           }
@@ -1712,6 +1797,30 @@ var netConfig = require("NetConfig");
           break;
       }
       cc.LobbyController.getInstance().refreshAccountInfo();
+
+      // ── [iOS RAM] Giải phóng VRAM bundle game vừa đóng ──
+      // Gốc rễ crash/reload trên iOS: texture KHÔNG được free khi đổi game → tích luỹ
+      // → Safari kill tab. Ở đây (đã về lobby, game không còn active) release bundle game
+      // vừa đóng: releaseUnusedAssets (né shared deps, ref-count-safe) + removeBundle.
+      // (KHÔNG reset dynamic atlas — gây đen thumbnail lobby; xem chú thích dưới.)
+      // CHỈ mobile (desktop dư RAM → giữ cache cho mở lại nhanh). Delay 1 nhịp cho destroy() xong.
+      if (cc.sys.isMobile) {
+        var _gid = (gameId != null) ? gameId
+          : (cc.RoomController && cc.RoomController.getInstance && cc.RoomController.getInstance().getGameId
+              ? cc.RoomController.getInstance().getGameId() : null);
+        this.scheduleOnce(function () {
+          try {
+            if (_gid != null && cc.BundleLoader && cc.GameBundleConfig
+                && cc.GameBundleConfig.hasBundleConfig && cc.GameBundleConfig.hasBundleConfig(_gid)) {
+              cc.BundleLoader.getInstance().releaseGame(_gid);
+            }
+            // [iOS BLACK-TEX] KHÔNG reset dynamic atlas ở đây. Sprite thumbnail lobby vẫn trên màn
+            // và là static (không vertsDirty) → reset huỷ texture atlas trong khi vertex buffer của
+            // chúng còn trỏ UV atlas cũ → ĐEN. Atlas đã bị giới hạn 1×1024² ≈ 4MB ở _tuneMemory nên
+            // reset gần như không tiết kiệm gì. releaseGame() phía trên mới là cái free VRAM game (fix F5).
+          } catch (e) { console.warn('[LobbyView] iOS mem free fail', e); }
+        }, 0.3);
+      }
     },
 
     destroyAllMiniGameView: function () {
@@ -1719,6 +1828,8 @@ var netConfig = require("NetConfig");
       this.destroyDynamicView(cc.GameId.TAI_XIU_MD5);
       this.destroyDynamicView(cc.GameId.TAI_XIU_SIEU_TOC);
       this.destroyDynamicView(cc.GameId.SICBO);
+      this.destroyDynamicView(cc.GameId.CHICKEN_FIGHT);
+      this.destroyDynamicView(cc.GameId.XENG_777);
       this.destroyDynamicView(cc.GameId.MINI_POKER);
       this.destroyDynamicView(cc.GameId.SEVEN77);
       this.destroyDynamicView(cc.GameId.BLOCK_BUSTER);
@@ -1935,6 +2046,18 @@ var netConfig = require("NetConfig");
           case cc.GameId.DRAGON_TIGER:
             this.createDynamicView(cc.GameId.DRAGON_TIGER);
             break;
+          case cc.GameId.CHICKEN_FIGHT:
+            this.createDynamicView(cc.GameId.CHICKEN_FIGHT);
+            break;
+          case cc.GameId.XENG_777:
+            this.createDynamicView(cc.GameId.XENG_777);
+            break;
+          case cc.GameId.AVIATOR:
+            this.createDynamicView(cc.GameId.AVIATOR);
+            break;
+          case cc.GameId.PHOENIX:
+            this.createDynamicView(cc.GameId.PHOENIX);
+            break;
           case cc.GameId.BAUCUA:
             this.createDynamicView(cc.GameId.BAUCUA);
             break;
@@ -2036,6 +2159,9 @@ var netConfig = require("NetConfig");
     },
 
     refreshAccountInfo: function () {
+      // [TỐC ĐỘ #5] Đã đăng xuất (loginState=false) -> KHÔNG refresh: tránh ~13 GetAccountInfo thừa
+      // (gọi với token null) dội ra khi destroy các view lúc logout.
+      if (!cc.LoginController.getInstance().getLoginState()) return;
       var getAccountInfoCommand = new cc.GetAccountInfoCommand();
       getAccountInfoCommand.execute(this);
     },
@@ -2078,7 +2204,10 @@ var netConfig = require("NetConfig");
 
       // Nếu đã login → hiển thị menu tab, ẩn guest UI
       // Nếu chưa login → hiển thị guest UI, ẩn menu tab
-      var isLoggedIn = cc.LoginController.getInstance().checkLogin();
+      // [LOGOUT FIX] DÙNG getLoginState() (chỉ đọc boolean) — KHÔNG dùng checkLogin() vì checkLogin có
+      // SIDE EFFECT tạo login view khi chưa đăng nhập. Lúc logout, destroyAllMiniGameView gọi hàm này ~11 lần
+      // (1 lần/game) -> nếu dùng checkLogin sẽ tạo ~11 login view chồng nhau (nền đen + X không tắt hết).
+      var isLoggedIn = cc.LoginController.getInstance().getLoginState();
       if (isLoggedIn) {
         this.nodemanutab.active = true;
         this.nodeguest.active = false;

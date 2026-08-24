@@ -1,0 +1,230 @@
+
+tamquoc.png
+size: 627,627
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+JP
+  rotate: true
+  xy: 369, 361
+  size: 174, 100
+  orig: 176, 102
+  offset: 1, 1
+  index: -1
+arm_R
+  rotate: false
+  xy: 2, 334
+  size: 197, 291
+  orig: 197, 291
+  offset: 0, 0
+  index: -1
+bg
+  rotate: false
+  xy: 503, 377
+  size: 122, 248
+  orig: 122, 248
+  offset: 0, 0
+  index: -1
+black
+  rotate: true
+  xy: 219, 86
+  size: 91, 112
+  orig: 91, 112
+  offset: 0, 0
+  index: -1
+boad1
+  rotate: true
+  xy: 471, 355
+  size: 180, 29
+  orig: 182, 31
+  offset: 1, 1
+  index: -1
+boar2
+  rotate: true
+  xy: 188, 152
+  size: 180, 29
+  orig: 182, 31
+  offset: 1, 1
+  index: -1
+boar3
+  rotate: false
+  xy: 339, 7
+  size: 7, 328
+  orig: 9, 330
+  offset: 1, 1
+  index: -1
+boar4
+  rotate: false
+  xy: 348, 8
+  size: 7, 327
+  orig: 9, 329
+  offset: 1, 1
+  index: -1
+character
+  rotate: false
+  xy: 219, 179
+  size: 118, 156
+  orig: 118, 156
+  offset: 0, 0
+  index: -1
+dust
+  rotate: false
+  xy: 201, 337
+  size: 166, 198
+  orig: 168, 200
+  offset: 1, 1
+  index: -1
+fire_10
+  rotate: true
+  xy: 465, 238
+  size: 50, 93
+  orig: 52, 95
+  offset: 1, 1
+  index: -1
+fire_12
+  rotate: true
+  xy: 465, 186
+  size: 50, 93
+  orig: 52, 95
+  offset: 1, 1
+  index: -1
+fire_2
+  rotate: true
+  xy: 369, 309
+  size: 50, 93
+  orig: 52, 95
+  offset: 1, 1
+  index: -1
+fire_4
+  rotate: false
+  xy: 357, 111
+  size: 50, 93
+  orig: 52, 95
+  offset: 1, 1
+  index: -1
+fire_6
+  rotate: false
+  xy: 357, 16
+  size: 50, 93
+  orig: 52, 95
+  offset: 1, 1
+  index: -1
+fire_8
+  rotate: false
+  xy: 413, 214
+  size: 50, 93
+  orig: 52, 95
+  offset: 1, 1
+  index: -1
+head
+  rotate: false
+  xy: 357, 206
+  size: 54, 101
+  orig: 54, 101
+  offset: 0, 0
+  index: -1
+horse2
+  rotate: false
+  xy: 2, 54
+  size: 184, 278
+  orig: 184, 300
+  offset: 0, 0
+  index: -1
+horse_guards
+  rotate: false
+  xy: 211, 32
+  size: 112, 52
+  orig: 112, 52
+  offset: 0, 0
+  index: -1
+khoinghiatext
+  rotate: false
+  xy: 2, 2
+  size: 207, 50
+  orig: 207, 50
+  offset: 0, 0
+  index: -1
+leg
+  rotate: true
+  xy: 502, 290
+  size: 85, 121
+  orig: 85, 121
+  offset: 0, 0
+  index: -1
+light1
+  rotate: false
+  xy: 560, 233
+  size: 57, 55
+  orig: 83, 82
+  offset: 13, 14
+  index: -1
+tamquoc_text_02
+  rotate: false
+  xy: 188, 113
+  size: 26, 37
+  orig: 144, 46
+  offset: 2, 2
+  index: -1
+tamquoc_text_04
+  rotate: false
+  xy: 448, 112
+  size: 44, 37
+  orig: 144, 46
+  offset: 3, 2
+  index: -1
+tamquoc_text_06
+  rotate: true
+  xy: 409, 95
+  size: 53, 37
+  orig: 144, 46
+  offset: 12, 2
+  index: -1
+tamquoc_text_08
+  rotate: false
+  xy: 443, 151
+  size: 53, 33
+  orig: 144, 46
+  offset: 31, 2
+  index: -1
+tamquoc_text_10
+  rotate: true
+  xy: 409, 150
+  size: 54, 32
+  orig: 144, 46
+  offset: 49, 2
+  index: -1
+tamquoc_text_12
+  rotate: true
+  xy: 409, 40
+  size: 53, 42
+  orig: 144, 46
+  offset: 68, 2
+  index: -1
+tamquoc_text_14
+  rotate: false
+  xy: 560, 189
+  size: 54, 42
+  orig: 144, 46
+  offset: 86, 2
+  index: -1
+tamquoc_text_16
+  rotate: true
+  xy: 498, 146
+  size: 38, 41
+  orig: 144, 46
+  offset: 104, 3
+  index: -1
+tamquoc_text_18
+  rotate: true
+  xy: 211, 11
+  size: 19, 34
+  orig: 144, 46
+  offset: 123, 3
+  index: -1
+tamquoc_tx
+  rotate: false
+  xy: 201, 537
+  size: 300, 88
+  orig: 300, 89
+  offset: 0, 0
+  index: -1

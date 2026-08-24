@@ -1,0 +1,258 @@
+
+taixiu_md5.png
+size: 504,513
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+bg
+  rotate: false
+  xy: 2, 161
+  size: 172, 350
+  orig: 172, 350
+  offset: 0, 0
+  index: -1
+boad1
+  rotate: false
+  xy: 194, 394
+  size: 180, 29
+  orig: 180, 31
+  offset: 0, 1
+  index: -1
+boar2
+  rotate: false
+  xy: 194, 363
+  size: 180, 29
+  orig: 180, 31
+  offset: 0, 1
+  index: -1
+boar3
+  rotate: false
+  xy: 176, 186
+  size: 7, 325
+  orig: 9, 327
+  offset: 1, 1
+  index: -1
+boar4
+  rotate: false
+  xy: 185, 187
+  size: 7, 324
+  orig: 9, 326
+  offset: 1, 1
+  index: -1
+coin2
+  rotate: false
+  xy: 316, 323
+  size: 56, 38
+  orig: 58, 40
+  offset: 1, 1
+  index: -1
+den
+  rotate: false
+  xy: 343, 2
+  size: 27, 27
+  orig: 29, 29
+  offset: 1, 1
+  index: -1
+dice_11
+  rotate: false
+  xy: 376, 311
+  size: 126, 112
+  orig: 128, 113
+  offset: 1, 1
+  index: -1
+frame1
+  rotate: true
+  xy: 461, 440
+  size: 71, 37
+  orig: 71, 38
+  offset: 0, 1
+  index: -1
+fx_02
+  rotate: false
+  xy: 2, 21
+  size: 121, 67
+  orig: 130, 67
+  offset: 4, 0
+  index: -1
+fx_04
+  rotate: false
+  xy: 194, 294
+  size: 120, 67
+  orig: 130, 67
+  offset: 5, 0
+  index: -1
+fx_06
+  rotate: false
+  xy: 316, 242
+  size: 119, 67
+  orig: 130, 67
+  offset: 6, 0
+  index: -1
+fx_08
+  rotate: false
+  xy: 316, 173
+  size: 119, 67
+  orig: 130, 67
+  offset: 6, 0
+  index: -1
+fx_10
+  rotate: false
+  xy: 316, 104
+  size: 119, 67
+  orig: 130, 67
+  offset: 6, 0
+  index: -1
+fx_12
+  rotate: false
+  xy: 194, 225
+  size: 120, 67
+  orig: 130, 67
+  offset: 6, 0
+  index: -1
+fx_14
+  rotate: false
+  xy: 194, 156
+  size: 120, 67
+  orig: 130, 67
+  offset: 6, 0
+  index: -1
+fx_16
+  rotate: false
+  xy: 153, 87
+  size: 120, 67
+  orig: 130, 67
+  offset: 6, 0
+  index: -1
+fx_18
+  rotate: false
+  xy: 125, 18
+  size: 120, 67
+  orig: 130, 67
+  offset: 6, 0
+  index: -1
+light3
+  rotate: false
+  xy: 343, 31
+  size: 71, 71
+  orig: 71, 71
+  offset: 0, 0
+  index: -1
+md5
+  rotate: false
+  xy: 2, 90
+  size: 149, 69
+  orig: 149, 69
+  offset: 0, 0
+  index: -1
+mdtext_00
+  rotate: true
+  xy: 316, 88
+  size: 14, 25
+  orig: 145, 49
+  offset: 33, 19
+  index: -1
+mdtext_04
+  rotate: true
+  xy: 464, 10
+  size: 33, 38
+  orig: 145, 49
+  offset: 33, 6
+  index: -1
+mdtext_08
+  rotate: false
+  xy: 437, 127
+  size: 50, 39
+  orig: 145, 49
+  offset: 33, 5
+  index: -1
+mdtext_12
+  rotate: true
+  xy: 275, 96
+  size: 58, 39
+  orig: 145, 49
+  offset: 45, 5
+  index: -1
+mdtext_16
+  rotate: false
+  xy: 437, 86
+  size: 49, 39
+  orig: 145, 49
+  offset: 63, 5
+  index: -1
+mdtext_20
+  rotate: false
+  xy: 464, 45
+  size: 31, 39
+  orig: 145, 49
+  offset: 81, 5
+  index: -1
+mdtext_24
+  rotate: false
+  xy: 488, 97
+  size: 14, 28
+  orig: 204, 66
+  offset: 143, 10
+  index: -1
+sumtext
+  rotate: true
+  xy: 247, 19
+  size: 66, 94
+  orig: 66, 95
+  offset: 0, 0
+  index: -1
+taixiutext
+  rotate: false
+  xy: 194, 425
+  size: 265, 86
+  orig: 265, 86
+  offset: 0, 0
+  index: -1
+taixiutext_00
+  rotate: false
+  xy: 416, 86
+  size: 14, 16
+  orig: 145, 49
+  offset: 1, 21
+  index: -1
+taixiutext_04
+  rotate: false
+  xy: 416, 40
+  size: 46, 44
+  orig: 145, 49
+  offset: 1, 1
+  index: -1
+taixiutext_08
+  rotate: false
+  xy: 437, 168
+  size: 53, 44
+  orig: 145, 49
+  offset: 18, 1
+  index: -1
+taixiutext_12
+  rotate: false
+  xy: 437, 263
+  size: 61, 46
+  orig: 145, 49
+  offset: 49, 1
+  index: -1
+taixiutext_16
+  rotate: false
+  xy: 437, 214
+  size: 60, 47
+  orig: 145, 49
+  offset: 78, 1
+  index: -1
+taixiutext_20
+  rotate: true
+  xy: 416, 3
+  size: 35, 36
+  orig: 145, 49
+  offset: 109, 1
+  index: -1
+trang
+  rotate: false
+  xy: 372, 2
+  size: 27, 27
+  orig: 29, 29
+  offset: 1, 1
+  index: -1

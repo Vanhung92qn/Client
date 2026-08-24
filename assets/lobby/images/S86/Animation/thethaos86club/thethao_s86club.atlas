@@ -1,0 +1,146 @@
+
+thethao_s86club.png
+size: 2011,884
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Group 7
+  rotate: true
+  xy: 1673, 631
+  size: 251, 336
+  orig: 251, 337
+  offset: 0, 1
+  index: -1
+back1
+  rotate: true
+  xy: 306, 18
+  size: 278, 276
+  orig: 303, 276
+  offset: 8, 0
+  index: -1
+back2
+  rotate: false
+  xy: 2, 11
+  size: 302, 285
+  orig: 302, 295
+  offset: 0, 10
+  index: -1
+bg
+  rotate: false
+  xy: 2, 298
+  size: 386, 584
+  orig: 386, 584
+  offset: 0, 0
+  index: -1
+euro
+  rotate: false
+  xy: 906, 13
+  size: 98, 22
+  orig: 144, 30
+  offset: 16, 4
+  index: -1
+fd
+  rotate: false
+  xy: 1401, 429
+  size: 270, 453
+  orig: 270, 460
+  offset: 0, 7
+  index: -1
+fdA_gl
+  rotate: true
+  xy: 1439, 292
+  size: 135, 228
+  orig: 135, 228
+  offset: 0, 0
+  index: -1
+fdB_gl
+  rotate: false
+  xy: 1180, 43
+  size: 257, 339
+  orig: 257, 339
+  offset: 0, 0
+  index: -1
+fdC_gl
+  rotate: false
+  xy: 1694, 227
+  size: 168, 143
+  orig: 168, 143
+  offset: 0, 0
+  index: -1
+ft5
+  rotate: true
+  xy: 390, 384
+  size: 498, 1009
+  orig: 736, 1085
+  offset: 112, 26
+  index: -1
+gv_gl
+  rotate: true
+  xy: 1864, 202
+  size: 168, 143
+  orig: 168, 143
+  offset: 0, 0
+  index: -1
+kros
+  rotate: true
+  xy: 584, 2
+  size: 308, 320
+  orig: 311, 323
+  offset: 0, 0
+  index: -1
+logo
+  rotate: false
+  xy: 604, 315
+  size: 47, 67
+  orig: 47, 67
+  offset: 0, 0
+  index: -1
+mo
+  rotate: false
+  xy: 906, 37
+  size: 272, 345
+  orig: 272, 346
+  offset: 0, 1
+  index: -1
+mu_gl
+  rotate: false
+  xy: 1694, 82
+  size: 168, 143
+  orig: 168, 143
+  offset: 0, 0
+  index: -1
+pa1
+  rotate: false
+  xy: 2, 3
+  size: 82, 6
+  orig: 82, 6
+  offset: 0, 0
+  index: -1
+sd_t
+  rotate: true
+  xy: 1439, 15
+  size: 275, 253
+  orig: 362, 267
+  offset: 37, 0
+  index: -1
+thao
+  rotate: false
+  xy: 390, 312
+  size: 212, 70
+  orig: 212, 70
+  offset: 0, 0
+  index: -1
+the
+  rotate: true
+  xy: 1864, 32
+  size: 168, 92
+  orig: 169, 92
+  offset: 1, 0
+  index: -1
+vdji
+  rotate: true
+  xy: 1673, 372
+  size: 257, 335
+  orig: 257, 339
+  offset: 0, 4
+  index: -1

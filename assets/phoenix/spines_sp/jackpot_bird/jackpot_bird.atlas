@@ -1,0 +1,76 @@
+
+jackpot_bird.png
+size: 395,400
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+feather1
+  rotate: true
+  xy: 319, 11
+  size: 40, 73
+  orig: 40, 73
+  offset: 0, 0
+  index: -1
+feather2
+  rotate: false
+  xy: 360, 233
+  size: 33, 33
+  orig: 33, 33
+  offset: 0, 0
+  index: -1
+trail/chim
+  rotate: false
+  xy: 319, 53
+  size: 55, 69
+  orig: 55, 69
+  offset: 0, 0
+  index: -1
+trail/curve1
+  rotate: false
+  xy: 197, 2
+  size: 120, 113
+  orig: 120, 113
+  offset: 0, 0
+  index: -1
+trail/curve2
+  rotate: true
+  xy: 284, 268
+  size: 130, 107
+  orig: 130, 107
+  offset: 0, 0
+  index: -1
+trail/dot
+  rotate: false
+  xy: 360, 202
+  size: 29, 29
+  orig: 29, 29
+  offset: 0, 0
+  index: -1
+trail/dot3
+  rotate: false
+  xy: 360, 168
+  size: 24, 32
+  orig: 24, 32
+  offset: 0, 0
+  index: -1
+trail/trail_sharp1
+  rotate: true
+  xy: 2, 2
+  size: 113, 193
+  orig: 113, 193
+  offset: 0, 0
+  index: -1
+trail/trail_tip_full
+  rotate: false
+  xy: 284, 124
+  size: 74, 142
+  orig: 74, 142
+  offset: 0, 0
+  index: -1
+win/radiated_light
+  rotate: false
+  xy: 2, 117
+  size: 280, 281
+  orig: 280, 281
+  offset: 0, 0
+  index: -1

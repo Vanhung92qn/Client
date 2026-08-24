@@ -54,6 +54,7 @@ var netConfig = require('NetConfig');
             this.lbBalance.string = 'Số dư: ' + cc.Tool.getInstance().formatNumber(loginResponse.Balance);
 
             var nickNameAgency = cc.Tool.getInstance().getItem('@nickNameAgency');
+            if (!nickNameAgency || nickNameAgency === 'null') nickNameAgency = '';   // tranh EditBox hien chu "null"
             this.editBoxNickNameReceive.string = nickNameAgency;
             var checkAgency = cc.ShopController.getInstance().checkNickNameAgency(nickNameAgency);
             this.isAgency = checkAgency;
@@ -253,6 +254,9 @@ var netConfig = require('NetConfig');
                 return;
             }
 
+            // [OTP] TAM THOI TAT: chuyen tien khong can OTP.
+            // Server da OFF san (config TRANSFER_OTP_REQUIRED vang key -> khong validate OTP).
+            // Muon BAT LAI: bo comment doan duoi + set TRANSFER_OTP_REQUIRED=1 o Web.config Portal.
             // if (this.otp === '') {
             //     cc.PopupController.getInstance().showMessage('Vui lòng nhập mã OTP');
             //     return;

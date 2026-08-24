@@ -64,27 +64,31 @@
             this.lbTimer.string = `${hh}:${mm}:${ss}`;
         },
         updateDataResult: function (data) {
+            if (!data) return;
             this.currPharse = parseInt(data.Phrase);
             this.controller.setCurrPharse(this.currPharse);
             this.fixTime = parseInt(data.Elapsed);
             this.updateUITimer();
             let result = data.Result;
+            //Cold-start: Result rong (DateResult null) + OpenDate default (nam 0001).
+            //Khong suy ngay tu OpenDate rac -> chi clear, cho push ke tiep co DateResult that.
+            if (!result || !result.DateResult) {
+                this.clearResult();
+                if (data.OpenDate && new Date(data.OpenDate).getFullYear() > 1) {
+                    this.controller.setOpenDate(new Date(data.OpenDate));
+                }
+                return;
+            }
             try {
-                //Format currentDateResult
-                //dd/mm/yyyy --> mm/dd/yyyy
+                //Format currentDateResult dd/mm/yyyy --> mm/dd/yyyy
                 let lstDate = result.DateResult.split("/");
                 let strFormatDate = `${lstDate[1]}/${lstDate[0]}/${lstDate[2]}`;
                 this.controller.setCurrDateResult(new Date(strFormatDate));
                 this.setResultUI(result);
             } catch (e) {
-                let setCurrDateResult = new Date(data.OpenDate);
-                setCurrDateResult.setDate(setCurrDateResult.getDate() - 1);
-                this.controller.setCurrDateResult(setCurrDateResult);
-                this.setResultUI(result);
+                this.clearResult();
             }
-
             this.controller.setOpenDate(new Date(data.OpenDate));
-
         },
         updateUITimer: function () {
             let color = this.colorBet;

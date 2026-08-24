@@ -1,0 +1,656 @@
+
+InGame-Thang-2.png
+size: 1954,1996
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+coin1
+  rotate: false
+  xy: 56, 24
+  size: 26, 18
+  orig: 26, 18
+  offset: 0, 0
+  index: -1
+coin2
+  rotate: false
+  xy: 110, 28
+  size: 25, 14
+  orig: 25, 14
+  offset: 0, 0
+  index: -1
+coin3
+  rotate: false
+  xy: 2, 17
+  size: 25, 25
+  orig: 25, 25
+  offset: 0, 0
+  index: -1
+coin4
+  rotate: false
+  xy: 29, 20
+  size: 25, 22
+  orig: 25, 22
+  offset: 0, 0
+  index: -1
+coin5
+  rotate: false
+  xy: 29, 20
+  size: 25, 22
+  orig: 25, 22
+  offset: 0, 0
+  index: -1
+coin6
+  rotate: false
+  xy: 84, 24
+  size: 24, 18
+  orig: 24, 18
+  offset: 0, 0
+  index: -1
+vfx1/Layer 1
+  rotate: false
+  xy: 490, 816
+  size: 202, 202
+  orig: 202, 202
+  offset: 0, 0
+  index: -1
+vfx1/Layer 10
+  rotate: false
+  xy: 938, 1384
+  size: 202, 202
+  orig: 202, 202
+  offset: 0, 0
+  index: -1
+vfx1/Layer 11
+  rotate: false
+  xy: 938, 1180
+  size: 202, 202
+  orig: 202, 202
+  offset: 0, 0
+  index: -1
+vfx1/Layer 12
+  rotate: false
+  xy: 898, 772
+  size: 202, 202
+  orig: 202, 202
+  offset: 0, 0
+  index: -1
+vfx1/Layer 13
+  rotate: false
+  xy: 490, 612
+  size: 202, 202
+  orig: 202, 202
+  offset: 0, 0
+  index: -1
+vfx1/Layer 14
+  rotate: false
+  xy: 694, 612
+  size: 202, 202
+  orig: 202, 202
+  offset: 0, 0
+  index: -1
+vfx1/Layer 15
+  rotate: false
+  xy: 898, 568
+  size: 202, 202
+  orig: 202, 202
+  offset: 0, 0
+  index: -1
+vfx1/Layer 16
+  rotate: false
+  xy: 490, 408
+  size: 202, 202
+  orig: 202, 202
+  offset: 0, 0
+  index: -1
+vfx1/Layer 2
+  rotate: false
+  xy: 694, 816
+  size: 202, 202
+  orig: 202, 202
+  offset: 0, 0
+  index: -1
+vfx1/Layer 3
+  rotate: false
+  xy: 734, 1792
+  size: 202, 202
+  orig: 202, 202
+  offset: 0, 0
+  index: -1
+vfx1/Layer 4
+  rotate: false
+  xy: 734, 1588
+  size: 202, 202
+  orig: 202, 202
+  offset: 0, 0
+  index: -1
+vfx1/Layer 5
+  rotate: false
+  xy: 734, 1384
+  size: 202, 202
+  orig: 202, 202
+  offset: 0, 0
+  index: -1
+vfx1/Layer 6
+  rotate: false
+  xy: 734, 1180
+  size: 202, 202
+  orig: 202, 202
+  offset: 0, 0
+  index: -1
+vfx1/Layer 7
+  rotate: false
+  xy: 898, 976
+  size: 202, 202
+  orig: 202, 202
+  offset: 0, 0
+  index: -1
+vfx1/Layer 8
+  rotate: false
+  xy: 938, 1792
+  size: 202, 202
+  orig: 202, 202
+  offset: 0, 0
+  index: -1
+vfx1/Layer 9
+  rotate: false
+  xy: 938, 1588
+  size: 202, 202
+  orig: 202, 202
+  offset: 0, 0
+  index: -1
+vfx2/Layer 1
+  rotate: false
+  xy: 694, 409
+  size: 201, 201
+  orig: 201, 201
+  offset: 0, 0
+  index: -1
+vfx2/Layer 10
+  rotate: false
+  xy: 1142, 1184
+  size: 201, 201
+  orig: 201, 201
+  offset: 0, 0
+  index: -1
+vfx2/Layer 11
+  rotate: false
+  xy: 1102, 774
+  size: 201, 201
+  orig: 201, 201
+  offset: 0, 0
+  index: -1
+vfx2/Layer 12
+  rotate: false
+  xy: 1303, 571
+  size: 201, 201
+  orig: 201, 201
+  offset: 0, 0
+  index: -1
+vfx2/Layer 13
+  rotate: false
+  xy: 1305, 981
+  size: 201, 201
+  orig: 201, 201
+  offset: 0, 0
+  index: -1
+vfx2/Layer 14
+  rotate: false
+  xy: 1305, 778
+  size: 201, 201
+  orig: 201, 201
+  offset: 0, 0
+  index: -1
+vfx2/Layer 15
+  rotate: false
+  xy: 1303, 368
+  size: 201, 201
+  orig: 201, 201
+  offset: 0, 0
+  index: -1
+vfx2/Layer 16
+  rotate: false
+  xy: 1303, 165
+  size: 201, 201
+  orig: 201, 201
+  offset: 0, 0
+  index: -1
+vfx2/Layer 17
+  rotate: false
+  xy: 896, 162
+  size: 201, 201
+  orig: 201, 201
+  offset: 0, 0
+  index: -1
+vfx2/Layer 18
+  rotate: false
+  xy: 1099, 162
+  size: 201, 201
+  orig: 201, 201
+  offset: 0, 0
+  index: -1
+vfx2/Layer 19
+  rotate: false
+  xy: 490, 2
+  size: 201, 201
+  orig: 201, 201
+  offset: 0, 0
+  index: -1
+vfx2/Layer 2
+  rotate: false
+  xy: 897, 365
+  size: 201, 201
+  orig: 201, 201
+  offset: 0, 0
+  index: -1
+vfx2/Layer 20
+  rotate: false
+  xy: 693, 2
+  size: 201, 201
+  orig: 201, 201
+  offset: 0, 0
+  index: -1
+vfx2/Layer 21
+  rotate: false
+  xy: 1506, 575
+  size: 201, 201
+  orig: 201, 201
+  offset: 0, 0
+  index: -1
+vfx2/Layer 22
+  rotate: false
+  xy: 1506, 372
+  size: 201, 201
+  orig: 201, 201
+  offset: 0, 0
+  index: -1
+vfx2/Layer 23
+  rotate: false
+  xy: 1506, 169
+  size: 201, 201
+  orig: 201, 201
+  offset: 0, 0
+  index: -1
+vfx2/Layer 24
+  rotate: false
+  xy: 1345, 1793
+  size: 201, 201
+  orig: 201, 201
+  offset: 0, 0
+  index: -1
+vfx2/Layer 25
+  rotate: false
+  xy: 1345, 1590
+  size: 201, 201
+  orig: 201, 201
+  offset: 0, 0
+  index: -1
+vfx2/Layer 26
+  rotate: false
+  xy: 1345, 1387
+  size: 201, 201
+  orig: 201, 201
+  offset: 0, 0
+  index: -1
+vfx2/Layer 27
+  rotate: false
+  xy: 1508, 1184
+  size: 201, 201
+  orig: 201, 201
+  offset: 0, 0
+  index: -1
+vfx2/Layer 28
+  rotate: false
+  xy: 1508, 981
+  size: 201, 201
+  orig: 201, 201
+  offset: 0, 0
+  index: -1
+vfx2/Layer 29
+  rotate: false
+  xy: 1508, 778
+  size: 201, 201
+  orig: 201, 201
+  offset: 0, 0
+  index: -1
+vfx2/Layer 3
+  rotate: false
+  xy: 490, 205
+  size: 201, 201
+  orig: 201, 201
+  offset: 0, 0
+  index: -1
+vfx2/Layer 30
+  rotate: false
+  xy: 1548, 1793
+  size: 201, 201
+  orig: 201, 201
+  offset: 0, 0
+  index: -1
+vfx2/Layer 31
+  rotate: false
+  xy: 1548, 1590
+  size: 201, 201
+  orig: 201, 201
+  offset: 0, 0
+  index: -1
+vfx2/Layer 32
+  rotate: false
+  xy: 1548, 1387
+  size: 201, 201
+  orig: 201, 201
+  offset: 0, 0
+  index: -1
+vfx2/Layer 33
+  rotate: false
+  xy: 1709, 575
+  size: 201, 201
+  orig: 201, 201
+  offset: 0, 0
+  index: -1
+vfx2/Layer 34
+  rotate: false
+  xy: 1709, 372
+  size: 201, 201
+  orig: 201, 201
+  offset: 0, 0
+  index: -1
+vfx2/Layer 35
+  rotate: false
+  xy: 1709, 169
+  size: 201, 201
+  orig: 201, 201
+  offset: 0, 0
+  index: -1
+vfx2/Layer 36
+  rotate: false
+  xy: 1711, 1184
+  size: 201, 201
+  orig: 201, 201
+  offset: 0, 0
+  index: -1
+vfx2/Layer 37
+  rotate: false
+  xy: 1711, 981
+  size: 201, 201
+  orig: 201, 201
+  offset: 0, 0
+  index: -1
+vfx2/Layer 38
+  rotate: false
+  xy: 1711, 778
+  size: 201, 201
+  orig: 201, 201
+  offset: 0, 0
+  index: -1
+vfx2/Layer 39
+  rotate: false
+  xy: 1751, 1793
+  size: 201, 201
+  orig: 201, 201
+  offset: 0, 0
+  index: -1
+vfx2/Layer 4
+  rotate: false
+  xy: 693, 205
+  size: 201, 201
+  orig: 201, 201
+  offset: 0, 0
+  index: -1
+vfx2/Layer 40
+  rotate: false
+  xy: 1751, 1590
+  size: 201, 201
+  orig: 201, 201
+  offset: 0, 0
+  index: -1
+vfx2/Layer 41
+  rotate: false
+  xy: 1751, 1387
+  size: 201, 201
+  orig: 201, 201
+  offset: 0, 0
+  index: -1
+vfx2/Layer 5
+  rotate: false
+  xy: 1100, 365
+  size: 201, 201
+  orig: 201, 201
+  offset: 0, 0
+  index: -1
+vfx2/Layer 6
+  rotate: false
+  xy: 1102, 977
+  size: 201, 201
+  orig: 201, 201
+  offset: 0, 0
+  index: -1
+vfx2/Layer 7
+  rotate: false
+  xy: 1142, 1793
+  size: 201, 201
+  orig: 201, 201
+  offset: 0, 0
+  index: -1
+vfx2/Layer 8
+  rotate: false
+  xy: 1142, 1590
+  size: 201, 201
+  orig: 201, 201
+  offset: 0, 0
+  index: -1
+vfx2/Layer 9
+  rotate: false
+  xy: 1142, 1387
+  size: 201, 201
+  orig: 201, 201
+  offset: 0, 0
+  index: -1
+vfxsang/Layer 1
+  rotate: false
+  xy: 2, 1508
+  size: 242, 242
+  orig: 242, 242
+  offset: 0, 0
+  index: -1
+vfxsang/Layer 10
+  rotate: false
+  xy: 246, 1508
+  size: 242, 242
+  orig: 242, 242
+  offset: 0, 0
+  index: -1
+vfxsang/Layer 11
+  rotate: false
+  xy: 246, 1264
+  size: 242, 242
+  orig: 242, 242
+  offset: 0, 0
+  index: -1
+vfxsang/Layer 12
+  rotate: false
+  xy: 246, 1020
+  size: 242, 242
+  orig: 242, 242
+  offset: 0, 0
+  index: -1
+vfxsang/Layer 13
+  rotate: false
+  xy: 246, 776
+  size: 242, 242
+  orig: 242, 242
+  offset: 0, 0
+  index: -1
+vfxsang/Layer 14
+  rotate: false
+  xy: 246, 532
+  size: 242, 242
+  orig: 242, 242
+  offset: 0, 0
+  index: -1
+vfxsang/Layer 15
+  rotate: false
+  xy: 246, 288
+  size: 242, 242
+  orig: 242, 242
+  offset: 0, 0
+  index: -1
+vfxsang/Layer 16
+  rotate: false
+  xy: 246, 44
+  size: 242, 242
+  orig: 242, 242
+  offset: 0, 0
+  index: -1
+vfxsang/Layer 17
+  rotate: false
+  xy: 490, 1752
+  size: 242, 242
+  orig: 242, 242
+  offset: 0, 0
+  index: -1
+vfxsang/Layer 18
+  rotate: false
+  xy: 490, 1508
+  size: 242, 242
+  orig: 242, 242
+  offset: 0, 0
+  index: -1
+vfxsang/Layer 19
+  rotate: false
+  xy: 490, 1264
+  size: 242, 242
+  orig: 242, 242
+  offset: 0, 0
+  index: -1
+vfxsang/Layer 2
+  rotate: false
+  xy: 2, 1264
+  size: 242, 242
+  orig: 242, 242
+  offset: 0, 0
+  index: -1
+vfxsang/Layer 20
+  rotate: false
+  xy: 490, 1020
+  size: 242, 242
+  orig: 242, 242
+  offset: 0, 0
+  index: -1
+vfxsang/Layer 3
+  rotate: false
+  xy: 2, 1020
+  size: 242, 242
+  orig: 242, 242
+  offset: 0, 0
+  index: -1
+vfxsang/Layer 4
+  rotate: false
+  xy: 2, 776
+  size: 242, 242
+  orig: 242, 242
+  offset: 0, 0
+  index: -1
+vfxsang/Layer 5
+  rotate: false
+  xy: 2, 532
+  size: 242, 242
+  orig: 242, 242
+  offset: 0, 0
+  index: -1
+vfxsang/Layer 6
+  rotate: false
+  xy: 2, 288
+  size: 242, 242
+  orig: 242, 242
+  offset: 0, 0
+  index: -1
+vfxsang/Layer 7
+  rotate: false
+  xy: 2, 44
+  size: 242, 242
+  orig: 242, 242
+  offset: 0, 0
+  index: -1
+vfxsang/Layer 8
+  rotate: false
+  xy: 246, 1752
+  size: 242, 242
+  orig: 242, 242
+  offset: 0, 0
+  index: -1
+vfxsang/Layer 9
+  rotate: false
+  xy: 2, 1752
+  size: 242, 242
+  orig: 242, 242
+  offset: 0, 0
+  index: -1
+
+InGame-Thang-22.png
+size: 814,408
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+vfx2/Layer 42
+  rotate: false
+  xy: 2, 205
+  size: 201, 201
+  orig: 201, 201
+  offset: 0, 0
+  index: -1
+vfx2/Layer 43
+  rotate: false
+  xy: 2, 2
+  size: 201, 201
+  orig: 201, 201
+  offset: 0, 0
+  index: -1
+vfx2/Layer 44
+  rotate: false
+  xy: 205, 205
+  size: 201, 201
+  orig: 201, 201
+  offset: 0, 0
+  index: -1
+vfx2/Layer 45
+  rotate: false
+  xy: 205, 2
+  size: 201, 201
+  orig: 201, 201
+  offset: 0, 0
+  index: -1
+vfx2/Layer 46
+  rotate: false
+  xy: 408, 205
+  size: 201, 201
+  orig: 201, 201
+  offset: 0, 0
+  index: -1
+vfx2/Layer 47
+  rotate: false
+  xy: 408, 2
+  size: 201, 201
+  orig: 201, 201
+  offset: 0, 0
+  index: -1
+vfx2/Layer 48
+  rotate: false
+  xy: 611, 205
+  size: 201, 201
+  orig: 201, 201
+  offset: 0, 0
+  index: -1
+vfx2/Layer 49
+  rotate: false
+  xy: 611, 2
+  size: 201, 201
+  orig: 201, 201
+  offset: 0, 0
+  index: -1
+vfx2/Layer 50
+  rotate: false
+  xy: 611, 2
+  size: 201, 201
+  orig: 201, 201
+  offset: 0, 0
+  index: -1

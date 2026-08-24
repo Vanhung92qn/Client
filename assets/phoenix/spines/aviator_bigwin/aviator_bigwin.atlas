@@ -1,0 +1,223 @@
+
+aviator_bigwin.png
+size: 1710,728
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+FX_Firework/FX_Firework_00000
+  rotate: false
+  xy: 2, 486
+  size: 240, 240
+  orig: 240, 240
+  offset: 0, 0
+  index: -1
+FX_Firework/FX_Firework_00002
+  rotate: false
+  xy: 2, 244
+  size: 240, 240
+  orig: 240, 240
+  offset: 0, 0
+  index: -1
+FX_Firework/FX_Firework_00004
+  rotate: false
+  xy: 244, 486
+  size: 240, 240
+  orig: 240, 240
+  offset: 0, 0
+  index: -1
+FX_Firework/FX_Firework_00006
+  rotate: false
+  xy: 2, 2
+  size: 240, 240
+  orig: 240, 240
+  offset: 0, 0
+  index: -1
+FX_Firework/FX_Firework_00008
+  rotate: false
+  xy: 244, 244
+  size: 240, 240
+  orig: 240, 240
+  offset: 0, 0
+  index: -1
+FX_Firework/FX_Firework_00010
+  rotate: false
+  xy: 486, 486
+  size: 240, 240
+  orig: 240, 240
+  offset: 0, 0
+  index: -1
+FX_Firework/FX_Firework_00012
+  rotate: false
+  xy: 244, 2
+  size: 240, 240
+  orig: 240, 240
+  offset: 0, 0
+  index: -1
+FX_Firework/FX_Firework_00014
+  rotate: false
+  xy: 486, 244
+  size: 240, 240
+  orig: 240, 240
+  offset: 0, 0
+  index: -1
+FX_Firework/FX_Firework_00016
+  rotate: false
+  xy: 728, 486
+  size: 240, 240
+  orig: 240, 240
+  offset: 0, 0
+  index: -1
+FX_Firework/FX_Firework_00018
+  rotate: false
+  xy: 486, 2
+  size: 240, 240
+  orig: 240, 240
+  offset: 0, 0
+  index: -1
+FX_Firework/FX_Firework_00020
+  rotate: false
+  xy: 728, 244
+  size: 240, 240
+  orig: 240, 240
+  offset: 0, 0
+  index: -1
+FX_Firework/FX_Firework_00022
+  rotate: false
+  xy: 970, 486
+  size: 240, 240
+  orig: 240, 240
+  offset: 0, 0
+  index: -1
+FX_Firework/FX_Firework_00024
+  rotate: false
+  xy: 728, 2
+  size: 240, 240
+  orig: 240, 240
+  offset: 0, 0
+  index: -1
+FX_Firework/FX_Firework_00026
+  rotate: false
+  xy: 970, 244
+  size: 240, 240
+  orig: 240, 240
+  offset: 0, 0
+  index: -1
+FX_Firework/FX_Firework_00028
+  rotate: false
+  xy: 1212, 486
+  size: 240, 240
+  orig: 240, 240
+  offset: 0, 0
+  index: -1
+FX_Firework/FX_Firework_00030
+  rotate: false
+  xy: 970, 2
+  size: 240, 240
+  orig: 240, 240
+  offset: 0, 0
+  index: -1
+FX_Firework/FX_Firework_00032
+  rotate: false
+  xy: 1212, 244
+  size: 240, 240
+  orig: 240, 240
+  offset: 0, 0
+  index: -1
+FX_Firework/FX_Firework_00034
+  rotate: false
+  xy: 1454, 486
+  size: 240, 240
+  orig: 240, 240
+  offset: 0, 0
+  index: -1
+Plane_Fire/Plane_Fire_00000
+  rotate: false
+  xy: 1212, 5
+  size: 125, 104
+  orig: 125, 104
+  offset: 0, 0
+  index: -1
+Plane_Fire/Plane_Fire_00001
+  rotate: false
+  xy: 1454, 266
+  size: 125, 104
+  orig: 125, 104
+  offset: 0, 0
+  index: -1
+Plane_Fire/Plane_Fire_00002
+  rotate: false
+  xy: 1339, 5
+  size: 125, 104
+  orig: 125, 104
+  offset: 0, 0
+  index: -1
+Plane_Fire/Plane_Fire_00003
+  rotate: true
+  xy: 1516, 139
+  size: 125, 104
+  orig: 125, 104
+  offset: 0, 0
+  index: -1
+Plane_Fire/Plane_Fire_00004
+  rotate: false
+  xy: 1581, 266
+  size: 125, 104
+  orig: 125, 104
+  offset: 0, 0
+  index: -1
+Plane_Fire/Plane_Fire_00005
+  rotate: false
+  xy: 1466, 5
+  size: 125, 104
+  orig: 125, 104
+  offset: 0, 0
+  index: -1
+banner
+  rotate: false
+  xy: 1212, 111
+  size: 302, 131
+  orig: 302, 131
+  offset: 0, 0
+  index: -1
+may bay main copy
+  rotate: false
+  xy: 1454, 372
+  size: 189, 112
+  orig: 189, 112
+  offset: 0, 0
+  index: -1
+pub1
+  rotate: false
+  xy: 1454, 252
+  size: 12, 12
+  orig: 12, 12
+  offset: 0, 0
+  index: -1
+pub2
+  rotate: false
+  xy: 1696, 714
+  size: 12, 12
+  orig: 12, 12
+  offset: 0, 0
+  index: -1
+string1
+  rotate: true
+  xy: 1622, 164
+  size: 100, 71
+  orig: 100, 71
+  offset: 0, 0
+  index: -1
+string2
+  rotate: true
+  xy: 1645, 400
+  size: 84, 48
+  orig: 84, 48
+  offset: 0, 0
+  index: -1
+text2
+  rotate: true
+  xy: 1593, 16
+  size: 121, 34
+  orig: 121, 34
+  offset: 0, 0
+  index: -1

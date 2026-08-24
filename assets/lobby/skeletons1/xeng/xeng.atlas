@@ -1,0 +1,125 @@
+
+xeng.png
+size: 749,368
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+7
+  rotate: false
+  xy: 535, 197
+  size: 118, 168
+  orig: 126, 171
+  offset: 0, 0
+  index: -1
+7_P
+  rotate: false
+  xy: 281, 3
+  size: 135, 166
+  orig: 139, 169
+  offset: 2, 1
+  index: -1
+7_P_2
+  rotate: false
+  xy: 397, 199
+  size: 135, 166
+  orig: 139, 169
+  offset: 2, 1
+  index: -1
+7_T
+  rotate: false
+  xy: 142, 4
+  size: 136, 165
+  orig: 139, 168
+  offset: 1, 1
+  index: -1
+7_T_2
+  rotate: false
+  xy: 3, 3
+  size: 136, 166
+  orig: 139, 168
+  offset: 2, 0
+  index: -1
+8
+  rotate: false
+  xy: 419, 3
+  size: 122, 168
+  orig: 126, 171
+  offset: 0, 0
+  index: -1
+Layer 13
+  rotate: true
+  xy: 637, 61
+  size: 61, 53
+  orig: 61, 54
+  offset: 0, 1
+  index: -1
+Layer 14
+  rotate: true
+  xy: 637, 125
+  size: 55, 60
+  orig: 56, 60
+  offset: 0, 0
+  index: -1
+Layer 15
+  rotate: false
+  xy: 693, 62
+  size: 42, 34
+  orig: 42, 34
+  offset: 0, 0
+  index: -1
+bg_0
+  rotate: true
+  xy: 3, 172
+  size: 193, 391
+  orig: 195, 393
+  offset: 1, 1
+  index: -1
+coin_1
+  rotate: true
+  xy: 700, 139
+  size: 41, 44
+  orig: 41, 44
+  offset: 0, 0
+  index: -1
+coin_2
+  rotate: true
+  xy: 700, 99
+  size: 37, 44
+  orig: 37, 44
+  offset: 0, 0
+  index: -1
+coin_3
+  rotate: true
+  xy: 693, 27
+  size: 32, 44
+  orig: 32, 44
+  offset: 0, 0
+  index: -1
+coin_4
+  rotate: true
+  xy: 397, 174
+  size: 22, 43
+  orig: 23, 44
+  offset: 1, 0
+  index: -1
+coin_5
+  rotate: true
+  xy: 443, 189
+  size: 7, 43
+  orig: 7, 43
+  offset: 0, 0
+  index: -1
+xeng
+  rotate: true
+  xy: 656, 183
+  size: 182, 90
+  orig: 184, 90
+  offset: 1, 0
+  index: -1
+xeng_2
+  rotate: true
+  xy: 544, 12
+  size: 182, 90
+  orig: 184, 90
+  offset: 1, 0
+  index: -1

@@ -1,0 +1,25 @@
+info face="font" size=32 bold=0 italic=0 charset="" unicode=1 stretchH=100 smooth=1 aa=1 padding=0,0,0,0 spacing=0,0 outline=0
+common lineHeight=32 base=32 scaleW=0 scaleH=0 pages=1 packed=0
+page id=0 file="Font_bitmap_number_SU-export.png"
+chars count=21
+char id=44 x=24 y=94 width=12 height=15 xoffset=0 yoffset=21 xadvance=8 page=0 chnl=15
+char id=55 x=72 y=58 width=23 height=28 xoffset=0 yoffset=4 xadvance=19 page=0 chnl=15
+char id=66 x=0 y=85 width=23 height=29 xoffset=0 yoffset=3 xadvance=19 page=0 chnl=15
+char id=77 x=0 y=0 width=30 height=29 xoffset=0 yoffset=3 xadvance=26 page=0 chnl=15
+char id=45 x=24 y=78 width=23 height=15 xoffset=0 yoffset=16 xadvance=19 page=0 chnl=15
+char id=56 x=72 y=29 width=23 height=28 xoffset=0 yoffset=4 xadvance=19 page=0 chnl=15
+char id=46 x=25 y=35 width=10 height=10 xoffset=0 yoffset=22 xadvance=6 page=0 chnl=15
+char id=57 x=48 y=35 width=23 height=28 xoffset=0 yoffset=4 xadvance=19 page=0 chnl=15
+char id=36 x=31 y=0 width=23 height=34 xoffset=0 yoffset=1 xadvance=19 page=0 chnl=15
+char id=58 x=24 y=55 width=23 height=22 xoffset=0 yoffset=10 xadvance=19 page=0 chnl=15
+char id=48 x=55 y=0 width=23 height=28 xoffset=0 yoffset=4 xadvance=19 page=0 chnl=15
+char id=49 x=79 y=0 width=23 height=28 xoffset=0 yoffset=4 xadvance=19 page=0 chnl=15
+char id=9 x=0 y=0 width=0 height=0 xoffset=0 yoffset=0 xadvance=24 page=0 chnl=15
+char id=50 x=72 y=87 width=23 height=28 xoffset=0 yoffset=4 xadvance=19 page=0 chnl=15
+char id=51 x=96 y=58 width=23 height=28 xoffset=0 yoffset=4 xadvance=19 page=0 chnl=15
+char id=52 x=96 y=29 width=23 height=28 xoffset=0 yoffset=4 xadvance=19 page=0 chnl=15
+char id=53 x=48 y=64 width=23 height=28 xoffset=0 yoffset=4 xadvance=19 page=0 chnl=15
+char id=75 x=0 y=55 width=23 height=29 xoffset=0 yoffset=3 xadvance=19 page=0 chnl=15
+char id=32 x=0 y=0 width=0 height=0 xoffset=0 yoffset=0 xadvance=6 page=0 chnl=15
+char id=43 x=0 y=30 width=24 height=24 xoffset=0 yoffset=8 xadvance=20 page=0 chnl=15
+char id=54 x=96 y=87 width=23 height=28 xoffset=0 yoffset=4 xadvance=19 page=0 chnl=15

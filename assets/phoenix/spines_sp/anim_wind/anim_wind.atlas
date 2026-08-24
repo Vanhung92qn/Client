@@ -1,0 +1,20 @@
+
+anim_wind.png
+size: 256,128
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+glow_mid_vanilla
+  rotate: false
+  xy: 130, 65
+  size: 63, 63
+  orig: 73, 73
+  offset: 5, 5
+  index: -1
+wind_wave
+  rotate: false
+  xy: 0, 0
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1

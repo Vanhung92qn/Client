@@ -1,0 +1,13 @@
+{
+  "ver": "1.1.3",
+  "uuid": "db2c0986-84c0-4036-a098-83d55f19c5b0",
+  "importer": "folder",
+  "isBundle": true,
+  "bundleName": "prefabs",
+  "priority": 6,
+  "compressionType": {},
+  "optimizeHotUpdate": {},
+  "inlineSpriteFrames": {},
+  "isRemoteBundle": {},
+  "subMetas": {}
+}

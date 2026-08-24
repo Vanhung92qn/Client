@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "15fef75e-c865-4705-9da8-e9e1c87af117",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 172,
+  "height": 71,
+  "platformSettings": {},
+  "subMetas": {
+    "btn thiet lap lai": {
+      "ver": "1.0.6",
+      "uuid": "6b2793e8-7c44-48e0-9982-e3b473220092",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "15fef75e-c865-4705-9da8-e9e1c87af117",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0.5,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 172,
+      "height": 70,
+      "rawWidth": 172,
+      "rawHeight": 71,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

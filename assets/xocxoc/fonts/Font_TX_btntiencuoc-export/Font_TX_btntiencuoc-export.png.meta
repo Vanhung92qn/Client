@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "41e0146a-d699-407d-8040-27af27b70bd7",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 78,
+  "height": 78,
+  "platformSettings": {},
+  "subMetas": {
+    "Font_TX_btntiencuoc-export": {
+      "ver": "1.0.6",
+      "uuid": "cc94c82c-8f16-4a81-b731-1bd6613f1573",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "41e0146a-d699-407d-8040-27af27b70bd7",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -0.5,
+      "offsetY": 0.5,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 77,
+      "height": 77,
+      "rawWidth": 78,
+      "rawHeight": 78,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

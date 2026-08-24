@@ -1,0 +1,55 @@
+
+Tai.png
+size: 543,376
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+1
+  rotate: false
+  xy: 2, 2
+  size: 191, 97
+  orig: 204, 137
+  offset: 7, 16
+  index: -1
+1A
+  rotate: false
+  xy: 278, 12
+  size: 198, 103
+  orig: 204, 137
+  offset: 1, 13
+  index: -1
+2
+  rotate: false
+  xy: 278, 12
+  size: 198, 103
+  orig: 204, 137
+  offset: 1, 13
+  index: -1
+Blur
+  rotate: true
+  xy: 2, 101
+  size: 273, 274
+  orig: 295, 293
+  offset: 11, 10
+  index: -1
+Lighht2
+  rotate: false
+  xy: 195, 31
+  size: 67, 68
+  orig: 73, 72
+  offset: 3, 2
+  index: -1
+Light
+  rotate: false
+  xy: 478, 52
+  size: 63, 63
+  orig: 103, 138
+  offset: 20, 42
+  index: -1
+Light1
+  rotate: false
+  xy: 278, 117
+  size: 257, 257
+  orig: 311, 301
+  offset: 27, 23
+  index: -1

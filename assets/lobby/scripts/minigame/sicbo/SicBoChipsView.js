@@ -279,7 +279,11 @@
                     posIndex--;
 
                     while (posIndex >= 0) {
-                        listChips[posIndex][0].active = false;
+                        // Defensive: list co the bi clearAllChips (phien moi) lam rong trong 0.3s delay
+                        // -> listChips[posIndex] undefined. Guard tranh crash "reading '0' of undefined".
+                        if (listChips && listChips[posIndex] && listChips[posIndex][0]) {
+                            listChips[posIndex][0].active = false;
+                        }
                         posIndex--;
                     }
                 }

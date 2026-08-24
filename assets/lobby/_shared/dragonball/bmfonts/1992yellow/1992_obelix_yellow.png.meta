@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "177ed255-6672-4ff4-b1f3-b8a07c72455f",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 133,
+  "height": 132,
+  "platformSettings": {},
+  "subMetas": {
+    "1992_obelix_yellow": {
+      "ver": "1.0.6",
+      "uuid": "965ec771-d64c-40dd-a242-69b90a4a42d8",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "177ed255-6672-4ff4-b1f3-b8a07c72455f",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -1,
+      "offsetY": 1,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 131,
+      "height": 130,
+      "rawWidth": 133,
+      "rawHeight": 132,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

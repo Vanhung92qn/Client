@@ -66,6 +66,8 @@ var netConfig = require("NetConfig");
         updateMultiple: function (data) {
             if (!data)
                 return;
+            //Luu he so vao controller de panel dat cuoc (LodePanelBet) tinh tien thang
+            cc.LodeController.getInstance().setMultipliers(data);
             data.map(multipleData => {
                 let strMultiple = "1   X   " + multipleData.Multiplier;
                 switch (parseInt(multipleData.GateID)) {

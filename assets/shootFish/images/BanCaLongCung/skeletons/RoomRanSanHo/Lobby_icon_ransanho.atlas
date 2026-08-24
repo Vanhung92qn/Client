@@ -1,0 +1,258 @@
+
+Lobby_icon_ransanho.png
+size: 982,576
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+armor1
+  rotate: false
+  xy: 786, 265
+  size: 89, 66
+  orig: 89, 66
+  offset: 0, 0
+  index: -1
+armor2
+  rotate: false
+  xy: 789, 333
+  size: 91, 137
+  orig: 91, 138
+  offset: 0, 1
+  index: -1
+armor3
+  rotate: true
+  xy: 786, 203
+  size: 60, 81
+  orig: 60, 81
+  offset: 0, 0
+  index: -1
+armor3.2
+  rotate: true
+  xy: 725, 8
+  size: 35, 62
+  orig: 36, 62
+  offset: 0, 0
+  index: -1
+armor4
+  rotate: false
+  xy: 673, 142
+  size: 110, 99
+  orig: 111, 100
+  offset: 0, 1
+  index: -1
+armor5
+  rotate: false
+  xy: 673, 243
+  size: 111, 102
+  orig: 112, 103
+  offset: 0, 1
+  index: -1
+body
+  rotate: false
+  xy: 367, 188
+  size: 199, 119
+  orig: 200, 120
+  offset: 0, 1
+  index: -1
+bubble
+  rotate: false
+  xy: 890, 66
+  size: 35, 35
+  orig: 35, 35
+  offset: 0, 0
+  index: -1
+coral
+  rotate: false
+  xy: 810, 26
+  size: 78, 75
+  orig: 78, 75
+  offset: 0, 0
+  index: -1
+ear
+  rotate: true
+  xy: 933, 380
+  size: 95, 47
+  orig: 95, 48
+  offset: 0, 1
+  index: -1
+frame
+  rotate: false
+  xy: 2, 192
+  size: 363, 382
+  orig: 365, 384
+  offset: 1, 1
+  index: -1
+hair
+  rotate: false
+  xy: 654, 3
+  size: 69, 40
+  orig: 70, 41
+  offset: 0, 1
+  index: -1
+head1
+  rotate: false
+  xy: 654, 347
+  size: 133, 123
+  orig: 142, 124
+  offset: 8, 1
+  index: -1
+hu
+  rotate: false
+  xy: 655, 472
+  size: 222, 102
+  orig: 222, 102
+  offset: 0, 0
+  index: -1
+legback1
+  rotate: false
+  xy: 375, 30
+  size: 92, 156
+  orig: 92, 156
+  offset: 0, 0
+  index: -1
+legback2
+  rotate: true
+  xy: 869, 207
+  size: 54, 107
+  orig: 55, 111
+  offset: 0, 4
+  index: -1
+legfront1
+  rotate: false
+  xy: 469, 27
+  size: 86, 159
+  orig: 86, 159
+  offset: 0, 0
+  index: -1
+legfront2
+  rotate: false
+  xy: 555, 314
+  size: 97, 169
+  orig: 97, 169
+  offset: 0, 0
+  index: -1
+moss1
+  rotate: true
+  xy: 785, 150
+  size: 51, 108
+  orig: 51, 109
+  offset: 0, 1
+  index: -1
+moss2
+  rotate: false
+  xy: 2, 6
+  size: 319, 184
+  orig: 342, 184
+  offset: 22, 0
+  index: -1
+mouth
+  rotate: false
+  xy: 367, 309
+  size: 186, 174
+  orig: 186, 174
+  offset: 0, 0
+  index: -1
+pearl
+  rotate: false
+  xy: 879, 477
+  size: 98, 97
+  orig: 98, 97
+  offset: 0, 0
+  index: -1
+star
+  rotate: false
+  xy: 916, 112
+  size: 40, 43
+  orig: 42, 45
+  offset: 1, 1
+  index: -1
+tail
+  rotate: false
+  xy: 557, 61
+  size: 95, 119
+  orig: 101, 122
+  offset: 5, 3
+  index: -1
+tail2
+  rotate: false
+  xy: 568, 182
+  size: 103, 130
+  orig: 104, 131
+  offset: 0, 1
+  index: -1
+text_light/text_light2_1
+  rotate: true
+  xy: 933, 313
+  size: 65, 44
+  orig: 193, 54
+  offset: 0, 1
+  index: -1
+text_light/text_light2_2
+  rotate: false
+  xy: 557, 14
+  size: 95, 45
+  orig: 193, 54
+  offset: 0, 0
+  index: -1
+text_light/text_light2_3
+  rotate: false
+  xy: 789, 103
+  size: 125, 45
+  orig: 193, 54
+  offset: 0, 0
+  index: -1
+text_light/text_light2_4
+  rotate: false
+  xy: 654, 45
+  size: 154, 45
+  orig: 193, 54
+  offset: 1, 0
+  index: -1
+text_light/text_light2_5
+  rotate: true
+  xy: 323, 2
+  size: 184, 50
+  orig: 193, 54
+  offset: 1, 1
+  index: -1
+text_light/text_light2_6
+  rotate: true
+  xy: 882, 313
+  size: 162, 49
+  orig: 193, 54
+  offset: 30, 4
+  index: -1
+text_light/text_light2_7
+  rotate: false
+  xy: 654, 92
+  size: 133, 48
+  orig: 193, 54
+  offset: 60, 6
+  index: -1
+text_light/text_light2_8
+  rotate: false
+  xy: 877, 263
+  size: 103, 48
+  orig: 193, 54
+  offset: 90, 6
+  index: -1
+text_light/text_light2_9
+  rotate: false
+  xy: 895, 157
+  size: 73, 48
+  orig: 193, 54
+  offset: 120, 6
+  index: -1
+text_ransanho
+  rotate: false
+  xy: 367, 485
+  size: 286, 89
+  orig: 288, 91
+  offset: 1, 1
+  index: -1
+tongue
+  rotate: false
+  xy: 375, 3
+  size: 44, 25
+  orig: 45, 26
+  offset: 0, 1
+  index: -1

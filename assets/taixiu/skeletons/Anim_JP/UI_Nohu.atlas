@@ -1,0 +1,55 @@
+
+UI_Nohu.png
+size: 1024,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+frame
+  rotate: true
+  xy: 641, 536
+  size: 470, 105
+  orig: 470, 105
+  offset: 0, 0
+  index: -1
+fx_cycle
+  rotate: false
+  xy: 2, 398
+  size: 637, 608
+  orig: 637, 608
+  offset: 0, 0
+  index: -1
+money_l
+  rotate: true
+  xy: 521, 147
+  size: 249, 163
+  orig: 249, 163
+  offset: 0, 0
+  index: -1
+money_r
+  rotate: false
+  xy: 467, 23
+  size: 217, 122
+  orig: 217, 122
+  offset: 0, 0
+  index: -1
+nohu_dropshadow
+  rotate: false
+  xy: 2, 173
+  size: 517, 223
+  orig: 517, 223
+  offset: 0, 0
+  index: -1
+nohu_ef
+  rotate: true
+  xy: 748, 559
+  size: 447, 153
+  orig: 447, 153
+  offset: 0, 0
+  index: -1
+nohu_text
+  rotate: false
+  xy: 2, 2
+  size: 463, 169
+  orig: 463, 169
+  offset: 0, 0
+  index: -1

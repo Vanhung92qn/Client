@@ -12,12 +12,12 @@
         LuckyDiceSieuTocHub: 'luckydicesieutocHub',
 		SicBoHub: 'sicboHub',
         MiniPokerHub: 'xpokerHub',
-        Seven77Hub: 'kingstarHub',
+        Seven77Hub: 'minibarHub',
         BlockBusterHub: 'blockbusterHub',
         LuckyWildHub: 'luckywildHub',
 
         EgyptHub: 'egyptHub',
-        ThreeKingdomHub: 'taydukyHub',
+        ThreeKingdomHub: 'tamquocHub',
         AquariumHub: 'thuycungHub',
         DragonBallHub: 'songokuHub',
         BumBumHub: 'bumbumHub',
@@ -26,6 +26,10 @@
 
         MonkeyHub: 'monkeyHub',
         DragonTigerHub: 'dragontigerHub',
+        ChickenFightHub: 'chickenFightHub',
+        Xeng777Hub: 'xeng777Hub',
+        AviatorHub: 'aviatorHub',
+        PhoenixHub: 'phoenixHub',
         XocXocHub: 'sedieHub',
 
         ThreeCardsHub: 'bacayHub',

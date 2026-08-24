@@ -1,0 +1,85 @@
+{
+"skeleton": {
+	"hash": "vD88x2xeUTOeB4cr1W/p9zr9rHA",
+	"spine": "3.8.75",
+	"x": -162.9,
+	"y": -124.19,
+	"width": 259.7,
+	"height": 140.54,
+	"images": "C:/Users/Admin/PSD/out/awin.vna1612.com/spines/43_txdaigia/PNG",
+	"audio": "C:\\Users\\Admin\\SOUCRE\\GAMEVAC\\assets\\S86\\animation\\taixiumd5"
+},
+"bones": [
+	{ "name": "root" },
+	{ "name": "tx", "parent": "root", "y": -28.69, "scaleX": 1.1, "scaleY": 1.1 },
+	{ "name": "dg2", "parent": "root", "x": 59.78, "y": -88.85, "scaleX": 0.94, "scaleY": 0.94 }
+],
+"slots": [
+	{ "name": "bg", "bone": "root" },
+	{ "name": "tx", "bone": "tx", "attachment": "tx" },
+	{ "name": "dg2", "bone": "dg2", "attachment": "dg" }
+],
+"skins": [
+	{
+		"name": "default",
+		"attachments": {
+			"tx": {
+				"tx": { "y": 5.41, "width": 176, "height": 66 }
+			},
+			"dg2": {
+				"dg": {
+					"type": "mesh",
+					"uvs": [ 1, 1, 0, 1, 0, 0, 1, 0 ],
+					"triangles": [ 1, 2, 3, 1, 3, 0 ],
+					"vertices": [ 37.39, -37.59, -158.57, -37.58, -158.56, 30.58, 37.4, 30.57 ],
+					"hull": 4,
+					"edges": [ 0, 6, 0, 2, 2, 4, 4, 6 ],
+					"width": 213,
+					"height": 71
+				}
+			}
+		}
+	}
+],
+"animations": {
+	"animation": {
+		"slots": {
+			"tx": {
+				"color": [
+					{ "color": "ffffff00" },
+					{ "time": 0.3333, "color": "ffffffff" }
+				]
+			}
+		},
+		"bones": {
+			"tx": {
+				"scale": [
+					{ "x": 2, "y": 2 },
+					{ "time": 0.3333 },
+					{ "time": 0.4, "x": 1.099, "y": 1.099 },
+					{ "time": 0.5, "curve": "stepped" },
+					{ "time": 2 },
+					{ "time": 2.0667, "x": 1.075, "y": 1.075 },
+					{ "time": 2.1667 },
+					{ "time": 2.2333, "x": 1.075, "y": 1.075 },
+					{ "time": 2.3333 }
+				]
+			},
+			"dg2": {
+				"scale": [
+					{ "time": 0.4333 },
+					{ "time": 0.5, "x": 1.058, "y": 1.058 },
+					{ "time": 0.6 },
+					{ "time": 0.6667, "x": 1.058, "y": 1.058 },
+					{ "time": 0.7667, "curve": "stepped" },
+					{ "time": 2.6 },
+					{ "time": 2.6667, "x": 1.058, "y": 1.058 },
+					{ "time": 2.7667 },
+					{ "time": 2.8333, "x": 1.058, "y": 1.058 },
+					{ "time": 2.9333 }
+				]
+			}
+		}
+	}
+}
+}

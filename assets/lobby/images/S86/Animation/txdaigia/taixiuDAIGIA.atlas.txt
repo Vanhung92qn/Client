@@ -1,0 +1,20 @@
+
+taixiuDAIGIA.png
+size: 395,75
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+dg
+  rotate: false
+  xy: 2, 2
+  size: 213, 71
+  orig: 213, 71
+  offset: 0, 0
+  index: -1
+tx
+  rotate: false
+  xy: 217, 7
+  size: 176, 66
+  orig: 176, 66
+  offset: 0, 0
+  index: -1

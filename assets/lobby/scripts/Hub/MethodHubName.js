@@ -59,6 +59,12 @@
         TREASURE_CARROT_JUMP_CREATE_NEXT_DATA: 'CarrotJumpCreateNextData',
 
         PING_PONG: 'PingPong',
+
+        //Aviator (115)
+        CASH_OUT: 'Cashout',
+
+        //Hoa Phung (116) - panel Nguoi trong phong (nguoi that dang ket noi + roster bot)
+        GET_USER_IN_ROOM: 'GetUserInRoom',
     });
 
 }).call(this);

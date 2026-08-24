@@ -1,0 +1,132 @@
+
+santrung.png
+size: 507,507
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+10
+  rotate: false
+  xy: 185, 107
+  size: 158, 33
+  orig: 158, 33
+  offset: 0, 0
+  index: -1
+11
+  rotate: false
+  xy: 150, 72
+  size: 158, 33
+  orig: 158, 33
+  offset: 0, 0
+  index: -1
+12
+  rotate: false
+  xy: 150, 37
+  size: 158, 33
+  orig: 158, 33
+  offset: 0, 0
+  index: -1
+13
+  rotate: false
+  xy: 150, 2
+  size: 158, 33
+  orig: 158, 33
+  offset: 0, 0
+  index: -1
+14
+  rotate: true
+  xy: 412, 106
+  size: 158, 33
+  orig: 158, 33
+  offset: 0, 0
+  index: -1
+15
+  rotate: false
+  xy: 310, 48
+  size: 158, 33
+  orig: 158, 33
+  offset: 0, 0
+  index: -1
+16
+  rotate: false
+  xy: 310, 13
+  size: 158, 33
+  orig: 158, 33
+  offset: 0, 0
+  index: -1
+17
+  rotate: true
+  xy: 447, 219
+  size: 158, 33
+  orig: 158, 33
+  offset: 0, 0
+  index: -1
+4
+  rotate: false
+  xy: 345, 83
+  size: 65, 68
+  orig: 65, 68
+  offset: 0, 0
+  index: -1
+flash_7
+  rotate: false
+  xy: 299, 153
+  size: 111, 111
+  orig: 111, 111
+  offset: 0, 0
+  index: -1
+o
+  rotate: false
+  xy: 377, 339
+  size: 37, 38
+  orig: 37, 38
+  offset: 0, 0
+  index: -1
+particle
+  rotate: false
+  xy: 2, 127
+  size: 181, 181
+  orig: 181, 181
+  offset: 0, 0
+  index: -1
+st_b_frame
+  rotate: false
+  xy: 194, 324
+  size: 181, 181
+  orig: 181, 181
+  offset: 0, 0
+  index: -1
+st_egg_brown
+  rotate: false
+  xy: 377, 379
+  size: 112, 126
+  orig: 112, 126
+  offset: 0, 0
+  index: -1
+st_egg_gold
+  rotate: true
+  xy: 2, 11
+  size: 114, 146
+  orig: 114, 146
+  offset: 0, 0
+  index: -1
+st_egg_pink
+  rotate: false
+  xy: 185, 142
+  size: 112, 122
+  orig: 112, 122
+  offset: 0, 0
+  index: -1
+st_frame
+  rotate: false
+  xy: 2, 310
+  size: 190, 195
+  orig: 190, 195
+  offset: 0, 0
+  index: -1
+st_text
+  rotate: false
+  xy: 194, 266
+  size: 228, 56
+  orig: 228, 56
+  offset: 0, 0
+  index: -1

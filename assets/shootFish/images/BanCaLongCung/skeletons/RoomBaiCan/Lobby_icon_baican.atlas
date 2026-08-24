@@ -1,0 +1,160 @@
+
+Lobby_icon_baican.png
+size: 1019,358
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+bc_b_hand
+  rotate: false
+  xy: 871, 12
+  size: 63, 63
+  orig: 63, 63
+  offset: 0, 0
+  index: -1
+bc_b_horn
+  rotate: false
+  xy: 774, 4
+  size: 95, 114
+  orig: 95, 114
+  offset: 0, 0
+  index: -1
+bc_background
+  rotate: true
+  xy: 2, 3
+  size: 353, 341
+  orig: 353, 341
+  offset: 0, 0
+  index: -1
+bc_body
+  rotate: false
+  xy: 345, 98
+  size: 216, 258
+  orig: 216, 258
+  offset: 0, 0
+  index: -1
+bc_body_gold
+  rotate: true
+  xy: 933, 268
+  size: 88, 83
+  orig: 88, 83
+  offset: 0, 0
+  index: -1
+bc_body_wing
+  rotate: false
+  xy: 345, 2
+  size: 108, 94
+  orig: 108, 94
+  offset: 0, 0
+  index: -1
+bc_body_wing1
+  rotate: true
+  xy: 654, 113
+  size: 47, 70
+  orig: 47, 70
+  offset: 0, 0
+  index: -1
+bc_body_wing2
+  rotate: false
+  xy: 563, 98
+  size: 34, 62
+  orig: 34, 62
+  offset: 0, 0
+  index: -1
+bc_close
+  rotate: false
+  xy: 871, 89
+  size: 31, 33
+  orig: 31, 33
+  offset: 0, 0
+  index: -1
+bc_crown
+  rotate: true
+  xy: 599, 102
+  size: 58, 53
+  orig: 58, 53
+  offset: 0, 0
+  index: -1
+bc_eye
+  rotate: false
+  xy: 936, 46
+  size: 28, 29
+  orig: 28, 29
+  offset: 0, 0
+  index: -1
+bc_eyelid
+  rotate: false
+  xy: 860, 124
+  size: 66, 36
+  orig: 66, 36
+  offset: 0, 0
+  index: -1
+bc_f_hand
+  rotate: true
+  xy: 928, 77
+  size: 83, 89
+  orig: 83, 89
+  offset: 0, 0
+  index: -1
+bc_hand_gold
+  rotate: false
+  xy: 773, 120
+  size: 85, 40
+  orig: 85, 40
+  offset: 0, 0
+  index: -1
+bc_horn
+  rotate: false
+  xy: 662, 9
+  size: 110, 102
+  orig: 110, 102
+  offset: 0, 0
+  index: -1
+bc_text
+  rotate: false
+  xy: 455, 6
+  size: 205, 90
+  orig: 205, 90
+  offset: 0, 0
+  index: -1
+bong16
+  rotate: false
+  xy: 726, 115
+  size: 45, 45
+  orig: 45, 45
+  offset: 0, 0
+  index: -1
+fx_text0
+  rotate: true
+  xy: 563, 162
+  size: 194, 72
+  orig: 194, 72
+  offset: 0, 0
+  index: -1
+fx_text1
+  rotate: true
+  xy: 637, 162
+  size: 194, 72
+  orig: 194, 72
+  offset: 0, 0
+  index: -1
+fx_text2
+  rotate: true
+  xy: 711, 162
+  size: 194, 72
+  orig: 194, 72
+  offset: 0, 0
+  index: -1
+fx_text3
+  rotate: true
+  xy: 785, 162
+  size: 194, 72
+  orig: 194, 72
+  offset: 0, 0
+  index: -1
+fx_text4
+  rotate: true
+  xy: 859, 162
+  size: 194, 72
+  orig: 194, 72
+  offset: 0, 0
+  index: -1

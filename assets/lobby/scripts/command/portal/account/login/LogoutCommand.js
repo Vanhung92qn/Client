@@ -24,7 +24,9 @@
                     * */
                     return controller.onLogoutResponse(obj);
                 } else {
-                    cc.PopupController.getInstance().showMessageError(obj.Message, obj.ResponseCode);
+                    // [TỐC ĐỘ #3] Logout best-effort: client đã đăng xuất optimistic rồi -> KHÔNG hiện lỗi
+                    // (tránh popup "đăng xuất thất bại" sau khi đã về màn login). Chỉ log.
+                    console.warn('[Logout] server tra ve loi (bo qua, da out optimistic):', obj.Message);
                 }
             });
         };

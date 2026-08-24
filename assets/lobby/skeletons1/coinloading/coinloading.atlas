@@ -1,0 +1,13 @@
+
+coinloading.png
+size: 167,168
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+coin
+  rotate: false
+  xy: 2, 2
+  size: 163, 164
+  orig: 166, 166
+  offset: 2, 1
+  index: -1

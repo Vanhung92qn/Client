@@ -34,20 +34,28 @@
                 return this.hubView.sendRequestOnHub(method, data1, data2);
         };
 
+        // Guard chatView cho đồng bộ với sendRequestOnHub ở trên: scene nào quên nhúng
+        // ChatRoomPrefab thì chatView undefined -> throw. Nguy hiểm ở chỗ onHubMessage của các
+        // view duyệt message bằng .map KHÔNG try/catch, nên MỘT tin chat nổ là văng khỏi cả vòng
+        // lặp, nuốt luôn những message game đứng sau nó trong cùng frame.
         ChatRoomController.prototype.showChat = function () {
-            return this.chatView.showChat();
+            if (this.chatView)
+                return this.chatView.showChat();
         };
 
         ChatRoomController.prototype.addChatContent = function (message) {
-            return this.chatView.addChatContent(message);
+            if (this.chatView)
+                return this.chatView.addChatContent(message);
         };
 
         ChatRoomController.prototype.getIndexEmotion = function (message) {
-            return this.chatView.getIndexEmotion(message);
+            if (this.chatView)
+                return this.chatView.getIndexEmotion(message);
         };
 
         ChatRoomController.prototype.checkIsEmotion = function (message) {
-            return this.chatView.checkIsEmotion(message);
+            if (this.chatView)
+                return this.chatView.checkIsEmotion(message);
         };
 
 

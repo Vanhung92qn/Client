@@ -8,7 +8,7 @@
         }
 
         Seven77GetHistoryCommand.prototype.execute = function (controller) {
-            var url = 'api/kingstar/GetHistory?top=50';
+            var url = 'api/minibar/GetHistory?top=50';
 
             return cc.ServerConnector.getInstance().sendRequest(cc.SubdomainName.SEVEN77, url, function (response) {
                 var obj = JSON.parse(response);

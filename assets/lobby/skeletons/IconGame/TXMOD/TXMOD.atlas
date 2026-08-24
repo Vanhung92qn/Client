@@ -1,0 +1,146 @@
+
+TXMOD.png
+size: 1374,710
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+TX_BG1
+  rotate: false
+  xy: 565, 307
+  size: 256, 400
+  orig: 258, 402
+  offset: 1, 1
+  index: -1
+TX_BG2
+  rotate: false
+  xy: 824, 307
+  size: 256, 400
+  orig: 258, 402
+  offset: 1, 1
+  index: -1
+TX_BG3
+  rotate: true
+  xy: 565, 7
+  size: 297, 328
+  orig: 297, 328
+  offset: 0, 0
+  index: -1
+TX_BG4
+  rotate: false
+  xy: 295, 298
+  size: 267, 409
+  orig: 269, 411
+  offset: 1, 1
+  index: -1
+TX_BG_FX1
+  rotate: true
+  xy: 896, 96
+  size: 208, 170
+  orig: 208, 170
+  offset: 0, 0
+  index: -1
+TX_BG_FX2
+  rotate: false
+  xy: 1083, 285
+  size: 177, 96
+  orig: 177, 96
+  offset: 0, 0
+  index: -1
+TX_Dice_back
+  rotate: false
+  xy: 1253, 47
+  size: 112, 108
+  orig: 112, 108
+  offset: 0, 0
+  index: -1
+TX_Dice_back_FX
+  rotate: true
+  xy: 1253, 158
+  size: 124, 118
+  orig: 126, 120
+  offset: 1, 1
+  index: -1
+TX_Dice_front
+  rotate: false
+  xy: 233, 100
+  size: 164, 165
+  orig: 164, 165
+  offset: 0, 0
+  index: -1
+TX_Dice_front_FX
+  rotate: false
+  xy: 1069, 100
+  size: 181, 182
+  orig: 183, 184
+  offset: 1, 1
+  index: -1
+TX_FX_Ring
+  rotate: false
+  xy: 3, 38
+  size: 227, 227
+  orig: 227, 227
+  offset: 0, 0
+  index: -1
+TX_FX_shine
+  rotate: false
+  xy: 400, 161
+  size: 134, 134
+  orig: 158, 158
+  offset: 10, 12
+  index: -1
+TX_Frame1
+  rotate: true
+  xy: 1262, 437
+  size: 270, 72
+  orig: 272, 74
+  offset: 1, 1
+  index: -1
+TX_Frame4
+  rotate: false
+  xy: 3, 268
+  size: 289, 439
+  orig: 293, 441
+  offset: 2, 1
+  index: -1
+TX_Frame_fx1
+  rotate: false
+  xy: 3, 3
+  size: 130, 32
+  orig: 130, 32
+  offset: 0, 0
+  index: -1
+TX_Frame_fx2
+  rotate: true
+  xy: 1083, 384
+  size: 323, 176
+  orig: 323, 176
+  offset: 0, 0
+  index: -1
+TX_Text1
+  rotate: true
+  xy: 1263, 324
+  size: 110, 80
+  orig: 112, 82
+  offset: 1, 1
+  index: -1
+TX_Text1_glow
+  rotate: false
+  xy: 896, 3
+  size: 121, 90
+  orig: 124, 92
+  offset: 2, 1
+  index: -1
+TX_Text2
+  rotate: false
+  xy: 233, 13
+  size: 126, 84
+  orig: 128, 86
+  offset: 1, 1
+  index: -1
+TX_Text2_glow
+  rotate: false
+  xy: 400, 63
+  size: 138, 95
+  orig: 142, 97
+  offset: 2, 1
+  index: -1

@@ -1,0 +1,14 @@
+# ─────────────────────────────────────────────────────────────────
+# .gitattributes — bao ve toan ven du lieu khi dong bo VPS <-> may local
+#
+# `* -text` = TAT hoan toan viec Git tu doi line ending (CRLF <-> LF).
+# Ly do: assets/ chua hang nghin file binary dac thu cua Cocos/Spine
+# (.skel, .pac, .bin, .fnt, .plist, .atlas...). Neu de Git tu doan
+# text/binary, mot file binary bi nhan nham la text se bi convert
+# line ending => HONG FILE, game loi asset.
+#
+# Doi lai: Git luu nguyen xi tung byte nhu tren dia. VPS va may local
+# deu la Windows nen hoan toan nhat quan.
+# ─────────────────────────────────────────────────────────────────
+
+* -text

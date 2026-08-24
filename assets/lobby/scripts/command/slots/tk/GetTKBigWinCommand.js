@@ -10,7 +10,7 @@
         }
 
         GetTKBigWinCommand.prototype.execute = function (controller) {
-            var url = 'api/tayduky/GetBigWinner?top=50&type=' + cc.BigWinnerType.BIG_WIN;
+            var url = 'api/tamquoc/GetBigWinner?top=50&type=' + cc.BigWinnerType.BIG_WIN;
 
             return cc.ServerConnector.getInstance().sendRequest(cc.SubdomainName.THREE_KINGDOM, url, function (response) {
                 var obj = JSON.parse(response);

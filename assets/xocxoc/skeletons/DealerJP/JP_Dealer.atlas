@@ -1,0 +1,181 @@
+
+JP_Dealer.png
+size: 684,684
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Coin
+  rotate: true
+  xy: 2, 406
+  size: 273, 280
+  orig: 273, 280
+  offset: 0, 0
+  index: -1
+Frame
+  rotate: false
+  xy: 229, 168
+  size: 223, 44
+  orig: 223, 44
+  offset: 0, 0
+  index: -1
+Frame_ef/Frame_ef_00
+  rotate: true
+  xy: 566, 454
+  size: 225, 46
+  orig: 225, 46
+  offset: 0, 0
+  index: -1
+Frame_ef/Frame_ef_01
+  rotate: true
+  xy: 614, 454
+  size: 225, 46
+  orig: 225, 46
+  offset: 0, 0
+  index: -1
+Frame_ef/Frame_ef_02
+  rotate: false
+  xy: 2, 358
+  size: 225, 46
+  orig: 225, 46
+  offset: 0, 0
+  index: -1
+Frame_ef/Frame_ef_03
+  rotate: false
+  xy: 229, 358
+  size: 225, 46
+  orig: 225, 46
+  offset: 0, 0
+  index: -1
+Frame_ef/Frame_ef_04
+  rotate: false
+  xy: 456, 358
+  size: 225, 46
+  orig: 225, 46
+  offset: 0, 0
+  index: -1
+Frame_ef/Frame_ef_05
+  rotate: false
+  xy: 2, 310
+  size: 225, 46
+  orig: 225, 46
+  offset: 0, 0
+  index: -1
+Frame_ef/Frame_ef_06
+  rotate: false
+  xy: 229, 310
+  size: 225, 46
+  orig: 225, 46
+  offset: 0, 0
+  index: -1
+Frame_ef/Frame_ef_07
+  rotate: false
+  xy: 456, 310
+  size: 225, 46
+  orig: 225, 46
+  offset: 0, 0
+  index: -1
+Frame_ef/Frame_ef_08
+  rotate: false
+  xy: 2, 262
+  size: 225, 46
+  orig: 225, 46
+  offset: 0, 0
+  index: -1
+Frame_ef/Frame_ef_09
+  rotate: false
+  xy: 229, 262
+  size: 225, 46
+  orig: 225, 46
+  offset: 0, 0
+  index: -1
+Frame_ef/Frame_ef_10
+  rotate: false
+  xy: 456, 262
+  size: 225, 46
+  orig: 225, 46
+  offset: 0, 0
+  index: -1
+Frame_ef/Frame_ef_11
+  rotate: false
+  xy: 2, 214
+  size: 225, 46
+  orig: 225, 46
+  offset: 0, 0
+  index: -1
+Frame_ef/Frame_ef_12
+  rotate: false
+  xy: 229, 214
+  size: 225, 46
+  orig: 225, 46
+  offset: 0, 0
+  index: -1
+Frame_ef/Frame_ef_13
+  rotate: false
+  xy: 456, 214
+  size: 225, 46
+  orig: 225, 46
+  offset: 0, 0
+  index: -1
+Frame_ef/Frame_ef_14
+  rotate: false
+  xy: 2, 166
+  size: 225, 46
+  orig: 225, 46
+  offset: 0, 0
+  index: -1
+Heo
+  rotate: true
+  xy: 454, 6
+  size: 206, 218
+  orig: 206, 218
+  offset: 0, 0
+  index: -1
+Money
+  rotate: false
+  xy: 2, 37
+  size: 168, 71
+  orig: 168, 71
+  offset: 0, 0
+  index: -1
+Money_A
+  rotate: true
+  xy: 365, 11
+  size: 99, 65
+  orig: 99, 65
+  offset: 0, 0
+  index: -1
+Rope
+  rotate: true
+  xy: 185, 69
+  size: 41, 178
+  orig: 41, 178
+  offset: 0, 0
+  index: -1
+Sparkle
+  rotate: false
+  xy: 566, 407
+  size: 46, 45
+  orig: 46, 45
+  offset: 0, 0
+  index: -1
+Table
+  rotate: true
+  xy: 284, 406
+  size: 273, 280
+  orig: 273, 280
+  offset: 0, 0
+  index: -1
+Text_JackPot
+  rotate: false
+  xy: 229, 112
+  size: 181, 54
+  orig: 181, 54
+  offset: 0, 0
+  index: -1
+Text_JackPot_ef
+  rotate: false
+  xy: 2, 110
+  size: 181, 54
+  orig: 181, 54
+  offset: 0, 0
+  index: -1

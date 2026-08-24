@@ -1,0 +1,405 @@
+
+UI_button_normal.png
+size: 1024,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+btn_DATCUOC/Light_green
+  rotate: false
+  xy: 369, 339
+  size: 284, 72
+  orig: 298, 72
+  offset: 7, 0
+  index: -1
+btn_DATCUOC/Light_red
+  rotate: true
+  xy: 289, 94
+  size: 284, 72
+  orig: 298, 72
+  offset: 7, 0
+  index: -1
+btn_DATCUOC/autolanding_button_glow
+  rotate: false
+  xy: 378, 491
+  size: 323, 116
+  orig: 331, 125
+  offset: 4, 5
+  index: -1
+btn_DATCUOC/btn_Datcuoc_red_1
+  rotate: false
+  xy: 2, 373
+  size: 285, 72
+  orig: 285, 72
+  offset: 0, 0
+  index: -1
+btn_DATCUOC/dim_light_center
+  rotate: true
+  xy: 1012, 428
+  size: 47, 10
+  orig: 63, 11
+  offset: 8, 1
+  index: -1
+btn_DATCUOC/dim_light_conner_green
+  rotate: false
+  xy: 2, 151
+  size: 282, 72
+  orig: 298, 72
+  offset: 8, 0
+  index: -1
+btn_DATCUOC/dim_light_conner_red
+  rotate: false
+  xy: 2, 77
+  size: 282, 72
+  orig: 298, 72
+  offset: 8, 0
+  index: -1
+btn_DATCUOC/eff_star_glow
+  rotate: false
+  xy: 428, 132
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+btn_DATCUOC/glow
+  rotate: true
+  xy: 655, 151
+  size: 197, 38
+  orig: 298, 72
+  offset: 51, 0
+  index: -1
+btn_DATCUOC/light_edge
+  rotate: false
+  xy: 697, 300
+  size: 221, 72
+  orig: 298, 72
+  offset: 38, 0
+  index: -1
+btn_DATCUOC/main_btn_green
+  rotate: false
+  xy: 2, 299
+  size: 284, 72
+  orig: 297, 72
+  offset: 6, 0
+  index: -1
+btn_DATCUOC/main_btn_orange
+  rotate: false
+  xy: 2, 225
+  size: 284, 72
+  orig: 298, 72
+  offset: 7, 0
+  index: -1
+btn_DATCUOC/pieces/crack_light
+  rotate: false
+  xy: 2, 447
+  size: 374, 160
+  orig: 395, 180
+  offset: 11, 10
+  index: -1
+btn_DATCUOC/pieces/pieces_2
+  rotate: false
+  xy: 703, 530
+  size: 290, 77
+  orig: 292, 83
+  offset: 1, 3
+  index: -1
+btn_DATCUOC/pieces/pieces_3
+  rotate: false
+  xy: 703, 452
+  size: 290, 76
+  orig: 293, 82
+  offset: 1, 3
+  index: -1
+btn_DATCUOC/pieces/pieces_4
+  rotate: false
+  xy: 378, 413
+  size: 290, 76
+  orig: 294, 82
+  offset: 2, 3
+  index: -1
+btn_DATCUOC/pieces/pieces_red_1
+  rotate: false
+  xy: 701, 374
+  size: 289, 76
+  orig: 289, 76
+  offset: 0, 0
+  index: -1
+btn_DATCUOC/tt_1
+  rotate: false
+  xy: 695, 180
+  size: 146, 51
+  orig: 147, 51
+  offset: 0, 0
+  index: -1
+btn_DATCUOC/tt_2
+  rotate: false
+  xy: 363, 242
+  size: 116, 56
+  orig: 119, 56
+  offset: 3, 0
+  index: -1
+btn_DATCUOC/tt_3
+  rotate: false
+  xy: 695, 126
+  size: 137, 52
+  orig: 141, 53
+  offset: 1, 1
+  index: -1
+btn_DATCUOC/tt_4
+  rotate: false
+  xy: 481, 217
+  size: 90, 62
+  orig: 91, 62
+  offset: 1, 0
+  index: -1
+btn_auto_ruttien/base
+  rotate: false
+  xy: 695, 233
+  size: 188, 65
+  orig: 188, 65
+  offset: 0, 0
+  index: -1
+btn_auto_ruttien/corner_glow
+  rotate: false
+  xy: 771, 11
+  size: 55, 52
+  orig: 70, 59
+  offset: 15, 7
+  index: -1
+btn_auto_ruttien/corner_glow1
+  rotate: true
+  xy: 885, 242
+  size: 56, 33
+  orig: 76, 40
+  offset: 16, 0
+  index: -1
+btn_auto_ruttien/corner_glow3
+  rotate: true
+  xy: 608, 100
+  size: 61, 38
+  orig: 86, 49
+  offset: 14, 0
+  index: -1
+btn_auto_ruttien/corner_glow4
+  rotate: true
+  xy: 670, 448
+  size: 41, 29
+  orig: 57, 40
+  offset: 0, 11
+  index: -1
+btn_auto_ruttien/dot_active
+  rotate: false
+  xy: 995, 460
+  size: 15, 15
+  orig: 15, 15
+  offset: 0, 0
+  index: -1
+btn_auto_ruttien/dot_inactive
+  rotate: false
+  xy: 995, 443
+  size: 15, 15
+  orig: 15, 15
+  offset: 0, 0
+  index: -1
+btn_auto_ruttien/flap1
+  rotate: false
+  xy: 655, 350
+  size: 40, 61
+  orig: 192, 69
+  offset: 150, 3
+  index: -1
+btn_auto_ruttien/flap2
+  rotate: true
+  xy: 573, 222
+  size: 57, 65
+  orig: 192, 69
+  offset: 133, 2
+  index: -1
+btn_auto_ruttien/flap3
+  rotate: false
+  xy: 289, 380
+  size: 78, 65
+  orig: 192, 69
+  offset: 112, 2
+  index: -1
+btn_auto_ruttien/flap4
+  rotate: false
+  xy: 920, 307
+  size: 101, 65
+  orig: 192, 69
+  offset: 89, 2
+  index: -1
+btn_auto_ruttien/flap5
+  rotate: true
+  xy: 843, 112
+  size: 119, 65
+  orig: 192, 69
+  offset: 71, 2
+  index: -1
+btn_auto_ruttien/flap6
+  rotate: false
+  xy: 501, 281
+  size: 135, 56
+  orig: 192, 69
+  offset: 55, 11
+  index: -1
+btn_auto_ruttien/flap7
+  rotate: false
+  xy: 363, 300
+  size: 136, 37
+  orig: 192, 69
+  offset: 45, 30
+  index: -1
+btn_auto_ruttien/flap8
+  rotate: true
+  xy: 995, 477
+  size: 130, 16
+  orig: 192, 69
+  offset: 27, 51
+  index: -1
+fire/1
+  rotate: true
+  xy: 480, 157
+  size: 58, 62
+  orig: 66, 69
+  offset: 0, 5
+  index: -1
+fire/10
+  rotate: true
+  xy: 573, 163
+  size: 57, 64
+  orig: 66, 69
+  offset: 0, 5
+  index: -1
+fire/11
+  rotate: true
+  xy: 363, 184
+  size: 56, 64
+  orig: 66, 69
+  offset: 0, 5
+  index: -1
+fire/12
+  rotate: true
+  xy: 544, 107
+  size: 54, 62
+  orig: 66, 69
+  offset: 1, 5
+  index: -1
+fire/13
+  rotate: false
+  xy: 425, 61
+  size: 51, 60
+  orig: 66, 69
+  offset: 2, 5
+  index: -1
+fire/14
+  rotate: false
+  xy: 429, 182
+  size: 49, 58
+  orig: 66, 69
+  offset: 3, 5
+  index: -1
+fire/15
+  rotate: true
+  xy: 833, 57
+  size: 53, 58
+  orig: 66, 69
+  offset: 3, 5
+  index: -1
+fire/16
+  rotate: false
+  xy: 363, 123
+  size: 63, 59
+  orig: 66, 69
+  offset: 3, 5
+  index: -1
+fire/17
+  rotate: true
+  xy: 478, 34
+  size: 59, 60
+  orig: 66, 69
+  offset: 5, 5
+  index: -1
+fire/18
+  rotate: true
+  xy: 710, 10
+  size: 57, 59
+  orig: 66, 69
+  offset: 6, 5
+  index: -1
+fire/19
+  rotate: true
+  xy: 478, 95
+  size: 60, 61
+  orig: 66, 69
+  offset: 1, 5
+  index: -1
+fire/2
+  rotate: true
+  xy: 541, 49
+  size: 56, 61
+  orig: 66, 69
+  offset: 0, 5
+  index: -1
+fire/3
+  rotate: true
+  xy: 710, 69
+  size: 55, 60
+  orig: 66, 69
+  offset: 0, 5
+  index: -1
+fire/4
+  rotate: false
+  xy: 772, 65
+  size: 59, 59
+  orig: 66, 69
+  offset: 1, 5
+  index: -1
+fire/5
+  rotate: false
+  xy: 348, 3
+  size: 60, 57
+  orig: 66, 69
+  offset: 1, 5
+  index: -1
+fire/6
+  rotate: false
+  xy: 363, 62
+  size: 60, 59
+  orig: 66, 69
+  offset: 1, 5
+  index: -1
+fire/7
+  rotate: true
+  xy: 286, 34
+  size: 58, 60
+  orig: 66, 69
+  offset: 2, 5
+  index: -1
+fire/8
+  rotate: true
+  xy: 410, 2
+  size: 57, 60
+  orig: 66, 69
+  offset: 2, 5
+  index: -1
+fire/9
+  rotate: true
+  xy: 648, 67
+  size: 57, 60
+  orig: 66, 69
+  offset: 1, 5
+  index: -1
+spot
+  rotate: false
+  xy: 920, 206
+  size: 99, 99
+  orig: 119, 119
+  offset: 10, 10
+  index: -1
+spot2
+  rotate: true
+  xy: 910, 106
+  size: 98, 99
+  orig: 119, 119
+  offset: 11, 10
+  index: -1

@@ -1,0 +1,62 @@
+
+VIP.png
+size: 512,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+AS
+  rotate: false
+  xy: 251, 122
+  size: 115, 120
+  orig: 119, 128
+  offset: 2, 4
+  index: -1
+Haoquang
+  rotate: false
+  xy: 2, 253
+  size: 145, 117
+  orig: 147, 121
+  offset: 1, 1
+  index: -1
+Star
+  rotate: true
+  xy: 2, 65
+  size: 51, 47
+  orig: 53, 50
+  offset: 1, 1
+  index: -1
+VIP
+  rotate: false
+  xy: 123, 174
+  size: 126, 68
+  orig: 131, 72
+  offset: 3, 2
+  index: -1
+VIP copy
+  rotate: true
+  xy: 123, 64
+  size: 108, 48
+  orig: 110, 50
+  offset: 1, 1
+  index: -1
+icoN_LIGHT
+  rotate: true
+  xy: 2, 118
+  size: 133, 119
+  orig: 162, 164
+  offset: 16, 25
+  index: -1
+icon
+  rotate: false
+  xy: 149, 244
+  size: 126, 126
+  orig: 126, 126
+  offset: 0, 0
+  index: -1
+quan
+  rotate: false
+  xy: 277, 277
+  size: 93, 93
+  orig: 95, 95
+  offset: 1, 1
+  index: -1

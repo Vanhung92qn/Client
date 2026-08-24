@@ -1,0 +1,76 @@
+
+sicbo.png
+size: 1024,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+FX
+  rotate: false
+  xy: 2, 2
+  size: 493, 493
+  orig: 493, 493
+  offset: 0, 0
+  index: -1
+SICBO
+  rotate: false
+  xy: 497, 11
+  size: 195, 56
+  orig: 195, 56
+  offset: 0, 0
+  index: -1
+bg
+  rotate: false
+  xy: 497, 69
+  size: 259, 426
+  orig: 259, 426
+  offset: 0, 0
+  index: -1
+c1
+  rotate: false
+  xy: 984, 455
+  size: 34, 40
+  orig: 34, 40
+  offset: 0, 0
+  index: -1
+c2
+  rotate: false
+  xy: 694, 19
+  size: 58, 48
+  orig: 58, 48
+  offset: 0, 0
+  index: -1
+c3
+  rotate: false
+  xy: 754, 3
+  size: 55, 47
+  orig: 55, 47
+  offset: 0, 0
+  index: -1
+girl
+  rotate: false
+  xy: 758, 138
+  size: 224, 357
+  orig: 224, 357
+  offset: 0, 0
+  index: -1
+xx1
+  rotate: false
+  xy: 758, 52
+  size: 93, 84
+  orig: 93, 84
+  offset: 0, 0
+  index: -1
+xx2
+  rotate: false
+  xy: 932, 66
+  size: 71, 70
+  orig: 71, 70
+  offset: 0, 0
+  index: -1
+xx3
+  rotate: false
+  xy: 853, 66
+  size: 77, 70
+  orig: 77, 70
+  offset: 0, 0
+  index: -1

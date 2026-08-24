@@ -52,24 +52,19 @@
             }
 
             this.lbRequestID.string = '#' + item.RequestID;
-            if (item.Code !== null) {
 
-                switch (item.Code.toLowerCase()) {
-                    case 'N/A'.toLowerCase():
-                        this.lbTranID.string = cc.LoginController.getInstance().getNickname();
-                        break;
-                    case 'VIEW INBOX'.toLowerCase():
-                        this.lbTranID.string = 'THẤT BẠI liên hệ CSKH để được hỗ trợ\n Xin Cảm Ơn ! ';
-                        break;
-                    case 'ok'.toLowerCase():
-                        this.lbTranID.string = 'Thông qua';
-                        break;
-                    default:
-                        this.lbTranID.string = item.Code;
-                        break;
-                }
+            // Ghi chu (lbTranID) theo TRANG THAI:
+            //  - Thanh cong  -> bao thanh cong
+            //  - Dang xu ly  -> bao dang xu ly
+            //  - Tu choi/huy -> hien LY DO admin nhap (item.RejectReason), khong co thi "Lien he CSKH"
+            var _st = '' + item.Status;
+            var _reason = ('' + (item.RejectReason || '')).trim();
+            if (_st === cc.BankState.SUCCESS) {
+                this.lbTranID.string = 'Giao dịch thành công';
+            } else if (_st === cc.BankState.PENDING || _st === cc.BankState.PENDING_BANK) {
+                this.lbTranID.string = 'Đang xử lý, vui lòng chờ';
             } else {
-                this.lbTranID.string = '';
+                this.lbTranID.string = _reason.length > 0 ? _reason : 'Liên hệ CSKH để được hỗ trợ';
             }
 
             this.lbValue.string = cc.Tool.getInstance().formatNumber(item.AmountGame);

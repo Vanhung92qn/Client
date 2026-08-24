@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "6a43ea65-b50c-4edf-8b5a-b18ad7751ba6",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 1089,
+  "height": 573,
+  "platformSettings": {},
+  "subMetas": {
+    "Aviator_Faq_1": {
+      "ver": "1.0.6",
+      "uuid": "83fe2739-b92f-450a-85eb-36547d9903cd",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "6a43ea65-b50c-4edf-8b5a-b18ad7751ba6",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -66,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 957,
+      "height": 573,
+      "rawWidth": 1089,
+      "rawHeight": 573,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

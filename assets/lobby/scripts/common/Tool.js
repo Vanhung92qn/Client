@@ -127,7 +127,8 @@
         };
 
         Tool.prototype.removeDot = function (val) {
-            return parseInt((val.split(',').join("")).split('+').join(""));
+            // formatNumber dung dau CHAM ngan nghin (500.000) -> phai strip ca '.' , ',' va '+'
+            return parseInt(String(val).split('.').join('').split(',').join('').split('+').join(''));
         };
 
         Tool.prototype.formatRichTextGray = function (str1, str2) {
@@ -530,6 +531,28 @@
         Tool.prototype.pushZero = function (number) {
             number = parseInt(number);
             return (number < 10) ? "0"+number : number;
+        };
+
+        // Aviator: format số K/M (1500->1.5K, 2000000->2M). Copy từ ClientAVIATOR (dev Tool thiếu).
+        Tool.prototype.nFormatter = function (num, digits) {
+            if (!digits) {
+                digits = 2;
+            }
+            var lookup = [
+                { value: 1, symbol: "" },
+                { value: 1e3, symbol: "K" },
+                { value: 1e6, symbol: "M" },
+            ];
+            var rx = /\.0+$|(\.[0-9]*[1-9])0+$/;
+            var item = lookup
+                .slice()
+                .reverse()
+                .find(function (item) {
+                    return num >= item.value;
+                });
+            return item
+                ? (num / item.value).toFixed(digits).replace(rx, "$1") + item.symbol
+                : "0";
         };
         return Tool;
 

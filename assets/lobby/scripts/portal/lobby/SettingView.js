@@ -11,58 +11,50 @@ var netConfig = require('NetConfig');
 
         // use this for initialization
         onLoad: function () {
-            this.animationSetting = this.node.getComponent(cc.Animation);
             cc.LobbyController.getInstance().setSettingView(this);
             this.node.zIndex = cc.NoteDepth.SETTING;
 			// this.animation = this.node.getComponent(cc.Animation);
         },
-		
-        
+
+
         openSetting: function () {
-            this.animationSetting.play('openSettingMenu');
+            // Hien menu truc tiep, khong dung animation
+            var seting = this.node.getChildByName('seting');
+            seting.scale = 1;
+            seting.active = true;
         },
 
         closeSetting: function () {
-            this.animationSetting.play('closeSettingMenu');
+            this.node.getChildByName('seting').active = false;
         },
 
-        onLogoutResponse: function () {
-            cc.LobbyController.getInstance().resetTopBar();
+        // Optimistic: dọn dẹp đã chạy ngay ở confirmLogoutClicked -> server callback KHÔNG cần làm gì.
+        onLogoutResponse: function () { /* no-op */ },
 
+        _logoutCleanup: function () {
+            // [TỐC ĐỘ #3+#5] Đặt loginState=false + xoá token TRƯỚC -> refreshAccountInfo (#5) tự bỏ qua,
+            // tránh ~13 GetAccountInfo thừa (gọi với token null) dội ra khi destroy các view.
+            cc.LoginController.getInstance().setLoginState(false);
+            cc.ServerConnector.getInstance().setToken(null);
+            cc.Tool.getInstance().setItem("@atn", null);
+
+            cc.LobbyController.getInstance().resetTopBar();
             cc.BalanceController.getInstance().updateRealBalance(0);
             cc.BalanceController.getInstance().updateBalance(0);
-
-            //xoa token
-            cc.ServerConnector.getInstance().setToken(null);
-            //clear local token
-            cc.Tool.getInstance().setItem("@atn", null);
-            //cc.ServerConnector.getInstance().setToken(cc.Tool.getInstance().getItem("@atn"));
 
             cc.LobbyController.getInstance().destroyAllMiniGameView();
 
             cc.HubController.getInstance().disconnectPortalHub();
-
-
             //disconnect hub tx
             cc.TaiXiuController.getInstance().disconnectAndLogout();
-            //connect lai voi token = null
+            //connect lai voi token = null (guest)
             cc.TaiXiuController.getInstance().connectHubTx();
 
-            cc.LoginController.getInstance().setLoginState(false);
             cc.PopupController.getInstance().closePopup();
             cc.LobbyController.getInstance().updateUILogin(true);
             //cc.LobbyController.getInstance().createLoginView();
             cc.LobbyController.getInstance().destroyAccountView();
             cc.LobbyController.getInstance().destroyShopView();
-
-            //EVENT SAN KHO BAU
-            // if (!cc.Config.getInstance().getDomainVK().includes(netConfig.HOST)) {
-            //     cc.TreasureController.getInstance().resetCarrot();
-            // }
-
-            // if (cc.sys.isNative && sdkbox) {
-            //     sdkbox.PluginFacebook.logout();
-            // }
 
             cc.DDNA.getInstance().removeSessionId();
         },
@@ -137,8 +129,12 @@ var netConfig = require('NetConfig');
         },
 
         confirmLogoutClicked: function () {
-            var logoutCommand = new cc.LogoutCommand;
-            logoutCommand.execute(this);
+            // [LOGOUT TỨC THÌ] Bug gốc (showLobbyAfterMinigame gọi checkLogin -> tự tạo login view) ĐÃ fix
+            // (đổi sang getLoginState) -> optimistic giờ an toàn. Gọi Logout khi token CÒN hợp lệ (trước khi
+            // _logoutCleanup xoá token) -> server trả 1, không -1001. Dọn + về sảnh guest NGAY, không chờ server.
+            cc.PopupController.getInstance().closePopup();
+            new cc.LogoutCommand().execute(this);   // gửi ngầm, token còn hợp lệ
+            this._logoutCleanup();                    // dọn dẹp + về sảnh guest TỨC THÌ
         },
 
         cancelLogoutClicked: function () {

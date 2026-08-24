@@ -1,0 +1,13 @@
+{
+  "ver": "1.1.3",
+  "uuid": "ec704629-4b17-4b0f-9e0f-8bac13de8913",
+  "importer": "folder",
+  "isBundle": true,
+  "bundleName": "minipoker",
+  "priority": 1,
+  "compressionType": {},
+  "optimizeHotUpdate": {},
+  "inlineSpriteFrames": {},
+  "isRemoteBundle": {},
+  "subMetas": {}
+}

@@ -1,0 +1,55 @@
+
+text.png
+size: 640,636
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Shuffle_a01
+  rotate: true
+  xy: 531, 308
+  size: 326, 105
+  orig: 326, 105
+  offset: 0, 0
+  index: -1
+Shuffle_a01_blur
+  rotate: false
+  xy: 2, 89
+  size: 326, 105
+  orig: 326, 105
+  offset: 0, 0
+  index: -1
+Shuffle_wwww
+  rotate: false
+  xy: 2, 24
+  size: 339, 63
+  orig: 339, 63
+  offset: 0, 0
+  index: -1
+停止下注
+  rotate: false
+  xy: 2, 306
+  size: 527, 108
+  orig: 527, 108
+  offset: 0, 0
+  index: -1
+停止下注_BULR
+  rotate: false
+  xy: 2, 196
+  size: 527, 108
+  orig: 527, 108
+  offset: 0, 0
+  index: -1
+開始下注
+  rotate: false
+  xy: 2, 526
+  size: 527, 108
+  orig: 527, 108
+  offset: 0, 0
+  index: -1
+開始下注_BLUR
+  rotate: false
+  xy: 2, 416
+  size: 527, 108
+  orig: 527, 108
+  offset: 0, 0
+  index: -1

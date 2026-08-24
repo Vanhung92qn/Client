@@ -254,7 +254,19 @@ var netConfig = require('NetConfig');
         },
 
         portalNegotiate: function () {
-            cc.PopupController.getInstance().showBusy();
+            // [TỐC ĐỘ #1] KHÔNG showBusy: sảnh đã hiện sau loginSuccess (balance/VIP/avatar từ RAM),
+            // negotiate + connect Portal hub chạy NGẦM, không khoá màn hình login.
+
+            // [TỐC ĐỘ #3] Nếu Login/CreateAccount đã trả ConnectionToken -> mở thẳng WebSocket,
+            // BỎ round-trip GET /signalr/negotiate. Consume 1 lần (set null) -> reconnect sau dùng this.connectionToken.
+            var preToken = cc.LoginController.getInstance().getPortalConnectionToken();
+            if (preToken) {
+                cc.LoginController.getInstance().setPortalConnectionToken(null);
+                this.onPortalNegotiateResponse({ ConnectionToken: preToken });
+                return;
+            }
+
+            // Fallback: server cũ chưa trả token -> negotiate như cũ (vẫn chạy đúng).
             var portalNegotiateCommand = new cc.PortalNegotiateCommand;
             portalNegotiateCommand.execute(this);
         },
@@ -301,7 +313,7 @@ var netConfig = require('NetConfig');
         },
 
         onHubClose: function (obj) {
-            //reconnect            
+            //reconnect
             if ((new Date()).getTime() - this.lastTimeReconnect >= netConfig.RECONNECT_TIME * 1000) {
                 this.reconnect();
             } else {
@@ -322,8 +334,9 @@ var netConfig = require('NetConfig');
             cc.HubController.getInstance().setPortalHub(this.portalHub);
 
             this.sendRequestOnHub(cc.MethodHubName.ENTER_LOBBY);
-            cc.PopupController.getInstance().hideBusy();
-
+            // [TỐC ĐỘ #1] Bỏ hideBusy() ở đây: Portal hub connect ngầm không bật spinner nữa.
+            // Hub mở ~1-2s sau login -> nếu hideBusy ở đây dễ lỡ tay tắt spinner của luồng khác
+            // (vd user vừa bấm vào 1 game ngay sau khi login).
         },
 
         onHubMessage: function (response) {

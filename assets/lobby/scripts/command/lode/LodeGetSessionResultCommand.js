@@ -11,8 +11,8 @@
         }
 
         LodeGetSessionResultCommand.prototype.execute = function (controller, openDate) {
-            let url = '/api/Account/GetSessionResult?openDate='+openDate;
-            let subDomainName = cc.SubdomainName.PORTAL;
+            let url = 'api/Xoso/GetSessionResult?openDate='+openDate;
+            let subDomainName = cc.SubdomainName.LODE;
             return cc.ServerConnector.getInstance().sendRequest(subDomainName, url, function (response) {
                 var obj = JSON.parse(response);
                 return controller.onGetHistoryResponse(obj);

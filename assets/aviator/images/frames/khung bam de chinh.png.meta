@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "9c57cd06-d3b8-4bf4-b927-f2b9da3a0981",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 312,
+  "height": 239,
+  "platformSettings": {},
+  "subMetas": {
+    "khung bam de chinh": {
+      "ver": "1.0.6",
+      "uuid": "1e51ea51-a79b-42a3-95a8-60a90b1fc67b",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "9c57cd06-d3b8-4bf4-b927-f2b9da3a0981",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0.5,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 312,
+      "height": 238,
+      "rawWidth": 312,
+      "rawHeight": 239,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

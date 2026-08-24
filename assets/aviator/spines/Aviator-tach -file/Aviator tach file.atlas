@@ -1,0 +1,160 @@
+
+Aviator tach file.png
+size: 1916,480
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Layer 20
+  rotate: false
+  xy: 1630, 98
+  size: 137, 93
+  orig: 160, 115
+  offset: 10, 11
+  index: -1
+as nong
+  rotate: false
+  xy: 1769, 175
+  size: 136, 303
+  orig: 622, 661
+  offset: 477, 202
+  index: -1
+body
+  rotate: false
+  xy: 1769, 22
+  size: 109, 76
+  orig: 109, 76
+  offset: 0, 0
+  index: -1
+canh duoi
+  rotate: true
+  xy: 1902, 152
+  size: 21, 8
+  orig: 21, 8
+  offset: 0, 0
+  index: -1
+canh phai
+  rotate: false
+  xy: 1880, 8
+  size: 32, 14
+  orig: 32, 14
+  offset: 0, 0
+  index: -1
+canh trai
+  rotate: true
+  xy: 1880, 24
+  size: 74, 34
+  orig: 74, 34
+  offset: 0, 0
+  index: -1
+dich
+  rotate: false
+  xy: 1769, 100
+  size: 111, 73
+  orig: 194, 123
+  offset: 41, 25
+  index: -1
+gio
+  rotate: false
+  xy: 426, 3
+  size: 78, 4
+  orig: 80, 6
+  offset: 1, 1
+  index: -1
+laser
+  rotate: false
+  xy: 2, 193
+  size: 1765, 285
+  orig: 1852, 361
+  offset: 30, 38
+  index: -1
+no 1
+  rotate: true
+  xy: 1630, 8
+  size: 88, 101
+  orig: 90, 103
+  offset: 1, 1
+  index: -1
+no 2
+  rotate: false
+  xy: 1505, 50
+  size: 123, 141
+  orig: 125, 143
+  offset: 1, 1
+  index: -1
+no 3
+  rotate: false
+  xy: 1209, 16
+  size: 168, 175
+  orig: 170, 177
+  offset: 1, 1
+  index: -1
+no 4
+  rotate: false
+  xy: 836, 2
+  size: 185, 189
+  orig: 187, 191
+  offset: 1, 1
+  index: -1
+no 5
+  rotate: false
+  xy: 1023, 2
+  size: 184, 189
+  orig: 186, 191
+  offset: 1, 1
+  index: -1
+no 6
+  rotate: false
+  xy: 219, 8
+  size: 205, 183
+  orig: 207, 185
+  offset: 1, 1
+  index: -1
+no 7
+  rotate: false
+  xy: 426, 9
+  size: 205, 182
+  orig: 205, 183
+  offset: 0, 1
+  index: -1
+no 8
+  rotate: false
+  xy: 2, 16
+  size: 215, 157
+  orig: 215, 158
+  offset: 0, 0
+  index: -1
+no 9
+  rotate: false
+  xy: 633, 38
+  size: 201, 153
+  orig: 201, 155
+  offset: 0, 1
+  index: -1
+outer glow
+  rotate: true
+  xy: 1379, 24
+  size: 167, 124
+  orig: 174, 131
+  offset: 4, 3
+  index: -1
+tia lua 1
+  rotate: true
+  xy: 1882, 126
+  size: 47, 18
+  orig: 52, 22
+  offset: 3, 2
+  index: -1
+tia lua 2
+  rotate: true
+  xy: 1733, 18
+  size: 78, 26
+  orig: 82, 30
+  offset: 2, 2
+  index: -1
+vong trin
+  rotate: true
+  xy: 1882, 108
+  size: 16, 28
+  orig: 18, 30
+  offset: 1, 1
+  index: -1

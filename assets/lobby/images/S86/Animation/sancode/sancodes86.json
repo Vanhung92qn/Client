@@ -1,0 +1,82 @@
+{
+"skeleton": {
+	"hash": "uf2hQpYoMBAlPfzqLIrGpG7Ra3Q",
+	"spine": "3.8.75",
+	"x": -194.71,
+	"y": -1,
+	"width": 92.66,
+	"height": 67.65,
+	"images": "C:/Users/Admin/Downloads/vua24.club/PNG",
+	"audio": "C:\\Users\\Admin\\Downloads\\vua24.club"
+},
+"bones": [
+	{ "name": "root" },
+	{ "name": "bone", "parent": "root", "x": -125.41, "y": 29.8 },
+	{ "name": "arrow2", "parent": "bone", "x": -20.18, "y": 4.14 },
+	{ "name": "sancode", "parent": "bone" }
+],
+"slots": [
+	{ "name": "sancode", "bone": "sancode" }
+],
+"skins": [
+	{
+		"name": "default",
+		"attachments": {
+			"sancode": {
+				"sancode": { "x": 0.5, "scaleX": 0.5, "scaleY": 0.5, "width": 661, "height": 512 }
+			}
+		}
+	}
+],
+"animations": {
+	"animation": {
+		"slots": {
+			"sancode": {
+				"attachment": [
+					{ "name": "sancode" }
+				]
+			}
+		},
+		"bones": {
+			"bone": {
+				"rotate": [
+					{ "angle": -0.29, "curve": 0.31, "c2": 0.62, "c3": 0.64 },
+					{ "time": 0.2, "curve": 0.36, "c3": 0.596 },
+					{ "time": 1.2, "angle": -3.35, "curve": 0.372, "c3": 0.641, "c4": 0.71 },
+					{ "time": 2, "angle": -0.29 }
+				],
+				"translate": [
+					{ "curve": 0.25, "c3": 0.75 },
+					{ "time": 1, "y": -2.01, "curve": 0.25, "c3": 0.75 },
+					{ "time": 2 }
+				],
+				"scale": [
+					{ "x": 1.032, "y": 1.032, "curve": 0.378, "c2": 0.52, "c3": 0.748 },
+					{ "time": 0.4667, "curve": 0.25, "c3": 0.75 },
+					{ "time": 1.4667, "x": 1.07, "y": 1.07, "curve": 0.248, "c3": 0.628, "c4": 0.52 },
+					{ "time": 2, "x": 1.032, "y": 1.032 }
+				]
+			},
+			"sancode": {
+				"rotate": [
+					{ "angle": -0.29, "curve": 0.31, "c2": 0.62, "c3": 0.64 },
+					{ "time": 0.2, "curve": 0.36, "c3": 0.596 },
+					{ "time": 1.2, "angle": -3.35, "curve": 0.372, "c3": 0.641, "c4": 0.71 },
+					{ "time": 2, "angle": -0.29 }
+				],
+				"translate": [
+					{ "curve": 0.25, "c3": 0.75 },
+					{ "time": 1, "y": -2.01, "curve": 0.25, "c3": 0.75 },
+					{ "time": 2 }
+				],
+				"scale": [
+					{ "x": 1.032, "y": 1.032, "curve": 0.378, "c2": 0.52, "c3": 0.748 },
+					{ "time": 0.4667, "curve": 0.25, "c3": 0.75 },
+					{ "time": 1.4667, "x": 1.07, "y": 1.07, "curve": 0.248, "c3": 0.628, "c4": 0.52 },
+					{ "time": 2, "x": 1.032, "y": 1.032 }
+				]
+			}
+		}
+	}
+}
+}

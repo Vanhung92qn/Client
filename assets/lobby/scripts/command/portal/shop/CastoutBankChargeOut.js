@@ -10,7 +10,7 @@
         }
 
         CastoutBankChargeOut.prototype.execute = function (controller) {
-            var url = 'api/CastOutBankNew/ChargeOutNew';
+            var url = 'api/CastOutBank/ChargeOut';
            
             var params = JSON.stringify({
                 SoTk:controller.VarSoTk,
