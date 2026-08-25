@@ -60630,6 +60630,7 @@
     "btnHandle": {
       "__id__": 1277
     },
+    "touchParent": null,
     "_id": "a2uKEeCrtFRqtQQjkHzIAd"
   },
   {
@@ -60753,6 +60754,7 @@
     "btnHandle": {
       "__id__": 1283
     },
+    "touchParent": null,
     "_id": "05q3Q0oYBPnqAzOxFth0Vl"
   },
   {
@@ -61012,6 +61014,7 @@
     "btnHandle": {
       "__id__": 1286
     },
+    "touchParent": null,
     "_id": "fbsiDsQNxJqLk0noVaJwA4"
   },
   {

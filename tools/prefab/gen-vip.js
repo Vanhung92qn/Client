@@ -194,11 +194,13 @@ function buildRankItem(uuidScript) {
         P.label('VIP 1', { size: 24, hAlign: 0, overflow: 1 }),
       ]),
 
-      P.node('lbVpRequired', { size: [220, 30], pos: [-140, 0], ref: 'lbVp', color: C_DIM }, [], [
-        P.label('0 VP', { size: 20, hAlign: 0, overflow: 1 }),
+      // Rong 280 va co chu 18: chuoi day du la "20.000.000 VP · nạp 400tr"
+      // (~25 ky tu). O 220px co chu 20 nhu truoc thi bi cat mat phan nap.
+      P.node('lbVpRequired', { size: [280, 30], pos: [-125, 0], ref: 'lbVp', color: C_DIM }, [], [
+        P.label('0 VP', { size: 18, hAlign: 0, overflow: 1 }),
       ]),
 
-      P.node('lbReward', { size: [240, 32], pos: [140, 0], ref: 'lbReward', color: C_WHITE }, [], [
+      P.node('lbReward', { size: [220, 32], pos: [155, 0], ref: 'lbReward', color: C_WHITE }, [], [
         P.label('—', { size: 22, hAlign: 2, overflow: 1 }),
       ]),
 
@@ -295,10 +297,10 @@ function buildRankTab(uuidScript, uuidItemPrefab) {
         P.node('h1', { size: [200, 26], pos: [-330, 0], color: C_DIM }, [], [
           P.label('Hạng', { size: 17, hAlign: 0, overflow: 1 }),
         ]),
-        P.node('h2', { size: [220, 26], pos: [-140, 0], color: C_DIM }, [], [
-          P.label('VP tích luỹ cần đạt', { size: 17, hAlign: 0, overflow: 1 }),
+        P.node('h2', { size: [280, 26], pos: [-125, 0], color: C_DIM }, [], [
+          P.label('Điều kiện lên hạng', { size: 17, hAlign: 0, overflow: 1 }),
         ]),
-        P.node('h3', { size: [240, 26], pos: [140, 0], color: C_DIM }, [], [
+        P.node('h3', { size: [220, 26], pos: [155, 0], color: C_DIM }, [], [
           P.label('Thưởng thăng hạng', { size: 17, hAlign: 2, overflow: 1 }),
         ]),
       ]),
