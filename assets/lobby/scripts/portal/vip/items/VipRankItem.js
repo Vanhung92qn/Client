@@ -56,15 +56,10 @@ module.exports = cc.Class({
     if (icon && this.spIcon) this.spIcon.spriteFrame = icon;
     this.lbRankName.string = rank.name;
 
-    // Hien CA HAI dieu kien: len hang phai du diem VA du tien nap.
-    // Chi hien moi diem thi nguoi choi cuoc nhieu nap it se khong hieu vi sao
-    // minh du diem ma van khong len hang.
-    if (rank.requiredDeposit > 0) {
-      this.lbVpRequired.string =
-        `${VipModel.formatNumber(rank.vpRequired)} VP · nạp ${VipModel.formatShort(rank.requiredDeposit)}`;
-    } else {
-      this.lbVpRequired.string = `${VipModel.formatNumber(rank.vpRequired)} VP`;
-    }
+    // CO Y chi hien moc diem, KHONG hien tien nap toi thieu tren danh sach
+    // (user quyet dinh 2026-08-25). Dieu kien nap van con hieu luc o server
+    // va van duoc noi ro trong popup khi nguoi choi bam nut ma chua du.
+    this.lbVpRequired.string = `${VipModel.formatNumber(rank.vpRequired)} VP`;
     this.lbReward.string =
       rank.reward > 0 ? VipModel.formatNumber(rank.reward) : '—';
 

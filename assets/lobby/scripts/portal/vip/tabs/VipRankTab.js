@@ -82,21 +82,15 @@ module.exports = cc.Class({
       this.lbProgress.string =
         `${VipModel.formatNumber(vip.vpAccumulated)} / ${VipModel.formatNumber(vip.next.vpRequired)} VP`;
 
-      // Noi ro CON THIEU GI. Nguoi choi cuoc nhieu ma nap it thi da du diem
-      // nhung van khong len hang — bao "con thieu X diem" luc do la sai va
-      // ho se thac mac.
+      // CO Y chi noi ve DIEM, khong nhac toi tien nap o man hinh chinh
+      // (user quyet dinh 2026-08-25). Dieu kien nap van con hieu luc o server.
       const n = vip.next.name;
-      const d = VipModel.formatNumber(vip.depositToNext);
       const p = VipModel.formatNumber(vip.vpToNext);
 
-      if (vip.blockedBy === 'deposit') {
-        this.lbNextHint.string = `Đã đủ điểm — cần nạp thêm ${d}đ để lên ${n}`;
-      } else if (vip.blockedBy === 'both') {
-        this.lbNextHint.string = `Lên ${n} cần thêm ${p} VP và nạp thêm ${d}đ`;
-      } else if (vip.blockedBy === 'point') {
+      if (vip.vpToNext > 0) {
         this.lbNextHint.string = `Còn ${p} VP nữa lên ${n}`;
       } else {
-        this.lbNextHint.string = `Đã đủ điều kiện lên ${n}`;
+        this.lbNextHint.string = `Đã đủ điểm lên ${n}`;
       }
     } else {
       this.barProgress.progress = 1;
