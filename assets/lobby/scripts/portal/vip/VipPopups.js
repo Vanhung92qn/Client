@@ -19,6 +19,8 @@ const ID = {
   VIP: 'vip',
   RAKEBACK: 'rakeback',
   LIXI: 'lixi',
+  /** Man hieu ung mo hong bao — mo chong len tren popup Li xi. */
+  LIXI_OPEN: 'lixiOpen',
 };
 
 const BY_ID = {
@@ -37,10 +39,19 @@ const BY_ID = {
   },
   [ID.LIXI]: {
     id: ID.LIXI,
-    // Chua co backend — mo vao van xem duoc nhung ben trong bao "sap co".
     title: 'LÌ XÌ',
     prefab: 'portal/Lixi/LixiPopup',
     enabled: true,
+  },
+  [ID.LIXI_OPEN]: {
+    id: ID.LIXI_OPEN,
+    title: 'MỞ HỒNG BAO',
+    prefab: 'portal/Lixi/LixiOpenView',
+    enabled: true,
+    // Man hieu ung phai MO CHONG LEN moi lan bam, khong duoc tai su dung
+    // cai dang mo: nguoi choi mo hai hong bao lien tiep thi lan thu hai se
+    // thay lai ket qua cu.
+    allowStack: true,
   },
 };
 
@@ -86,8 +97,8 @@ function open(id, parent) {
 
   const root = parent || cc.director.getScene().getChildByName('Canvas');
 
-  // Dang mo roi thi chi dua len tren
-  if (root) {
+  // Dang mo roi thi chi dua len tren — tru popup khai bao allowStack
+  if (root && !meta.allowStack) {
     const existed = root.getChildByName(meta.nodeName || _nodeNameOf(meta));
     if (existed && existed.isValid) {
       existed.zIndex = cc.NoteDepth.POPUP_PORTAL;
