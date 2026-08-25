@@ -81,8 +81,23 @@ module.exports = cc.Class({
       this.barProgress.progress = vip.progress;
       this.lbProgress.string =
         `${VipModel.formatNumber(vip.vpAccumulated)} / ${VipModel.formatNumber(vip.next.vpRequired)} VP`;
-      this.lbNextHint.string =
-        `Còn ${VipModel.formatNumber(vip.vpToNext)} VP nữa lên ${vip.next.name}`;
+
+      // Noi ro CON THIEU GI. Nguoi choi cuoc nhieu ma nap it thi da du diem
+      // nhung van khong len hang — bao "con thieu X diem" luc do la sai va
+      // ho se thac mac.
+      const n = vip.next.name;
+      const d = VipModel.formatNumber(vip.depositToNext);
+      const p = VipModel.formatNumber(vip.vpToNext);
+
+      if (vip.blockedBy === 'deposit') {
+        this.lbNextHint.string = `Đã đủ điểm — cần nạp thêm ${d}đ để lên ${n}`;
+      } else if (vip.blockedBy === 'both') {
+        this.lbNextHint.string = `Lên ${n} cần thêm ${p} VP và nạp thêm ${d}đ`;
+      } else if (vip.blockedBy === 'point') {
+        this.lbNextHint.string = `Còn ${p} VP nữa lên ${n}`;
+      } else {
+        this.lbNextHint.string = `Đã đủ điều kiện lên ${n}`;
+      }
     } else {
       this.barProgress.progress = 1;
       this.lbProgress.string = `${VipModel.formatNumber(vip.vpAccumulated)} VP`;
@@ -104,7 +119,8 @@ module.exports = cc.Class({
           rank,
           this._iconOf(rank.rankId),
           () => this._onClaimed(),
-          vip.vpAccumulated
+          vip.vpAccumulated,
+          vip.totalDeposit
         );
       }
       this._items.push(node);

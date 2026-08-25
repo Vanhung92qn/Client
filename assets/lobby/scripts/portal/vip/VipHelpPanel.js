@@ -76,6 +76,27 @@ module.exports = cc.Class({
     lines.push('  1. Điểm cược tích luỹ đạt mốc của hạng đó');
     lines.push('  2. Tổng tiền đã nạp đạt mức tối thiểu');
     lines.push('');
+    lines.push('  Cược nhiều mà nạp ít thì vẫn chưa lên hạng —');
+    lines.push('  và ngược lại. Phải đủ cả hai.');
+    lines.push('');
+
+    if (vip) {
+      lines.push('BẠN ĐANG CÓ');
+      lines.push(`  Điểm tích luỹ:  ${f(vip.vpAccumulated)}`);
+      lines.push(`  Đã nạp:         ${f(vip.totalDeposit)}đ`);
+      if (vip.next) {
+        if (vip.blockedBy === 'deposit') {
+          lines.push(`  → Đã đủ điểm, cần nạp thêm ${f(vip.depositToNext)}đ`);
+        } else if (vip.blockedBy === 'both') {
+          lines.push(`  → Cần thêm ${f(vip.vpToNext)} điểm và ${f(vip.depositToNext)}đ nạp`);
+        } else if (vip.blockedBy === 'point') {
+          lines.push(`  → Cần thêm ${f(vip.vpToNext)} điểm nữa`);
+        } else {
+          lines.push('  → Đã đủ điều kiện lên hạng tiếp theo');
+        }
+      }
+      lines.push('');
+    }
 
     // Vi du lay tu chinh bac ke tiep cua nguoi dang xem
     const ex = (vip && vip.next) || null;

@@ -47,14 +47,24 @@ module.exports = cc.Class({
    * @param {number}   vpAccumulated VP tich luy hien tai — de bao con
    *                   thieu bao nhieu khi nguoi choi bam vao bac chua dat
    */
-  setData(rank, icon, onClaimed, vpAccumulated) {
+  setData(rank, icon, onClaimed, vpAccumulated, totalDeposit) {
     this._rank = rank;
     this._onClaimed = onClaimed;
     this._vpAccumulated = Number(vpAccumulated) || 0;
+    this._totalDeposit = Number(totalDeposit) || 0;
 
     if (icon && this.spIcon) this.spIcon.spriteFrame = icon;
     this.lbRankName.string = rank.name;
-    this.lbVpRequired.string = `${VipModel.formatNumber(rank.vpRequired)} VP`;
+
+    // Hien CA HAI dieu kien: len hang phai du diem VA du tien nap.
+    // Chi hien moi diem thi nguoi choi cuoc nhieu nap it se khong hieu vi sao
+    // minh du diem ma van khong len hang.
+    if (rank.requiredDeposit > 0) {
+      this.lbVpRequired.string =
+        `${VipModel.formatNumber(rank.vpRequired)} VP · nạp ${VipModel.formatShort(rank.requiredDeposit)}`;
+    } else {
+      this.lbVpRequired.string = `${VipModel.formatNumber(rank.vpRequired)} VP`;
+    }
     this.lbReward.string =
       rank.reward > 0 ? VipModel.formatNumber(rank.reward) : '—';
 
@@ -124,12 +134,24 @@ module.exports = cc.Class({
     }
 
     if (!r.reached) {
-      const thieu = Math.max(0, r.vpRequired - this._vpAccumulated);
-      cc.PopupController.getInstance().showMessage(
-        `Chưa đủ điều kiện nhận thưởng ${r.name}.\n` +
-        `Cần ${VipModel.formatNumber(r.vpRequired)} VP tích luỹ, ` +
-        `bạn còn thiếu ${VipModel.formatNumber(thieu)} VP.`
-      );
+      // Noi ro thieu DIEM hay thieu NAP — hai thu khac nhau, bao chung chung
+      // thi nguoi choi du diem ma khong len hang se khong hieu vi sao.
+      const thieuVp = Math.max(0, r.vpRequired - this._vpAccumulated);
+      const thieuNap = Math.max(0, r.requiredDeposit - this._totalDeposit);
+      const lines = [`Chưa đủ điều kiện nhận thưởng ${r.name}.`];
+
+      if (thieuVp > 0) {
+        lines.push(`Còn thiếu ${VipModel.formatNumber(thieuVp)} VP` +
+          ` (cược thêm ${VipModel.formatShort(thieuVp * VipModel.VND_PER_POINT)}đ).`);
+      }
+      if (thieuNap > 0) {
+        lines.push(`Còn thiếu ${VipModel.formatNumber(thieuNap)}đ tiền nạp.`);
+      }
+      if (thieuVp <= 0 && thieuNap <= 0) {
+        lines.push('Hạng sẽ được cập nhật ở ván cược tiếp theo.');
+      }
+
+      cc.PopupController.getInstance().showMessage(lines.join('\n'));
       this._shake();
       return;
     }

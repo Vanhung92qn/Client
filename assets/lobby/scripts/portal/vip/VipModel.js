@@ -81,6 +81,8 @@ function parse(res) {
   const raw = Array.isArray(res.ListReWard) ? res.ListReWard : [];
 
   const vpAvailable = Number(res.VP) || 0;
+  /** Tong tien da nap — server tra ve tu 2026-08-25. */
+  const totalDeposit = Number(res.TotalDeposit) || 0;
 
   // Server co the (chua) tra ve hai field nay.
   const hasAccumulated = res.AccumulatedVP !== undefined && res.AccumulatedVP !== null;
@@ -126,8 +128,23 @@ function parse(res) {
 
   let progress = 1;
   let vpToNext = 0;
+  /** Con thieu bao nhieu TIEN NAP de len bac ke tiep. */
+  let depositToNext = 0;
+  /**
+   * Ly do chua len duoc bac ke tiep: 'point' | 'deposit' | 'both' | null.
+   *
+   * Can phan biet ro: nguoi choi cuoc rat nhieu nhung nap it thi DU DIEM ma
+   * van khong len hang. Neu chi bao "con thieu X diem" thi ho se thac mac vi
+   * diem da du roi.
+   */
+  let blockedBy = null;
+
   if (next) {
     vpToNext = Math.max(0, next.vpRequired - vpAccumulated);
+    depositToNext = Math.max(0, next.requiredDeposit - totalDeposit);
+    if (vpToNext > 0 && depositToNext > 0) blockedBy = 'both';
+    else if (vpToNext > 0) blockedBy = 'point';
+    else if (depositToNext > 0) blockedBy = 'deposit';
     // Do tu 0 chu KHONG tu moc bac hien tai, de khop voi nhan
     // "513 / 1.000 VP" hien ngay tren thanh. Neu do tu moc bac thi
     // nhan bao 513/1.000 (nhin nhu quá nua) ma thanh moi chay 2,6%
@@ -139,6 +156,12 @@ function parse(res) {
   return {
     /** VP tieu duoc. */
     vpAvailable,
+    /** Tong tien da nap thanh cong. */
+    totalDeposit,
+    /** Con thieu bao nhieu tien nap de len bac ke tiep. */
+    depositToNext,
+    /** Vi sao chua len bac ke tiep: 'point' | 'deposit' | 'both' | null. */
+    blockedBy,
     /** VP tich luy — quyet dinh bac. Bang vpAvailable neu server chua tra ve. */
     vpAccumulated,
     /**
