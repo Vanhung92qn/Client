@@ -450,28 +450,32 @@ function buildRakebackTab(uuidScript) {
     'VipRakebackTab',
     { size: [W_TAB, H_TAB] },
     [
-      // ── Phan so lieu, an di khi chua co API ──
-      P.node('content', { size: [W_TAB, H_TAB], active: false, ref: 'content' }, [
-        P.node('hero', { size: [940, 150], pos: [0, 130] }, [
-          P.node('bg', { size: [940, 150] }, [], [
+      // ── Phan so lieu ──
+      P.node('content', { size: [W_TAB, H_TAB], ref: 'content' }, [
+        P.node('hero', { size: [940, 170], pos: [0, 125] }, [
+          P.node('bg', { size: [940, 170] }, [], [
             P.sprite(IMG.borderNho, { type: 1, sizeMode: 0 }),
           ]),
-          P.node('icon', { size: [78, 68], pos: [-380, 16] }, [], [
+          P.node('icon', { size: [78, 68], pos: [-380, 24] }, [], [
             P.sprite(IMG.treasure, { sizeMode: 0 }),
           ]),
-          P.node('lbAmount', { size: [520, 56], pos: [40, 22], ref: 'lbAmount', color: C_GOLD }, [], [
+          P.node('lbAmount', { size: [520, 56], pos: [40, 34], ref: 'lbAmount', color: C_GOLD }, [], [
             P.label('0', { size: 44, overflow: 1 }),
           ]),
-          P.node('lbCaption', { size: [820, 26], pos: [0, -44], color: C_DIM }, [], [
-            P.label('Tiền hoàn trả kỳ này', { size: 18, overflow: 1 }),
+          P.node('lbCaption', { size: [820, 26], pos: [0, -12], color: C_DIM }, [], [
+            P.label('Có thể nhận ngay', { size: 18, overflow: 1 }),
+          ]),
+          // Hien ca phan le duoi 1 dong — cho nguoi choi thay tien dang chay
+          P.node('lbPending', { size: [880, 26], pos: [0, -48], ref: 'lbPending', color: C_WHITE }, [], [
+            P.label('Đang tích luỹ: 0đ', { size: 17, overflow: 1 }),
           ]),
         ]),
 
-        cell('Rate', 'lbRate', 'Tỷ lệ hoàn theo hạng', -310, 0, 300),
-        cell('Period', 'lbPeriod', 'Kỳ hoàn trả', 0, 0, 300),
-        cell('Bet', 'lbTotalBet', 'Tổng cược trong kỳ', 310, 0, 300),
+        cell('Rank', 'lbRank', 'Hạng hiện tại', -310, -20, 300),
+        cell('Rate', 'lbRate', 'Tỷ lệ hoàn mỗi ván cược', 0, -20, 300),
+        cell('Claimed', 'lbTotalClaimed', 'Tổng đã nhận', 310, -20, 300),
 
-        P.node('btnClaim', { size: [124, 44], pos: [0, -110], ref: 'claim' }, [
+        P.node('btnClaim', { size: [124, 44], pos: [0, -130], ref: 'claim' }, [
           P.node('lbClaim', { size: [124, 40], ref: 'lbClaim' }, [], [
             P.label('Nhận', { size: 20, overflow: 1 }),
           ]),
@@ -479,10 +483,14 @@ function buildRakebackTab(uuidScript) {
           P.sprite(IMG.btnNhan, { sizeMode: 0 }),
           P.button({ transition: 3, normal: IMG.btnNhan, disabled: IMG.btnNhanDis }),
         ]),
+
+        P.node('lbNote', { size: [900, 24], pos: [0, -178], color: C_DIM }, [], [
+          P.label('Tiền hoàn cộng ngay sau mỗi ván cược — nhận lúc nào cũng được', { size: 15, overflow: 1 }),
+        ]),
       ]),
 
-      // ── Man hinh "chua co" ──
-      P.node('notReady', { size: [900, 200], pos: [0, 20], ref: 'notReady' }, [
+      // ── Man hinh bao loi, an san ──
+      P.node('notReady', { size: [900, 200], pos: [0, 20], active: false, ref: 'notReady' }, [
         P.node('icon', { size: [78, 68], pos: [0, 60] }, [], [
           P.sprite(IMG.treasure, { sizeMode: 0 }),
         ]),
@@ -494,11 +502,14 @@ function buildRakebackTab(uuidScript) {
     [
       P.script(uuidScript, {
         lbAmount: P.refComp('lbAmount', 'cc.Label'),
+        lbPending: P.refComp('lbPending', 'cc.Label'),
         lbRate: P.refComp('lbRate', 'cc.Label'),
-        lbPeriod: P.refComp('lbPeriod', 'cc.Label'),
-        lbTotalBet: P.refComp('lbTotalBet', 'cc.Label'),
+        lbRank: P.refComp('lbRank', 'cc.Label'),
+        lbTotalClaimed: P.refComp('lbTotalClaimed', 'cc.Label'),
         nodeClaim: P.ref('claim'),
         lbClaim: P.refComp('lbClaim', 'cc.Label'),
+        sfClaimNormal: { __uuid__: IMG.btnNhan },
+        sfClaimDisabled: { __uuid__: IMG.btnNhanDis },
         nodeNotReady: P.ref('notReady'),
         lbNotReady: P.refComp('lbNotReady', 'cc.Label'),
         nodeContent: P.ref('content'),

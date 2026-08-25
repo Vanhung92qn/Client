@@ -18,6 +18,9 @@
 const ENDPOINT = {
   USER_VP: 'api/VIP2/GetUserVP',
   CLAIM_RANK: 'api/VIP2/ChangeVPToGif',
+  RAKEBACK: 'api/VIP2/GetRakeback',
+  RAKEBACK_CLAIM: 'api/VIP2/ClaimRakeback',
+  RAKEBACK_HISTORY: 'api/VIP2/GetRakebackHistory',
 };
 
 /** Han gio tu bao ve (ms) — dai hon timeout 60s cua XHR mot chut. */
@@ -114,6 +117,54 @@ const VipService = {
       // Nhan xong thi so lieu cu khong con dung nua
       VipService.clearCache();
       return obj;
+    });
+  },
+
+  /**
+   * So du hoan tra cuoc.
+   * @param {boolean} force bo qua cache — tien hoan cong lien tuc sau moi van
+   *                  nen thuong xuyen can so moi nhat
+   */
+  getRakeback(force) {
+    const key = 'rakeback';
+    const hit = _cache[key];
+    if (!force && hit && Date.now() - hit.at < CACHE_TTL) {
+      return Promise.resolve(hit.data);
+    }
+    return request(ENDPOINT.RAKEBACK).then((obj) => {
+      if (obj.ResponseCode !== 1) {
+        showError(obj);
+        throw new Error(`GetRakeback that bai: ${obj.ResponseCode}`);
+      }
+      _cache[key] = { at: Date.now(), data: obj };
+      return obj;
+    });
+  },
+
+  /**
+   * Nhan tien hoan tra. Lay tron goi phan nguyen dang co; phan le duoi
+   * 1 dong server giu lai cong don cho lan sau.
+   */
+  claimRakeback() {
+    return request(ENDPOINT.RAKEBACK_CLAIM, {}).then((obj) => {
+      if (obj.ResponseCode !== 1) {
+        showError(obj);
+        throw new Error(`ClaimRakeback that bai: ${obj.ResponseCode}`);
+      }
+      VipService.clearCache();
+      return obj;
+    });
+  },
+
+  /** Lich su nhan hoan tra. */
+  getRakebackHistory(top) {
+    const url = `${ENDPOINT.RAKEBACK_HISTORY}?top=${top || 50}`;
+    return request(url).then((obj) => {
+      if (obj.ResponseCode !== 1) {
+        showError(obj);
+        throw new Error(`GetRakebackHistory that bai: ${obj.ResponseCode}`);
+      }
+      return obj.List || [];
     });
   },
 
