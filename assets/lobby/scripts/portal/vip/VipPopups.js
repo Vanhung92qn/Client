@@ -31,14 +31,15 @@ const BY_ID = {
   [ID.RAKEBACK]: {
     id: ID.RAKEBACK,
     title: 'HOÀN TRẢ CƯỢC',
-    prefab: 'portal/vip/RakebackPopup',
+    // Duong dan PHAN BIET HOA THUONG — phai trung y het ten thu muc tren dia
+    prefab: 'portal/RakeBack/RakebackPopup',
     enabled: true,
   },
   [ID.LIXI]: {
     id: ID.LIXI,
     // Chua co backend — mo vao van xem duoc nhung ben trong bao "sap co".
     title: 'LÌ XÌ',
-    prefab: 'portal/vip/LixiPopup',
+    prefab: 'portal/Lixi/LixiPopup',
     enabled: true,
   },
 };

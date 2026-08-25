@@ -21,7 +21,15 @@ const fs = require('fs');
 const path = require('path');
 const A = require('./lib/assets');
 
-const VIP_DIR = path.join(A.ASSETS_ROOT, 'prefabs', 'portal', 'vip');
+/**
+ * Cac thu muc chua prefab VIP. Hoan tra va Li xi nam o thu muc RIENG canh
+ * vip/ nen phai liet ke ca ba, khong thi quet sot.
+ */
+const VIP_DIRS = [
+  path.join(A.ASSETS_ROOT, 'prefabs', 'portal', 'vip'),
+  path.join(A.ASSETS_ROOT, 'prefabs', 'portal', 'RakeBack'),
+  path.join(A.ASSETS_ROOT, 'prefabs', 'portal', 'Lixi'),
+];
 
 /** Tap hop uuid co that trong project — quet mot lan roi tra cuu. */
 const knownUuids = (() => {
@@ -188,7 +196,10 @@ function main() {
       }
       return out;
     };
-    files = collect(VIP_DIR);
+    files = [];
+    for (const d of VIP_DIRS) {
+      if (fs.existsSync(d)) files.push(...collect(d));
+    }
   }
 
   let bad = 0;

@@ -4,11 +4,16 @@
  *   node tools/prefab/gen-vip.js
  *
  * Sinh ra:
- *   assets/prefabs/portal/vip/VipPopup.prefab
+ *   assets/prefabs/portal/vip/VipPopup.prefab            (2 tab ben trong)
  *   assets/prefabs/portal/vip/tabs/VipRankTab.prefab
  *   assets/prefabs/portal/vip/tabs/VipPointTab.prefab
  *   assets/prefabs/portal/vip/items/VipRankItem.prefab
+ *   assets/prefabs/portal/RakeBack/RakebackPopup.prefab  (popup doc lap)
+ *   assets/prefabs/portal/Lixi/LixiPopup.prefab          (popup doc lap)
  * kem file .meta cho tung cai.
+ *
+ * Hai popup doc lap de o thu muc RIENG cho de quan ly. Ten thu muc phai
+ * trung y het voi duong dan load trong VipPopups.js (phan biet hoa thuong).
  *
  * Script da duoc gan san vao node kem day du property, nen mo trong
  * Cocos Creator la chay duoc ngay, khong phai keo tay.
@@ -25,7 +30,9 @@ const P = require('./lib/cocos-prefab');
 const A = require('./lib/assets');
 
 const ASSETS = A.ASSETS_ROOT;
-const PREFAB_DIR = path.join(ASSETS, 'prefabs', 'portal', 'vip');
+// Moc la thu muc portal chu khong phai portal/vip: hai popup Hoan tra va
+// Li xi nam o thu muc RIENG canh vip/ cho de quan ly.
+const PREFAB_DIR = path.join(ASSETS, 'prefabs', 'portal');
 const SCRIPT_DIR = path.join(ASSETS, 'lobby', 'scripts', 'portal', 'vip');
 
 // ─────────────────────────────────────────────────────────────────
@@ -844,9 +851,11 @@ function main() {
   ensureFolderMeta(SCRIPT_DIR);
   ensureFolderMeta(path.join(SCRIPT_DIR, 'tabs'));
   ensureFolderMeta(path.join(SCRIPT_DIR, 'items'));
-  ensureFolderMeta(PREFAB_DIR);
-  ensureFolderMeta(path.join(PREFAB_DIR, 'tabs'));
-  ensureFolderMeta(path.join(PREFAB_DIR, 'items'));
+  ensureFolderMeta(path.join(PREFAB_DIR, 'vip'));
+  ensureFolderMeta(path.join(PREFAB_DIR, 'vip', 'tabs'));
+  ensureFolderMeta(path.join(PREFAB_DIR, 'vip', 'items'));
+  ensureFolderMeta(path.join(PREFAB_DIR, 'RakeBack'));
+  ensureFolderMeta(path.join(PREFAB_DIR, 'Lixi'));
 
   const sItem = scriptUuid(path.join('items', 'VipRankItem.js'));
   const sRankTab = scriptUuid(path.join('tabs', 'VipRankTab.js'));
@@ -863,20 +872,29 @@ function main() {
   scriptUuid('VipPopups.js');
   scriptUuid('VipOpenButton.js');
 
-  const uItem = prefabUuid(path.join('items', 'VipRankItem.prefab'));
-  const uRankTab = prefabUuid(path.join('tabs', 'VipRankTab.prefab'));
-  const uPointTab = prefabUuid(path.join('tabs', 'VipPointTab.prefab'));
-  const uPopup = prefabUuid('VipPopup.prefab');
-  // Hai popup DOC LAP, nam canh VipPopup chu khong phai trong tabs/
-  const uRakeback = prefabUuid('RakebackPopup.prefab');
-  const uLixi = prefabUuid('LixiPopup.prefab');
+  // Duong dan tinh tu assets/prefabs/portal
+  const P_ITEM = path.join('vip', 'items', 'VipRankItem.prefab');
+  const P_RANK = path.join('vip', 'tabs', 'VipRankTab.prefab');
+  const P_POINT = path.join('vip', 'tabs', 'VipPointTab.prefab');
+  const P_VIP = path.join('vip', 'VipPopup.prefab');
+  // Hai popup DOC LAP nam o thu muc RIENG cho de quan ly.
+  // Ten thu muc phai trung y het khi load o VipPopups.js (phan biet hoa thuong).
+  const P_RAKE = path.join('RakeBack', 'RakebackPopup.prefab');
+  const P_LIXI = path.join('Lixi', 'LixiPopup.prefab');
 
-  writePrefab(path.join('items', 'VipRankItem.prefab'), buildRankItem(sItem), uItem);
-  writePrefab(path.join('tabs', 'VipRankTab.prefab'), buildRankTab(sRankTab, uItem), uRankTab);
-  writePrefab(path.join('tabs', 'VipPointTab.prefab'), buildPointTab(sPointTab), uPointTab);
-  writePrefab('VipPopup.prefab', buildPopup(sPopup, sHelp), uPopup);
-  writePrefab('RakebackPopup.prefab', buildRakebackPopup(sRakeback), uRakeback);
-  writePrefab('LixiPopup.prefab', buildLixiPopup(sLixi), uLixi);
+  const uItem = prefabUuid(P_ITEM);
+  const uRankTab = prefabUuid(P_RANK);
+  const uPointTab = prefabUuid(P_POINT);
+  const uPopup = prefabUuid(P_VIP);
+  const uRakeback = prefabUuid(P_RAKE);
+  const uLixi = prefabUuid(P_LIXI);
+
+  writePrefab(P_ITEM, buildRankItem(sItem), uItem);
+  writePrefab(P_RANK, buildRankTab(sRankTab, uItem), uRankTab);
+  writePrefab(P_POINT, buildPointTab(sPointTab), uPointTab);
+  writePrefab(P_VIP, buildPopup(sPopup, sHelp), uPopup);
+  writePrefab(P_RAKE, buildRakebackPopup(sRakeback), uRakeback);
+  writePrefab(P_LIXI, buildLixiPopup(sLixi), uLixi);
 
   console.log('---------------------');
   console.log('Xong.');
