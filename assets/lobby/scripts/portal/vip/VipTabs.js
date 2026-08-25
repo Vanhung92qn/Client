@@ -16,8 +16,6 @@
 const ID = {
   RANK: 'rank',
   POINT: 'point',
-  RAKEBACK: 'rakeback',
-  LIXI: 'lixi',
 };
 
 const BY_ID = {
@@ -35,27 +33,12 @@ const BY_ID = {
     component: 'VipPointTab',
     enabled: true,
   },
-  // Hai tab duoi da co prefab + script RIENG, mo vao xem duoc, nhung chua
-  // co backend nen tam hien phan giai thich thay vi so lieu gia.
-  // Xem ghi chu nghiep vu can chot trong tung file script truoc khi lam SP.
-  [ID.RAKEBACK]: {
-    id: ID.RAKEBACK,
-    title: 'HOÀN TRẢ',
-    prefab: 'portal/vip/tabs/VipRakebackTab',
-    component: 'VipRakebackTab',
-    enabled: true,
-  },
-  [ID.LIXI]: {
-    id: ID.LIXI,
-    title: 'LÌ XÌ',
-    prefab: 'portal/vip/tabs/VipLixiTab',
-    component: 'VipLixiTab',
-    enabled: true,
-  },
+  // Hoan tra va Li xi KHONG con la tab o day nua — moi cai la mot popup
+  // RIENG, mo bang nut rieng tu lobby. Xem VipPopups.js.
 };
 
 /** Thu tu hien thi — phai trung thu tu mang tabButtons trong prefab. */
-const ORDER = [ID.RANK, ID.POINT, ID.RAKEBACK, ID.LIXI];
+const ORDER = [ID.RANK, ID.POINT];
 
 module.exports = {
   ID,

@@ -1,55 +1,75 @@
 /**
- * VipOpenButton — mo popup VIP tu bat ky nut nao.
+ * VipOpenButton — mo mot trong ba popup VIP tu bat ky nut nao.
  *
- * Co HAI cach dung, chon cai nao tien hon:
+ * Keo script nay vao node cua nut, roi chon `popup` trong Inspector:
+ *     VIP       Dac quyen VIP (Hang VIP + VIPPOINT)
+ *     RAKEBACK  Hoan tra cuoc
+ *     LIXI      Li xi
  *
+ * Co HAI cach dung:
  *   Cach 1 (khong phai gan gi):
- *     Keo script nay vao thang node cua nut. Xong. Bam la mo popup.
+ *     De `autoBind` bat. Bam vao node la mo popup da chon.
  *
  *   Cach 2 (gan ClickEvent nhu binh thuong):
- *     Node co cc.Button san roi -> keo script nay vao node do, o muc
- *     Click Events chon node do + component VipOpenButton + ham
- *     `openVipPopup`. Nho tat `autoBind` de khoi mo hai lan.
+ *     Tat `autoBind`, roi o muc Click Events cua cc.Button tro toi ham
+ *     `openPopup` cua chinh component nay. Tat autoBind de khoi mo hai lan.
  *
- * Ngoai ra con mot cach nua khong can script nay: goi thang tu code
- *     require('VipPopup').open();
+ * Ngoai ra con goi thang tu code duoc:
+ *     require('VipPopups').open('rakeback');
  */
 
 'use strict';
 
-const VipPopup = require('VipPopup');
+const VipPopups = require('VipPopups');
+
+/** Cho hien dropdown trong Inspector thay vi bat go chuoi. */
+const PopupTarget = cc.Enum({
+  VIP: 0,
+  RAKEBACK: 1,
+  LIXI: 2,
+});
+
+const TARGET_ID = {
+  0: VipPopups.ID.VIP,
+  1: VipPopups.ID.RAKEBACK,
+  2: VipPopups.ID.LIXI,
+};
 
 module.exports = cc.Class({
   extends: cc.Component,
 
   properties: {
+    popup: {
+      default: PopupTarget.VIP,
+      type: PopupTarget,
+      tooltip: 'Popup se mo khi bam nut nay',
+    },
     autoBind: {
       default: true,
       tooltip:
         'Tu bat su kien cham vao node nay. Tat di neu ban tu gan ClickEvent ' +
-        'toi ham openVipPopup, khong thi popup se mo hai lan.',
+        'toi ham openPopup, khong thi popup se mo hai lan.',
     },
   },
 
   onLoad() {
     if (this.autoBind) {
-      this.node.on(cc.Node.EventType.TOUCH_END, this.openVipPopup, this);
+      this.node.on(cc.Node.EventType.TOUCH_END, this.openPopup, this);
     }
   },
 
   /** Gan ham nay vao Click Events cua cc.Button neu tat autoBind. */
-  openVipPopup() {
+  openPopup() {
     if (this._opening) return;
     this._opening = true;
 
-    VipPopup.open()
-      .then((node) => {
-        node.zIndex = cc.NoteDepth.POPUP_PORTAL;
-      })
+    const id = TARGET_ID[this.popup] || VipPopups.ID.VIP;
+
+    VipPopups.open(id)
       .catch((err) => {
-        cc.error('[VipOpenButton] Khong mo duoc popup VIP:', err);
+        cc.error(`[VipOpenButton] Khong mo duoc popup "${id}":`, err);
         cc.PopupController.getInstance().showMessageError(
-          'Không mở được trang VIP, vui lòng thử lại.'
+          'Không mở được, vui lòng thử lại.'
         );
       })
       .then(() => {

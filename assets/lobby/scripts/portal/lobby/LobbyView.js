@@ -473,25 +473,30 @@ var netConfig = require("NetConfig");
     },
 
     /**
-     * Mo popup VIP (prefabs/portal/vip/VipPopup).
-     * Gan thang ham nay vao Click Events cua bat ky nut nao trong lobby:
+     * Ba popup VIP doc lap, moi cai mot prefab rieng.
+     * Gan thang cac ham nay vao Click Events cua nut trong lobby:
      *   Target = node co LobbyView, Component = LobbyView,
-     *   Handler = openVipPopupClicked
+     *   Handler = openVipPopupClicked / openRakebackPopupClicked / openLixiPopupClicked
      * Popup tu nap prefab nen khong phai keo prefab vao property nao ca.
      */
     openVipPopupClicked: function () {
-      var self = this;
-      require('VipPopup')
-        .open(this.node)
-        .then(function (node) {
-          node.zIndex = cc.NoteDepth.POPUP_PORTAL;
-          self.nodeVipPopup = node;
-        })
+      this._openVipPopup('vip', 'Không mở được trang VIP, vui lòng thử lại.');
+    },
+
+    openRakebackPopupClicked: function () {
+      this._openVipPopup('rakeback', 'Không mở được trang Hoàn trả, vui lòng thử lại.');
+    },
+
+    openLixiPopupClicked: function () {
+      this._openVipPopup('lixi', 'Không mở được trang Lì xì, vui lòng thử lại.');
+    },
+
+    _openVipPopup: function (id, errMsg) {
+      require('VipPopups')
+        .open(id, this.node)
         .catch(function (err) {
-          cc.error('[LobbyView] Khong mo duoc popup VIP:', err);
-          cc.PopupController.getInstance().showMessageError(
-            'Không mở được trang VIP, vui lòng thử lại.'
-          );
+          cc.error('[LobbyView] Khong mo duoc popup "' + id + '":', err);
+          cc.PopupController.getInstance().showMessageError(errMsg);
         });
     },
 

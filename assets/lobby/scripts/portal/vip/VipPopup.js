@@ -14,30 +14,10 @@
 'use strict';
 
 const TAB = require('VipTabs');
+const VipPopups = require('VipPopups');
 
-/** Ten bundle chua prefab — xem assets/prefabs.meta ("bundleName": "prefabs"). */
-const PREFAB_BUNDLE = 'prefabs';
-
-/** Nap mot prefab trong bundle, tra ve Promise. */
-function loadPrefab(pathInBundle) {
-  return new Promise((resolve, reject) => {
-    const done = (bundle) => {
-      bundle.load(pathInBundle, cc.Prefab, (err, prefab) => {
-        if (err) reject(err);
-        else resolve(prefab);
-      });
-    };
-    const loaded = cc.assetManager.getBundle(PREFAB_BUNDLE);
-    if (loaded) {
-      done(loaded);
-      return;
-    }
-    cc.assetManager.loadBundle(PREFAB_BUNDLE, (err, bundle) => {
-      if (err) reject(err);
-      else done(bundle);
-    });
-  });
-}
+/** Dung chung ham nap prefab voi VipPopups, khoi viet hai lan. */
+const loadPrefab = VipPopups.loadPrefab;
 
 const VipPopup = cc.Class({
   extends: cc.Component,
@@ -217,16 +197,13 @@ const VipPopup = cc.Class({
 
 /**
  * Mo popup VIP tu bat ky dau:  require('VipPopup').open(parentNode)
+ * Giu lai cho code cu dang goi; ben trong dung chung VipPopups.open nen
+ * cung duoc loi ich "dang mo roi thi dua len tren, khong mo them cai nua".
  * @param {cc.Node} parent node cha, mac dinh la Canvas
  * @returns {Promise<cc.Node>}
  */
 VipPopup.open = function (parent) {
-  return loadPrefab('portal/vip/VipPopup').then((prefab) => {
-    const node = cc.instantiate(prefab);
-    node.parent = parent || cc.director.getScene().getChildByName('Canvas');
-    node.setPosition(0, 0);
-    return node;
-  });
+  return VipPopups.open(VipPopups.ID.VIP, parent);
 };
 
 module.exports = VipPopup;

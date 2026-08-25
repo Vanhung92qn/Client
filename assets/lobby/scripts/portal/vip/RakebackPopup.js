@@ -1,15 +1,15 @@
 /**
- * VipRakebackTab — tab "HOAN TRA CUOC".
+ * RakebackPopup — popup "HOAN TRA CUOC", DOC LAP voi popup VIP.
  *
  * CACH HOAT DONG: tien hoan duoc cong NGAY sau moi van cuoc, khong cho chot
  * theo ngay. Nguoi choi bam nhan luc nao cung duoc, nhan tron goi phan dang
  * co roi no lai cong tiep tu van sau.
  *
  * VE PHAN LE: tien hoan tinh ra thuong le duoi 1 dong (vd cuoc 1.234.567d
- * x 0,17% = 2.098,7639d). Vi game chi chua duoc so nguyen nen khi nhan chi
- * chuyen 2.098d vao vi, con 0,7639d GIU LAI cong don cho lan sau — khong
- * vut di dong nao. Man hinh hien ca hai: so nhan duoc ngay va so tich luy
- * day du (co phan le) de nguoi choi thay tien dang chay lien tuc.
+ * x 0,18% = 2.222,2206d). Vi game chi chua duoc so nguyen nen khi nhan chi
+ * chuyen 2.222d vao vi, con 0,2206d GIU LAI cong don cho lan sau — khong
+ * vut di dong nao. Man hinh hien ca hai so: nhan duoc ngay va dang tich luy
+ * (co phan le) de nguoi choi thay tien chay lien tuc.
  */
 
 'use strict';
@@ -17,13 +17,16 @@
 const VipService = require('VipService');
 const VipModel = require('VipModel');
 
-/** Nhip tu lam moi so du khi tab dang mo (ms). */
-const AUTO_REFRESH_MS = 15000;
+/** Nhip tu lam moi so du khi popup dang mo (giay). */
+const AUTO_REFRESH_SEC = 15;
 
 module.exports = cc.Class({
   extends: cc.Component,
 
   properties: {
+    lbTitle: cc.Label,
+    btnClose: cc.Node,
+
     /** So tien nhan duoc ngay bay gio (phan nguyen). */
     lbAmount: cc.Label,
     /** So tich luy day du ke ca phan le — cho thay tien dang chay. */
@@ -40,24 +43,35 @@ module.exports = cc.Class({
     sfClaimNormal: cc.SpriteFrame,
     sfClaimDisabled: cc.SpriteFrame,
 
-    /** Hien khi chua co gi de nhan hoac loi mang. */
-    nodeNotReady: cc.Node,
-    lbNotReady: cc.Label,
+    /** Hien khi loi mang. */
+    nodeError: cc.Node,
+    lbError: cc.Label,
     /** Phan so lieu. */
     nodeContent: cc.Node,
+    /** Hien khi dang goi API. */
+    nodeLoading: cc.Node,
   },
 
   onLoad() {
     this._busy = false;
     this._data = null;
+
+    this.animation = this.node.getComponent(cc.Animation);
+
+    if (this.btnClose) {
+      this.btnClose.on(cc.Node.EventType.TOUCH_END, this.close, this);
+    }
     if (this.nodeClaim) {
       this.nodeClaim.on(cc.Node.EventType.TOUCH_END, this._onClaim, this);
     }
+    this._setLoading(false);
+    this._showError(null);
   },
 
   onEnable() {
-    // Tien hoan cong lien tuc nen tu lam moi khi tab dang mo
-    this.schedule(this._silentRefresh, AUTO_REFRESH_MS / 1000);
+    if (this.animation) this.animation.play('openPopup');
+    // Tien hoan cong lien tuc nen tu lam moi khi popup dang mo
+    this.schedule(this._silentRefresh, AUTO_REFRESH_SEC);
   },
 
   onDisable() {
@@ -68,9 +82,10 @@ module.exports = cc.Class({
     this.refresh();
   },
 
+  // ───────────────────────────────────────────────────────────────
+
   refresh() {
-    const popup = this._popup();
-    if (popup) popup.setLoading(true);
+    this._setLoading(true);
 
     VipService.getRakeback(true)
       .then((res) => {
@@ -78,12 +93,10 @@ module.exports = cc.Class({
         this._render(res);
       })
       .catch((err) => {
-        cc.warn('[VipRakebackTab] Khong lay duoc hoan tra:', err.message);
-        this._showNotReady('Không tải được thông tin hoàn trả.\nVui lòng thử lại.');
+        cc.warn('[RakebackPopup] Khong lay duoc hoan tra:', err.message);
+        this._showError('Không tải được thông tin hoàn trả.\nVui lòng thử lại.');
       })
-      .then(() => {
-        if (popup) popup.setLoading(false);
-      });
+      .then(() => this._setLoading(false));
   },
 
   /** Lam moi ngam, khong hien vong xoay — dung cho nhip tu dong. */
@@ -98,19 +111,17 @@ module.exports = cc.Class({
       });
   },
 
-  // ───────────────────────────────────────────────────────────────
-
   _render(res) {
     this._data = res;
-    this._showNotReady(null);
+    this._showError(null);
 
     const claimable = Number(res.ClaimableAmount) || 0;
     const pending = Number(res.PendingAmount) || 0;
 
     this.lbAmount.string = VipModel.formatNumber(claimable);
 
-    // Hien ca phan le de nguoi choi thay tien dang chay tung dong,
-    // thay vi mot con so nguyen dung im mai moi nhuc nhich.
+    // Hien ca phan le de nguoi choi thay tien dang chay tung dong, thay vi
+    // mot con so nguyen dung im mai moi nhuc nhich.
     if (this.lbPending) {
       const le = pending - Math.floor(pending);
       this.lbPending.string = le > 0
@@ -144,7 +155,8 @@ module.exports = cc.Class({
       const frame = on ? this.sfClaimNormal : this.sfClaimDisabled;
       if (frame) sprite.spriteFrame = frame;
     }
-    // Giu interactable = true de bam vao van co phan hoi, giong VipRankItem
+    // Giu interactable = true de bam vao van co phan hoi. Tat di thi
+    // cc.Button nuot luon su kien cham, nut thanh cam.
     const button = this.nodeClaim.getComponent(cc.Button);
     if (button) button.interactable = true;
   },
@@ -176,7 +188,7 @@ module.exports = cc.Class({
         }
       })
       .catch((err) => {
-        cc.warn('[VipRakebackTab] Nhan hoan tra that bai:', err.message);
+        cc.warn('[RakebackPopup] Nhan hoan tra that bai:', err.message);
       })
       .then(() => {
         if (!this.node || !this.node.isValid) return;
@@ -196,19 +208,24 @@ module.exports = cc.Class({
       .start();
   },
 
-  _showNotReady(message) {
-    if (this.nodeNotReady) this.nodeNotReady.active = !!message;
-    if (this.nodeContent) this.nodeContent.active = !message;
-    if (message && this.lbNotReady) this.lbNotReady.string = message;
+  _setLoading(on) {
+    if (this.nodeLoading) this.nodeLoading.active = !!on;
   },
 
-  _popup() {
-    let n = this.node.parent;
-    while (n) {
-      const c = n.getComponent('VipPopup');
-      if (c) return c;
-      n = n.parent;
+  _showError(message) {
+    if (this.nodeError) this.nodeError.active = !!message;
+    if (this.nodeContent) this.nodeContent.active = !message;
+    if (message && this.lbError) this.lbError.string = message;
+  },
+
+  close() {
+    if (!this.animation) {
+      this.node.destroy();
+      return;
     }
-    return null;
+    this.animation.play('closePopup');
+    this.scheduleOnce(() => {
+      if (this.node && this.node.isValid) this.node.destroy();
+    }, 0.12);
   },
 });

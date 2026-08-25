@@ -428,10 +428,60 @@ function buildPointTab(uuidScript) {
 }
 
 // ─────────────────────────────────────────────────────────────────
-// Prefab: VipRakebackTab — Hoan tra cuoc (chua co backend)
+// Khung popup dung chung cho cac popup DOC LAP (Hoan tra, Li xi)
 // ─────────────────────────────────────────────────────────────────
 
-function buildRakebackTab(uuidScript) {
+/**
+ * Dung phan khung: nen mo, nen popup, thanh tieu de, nut dong.
+ * Tra ve mang node con de gan them noi dung rieng vao sau.
+ *
+ * @param {string} title    chu tren thanh tieu de
+ * @param {number} w,h      kich thuoc popup
+ * @param {Array}  inner    cac node noi dung rieng cua tung popup
+ */
+function popupFrame(title, w, h, inner) {
+  return [
+    // Nen mo phu kin man hinh
+    P.node('dim', { size: [2000, 1400], color: [0, 0, 0], opacity: 160 }, [], [
+      P.sprite(IMG.bgPopup, { type: 1, sizeMode: 0 }),
+    ]),
+
+    P.node('frame', { size: [w, h] }, [
+      P.node('bg', { size: [w, h] }, [], [
+        P.sprite(IMG.bgPopup, { type: 1, sizeMode: 0 }),
+      ]),
+
+      P.node('titleBar', { size: [420, 64], pos: [0, h / 2 - 10] }, [
+        P.node('bgTitle', { size: [420, 64] }, [], [
+          P.sprite(IMG.titPopup, { type: 1, sizeMode: 0 }),
+        ]),
+        P.node('lbTitle', { size: [400, 44], ref: 'lbTitle', color: C_GOLD }, [], [
+          P.label(title, { size: 26, overflow: 1 }),
+        ]),
+      ]),
+
+      P.node('btnClose', {
+        size: [66, 67],
+        pos: [w / 2 - 34, h / 2 - 34],
+        ref: 'btnClose',
+      }, [], [
+        P.sprite(IMG.btnClose, { sizeMode: 0 }),
+        P.button({ transition: 3, zoomScale: 1.1 }),
+      ]),
+
+      ...inner,
+    ]),
+  ];
+}
+
+// ─────────────────────────────────────────────────────────────────
+// Prefab: RakebackPopup — Hoan tra cuoc (popup DOC LAP)
+// ─────────────────────────────────────────────────────────────────
+
+const W_RB = 1000;
+const H_RB = 580;
+
+function buildRakebackPopup(uuidScript) {
   /** Mot o so lieu nho. */
   const cell = (name, refName, caption, x, y, w) =>
     P.node('cell' + name, { size: [w, 92], pos: [x, y] }, [
@@ -447,11 +497,11 @@ function buildRakebackTab(uuidScript) {
     ]);
 
   return P.node(
-    'VipRakebackTab',
-    { size: [W_TAB, H_TAB] },
-    [
+    'RakebackPopup',
+    { size: [W_RB, H_RB] },
+    popupFrame('HOÀN TRẢ CƯỢC', W_RB, H_RB, [
       // ── Phan so lieu ──
-      P.node('content', { size: [W_TAB, H_TAB], ref: 'content' }, [
+      P.node('content', { size: [W_RB, H_RB - 110], pos: [0, -50], ref: 'content' }, [
         P.node('hero', { size: [940, 170], pos: [0, 125] }, [
           P.node('bg', { size: [940, 170] }, [], [
             P.sprite(IMG.borderNho, { type: 1, sizeMode: 0 }),
@@ -498,9 +548,17 @@ function buildRakebackTab(uuidScript) {
           P.label('', { size: 20, wrap: true, overflow: 0 }),
         ]),
       ]),
-    ],
+
+      P.node('loading', { size: [300, 60], pos: [0, -50], active: false, ref: 'loading' }, [
+        P.node('lb', { size: [300, 50], color: C_WHITE }, [], [
+          P.label('Đang tải...', { size: 22, overflow: 1 }),
+        ]),
+      ]),
+    ]),
     [
       P.script(uuidScript, {
+        lbTitle: P.refComp('lbTitle', 'cc.Label'),
+        btnClose: P.ref('btnClose'),
         lbAmount: P.refComp('lbAmount', 'cc.Label'),
         lbPending: P.refComp('lbPending', 'cc.Label'),
         lbRate: P.refComp('lbRate', 'cc.Label'),
@@ -510,27 +568,31 @@ function buildRakebackTab(uuidScript) {
         lbClaim: P.refComp('lbClaim', 'cc.Label'),
         sfClaimNormal: { __uuid__: IMG.btnNhan },
         sfClaimDisabled: { __uuid__: IMG.btnNhanDis },
-        nodeNotReady: P.ref('notReady'),
-        lbNotReady: P.refComp('lbNotReady', 'cc.Label'),
+        nodeError: P.ref('notReady'),
+        lbError: P.refComp('lbNotReady', 'cc.Label'),
         nodeContent: P.ref('content'),
+        nodeLoading: P.ref('loading'),
       }),
     ]
   );
 }
 
 // ─────────────────────────────────────────────────────────────────
-// Prefab: VipLixiTab — Li xi / hong bao (chua co backend)
+// Prefab: LixiPopup — Li xi / hong bao (popup DOC LAP, chua co backend)
 // ─────────────────────────────────────────────────────────────────
 
-function buildLixiTab(uuidScript) {
-  const listW = 960;
+const W_LX = 1000;
+const H_LX = 580;
+
+function buildLixiPopup(uuidScript) {
+  const listW = 900;
   const listH = 300;
 
   return P.node(
-    'VipLixiTab',
-    { size: [W_TAB, H_TAB] },
-    [
-      P.node('content', { size: [W_TAB, H_TAB], active: false, ref: 'content' }, [
+    'LixiPopup',
+    { size: [W_LX, H_LX] },
+    popupFrame('LÌ XÌ', W_LX, H_LX, [
+      P.node('content', { size: [W_LX, H_LX - 110], pos: [0, -50], active: false, ref: 'content' }, [
         P.node('lbCount', { size: [900, 34], pos: [0, 190], ref: 'lbCount', color: C_GOLD }, [], [
           P.label('Bạn có 0 hồng bao chưa mở', { size: 22, overflow: 1 }),
         ]),
@@ -559,7 +621,7 @@ function buildLixiTab(uuidScript) {
         ]),
       ]),
 
-      P.node('notReady', { size: [900, 200], pos: [0, 20], ref: 'notReady' }, [
+      P.node('notReady', { size: [900, 200], pos: [0, -40], ref: 'notReady' }, [
         P.node('icon', { size: [84, 61], pos: [0, 60] }, [], [
           P.sprite(IMG.iconThe, { sizeMode: 0 }),
         ]),
@@ -567,9 +629,11 @@ function buildLixiTab(uuidScript) {
           P.label('', { size: 20, wrap: true, overflow: 0 }),
         ]),
       ]),
-    ],
+    ]),
     [
       P.script(uuidScript, {
+        lbTitle: P.refComp('lbTitle', 'cc.Label'),
+        btnClose: P.ref('btnClose'),
         nodeListContent: P.ref('listContent'),
         lbCount: P.refComp('lbCount', 'cc.Label'),
         nodeNotReady: P.ref('notReady'),
@@ -587,10 +651,10 @@ function buildLixiTab(uuidScript) {
 const W_POPUP = 1100;
 const H_POPUP = 620;
 
-const TAB_TITLES = ['HẠNG VIP', 'VIPPOINT', 'HOÀN TRẢ', 'LÌ XÌ'];
-// Ca 4 tab deu mo duoc. Hai tab cuoi da co prefab + script rieng nhung
-// chua co backend nen ben trong hien phan giai thich, khong hien so gia.
-const TAB_ENABLED = [true, true, true, true];
+// Popup VIP chi con HAI tab. Hoan tra va Li xi da tach thanh popup RIENG,
+// moi cai mot prefab, mo bang nut rieng tu lobby.
+const TAB_TITLES = ['HẠNG VIP', 'VIPPOINT'];
+const TAB_ENABLED = [true, true];
 
 function buildPopup(uuidScript, uuidHelp) {
   const tabW = 236;
@@ -687,7 +751,7 @@ function buildPopup(uuidScript, uuidHelp) {
       P.script(uuidScript, {
         lbTitle: P.refComp('lbTitle', 'cc.Label'),
         nodeContent: P.ref('content'),
-        tabButtons: [P.ref('tab0'), P.ref('tab1'), P.ref('tab2'), P.ref('tab3')],
+        tabButtons: TAB_TITLES.map((_, i) => P.ref('tab' + i)),
         nodeLoading: P.ref('loading'),
         btnClose: P.ref('btnClose'),
         btnHelp: P.ref('btnHelp'),
@@ -787,29 +851,32 @@ function main() {
   const sItem = scriptUuid(path.join('items', 'VipRankItem.js'));
   const sRankTab = scriptUuid(path.join('tabs', 'VipRankTab.js'));
   const sPointTab = scriptUuid(path.join('tabs', 'VipPointTab.js'));
-  const sRakeTab = scriptUuid(path.join('tabs', 'VipRakebackTab.js'));
-  const sLixiTab = scriptUuid(path.join('tabs', 'VipLixiTab.js'));
+  // Hai popup DOC LAP — script nam canh VipPopup.js chu khong trong tabs/
+  const sRakeback = scriptUuid('RakebackPopup.js');
+  const sLixi = scriptUuid('LixiPopup.js');
   const sPopup = scriptUuid('VipPopup.js');
   const sHelp = scriptUuid('VipHelpPanel.js');
   // Hai file duoi khong phai component nhung van can .meta de Cocos import
   scriptUuid('VipService.js');
   scriptUuid('VipModel.js');
   scriptUuid('VipTabs.js');
+  scriptUuid('VipPopups.js');
   scriptUuid('VipOpenButton.js');
 
   const uItem = prefabUuid(path.join('items', 'VipRankItem.prefab'));
   const uRankTab = prefabUuid(path.join('tabs', 'VipRankTab.prefab'));
   const uPointTab = prefabUuid(path.join('tabs', 'VipPointTab.prefab'));
-  const uRakeTab = prefabUuid(path.join('tabs', 'VipRakebackTab.prefab'));
-  const uLixiTab = prefabUuid(path.join('tabs', 'VipLixiTab.prefab'));
   const uPopup = prefabUuid('VipPopup.prefab');
+  // Hai popup DOC LAP, nam canh VipPopup chu khong phai trong tabs/
+  const uRakeback = prefabUuid('RakebackPopup.prefab');
+  const uLixi = prefabUuid('LixiPopup.prefab');
 
   writePrefab(path.join('items', 'VipRankItem.prefab'), buildRankItem(sItem), uItem);
   writePrefab(path.join('tabs', 'VipRankTab.prefab'), buildRankTab(sRankTab, uItem), uRankTab);
   writePrefab(path.join('tabs', 'VipPointTab.prefab'), buildPointTab(sPointTab), uPointTab);
-  writePrefab(path.join('tabs', 'VipRakebackTab.prefab'), buildRakebackTab(sRakeTab), uRakeTab);
-  writePrefab(path.join('tabs', 'VipLixiTab.prefab'), buildLixiTab(sLixiTab), uLixiTab);
   writePrefab('VipPopup.prefab', buildPopup(sPopup, sHelp), uPopup);
+  writePrefab('RakebackPopup.prefab', buildRakebackPopup(sRakeback), uRakeback);
+  writePrefab('LixiPopup.prefab', buildLixiPopup(sLixi), uLixi);
 
   console.log('---------------------');
   console.log('Xong.');
