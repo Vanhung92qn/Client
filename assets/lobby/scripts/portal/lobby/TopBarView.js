@@ -166,7 +166,8 @@ var netConfig = require('NetConfig');
                 }
 
                 cc.Tool.getInstance().setItem('@startSubTabEvent', 'TOP');
-                cc.LobbyController.getInstance().createEventView();
+                // He su kien 2019 da go 2026-08-27 (backend khong con controller).
+                cc.PopupController.getInstance().showMessage('Sự kiện đã kết thúc.');
                 cc.DDNA.getInstance().uiInteraction(cc.DDNAUILocation.PORTAL, 'EVENT', cc.DDNAUIType.BUTTON);
             }
         },

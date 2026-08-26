@@ -28,15 +28,17 @@ var netConfig = require("NetConfig");
       hotrosdtvn: cc.Node,
       //hotrolivechat: cc.Node,
 
-      prefabEvent: cc.Prefab,
       prefabVQMM: cc.Prefab,
 
-      //event - x2 Nap
+      // Popup banner hien sau khi dang nhap
       prefabBannerPopup: cc.Prefab,
-      prefabX2Reward: cc.Prefab,
 
-      //prefab FX summon Dragon
-      prefabFxSummonDragon: cc.Prefab,
+      /* Da go 2026-08-27 cung he su kien 2019:
+           prefabEvent            eventView-4     (trung tam su kien 5 tab)
+           prefabX2Reward         x2RewardView    (su kien nap X2)
+           prefabFxSummonDragon   fxSummonDragon  (hieu ung rong)
+         Ca ba deu chet: backend khong con controller, bang du lieu nguoi
+         choi 0 dong. Xem git 4495c5f tro ve truoc neu can dung lai.     */
 
       //slots chinh
       //prefabShowPercentLoadGame:cc.Prefab,
@@ -312,13 +314,6 @@ var netConfig = require("NetConfig");
       if (this.nodeBannerPopup && this.nodeBannerPopup.isValid) this.nodeBannerPopup.destroy(); this.nodeBannerPopup = null;
     },
 
-    createX2RewardView: function () {
-      this.nodeX2Reward = this.createView(this.prefabX2Reward);
-    },
-
-    destroyX2RewardView: function () {
-      if (this.nodeX2Reward && this.nodeX2Reward.isValid) this.nodeX2Reward.destroy(); this.nodeX2Reward = null;
-    },
 
     //event san KHO BAU
     createEventPopupView: function () {
@@ -389,15 +384,6 @@ var netConfig = require("NetConfig");
       if (this.nodeTreasureTopView && this.nodeTreasureTopView.isValid) this.nodeTreasureTopView.destroy(); this.nodeTreasureTopView = null;
     },
 
-    //Fx
-    createFxSummonDragon: function () {
-      this.nodeFxSummonDragon = this.createView(this.prefabFxSummonDragon);
-    },
-
-    destroyFxSummonDragon: function () {
-      if (this.nodeFxSummonDragon && this.nodeFxSummonDragon.isValid) this.nodeFxSummonDragon.destroy(); this.nodeFxSummonDragon = null;
-    },
-    //end fx
 
     //Portal Portal Portal
     createLoginView: function () {
@@ -622,9 +608,6 @@ var netConfig = require("NetConfig");
       //hide cac node o lobby
     },
 
-    createEventView: function () {
-      this.nodeEventView = this.createView(this.prefabEvent);
-    },
 
     createAppSafeHelpView: function () {
       this.createView(this.prefabAppSafeHelp);
@@ -1810,16 +1793,6 @@ var netConfig = require("NetConfig");
           if (this.nodeSlotsView && this.nodeSlotsView.isValid) {
             this.nodeSlotsView.destroy();
             this.nodeSlotsView = null;
-          }
-
-          if (this.nodeEventView && this.nodeEventView.isValid) {
-            this.nodeEventView.destroy();
-            this.nodeEventView = null;
-          }
-
-          if (this.nodeEventViewTopVP && this.nodeEventViewTopVP.isValid) {
-            this.nodeEventViewTopVP.destroy();
-            this.nodeEventViewTopVP = null;
           }
 
           break;

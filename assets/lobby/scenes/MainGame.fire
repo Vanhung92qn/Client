@@ -59618,7 +59618,7 @@
         "__id__": 1261
       }
     ],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 1263
@@ -86961,20 +86961,11 @@
     "hotrosdtvn": {
       "__id__": 1670
     },
-    "prefabEvent": {
-      "__uuid__": "94741a7d-849b-4342-b7ed-84d4a706562a"
-    },
     "prefabVQMM": {
       "__uuid__": "7df4d9f8-0ec1-40f3-bca3-47116053b271"
     },
     "prefabBannerPopup": {
       "__uuid__": "9b65a6be-b65c-4bca-9054-53c79959b4fb"
-    },
-    "prefabX2Reward": {
-      "__uuid__": "3adeaa9b-a772-42df-87aa-11fb3f91452e"
-    },
-    "prefabFxSummonDragon": {
-      "__uuid__": "51e65797-5296-4d10-8675-93ef6c62b062"
     },
     "lbLoadingEgypt": {
       "__id__": 723

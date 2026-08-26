@@ -212,7 +212,7 @@ var timeAll=60;
                         cc.TaiXiuController.getInstance().setEventWinnerResult(m.A[0]);
                         //Khoi tao hieu ung khi dang o portal hoặc đang bật TX
                         if (cc.LobbyController.getInstance().checkLobbyActive() || cc.TaiXiuController.getInstance().getIsOpen()) {
-                            cc.LobbyController.getInstance().createFxSummonDragon();
+                            // He su kien 2019 da go 2026-08-27 (backend khong con controller).
                         }
 
 

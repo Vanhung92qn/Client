@@ -43,7 +43,8 @@ var netConfig = require('NetConfig');
 
         x2Clicked: function () {
             if (cc.LoginController.getInstance().checkLogin()) {
-                cc.LobbyController.getInstance().createX2RewardView(cc.X2Tab.PROGRESS);
+                // He su kien 2019 da go 2026-08-27 (backend khong con controller).
+                cc.PopupController.getInstance().showMessage('Sự kiện đã kết thúc.');
             }
         },
 

@@ -79,15 +79,6 @@
             return this.lobbyView.destroyBannerPopup();
         };
 
-        LobbyController.prototype.createX2RewardView = function (startTab) {
-            cc.Tool.getInstance().setItem('@startTabX2', startTab);
-            return this.lobbyView.createX2RewardView();
-        };
-
-        LobbyController.prototype.destroyX2RewardView = function () {
-            return this.lobbyView.destroyX2RewardView();
-        };
-
         //Event - san kho bau
         LobbyController.prototype.createTreasureView = function () {
             return this.lobbyView.createTreasureView();
@@ -137,14 +128,6 @@
             return this.lobbyView.destroyTreasureTopView();
         };
         //Event - san kho bau end
-
-        LobbyController.prototype.createFxSummonDragon = function () {
-            return this.lobbyView.createFxSummonDragon();
-        };
-
-        LobbyController.prototype.destroyFxSummonDragon = function () {
-            return this.lobbyView.destroyFxSummonDragon();
-        };
 
         LobbyController.prototype.createLoginView = function () {
             return this.lobbyView.createLoginView();
@@ -237,14 +220,6 @@
 
         LobbyController.prototype.createGiftcodeView = function () {
             return this.lobbyView.createGiftcodeView();
-        };
-
-        LobbyController.prototype.createEventView = function () {
-            return this.lobbyView.createEventView();
-        };
-
-        LobbyController.prototype.createEventViewTopVP = function () {
-            return this.lobbyView.createEventView();
         };
 
         LobbyController.prototype.createAppSafeHelpView = function () {

@@ -162,7 +162,8 @@
         openEventClicked: function () {
             // if (cc.LoginController.getInstance().checkLogin()) {
             cc.Tool.getInstance().setItem('@startTabEvent', '1');
-            cc.LobbyController.getInstance().createEventView();
+            // He su kien 2019 da go 2026-08-27 (backend khong con controller).
+            cc.PopupController.getInstance().showMessage('Sự kiện đã kết thúc.');
             // }
         },
     });
