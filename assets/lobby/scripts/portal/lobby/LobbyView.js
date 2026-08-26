@@ -32,7 +32,7 @@ var netConfig = require("NetConfig");
       prefabVQMM: cc.Prefab,
 
       //event - x2 Nap
-      prefabX2Popup: cc.Prefab,
+      prefabBannerPopup: cc.Prefab,
       prefabX2Reward: cc.Prefab,
 
       //prefab FX summon Dragon
@@ -304,12 +304,12 @@ var netConfig = require("NetConfig");
     },
 
     //event X2
-    createX2PopupView: function () {
-      this.nodeX2Popup = this.createView(this.prefabX2Popup);
+    createBannerPopup: function () {
+      this.nodeBannerPopup = this.createView(this.prefabBannerPopup);
     },
 
-    destroyX2PopupView: function () {
-      if (this.nodeX2Popup && this.nodeX2Popup.isValid) this.nodeX2Popup.destroy(); this.nodeX2Popup = null;
+    destroyBannerPopup: function () {
+      if (this.nodeBannerPopup && this.nodeBannerPopup.isValid) this.nodeBannerPopup.destroy(); this.nodeBannerPopup = null;
     },
 
     createX2RewardView: function () {
@@ -1952,7 +1952,7 @@ var netConfig = require("NetConfig");
 
       //Kiem tra thu chua doc
       cc.LobbyController.getInstance().getMailUnRead();
-      cc.LobbyController.getInstance().createX2PopupView();
+      cc.LobbyController.getInstance().createBannerPopup();
       //Bat huong dan appSafe sau khi Login + chua tich hopj AppSafe
       var loginResponse = cc.LoginController.getInstance().getLoginResponse();
 
@@ -1994,8 +1994,8 @@ var netConfig = require("NetConfig");
       // checkHaveGiftcodeCommand.execute();
 
       // show sieu xe
-      // if (this.nodeX2Popup == null)
-      //   cc.LobbyController.getInstance().createX2PopupView(); // comment
+      // if (this.nodeBannerPopup == null)
+      //   cc.LobbyController.getInstance().createBannerPopup(); // comment
 
       if (cc.LoginController.getInstance().checkLogin()) {
         this.lbTopVp.string = cc.Tool.getInstance().formatNumber(

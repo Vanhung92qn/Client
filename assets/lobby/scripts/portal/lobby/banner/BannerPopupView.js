@@ -1,9 +1,16 @@
 /**
- * Created by Welcome on 4/18/2019.
+ * BannerPopupView — popup banner hien ngay sau khi dang nhap.
+ *
+ * Ten cu la X2View, de trong thu muc x2/ nen nghe nhu su kien nap
+ * X2. That ra no chi la khung popup cho banner quang cao: bam vao
+ * thi mo man nap tien.
+ *
+ * Su kien X2 that la x2RewardView.prefab — co thanh tien do va nut
+ * nhan thuong, goi api/X2Reward/* (api do da chet).
  */
 
 (function () {
-    cc.X2View = cc.Class({
+    cc.BannerPopupView = cc.Class({
         "extends": cc.Component,
         properties: {
 
@@ -20,27 +27,27 @@
 
         cardClicked: function () {
             cc.LobbyController.getInstance().createShopView(cc.ShopTab.TOPUP);
-            cc.LobbyController.getInstance().destroyX2PopupView();
+            cc.LobbyController.getInstance().destroyBannerPopup();
         },
 
         momoClicked: function () {
             cc.LobbyController.getInstance().createShopView(cc.ShopTab.MOMO);
-            cc.LobbyController.getInstance().destroyX2PopupView();
+            cc.LobbyController.getInstance().destroyBannerPopup();
         },
 
         bankClicked: function () {
             cc.LobbyController.getInstance().createShopView(cc.ShopTab.BANK);
-            cc.LobbyController.getInstance().destroyX2PopupView();
+            cc.LobbyController.getInstance().destroyBannerPopup();
         },
 
         agencyClicked: function () {
             cc.LobbyController.getInstance().createShopView(cc.ShopTab.AGENCY);
-            cc.LobbyController.getInstance().destroyX2PopupView();
+            cc.LobbyController.getInstance().destroyBannerPopup();
         },
 
         helpClicked: function () {
             cc.LobbyController.getInstance().createX2RewardView(cc.X2Tab.RULES);
-            cc.LobbyController.getInstance().destroyX2PopupView();
+            cc.LobbyController.getInstance().destroyBannerPopup();
         },
 
         openEventClicked: function (event, index) {
@@ -61,7 +68,7 @@
             var delay = 0.3;
             cc.director.getScheduler().schedule(function () {
                 self.animation.stop();
-                cc.LobbyController.getInstance().destroyX2PopupView();
+                cc.LobbyController.getInstance().destroyBannerPopup();
             }, this, 1, 0, delay, false);
         },
     });

@@ -71,12 +71,12 @@
         };
 
         // Event - x2
-        LobbyController.prototype.createX2PopupView = function () {
-            return this.lobbyView.createX2PopupView();
+        LobbyController.prototype.createBannerPopup = function () {
+            return this.lobbyView.createBannerPopup();
         };
 
-        LobbyController.prototype.destroyX2PopupView = function () {
-            return this.lobbyView.destroyX2PopupView();
+        LobbyController.prototype.destroyBannerPopup = function () {
+            return this.lobbyView.destroyBannerPopup();
         };
 
         LobbyController.prototype.createX2RewardView = function (startTab) {

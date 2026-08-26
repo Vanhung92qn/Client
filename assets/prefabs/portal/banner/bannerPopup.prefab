@@ -13,7 +13,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "x2View",
+    "_name": "bannerPopup",
     "_objFlags": 0,
     "_parent": null,
     "_children": [
