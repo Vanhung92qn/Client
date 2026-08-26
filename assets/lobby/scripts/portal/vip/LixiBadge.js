@@ -5,11 +5,11 @@
  * rieng vi chi la mot component gan them; dung prefab cho viec nay chi
  * them mot tang ma khong giai quyet gi.
  *
- * Nguyen tac: KHONG co hong bao thi icon AN HAN (node.active = false),
- * khong hien nut xam. Nut xam nam do quanh nam chi lam chat lobby.
- *
  * Tu hoi server theo nhip. Nhip nhanh hon binh thuong trong khung gio vang
  * vi luc do so hong bao con lai tut rat nhanh.
+ *
+ * Nut AN hay LUON HIEN thi do co autoHide quyet dinh — xem chu thich cua
+ * property do ben duoi.
  */
 
 'use strict';
@@ -37,14 +37,28 @@ module.exports = cc.Class({
      * Tat di neu nut da co su kien click khac trong scene.
      */
     autoOpenPopup: true,
+
+    /**
+     * Tu an nut khi khong co hong bao nao.
+     *
+     * MAC DINH TAT — nut luon hien, badge van chay binh thuong. Nhu vay
+     * moi nguoi deu thay co tinh nang li xi va bam vao xem duoc gio phat,
+     * thay vi khong bao gio biet no ton tai.
+     *
+     * Bat len thi nut chi hien khi that su co hong bao — lobby gon hon
+     * nhung nguoi choi moi se khong biet co tinh nang nay.
+     */
+    autoHide: false,
   },
 
   onLoad() {
     this._summary = null;
     this._pollSec = POLL_IDLE;
 
-    // An ngay tu dau — cho toi khi server xac nhan co gi thi moi hien
-    this.node.active = false;
+    // Chi an san khi duoc bat; mac dinh giu nguyen trang thai trong scene
+    if (this.autoHide) {
+      this.node.active = false;
+    }
 
     if (this.autoOpenPopup) {
       this.node.on(cc.Node.EventType.TOUCH_END, this._open, this);
@@ -95,8 +109,15 @@ module.exports = cc.Class({
 
   _render() {
     const s = this._summary;
+
     if (!s || !s.enabled || !s.hasAnything) {
-      this.node.active = false;
+      if (this.autoHide) {
+        this.node.active = false;
+        return;
+      }
+      // Van hien nut, chi tat cham do va nhan "dang phat"
+      if (this.nodeBadge) this.nodeBadge.active = false;
+      if (this.nodeHot) this.nodeHot.active = false;
       return;
     }
 
