@@ -18,7 +18,12 @@ const PREFAB_BUNDLE = 'prefabs';
 const ID = {
   VIP: 'vip',
   RAKEBACK: 'rakeback',
+  /** Khung gio vang — nut o lobby LUON HIEN. */
   LIXI: 'lixi',
+  /** Li xi thang + qua CSKH — nut o lobby chi hien khi co. */
+  LIXI_MINE: 'lixiMine',
+  /** Lich su da nhan. */
+  LIXI_HISTORY: 'lixiHistory',
   /** Man hieu ung mo hong bao — mo chong len tren popup Li xi. */
   LIXI_OPEN: 'lixiOpen',
 };
@@ -39,8 +44,20 @@ const BY_ID = {
   },
   [ID.LIXI]: {
     id: ID.LIXI,
-    title: 'LÌ XÌ',
+    title: 'KHUNG GIỜ VÀNG',
     prefab: 'portal/Lixi/LixiPopup',
+    enabled: true,
+  },
+  [ID.LIXI_MINE]: {
+    id: ID.LIXI_MINE,
+    title: 'LÌ XÌ CỦA BẠN',
+    prefab: 'portal/Lixi/LixiMinePopup',
+    enabled: true,
+  },
+  [ID.LIXI_HISTORY]: {
+    id: ID.LIXI_HISTORY,
+    title: 'LỊCH SỬ LÌ XÌ',
+    prefab: 'portal/Lixi/LixiHistoryPopup',
     enabled: true,
   },
   [ID.LIXI_OPEN]: {

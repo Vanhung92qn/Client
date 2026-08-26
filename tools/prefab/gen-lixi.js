@@ -227,11 +227,30 @@ function buildItem(uScript) {
 const POPUP_W = 860;
 const POPUP_H = 600;
 
-function buildPopup(uScript, uItemPrefab, uHelpPrefab) {
+/**
+ * Man chinh — dung CHUNG cho hai popup:
+ *
+ *   Khung gio vang   co khoi gio vang, chi hien hong bao loai 1
+ *   Li xi cua ban    khong co khoi gio vang, hien loai 2 + 3
+ *
+ * Hai cai giong nhau toi 90% (danh sach, trang thai rong, nut tro giup,
+ * nut lich su) nen dung chung mot ham va mot script; khac nhau o
+ * filterTypes va hasGoldenBlock truyen vao.
+ *
+ * @param {object} o
+ *   nodeName, title, uScript, uItemPrefab, uHelpPrefab,
+ *   filterTypes  [1] hoac [2,3]
+ *   golden       co dung khoi khung gio vang khong
+ */
+function buildPopup(o) {
+  const uScript = o.uScript;
+  const uItemPrefab = o.uItemPrefab;
+  const uHelpPrefab = o.uHelpPrefab;
   const listW = 780;
-  const listH = 300;
+  // Khong co khoi gio vang thi danh sach duoc cao them — dung de trong
+  const listH = o.golden ? 300 : 380;
 
-  return P.node('LixiPopup', { size: [POPUP_W, POPUP_H] }, popupFrame('LÌ XÌ', POPUP_W, POPUP_H, [
+  return P.node(o.nodeName, { size: [POPUP_W, POPUP_H] }, popupFrame(o.title, POPUP_W, POPUP_H, [
 
     // Nut "?" canh nut dong
     P.node('btnHelp', {
@@ -267,12 +286,14 @@ function buildPopup(uScript, uItemPrefab, uHelpPrefab) {
       P.label('Tổng 145.000đ', { size: 22, hAlign: 2, overflow: 1 }),
     ]),
 
-    // ── Khoi khung gio vang — chi hien khi dang co dot ───────────
+    // ── Khoi khung gio vang ──────────────────────────────────────
+    // LUON HIEN o popup gio vang (ke ca ngoai gio — luc do no noi "khung
+    // gio sau: 12h00"). Popup "Li xi cua ban" khong dung khoi nay.
     P.node('nodeGolden', {
       size: [780, 96],
       pos: [0, POPUP_H / 2 - 168],
       ref: 'nodeGolden',
-      active: false,
+      active: !!o.golden,
     }, [
       P.node('bgGolden', { size: [780, 96] }, [], [
         P.sprite(IMG.borderNho, { type: 1, sizeMode: 0 }),
@@ -313,7 +334,7 @@ function buildPopup(uScript, uItemPrefab, uHelpPrefab) {
     ]),
 
     // ── Danh sach ────────────────────────────────────────────────
-    P.node('nodeContent', { size: [listW, listH], pos: [0, -60], ref: 'nodeContent' }, [
+    P.node('nodeContent', { size: [listW, listH], pos: [0, o.golden ? -60 : -20], ref: 'nodeContent' }, [
       P.node('scroll', { size: [listW, listH] }, [
         P.node('view', { size: [listW, listH] }, [
           P.node('listContent', {
@@ -342,7 +363,7 @@ function buildPopup(uScript, uItemPrefab, uHelpPrefab) {
     // Man hinh trong la co hoi nhac quay lai, khong de no trong khong
     P.node('nodeEmpty', {
       size: [640, 220],
-      pos: [0, -60],
+      pos: [0, o.golden ? -60 : -20],
       ref: 'nodeEmpty',
       active: false,
     }, [
@@ -365,12 +386,28 @@ function buildPopup(uScript, uItemPrefab, uHelpPrefab) {
     // ── Dang tai ─────────────────────────────────────────────────
     P.node('nodeLoading', {
       size: [300, 40],
-      pos: [0, -60],
+      pos: [0, o.golden ? -60 : -20],
       ref: 'nodeLoading',
       color: C_DIM,
       active: false,
     }, [], [
       P.label('Đang tải...', { size: 22, overflow: 1 }),
+    ]),
+
+    // ── Nut mo lich su ───────────────────────────────────────────
+    // Lich su la popup RIENG: man nay de hanh dong (cuop, mo), man kia de
+    // tra cuu. Nhet chung thi man hanh dong dai ra vi thu khong ai xem
+    // thuong xuyen.
+    P.node('btnHistory', {
+      size: [200, 46],
+      pos: [POPUP_W / 2 - 130, -POPUP_H / 2 + 46],
+      ref: 'btnHistory',
+    }, [
+      P.node('lbHistory', { size: [200, 40], color: C_DIM }, [], [
+        P.label('Lịch sử nhận  ›', { size: 20, overflow: 1 }),
+      ]),
+    ], [
+      P.button({ transition: 3, zoomScale: 1.06 }),
     ]),
 
   ]), [
@@ -392,6 +429,10 @@ function buildPopup(uScript, uItemPrefab, uHelpPrefab) {
       nodeContent: P.ref('nodeContent'),
       nodeLoading: P.ref('nodeLoading'),
       prefabHelp: { __uuid__: uHelpPrefab },
+      btnHistory: P.ref('btnHistory'),
+      // Hai popup dung chung script, khac nhau o hai gia tri nay
+      filterTypes: o.filterTypes,
+      hasGoldenBlock: !!o.golden,
     }),
   ]);
 }
@@ -487,6 +528,90 @@ function buildOpenView(uScript) {
 }
 
 // ─────────────────────────────────────────────────────────────────
+// 3b. LixiHistoryPopup — lich su da nhan
+// ─────────────────────────────────────────────────────────────────
+
+const HIST_W = 860;
+const HIST_H = 560;
+
+function buildHistory(uScript, uItemPrefab) {
+  const listW = 780;
+  const listH = 380;
+
+  return P.node('LixiHistoryPopup', { size: [HIST_W, HIST_H] },
+    popupFrame('LỊCH SỬ LÌ XÌ', HIST_W, HIST_H, [
+
+      // Dong tong ket: da nhan bao nhieu cai, tong bao nhieu tien
+      P.node('lbSummary', {
+        size: [740, 34],
+        pos: [0, HIST_H / 2 - 92],
+        ref: 'lbSummary',
+        color: C_GOLD,
+      }, [], [
+        P.label('Đã nhận 3 hồng bao · tổng 15.000đ', { size: 22, overflow: 1 }),
+      ]),
+
+      P.node('scroll', { size: [listW, listH], pos: [0, -34] }, [
+        P.node('view', { size: [listW, listH] }, [
+          P.node('histContent', {
+            size: [listW, 0],
+            pos: [0, listH / 2],
+            anchor: [0.5, 1],
+            ref: 'histContent',
+          }, [], [
+            P.layout({
+              layoutType: 2,
+              resize: 1,
+              spacingY: 8,
+              padding: { T: 4, B: 4 },
+              size: [listW, 0],
+            }),
+          ]),
+        ], [
+          P.mask({ type: 0 }),
+        ]),
+      ], [
+        P.scrollView({ vertical: true, horizontal: false, content: P.ref('histContent') }),
+      ]),
+
+      P.node('nodeEmpty', {
+        size: [640, 160],
+        pos: [0, -34],
+        ref: 'nodeEmpty',
+        active: false,
+      }, [
+        P.node('lbEmpty', { size: [620, 120], ref: 'lbEmpty', color: C_DIM }, [], [
+          P.label('Bạn chưa nhận lì xì nào\n\nNhận rồi sẽ thấy ở đây',
+            { size: 21, lineHeight: 30, overflow: 1, wrap: true }),
+        ]),
+      ]),
+
+      P.node('nodeLoading', {
+        size: [300, 40],
+        pos: [0, -34],
+        ref: 'nodeLoading',
+        color: C_DIM,
+        active: false,
+      }, [], [
+        P.label('Đang tải...', { size: 22, overflow: 1 }),
+      ]),
+
+    ]),
+  [
+    P.script(uScript, {
+      lbTitle: P.refComp('lbTitle', 'cc.Label'),
+      btnClose: P.ref('btnClose'),
+      lbSummary: P.refComp('lbSummary', 'cc.Label'),
+      nodeListContent: P.ref('histContent'),
+      prefabItem: { __uuid__: uItemPrefab },
+      nodeEmpty: P.ref('nodeEmpty'),
+      lbEmpty: P.refComp('lbEmpty', 'cc.Label'),
+      nodeLoading: P.ref('nodeLoading'),
+    }),
+  ]);
+}
+
+// ─────────────────────────────────────────────────────────────────
 // 4. LixiHelpPopup — bang giai thich
 // ─────────────────────────────────────────────────────────────────
 
@@ -567,23 +692,49 @@ function main() {
   const uOpen = scriptUuid('LixiOpenView.js');
   const uHelp = scriptUuid('LixiHelpPanel.js');
   const uBadge = scriptUuid('LixiBadge.js');
+  const uHist = scriptUuid('LixiHistoryPopup.js');
   console.log(`  script: service=${uService.slice(0, 8)} model=${uModel.slice(0, 8)} badge=${uBadge.slice(0, 8)}\n`);
 
   const P_ITEM = path.join('Lixi', 'items', 'LixiItem.prefab');
   const P_OPEN = path.join('Lixi', 'LixiOpenView.prefab');
   const P_HELP = path.join('Lixi', 'LixiHelpPopup.prefab');
   const P_POPUP = path.join('Lixi', 'LixiPopup.prefab');
+  const P_MINE = path.join('Lixi', 'LixiMinePopup.prefab');
+  const P_HIST = path.join('Lixi', 'LixiHistoryPopup.prefab');
 
   const uItemPf = prefabUuid(P_ITEM);
   const uOpenPf = prefabUuid(P_OPEN);
   const uHelpPf = prefabUuid(P_HELP);
   const uPopupPf = prefabUuid(P_POPUP);
+  const uMinePf = prefabUuid(P_MINE);
+  const uHistPf = prefabUuid(P_HIST);
 
   // Prefab CON sinh truoc: popup cha can uuid cua chung de bind property
   writePrefab(P_ITEM, buildItem(uItem), uItemPf);
   writePrefab(P_OPEN, buildOpenView(uOpen), uOpenPf);
   writePrefab(P_HELP, buildHelp(uHelp), uHelpPf);
-  writePrefab(P_POPUP, buildPopup(uPopup, uItemPf, uHelpPf), uPopupPf);
+  writePrefab(P_HIST, buildHistory(uHist, uItemPf), uHistPf);
+
+  // Hai popup chinh — cung ham, cung script, khac filterTypes va golden
+  writePrefab(P_POPUP, buildPopup({
+    nodeName: 'LixiPopup',
+    title: 'KHUNG GIỜ VÀNG',
+    uScript: uPopup,
+    uItemPrefab: uItemPf,
+    uHelpPrefab: uHelpPf,
+    filterTypes: [1],
+    golden: true,
+  }), uPopupPf);
+
+  writePrefab(P_MINE, buildPopup({
+    nodeName: 'LixiMinePopup',
+    title: 'LÌ XÌ CỦA BẠN',
+    uScript: uPopup,
+    uItemPrefab: uItemPf,
+    uHelpPrefab: uHelpPf,
+    filterTypes: [2, 3],
+    golden: false,
+  }), uMinePf);
 
   console.log('\nXong. Kiem lai bang: node tools/prefab/validate.js');
 }

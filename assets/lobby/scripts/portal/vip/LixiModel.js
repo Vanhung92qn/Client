@@ -102,6 +102,22 @@ function parseItem(raw) {
   };
 }
 
+/**
+ * Gio phat ke tiep, dang doc duoc.
+ * @param {number} hour  0..23, -1 nghia la khong co lich
+ * @param {number} minutes  con bao nhieu phut nua
+ */
+function formatNextGolden(hour, minutes) {
+  if (hour < 0) return '';
+
+  const hh = `${hour < 10 ? '0' : ''}${hour}h00`;
+
+  // Duoi mot tieng thi noi so phut cho de hinh dung; xa hon thi so phut
+  // khong con y nghia gi
+  if (minutes > 0 && minutes < 60) return `Khung giờ sau: ${hh} (còn ${minutes} phút)`;
+  return `Khung giờ sau: ${hh}`;
+}
+
 /** Chuan hoa ket qua SP_Lixi_Summary. */
 function parseSummary(raw) {
   if (!raw) return null;
@@ -110,31 +126,46 @@ function parseSummary(raw) {
   const min = Number(raw.GoldenMin) || 0;
   const max = Number(raw.GoldenMax) || 0;
 
+  const nextHour = raw.NextGoldenHour === undefined ? -1 : Number(raw.NextGoldenHour);
+  const nextMinutes = Math.max(0, Number(raw.NextGoldenMinutes) || 0);
+
+  const activeCampaignId = Number(raw.ActiveCampaignID) || 0;
+  const activeRemain = Number(raw.ActiveRemain) || 0;
+  const alreadyGrabbed = !!raw.AlreadyGrabbed;
+  const personalCount = Number(raw.PersonalCount) || 0;
+
   return {
     enabled: !!raw.Enabled,
     pendingCount: Number(raw.PendingCount) || 0,
     pendingAmount: Math.floor(Number(raw.PendingAmount) || 0),
 
-    activeCampaignId: Number(raw.ActiveCampaignID) || 0,
-    activeRemain: Number(raw.ActiveRemain) || 0,
-    activeSeconds: Math.max(0, Number(raw.ActiveSeconds) || 0),
-    alreadyGrabbed: !!raw.AlreadyGrabbed,
+    // ── Rieng loai 2 + 3: qua CUA RIENG nguoi nay ────────────────
+    // Nut "Li xi cua ban" o lobby chi hien khi con so nay > 0
+    personalCount,
+    personalAmount: Math.floor(Number(raw.PersonalAmount) || 0),
 
-    // Cau hinh THAT lay tu LixiConfig — dung de hien cho nguoi choi
+    activeCampaignId,
+    activeRemain,
+    activeSeconds: Math.max(0, Number(raw.ActiveSeconds) || 0),
+    alreadyGrabbed,
+
+    // Khung gio ke tiep — de ngoai gio van noi duoc bao gio quay lai
+    nextGoldenHour: nextHour,
+    nextGoldenMinutes: nextMinutes,
+    nextGoldenText: formatNextGolden(nextHour, nextMinutes),
+
+    // Cau hinh that. KHONG con hien cho nguoi choi (user chot 2026-08-27)
+    // nhung giu lai vi man hinh quan tri va cac man sau nay con dung.
     goldenQuantity: quantity,
     goldenMin: min,
     goldenMax: max,
     goldenText: formatRange(min, max),
 
-    /** Co dot dang mo va minh chua lay -> nut "Cuop li xi" sang. */
-    canGrab: !!raw.Enabled
-      && Number(raw.ActiveCampaignID) > 0
-      && Number(raw.ActiveRemain) > 0
-      && !raw.AlreadyGrabbed,
+    /** Dot dang mo, con hong bao, va minh chua lay. */
+    canGrab: !!raw.Enabled && activeCampaignId > 0 && activeRemain > 0 && !alreadyGrabbed,
 
-    /** Co gi de hien o lobby khong (badge hoac dot dang chay). */
-    hasAnything: (Number(raw.PendingCount) || 0) > 0
-      || (Number(raw.ActiveCampaignID) > 0 && Number(raw.ActiveRemain) > 0 && !raw.AlreadyGrabbed),
+    /** Dot dang dien ra (du minh da lay hay chua). */
+    goldenLive: activeCampaignId > 0 && Math.max(0, Number(raw.ActiveSeconds) || 0) > 0,
   };
 }
 
@@ -145,6 +176,7 @@ module.exports = {
   formatNumber,
   formatCountdown,
   formatRange,
+  formatNextGolden,
   parseItem,
   parseSummary,
 };
