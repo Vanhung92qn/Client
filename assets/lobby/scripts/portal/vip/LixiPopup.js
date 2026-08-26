@@ -30,6 +30,8 @@ module.exports = cc.Class({
     lbTitle: cc.Label,
     btnClose: cc.Node,
     btnHelp: cc.Node,
+    /** Mo popup lich su. Phai khai bao o day thi Cocos moi nhan binding. */
+    btnHistory: cc.Node,
 
     /** "Bạn có N hồng bao chưa mở" */
     lbCount: cc.Label,
@@ -53,6 +55,15 @@ module.exports = cc.Class({
 
     nodeContent: cc.Node,
     nodeLoading: cc.Node,
+
+    /**
+     * "Hôm nay bạn đã nhận: 5.000đ" — chi popup khung gio vang dung.
+     *
+     * Thay cho danh sach item: hong bao gio vang cuop duoc la MO LUON nen
+     * khong bao gio nam cho, liet ke ra chi thay mot dong "Da nhan" vo
+     * nghia. Mot dong tong ket la du.
+     */
+    lbToday: cc.Label,
 
     /** Prefab bang giai thich, mo bang nut "?". */
     prefabHelp: cc.Prefab,
@@ -151,10 +162,15 @@ module.exports = cc.Class({
         list = list.filter((x) => this.filterTypes.indexOf(x.type) >= 0);
       }
 
-      this._renderHeader(list);
-      if (this.hasGoldenBlock) this._renderGolden();
-      else if (this.nodeGolden) this.nodeGolden.active = false;
-      this._renderList(list);
+      if (this.hasGoldenBlock) {
+        // Popup khung gio vang: khong liet ke item, chi tong ket mot dong
+        this._renderGolden();
+        this._renderToday(list);
+      } else {
+        if (this.nodeGolden) this.nodeGolden.active = false;
+        this._renderHeader(list);
+        this._renderList(list);
+      }
     });
   },
 
@@ -163,11 +179,41 @@ module.exports = cc.Class({
   // ───────────────────────────────────────────────────────────────
 
   /**
-   * Dong dau popup.
+   * "Hôm nay bạn đã nhận: 5.000đ" — thay cho danh sach o popup gio vang.
+   *
+   * Chi tinh hong bao gio vang MO TRONG NGAY: hom qua nhan gi thi thuoc ve
+   * lich su, khong lien quan toi hom nay.
+   */
+  _renderToday(list) {
+    if (!this.lbToday) return;
+
+    const today = new Date();
+    const isToday = (raw) => {
+      if (!raw) return false;
+      const d = new Date(raw);
+      return d.getFullYear() === today.getFullYear()
+        && d.getMonth() === today.getMonth()
+        && d.getDate() === today.getDate();
+    };
+
+    const opened = list.filter((x) => x.isOpened && isToday(x.openDate));
+    const total = opened.reduce((sum, x) => sum + x.amount, 0);
+
+    if (opened.length) {
+      this.lbToday.string = `Hôm nay bạn đã nhận ${LixiModel.formatNumber(total)}đ`;
+      this.lbToday.node.color = cc.color(255, 214, 122);
+    } else {
+      this.lbToday.string = 'Hôm nay bạn chưa nhận lì xì nào';
+      this.lbToday.node.color = cc.color(178, 190, 205);
+    }
+  },
+
+  /**
+   * Dong dau popup "Li xi cua ban".
    *
    * Dem tren DANH SACH DA LOC chu khong dung summary.pendingCount: con so
-   * do gop ca ba loai, nen popup khung gio vang se noi "ban co 2 hong bao"
-   * trong khi ben duoi khong hien cai nao (chung thuoc loai khac).
+   * do gop ca ba loai, nen se noi "ban co 3 hong bao" trong khi ben duoi
+   * chi hien 2 (cai con lai thuoc loai khac).
    */
   _renderHeader(list) {
     const pending = (list || []).filter((x) => x.isPending);

@@ -1,5 +1,5 @@
 /**
- * gen-lixi.js — sinh 4 prefab cua he Li xi bang code.
+ * gen-lixi.js — sinh 6 prefab cua he Li xi bang code.
  *
  *   node tools/prefab/gen-lixi.js        (cwd = C:\Server\Client)
  *
@@ -8,11 +8,21 @@
  * ma uuid khong doi (giu .meta cu), va moi thay doi bo cuc deu doc duoc
  * trong diff git thay vi mot khoi JSON 2000 dong.
  *
- * Bon prefab:
- *   Lixi/LixiPopup.prefab       man chinh — danh sach + khoi gio vang
- *   Lixi/items/LixiItem.prefab  mot dong trong danh sach
- *   Lixi/LixiOpenView.prefab    man hieu ung mo hong bao
- *   Lixi/LixiHelpPopup.prefab   bang giai thich
+ * Sau prefab:
+ *   Lixi/LixiPopup.prefab        KHUNG GIO VANG — khoi trang thai + luat
+ *                                choi + tong ket hom nay. KHONG co danh
+ *                                sach: hong bao gio vang cuop duoc la mo
+ *                                luon nen khong bao gio nam cho.
+ *   Lixi/LixiMinePopup.prefab    LI XI CUA BAN — danh sach hong bao loai
+ *                                2+3, nam cho toi 7 ngay nen danh sach la
+ *                                thu chinh.
+ *   Lixi/LixiHistoryPopup.prefab lich su da nhan
+ *   Lixi/items/LixiItem.prefab   mot dong trong danh sach
+ *   Lixi/LixiOpenView.prefab     man hieu ung mo hong bao
+ *   Lixi/LixiHelpPopup.prefab    bang giai thich
+ *
+ * Hai popup dau dung CHUNG mot ham buildPopup va CHUNG mot script, khac
+ * nhau o filterTypes / golden truyen vao.
  *
  * Chay xong nho kiem lai:  node tools/prefab/validate.js
  */
@@ -247,8 +257,99 @@ function buildPopup(o) {
   const uItemPrefab = o.uItemPrefab;
   const uHelpPrefab = o.uHelpPrefab;
   const listW = 780;
-  // Khong co khoi gio vang thi danh sach duoc cao them — dung de trong
-  const listH = o.golden ? 300 : 380;
+  const listH = 380;
+
+  /* Popup KHUNG GIO VANG khong co danh sach item.
+
+     Hong bao gio vang cuop duoc la MO LUON nen khong bao gio nam cho;
+     liet ke ra chi thay mot dong "Da nhan" vo nghia (user bao dung o ban
+     truoc). Thay bang: khoi trang thai lon + luat choi + mot dong tong
+     ket hom nay.
+
+     Popup LI XI CUA BAN thi nguoc lai — hong bao nam cho toi 7 ngay nen
+     danh sach la thu chinh.                                            */
+  const listBlock = o.golden ? [] : [
+    P.node('nodeContent', { size: [listW, listH], pos: [0, -20], ref: 'nodeContent' }, [
+      P.node('scroll', { size: [listW, listH] }, [
+        P.node('view', { size: [listW, listH] }, [
+          P.node('listContent', {
+            size: [listW, 0],
+            pos: [0, listH / 2],
+            anchor: [0.5, 1],
+            ref: 'listContent',
+          }, [], [
+            P.layout({
+              layoutType: 2,
+              resize: 1,
+              spacingY: 8,
+              padding: { T: 4, B: 4 },
+              size: [listW, 0],
+            }),
+          ]),
+        ], [
+          P.mask({ type: 0 }),
+        ]),
+      ], [
+        P.scrollView({ vertical: true, horizontal: false, content: P.ref('listContent') }),
+      ]),
+    ]),
+
+    P.node('nodeEmpty', {
+      size: [640, 220],
+      pos: [0, -20],
+      ref: 'nodeEmpty',
+      active: false,
+    }, [
+      P.node('iconEmpty', { size: [90, 90], pos: [0, 66], opacity: 130 }, [], [
+        P.sprite(IMG.hongBao, { sizeMode: 0 }),
+      ]),
+      P.node('lbEmpty', { size: [620, 130], pos: [0, -34], ref: 'lbEmpty', color: C_DIM }, [], [
+        P.label('Bạn chưa có lì xì nào', { size: 21, lineHeight: 30, overflow: 1, wrap: true }),
+      ]),
+    ]),
+  ];
+
+  /* Luat choi — chi popup gio vang co.
+
+     Day la ly do chinh nguoi choi mo popup nay khi CHUA toi gio: de biet
+     bao gio co va choi kieu gi. Giau vao nut "?" thi it ai bam.          */
+  const rulesBlock = !o.golden ? [] : [
+    P.node('nodeRules', { size: [780, 210], pos: [0, -74] }, [
+      P.node('bgRules', { size: [780, 210] }, [], [
+        P.sprite(IMG.borderNho, { type: 1, sizeMode: 0 }),
+      ]),
+      P.node('lbRulesTitle', {
+        size: [740, 30],
+        pos: [0, 74],
+        color: C_GOLD,
+      }, [], [
+        P.label('LUẬT CHƠI', { size: 20, overflow: 1 }),
+      ]),
+      P.node('lbRules', {
+        size: [700, 140],
+        pos: [0, -14],
+        color: C_WHITE,
+      }, [], [
+        P.label(
+          'Mỗi ngày phát 2 đợt: 12h00 và 21h00\n'
+          + 'Ai nhanh tay thì được, hết là hết\n'
+          + 'Mỗi người nhận 1 hồng bao mỗi đợt\n'
+          + 'Nhận xong tiền vào ví ngay, không cần làm gì thêm',
+          { size: 19, lineHeight: 32, hAlign: 1, overflow: 1, wrap: true }
+        ),
+      ]),
+    ]),
+
+    // Tong ket hom nay — thay cho danh sach item
+    P.node('lbToday', {
+      size: [740, 34],
+      pos: [0, -212],
+      ref: 'lbToday',
+      color: C_DIM,
+    }, [], [
+      P.label('Hôm nay bạn chưa nhận lì xì nào', { size: 21, overflow: 1 }),
+    ]),
+  ];
 
   return P.node(o.nodeName, { size: [POPUP_W, POPUP_H] }, popupFrame(o.title, POPUP_W, POPUP_H, [
 
@@ -266,24 +367,28 @@ function buildPopup(o) {
     ]),
 
     // ── Dong dau: dang co bao nhieu ──────────────────────────────
-    P.node('lbCount', {
-      size: [560, 34],
-      pos: [-POPUP_W / 2 + 40 + 280, POPUP_H / 2 - 92],
-      anchor: [0, 0.5],
-      ref: 'lbCount',
-      color: C_WHITE,
-    }, [], [
-      P.label('Bạn có 3 hồng bao chưa mở', { size: 24, hAlign: 0, overflow: 1 }),
-    ]),
+    // Chi popup "Li xi cua ban" dung. Popup gio vang khong co gi nam cho
+    // nen dem "ban co N hong bao" luon bang 0, hien ra chi thua.
+    ...(o.golden ? [] : [
+      P.node('lbCount', {
+        size: [560, 34],
+        pos: [-POPUP_W / 2 + 40 + 280, POPUP_H / 2 - 92],
+        anchor: [0, 0.5],
+        ref: 'lbCount',
+        color: C_WHITE,
+      }, [], [
+        P.label('Bạn có 3 hồng bao chưa mở', { size: 24, hAlign: 0, overflow: 1 }),
+      ]),
 
-    P.node('lbTotal', {
-      size: [260, 32],
-      pos: [POPUP_W / 2 - 40 - 130, POPUP_H / 2 - 92],
-      anchor: [1, 0.5],
-      ref: 'lbTotal',
-      color: C_GOLD,
-    }, [], [
-      P.label('Tổng 145.000đ', { size: 22, hAlign: 2, overflow: 1 }),
+      P.node('lbTotal', {
+        size: [260, 32],
+        pos: [POPUP_W / 2 - 40 - 130, POPUP_H / 2 - 92],
+        anchor: [1, 0.5],
+        ref: 'lbTotal',
+        color: C_GOLD,
+      }, [], [
+        P.label('Tổng 145.000đ', { size: 22, hAlign: 2, overflow: 1 }),
+      ]),
     ]),
 
     // ── Khoi khung gio vang ──────────────────────────────────────
@@ -333,55 +438,9 @@ function buildPopup(o) {
       ]),
     ]),
 
-    // ── Danh sach ────────────────────────────────────────────────
-    P.node('nodeContent', { size: [listW, listH], pos: [0, o.golden ? -60 : -20], ref: 'nodeContent' }, [
-      P.node('scroll', { size: [listW, listH] }, [
-        P.node('view', { size: [listW, listH] }, [
-          P.node('listContent', {
-            size: [listW, 0],
-            pos: [0, listH / 2],
-            anchor: [0.5, 1],
-            ref: 'listContent',
-          }, [], [
-            P.layout({
-              layoutType: 2,
-              resize: 1,
-              spacingY: 8,
-              padding: { T: 4, B: 4 },
-              size: [listW, 0],
-            }),
-          ]),
-        ], [
-          P.mask({ type: 0 }),
-        ]),
-      ], [
-        P.scrollView({ vertical: true, horizontal: false, content: P.ref('listContent') }),
-      ]),
-    ]),
-
-    // ── Trang thai rong ──────────────────────────────────────────
-    // Man hinh trong la co hoi nhac quay lai, khong de no trong khong
-    P.node('nodeEmpty', {
-      size: [640, 220],
-      pos: [0, o.golden ? -60 : -20],
-      ref: 'nodeEmpty',
-      active: false,
-    }, [
-      P.node('iconEmpty', { size: [90, 90], pos: [0, 66], opacity: 130 }, [], [
-        P.sprite(IMG.hongBao, { sizeMode: 0 }),
-      ]),
-      P.node('lbEmpty', {
-        size: [620, 130],
-        pos: [0, -34],
-        ref: 'lbEmpty',
-        color: C_DIM,
-      }, [], [
-        P.label(
-          'Chưa có hồng bao nào\n\nQuay lại lúc 12h00 hoặc 21h00\nđể cướp lì xì khung giờ vàng',
-          { size: 21, lineHeight: 30, overflow: 1, wrap: true }
-        ),
-      ]),
-    ]),
+    // ── Than popup: danh sach HOAC luat choi ─────────────────────
+    ...listBlock,
+    ...rulesBlock,
 
     // ── Dang tai ─────────────────────────────────────────────────
     P.node('nodeLoading', {
@@ -412,24 +471,38 @@ function buildPopup(o) {
 
   ]), [
     P.script(uScript, {
+      // ── Co o CA HAI popup ────────────────────────────────────
       lbTitle: P.refComp('lbTitle', 'cc.Label'),
       btnClose: P.ref('btnClose'),
       btnHelp: P.ref('btnHelp'),
-      lbCount: P.refComp('lbCount', 'cc.Label'),
-      lbTotal: P.refComp('lbTotal', 'cc.Label'),
+      btnHistory: P.ref('btnHistory'),
+      nodeLoading: P.ref('nodeLoading'),
+      prefabHelp: { __uuid__: uHelpPrefab },
+
+      // ── Khoi khung gio vang ───────────────────────────────────
       nodeGolden: P.ref('nodeGolden'),
       lbGoldenInfo: P.refComp('lbGoldenInfo', 'cc.Label'),
       lbGoldenCountdown: P.refComp('lbGoldenCountdown', 'cc.Label'),
       nodeGrab: P.ref('btnGrab'),
       lbGrab: P.refComp('lbGrab', 'cc.Label'),
-      nodeListContent: P.ref('listContent'),
-      prefabItem: { __uuid__: uItemPrefab },
-      nodeEmpty: P.ref('nodeEmpty'),
-      lbEmpty: P.refComp('lbEmpty', 'cc.Label'),
-      nodeContent: P.ref('nodeContent'),
-      nodeLoading: P.ref('nodeLoading'),
-      prefabHelp: { __uuid__: uHelpPrefab },
-      btnHistory: P.ref('btnHistory'),
+
+      /* Cac ref duoi day chi ton tai o MOT trong hai nhanh — bind ref
+         khong co node thi P.build() nem loi, nen phai theo dieu kien. */
+
+      // Chi popup gio vang: dong tong ket thay cho danh sach
+      ...(o.golden ? {
+        lbToday: P.refComp('lbToday', 'cc.Label'),
+      } : {
+        // Chi popup "Li xi cua ban": danh sach + dem o dong dau
+        lbCount: P.refComp('lbCount', 'cc.Label'),
+        lbTotal: P.refComp('lbTotal', 'cc.Label'),
+        nodeListContent: P.ref('listContent'),
+        nodeContent: P.ref('nodeContent'),
+        nodeEmpty: P.ref('nodeEmpty'),
+        lbEmpty: P.refComp('lbEmpty', 'cc.Label'),
+        prefabItem: { __uuid__: uItemPrefab },
+      }),
+
       // Hai popup dung chung script, khac nhau o hai gia tri nay
       filterTypes: o.filterTypes,
       hasGoldenBlock: !!o.golden,
@@ -604,8 +677,6 @@ function buildHistory(uScript, uItemPrefab) {
       lbSummary: P.refComp('lbSummary', 'cc.Label'),
       nodeListContent: P.ref('histContent'),
       prefabItem: { __uuid__: uItemPrefab },
-      nodeEmpty: P.ref('nodeEmpty'),
-      lbEmpty: P.refComp('lbEmpty', 'cc.Label'),
       nodeLoading: P.ref('nodeLoading'),
     }),
   ]);
