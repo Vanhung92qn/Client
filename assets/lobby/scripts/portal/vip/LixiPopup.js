@@ -63,10 +63,15 @@ module.exports = cc.Class({
      * [1]    khung gio vang  — popup nay
      * [2,3]  li xi thang + qua CSKH — popup "Li xi cua ban"
      *
-     * Hai popup dung CHUNG script, khac nhau o day. Rong thi hien tat ca.
+     * Hai popup dung CHUNG script, khac nhau o day. Gia tri that do PREFAB
+     * dat (xem tools/prefab/gen-lixi.js); RONG nghia la hien tat ca.
+     *
+     * default PHAI la mang RONG: Cocos Creator bao loi "Default array must
+     * be empty" neu dat [1] o day. Khong sao ca — prefab van ghi de duoc,
+     * va rong thi hien tat ca nen truong hop xau nhat cung khong mat gi.
      */
     filterTypes: {
-      default: [1],
+      default: [],
       type: [cc.Integer],
     },
 
