@@ -29,6 +29,7 @@ const VIP_DIRS = [
   path.join(A.ASSETS_ROOT, 'prefabs', 'portal', 'vip'),
   path.join(A.ASSETS_ROOT, 'prefabs', 'portal', 'RakeBack'),
   path.join(A.ASSETS_ROOT, 'prefabs', 'portal', 'Lixi'),
+  path.join(A.ASSETS_ROOT, 'prefabs', 'portal', 'Quest'),
 ];
 
 /** Tap hop uuid co that trong project — quet mot lan roi tra cuu. */

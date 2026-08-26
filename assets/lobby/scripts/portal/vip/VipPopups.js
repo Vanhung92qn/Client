@@ -26,6 +26,8 @@ const ID = {
   LIXI_HISTORY: 'lixiHistory',
   /** Man hieu ung mo hong bao — mo chong len tren popup Li xi. */
   LIXI_OPEN: 'lixiOpen',
+  /** Nhiem vu / Su kien — nut o thanh duoi lobby (btnEvent). */
+  QUEST: 'quest',
 };
 
 const BY_ID = {
@@ -69,6 +71,12 @@ const BY_ID = {
     // cai dang mo: nguoi choi mo hai hong bao lien tiep thi lan thu hai se
     // thay lai ket qua cu.
     allowStack: true,
+  },
+  [ID.QUEST]: {
+    id: ID.QUEST,
+    title: 'NHIỆM VỤ',
+    prefab: 'portal/Quest/QuestPopup',
+    enabled: true,
   },
 };
 
