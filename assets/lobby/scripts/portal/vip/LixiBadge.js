@@ -58,6 +58,24 @@ module.exports = cc.Class({
     /** Nhan "Đang phát" khi co dot gio vang. */
     nodeHot: cc.Node,
     /**
+     * Node THAT SU duoc bat/tat va bat su kien cham.
+     *
+     * 🔴 BAT BUOC dat khi che do PERSONAL (nut tu an khi khong co gi).
+     *
+     * Ly do: Cocos KHONG goi onLoad/onEnable cua component nam tren node
+     * dang inactive. Neu component tu tat chinh node cua no thi lan sau no
+     * khong con chay de bat lai — nut bien mat vinh vien, va khong co lay
+     * mot dong log nao vi ham poll chua bao gio duoc goi.
+     *
+     * Cach dung: gan component len mot node BOC luon active, tro
+     * nodeTarget toi nut that ben trong.
+     *
+     * De trong thi dung chinh node mang component — chi an toan khi node
+     * do luon active (che do GOLDEN).
+     */
+    nodeTarget: cc.Node,
+
+    /**
      * Bam vao icon co tu mo popup Li xi khong.
      * Tat di neu nut da co su kien click khac trong scene.
      */
@@ -76,21 +94,38 @@ module.exports = cc.Class({
     autoHide: false,
   },
 
+  /** Node duoc bat/tat va nhan su kien cham. Xem chu thich nodeTarget. */
+  _target() {
+    return (this.nodeTarget && this.nodeTarget.isValid) ? this.nodeTarget : this.node;
+  },
+
   onLoad() {
     this._summary = null;
     this._pollSec = POLL_IDLE;
 
-    // Chi an san khi duoc bat; mac dinh giu nguyen trang thai trong scene
-    if (this.autoHide) {
-      this.node.active = false;
+    const target = this._target();
+
+    // Canh bao som thay vi de nguoi sau ngoi do ma khong hieu vi sao nut
+    // khong bao gio hien: component nam tren chinh node no se tat.
+    if (this.autoHide && target === this.node) {
+      cc.warn('[LixiBadge] autoHide bat nhung nodeTarget de trong — '
+        + 'component se tu tat node cua chinh no va khong bao gio chay lai. '
+        + 'Hay gan component len node boc luon active roi tro nodeTarget toi nut.');
     }
 
+    if (this.autoHide) {
+      target.active = false;
+    }
+
+    // Bat cham tren NUT THAT, khong phai node boc: node boc khong co hinh
+    // gi nen cham vao no la cham vao khoang trong
     if (this.autoOpenPopup) {
-      this.node.on(cc.Node.EventType.TOUCH_END, this._open, this);
+      target.on(cc.Node.EventType.TOUCH_END, this._open, this);
     }
   },
 
   onEnable() {
+    cc.log(`[LixiBadge] onEnable mode=${this._modeName()} target=${this._target().name}`);
     this._poll();
     this.schedule(this._poll, this._pollSec);
   },
@@ -99,18 +134,33 @@ module.exports = cc.Class({
     this.unschedule(this._poll);
   },
 
+  _modeName() {
+    return this.mode === MODE.PERSONAL ? 'PERSONAL' : 'GOLDEN';
+  },
+
   _poll() {
     LixiService.getSummary()
       .then((raw) => {
         if (!this.node || !this.node.isValid) return;
         this._summary = LixiModel.parseSummary(raw);
+
+        // Log gon nhung du de chan doan tu F12 ma khong phai doc code:
+        // thay ngay server tra gi va nut se hien hay khong
+        const s = this._summary;
+        cc.log(`[LixiBadge:${this._modeName()}] enabled=${s.enabled} `
+          + `personal=${s.personalCount} pending=${s.pendingCount} `
+          + `canGrab=${s.canGrab} nextGolden=${s.nextGoldenHour}h`);
+
         this._render();
         this._retune();
+
+        cc.log(`[LixiBadge:${this._modeName()}] -> nut ${this._target().active ? 'HIEN' : 'an'}`);
       })
       .catch((err) => {
-        // Im lang. Badge hong thi cung khong the dam popup loi vao mat
-        // nguoi choi moi phut mot lan chi vi mang chap chon.
-        cc.warn('[LixiBadge]', err.message);
+        // Khong dam popup loi vao mat nguoi choi moi phut mot lan chi vi
+        // mang chap chon — nhung phai co log, neu khong thi luc hong se
+        // khong con manh moi nao de lan.
+        cc.warn('[LixiBadge] goi GetSummary that bai:', err.message);
       });
   },
 
@@ -151,14 +201,15 @@ module.exports = cc.Class({
    * chua lay. Da lay roi thi tat cham do — khong con viec gi de nhac.
    */
   _renderGolden(s) {
+    const target = this._target();
     if (!s || !s.enabled) {
-      if (this.autoHide) this.node.active = false;
+      if (this.autoHide) target.active = false;
       else if (this.nodeBadge) this.nodeBadge.active = false;
       return;
     }
 
-    const first = !this.node.active;
-    this.node.active = true;
+    const first = !target.active;
+    target.active = true;
 
     // Cham do khong hien SO o che do nay: dot gio vang la chuyen chung cua
     // ca phong, con so "1" chang noi len dieu gi
@@ -180,16 +231,17 @@ module.exports = cc.Class({
    * bam vao chi thay danh sach trong.
    */
   _renderPersonal(s) {
+    const target = this._target();
     const count = s ? s.personalCount : 0;
 
     if (!s || !s.enabled || count <= 0) {
-      this.node.active = false;
+      target.active = false;
       this._wasHot = false;
       return;
     }
 
-    const first = !this.node.active;
-    this.node.active = true;
+    const first = !target.active;
+    target.active = true;
 
     if (this.nodeBadge) {
       this.nodeBadge.active = true;
@@ -205,10 +257,11 @@ module.exports = cc.Class({
   },
 
   _attract() {
-    if (!this.node || !this.node.isValid) return;
-    this.node.stopAllActions();
-    const s = this.node.scale;
-    cc.tween(this.node)
+    const target = this._target();
+    if (!target || !target.isValid) return;
+    target.stopAllActions();
+    const s = target.scale;
+    cc.tween(target)
       .to(0.12, { scale: s * 1.18 })
       .to(0.10, { scale: s * 0.94 })
       .to(0.08, { scale: s })
