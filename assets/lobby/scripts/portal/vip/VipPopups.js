@@ -136,6 +136,19 @@ function loadPrefab(pathInBundle) {
 }
 
 /**
+ * Popup dang tren duong nap, theo id.
+ *
+ * Vi sao can: kiem "da mo chua" ben duoi dua vao node DA NAM trong cay, ma
+ * lan nap prefab dau tien thi chua co node nao ca. Hai loi goi lien tiep
+ * trong cung mot khoanh khac deu truot qua khoi kiem do va deu instantiate
+ * — ra hai popup chong nhau.
+ *
+ * Xay ra that khi mot nut vua co cc.ClickEvent trong editor vua co
+ * node.on(TOUCH_END) trong ma nguon, hoac khi nguoi choi bam nhanh hai cai.
+ */
+const pending = Object.create(null);
+
+/**
  * Mo mot popup theo id.
  *
  * Neu popup do dang mo san thi dua no len tren thay vi mo them cai nua —
@@ -164,15 +177,29 @@ function open(id, parent) {
       existed.active = true;
       return Promise.resolve(existed);
     }
+
+    // Chua co node nhung dang tren duong nap — dua chung mot ket qua
+    if (pending[id]) return pending[id];
   }
 
-  return loadPrefab(meta.prefab).then((prefab) => {
+  const task = loadPrefab(meta.prefab).then((prefab) => {
     const node = cc.instantiate(prefab);
     node.parent = root;
     node.setPosition(0, 0);
     node.zIndex = cc.NoteDepth.POPUP_PORTAL;
     return node;
   });
+
+  /* allowStack thi KHONG ghi so: man hieu ung mo hong bao phai mo chong len
+     that su, gop lai la nguoi choi mo hai cai lien tiep chi thay ket qua cu. */
+  if (meta.allowStack) return task;
+
+  pending[id] = task;
+  // Xoa so ngay khi xong (du thanh hay bai) de lan bam sau lai nap binh thuong
+  const clear = () => { if (pending[id] === task) delete pending[id]; };
+  task.then(clear, clear);
+
+  return task;
 }
 
 /** Ten node goc cua prefab = phan cuoi duong dan. */

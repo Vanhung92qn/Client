@@ -459,10 +459,11 @@ var netConfig = require("NetConfig");
     },
 
     /**
-     * Ba popup VIP doc lap, moi cai mot prefab rieng.
+     * Bon popup doc lap, moi cai mot prefab rieng.
      * Gan thang cac ham nay vao Click Events cua nut trong lobby:
-     *   Target = node co LobbyView, Component = LobbyView,
-     *   Handler = openVipPopupClicked / openRakebackPopupClicked / openLixiPopupClicked
+     *   Target = node co LobbyView (node Canvas), Component = LobbyView,
+     *   Handler = openVipPopupClicked / openRakebackPopupClicked
+     *           / openLixiPopupClicked / openQuestPopupClicked
      * Popup tu nap prefab nen khong phai keo prefab vao property nao ca.
      */
     openVipPopupClicked: function () {
@@ -475,6 +476,11 @@ var netConfig = require("NetConfig");
 
     openLixiPopupClicked: function () {
       this._openVipPopup('lixi', 'Không mở được trang Lì xì, vui lòng thử lại.');
+    },
+
+    /** Nut "Su kien" o thanh duoi (btnEvent). */
+    openQuestPopupClicked: function () {
+      this._openVipPopup('quest', 'Không mở được trang Nhiệm vụ, vui lòng thử lại.');
     },
 
     _openVipPopup: function (id, errMsg) {
