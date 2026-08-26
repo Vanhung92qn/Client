@@ -1,14 +1,16 @@
 /**
  * QuestPopup — man hinh Nhiem vu, hai tab.
  *
- * CHIA TAB THEO CHU KY, khong phai theo loai viec:
+ *   NHIEM VU  TAT CA nhiem vu dang bat
+ *   SU KIEN   danh cho su kien theo dot, hien chua co cai nao
  *
- *   NHIEM VU  Cycle = 1 (hang ngay)  — lam lai moi ngay, 0h reset
- *   SU KIEN   Cycle = 2 (mot lan)    — lam mot lan ca doi, nhiem vu tan thu
+ * Ban dau toi chia tab theo chu ky (hang ngay / mot lan). Thu that thi hong:
+ * chi co DUNG MOT nhiem vu hang ngay nen tab NHIEM VU luon tro troi mot dong,
+ * ba nhiem vu con lai bi day het sang tab kia. User bao "cho hien thi o het
+ * phan nhiem vu, hien tai su kien rong" — nen gio NHIEM VU gom tat ca.
  *
- * Chia kieu nay vi do la thu nguoi choi that su quan tam: cai nao mai lam
- * lai duoc, cai nao lam xong la het. Chia theo "cuoc / nap / dang nhap" thi
- * ho phai tu doan cai nao con lam duoc.
+ * Muon chia lai theo chu ky: doi TAB_FILTER ben duoi, khong phai sua cho nao
+ * khac.
  *
  * Badge tren tab = so nhiem vu DA XONG ma CHUA BAM NHAN trong tab do — chi
  * so do moi dang lam nguoi choi mo popup.
@@ -26,6 +28,18 @@ const TAB = cc.Enum({
   DAILY: 0,
   ONCE: 1,
 });
+
+/**
+ * Tab nao nhan nhiem vu nao. Mot cho duy nhat quyet dinh — doi o day la ca
+ * danh sach lan huy hieu dem deu doi theo.
+ *
+ *   DAILY -> nhan tat ca
+ *   ONCE  -> chua nhan gi (danh cho su kien theo dot sau nay)
+ */
+const TAB_FILTER = {
+  [TAB.DAILY]: function () { return true; },
+  [TAB.ONCE]: function () { return false; },
+};
 
 module.exports = cc.Class({
   extends: cc.Component,
@@ -139,8 +153,8 @@ module.exports = cc.Class({
   },
 
   _renderTabs() {
-    const daily = this._all.filter((x) => x.cycle === QuestModel.CYCLE.DAILY);
-    const once = this._all.filter((x) => x.cycle === QuestModel.CYCLE.ONCE);
+    const daily = this._all.filter(TAB_FILTER[TAB.DAILY]);
+    const once = this._all.filter(TAB_FILTER[TAB.ONCE]);
 
     // Badge dem cai DA XONG CHUA NHAN, khong phai tong so nhiem vu —
     // con so do moi dang lam nguoi choi mo popup
@@ -171,9 +185,8 @@ module.exports = cc.Class({
   _renderList() {
     this._clearList();
 
-    const want = this._tab === TAB.DAILY ? QuestModel.CYCLE.DAILY : QuestModel.CYCLE.ONCE;
     const list = this._all
-      .filter((x) => x.cycle === want)
+      .filter(TAB_FILTER[this._tab] || TAB_FILTER[TAB.DAILY])
       .sort((a, b) => a.sortOrder - b.sortOrder);
 
     const has = list.length > 0;
@@ -181,7 +194,7 @@ module.exports = cc.Class({
     if (this.lbEmpty && !has) {
       this.lbEmpty.string = this._tab === TAB.DAILY
         ? 'Hôm nay chưa có nhiệm vụ nào'
-        : 'Bạn đã làm hết nhiệm vụ ở đây';
+        : 'Chưa có sự kiện nào đang diễn ra';
     }
     if (!has || !this.prefabItem || !this.nodeListContent) return;
 
