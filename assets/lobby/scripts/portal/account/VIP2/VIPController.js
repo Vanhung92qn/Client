@@ -32,9 +32,9 @@
             return this.VIP2View.getCardInfo();
         };
 
-        VIPController.prototype.getLoanInfo = function () {
-            return this.VIP2View.getLoanInfo();
-        };
+        /* Da go getLoanInfo: VIP2View.getLoanInfo khong con ton tai (commit
+           c6e13f0 don phan VAY TIEN) nen ham nay chac chan nem TypeError neu
+           bi goi. Khong con ai goi nua sau khi sua VIPPrizeItem. */
 
         return VIPController;
 

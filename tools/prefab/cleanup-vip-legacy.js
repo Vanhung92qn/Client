@@ -24,6 +24,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const Backup = require('./lib/backup');
 const A = require('./lib/assets');
 
 const ROOT = A.ASSETS_ROOT;
@@ -90,7 +91,7 @@ for (const o of arr) {
   }
 }
 if (removed) {
-  fs.writeFileSync(ACCOUNT_PREFAB + '.bak', raw, 'utf8');
+  const bak = Backup.save(ACCOUNT_PREFAB, raw);
   fs.writeFileSync(ACCOUNT_PREFAB, JSON.stringify(arr, null, 2), 'utf8');
   console.log(`\n  go ${removed} thuoc tinh khoi accountViewNew3.prefab`);
 }

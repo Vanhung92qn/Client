@@ -24,6 +24,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const Backup = require('./lib/backup');
 const P = require('./lib/cocos-prefab');
 const A = require('./lib/assets');
 
@@ -254,11 +255,11 @@ function main() {
     return;
   }
 
-  fs.writeFileSync(SCENE + '.bak', raw, 'utf8');
+  const bak = Backup.save(SCENE, raw);
   fs.writeFileSync(SCENE, JSON.stringify(arr, null, 2), 'utf8');
   console.log('');
   console.log(`Da ghi ${SCENE}`);
-  console.log(`Ban cu luu o ${path.basename(SCENE)}.bak`);
+  console.log(`Ban cu luu o ${bak}`);
 }
 
 main();

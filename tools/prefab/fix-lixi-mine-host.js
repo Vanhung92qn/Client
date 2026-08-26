@@ -33,6 +33,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const Backup = require('./lib/backup');
 const P = require('./lib/cocos-prefab');
 const A = require('./lib/assets');
 
@@ -166,10 +167,10 @@ function main() {
     return;
   }
 
-  fs.writeFileSync(SCENE + '.bak', raw, 'utf8');
+  const bak = Backup.save(SCENE, raw);
   fs.writeFileSync(SCENE, JSON.stringify(arr, null, 2), 'utf8');
   console.log('');
-  console.log('Da ghi scene. Ban cu o MainGame.fire.bak');
+  console.log(`Da ghi scene. Ban cu o ${bak}`);
 }
 
 main();

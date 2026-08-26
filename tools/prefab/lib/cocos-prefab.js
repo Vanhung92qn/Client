@@ -626,7 +626,10 @@ function imageMeta(texUuid, frameUuid, frameName, width, height) {
 /** Noi dung file .js.meta di kem script. */
 function scriptMeta(scriptUuid) {
   return {
-    ver: '1.0.8',
+    // Cocos 2.4.10 dung 1.1.0 cho importer javascript. Truoc ghi 1.0.8 nen
+    // lan dau mo editor no chuan hoa lai, sinh ra mot dong diff thua o moi
+    // .js.meta vua tao. Khong hai gi nhung ban ra thi khoi phai ban tam.
+    ver: '1.1.0',
     uuid: scriptUuid,
     importer: 'javascript',
     isPlugin: false,

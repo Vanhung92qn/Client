@@ -85,7 +85,18 @@
 
             cc.DDNA.getInstance().vipSummary(cc.DDNATransactionName.VIP_PRIZE, this.item.QuaterAcc);
 
-            cc.VIPController.getInstance().getLoanInfo();
+            /* Truoc day cho nay goi cc.VIPController.getInstance().getLoanInfo()
+               de nap lai danh sach. Duong day do la:
+                 getLoanInfo -> GetVIPLoanInfoCommand -> onGetVIPLoanInfoResponse
+                 -> listView.resetListLoan() + initializeLoan()
+               Ca ba mat xich giua da bi go trong commit c6e13f0 cung voi phan
+               VAY TIEN (user chot khong lam), nen goi tiep la nem TypeError:
+               VIP2View.getLoanInfo is not a function — dung ngay sau khi nguoi
+               choi vua nhan thuong quy xong.
+
+               Bo loi goi thay vi noi lai duong day: tien da cong o
+               updateRealBalance/updateBalance ben tren, phan con lai chi la ve
+               lai danh sach. Xem ghi chu o VIP2ListView.initializeLoan. */
         },
 
         //click

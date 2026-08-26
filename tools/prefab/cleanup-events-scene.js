@@ -19,6 +19,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const Backup = require('./lib/backup');
 const A = require('./lib/assets');
 
 const SCENE = path.join(A.ASSETS_ROOT, 'lobby', 'scenes', 'MainGame.fire');
@@ -95,6 +96,6 @@ if (!WRITE) {
 console.log('');
 for (const a of actions) { a.run(); console.log('  ok  ' + a.desc); }
 
-fs.writeFileSync(SCENE + '.bak', raw, 'utf8');
+const bak = Backup.save(SCENE, raw);
 fs.writeFileSync(SCENE, JSON.stringify(arr, null, 2), 'utf8');
-console.log('\nDa ghi scene. Ban cu o MainGame.fire.bak');
+console.log(`\nDa ghi scene. Ban cu o ${bak}`);

@@ -1,0 +1,8 @@
+# Ban luu truoc khi ghi de file trong assets/ — do lib/backup.js sinh ra.
+# KHONG commit: git da giu lich su roi, day chi la luoi do cho luc chay tool.
+#
+# Thu muc tu bo qua chinh no thay vi them dong vao Client/.gitignore — file do
+# da duoc chuan hoa theo Cocos 2.4.10, dung vao la nguoi khac pull ve co the
+# khong mo duoc project.
+*
+!.gitignore
