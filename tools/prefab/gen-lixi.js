@@ -92,6 +92,13 @@ function writePrefab(relFromPrefabDir, rootNode, uuid) {
 // TINH mot khung — dung duoc ngay cho cc.Sprite, khong can ve moi.
 // ─────────────────────────────────────────────────────────────────
 
+/*
+ * CHI dung anh trong hai bundle 'common' va 'lobby'.
+ *
+ * Truoc day co dung tk/images/bonus/gift.png — bundle 'tk' priority 1,
+ * khong chac da nap luc mo popup, nen anh do ve sau chu roi rac. Doi sang
+ * coin-gold trong 'common' de bot mot phu thuoc cheo bundle.
+ */
 const IMG = A.spriteFrames({
   bgPopup: 'common/images/popup/bg_popup.png',
   titPopup: 'common/images/popup/tit_popup.png',
@@ -102,7 +109,6 @@ const IMG = A.spriteFrames({
   btnNhanDis: 'lobby/images/image_nohu/GateImages/Vip/nhan-btn-disable.png',
   hongBao: 'lobby/skeletons/event/HongBao/HongBao_sf.png',
   coinGold: 'common/images/coin-gold.png',
-  gift: 'tk/images/bonus/gift.png',
 });
 
 const C_GOLD = [255, 214, 122];
@@ -225,7 +231,7 @@ function buildItem(uScript) {
       nodeOpen: P.ref('btnOpen'),
       lbDone: P.refComp('lbDone', 'cc.Label'),
       sfBaoClosed: { __uuid__: IMG.hongBao },
-      sfBaoOpened: { __uuid__: IMG.gift },
+      sfBaoOpened: { __uuid__: IMG.coinGold },
     }),
   ]);
 }

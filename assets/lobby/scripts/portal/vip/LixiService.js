@@ -71,8 +71,40 @@ function showError(obj) {
   cc.PopupController.getInstance().showMessageError(msg, code);
 }
 
+/**
+ * Kenh bao "so hong bao vua doi".
+ *
+ * Khong co no thi badge o lobby phai cho toi nhip hoi ke tiep (toi 60
+ * giay) moi biet nguoi choi da mo hong bao — nut con nam do voi cham do
+ * trong khi tui da rong.
+ *
+ * Ai lam thay doi so hong bao thi goi notifyChanged(); ai hien so thi
+ * lang nghe. Nhe hon nhieu so voi ha nhip hoi xuong vai giay.
+ */
+const bus = new cc.EventTarget();
+
+const EVT_CHANGED = 'lixi:changed';
+
 const LixiService = {
   ENDPOINT,
+
+  /** Kenh su kien — xem chu thich cua bus. */
+  bus,
+  EVT_CHANGED,
+
+  /** Bao cho moi cho dang hien so hong bao rang no vua doi. */
+  notifyChanged() {
+    bus.emit(EVT_CHANGED);
+  },
+
+  /** Dang ky nghe. Nho goi offChanged trong onDisable. */
+  onChanged(cb, target) {
+    bus.on(EVT_CHANGED, cb, target);
+  },
+
+  offChanged(cb, target) {
+    bus.off(EVT_CHANGED, cb, target);
+  },
 
   /**
    * Tom tat cho badge o lobby: co bao nhieu hong bao dang cho, va co dot

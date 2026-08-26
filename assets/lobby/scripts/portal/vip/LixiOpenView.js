@@ -115,6 +115,10 @@ module.exports = cc.Class({
       if (lobby.refreshAccountInfo) lobby.refreshAccountInfo();
     }
 
+    // Va bao badge o lobby: bot mot cai roi. Khong bao thi nut con nam do
+    // voi cham do toi mot phut sau.
+    LixiService.notifyChanged();
+
     this._result = { ok: true, amount, res };
   },
 

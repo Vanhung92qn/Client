@@ -122,16 +122,36 @@ module.exports = cc.Class({
     if (this.autoOpenPopup) {
       target.on(cc.Node.EventType.TOUCH_END, this._open, this);
     }
+
+    /* Nap truoc popup va anh cua no ngay khi vao lobby.
+
+       Anh cua cac popup nay chua tung xuat hien o dau trong game nen lan
+       dau mo Cocos phai di tai tung cai — chu ve ngay con anh ve sau,
+       nhin nhu man hinh vo. Nap truoc luc lobby ranh thi toi luc bam moi
+       thu da nam san trong bo nho dem.
+
+       Hoan mot nhip de khong tranh bang thong voi thu can gap hon khi
+       lobby vua mo.                                                     */
+    this.scheduleOnce(() => {
+      VipPopups.preload(this.mode === MODE.PERSONAL ? VipPopups.ID.LIXI_MINE : VipPopups.ID.LIXI);
+      VipPopups.preload(VipPopups.ID.LIXI_OPEN);
+    }, 2);
   },
 
   onEnable() {
     cc.log(`[LixiBadge] onEnable mode=${this._modeName()} target=${this._target().name}`);
     this._poll();
     this.schedule(this._poll, this._pollSec);
+
+    // Mo hong bao xong thi biet ngay, khong phai cho toi nhip hoi ke tiep
+    // (toi 60 giay) — luc do nut con nam do voi cham do trong khi tui da
+    // rong, nhin nhu he thong dung hinh
+    LixiService.onChanged(this._poll, this);
   },
 
   onDisable() {
     this.unschedule(this._poll);
+    LixiService.offChanged(this._poll, this);
   },
 
   _modeName() {

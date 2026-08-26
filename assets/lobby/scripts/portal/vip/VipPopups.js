@@ -72,6 +72,40 @@ const BY_ID = {
   },
 };
 
+/**
+ * Nap TRUOC mot popup va toan bo anh cua no vao bo nho dem.
+ *
+ * Vi sao can: prefab sinh moi dung anh chua tung xuat hien o dau trong
+ * game, nen lan dau mo popup Cocos phai di tai tung anh — chu ve ngay con
+ * anh ve sau, nhin nhu man hinh vo. Cac popup cu cua game khong bi vi anh
+ * cua chung da duoc nap san cung scene.
+ *
+ * preload chi tai ve, khong dung hoa; goi luc lobby ranh thi toi luc nguoi
+ * choi bam moi thu da nam san trong bo nho dem.
+ *
+ * Loi thi bo qua: day chi la toi uu, that bai thi popup van mo duoc theo
+ * duong binh thuong.
+ */
+function preload(id) {
+  const meta = BY_ID[id];
+  if (!meta || !meta.enabled) return;
+
+  const run = (bundle) => {
+    bundle.preload(meta.prefab, cc.Prefab, (err) => {
+      if (err) cc.warn(`[VipPopups] preload "${id}" that bai:`, err.message);
+    });
+  };
+
+  const loaded = cc.assetManager.getBundle(PREFAB_BUNDLE);
+  if (loaded) {
+    run(loaded);
+    return;
+  }
+  cc.assetManager.loadBundle(PREFAB_BUNDLE, (err, bundle) => {
+    if (!err) run(bundle);
+  });
+}
+
 /** Nap mot prefab trong bundle, tra ve Promise. */
 function loadPrefab(pathInBundle) {
   return new Promise((resolve, reject) => {
@@ -143,5 +177,6 @@ module.exports = {
   ID,
   BY_ID,
   loadPrefab,
+  preload,
   open,
 };
