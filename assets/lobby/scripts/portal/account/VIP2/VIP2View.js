@@ -27,7 +27,6 @@ var netConfig = require('NetConfig');
             // } else {
             //     this.getVIPInfo();
             //     this.getCardInfo();
-            //     this.getLoanInfo();
             // }
             this.animation = this.node.getComponent(cc.Animation);
         },
@@ -44,11 +43,6 @@ var netConfig = require('NetConfig');
         getCardInfo: function () {
             var getVIPCardBonusCommand = new cc.GetVIPCardBonusCommand;
             getVIPCardBonusCommand.execute(this);
-        },
-
-        getLoanInfo: function () {
-            var getVIPLoanInfoCommand = new cc.GetVIPLoanInfoCommand;
-            getVIPLoanInfoCommand.execute(this);
         },
 
         onGetVIPInfoResponse: function (response) {
@@ -76,11 +70,6 @@ var netConfig = require('NetConfig');
         onGetVIPCardBonusResponse: function (response) {
             this.listView.resetListCard();
             this.listView.initializeCard(response);
-        },
-
-        onGetVIPLoanInfoResponse: function (response) {
-            this.listView.resetListLoan();
-            this.listView.initializeLoan(response);
         },
 
         policyClicked: function () {

@@ -8,7 +8,6 @@
         "extends": cc.Component,
         properties: {
             itemVIP: cc.Prefab,
-            itemVIPLoan: cc.Prefab,
             itemVIPPrize: cc.Prefab,
             itemVIPCard: cc.Prefab,
 
@@ -60,10 +59,6 @@
             for (var i = 0; i < children.length; i++) {
                 var item = children[i].getComponent(cc.VIPPrizeItem);
                 if (item) {
-                    item.updateIndex(this.indexActive);
-                    this.indexActive++;
-                } else {
-                    item = children[i].getComponent(cc.VIPLoanItem);
                     item.updateIndex(this.indexActive);
                     this.indexActive++;
                 }
@@ -234,7 +229,6 @@
         },
 
         initializeLoan: function (info) {
-            var loanInfor = info.LoanInfor;
             var quaterInfo = info.QuaterInfo;
             var beforeQuaterInfo = info.BeforeQuaterInfo;
 
@@ -280,20 +274,8 @@
                 // }
             }
 
-            if (loanInfor) {
-                item = cc.instantiate(this.itemVIPLoan);
-                this.nodeParentLoanActive.addChild(item);
-                item.getComponent(cc.VIPLoanItem).updateItem(loanInfor);
-
-                // if (loanInfor.LoanAmount === 0) {
-                //     this.nodeParentLoanProgress.addChild(item); //
-                //     item.getComponent(cc.VIPLoanItem).updateItem(loanInfor);
-                // } else {
-                //     //truong hop Vay luon active button
-                //     this.nodeParentLoanActive.addChild(item);
-                //     item.getComponent(cc.VIPLoanItem).updateItem(loanInfor);
-                // }
-            }
+            // Vay tien theo hang VIP da go 2026-08-27 (user chot khong lam).
+            // Node nodeParentLoanActive VAN DUNG cho THUONG QUY o hai khoi tren.
 
             this.updateAllIndex();
         },
