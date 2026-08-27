@@ -15,16 +15,32 @@ var portalConfig = require('PortalConfig');
             cc.LobbyController.getInstance().setLobbyEffectView(this);
             this.node.parent.zIndex = cc.NoteDepth.PORTAL_JACKPOT_EFFECT;
             this.nodeEffect = null;
-            // cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
+
+            /* Cong tac thu tay. Go vao Console trinh duyet (hoac cua so preview
+               cua Cocos):
+                   cc.testNoHu()
+                   cc.testNoHu('SumClub', 88888888, 'Ai Cap')
+
+               Vi sao can: hieu ung that phu thuoc server ban tin xuong, khong
+               the ngoi cho no hu de canh vi tri. Co cai nay thi goi bao nhieu
+               lan tuy y.
+
+               Co tinh KHONG dung phim tat: nguoi choi bam nham la hien thong
+               bao no hu gia giua lobby. */
+            var self = this;
+            cc.testNoHu = function (nickName, jackpotValue, gameName) {
+                if (!cc.isValid(self)) { cc.warn('[testNoHu] LobbyEffectView khong con song'); return; }
+                self.showFxWinJackpot({
+                    NickName: nickName || 'NguoiChoiThu',
+                    JackpotValue: jackpotValue || 123456789,
+                    GameName: gameName || 'Ai Cap',
+                });
+            };
         },
 
-        // onKeyDown: function (event) {
-        //     switch(event.keyCode) {
-        //         case cc.macro.KEY.a:
-        //             cc.LobbyJackpotController.getInstance().getXJackpot();
-        //             break;
-        //     }
-        // },
+        onDestroy: function () {
+            if (cc.testNoHu) cc.testNoHu = undefined;
+        },
 
         showFxWinJackpot: function (user) {
             this.forceDestroyEffect();
