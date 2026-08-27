@@ -4,6 +4,26 @@
 
 var portalConfig = require('PortalConfig');
 
+/**
+ * Khung hinh THAT cua lobbyEffectItem, do so voi goc prefab.
+ *
+ * 🔴 Do bang cach duyet ca cay node va tinh theo ANCHOR cua tung node, dung
+ * nham la banner bi cat. Node 'black' co _anchorPoint.x = -0.13 (AM), nen no
+ * trai tu +43.3 den +291.8 chu khong phai can doi quanh goc:
+ *
+ *     black    anchor(-0.13, 0.5)  248.5 x 60.2  ->  x   43.3 .. 291.8
+ *       richtext anchor(0, 0.5)    193.5 x 54.2  ->  x   83.0 .. 276.5
+ *     hu_g     anchor( 0.5,  0.5)  197.7 x 126.0 ->  x  -84.9 .. 112.9
+ *     ------------------------------------------------------------
+ *     khung that:  x -84.86 .. +291.76   (rong 376.6, KHONG phai 248)
+ *
+ * Truoc day toi doan phai = 135 vi tuong 'black' neo giua. Sai 156.8px, va do
+ * dung bang phan bi cat khoi mep phai man hinh.
+ *
+ * Sua prefab thi phai do lai bo so nay.
+ */
+var KHUNG = { trai: 84.86, phai: 291.76 };
+
 (function () {
     cc.LobbyEffectView = cc.Class({
         "extends": cc.Component,
@@ -86,7 +106,7 @@ var portalConfig = require('PortalConfig');
          * bang 2 thuoc tinh leMepPhai / lechTamDoc.
          */
         _neoViTri: function () {
-            var TRAI = 113, PHAI = 135;   // noi dung trai ra 2 ben goc prefab
+            var TRAI = KHUNG.trai, PHAI = KHUNG.phai;
             var DEM = 10;
             var man = cc.view.getVisibleSize();
 
@@ -108,10 +128,9 @@ var portalConfig = require('PortalConfig');
         },
 
         _offsetNgoaiMan: function () {
-            /* Goc prefab neo (0, 0.5), noi dung trai sang TRAI 113px va sang
-               PHAI 135px. Muon khuat han thi mep TRAI cua noi dung phai vuot qua
-               mep phai man hinh. */
-            var LE_TRAI = 113;
+            /* Muon khuat han thi mep TRAI cua noi dung phai vuot qua mep phai
+               man hinh. */
+            var LE_TRAI = KHUNG.trai;
             var DEM = 40;
             var rongMan = cc.view.getVisibleSize().width;
             var worldX = this.node.parent.convertToWorldSpaceAR(
