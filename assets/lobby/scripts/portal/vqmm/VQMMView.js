@@ -12,6 +12,7 @@
  */
 
 var vqmmConfig = require('VQMMConfig');
+var LixiService = require('LixiService');
 
 (function () {
     //ID cac o dac biet cua vong nho, khop bang SpinWeight ben server
@@ -157,6 +158,14 @@ var vqmmConfig = require('VQMMConfig');
             cc.director.getScheduler().schedule(function () {
                 cc.PopupController.getInstance().showMessage(self.buildRewardMessage(response));
                 self.isSpinning = false;
+
+                //Trung hong bao thi bao NGAY cho badge "Li xi cua ban" o lobby.
+                //Khong bao thi LixiBadge phai cho toi nhip hoi ke tiep
+                //(LixiBadge.js:29 POLL_IDLE = 60 giay) moi biet — nhin nhu phai
+                //F5 moi hien. Cung khuon voi QuestPopup.js:266.
+                if (response.EnvelopeID > 0) {
+                    LixiService.notifyChanged();
+                }
             }, this, 0, 0, vqmmConfig.SPIN_TIME, false);
 
             cc.LobbyController.getInstance().refreshAccountInfo();
