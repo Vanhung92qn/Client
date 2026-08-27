@@ -67,6 +67,18 @@ var KHUNG = { trai: 84.86, phai: 291.76 };
                     JackpotValue: jackpotValue || 123456789,
                     GameName: gameName || 'Ai Cap',
                 });
+                /* Bao lai so do THAT sau khi truot vao xong, de khoi phai ta
+                   bang mat "con che mot ti". */
+                self.scheduleOnce(function () {
+                    if (!cc.isValid(self.nodeEffect)) return;
+                    var k = self.nodeEffect.getBoundingBoxToWorld();
+                    var rong = cc.view.getVisibleSize().width;
+                    cc.log('[testNoHu] banner trai=' + k.xMin.toFixed(0)
+                        + ' phai=' + k.xMax.toFixed(0)
+                        + ' | man rong=' + rong.toFixed(0)
+                        + ' | cach mep phai=' + (rong - k.xMax).toFixed(0) + 'px'
+                        + (k.xMax > rong ? '  <-- CON BI CAT' : ''));
+                }, 0.6);
             };
 
             /* Canh ngay luc chay, khoi build lai moi lan thu. Ca hai deu hien
@@ -148,16 +160,53 @@ var KHUNG = { trai: 84.86, phai: 291.76 };
             this.nodeEffect.getComponent(cc.LobbyEffectItem).updateUser(this, user);
             this.animationEffect = this.nodeEffect.getComponent(cc.Animation);
 
-            /* Truot vao tu mep PHAI roi dung lai dung vi tri node.
-               Dung cc.tween chu KHONG dung file .anim: .anim luu vi tri TUYET
-               DOI, va do chinh la thu vua lam hong man nay. tween chay theo do
-               lech tuong doi nen keo node di dau cung khong hong. */
+            /* Do san ra ngoai mep phai truoc, chua ai thay gi. */
             this.nodeEffect.setPosition(this._offsetNgoaiMan(), 0);
-            cc.tween(this.nodeEffect)
-                .to(0.45, { x: 0 }, { easing: 'cubicOut' })
-                .start();
+
+            /* Doi ~2 khung hinh roi moi do va truot vao.
+               Vi sao phai doi: cc.RichText khong tinh lai kich thuoc ngay khi
+               gan _string — no danh dau layout ban va cap nhat o khung sau. Do
+               ngay lap tuc la van ra kich thuoc cu ghi trong prefab.
+               30ms khong ai kip thay, ma doi lai la so do THAT. Lay du 2 khung
+               chu khong 1, vi thu tu update giua RichText va scheduleOnce trong
+               cung mot khung la khong dam bao. */
+            this.scheduleOnce(function () {
+                if (!cc.isValid(this.nodeEffect)) return;
+                this._chinhChoVua();
+
+                cc.tween(this.nodeEffect)
+                    .to(0.45, { x: 0 }, { easing: 'cubicOut' })
+                    .start();
+            }, 0.03);
 
             cc.director.getScheduler().schedule(this.destroyEffect, this, 0, 0, portalConfig.TIME_SHOW_EFFECT_JACKPOT, false);
+        },
+
+        /**
+         * Do khung THAT cua banner sau khi da do chu vao, roi day node sang trai
+         * dung bang phan bi tran ra ngoai mep phai.
+         *
+         * 🔴 Vi sao khong ghi so cung: noi dung banner CO GIAN theo chu. Ten dai
+         * + so tien lon + ten game dai thi cc.RichText phinh rong hon kich thuoc
+         * ghi trong prefab, va phan phinh them do bi cat mat. Toi da doan sai
+         * kich thuoc HAI LAN (135 roi 291.76) truoc khi hieu ra dieu nay — nen
+         * bo doan, de chinh no tu do.
+         *
+         * KHUNG chi con dung de tinh diem xuat phat ngoai man, cho do khong can
+         * chinh xac tuyet doi.
+         */
+        _chinhChoVua: function () {
+            var n = this.nodeEffect;
+            var khung = n.getBoundingBoxToWorld();
+            if (!khung || khung.width <= 0) return;
+
+            /* Khung do luc node dang o ngoai man, nen quy ve vi tri NGHI (x=0)
+               bang cach tru di do lech dang co. */
+            var mepPhaiKhiNghi = khung.xMax - n.x;
+            var mepPhaiChoPhep = cc.view.getVisibleSize().width - this.leMepPhai;
+            var tran = mepPhaiKhiNghi - mepPhaiChoPhep;
+
+            if (tran > 0.5) this.node.x -= tran;
         },
 
         forceDestroyEffect: function () {
