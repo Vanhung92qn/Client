@@ -11,6 +11,7 @@
         ERROR_203: 'Bạn cần xác thực số điện thoại để mở Vòng Quay May Mắn',
         ERROR_204: 'Vòng quay đang tạm khoá. Vui lòng quay lại sau',
         ERROR_205: 'Trả thưởng không thành công, lượt quay đã được hoàn lại',
+        ERROR_207: 'Quỹ thưởng hôm nay đã hết. Lượt quay của bạn vẫn còn, mời quay lại vào ngày mai',
         ERROR_1001: 'Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại',
         ERROR_1003: 'Có lỗi xảy ra. Vui lòng thử lại'
     });

@@ -256,6 +256,12 @@ var LixiService = require('LixiService');
                     this.isSpinning = false;
                     cc.PopupController.getInstance().showMessage(cc.VQMMSpinError.ERROR_205);
                     break;
+                case -207:
+                    //Cham tran chi tra trong ngay. Server tra ve TRUOC khi tru
+                    //luot nen nguoi choi khong mat gi — noi ro de ho yen tam.
+                    this.isSpinning = false;
+                    cc.PopupController.getInstance().showMessage(cc.VQMMSpinError.ERROR_207);
+                    break;
                 case -1001:
                     this.isSpinning = false;
                     cc.PopupController.getInstance().showMessage(cc.VQMMSpinError.ERROR_1001);
