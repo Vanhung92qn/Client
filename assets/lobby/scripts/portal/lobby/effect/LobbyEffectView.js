@@ -36,6 +36,20 @@ var portalConfig = require('PortalConfig');
                     GameName: gameName || 'Ai Cap',
                 });
             };
+
+            /* Canh vi tri ngay luc chay, khoi build lai moi lan thu:
+                   cc.viTriNoHu(780, 620)   <- toa do WORLD muon dat
+               No doi node roi hien thu luon, va in ra so LOCAL de ghi vao scene.
+               Chi co tac dung khi da tat animation (playOnLoad=false trong
+               lobbyEffectItem.prefab) — con anim thi vi tri bi ghi de. */
+            cc.viTriNoHu = function (worldX, worldY) {
+                if (!cc.isValid(self)) { cc.warn('[viTriNoHu] LobbyEffectView khong con song'); return; }
+                var n = self.node;
+                n.setPosition(n.parent.convertToNodeSpaceAR(cc.v2(worldX, worldY)));
+                cc.log('[viTriNoHu] lobbyEffectView local = ('
+                    + n.x.toFixed(1) + ', ' + n.y.toFixed(1) + ')  -- doc so nay cho toi de ghi vao scene');
+                cc.testNoHu();
+            };
         },
 
         onDestroy: function () {
@@ -65,7 +79,16 @@ var portalConfig = require('PortalConfig');
 
         destroyEffect: function () {
             if (this.animationEffect === null) return;
-            this.animationEffect.play('fadeIn');
+            /* Da TAT animation cu theo yeu cau: cho hien thi thay duoc truoc,
+               animation tinh sau. Clip 'fadeIn' (thuc ra la clip BIEN MAT) van
+               con nguyen trong prefab, bo comment dong duoi la chay lai.
+
+               Rieng clip HIEN RA ('fadeOut', playOnLoad) da tat trong prefab vi
+               no keo ca vi tri: track 'position' ghi de setPosition(0,0) thanh
+               (642.055, 233.576) — do runtime that thi node bay ra ngoai mep
+               phai 431.8px nen khong ai nhin thay. Toa do do la rac thua, vi
+               2 clip nay dung CHUNG voi btnMINI va TOPJackpotWinView. */
+            // this.animationEffect.play('fadeIn');
             var self = this;
             cc.director.getScheduler().schedule(function () {
                 if (cc.isValid(self.nodeEffect)) {
