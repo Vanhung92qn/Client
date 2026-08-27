@@ -11,17 +11,16 @@ var portalConfig = require('PortalConfig');
             prefabEffect: cc.Prefab,
 
             /**
-             * Banner cach MEP PHAI man hinh bao nhieu px. Muon xe ra xa goc thi
-             * tang so nay. Chinh duoc o Inspector, hoac thu ngay luc chay bang
-             * cc.leNoHu(30).
-             *
-             * 🔴 Toa do X cua node duoc TINH LAI luc chay theo be rong man hinh
-             * that, nen keo node theo chieu NGANG trong editor se khong an thua
-             * — dung so nay. Toa do Y thi van keo binh thuong: canvas web chay
-             * FIXED_HEIGHT (SafeArea.js) nen chieu cao luon 732, truc doc khong
-             * bao gio lech.
+             * Banner cach MEP PHAI man hinh bao nhieu px.
+             * Thu ngay luc chay: cc.leNoHu(30)
              */
             leMepPhai: 20,
+
+            /**
+             * Banner lech bao nhieu so voi TAM DOC man hinh (am = xuong duoi).
+             * Thu ngay luc chay: cc.caoNoHu(-234)
+             */
+            lechTamDoc: -234,
         },
 
         onLoad: function () {
@@ -50,23 +49,25 @@ var portalConfig = require('PortalConfig');
                 });
             };
 
-            /* Canh ngay luc chay, khoi build lai moi lan thu.
-                   cc.leNoHu(30)    <- cach mep PHAI bao nhieu px
-                   cc.caoNoHu(400)  <- cao bao nhieu (toa do WORLD Y)
-               Ca hai deu hien thu luon va in ra so de ghi vao scene. */
+            /* Canh ngay luc chay, khoi build lai moi lan thu. Ca hai deu hien
+               thu luon va in ra so de ghi vao Inspector cua LobbyEffectView.
+                   cc.leNoHu(30)     <- cach mep PHAI bao nhieu px
+                   cc.caoNoHu(-234)  <- lech bao nhieu so voi TAM DOC (am = xuong)
+               Doi sang gia lap iPad/dien thoai roi goi lai de kiem tra ca hai. */
             cc.leNoHu = function (px) {
                 if (!cc.isValid(self)) { cc.warn('[leNoHu] LobbyEffectView khong con song'); return; }
                 self.leMepPhai = px;
-                cc.log('[leNoHu] leMepPhai = ' + px + '  -- ghi vao Inspector cua LobbyEffectView');
+                cc.log('[leNoHu] leMepPhai = ' + px);
                 cc.testNoHu();
             };
 
-            cc.caoNoHu = function (worldY) {
+            cc.caoNoHu = function (lech) {
                 if (!cc.isValid(self)) { cc.warn('[caoNoHu] LobbyEffectView khong con song'); return; }
-                var n = self.node;
-                n.y = n.parent.convertToNodeSpaceAR(cc.v2(0, worldY)).y;
-                cc.log('[caoNoHu] lobbyEffectView Position Y = ' + n.y.toFixed(1)
-                    + '  -- ghi vao Inspector (rieng X thi bo qua, no duoc tinh lai luc chay)');
+                self.lechTamDoc = lech;
+                var man = cc.view.getVisibleSize();
+                cc.log('[caoNoHu] lechTamDoc = ' + lech
+                    + '  (man ' + man.width.toFixed(0) + 'x' + man.height.toFixed(0)
+                    + ' -> banner o WORLD y = ' + (man.height / 2 + lech).toFixed(0) + ')');
                 cc.testNoHu();
             };
         },
@@ -78,43 +79,32 @@ var portalConfig = require('PortalConfig');
         },
 
         /**
-         * Khoang cach can day sang PHAI de banner nam tron ngoai mep man hinh.
+         * Neo banner vao MEP PHAI + TAM DOC man hinh, tinh lai moi lan hien.
          *
-         * Tinh luc chay chu khong ghi cung so, vi do la dung cai bay vua sap:
-         * fadeOut.anim ghi cung (642.055, 233.576) — toa do cua mot node khac tu
-         * doi nao — nen node bay ra ngoai mep phai 431.8px va khong ai nhin thay.
-         * Do lech do BAT BIEN voi moi do phan giai (cc.Widget ghim chuoi cha vao
-         * mep PHAI), tuc no chua bao gio hien duoc tren bat ky may nao.
-         *
-         * Tinh dong thi keo node lobbyEffectView di dau animation van dung do.
+         * Vi tri node trong scene chi con dung de tham khao — ca hai truc deu
+         * duoc tinh lai o day, nen keo node trong editor khong an thua. Chinh
+         * bang 2 thuoc tinh leMepPhai / lechTamDoc.
          */
-        /**
-         * Neo banner vao MEP PHAI man hinh, tinh lai moi lan hien.
-         *
-         * VI SAO CAN: node cha 'widget-top-left-noHide' ghim cach mep phai 755px
-         * CO DINH. Cong local x=450 thanh banner cach mep phai 195px — o do phan
-         * giai thiet ke 1561px thi dep, nhung man cang hep thi 195px cang chiem
-         * ti le lon:
-         *
-         *     16:9  rong 1301  banner 858..1106   ok
-         *     1:1   rong  732  banner 289..537    da troi vao GIUA man
-         *     9:16  rong  412  banner -32..216    LOT mep trai 32px
-         *     9:19.5 rong 338  banner -106..142   LOT mep trai 106px
-         *
-         * Chi tinh lai truc X. Truc Y giu nguyen so da keo trong editor: canvas
-         * web chay FIXED_HEIGHT nen chieu cao luon la 732, doc khong bao gio lech.
-         */
-        _neoMepPhai: function () {
+        _neoViTri: function () {
             var TRAI = 113, PHAI = 135;   // noi dung trai ra 2 ben goc prefab
-            var DEM_TRAI = 10;
-            var rongMan = cc.view.getVisibleSize().width;
+            var DEM = 10;
+            var man = cc.view.getVisibleSize();
 
-            var wx = rongMan - this.leMepPhai - PHAI;
+            var wx = man.width - this.leMepPhai - PHAI;
             /* Man qua hep thi thu mep phai truoc, nhung khong duoc de lot mep
                trai — tha sat goc con hon bien mat mot nua. */
-            if (wx - TRAI < DEM_TRAI) wx = DEM_TRAI + TRAI;
+            if (wx - TRAI < DEM) wx = DEM + TRAI;
 
-            this.node.x = this.node.parent.convertToNodeSpaceAR(cc.v2(wx, 0)).x;
+            /* Neo theo TAM DOC, khong phai mep tren hay mep duoi. Do bang so
+               lieu that: CanvasResizer.ts giu be rong 1561 CO DINH va co gian
+               chieu cao (desktop 732 -> iPad Air 2 thanh 2081.33). Con toan bo
+               noi dung lobby nam trong 'offset-left' o y=0 cua khung phu kin
+               man, tuc CAN GIUA theo chieu doc.
+               Bam mep tren thi tren iPad banner treo lo lung cach cum game hang
+               tram pixel — do dung la trieu chung 'van bi lech'. */
+            var wy = man.height / 2 + this.lechTamDoc;
+
+            this.node.setPosition(this.node.parent.convertToNodeSpaceAR(cc.v2(wx, wy)));
         },
 
         _offsetNgoaiMan: function () {
@@ -132,7 +122,7 @@ var portalConfig = require('PortalConfig');
 
         showFxWinJackpot: function (user) {
             this.forceDestroyEffect();
-            this._neoMepPhai();
+            this._neoViTri();
 
             this.nodeEffect = cc.instantiate(this.prefabEffect);
             this.nodeEffect.parent = this.node;
