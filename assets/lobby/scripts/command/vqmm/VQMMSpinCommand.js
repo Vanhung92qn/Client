@@ -1,5 +1,6 @@
 /**
  * Created by Nofear on 2/27/2019.
+ * 2026-08-28: bo captcha (server khong con kiem tra), sua loi double-slash.
  */
 
 (function () {
@@ -10,11 +11,13 @@
         }
 
         VQMMSpinCommand.prototype.execute = function (controller) {
-            var url = '/api/luckyrotation/Spin';
+            //KHONG co dau '/' o dau: ServerConnector da tu noi 'https://' + subdomain + host + '/'
+            //(ban cu de '/api/...' nen URL rap ra bi '//api/...')
+            var url = 'api/luckyrotation/Spin';
 
+            //Captcha da bo hoan toan o server. Van gui DeviceID vi server dung
+            //no de ghi nhat ky (1=web, 2=ios, 3=android).
             var params = JSON.stringify({
-                Captcha: controller.captcha,
-                PrivateKey: cc.ServerConnector.getInstance().getCaptchaPrivateKey(),
                 DeviceID: cc.Config.getInstance().getDeviceType()
             });
 

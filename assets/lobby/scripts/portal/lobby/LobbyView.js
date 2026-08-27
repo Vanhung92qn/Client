@@ -404,18 +404,18 @@ var netConfig = require("NetConfig");
       this.nodeLoginView = null;
     },
 
-    // createVQMMView: function () {
-    //  if (this.nodeVQMMView === null) {
-    //      this.nodeVQMMView = this.createView(this.prefabVQMM);
-    //  }
-    // },
+    createVQMMView: function () {
+      if (this.nodeVQMMView === null) {
+        this.nodeVQMMView = this.createView(this.prefabVQMM);
+      }
+    },
 
-    // destroyVQMMView: function () {
-    //  if (this.nodeVQMMView) {
-    //   this.nodeVQMMView.destroy();
-    //   this.nodeVQMMView = null;
-    // }
-    //   },
+    destroyVQMMView: function () {
+      if (this.nodeVQMMView) {
+        this.nodeVQMMView.destroy();
+        this.nodeVQMMView = null;
+      }
+    },
 
     createHistoryView: function () {
       // if (cc.Config.getInstance().getServiceId() === cc.ServiceId.BLOCK_BUSTER_3
