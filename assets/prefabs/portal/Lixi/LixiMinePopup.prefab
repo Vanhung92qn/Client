@@ -3002,7 +3002,8 @@
     },
     "filterTypes": [
       2,
-      3
+      3,
+      4
     ],
     "hasGoldenBlock": false,
     "_id": ""
