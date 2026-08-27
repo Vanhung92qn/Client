@@ -360,8 +360,12 @@ var netConfig = require('NetConfig');
                         cc.LobbyController.getInstance().refreshAccountInfo();
                         break;
 
-                   // case cc.MethodHubOnName.EFFECT_JACKPOT_ALL:
-                       // cc.LobbyController.getInstance().showFxWinJackpot(m.A[0]);
+                    /* Truoc day ca nhan 'case' bi comment nhung THAN thi khong,
+                       nen 2 dong duoi roi ra sau 'break' cua TOPUP_CARD —
+                       khong thuoc case nao, khong bao gio chay. Vi vay cai
+                       refresh so hu o lobby cung chet theo ma khong ai biet. */
+                    case cc.MethodHubOnName.EFFECT_JACKPOT_ALL:
+                        cc.LobbyController.getInstance().showFxWinJackpot(m.A[0]);
 
                         cc.LobbyJackpotController.getInstance().getXJackpot();
                         break;

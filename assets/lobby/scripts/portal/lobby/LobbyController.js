@@ -50,9 +50,16 @@
             return this.gameAssets;
         };
 
-       // LobbyController.prototype.showFxWinJackpot = function (user) {
-         //   return this.lobbyEffectView.showFxWinJackpot(user);
-       // };
+        LobbyController.prototype.showFxWinJackpot = function (user) {
+            /* Server bat effectJackpotAll ve Clients.All nen tin co the toi
+               BAT KY luc nao — ke ca truoc khi LobbyEffectView.onLoad kip goi
+               setLobbyEffectView. Khong co chan nay thi mot thong bao no hu den
+               sai thoi diem se nem TypeError giet ca onHubMessage, keo theo moi
+               tin khac cua PortalHub. Mat mot hieu ung thi khong sao, gay
+               onHubMessage moi la nang. */
+            if (!cc.isValid(this.lobbyEffectView)) return;
+            return this.lobbyEffectView.showFxWinJackpot(user);
+        };
 
         LobbyController.prototype.openSetting = function () {
             return this.settingView.openSetting();
