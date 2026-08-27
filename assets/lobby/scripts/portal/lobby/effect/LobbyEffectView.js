@@ -56,20 +56,53 @@ var portalConfig = require('PortalConfig');
             if (cc.testNoHu) cc.testNoHu = undefined;
         },
 
+        /**
+         * Khoang cach can day sang PHAI de banner nam tron ngoai mep man hinh.
+         *
+         * Tinh luc chay chu khong ghi cung so, vi do la dung cai bay vua sap:
+         * fadeOut.anim ghi cung (642.055, 233.576) — toa do cua mot node khac tu
+         * doi nao — nen node bay ra ngoai mep phai 431.8px va khong ai nhin thay.
+         * Do lech do BAT BIEN voi moi do phan giai (cc.Widget ghim chuoi cha vao
+         * mep PHAI), tuc no chua bao gio hien duoc tren bat ky may nao.
+         *
+         * Tinh dong thi keo node lobbyEffectView di dau animation van dung do.
+         */
+        _offsetNgoaiMan: function () {
+            /* Goc prefab neo (0, 0.5), noi dung trai sang TRAI 113px va sang
+               PHAI 135px. Muon khuat han thi mep TRAI cua noi dung phai vuot qua
+               mep phai man hinh. */
+            var LE_TRAI = 113;
+            var DEM = 40;
+            var rongMan = cc.view.getVisibleSize().width;
+            var worldX = this.node.parent.convertToWorldSpaceAR(
+                cc.v2(this.node.x, this.node.y)
+            ).x;
+            return Math.max(rongMan + LE_TRAI + DEM - worldX, 200);
+        },
+
         showFxWinJackpot: function (user) {
             this.forceDestroyEffect();
 
             this.nodeEffect = cc.instantiate(this.prefabEffect);
             this.nodeEffect.parent = this.node;
-            this.nodeEffect.setPosition(0, 0);
             this.nodeEffect.getComponent(cc.LobbyEffectItem).updateUser(this, user);
             this.animationEffect = this.nodeEffect.getComponent(cc.Animation);
+
+            /* Truot vao tu mep PHAI roi dung lai dung vi tri node.
+               Dung cc.tween chu KHONG dung file .anim: .anim luu vi tri TUYET
+               DOI, va do chinh la thu vua lam hong man nay. tween chay theo do
+               lech tuong doi nen keo node di dau cung khong hong. */
+            this.nodeEffect.setPosition(this._offsetNgoaiMan(), 0);
+            cc.tween(this.nodeEffect)
+                .to(0.45, { x: 0 }, { easing: 'cubicOut' })
+                .start();
 
             cc.director.getScheduler().schedule(this.destroyEffect, this, 0, 0, portalConfig.TIME_SHOW_EFFECT_JACKPOT, false);
         },
 
         forceDestroyEffect: function () {
             if (cc.isValid(this.nodeEffect)) {
+                cc.Tween.stopAllByTarget(this.nodeEffect);
                 this.nodeEffect.destroy();
                 this.animationEffect = null;
                 this.nodeEffect = null;
@@ -78,23 +111,25 @@ var portalConfig = require('PortalConfig');
         },
 
         destroyEffect: function () {
-            if (this.animationEffect === null) return;
-            /* Da TAT animation cu theo yeu cau: cho hien thi thay duoc truoc,
-               animation tinh sau. Clip 'fadeIn' (thuc ra la clip BIEN MAT) van
-               con nguyen trong prefab, bo comment dong duoi la chay lai.
+            if (!cc.isValid(this.nodeEffect)) return;
 
-               Rieng clip HIEN RA ('fadeOut', playOnLoad) da tat trong prefab vi
-               no keo ca vi tri: track 'position' ghi de setPosition(0,0) thanh
-               (642.055, 233.576) — do runtime that thi node bay ra ngoai mep
-               phai 431.8px nen khong ai nhin thay. Toa do do la rac thua, vi
-               2 clip nay dung CHUNG voi btnMINI va TOPJackpotWinView. */
-            // this.animationEffect.play('fadeIn');
+            /* Truot NGUOC ra mep phai roi moi huy. Ra cung ben voi luc vao:
+               node nam sat mep phai nen duong ve ngan (~480px), snappy. Neu cho
+               ra mep TRAI thi phai bang qua ca man hinh ~1370px — hoac cham le
+               the, hoac nhanh den muc quet ngang mat nguoi choi.
+
+               Huy trong .call() cua tween chu khong hen gio rieng: truoc day hen
+               0.15s trong khi clip chay 0.333s nen node bi cat giua chung. */
             var self = this;
-            cc.director.getScheduler().schedule(function () {
-                if (cc.isValid(self.nodeEffect)) {
-                    self.nodeEffect.destroy();
-                }
-            }, this, 0, 0, 0.15, false);
+            cc.Tween.stopAllByTarget(this.nodeEffect);
+            cc.tween(this.nodeEffect)
+                .to(0.35, { x: this._offsetNgoaiMan() }, { easing: 'cubicIn' })
+                .call(function () {
+                    if (cc.isValid(self.nodeEffect)) self.nodeEffect.destroy();
+                    self.nodeEffect = null;
+                    self.animationEffect = null;
+                })
+                .start();
         },
     });
 }).call(this);
