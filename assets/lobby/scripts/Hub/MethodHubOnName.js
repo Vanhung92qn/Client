@@ -22,9 +22,6 @@
         BET_OF_ACCOUNT: 'betOfAccount', //enterLobby
         BET_SUCCESS: 'betSuccess', //Bet
         WIN_RESULT: 'winResult',
-        CORD_ACCOUNT_INFO: 'cordAccountInfo', //thong tin du day của user
-        EVENT_WINNER_RESULT: 'eventWinnerResult', //ket qua khi trieu hoi duoc rong -> ban cho tat ca user
-        SUMMON_DRAGON_AWARD: 'summonDragonAward',
 
         // taixiu md5
         SESSION_INFO_MD5: 'Md5sessionInfo', //enterLobby
@@ -32,9 +29,6 @@
         BET_OF_ACCOUNT_MD5: 'Md5betOfAccount', //enterLobby
         BET_SUCCESS_MD5: 'Md5betSuccess', //Bet
         WIN_RESULT_MD5: 'Md5winResult',
-        CORD_ACCOUNT_INFO_MD5: 'Md5cordAccountInfo', //thong tin du day của user
-        EVENT_WINNER_RESULT_MD5: 'Md5eventWinnerResult', //ket qua khi trieu hoi duoc rong -> ban cho tat ca user
-        SUMMON_DRAGON_AWARD_MD5: 'Md5summonDragonAward',		
 
         // taixiu sieutoc
         SESSION_INFO_ST: 'STsessionInfo', //enterLobby
@@ -42,9 +36,6 @@
         BET_OF_ACCOUNT_ST: 'STbetOfAccount', //enterLobby
         BET_SUCCESS_ST: 'STbetSuccess', //Bet
         WIN_RESULT_ST: 'STwinResult',
-        CORD_ACCOUNT_INFO_ST: 'STcordAccountInfo', //thong tin du day của user
-        EVENT_WINNER_RESULT_ST: 'STeventWinnerResult', //ket qua khi trieu hoi duoc rong -> ban cho tat ca user
-        SUMMON_DRAGON_AWARD_ST: 'STsummonDragonAward',
 		
 		//SICBO
         SESSION_INFO_SICBO: 'SicbosessionInfo', //enterLobby
@@ -52,9 +43,6 @@
         BET_OF_ACCOUNT_SICBO: 'SicbobetOfAccount', //enterLobby
         BET_SUCCESS_SICBO: 'SicbobetSuccess', //Bet
         WIN_RESULT_SICBO: 'SicbowinResult',
-        CORD_ACCOUNT_INFO_SICBO: 'SicbocordAccountInfo', //thong tin du day của user
-        EVENT_WINNER_RESULT_SICBO: 'SicboeventWinnerResult', //ket qua khi trieu hoi duoc rong -> ban cho tat ca user
-        SUMMON_DRAGON_AWARD_SICBO: 'SicbosummonDragonAward',	
 
         //xoc dia
         PLAYER_LEAVE: 'playerLeave', //người chơi rời bàn

@@ -471,17 +471,6 @@
         //  ResultEffect / JackpotHistory + SessionDetail (popup)
         // ─────────────────────────────────────────────────────────────
 
-        // -- SicBoEventView (component, mount trên SicBoView.prefab) --
-        SicBoController.prototype.setSicBoEventView = function (view) {
-            return this.sicBoEventView = view;
-        };
-        SicBoController.prototype.activeEventPH = function (enable) {
-            if (this.sicBoEventView) return this.sicBoEventView.activeEventPH(enable);
-        };
-        SicBoController.prototype.setUserCord = function (cordWin, cordLost) {
-            if (this.sicBoEventView) return this.sicBoEventView.setUserCord(cordWin, cordLost);
-        };
-
         // -- SicBoSessionHistoryView (strip lich su phien duoi cung) --
         SicBoController.prototype.setSicBoSessionHistoryView = function (view) {
             return this.sicBoSessionHistoryView = view;

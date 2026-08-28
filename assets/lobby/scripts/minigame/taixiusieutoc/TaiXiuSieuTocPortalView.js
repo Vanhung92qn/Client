@@ -152,9 +152,6 @@ var timeAll=60;
                     console.log(this.luckyDiceHub);
                     this.luckyDiceHub.bet(data1, data2);
                     break;
-                case cc.MethodHubName.CORD_INFO:
-                    this.luckyDiceHub.cordInfo();
-                    break;
             }
         },
 
@@ -182,10 +179,6 @@ var timeAll=60;
                     case cc.MethodHubOnName.GAME_HISTORY:
                         cc.TaiXiuSieuTocController.getInstance().updateSessionHistory(m.A[0]);
 
-                        //login roi -> moi goi
-                        if (cc.LoginController.getInstance().getLoginState() && cc.TaiXiuSieuTocController.getInstance().getIsOpen()) {
-                            this.sendRequestOnHub(cc.MethodHubName.CORD_INFO);
-                        }
                         break;
                     //vao Phong
                     case cc.MethodHubOnName.BET_OF_ACCOUNT:
@@ -194,48 +187,6 @@ var timeAll=60;
                         }, this, 1, 0, 0.2, false);
                         break;
 
-                    //su kien trieu hoi PH
-                    case cc.MethodHubOnName.CORD_ACCOUNT_INFO:
-                        var data = m.A[0];
-                        if (data.IsEventDragon) {
-                            cc.TaiXiuSieuTocController.getInstance().activeEventPH(true);
-                            cc.TaiXiuSieuTocController.getInstance().setUserCord(data.CordWin, data.CordLost);
-                        } else {
-                            cc.TaiXiuSieuTocController.getInstance().activeEventPH(false);
-                        }
-                        break;
-                    //su kien trieu hoi PH
-                    case cc.MethodHubOnName.EVENT_WINNER_RESULT:
-                        //set giai thuong + user goi duoc rong
-                        cc.TaiXiuSieuTocController.getInstance().setEventWinnerResult(m.A[0]);
-                        //Khoi tao hieu ung khi dang o portal hoặc đang bật TX
-                        if (cc.LobbyController.getInstance().checkLobbyActive() || cc.TaiXiuSieuTocController.getInstance().getIsOpen()) {
-                            // He su kien 2019 da go 2026-08-27 (backend khong con controller).
-                        }
-
-
-                        //login roi -> moi goi
-                        if (cc.LoginController.getInstance().getLoginState()) {
-                            this.sendRequestOnHub(cc.MethodHubName.CORD_INFO);
-                        }
-
-                        //Khoi tao hieu ung khi đang bật TX
-                        // if (cc.TaiXiuSieuTocController.getInstance().getIsOpen()) {
-                        //     cc.LobbyController.getInstance().createFxSummonDragon();
-                        // }
-
-                        break;
-                    //su kien trieu hoi PH
-                    case cc.MethodHubOnName.SUMMON_DRAGON_AWARD:
-                        //user nam trong TOP dây Win/Lose -> duoc thuong -> lay lai thong tin balance
-                        // {
-                        //     "AccountID": 100000012,
-                        //     "PrizeValue": 1756234,
-                        //     "Balance": 243553877
-                        // }
-
-                        cc.LobbyController.getInstance().refreshAccountInfo();
-                        break;
 
                     //bet thanh cong
                     case cc.MethodHubOnName.BET_SUCCESS:

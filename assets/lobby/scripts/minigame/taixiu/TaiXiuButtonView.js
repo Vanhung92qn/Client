@@ -115,9 +115,6 @@
         },
         jackpotHistoryClicked: function () {
             cc.TaiXiuMainController.getInstance().createJackpotHistoryView();
-        },
-        eventPHClicked: function () {
-            cc.TaiXiuController.getInstance().clickUIEventPH();
         }
     });
 }).call(this);

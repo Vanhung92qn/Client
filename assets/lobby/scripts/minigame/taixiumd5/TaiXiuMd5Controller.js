@@ -57,10 +57,6 @@
             return this.taiXiuMd5SessionHistoryView = taiXiuMd5SessionHistoryView;
         };
 
-        TaiXiuMd5Controller.prototype.setTaiXiuMd5EventView = function (taiXiuMd5EventView) {
-            return this.taiXiuMd5EventView = taiXiuMd5EventView;
-        };
-
         TaiXiuMd5Controller.prototype.setIsOpen = function (isOpen) {
             return this.isOpen = isOpen;
         };
@@ -75,15 +71,6 @@
 
         TaiXiuMd5Controller.prototype.getSID = function () {
             return this.sID;
-        };
-
-        //set ket qua Summon Dragon Event
-        TaiXiuMd5Controller.prototype.setEventWinnerResult = function (md5eventWinnerResult) {
-            return this.md5eventWinnerResult = md5eventWinnerResult;
-        };
-
-        TaiXiuMd5Controller.prototype.getEventWinnerResult = function () {
-            return this.md5eventWinnerResult;
         };
 
         TaiXiuMd5Controller.prototype.openEndDiaNanView = function () {
@@ -133,22 +120,6 @@
             if (this.taiXiuMd5InputBetView)
                 this.taiXiuMd5InputBetView.reset();
         };
-        //EVENT VIEW
-        TaiXiuMd5Controller.prototype.clickUIEventPH = function () {
-            if (this.taiXiuMd5EventView)
-                return this.taiXiuMd5EventView.clickUIEventPH();
-        };
-
-        TaiXiuMd5Controller.prototype.activeEventPH = function (enable) {
-            if (this.taiXiuMd5EventView)
-                return this.taiXiuMd5EventView.activeEventPH(enable);
-        };
-
-        TaiXiuMd5Controller.prototype.setUserCord = function (cordWin, cordLost) {
-            if (this.taiXiuMd5EventView)
-                return this.taiXiuMd5EventView.setUserCord(cordWin, cordLost);
-        };
-
 
         //PORTAL VIEW
         //ket noi luc dau chua login

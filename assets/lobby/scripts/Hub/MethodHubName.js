@@ -21,7 +21,6 @@
 
         //Tai Xiu
         BET: 'Bet',
-        CORD_INFO: 'CordInfo',
 
         //Card game
         BUY_IN: 'BuyIn', //nap chip

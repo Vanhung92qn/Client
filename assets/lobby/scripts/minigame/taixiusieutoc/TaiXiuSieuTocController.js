@@ -58,10 +58,6 @@
             return this.taiXiuSessionHistoryView = taiXiuSessionHistoryView;
         };
 
-        TaiXiuSieuTocController.prototype.setTaiXiuSieuTocEventView = function (taiXiuEventView) {
-            return this.taiXiuEventView = taiXiuEventView;
-        };
-
         TaiXiuSieuTocController.prototype.setIsOpen = function (isOpen) {
             return this.isOpen = isOpen;
         };
@@ -76,15 +72,6 @@
 
         TaiXiuSieuTocController.prototype.getSID = function () {
             return this.sID;
-        };
-
-        //set ket qua Summon Dragon Event
-        TaiXiuSieuTocController.prototype.setEventWinnerResult = function (eventWinnerResult) {
-            return this.eventWinnerResult = eventWinnerResult;
-        };
-
-        TaiXiuSieuTocController.prototype.getEventWinnerResult = function () {
-            return this.eventWinnerResult;
         };
 
         TaiXiuSieuTocController.prototype.openEndDiaNanView = function () {
@@ -134,22 +121,6 @@
             if (this.taiXiuInputBetView)
                 this.taiXiuInputBetView.reset();
         };
-        //EVENT VIEW
-        TaiXiuSieuTocController.prototype.clickUIEventPH = function () {
-            if (this.taiXiuEventView)
-                return this.taiXiuEventView.clickUIEventPH();
-        };
-
-        TaiXiuSieuTocController.prototype.activeEventPH = function (enable) {
-            if (this.taiXiuEventView)
-                return this.taiXiuEventView.activeEventPH(enable);
-        };
-
-        TaiXiuSieuTocController.prototype.setUserCord = function (cordWin, cordLost) {
-            if (this.taiXiuEventView)
-                return this.taiXiuEventView.setUserCord(cordWin, cordLost);
-        };
-
 
         //PORTAL VIEW
         //ket noi luc dau chua login

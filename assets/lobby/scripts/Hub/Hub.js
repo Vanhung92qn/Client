@@ -359,12 +359,6 @@ var netConfig = require('NetConfig');
             data.A = [betType, ticketType, betData];
             this.send(data);
         };
-        Hub.prototype.cordInfo = function () {
-            var data = {
-                M: cc.MethodHubName.CORD_INFO,
-            };
-            this.send(data);
-        };
         //End Tai Xiu ============================
 
         //Xoc Dia =============================

@@ -78,15 +78,6 @@
             return this.sID;
         };
 
-        //set ket qua Summon Dragon Event
-        TaiXiuController.prototype.setEventWinnerResult = function (eventWinnerResult) {
-            return this.eventWinnerResult = eventWinnerResult;
-        };
-
-        TaiXiuController.prototype.getEventWinnerResult = function () {
-            return this.eventWinnerResult;
-        };
-
         TaiXiuController.prototype.openEndDiaNanView = function () {
             if (this.taiXiuResultView)
                 return this.taiXiuResultView.openEndDiaNan();
@@ -134,22 +125,6 @@
             if (this.taiXiuInputBetView)
                 this.taiXiuInputBetView.reset();
         };
-        //EVENT VIEW
-        TaiXiuController.prototype.clickUIEventPH = function () {
-            if (this.taiXiuEventView)
-                return this.taiXiuEventView.clickUIEventPH();
-        };
-
-        TaiXiuController.prototype.activeEventPH = function (enable) {
-            if (this.taiXiuEventView)
-                return this.taiXiuEventView.activeEventPH(enable);
-        };
-
-        TaiXiuController.prototype.setUserCord = function (cordWin, cordLost) {
-            if (this.taiXiuEventView)
-                return this.taiXiuEventView.setUserCord(cordWin, cordLost);
-        };
-
 
         //PORTAL VIEW
         //ket noi luc dau chua login
