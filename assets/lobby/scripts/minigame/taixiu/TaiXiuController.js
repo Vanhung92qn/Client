@@ -58,10 +58,6 @@
             return this.taiXiuSessionHistoryView = taiXiuSessionHistoryView;
         };
 
-        TaiXiuController.prototype.setTaiXiuEventView = function (taiXiuEventView) {
-            return this.taiXiuEventView = taiXiuEventView;
-        };
-
         TaiXiuController.prototype.setIsOpen = function (isOpen) {
             return this.isOpen = isOpen;
         };
