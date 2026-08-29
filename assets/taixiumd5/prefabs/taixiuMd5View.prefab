@@ -18243,7 +18243,11 @@
     },
     "_children": [],
     "_active": false,
-    "_components": [],
+    "_components": [
+      {
+        "__id__": 570
+      }
+    ],
     "_prefab": {
       "__id__": 484
     },
@@ -18314,7 +18318,11 @@
     },
     "_children": [],
     "_active": false,
-    "_components": [],
+    "_components": [
+      {
+        "__id__": 571
+      }
+    ],
     "_prefab": {
       "__id__": 486
     },
@@ -18385,7 +18393,11 @@
     },
     "_children": [],
     "_active": false,
-    "_components": [],
+    "_components": [
+      {
+        "__id__": 572
+      }
+    ],
     "_prefab": {
       "__id__": 488
     },
@@ -18539,7 +18551,7 @@
       "__id__": 490
     },
     "_children": [],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 492
@@ -18648,7 +18660,7 @@
       "__id__": 490
     },
     "_children": [],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 495
@@ -18757,7 +18769,7 @@
       "__id__": 490
     },
     "_children": [],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 498
@@ -21016,37 +21028,6 @@
     "nodeBGTimer": {
       "__id__": 533
     },
-    "spDice": [
-      {
-        "__id__": 492
-      },
-      {
-        "__id__": 495
-      },
-      {
-        "__id__": 498
-      }
-    ],
-    "sfDices": [
-      {
-        "__uuid__": "f18520ef-c894-4187-9b31-e2b5a0098687"
-      },
-      {
-        "__uuid__": "84c665e3-f7c1-47f0-bed8-316afae7438e"
-      },
-      {
-        "__uuid__": "ec846791-53b3-4f88-ba71-9a810d5e4f24"
-      },
-      {
-        "__uuid__": "cdf775cc-a968-426c-a0b4-c0d78ac44676"
-      },
-      {
-        "__uuid__": "96427247-7cb1-416a-8763-9e02c6b5d7b2"
-      },
-      {
-        "__uuid__": "210b6e78-bffe-446d-9709-eca380ae170e"
-      }
-    ],
     "Showketqua": {
       "__id__": 482
     },
@@ -21094,7 +21075,18 @@
     "nodeLBBetResult": {
       "__id__": 555
     },
-    "_id": ""
+    "_id": "",
+    "xnAnimation": [
+      {
+        "__id__": 570
+      },
+      {
+        "__id__": 571
+      },
+      {
+        "__id__": 572
+      }
+    ]
   },
   {
     "__type__": "1e5f11NUVtHqa2yU6wShGpf",
@@ -21165,5 +21157,131 @@
     },
     "fileId": "",
     "sync": false
+  },
+  {
+    "__type__": "sp.Skeleton",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 483
+    },
+    "_enabled": true,
+    "_materials": [
+      {
+        "__uuid__": "7afd064b-113f-480e-b793-8817d19f63c3"
+      }
+    ],
+    "paused": false,
+    "defaultSkin": "default",
+    "defaultAnimation": 1,
+    "_preCacheMode": 0,
+    "_cacheMode": 0,
+    "loop": true,
+    "premultipliedAlpha": false,
+    "timeScale": 1,
+    "_accTime": 0,
+    "_playCount": 0,
+    "_frameCache": null,
+    "_curFrame": null,
+    "_skeletonCache": null,
+    "_animationName": 1,
+    "_animationQueue": [],
+    "_headAniInfo": null,
+    "_playTimes": 0,
+    "_isAniComplete": true,
+    "_N$skeletonData": {
+      "__uuid__": "364287b6-f1ed-49bf-a7dd-9feec6b1ae1f"
+    },
+    "_N$_defaultCacheMode": 0,
+    "_N$debugSlots": false,
+    "_N$debugBones": false,
+    "_N$debugMesh": false,
+    "_N$useTint": false,
+    "_N$enableBatch": false,
+    "_id": ""
+  },
+  {
+    "__type__": "sp.Skeleton",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 485
+    },
+    "_enabled": true,
+    "_materials": [
+      {
+        "__uuid__": "7afd064b-113f-480e-b793-8817d19f63c3"
+      }
+    ],
+    "paused": false,
+    "defaultSkin": "default",
+    "defaultAnimation": 2,
+    "_preCacheMode": 0,
+    "_cacheMode": 0,
+    "loop": true,
+    "premultipliedAlpha": false,
+    "timeScale": 1,
+    "_accTime": 0,
+    "_playCount": 0,
+    "_frameCache": null,
+    "_curFrame": null,
+    "_skeletonCache": null,
+    "_animationName": 2,
+    "_animationQueue": [],
+    "_headAniInfo": null,
+    "_playTimes": 0,
+    "_isAniComplete": true,
+    "_N$skeletonData": {
+      "__uuid__": "364287b6-f1ed-49bf-a7dd-9feec6b1ae1f"
+    },
+    "_N$_defaultCacheMode": 0,
+    "_N$debugSlots": false,
+    "_N$debugBones": false,
+    "_N$debugMesh": false,
+    "_N$useTint": false,
+    "_N$enableBatch": false,
+    "_id": ""
+  },
+  {
+    "__type__": "sp.Skeleton",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 487
+    },
+    "_enabled": true,
+    "_materials": [
+      {
+        "__uuid__": "7afd064b-113f-480e-b793-8817d19f63c3"
+      }
+    ],
+    "paused": false,
+    "defaultSkin": "default",
+    "defaultAnimation": 3,
+    "_preCacheMode": 0,
+    "_cacheMode": 0,
+    "loop": true,
+    "premultipliedAlpha": false,
+    "timeScale": 1,
+    "_accTime": 0,
+    "_playCount": 0,
+    "_frameCache": null,
+    "_curFrame": null,
+    "_skeletonCache": null,
+    "_animationName": 3,
+    "_animationQueue": [],
+    "_headAniInfo": null,
+    "_playTimes": 0,
+    "_isAniComplete": true,
+    "_N$skeletonData": {
+      "__uuid__": "364287b6-f1ed-49bf-a7dd-9feec6b1ae1f"
+    },
+    "_N$_defaultCacheMode": 0,
+    "_N$debugSlots": false,
+    "_N$debugBones": false,
+    "_N$debugMesh": false,
+    "_N$useTint": false,
+    "_N$enableBatch": false,
+    "_id": ""
   }
 ]

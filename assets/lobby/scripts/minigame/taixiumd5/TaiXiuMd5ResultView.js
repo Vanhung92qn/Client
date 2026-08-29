@@ -22,20 +22,16 @@ var taiXiuMd5Config = require("TaiXiuMd5Config");
       nodeketqua: cc.Node,
       //animation Dice
       nodeBGTimer: cc.Node,
-      //3 cc.Sprite hien thi mat xuc xac (keo Sprite component cua tung dice vao theo thu tu 1,2,3)
-      spDice: {
+      //3 Spine xuc xac (keo sp.Skeleton cua tung dice vao theo thu tu 1,2,3)
+      xnAnimation: {
         default: [],
-        type: cc.Sprite,
+        type: sp.Skeleton,
       },
-      //6 SpriteFrame tuong ung mat 1..6 (keo 1.png..6.png tu dice.plist theo dung thu tu)
-      sfDices: {
-        default: [],
-        type: cc.SpriteFrame,
-      },
+      //node cha cua 3 Spine xuc xac, bat len khi hien ket qua
       Showketqua: cc.Node,
-      //Spine effect tung xuc xac
+      //Spine lac xuc xac — MD5 lac o DAU PHIEN MOI, khong lac luc ra ket qua
       xnEffect: sp.Skeleton,
-      //ten clip Spine cua animation tung
+      //ten clip Spine cua man lac dau phien
       diceShakeAnimName: 'animation',
       lbTotalDice: cc.Label,
       lblTextNotiNewGame: cc.Label,
@@ -83,13 +79,9 @@ var taiXiuMd5Config = require("TaiXiuMd5Config");
       this.nodeketqua.active = false;
       this.lbTotalDice.node.active = false;
 
-      //an 3 sprite dice
-      if (this.spDice && this.spDice.length) {
-        this.spDice.forEach(function (sp) {
-          if (sp && sp.node) sp.node.active = false;
-        });
-      }
-      //tat Spine tung
+      //an cum 3 xuc xac
+      if (this.Showketqua) this.Showketqua.active = false;
+      //tat Spine lac
       if (this.xnEffect && this.xnEffect.node) {
         this.xnEffect.node.active = false;
       }
@@ -116,18 +108,36 @@ var taiXiuMd5Config = require("TaiXiuMd5Config");
       return this.nodeBowl.active;
     },
 
-    //gan mat 1..6 cho 3 sprite dice
+    //gan mat 1..6 cho 3 Spine xuc xac — hien NGAY, khong chay man tung
+    //Clip "1".."6" dai 0 giay, la tu the tinh cua tung mat.
+    //BAT BUOC setToSetupPose() truoc: clip "1" khong key slot mat-tren va clip "4"
+    //khong key slot mat-giua, slot khong duoc key se giu nguyen anh cua van truoc
+    //-> ra mat xuc xac lai. Reset ve setup pose thi hai slot do roi dung ve dung
+    //gia tri (da doi chieu ca 6 mat voi tu the ket thuc cua clip "xi ngau bay N").
     applyDiceFaces: function (result) {
       var dice = [result.Dice1, result.Dice2, result.Dice3];
-      for (var i = 0; i < this.spDice.length; i++) {
+      for (var i = 0; i < this.xnAnimation.length; i++) {
         var v = dice[i];
-        var sp = this.spDice[i];
-        if (!sp || !sp.node) continue;
-        if (v >= 1 && v <= 6 && this.sfDices[v - 1]) {
-          sp.spriteFrame = this.sfDices[v - 1];
-          sp.node.active = true;
+        var skel = this.xnAnimation[i];
+        if (!skel || !skel.node) continue;
+        if (v >= 1 && v <= 6) {
+          skel.setToSetupPose();
+          skel.setAnimation(0, '' + v, false);
         }
       }
+      if (this.Showketqua) this.Showketqua.active = true;
+    },
+
+    //man lac xuc xac mo man phien moi (state BETTING)
+    playShakeNewSession: function () {
+      if (!this.xnEffect || !this.xnEffect.node) return;
+      var self = this;
+      this.xnEffect.node.active = true;
+      this.xnEffect.setAnimation(0, this.diceShakeAnimName, false);
+      this.xnEffect.setCompleteListener(function () {
+        self.xnEffect.node.active = false;
+      });
+      if (this.rollDice) this.rollDice.play();
     },
 
     updateResult: function (md5sessionInfo) {
@@ -140,6 +150,8 @@ var taiXiuMd5Config = require("TaiXiuMd5Config");
             //this.nodebaton.active = true;
             this.md5key.node.active = true;
             this.md5key.string = md5sessionInfo.Md5Encript;
+            //MD5 lac xuc xac de mo man phien moi (khac Tai Xiu thuong: tung de ra ket qua)
+            this.playShakeNewSession();
             break;
           case cc.TaiXiuState.END_BETTING:
             //this.animationMess.play('openMessage');
@@ -183,10 +195,6 @@ var taiXiuMd5Config = require("TaiXiuMd5Config");
 
       //an Bat Dang Up ngay khi vao RESULT
       if (this.nodebaton) this.nodebaton.active = false;
-      //an 3 sprite dice (san sang gan mat ket qua)
-      this.spDice.forEach(function (sp) {
-        if (sp && sp.node) sp.node.active = false;
-      });
 
       //CHE DO NAN: chuyen instant tu bat up sang bat nan, khong play Spine tung
       if (cc.TaiXiuMd5Controller.getInstance().getIsNan()) {
@@ -202,25 +210,12 @@ var taiXiuMd5Config = require("TaiXiuMd5Config");
         return;
       }
 
-      //CHE DO BINH THUONG: phat Spine tung roi hien sprite ket qua
-      if (this.rollDice) this.rollDice.play();
-
-      var self = this;
-      if (this.xnEffect && this.xnEffect.node) {
-        this.xnEffect.node.active = true;
-        this.xnEffect.setAnimation(0, this.diceShakeAnimName, false);
-        this.xnEffect.setCompleteListener(function () {
-          self.applyDiceFaces(md5sessionInfo.Result);
-          self.xnEffect.node.active = false;
-          self.nodeBGTimer.active = true;
-          self.diceAnimFinish();
-        });
-      } else {
-        cc.warn('[Md5ResultView] xnEffect chua wire, skip animation tung');
-        self.applyDiceFaces(md5sessionInfo.Result);
-        self.nodeBGTimer.active = true;
-        self.diceAnimFinish();
-      }
+      //CHE DO BINH THUONG: MD5 hien ket qua NGAY, khong co man tung.
+      //Man lac xuc xac cua MD5 nam o dau phien moi (state BETTING) chu khong phai o day.
+      if (this.xnEffect && this.xnEffect.node) this.xnEffect.node.active = false;
+      this.applyDiceFaces(md5sessionInfo.Result);
+      this.nodeBGTimer.active = true;
+      this.diceAnimFinish();
     },
 
     //chi bat ket qua xuc xac (che do Nan)
