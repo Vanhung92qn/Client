@@ -13,11 +13,6 @@ var netConfig = require('NetConfig');
             animation: cc.Animation,
 
           // lbError: cc.Label,
-
-            //KingViet
-            animationMenuNation: cc.Animation,
-            lbNation: cc.Label,
-            spriteNation: cc.Sprite,
         },
 
         // use this for initialization
@@ -28,17 +23,6 @@ var netConfig = require('NetConfig');
         onEnable: function () {
             this.editBoxNickname.string = '';
            // this.lbError.string = '';
-
-            if (cc.Config.getInstance().getDomainVK().includes(netConfig.HOST)) {
-                var index = cc.Config.getInstance().getIndexByNation(0);
-
-                if (this.gameAssets === undefined) {
-                    this.gameAssets = cc.LobbyController.getInstance().getGameAssets();
-                }
-
-                this.spriteNation.spriteFrame = this.gameAssets.sfNations[index];
-                this.lbNation.string = 'Chọn quốc gia';
-            }
         },
 
         showNickname: function (enable) {
@@ -80,44 +64,10 @@ var netConfig = require('NetConfig');
 		    cc.PopupController.getInstance().showMessage(response.Message);
         },
 
-        selectNationEvent: function(event, data) {
-            var index = cc.Config.getInstance().getIndexByNation(data.toString());
-
-            if (this.gameAssets === undefined) {
-                this.gameAssets = cc.LobbyController.getInstance().getGameAssets();
-            }
-
-            this.spriteNation.spriteFrame = this.gameAssets.sfNations[index];
-
-            this.nationCode = data.toString();
-
-            var nationStr = cc.Config.getInstance().getNationByNationCode(data.toString());
-
-            this.lbNation.string = nationStr;
-            this.animationMenuNation.play('hideDropdownMenu');
-        },
-
-        //Click
-        openMenuNationClicked: function () {
-            this.animationMenuNation.play('showDropdownMenu');
-        },
-
-        hideMenuNationClicked: function () {
-            this.animationMenuNation.play('hideDropdownMenu');
-        },
-
         //Click
         updateClicked: function () {
            // this.lbError.string = '';
             this.nickname = this.editBoxNickname.string;
-
-            if (cc.Config.getInstance().getDomainVK().includes(netConfig.HOST)) {
-                if (this.lbNation.string === 'Chọn quốc gia') {
-                    //this.lbError.string = 'Vui lòng chọn quốc gia';
-					 cc.PopupController.getInstance().showMessage('Chọn quốc gia');
-                    return;
-                }
-            }
 
             if (this.nickname === '') {
                 //this.lbError.string = 'Vui lòng nhập tên nhân vật';

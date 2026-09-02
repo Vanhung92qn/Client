@@ -9,7 +9,7 @@ var netConfig = require('NetConfig');
         "extends": cc.Component,
         properties: {
             nodeLogin: cc.Node,
-            nodeButtonLoginFB: cc.Node,
+            // nodeButtonLoginFB: cc.Node,
             // nodeLoginOTP: cc.Node,
 
             editBoxUsername: cc.EditBox,
@@ -21,7 +21,7 @@ var netConfig = require('NetConfig');
             // nodePasswordPlaceHolder: cc.Node,
             // nodeCaptchaPlaceHolder: cc.Node,
 
-          //  lbError: cc.Label,
+            //  lbError: cc.Label,
 
             //bat captcha khi login sai nhieu lan
             nodeCaptcha: cc.Node,
@@ -35,7 +35,7 @@ var netConfig = require('NetConfig');
         onLoad: function () {
             cc.LoginController.getInstance().setLoginView(this);
             this.nodeCaptcha.active = false;
-            this.node.zIndex =  cc.NoteDepth.LOGIN_VIEW;
+            this.node.zIndex = cc.NoteDepth.LOGIN_VIEW;
             //this.nodeClose.active = !cc.sys.isNative;
             this.animation = this.node.getComponent(cc.Animation);
 
@@ -46,7 +46,7 @@ var netConfig = require('NetConfig');
         },
 
         onEnable: function () {
-           // this.lbError.string = '';
+            // this.lbError.string = '';
             var tool = cc.Tool.getInstance();
             if (tool.getItem('@rememberPassword') !== null) {
                 if (tool.getItem('@rememberPassword') === 'true') {
@@ -73,14 +73,14 @@ var netConfig = require('NetConfig');
         //Dang test du ly scroll window game
         adjustEditBoxPosition: function (editBox) {
             // console.log('loginView adjustEditBoxPosition ');
-            var worldPos = editBox.node.convertToWorldSpace(cc.v2(0,0));
+            var worldPos = editBox.node.convertToWorldSpace(cc.v2(0, 0));
             var windowHeight = cc.visibleRect.height;
             var windowWidth = cc.visibleRect.width;
             var factor = 0.5;
 
             // console.log('loginView adjustEditBoxPosition windowHeight: ' + windowHeight);
             // console.log('loginView adjustEditBoxPosition windowWidth: ' + windowWidth);
-            if(windowWidth > windowHeight) {
+            if (windowWidth > windowHeight) {
                 factor = 0.7;
             }
 
@@ -90,8 +90,8 @@ var netConfig = require('NetConfig');
             // console.log('loginView adjustEditBoxPosition windowHeight * factor: ' + windowHeight * factor);
 
             var SCROLLY = 999;
-            setTimeout(function() {
-                if(window.scrollY < SCROLLY && worldPos.y < windowHeight * factor) {
+            setTimeout(function () {
+                if (window.scrollY < SCROLLY && worldPos.y < windowHeight * factor) {
                     var scrollOffset = windowHeight * factor - worldPos.y - window.scrollY;
                     if (scrollOffset < 35) scrollOffset = 35;
                     if (scrollOffset > 320) scrollOffset = 320;
@@ -108,7 +108,7 @@ var netConfig = require('NetConfig');
             this.editBoxCaptcha.stayOnTop = enable;
         },
 
-        showCaptcha: function() {
+        showCaptcha: function () {
             this.nodeCaptcha.active = true;
             this.getCaptcha();
         },
@@ -123,27 +123,27 @@ var netConfig = require('NetConfig');
         },
 
         callLogin: function () {
-           // this.lbError.string = '';
+            // this.lbError.string = '';
             this.username = this.editBoxUsername.string;
             this.password = this.editBoxPassword.string;
 
             if (this.username === '') {
-				cc.PopupController.getInstance().showMessage('Vui lòng nhập tên tài khoản');
+                cc.PopupController.getInstance().showMessage('Vui lòng nhập tên tài khoản');
                 //this.lbError.string = 'Vui lòng nhập tên tài khoản';
                 return;
             }
 
             if (this.password === '') {
-				cc.PopupController.getInstance().showMessage('Vui lòng nhập mật khẩu');
-              //  this.lbError.string = 'Vui lòng nhập mật khẩu';
+                cc.PopupController.getInstance().showMessage('Vui lòng nhập mật khẩu');
+                //  this.lbError.string = 'Vui lòng nhập mật khẩu';
                 return;
             }
 
             if (this.nodeCaptcha.active) {
                 this.captcha = this.editBoxCaptcha.string;
                 if (this.captcha === '') {
-					cc.PopupController.getInstance().showMessage('Vui lòng nhập mã xác nhận');
-                  //  this.lbError.string = 'Vui lòng nhập mã xác nhận';
+                    cc.PopupController.getInstance().showMessage('Vui lòng nhập mã xác nhận');
+                    //  this.lbError.string = 'Vui lòng nhập mã xác nhận';
                     return;
                 }
             }
@@ -266,15 +266,15 @@ var netConfig = require('NetConfig');
 
         onLoginResponseError: function (response) {
             if (response.ResponseCode === cc.LoginError.REQUIRE_CAPTCHA) {
-				cc.PopupController.getInstance().showMessage(response.Message);
+                cc.PopupController.getInstance().showMessage(response.Message);
                 //this.lbError.string = response.Message;
                 this.showCaptcha();
             } else if (response.ResponseCode === cc.LoginError.REQUIRE_OTP) {
                 cc.LoginController.getInstance().showOTP(true);
                 // this.nodeLoginOTP.active = true;
             } else {
-               // this.lbError.string = response.Message;
-			   cc.PopupController.getInstance().showMessage(response.Message);
+                // this.lbError.string = response.Message;
+                cc.PopupController.getInstance().showMessage(response.Message);
             }
         },
 
