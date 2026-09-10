@@ -716,6 +716,11 @@ const TWEEN = cc.tween;
             }
         },
         showBtnBien: function () {
+            // 2026-09-10: positionsUI chi duoc khoi tao khi vao ban (initPositions).
+            // onBet co the ban ra truoc do -> crash "Cannot read properties of undefined
+            // (reading 'map')". Cac ham anh em (updatePositions/removePlayer/getPositions...)
+            // deu da guard 'if (this.positionsUI)', rieng ham nay thieu.
+            if (!this.positionsUI) return;
             let count = 0;
             this.positionsUI.map(accId => {
                 if (accId > 0)

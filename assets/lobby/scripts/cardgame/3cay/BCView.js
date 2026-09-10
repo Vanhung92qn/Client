@@ -339,9 +339,13 @@ var netConfig = require('NetConfig');
                     case cc.MethodHubOnName.START_ANIMATION_TIME:
                         let dataInfo = m.A[0];
                         let dataTime = m.A[1];
+                        // 2026-09-10: cung rui ro null nhu UPDATE_SESSION (CloneData tra null).
+                        if (!dataInfo || !dataInfo.Players) break;
                         // Lay data cua user hien tai
                         let currAccId = cc.LoginController.getInstance().getUserId();
                         let currPlayer = cc.BCController.getInstance().getHandsCardByAccId(currAccId);
+                        // Nguoi choi vua roi ban thi khong con trong Players -> bo qua, dung crash.
+                        if (!dataInfo.Players[currAccId] || !currPlayer) break;
                         let currHandCard = dataInfo.Players[currAccId].Hand;
                         currPlayer.showCards(currHandCard, false);
 
@@ -405,6 +409,10 @@ var netConfig = require('NetConfig');
                     //Ket thuc phien
                     case cc.MethodHubOnName.UPDATE_SESSION:
                         // console.log("UPDATE_SESSION", m.A)
+                        // 2026-09-10: server tung gui null o day (CloneData nuot exception roi
+                        // tra null) -> "Cannot read properties of null (reading 'Players')".
+                        // Da va o server, giu them guard nay cho chac.
+                        if (!m.A || !m.A[0]) break;
                         cc.BCController.getInstance().updateInfo(m.A[0], cc.BCState.FINISH);
                         //update lai balance user
                         cc.BCController.getInstance().updateBalancePlayers(m.A[0].Players)
