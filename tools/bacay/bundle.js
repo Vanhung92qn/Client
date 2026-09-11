@@ -49,7 +49,7 @@ const BUNDLE_UUID = 'c7e14b90-5a6d-4f28-9d31-8b2e4c6a1f03';
 const BUNDLE_PRIORITY = 1;
 
 /** Thu muc cua bundle — so it, giong quy uoc Phoenix. */
-const DIRS = ['art', 'card', 'spine', 'prefab'];
+const DIRS = ['art', 'card', 'font', 'spine', 'ui', 'prefab'];
 
 /**
  * DANH MUC ASSET.
@@ -83,6 +83,23 @@ const DANH_MUC = [
   { nguon: 'BaCay/images/diamond.png', dich: 'art/suit_diamond.png', ly_do: 'chat ro, ban to' },
   { nguon: 'BaCay/images/spade.png', dich: 'art/suit_spade.png', ly_do: 'chat bich, ban to' },
   { nguon: 'BaCay/plist/heart.png', dich: 'art/suit_heart.png', ly_do: 'chat co, ban to' },
+
+  // ── Anh roi va chu ──────────────────────────────────────────────────
+  { nguon: '_shared/images/bgTlmn.png', dich: 'art/bg_table.png', ly_do: 'nen ban — anh roi, khong nam trong atlas' },
+  { nguon: '_shared/images/Button_LatTatCa.png', dich: 'art/btn_lat_tat_ca.png', ly_do: 'nut Lat tat ca' },
+  { nguon: '_shared/images/Text_NanBai.png', dich: 'art/txt_nan_bai.png', ly_do: 'chu "Nan bai"' },
+  {
+    nguon: '_shared/fonts/Font-export.fnt',
+    dich: 'font/main.fnt',
+    nhom: ['_shared/fonts/Font-export.png'],
+    ly_do: 'bitmap font chinh — nhan so ban, muc cuoc',
+  },
+  {
+    nguon: '_shared/fonts/Font_HelveticaNeue_Effect-export.fnt',
+    dich: 'font/effect.fnt',
+    nhom: ['_shared/fonts/Font_HelveticaNeue_Effect-export.png'],
+    ly_do: 'bitmap font co vien — nhan tren nut',
+  },
 
   // ── Spine ───────────────────────────────────────────────────────────
   {
@@ -305,8 +322,51 @@ function main() {
       continue;
     }
 
+    if (ext === '.fnt') {
+      // Bitmap font: .fnt + .png. 🔴 .fnt tro toi anh bang TEN TUONG DOI ghi trong
+      // dong `file="..."`, khong phai uuid — doi ten tep ma quen sua dong do thi chu
+      // hien ra rong tuech, Cocos khong bao gi.
+      const pngNguon = muc.nhom.find((x) => x.endsWith('.png'));
+      const pngDich = muc.dich.replace(/\.fnt$/, '.png');
+      const pngDst = chep(pngNguon, pngDich);
+
+      const texUuid = P.uuid4();
+      P.writeCocosJson(pngDst + '.meta', metaThuong(pngDst, path.basename(pngDich, '.png')));
+
+      let noiDung = fs.readFileSync(dst, 'utf8');
+      noiDung = noiDung.replace(/file="[^"]*"/, `file="${path.basename(pngDich)}"`);
+      fs.writeFileSync(dst, noiDung, 'utf8');
+
+      const co = /size=(-?\d+)/.exec(noiDung);
+      P.writeCocosJson(dst + '.meta', {
+        ver: '2.1.2',
+        uuid: P.uuid4(),
+        importer: 'bitmap-font',
+        textureUuid: JSON.parse(fs.readFileSync(pngDst + '.meta', 'utf8')).uuid,
+        fontSize: co ? Math.abs(Number(co[1])) : 32,
+        subMetas: {},
+      });
+      console.log(`  font  ${muc.dich}  (tro toi ${path.basename(pngDich)})`);
+      continue;
+    }
+
     throw new Error(`Chua biet xu ly duoi ${ext}: ${muc.dich}`);
   }
+
+  // ── Anh do cut-frames.py cat ra ────────────────────────────────────
+  // Chay cut-frames.py TRUOC bundle.js. Anh roi thi chua co .meta, sinh o day
+  // de moi .meta trong bundle deu do mot cho tao ra.
+  const thuMucUi = path.join(NEW, 'ui');
+  let soUi = 0;
+  for (const ten of fs.existsSync(thuMucUi) ? fs.readdirSync(thuMucUi) : []) {
+    if (!ten.endsWith('.png')) continue;
+    const abs = path.join(thuMucUi, ten);
+    P.writeCocosJson(abs + '.meta', metaThuong(abs, path.basename(ten, '.png')));
+    soTep++;
+    soByte += fs.statSync(abs).size;
+    soUi++;
+  }
+  if (soUi > 0) console.log(`  ui    ${soUi} anh da cat rieng tu atlas dung chung`);
 
   // .meta cho tung thu muc con
   for (const d of DIRS) {

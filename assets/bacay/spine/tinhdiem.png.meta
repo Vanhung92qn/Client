@@ -1,6 +1,6 @@
 {
   "ver": "2.3.7",
-  "uuid": "caf26b01-68f0-4ccb-a94d-91f98c9adb6d",
+  "uuid": "c8296052-daed-4735-b792-83e4db24d530",
   "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
@@ -14,9 +14,9 @@
   "subMetas": {
     "tinhdiem": {
       "ver": "1.0.6",
-      "uuid": "4e140613-3ede-4483-80a8-e6c8f6d22b4d",
+      "uuid": "1d865c5d-5e69-4b03-ba6c-e58d7e5d30a1",
       "importer": "sprite-frame",
-      "rawTextureUuid": "caf26b01-68f0-4ccb-a94d-91f98c9adb6d",
+      "rawTextureUuid": "c8296052-daed-4735-b792-83e4db24d530",
       "trimType": "none",
       "trimThreshold": 1,
       "rotated": false,

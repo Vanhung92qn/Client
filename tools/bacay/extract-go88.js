@@ -34,6 +34,9 @@ const RA = path.join(__dirname, 'layout');
  */
 const BUILTIN = require('../prefab/lib/builtin-uuids.json').uuids;
 
+/** frameName -> tệp nguồn bên Go88. Bộ sinh prefab tra bảng này khi thiếu asset. */
+const NGUON_FRAME = {};
+
 /** Prefab cần rút. */
 const CAN_RUT = [
   { tep: 'BaCay/prefabs/CardGameTableCaoRua_c09fb89e.prefab', ten: 'table', mo_ta: 'khung bàn Cào Rùa' },
@@ -96,7 +99,13 @@ function rut(tuyetDoi, chiMuc, boQua) {
       boQua.push({ loai: 'asset', chi_tiet: r.__uuid__, ly_do: 'không có .meta nào khai uuid này' });
       return null;
     }
-    return hit.frame || path.basename(hit.tep);
+
+    const ten = hit.frame || path.basename(hit.tep);
+
+    // Ghi lại frame này lấy TỪ TỆP NÀO bên Go88. Bộ sinh prefab dùng để nói thẳng
+    // "thiếu frame X, lấy ở Y" thay vì bắt người đọc đi mò trong 58.000 uuid.
+    NGUON_FRAME[ten] = hit.tep;
+    return ten;
   };
 
   /**
@@ -227,6 +236,9 @@ function main() {
     for (const [ly_do, n] of Object.entries(nhom)) console.log(`      ${n}× ${ly_do}`);
   }
 
+  fs.writeFileSync(path.join(RA, 'frames.json'), JSON.stringify(NGUON_FRAME, null, 2), 'utf8');
+  console.log(`
+${Object.keys(NGUON_FRAME).length} frame duoc dung — nguon ghi o frames.json`);
   console.log(`\nBố cục đã ghi ra ${path.relative(path.resolve(__dirname, '..', '..'), RA)}/`);
 }
 
