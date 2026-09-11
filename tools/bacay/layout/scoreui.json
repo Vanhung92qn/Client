@@ -1,0 +1,210 @@
+{
+  "nguon": "BaCay/prefabs/BaCayScoreUI_7d0053ce.prefab",
+  "mo_ta": "bảng điểm trên ghế",
+  "soNodeGoc": 9,
+  "soNodeRut": 9,
+  "boQua": [
+    {
+      "loai": "component",
+      "node": "BaCayScoreUI",
+      "chi_tiet": "db73d3IEp9O/IZR7NkPoMkR",
+      "ly_do": "script riêng của Go88, ta gắn script của mình"
+    },
+    {
+      "loai": "component",
+      "node": "New Node",
+      "chi_tiet": "cc.SkeletonAnimation",
+      "ly_do": "script riêng của Go88, ta gắn script của mình"
+    },
+    {
+      "loai": "node",
+      "node": "animJQK",
+      "chi_tiet": "cc.PrivateNode",
+      "ly_do": "con không phải cc.Node (vd cc.PrivateNode)"
+    }
+  ],
+  "cay": {
+    "ten": "BaCayScoreUI",
+    "x": 0,
+    "y": 0,
+    "w": 117,
+    "h": 36,
+    "anchorX": 0.5,
+    "anchorY": 0.5,
+    "scaleX": 1,
+    "scaleY": 1,
+    "active": true,
+    "opacity": 255,
+    "comps": [],
+    "con": [
+      {
+        "ten": "New Node",
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0,
+        "anchorX": 0.5,
+        "anchorY": 0.5,
+        "scaleX": 1,
+        "scaleY": 1,
+        "active": false,
+        "opacity": 255,
+        "comps": [],
+        "con": [
+          {
+            "ten": "bg",
+            "x": -1.23,
+            "y": 0,
+            "w": 172,
+            "h": 56,
+            "anchorX": 0.5,
+            "anchorY": 0.5,
+            "scaleX": 1,
+            "scaleY": 1,
+            "active": true,
+            "opacity": 255,
+            "comps": [
+              {
+                "loai": "cc.Sprite",
+                "frame": "borderThangSapLang"
+              }
+            ],
+            "con": []
+          },
+          {
+            "ten": "Bù",
+            "x": 9.72,
+            "y": -4.15,
+            "w": 33.13,
+            "h": 31.25,
+            "anchorX": 0.5,
+            "anchorY": 0.5,
+            "scaleX": 1,
+            "scaleY": 1,
+            "active": false,
+            "opacity": 255,
+            "comps": [
+              {
+                "loai": "cc.Label",
+                "text": "BÙ",
+                "co": 20,
+                "canhNgang": 1,
+                "font": "Font_HelveticaNeue_Effect-export.fnt"
+              }
+            ],
+            "con": []
+          },
+          {
+            "ten": "Score",
+            "x": 9.72,
+            "y": -4.15,
+            "w": 77.5,
+            "h": 31.25,
+            "anchorX": 0.5,
+            "anchorY": 0.5,
+            "scaleX": 1,
+            "scaleY": 1,
+            "active": true,
+            "opacity": 255,
+            "comps": [
+              {
+                "loai": "cc.Label",
+                "text": "XĐIỂM",
+                "co": 20,
+                "canhNgang": 1,
+                "font": "Font_HelveticaNeue_Effect-export.fnt"
+              }
+            ],
+            "con": []
+          },
+          {
+            "ten": "Ba Cây",
+            "x": 0.38,
+            "y": -3.43,
+            "w": 97.5,
+            "h": 31.25,
+            "anchorX": 0.5,
+            "anchorY": 0.5,
+            "scaleX": 1,
+            "scaleY": 1,
+            "active": false,
+            "opacity": 255,
+            "comps": [
+              {
+                "loai": "cc.Label",
+                "text": "BA CÂY",
+                "co": 20,
+                "canhNgang": 1,
+                "font": "Font_HelveticaNeue_Effect-export.fnt"
+              }
+            ],
+            "con": []
+          }
+        ]
+      },
+      {
+        "ten": "caorua_tinh diem",
+        "x": 0,
+        "y": 43,
+        "w": 293,
+        "h": 60,
+        "anchorX": 0.5,
+        "anchorY": 0.5,
+        "scaleX": 1,
+        "scaleY": 1,
+        "active": true,
+        "opacity": 255,
+        "comps": [
+          {
+            "loai": "sp.Skeleton",
+            "skel": "caorua_tinh diem.json",
+            "loop": false
+          }
+        ],
+        "con": []
+      },
+      {
+        "ten": "animJQK",
+        "x": 0,
+        "y": 43,
+        "w": 776.11,
+        "h": 479.04,
+        "anchorX": 0.5,
+        "anchorY": 0.5,
+        "scaleX": 1,
+        "scaleY": 1,
+        "active": false,
+        "opacity": 255,
+        "comps": [
+          {
+            "loai": "sp.Skeleton",
+            "skel": "Go_JQK.json",
+            "loop": false
+          }
+        ],
+        "con": []
+      },
+      {
+        "ten": "sameScore",
+        "x": 0,
+        "y": 43,
+        "w": 293,
+        "h": 60,
+        "anchorX": 0.5,
+        "anchorY": 0.5,
+        "scaleX": 1,
+        "scaleY": 1,
+        "active": false,
+        "opacity": 255,
+        "comps": [
+          {
+            "loai": "sp.Skeleton",
+            "skel": "caorua_tinh diem.json",
+            "anim": "2 nha hoa diem"
+          }
+        ],
+        "con": []
+      }
+    ]
+  }
+}

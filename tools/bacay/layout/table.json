@@ -1,0 +1,586 @@
+{
+  "nguon": "BaCay/prefabs/CardGameTableCaoRua_c09fb89e.prefab",
+  "mo_ta": "khung bàn Cào Rùa",
+  "soNodeGoc": 25,
+  "soNodeRut": 25,
+  "boQua": [
+    {
+      "loai": "component",
+      "node": "CardGameTableNoDealer",
+      "chi_tiet": "5637cfsLJ1KKJi9YlVhMGq5",
+      "ly_do": "script riêng của Go88, ta gắn script của mình"
+    },
+    {
+      "loai": "component",
+      "node": "CardGameTableNoDealer",
+      "chi_tiet": "3ec9dZLp6FIiZyjKV0G8noy",
+      "ly_do": "script riêng của Go88, ta gắn script của mình"
+    },
+    {
+      "loai": "component",
+      "node": "CardGameTableNoDealer",
+      "chi_tiet": "1ddabTCcNpL0qFBjfyn4UE3",
+      "ly_do": "script riêng của Go88, ta gắn script của mình"
+    },
+    {
+      "loai": "component",
+      "node": "icChatRoom",
+      "chi_tiet": "d339fGmg5hE/pI0+iDfQxgq",
+      "ly_do": "script riêng của Go88, ta gắn script của mình"
+    },
+    {
+      "loai": "component",
+      "node": "icExit_2",
+      "chi_tiet": "d339fGmg5hE/pI0+iDfQxgq",
+      "ly_do": "script riêng của Go88, ta gắn script của mình"
+    },
+    {
+      "loai": "component",
+      "node": "BtnStart",
+      "chi_tiet": "d339fGmg5hE/pI0+iDfQxgq",
+      "ly_do": "script riêng của Go88, ta gắn script của mình"
+    },
+    {
+      "loai": "component",
+      "node": "ReadyBtn",
+      "chi_tiet": "d339fGmg5hE/pI0+iDfQxgq",
+      "ly_do": "script riêng của Go88, ta gắn script của mình"
+    },
+    {
+      "loai": "component",
+      "node": "countDownProgress",
+      "chi_tiet": "5f1a2108T5BKpCTyy+ZdMOp",
+      "ly_do": "script riêng của Go88, ta gắn script của mình"
+    }
+  ],
+  "cay": {
+    "ten": "CardGameTableNoDealer",
+    "x": 0,
+    "y": 0,
+    "w": 1560,
+    "h": 720,
+    "anchorX": 0.5,
+    "anchorY": 0.5,
+    "scaleX": 1,
+    "scaleY": 1,
+    "active": true,
+    "opacity": 255,
+    "comps": [
+      {
+        "loai": "cc.Mask"
+      }
+    ],
+    "con": [
+      {
+        "ten": "bgTlmn",
+        "x": 0,
+        "y": 0,
+        "w": 1560,
+        "h": 1170,
+        "anchorX": 0.5,
+        "anchorY": 0.5,
+        "scaleX": 1,
+        "scaleY": 1,
+        "active": true,
+        "opacity": 255,
+        "comps": [
+          {
+            "loai": "cc.Sprite",
+            "frame": "bgTlmn"
+          }
+        ],
+        "con": []
+      },
+      {
+        "ten": "HUD",
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0,
+        "anchorX": 0.5,
+        "anchorY": 0.5,
+        "scaleX": 1,
+        "scaleY": 1,
+        "active": true,
+        "opacity": 255,
+        "comps": [
+          {
+            "loai": "cc.Widget",
+            "top": 360,
+            "bottom": 360,
+            "left": 780,
+            "right": 780,
+            "alignFlags": 18
+          }
+        ],
+        "con": [
+          {
+            "ten": "icChatRoom",
+            "x": 670,
+            "y": 260,
+            "w": 100,
+            "h": 100,
+            "anchorX": 0.5,
+            "anchorY": 0.5,
+            "scaleX": 1,
+            "scaleY": 1,
+            "active": true,
+            "opacity": 255,
+            "comps": [
+              {
+                "loai": "cc.Button"
+              }
+            ],
+            "con": [
+              {
+                "ten": "icChatRoom",
+                "x": 0,
+                "y": 0,
+                "w": 76,
+                "h": 75,
+                "anchorX": 0.5,
+                "anchorY": 0.5,
+                "scaleX": 1,
+                "scaleY": 1,
+                "active": true,
+                "opacity": 255,
+                "comps": [
+                  {
+                    "loai": "cc.Sprite",
+                    "frame": "icChatRoom"
+                  }
+                ],
+                "con": []
+              }
+            ]
+          },
+          {
+            "ten": "icExit_2",
+            "x": -670,
+            "y": 260,
+            "w": 100,
+            "h": 100,
+            "anchorX": 0.5,
+            "anchorY": 0.5,
+            "scaleX": 1,
+            "scaleY": 1,
+            "active": true,
+            "opacity": 255,
+            "comps": [
+              {
+                "loai": "cc.Button"
+              }
+            ],
+            "con": [
+              {
+                "ten": "icExit_2",
+                "x": 0,
+                "y": 0,
+                "w": 64,
+                "h": 63,
+                "anchorX": 0.5,
+                "anchorY": 0.5,
+                "scaleX": 1,
+                "scaleY": 1,
+                "active": true,
+                "opacity": 255,
+                "comps": [
+                  {
+                    "loai": "cc.Sprite",
+                    "frame": "icExit_2"
+                  }
+                ],
+                "con": []
+              }
+            ]
+          },
+          {
+            "ten": "borderLoadingTableHide",
+            "x": 0,
+            "y": -109.07,
+            "w": 400,
+            "h": 41,
+            "anchorX": 0.5,
+            "anchorY": 0.5,
+            "scaleX": 1,
+            "scaleY": 1,
+            "active": true,
+            "opacity": 255,
+            "comps": [],
+            "con": [
+              {
+                "ten": "borderLoadingTableHide",
+                "x": 0,
+                "y": 0,
+                "w": 400,
+                "h": 41,
+                "anchorX": 0.5,
+                "anchorY": 0.5,
+                "scaleX": 1,
+                "scaleY": 1,
+                "active": true,
+                "opacity": 132,
+                "comps": [
+                  {
+                    "loai": "cc.Sprite",
+                    "frame": "borderLoadingTableHide"
+                  }
+                ],
+                "con": []
+              },
+              {
+                "ten": "idBanLb",
+                "x": -109.44,
+                "y": 1,
+                "w": 0,
+                "h": 50.4,
+                "anchorX": 0.5,
+                "anchorY": 0.5,
+                "scaleX": 1,
+                "scaleY": 1,
+                "active": true,
+                "opacity": 69,
+                "comps": [
+                  {
+                    "loai": "cc.Label",
+                    "co": 28,
+                    "font": "MyriadPro-Bold.ttf"
+                  }
+                ],
+                "con": []
+              },
+              {
+                "ten": "mucCuocLb",
+                "x": 125.37,
+                "y": 1,
+                "w": 0,
+                "h": 50.4,
+                "anchorX": 0.5,
+                "anchorY": 0.5,
+                "scaleX": 1,
+                "scaleY": 1,
+                "active": true,
+                "opacity": 69,
+                "comps": [
+                  {
+                    "loai": "cc.Label",
+                    "co": 28,
+                    "canhNgang": 1,
+                    "font": "MyriadPro-Bold.ttf"
+                  }
+                ],
+                "con": []
+              },
+              {
+                "ten": "txtPhong",
+                "x": -144,
+                "y": 0,
+                "w": 61,
+                "h": 19,
+                "anchorX": 0.5,
+                "anchorY": 0.5,
+                "scaleX": 1,
+                "scaleY": 1,
+                "active": true,
+                "opacity": 183,
+                "comps": [
+                  {
+                    "loai": "cc.Sprite",
+                    "frame": "txtPhong"
+                  }
+                ],
+                "con": []
+              },
+              {
+                "ten": "txtCUoc",
+                "x": 85.64,
+                "y": -4,
+                "w": 76,
+                "h": 25,
+                "anchorX": 0.5,
+                "anchorY": 0.5,
+                "scaleX": 1,
+                "scaleY": 1,
+                "active": true,
+                "opacity": 183,
+                "comps": [
+                  {
+                    "loai": "cc.Sprite",
+                    "frame": "txtCUoc"
+                  }
+                ],
+                "con": []
+              },
+              {
+                "ten": "timebar3",
+                "x": 0,
+                "y": 0,
+                "w": 403,
+                "h": 41,
+                "anchorX": 0.5,
+                "anchorY": 0.5,
+                "scaleX": 1,
+                "scaleY": 1,
+                "active": false,
+                "opacity": 255,
+                "comps": [
+                  {
+                    "loai": "cc.Sprite",
+                    "frame": "borderLoadingTable"
+                  }
+                ],
+                "con": []
+              }
+            ]
+          },
+          {
+            "ten": "caorua_mid_table",
+            "x": 6.45,
+            "y": 17.25,
+            "w": 508,
+            "h": 185,
+            "anchorX": 0.5,
+            "anchorY": 0.5,
+            "scaleX": 1,
+            "scaleY": 1,
+            "active": true,
+            "opacity": 255,
+            "comps": [
+              {
+                "loai": "cc.Sprite",
+                "frame": "caorua_mid_table"
+              }
+            ],
+            "con": []
+          },
+          {
+            "ten": "BtnStart",
+            "x": 0,
+            "y": -61,
+            "w": 186,
+            "h": 67,
+            "anchorX": 0.5,
+            "anchorY": 0.5,
+            "scaleX": 1,
+            "scaleY": 1,
+            "active": false,
+            "opacity": 255,
+            "comps": [
+              {
+                "loai": "cc.Sprite",
+                "frame": "btnDanhbai",
+                "type": 1
+              },
+              {
+                "loai": "cc.Button"
+              }
+            ],
+            "con": [
+              {
+                "ten": "Label",
+                "x": 0,
+                "y": 27,
+                "w": 126.19,
+                "h": 73.13,
+                "anchorX": 0.5,
+                "anchorY": 0.5,
+                "scaleX": 1,
+                "scaleY": 1,
+                "active": true,
+                "opacity": 255,
+                "comps": [
+                  {
+                    "loai": "cc.Label",
+                    "text": "BẮT ĐẦU",
+                    "co": 18,
+                    "canhNgang": 1,
+                    "font": "Font-export.fnt"
+                  }
+                ],
+                "con": []
+              }
+            ]
+          },
+          {
+            "ten": "ReadyBtn",
+            "x": 0,
+            "y": -61,
+            "w": 186,
+            "h": 67,
+            "anchorX": 0.5,
+            "anchorY": 0.5,
+            "scaleX": 1,
+            "scaleY": 1,
+            "active": false,
+            "opacity": 255,
+            "comps": [
+              {
+                "loai": "cc.Sprite",
+                "frame": "btnDanhbai",
+                "type": 1
+              },
+              {
+                "loai": "cc.Button"
+              }
+            ],
+            "con": [
+              {
+                "ten": "Label",
+                "x": 0,
+                "y": 27,
+                "w": 144.69,
+                "h": 73.13,
+                "anchorX": 0.5,
+                "anchorY": 0.5,
+                "scaleX": 1,
+                "scaleY": 1,
+                "active": true,
+                "opacity": 255,
+                "comps": [
+                  {
+                    "loai": "cc.Label",
+                    "text": "SẴN SÀNG",
+                    "co": 18,
+                    "canhNgang": 1,
+                    "font": "Font-export.fnt"
+                  }
+                ],
+                "con": []
+              }
+            ]
+          },
+          {
+            "ten": "countDownProgress",
+            "x": 0,
+            "y": 23,
+            "w": 400,
+            "h": 41,
+            "anchorX": 0.5,
+            "anchorY": 0.5,
+            "scaleX": 1,
+            "scaleY": 1,
+            "active": false,
+            "opacity": 255,
+            "comps": [
+              {
+                "loai": "cc.ProgressBar",
+                "mode": 2
+              },
+              {
+                "loai": "cc.Sprite",
+                "frame": "borderLoadingTableHide"
+              }
+            ],
+            "con": [
+              {
+                "ten": "bar",
+                "x": -200.5,
+                "y": 0,
+                "w": 401,
+                "h": 40,
+                "anchorX": 0.5,
+                "anchorY": 0.5,
+                "scaleX": 1,
+                "scaleY": 1,
+                "active": true,
+                "opacity": 255,
+                "comps": [
+                  {
+                    "loai": "cc.Sprite",
+                    "frame": "loadingTable",
+                    "sizeMode": 0,
+                    "type": 3
+                  }
+                ],
+                "con": []
+              },
+              {
+                "ten": "timebar3",
+                "x": 0,
+                "y": 0,
+                "w": 403,
+                "h": 41,
+                "anchorX": 0.5,
+                "anchorY": 0.5,
+                "scaleX": 1,
+                "scaleY": 1,
+                "active": true,
+                "opacity": 255,
+                "comps": [
+                  {
+                    "loai": "cc.Sprite",
+                    "frame": "borderLoadingTable"
+                  }
+                ],
+                "con": []
+              },
+              {
+                "ten": "txtVanChoi",
+                "x": 0,
+                "y": 3,
+                "w": 342,
+                "h": 28,
+                "anchorX": 0.5,
+                "anchorY": 0.5,
+                "scaleX": 1,
+                "scaleY": 1,
+                "active": true,
+                "opacity": 255,
+                "comps": [
+                  {
+                    "loai": "cc.Sprite",
+                    "frame": "txtVanChoi"
+                  }
+                ],
+                "con": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ten": "icQuanBai",
+        "x": -2,
+        "y": 131.41,
+        "w": 74,
+        "h": 18,
+        "anchorX": 0.5,
+        "anchorY": 0.5,
+        "scaleX": 1,
+        "scaleY": 1,
+        "active": true,
+        "opacity": 168,
+        "comps": [
+          {
+            "loai": "cc.Sprite",
+            "frame": "icQuanBai"
+          }
+        ],
+        "con": []
+      },
+      {
+        "ten": "NameGame",
+        "x": -2,
+        "y": 155.41,
+        "w": 119.5,
+        "h": 50.4,
+        "anchorX": 0.5,
+        "anchorY": 0.5,
+        "scaleX": 1,
+        "scaleY": 1,
+        "active": true,
+        "opacity": 186,
+        "comps": [
+          {
+            "loai": "cc.Label",
+            "text": "CÀO RÙA",
+            "co": 29.5,
+            "canhNgang": 1,
+            "font": "MyriadPro-Bold.ttf"
+          }
+        ],
+        "con": []
+      }
+    ]
+  }
+}

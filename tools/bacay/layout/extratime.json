@@ -1,0 +1,74 @@
+{
+  "nguon": "BaCay/prefabs/BaCayAnimExtratime_0e13e9ae.prefab",
+  "mo_ta": "hiệu ứng rút thêm lá",
+  "soNodeGoc": 3,
+  "soNodeRut": 3,
+  "boQua": [
+    {
+      "loai": "component",
+      "node": "BaCayAnimExtratime",
+      "chi_tiet": "5c877+9V39IepRTvEK5WhyJ",
+      "ly_do": "script riêng của Go88, ta gắn script của mình"
+    }
+  ],
+  "cay": {
+    "ten": "BaCayAnimExtratime",
+    "x": 0,
+    "y": 61,
+    "w": 0,
+    "h": 0,
+    "anchorX": 0.5,
+    "anchorY": 0.5,
+    "scaleX": 1,
+    "scaleY": 1,
+    "active": true,
+    "opacity": 255,
+    "comps": [],
+    "con": [
+      {
+        "ten": "Hòa",
+        "x": 0,
+        "y": 0,
+        "w": 83.29,
+        "h": 78.12,
+        "anchorX": 0.5,
+        "anchorY": 0.5,
+        "scaleX": 1,
+        "scaleY": 1,
+        "active": false,
+        "opacity": 255,
+        "comps": [
+          {
+            "loai": "cc.Label",
+            "text": "Hòa",
+            "co": 45.39999999999999,
+            "canhNgang": 1,
+            "font": null
+          }
+        ],
+        "con": []
+      },
+      {
+        "ten": "Hòa so bài tiếp",
+        "x": 0,
+        "y": -63,
+        "w": 293,
+        "h": 60,
+        "anchorX": 0.5,
+        "anchorY": 0.5,
+        "scaleX": 1,
+        "scaleY": 1,
+        "active": true,
+        "opacity": 255,
+        "comps": [
+          {
+            "loai": "sp.Skeleton",
+            "skel": "caorua_tinh diem.json",
+            "anim": "sobaitiep"
+          }
+        ],
+        "con": []
+      }
+    ]
+  }
+}
