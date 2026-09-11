@@ -32,11 +32,32 @@ const VIP_DIRS = [
   path.join(A.ASSETS_ROOT, 'prefabs', 'portal', 'Quest'),
 ];
 
+/**
+ * uuid cua asset DUNG SAN trong engine Cocos (material builtin, sprite mac dinh
+ * cua Button/EditBox/ScrollBar...). Chung KHONG nam trong assets/ nen neu khong
+ * ke vao day thi validator bao sai — do duoc: 12/17 file "loi", 100% la dương
+ * tinh gia tu mot minh `eca5d2f2` (builtin-2d-sprite.mtl) xuat hien 7.419 lan.
+ *
+ * Danh sach sinh tu chinh ban cai Creator 2.4.10, xem lib/builtin-uuids.json.
+ * Sinh lai khi doi phien ban Creator.
+ */
+const BUILTIN_UUIDS = new Set(
+  Object.keys(require('./lib/builtin-uuids.json').uuids)
+);
+
 /** Tap hop uuid co that trong project — quet mot lan roi tra cuu. */
 const knownUuids = (() => {
   const set = new Set();
   const walk = (dir) => {
-    for (const name of fs.readdirSync(dir)) {
+    // Mot so thu muc co the khong doc duoc (vd vo thu muc dang cho xoa ma tien
+    // trinh khac con giu handle). Bo qua, dung de no lam sap ca validator.
+    let names;
+    try {
+      names = fs.readdirSync(dir);
+    } catch (e) {
+      return;
+    }
+    for (const name of names) {
       const p = path.join(dir, name);
       const st = fs.statSync(p);
       if (st.isDirectory()) walk(p);
@@ -88,10 +109,19 @@ function validate(filePath) {
       return;
     }
     if (typeof obj.__uuid__ === 'string') {
-      if (!knownUuids.has(obj.__uuid__)) {
+      if (!knownUuids.has(obj.__uuid__) && !BUILTIN_UUIDS.has(obj.__uuid__)) {
         errors.push(`${where}: uuid khong co trong project -> ${obj.__uuid__}`);
       }
       return;
+    }
+    // 🔴 Khoa Symbol bi JSON.stringify NUOT IM LANG — property ghi ra thanh {}
+    // va Cocos nap vao thanh null. Phai soi bang getOwnPropertySymbols: vong
+    // Object.keys() ben duoi khong bao gio nhin thay chung.
+    const syms = Object.getOwnPropertySymbols(obj);
+    if (syms.length) {
+      errors.push(
+        `${where}: con ${syms.length} khoa Symbol chua resolve — se bi nuot khi ghi file`
+      );
     }
     for (const k of Object.keys(obj)) {
       if (obj[k] === undefined) {

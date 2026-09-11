@@ -115,6 +115,16 @@ function node(name, opts = {}, children = [], components = []) {
 // ─────────────────────────────────────────────────────────────────
 
 /**
+ * Material DUNG SAN cua engine. Moi component ve duoc deu mang mot cai trong
+ * `_materials`; editor tu dien khi luu, nen neu bo sinh bo trong thi lan dau
+ * nguoi dung bam Ctrl+S se hien ra mot dong diff o MOI component.
+ * Do tren prefab that: cc.Sprite / cc.Label / cc.Mask deu dung builtin-2d-sprite,
+ * sp.Skeleton dung builtin-2d-spine. Xem lib/builtin-uuids.json.
+ */
+const MAT_SPRITE = 'eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432'; // builtin-2d-sprite.mtl
+const MAT_SPINE = '7afd064b-113f-480e-b793-8817d19f63c3'; // builtin-2d-spine.mtl
+
+/**
  * cc.Sprite
  * @param {string} spriteFrameUuid uuid cua SPRITE-FRAME (uuid trong subMetas
  *        cua file .meta, KHONG phai uuid cua texture)
@@ -126,6 +136,7 @@ function sprite(spriteFrameUuid, o = {}) {
     __comp: true,
     type: 'cc.Sprite',
     data: {
+      _materials: [{ __uuid__: MAT_SPRITE }],
       _srcBlendFactor: 770,
       _dstBlendFactor: 771,
       _spriteFrame: spriteFrameUuid ? { __uuid__: spriteFrameUuid } : null,
@@ -136,7 +147,6 @@ function sprite(spriteFrameUuid, o = {}) {
       _fillStart: 0,
       _fillRange: 0,
       _isTrimmedMode: o.trimmed === undefined ? true : !!o.trimmed,
-      _state: 0,
       _atlas: null,
     },
   };
@@ -156,8 +166,13 @@ function label(text, o = {}) {
   return {
     __comp: true,
     type: 'cc.Label',
+    // Tap khoa theo 78 cc.Label that: `_styleFlags` va `_underlineHeight` co o
+    // 100%, hai blend factor o 94%. Nguoc lai `_useOriginalSize` chi con o 6%
+    // (truong doi cu) nen BO — viet no vao la tao diff thua o moi nhan.
     data: {
-      _useOriginalSize: false,
+      _materials: [{ __uuid__: MAT_SPRITE }],
+      _srcBlendFactor: 770,
+      _dstBlendFactor: 771,
       _string: text,
       _N$string: text,
       _fontSize: fontSize,
@@ -167,6 +182,8 @@ function label(text, o = {}) {
       _isSystemFontUsed: !o.font,
       _spacingX: 0,
       _batchAsBitmap: false,
+      _styleFlags: 0,
+      _underlineHeight: 0,
       _N$horizontalAlign: o.hAlign == null ? 1 : o.hAlign,
       _N$verticalAlign: o.vAlign == null ? 1 : o.vAlign,
       _N$fontFamily: 'Arial',
@@ -347,6 +364,59 @@ function widget(o = {}) {
  * @param {string} scriptUuid uuid trong file .js.meta
  * @param {object} props      cac property cua script (dung ref/refComp de tro node)
  */
+/**
+ * sp.Skeleton — spine.
+ *
+ * Ba cho hong IM LANG, deu do doi chung tren prefab that (node "attackcraft" va
+ * "aircraft" trong PhoenixView.prefab):
+ *
+ *  1. Truong la `_N$skeletonData`, KHONG phai `_skeletonData`. Viet sai ten thi
+ *     Cocos van mo prefab binh thuong, chi la spine hien ra TRANG TRON.
+ *  2. `defaultAnimation` va `_animationName` phai BANG NHAU. Lech nhau thi
+ *     animation mac dinh khong chay.
+ *  3. Ca ba truong cache (`_cacheMode`, `_preCacheMode`, `_N$_defaultCacheMode`)
+ *     phai = 0. Khac 0 la che do cache khung hinh: setAnimation() luc chay
+ *     KHONG con tac dung, spine dung im o dong tac cu, khong mot loi nao bat len.
+ *
+ * @param {string} skelUuid uuid cua file .skel/.json (assetUuid, khong phai spriteFrame)
+ * @param {object} o  skin (mac dinh 'default'), anim, loop (mac dinh true), timeScale
+ */
+function skeleton(skelUuid, o = {}) {
+  const anim = o.anim == null ? '' : o.anim;
+  return {
+    __comp: true,
+    type: 'sp.Skeleton',
+    data: {
+      _materials: [{ __uuid__: MAT_SPINE }],
+      paused: false,
+      defaultSkin: o.skin == null ? 'default' : o.skin,
+      defaultAnimation: anim,
+      _preCacheMode: 0,
+      _cacheMode: 0,
+      loop: o.loop === undefined ? true : !!o.loop,
+      premultipliedAlpha: !!o.premultipliedAlpha,
+      timeScale: o.timeScale == null ? 1 : o.timeScale,
+      _accTime: 0,
+      _playCount: 0,
+      _frameCache: null,
+      _curFrame: null,
+      _skeletonCache: null,
+      _animationName: anim, // PHAI trung defaultAnimation
+      _animationQueue: [],
+      _headAniInfo: null,
+      _playTimes: 0,
+      _isAniComplete: true,
+      _N$skeletonData: skelUuid ? { __uuid__: skelUuid } : null,
+      _N$_defaultCacheMode: 0,
+      _N$debugSlots: false,
+      _N$debugBones: false,
+      _N$debugMesh: false,
+      _N$useTint: false,
+      _N$enableBatch: false,
+    },
+  };
+}
+
 function script(scriptUuid, props = {}) {
   return {
     __comp: true,
@@ -384,6 +454,8 @@ function build(root, pfUuid) {
   const refIndex = {}; // ref name -> { nodeId, comps: { type: id } }
 
   // [0] la cc.Prefab, node goc luon la [1]
+  // `readonly: false` co mat o 11/11 prefab that do editor luu — them vao de
+  // ban sinh ra khop chuan editor, do chenh lech khi nguoi dung bam Ctrl+S.
   out.push({
     __type__: 'cc.Prefab',
     _name: '',
@@ -392,6 +464,7 @@ function build(root, pfUuid) {
     data: { __id__: 1 },
     optimizationPolicy: 0,
     asyncLoadAssets: false,
+    readonly: false,
   });
 
   const rootId = walk(root, null);
@@ -416,6 +489,12 @@ function build(root, pfUuid) {
     const qz = Math.sin(rad);
     const qw = Math.cos(rad);
 
+    // Thu tu khoa va tap khoa chep DUNG theo cc.Node that do editor luu.
+    // Do tren 581 node that trong assets/phoenix: ca 20 khoa duoi day deu co
+    // mat o 100% node — ke ca CA HAI `_groupIndex` va `groupIndex` (Cocos 2.4
+    // giu song song ban cu va ban moi). `_level` thi KHONG node that nao co.
+    // Lech tap khoa khong lam Cocos bao loi, chi khien lan dau nguoi dung bam
+    // Ctrl+S la ca file hien thanh "da doi" trong git, che mat thay doi that.
     const nodeObj = {
       __type__: 'cc.Node',
       _name: n.name,
@@ -423,29 +502,38 @@ function build(root, pfUuid) {
       _parent: parentId == null ? null : { __id__: parentId },
       _children: [],
       _active: o.active === undefined ? true : !!o.active,
-      _level: 0,
       _components: [],
       _prefab: null,
       _opacity: o.opacity == null ? 255 : o.opacity,
       _color: color4(o.color || [255, 255, 255]),
       _contentSize: { __type__: 'cc.Size', width: size[0], height: size[1] },
       _anchorPoint: { __type__: 'cc.Vec2', x: anchor[0], y: anchor[1] },
-      _skewX: 0,
-      _skewY: 0,
-      groupIndex: o.groupIndex || 0,
-      _id: '',
-      _eulerAngles: { __type__: 'cc.Vec3', x: 0, y: 0, z: angle },
       _trs: {
         __type__: 'TypedArray',
         ctor: 'Float64Array',
         array: [pos[0], pos[1], 0, 0, 0, qz, qw, scale[0], scale[1], 1],
       },
+      _eulerAngles: { __type__: 'cc.Vec3', x: 0, y: 0, z: angle },
+      _skewX: 0,
+      _skewY: 0,
+      _is3DNode: false,
+      _groupIndex: o.groupIndex || 0,
+      groupIndex: o.groupIndex || 0,
+      _id: '',
     };
     out.push(nodeObj);
 
     if (o.ref) {
-      refIndex[o.ref] = refIndex[o.ref] || { comps: {} };
-      refIndex[o.ref].nodeId = id;
+      // 🔴 Ten ref trung nhau: truoc day node khai sau DE LEN node khai truoc
+      // ma khong bao gi. Moi tham chieu toi ten do se tro nham node, va prefab
+      // van mo duoc binh thuong — loi chi lo ra luc chay, o cho khac han.
+      if (refIndex[o.ref]) {
+        throw new Error(
+          `ref="${o.ref}" bi dung HAI LAN (node "${refIndex[o.ref].name}" va node "${n.name}"). ` +
+          `Moi ref phai la duy nhat trong mot prefab.`
+        );
+      }
+      refIndex[o.ref] = { comps: {}, name: n.name, nodeId: id };
     }
 
     // Con truoc, de thu tu trong mang giong Cocos xuat ra
@@ -467,26 +555,36 @@ function build(root, pfUuid) {
         comp.data,
         { _id: '' }
       );
-      // ghi nho de refComp() tim duoc
+      // ghi nho de refComp() tim duoc.
+      // 🔴 Luu MANG chu khong phai mot gia tri: mot node hoan toan co the mang
+      // hai component cung loai (vd 2 cc.Sprite). Truoc day khoa theo chuoi
+      // type nen cai thu hai de len cai thu nhat va refComp() im lang tro nham.
       if (o.ref) {
-        refIndex[o.ref].comps[comp.type] = cid;
+        (refIndex[o.ref].comps[comp.type] =
+          refIndex[o.ref].comps[comp.type] || []).push(cid);
       }
-      // component tro ve chinh node minh
-      for (const k of Object.keys(co)) {
-        if (co[k] && co[k][REF] && co[k][REF].kind === 'selfNode') {
-          co[k] = { __id__: id };
-        }
-      }
+      // component tro ve chinh node minh — duyet SAU (ke ca long nhieu tang),
+      // khong chi quet cac khoa o tang tren cung nhu truoc day.
+      resolveSelfNode(co, id);
       out.push(co);
       nodeObj._components.push({ __id__: cid });
     }
 
     // cc.PrefabInfo — moi node trong prefab deu phai co
+    //
+    // 🔴 `asset` PHAI la { __id__: 0 } — tro vao phan tu [0] (cc.Prefab) cua
+    // chinh mang nay, KHONG phai { __uuid__ } cua chinh minh.
+    // Do tren prefab that do editor luu: PhoenixView.prefab co 278 node mang
+    // { "__id__": 0 }; chi cac node thuoc mot prefab LONG BEN TRONG moi mang
+    // { "__uuid__": "<uuid nguon>" } (71 node) kem `root` tro toi goc cua
+    // instance do thay vi { __id__: 1 }.
+    // Viet { __uuid__: chinh no } khien prefab tu khai la dependency cua chinh
+    // minh — Cocos van mo duoc nen loi nay KHONG bao gi ca.
     const pid = out.length;
     out.push({
       __type__: 'cc.PrefabInfo',
       root: { __id__: 1 },
-      asset: { __uuid__: pfUuid },
+      asset: { __id__: 0 },
       fileId: fileId(),
       sync: false,
     });
@@ -496,41 +594,124 @@ function build(root, pfUuid) {
   }
 }
 
+/**
+ * Thay moi refSelfNode() nam o BAT KY tang nao trong `obj` bang { __id__: nodeId }.
+ * Goi ngay luc dung component, nen khong bao gio con sot lai toi resolveRefs().
+ */
+function resolveSelfNode(obj, nodeId) {
+  if (!obj || typeof obj !== 'object') return obj;
+  if (Array.isArray(obj)) {
+    for (let i = 0; i < obj.length; i++) obj[i] = resolveSelfNode(obj[i], nodeId);
+    return obj;
+  }
+  if (obj[REF] && obj[REF].kind === 'selfNode') return { __id__: nodeId };
+  for (const k of Object.keys(obj)) obj[k] = resolveSelfNode(obj[k], nodeId);
+  return obj;
+}
+
 /** Duyet toan bo mang, thay moi doi tuong co REF bang { __id__ } that. */
 function resolveRefs(out, refIndex) {
-  const visit = (obj) => {
+  const visit = (obj, path) => {
     if (!obj || typeof obj !== 'object') return obj;
     if (Array.isArray(obj)) {
-      for (let i = 0; i < obj.length; i++) obj[i] = visit(obj[i]);
+      for (let i = 0; i < obj.length; i++) obj[i] = visit(obj[i], `${path}[${i}]`);
       return obj;
     }
     const r = obj[REF];
     if (r) {
+      if (r.kind === 'selfNode') {
+        // 🔴 Truoc day nhanh nay `return obj` — tra ve nguyen doi tuong con
+        // giu khoa Symbol. JSON.stringify BO QUA khoa Symbol, nen property ghi
+        // ra thanh {} va Cocos nap vao thanh null. Khong mot loi nao bat len.
+        throw new Error(
+          `refSelfNode() con sot chua resolve tai ${path}. ` +
+          `No chi dung duoc BEN TRONG component cua chinh node do.`
+        );
+      }
       const entry = refIndex[r.name];
       if (!entry) {
-        throw new Error(`Khong tim thay node co ref="${r.name}"`);
+        throw new Error(`Khong tim thay node co ref="${r.name}" (tai ${path})`);
       }
       if (r.kind === 'node') return { __id__: entry.nodeId };
       if (r.kind === 'comp') {
-        const cid = entry.comps[r.type];
-        if (cid == null) {
+        const cids = entry.comps[r.type];
+        if (!cids || !cids.length) {
           throw new Error(
-            `Node ref="${r.name}" khong co component ${r.type}`
+            `Node ref="${r.name}" khong co component ${r.type} (tai ${path})`
           );
         }
-        return { __id__: cid };
+        if (cids.length > 1) {
+          throw new Error(
+            `Node ref="${r.name}" co ${cids.length} component ${r.type} — ` +
+            `refComp() khong biet chon cai nao. Tach ra node rieng, hoac dat ref khac nhau.`
+          );
+        }
+        return { __id__: cids[0] };
       }
-      return obj;
+      throw new Error(`Loai ref khong ro: ${r.kind} (tai ${path})`);
     }
-    for (const k of Object.keys(obj)) obj[k] = visit(obj[k]);
+    for (const k of Object.keys(obj)) obj[k] = visit(obj[k], `${path}.${k}`);
     return obj;
   };
-  for (const item of out) visit(item);
+  for (let i = 0; i < out.length; i++) {
+    visit(out[i], `[${i}]${out[i] && out[i].__type__ ? ' ' + out[i].__type__ : ''}`);
+  }
+
+  // Luoi chan cuoi: bat ky doi tuong nao con giu khoa Symbol se bi
+  // JSON.stringify nuot im lang. Bat o day de no khong bao gio ra toi file.
+  const scan = (obj, path) => {
+    if (!obj || typeof obj !== 'object') return;
+    if (Object.getOwnPropertySymbols(obj).length) {
+      throw new Error(`Con khoa Symbol chua resolve tai ${path} — se bi nuot khi ghi file.`);
+    }
+    if (Array.isArray(obj)) {
+      obj.forEach((v, i) => scan(v, `${path}[${i}]`));
+      return;
+    }
+    for (const k of Object.keys(obj)) scan(obj[k], `${path}.${k}`);
+  };
+  for (let i = 0; i < out.length; i++) scan(out[i], `[${i}]`);
 }
 
 // ─────────────────────────────────────────────────────────────────
-// Ghi file
+// Ghi file — dung dinh dang byte ma Cocos ghi ra
 // ─────────────────────────────────────────────────────────────────
+
+/**
+ * Ghi mot file JSON cua Cocos (.prefab, .fire, .meta, .anim).
+ *
+ * Do tren file that do editor luu (PhoenixView.prefab, .ts.meta, .prefab.meta):
+ *   - thut le 2 dau cach
+ *   - xuong dong LF thuan (0 CRLF)
+ *   - KHONG co byte newline o cuoi file
+ *   - KHONG co BOM
+ * Sai bat ky diem nao thi lan dau nguoi dung bam Ctrl+S, Cocos chuan hoa lai va
+ * ca file hien thanh "da doi" trong git — che mat thay doi that.
+ *
+ * ⚠️ Repo Client dat .gitattributes = `* -text` nen git KHONG tu doi xuong dong:
+ * ghi sao thi commit y nhu vay.
+ */
+function writeCocosJson(absPath, obj) {
+  const fs = require('fs');
+  const s = JSON.stringify(obj, null, 2).replace(/\r\n/g, '\n');
+  fs.writeFileSync(absPath, s, 'utf8'); // khong them '\n' o cuoi
+  return s.length;
+}
+
+/**
+ * Ghi mot file MA NGUON (.ts/.js) vao assets/.
+ *
+ * Khac file JSON o tren: 26 tep .ts dang song trong project (shootFish) dung
+ * CRLF va CO newline cuoi — do la dinh dang nguoi viet tren Windows. Ghi LF se
+ * lam file moi lech han voi phan con lai cua project.
+ */
+function writeSource(absPath, text) {
+  const fs = require('fs');
+  let s = text.replace(/\r\n/g, '\n').replace(/\n/g, '\r\n');
+  if (!s.endsWith('\r\n')) s += '\r\n';
+  fs.writeFileSync(absPath, s, 'utf8');
+  return s.length;
+}
 
 /** Noi dung file .prefab.meta di kem. */
 function prefabMeta(pfUuid) {
@@ -655,11 +836,16 @@ module.exports = {
   progressBar,
   mask,
   widget,
+  skeleton,
   script,
+  MAT_SPRITE,
+  MAT_SPINE,
   build,
   prefabMeta,
   scriptMeta,
   folderMeta,
   imageMeta,
+  writeCocosJson,
+  writeSource,
   color4,
 };

@@ -1,0 +1,286 @@
+
+feather.png
+size: 512,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+blur_c
+  rotate: false
+  xy: 280, 62
+  size: 91, 91
+  orig: 97, 97
+  offset: 3, 3
+  index: -1
+btu_1
+  rotate: false
+  xy: 166, 326
+  size: 23, 23
+  orig: 23, 23
+  offset: 0, 0
+  index: -1
+btu_2
+  rotate: false
+  xy: 38, 338
+  size: 25, 11
+  orig: 26, 12
+  offset: 0, 1
+  index: -1
+btu_3
+  rotate: false
+  xy: 2, 340
+  size: 18, 9
+  orig: 18, 10
+  offset: 0, 1
+  index: -1
+curve1
+  rotate: false
+  xy: 2, 2
+  size: 120, 113
+  orig: 120, 113
+  offset: 0, 0
+  index: -1
+curve2
+  rotate: false
+  xy: 373, 43
+  size: 130, 107
+  orig: 130, 107
+  offset: 0, 0
+  index: -1
+dot
+  rotate: false
+  xy: 191, 320
+  size: 29, 29
+  orig: 29, 29
+  offset: 0, 0
+  index: -1
+dot3
+  rotate: true
+  xy: 134, 327
+  size: 22, 30
+  orig: 24, 32
+  offset: 1, 1
+  index: -1
+ext_fxs/eff_star_glow
+  rotate: false
+  xy: 184, 280
+  size: 38, 38
+  orig: 48, 48
+  offset: 5, 5
+  index: -1
+ext_fxs/eff_star_glow3
+  rotate: false
+  xy: 222, 320
+  size: 29, 29
+  orig: 33, 33
+  offset: 2, 2
+  index: -1
+ext_fxs/firefx_sm/1
+  rotate: true
+  xy: 246, 160
+  size: 58, 62
+  orig: 66, 69
+  offset: 0, 5
+  index: -1
+ext_fxs/firefx_sm/10
+  rotate: true
+  xy: 310, 155
+  size: 57, 64
+  orig: 66, 69
+  offset: 0, 5
+  index: -1
+ext_fxs/firefx_sm/11
+  rotate: true
+  xy: 373, 214
+  size: 56, 64
+  orig: 66, 69
+  offset: 0, 5
+  index: -1
+ext_fxs/firefx_sm/12
+  rotate: true
+  xy: 184, 221
+  size: 54, 62
+  orig: 66, 69
+  offset: 1, 5
+  index: -1
+ext_fxs/firefx_sm/13
+  rotate: true
+  xy: 62, 241
+  size: 51, 60
+  orig: 66, 69
+  offset: 2, 5
+  index: -1
+ext_fxs/firefx_sm/14
+  rotate: true
+  xy: 2, 251
+  size: 49, 58
+  orig: 66, 69
+  offset: 3, 5
+  index: -1
+ext_fxs/firefx_sm/15
+  rotate: true
+  xy: 124, 239
+  size: 53, 58
+  orig: 66, 69
+  offset: 3, 5
+  index: -1
+ext_fxs/firefx_sm/16
+  rotate: false
+  xy: 2, 121
+  size: 63, 59
+  orig: 66, 69
+  offset: 3, 5
+  index: -1
+ext_fxs/firefx_sm/17
+  rotate: true
+  xy: 67, 117
+  size: 59, 60
+  orig: 66, 69
+  offset: 5, 5
+  index: -1
+ext_fxs/firefx_sm/18
+  rotate: false
+  xy: 2, 190
+  size: 57, 59
+  orig: 66, 69
+  offset: 6, 5
+  index: -1
+ext_fxs/firefx_sm/19
+  rotate: true
+  xy: 129, 100
+  size: 60, 61
+  orig: 66, 69
+  offset: 1, 5
+  index: -1
+ext_fxs/firefx_sm/2
+  rotate: true
+  xy: 310, 214
+  size: 56, 61
+  orig: 66, 69
+  offset: 0, 5
+  index: -1
+ext_fxs/firefx_sm/3
+  rotate: true
+  xy: 248, 220
+  size: 55, 60
+  orig: 66, 69
+  offset: 0, 5
+  index: -1
+ext_fxs/firefx_sm/4
+  rotate: false
+  xy: 123, 178
+  size: 59, 59
+  orig: 66, 69
+  offset: 1, 5
+  index: -1
+ext_fxs/firefx_sm/5
+  rotate: false
+  xy: 439, 213
+  size: 60, 57
+  orig: 66, 69
+  offset: 1, 5
+  index: -1
+ext_fxs/firefx_sm/6
+  rotate: false
+  xy: 438, 152
+  size: 60, 59
+  orig: 66, 69
+  offset: 1, 5
+  index: -1
+ext_fxs/firefx_sm/7
+  rotate: true
+  xy: 376, 154
+  size: 58, 60
+  orig: 66, 69
+  offset: 2, 5
+  index: -1
+ext_fxs/firefx_sm/8
+  rotate: true
+  xy: 61, 182
+  size: 57, 60
+  orig: 66, 69
+  offset: 2, 5
+  index: -1
+ext_fxs/firefx_sm/9
+  rotate: true
+  xy: 184, 162
+  size: 57, 60
+  orig: 66, 69
+  offset: 1, 5
+  index: -1
+firr/ci_fire5
+  rotate: false
+  xy: 192, 77
+  size: 86, 81
+  orig: 95, 102
+  offset: 3, 17
+  index: -1
+firr/f5
+  rotate: false
+  xy: 435, 314
+  size: 39, 35
+  orig: 39, 36
+  offset: 0, 1
+  index: -1
+line_fe
+  rotate: true
+  xy: 65, 334
+  size: 15, 37
+  orig: 18, 40
+  offset: 2, 1
+  index: -1
+longdo
+  rotate: true
+  xy: 224, 277
+  size: 40, 119
+  orig: 40, 119
+  offset: 0, 0
+  index: -1
+longdo2
+  rotate: true
+  xy: 22, 340
+  size: 9, 14
+  orig: 10, 16
+  offset: 0, 1
+  index: -1
+longlai_1
+  rotate: true
+  xy: 253, 319
+  size: 30, 89
+  orig: 30, 89
+  offset: 0, 0
+  index: -1
+longlai_2
+  rotate: true
+  xy: 344, 319
+  size: 30, 89
+  orig: 30, 89
+  offset: 0, 0
+  index: -1
+longlai_3
+  rotate: true
+  xy: 2, 302
+  size: 30, 89
+  orig: 30, 89
+  offset: 0, 0
+  index: -1
+longlai_4
+  rotate: true
+  xy: 93, 294
+  size: 30, 89
+  orig: 30, 89
+  offset: 0, 0
+  index: -1
+longthem
+  rotate: true
+  xy: 104, 333
+  size: 16, 28
+  orig: 19, 32
+  offset: 2, 2
+  index: -1
+longtrang
+  rotate: true
+  xy: 345, 272
+  size: 40, 119
+  orig: 40, 119
+  offset: 0, 0
+  index: -1

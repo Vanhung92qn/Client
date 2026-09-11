@@ -22,10 +22,27 @@ const A = require('./lib/assets');
 const file = process.argv[2] || path.join(A.ASSETS_ROOT, 'lobby', 'scenes', 'MainGame.fire');
 
 /** Tap hop uuid co that trong project. */
+/**
+ * Asset DUNG SAN cua engine (material builtin, sprite mac dinh cua Button/
+ * EditBox/ScrollBar...). Khong nam trong assets/ nen phai ke rieng, khong thi
+ * validator canh bao nham — xem lib/builtin-uuids.json.
+ */
+const BUILTIN_UUIDS = new Set(
+  Object.keys(require('./lib/builtin-uuids.json').uuids)
+);
+
 const knownUuids = (() => {
   const set = new Set();
   const walk = (dir) => {
-    for (const name of fs.readdirSync(dir)) {
+    // Mot so thu muc co the khong doc duoc (vd vo thu muc dang cho xoa ma tien
+    // trinh khac con giu handle). Bo qua, dung de no lam sap ca validator.
+    let names;
+    try {
+      names = fs.readdirSync(dir);
+    } catch (e) {
+      return;
+    }
+    for (const name of names) {
       const p = path.join(dir, name);
       const st = fs.statSync(p);
       if (st.isDirectory()) walk(p);
@@ -60,7 +77,7 @@ const checkRefs = (o, where) => {
     return;
   }
   if (typeof o.__uuid__ === 'string') {
-    if (!knownUuids.has(o.__uuid__) && !seen.has(o.__uuid__)) {
+    if (!knownUuids.has(o.__uuid__) && !BUILTIN_UUIDS.has(o.__uuid__) && !seen.has(o.__uuid__)) {
       seen.add(o.__uuid__);
       warns.push(`${where}: uuid khong thay trong project -> ${o.__uuid__}`);
     }
