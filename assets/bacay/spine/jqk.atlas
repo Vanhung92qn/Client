@@ -1,0 +1,27 @@
+
+jqk.png
+size: 729,320
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+1
+  rotate: true
+  xy: 662, 245
+  size: 74, 66
+  orig: 74, 66
+  offset: 0, 0
+  index: -1
+2
+  rotate: false
+  xy: 1, 18
+  size: 338, 301
+  orig: 338, 301
+  offset: 0, 0
+  index: -1
+6
+  rotate: true
+  xy: 341, 1
+  size: 318, 319
+  orig: 318, 319
+  offset: 0, 0
+  index: -1
