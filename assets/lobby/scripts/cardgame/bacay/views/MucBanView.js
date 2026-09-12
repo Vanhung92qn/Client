@@ -24,6 +24,30 @@
 
         onLoad: function () {
             this.rid = 0;
+            this.khoa = false;
+            this.day = false;
+            this.khiBam = null;
+
+            /**
+             * Đăng ký MỘT LẦN, giữ nguyên suốt đời node.
+             *
+             * 🔴 Bản trước tháo rồi lắp lại listener trong `dat()`. Hai chỗ hỏng:
+             *
+             *   1. `node.off(TOUCH_END)` KHÔNG kèm hàm sẽ xoá SẠCH mọi listener cùng loại
+             *      trên node — kể cả listener mà `cc.Button` tự cài. Nút mất luôn hiệu
+             *      ứng nhấn, mà chẳng có lỗi nào.
+             *   2. Server đẩy cập nhật sảnh mỗi giây, tức `dat()` chạy mỗi giây. Cú chạm
+             *      nào rơi đúng vào lúc tháo–lắp là mất trắng: người chơi bấm mà không
+             *      có gì xảy ra, bấm lại thì lại được — kiểu hỏng khó chịu nhất vì nó
+             *      không lặp lại đều.
+             *
+             * Giờ dữ liệu thay đổi nhưng listener đứng yên.
+             */
+            var self = this;
+            this.node.on(cc.Node.EventType.TOUCH_END, function () {
+                if (self.day || !self.khiBam) return;
+                self.khiBam(self.rid, self.khoa);
+            });
         },
 
         /** `r` là một phần tử `rooms`: `{ rid, bet, seats, maxSeat, minBuyIn, locked, state }`. */
@@ -40,17 +64,10 @@
             if (this.ndKhoa) this.ndKhoa.active = !!r.locked;
 
             // Bàn đầy thì mờ đi và không bấm được — thà không cho bấm còn hơn cho bấm
-            // rồi nhận về một lỗi.
-            var day = r.seats >= r.maxSeat;
-            this.node.opacity = day ? 140 : 255;
-
-            this.node.off(cc.Node.EventType.TOUCH_END);
-            if (!day && khiBam) {
-                var self = this;
-                this.node.on(cc.Node.EventType.TOUCH_END, function () {
-                    khiBam(self.rid, self.khoa);
-                });
-            }
+            // rồi nhận về một lỗi. Chỉ đổi DỮ LIỆU, không đụng tới listener.
+            this.day = r.seats >= r.maxSeat;
+            this.khiBam = khiBam;
+            this.node.opacity = this.day ? 140 : 255;
         },
     });
 

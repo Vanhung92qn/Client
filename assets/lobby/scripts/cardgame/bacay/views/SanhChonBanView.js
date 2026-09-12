@@ -13,6 +13,10 @@
 
 var BaCayNet = null;
 
+/** Chiều cao một dòng bàn (đúng ảnh `roomThuongXD` của Go88) và khoảng cách giữa hai dòng. */
+var CAO_DONG = 75;
+var CACH_DONG = 12;
+
 (function () {
     cc.SanhChonBanView = cc.Class({
         'extends': cc.Component,
@@ -50,7 +54,58 @@ var BaCayNet = null;
             this.go.push(BaCayNet.on('trangThai', function (t) { self.doiTrangThai(t); }));
 
             this.noNut();
+            this.tuKiem();
             this.batDau();
+        },
+
+        /**
+         * TỰ KIỂM lúc dựng — nói thẳng ra màn hình console cái gì đang sai.
+         *
+         * Vì sao cần: "bấm không ăn" có ít nhất ba nguyên nhân hoàn toàn khác nhau —
+         * node chưa nối, node bị ẩn/kích thước 0, hoặc có lớp khác nuốt cú chạm. Nhìn
+         * ảnh chụp màn hình thì cả ba giống hệt nhau. Ba dòng log này tách chúng ra.
+         *
+         * Đầu dò chạm bắt ở pha BẮT (capture) trên node gốc: nếu cú chạm không tới được
+         * đây thì chắc chắn có thứ khác nằm trên nuốt mất — không phải lỗi của nút.
+         */
+        tuKiem: function () {
+            var self = this;
+            var kiem = [
+                ['ndDanhSach', this.ndDanhSach],
+                ['btnChoiNhanh', this.btnChoiNhanh],
+                ['btnTaoBan', this.btnTaoBan],
+                ['lbTen', this.lbTen && this.lbTen.node],
+                ['lbTien', this.lbTien && this.lbTien.node],
+            ];
+            for (var i = 0; i < kiem.length; i++) {
+                var ten = kiem[i][0], nd = kiem[i][1];
+                if (!nd) { cc.error('[bacay] CHƯA NỐI: ' + ten); continue; }
+                var hop = nd.getBoundingBoxToWorld();
+                cc.log('[bacay] ' + ten + ': "' + nd.name + '" hiện=' + nd.activeInHierarchy
+                    + ' hộp=' + Math.round(hop.x) + ',' + Math.round(hop.y)
+                    + ' ' + Math.round(hop.width) + 'x' + Math.round(hop.height));
+                if (!nd.activeInHierarchy) cc.error('[bacay] ' + ten + ' ĐANG BỊ ẨN');
+                if (hop.width < 1 || hop.height < 1) cc.error('[bacay] ' + ten + ' KÍCH THƯỚC 0 — không bấm trúng được');
+            }
+
+            this.node.on(cc.Node.EventType.TOUCH_START, function (e) {
+                var p = e.getLocation();
+                var trung = [];
+                for (var k = 0; k < kiem.length; k++) {
+                    var nd2 = kiem[k][1];
+                    if (nd2 && nd2.activeInHierarchy && nd2.getBoundingBoxToWorld().contains(p)) {
+                        trung.push(kiem[k][0]);
+                    }
+                }
+                cc.log('[bacay] chạm tại ' + Math.round(p.x) + ',' + Math.round(p.y)
+                    + ' — trúng: ' + (trung.join(', ') || '(không nút nào)'));
+            }, this);
+            // Nghe ở pha THƯỜNG trên node gốc, không phải pha bắt: node gốc phủ kín màn
+            // hình nên nó thấy MỌI cú chạm, kể cả cú rơi vào chỗ trống. Đó chính là chỗ
+            // cần phân biệt:
+            //   • có dòng "chạm tại …"  → cú chạm TỚI ĐƯỢC sảnh, lỗi nằm ở nút
+            //   • không có dòng nào     → có lớp khác nằm trên nuốt sạch, nút vô can
+            // Con luôn được xét trước cha nên việc này không cướp chạm của nút nào.
         },
 
         onDestroy: function () {
@@ -62,11 +117,13 @@ var BaCayNet = null;
             var self = this;
             if (this.btnChoiNhanh) {
                 this.btnChoiNhanh.on(cc.Node.EventType.TOUCH_END, function () {
+                    cc.log('[bacay] bấm CHƠI NHANH');
                     self.choiNgay();
                 });
             }
             if (this.btnTaoBan) {
                 this.btnTaoBan.on(cc.Node.EventType.TOUCH_END, function () {
+                    cc.log('[bacay] bấm TẠO BÀN');
                     self.choiNgay();   // TODO: hộp thoại chọn mức cược + mật khẩu
                 });
             }
@@ -83,7 +140,12 @@ var BaCayNet = null;
                     cc.error('[bacay] đăng nhập hỏng:', res.e);
                     return;
                 }
-                if (self.lbTen && res.d) self.lbTen.string = res.d.nick || '';
+                if (res.d) {
+                    if (self.lbTen) self.lbTen.string = res.d.nick || '';
+                    // Chữ mẫu trong prefab Go88 là "$ 9.999.000.000" — trông rất hợp lý
+                    // nên không ai nghi ngờ. Phải ghi đè bằng số thật ngay.
+                    self.datTien(res.d.balance || 0);
+                }
                 return BaCayNet.theoDoiSanh();
             }).then(function () {
                 return BaCayNet.danhSachBan(self.mucCuocDangXem);
@@ -110,8 +172,27 @@ var BaCayNet = null;
         dungDanhSach: function (rooms) {
             this.ban = {};
             this.dong = {};
+            this.thuTu = [];
             if (this.ndDanhSach) this.ndDanhSach.removeAllChildren();
             for (var i = 0; i < rooms.length; i++) this.capNhatMotBan(rooms[i]);
+            this.xepDanhSach();
+        },
+
+        /**
+         * Xếp các dòng bàn thành cột dọc.
+         *
+         * `tableParent` của Go88 KHÔNG có Layout — họ tự đặt chỗ bằng script. Không xếp
+         * thì cả sáu dòng nằm chồng khít lên nhau ở giữa màn hình, và người chơi thấy
+         * đúng một dòng: sảnh trông như chỉ có một bàn.
+         */
+        xepDanhSach: function () {
+            if (!this.ndDanhSach) return;
+            var con = this.ndDanhSach.children;
+            var buoc = CAO_DONG + CACH_DONG;
+            var dau = (con.length - 1) * buoc / 2;
+            for (var i = 0; i < con.length; i++) {
+                con[i].setPosition(0, dau - i * buoc);
+            }
         },
 
         capNhatMotBan: function (r) {
@@ -119,16 +200,25 @@ var BaCayNet = null;
 
             this.ban[r.rid] = r;
             var n = this.dong[r.rid];
+            var moiDung = false;
             if (!n || !n.isValid) {
                 n = cc.instantiate(this.prefabMucBan);
                 n.parent = this.ndDanhSach;
                 this.dong[r.rid] = n;
+                moiDung = true;
             }
 
             var view = n.getComponent(cc.MucBanView);
-            if (!view) return;
+            if (!view) {
+                cc.error('[bacay] dòng bàn thiếu component MucBanView — prefab chưa gắn script?');
+                return;
+            }
             var self = this;
-            view.dat(r, function (rid, khoa) { self.vaoBan(rid, khoa); });
+            view.dat(r, function (rid, khoa) {
+                cc.log('[bacay] bấm vào bàn', rid, 'khoá=' + khoa);
+                self.vaoBan(rid, khoa);
+            });
+            if (moiDung) this.xepDanhSach();
         },
 
         boMotBan: function (rid) {
@@ -208,12 +298,11 @@ var BaCayNet = null;
             }).catch(function () { /* danh sách cũ vẫn hiện được */ });
         },
 
-        /** Số dư ở góc sảnh. */
+        /** Số dư ở góc sảnh. Giữ tiền tố "$" như thiết kế gốc. */
         datTien: function (soDu) {
-            if (this.lbTien) {
-                this.lbTien.string = Math.round(soDu).toString()
-                    .replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-            }
+            if (!this.lbTien) return;
+            var n = (typeof soDu === 'number' && isFinite(soDu)) ? Math.round(soDu) : 0;
+            this.lbTien.string = '$ ' + n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
         },
     });
 }).call(this);
