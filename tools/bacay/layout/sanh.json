@@ -1,0 +1,1266 @@
+{
+  "nguon": "_shared/prefabs/RoomScenebinhThuongXocDia_25d010ef.prefab",
+  "mo_ta": "sảnh chọn bàn",
+  "soNodeGoc": 53,
+  "soNodeRut": 53,
+  "boQua": [
+    {
+      "loai": "component",
+      "node": "RoomScenebinhThuongXocDia",
+      "chi_tiet": "98fcdlKqtdOBYipHWgZ0J8c",
+      "ly_do": "script riêng của Go88, ta gắn script của mình"
+    },
+    {
+      "loai": "component",
+      "node": "RoomScenebinhThuongXocDia",
+      "chi_tiet": "b948evbY2dN97PEyHnCAZxd",
+      "ly_do": "script riêng của Go88, ta gắn script của mình"
+    },
+    {
+      "loai": "component",
+      "node": "FootterRoomUi",
+      "chi_tiet": "edfa5caqt5D0L32KVUr6Ue7",
+      "ly_do": "script riêng của Go88, ta gắn script của mình"
+    },
+    {
+      "loai": "component",
+      "node": "Left",
+      "chi_tiet": "d339fGmg5hE/pI0+iDfQxgq",
+      "ly_do": "script riêng của Go88, ta gắn script của mình"
+    },
+    {
+      "loai": "component",
+      "node": "icAvatar",
+      "chi_tiet": "63af6iNvX5M+Ix3hKfM1Qqt",
+      "ly_do": "script riêng của Go88, ta gắn script của mình"
+    },
+    {
+      "loai": "component",
+      "node": "icAvatar",
+      "chi_tiet": "d339fGmg5hE/pI0+iDfQxgq",
+      "ly_do": "script riêng của Go88, ta gắn script của mình"
+    },
+    {
+      "loai": "component",
+      "node": "buttonName",
+      "chi_tiet": "d339fGmg5hE/pI0+iDfQxgq",
+      "ly_do": "script riêng của Go88, ta gắn script của mình"
+    },
+    {
+      "loai": "component",
+      "node": "buttonMoney",
+      "chi_tiet": "d339fGmg5hE/pI0+iDfQxgq",
+      "ly_do": "script riêng của Go88, ta gắn script của mình"
+    },
+    {
+      "loai": "component",
+      "node": "BtnActivePhone",
+      "chi_tiet": "d339fGmg5hE/pI0+iDfQxgq",
+      "ly_do": "script riêng của Go88, ta gắn script của mình"
+    },
+    {
+      "loai": "component",
+      "node": "Right",
+      "chi_tiet": "d339fGmg5hE/pI0+iDfQxgq",
+      "ly_do": "script riêng của Go88, ta gắn script của mình"
+    },
+    {
+      "loai": "component",
+      "node": "buttonChoiNhanh@2x",
+      "chi_tiet": "d339fGmg5hE/pI0+iDfQxgq",
+      "ly_do": "script riêng của Go88, ta gắn script của mình"
+    },
+    {
+      "loai": "component",
+      "node": "buttonTaoBan@2x",
+      "chi_tiet": "d339fGmg5hE/pI0+iDfQxgq",
+      "ly_do": "script riêng của Go88, ta gắn script của mình"
+    },
+    {
+      "loai": "component",
+      "node": "BtnHuongDan",
+      "chi_tiet": "d339fGmg5hE/pI0+iDfQxgq",
+      "ly_do": "script riêng của Go88, ta gắn script của mình"
+    },
+    {
+      "loai": "component",
+      "node": "btnXepHang",
+      "chi_tiet": "d339fGmg5hE/pI0+iDfQxgq",
+      "ly_do": "script riêng của Go88, ta gắn script của mình"
+    },
+    {
+      "loai": "component",
+      "node": "btnTinTuc",
+      "chi_tiet": "d339fGmg5hE/pI0+iDfQxgq",
+      "ly_do": "script riêng của Go88, ta gắn script của mình"
+    }
+  ],
+  "cay": {
+    "ten": "RoomScenebinhThuongXocDia",
+    "x": 780,
+    "y": 360,
+    "w": 1560,
+    "h": 720,
+    "anchorX": 0.5,
+    "anchorY": 0.5,
+    "scaleX": 1,
+    "scaleY": 1,
+    "active": true,
+    "opacity": 255,
+    "comps": [
+      {
+        "loai": "cc.Widget",
+        "alignFlags": 45
+      }
+    ],
+    "con": [
+      {
+        "ten": "ld_bg",
+        "x": 0,
+        "y": 0,
+        "w": 1560,
+        "h": 720,
+        "anchorX": 0.5,
+        "anchorY": 0.5,
+        "scaleX": 1,
+        "scaleY": 1,
+        "active": true,
+        "opacity": 255,
+        "comps": [
+          {
+            "loai": "cc.Sprite",
+            "frame": "bg",
+            "sizeMode": 0
+          },
+          {
+            "loai": "cc.Widget",
+            "alignFlags": 45
+          }
+        ],
+        "con": []
+      },
+      {
+        "ten": "skinHalloween",
+        "x": 0,
+        "y": 0,
+        "w": 1560,
+        "h": 720,
+        "anchorX": 0.5,
+        "anchorY": 0.5,
+        "scaleX": 1,
+        "scaleY": 1,
+        "active": false,
+        "opacity": 255,
+        "comps": [
+          {
+            "loai": "cc.Widget",
+            "alignFlags": 45
+          }
+        ],
+        "con": [
+          {
+            "ten": "topLeft",
+            "x": -732.67,
+            "y": 247.93,
+            "w": 0,
+            "h": 0,
+            "anchorX": 0.5,
+            "anchorY": 0.5,
+            "scaleX": 1,
+            "scaleY": 1,
+            "active": true,
+            "opacity": 255,
+            "comps": [
+              {
+                "loai": "sp.Skeleton",
+                "skel": "go_halloween_ce351eae.json",
+                "anim": "left"
+              },
+              {
+                "loai": "cc.Widget",
+                "top": 112.07400000000001,
+                "alignFlags": 1
+              }
+            ],
+            "con": []
+          },
+          {
+            "ten": "topRight",
+            "x": 733.72,
+            "y": 247.93,
+            "w": 0,
+            "h": 0,
+            "anchorX": 0.5,
+            "anchorY": 0.5,
+            "scaleX": 1,
+            "scaleY": 1,
+            "active": true,
+            "opacity": 255,
+            "comps": [
+              {
+                "loai": "sp.Skeleton",
+                "skel": "go_halloween_ce351eae.json",
+                "anim": "right"
+              },
+              {
+                "loai": "cc.Widget",
+                "top": 112.07400000000001,
+                "alignFlags": 1
+              }
+            ],
+            "con": []
+          },
+          {
+            "ten": "avatar",
+            "x": -738.17,
+            "y": -222.98,
+            "w": 0,
+            "h": 0,
+            "anchorX": 0.5,
+            "anchorY": 0.5,
+            "scaleX": 1,
+            "scaleY": 1,
+            "active": true,
+            "opacity": 255,
+            "comps": [
+              {
+                "loai": "sp.Skeleton",
+                "skel": "go_halloween_ce351eae.json",
+                "anim": "avatar"
+              },
+              {
+                "loai": "cc.Widget",
+                "bottom": 137.024,
+                "left": 41.82600000000002,
+                "alignFlags": 12
+              }
+            ],
+            "con": []
+          },
+          {
+            "ten": "botRight",
+            "x": 741.75,
+            "y": -241.43,
+            "w": 0,
+            "h": 0,
+            "anchorX": 0.5,
+            "anchorY": 0.5,
+            "scaleX": 1,
+            "scaleY": 1,
+            "active": true,
+            "opacity": 255,
+            "comps": [
+              {
+                "loai": "sp.Skeleton",
+                "skel": "go_halloween_ce351eae.json",
+                "anim": "rightdown"
+              },
+              {
+                "loai": "cc.Widget",
+                "bottom": 118.566,
+                "right": 38.24599999999998,
+                "alignFlags": 36
+              }
+            ],
+            "con": []
+          }
+        ]
+      },
+      {
+        "ten": "tableParent",
+        "x": 0,
+        "y": 0,
+        "w": 1560,
+        "h": 720,
+        "anchorX": 0.5,
+        "anchorY": 0.5,
+        "scaleX": 1,
+        "scaleY": 1,
+        "active": true,
+        "opacity": 255,
+        "comps": [
+          {
+            "loai": "cc.Widget",
+            "alignFlags": 5
+          }
+        ],
+        "con": []
+      },
+      {
+        "ten": "FootterRoomUi",
+        "x": 0,
+        "y": -360,
+        "w": 1560,
+        "h": 92,
+        "anchorX": 0.5,
+        "anchorY": 0.5,
+        "scaleX": 1,
+        "scaleY": 1,
+        "active": true,
+        "opacity": 255,
+        "comps": [
+          {
+            "loai": "cc.Widget",
+            "alignFlags": 4
+          }
+        ],
+        "con": [
+          {
+            "ten": "borderMask copy",
+            "x": 0,
+            "y": -2,
+            "w": 1560,
+            "h": 200,
+            "anchorX": 0.5,
+            "anchorY": 0.5,
+            "scaleX": 1,
+            "scaleY": 1,
+            "active": true,
+            "opacity": 255,
+            "comps": [
+              {
+                "loai": "cc.Sprite",
+                "frame": "borderMask",
+                "sizeMode": 0
+              },
+              {
+                "loai": "cc.Widget",
+                "bottom": -2,
+                "alignFlags": 4
+              }
+            ],
+            "con": []
+          },
+          {
+            "ten": "skinNewYear",
+            "x": 0,
+            "y": 54.57,
+            "w": 0,
+            "h": 0,
+            "anchorX": 0.5,
+            "anchorY": 0.5,
+            "scaleX": 1,
+            "scaleY": 1,
+            "active": false,
+            "opacity": 255,
+            "comps": [],
+            "con": [
+              {
+                "ten": "bottomL",
+                "x": -735.12,
+                "y": 38.1,
+                "w": 0,
+                "h": 0,
+                "anchorX": 0.5,
+                "anchorY": 0.5,
+                "scaleX": 1,
+                "scaleY": 1,
+                "active": true,
+                "opacity": 255,
+                "comps": [
+                  {
+                    "loai": "sp.Skeleton",
+                    "skel": "lobbytet_go.json",
+                    "anim": "avatar"
+                  }
+                ],
+                "con": []
+              },
+              {
+                "ten": "bottomR",
+                "x": 740.01,
+                "y": 38.1,
+                "w": 0,
+                "h": 0,
+                "anchorX": 0.5,
+                "anchorY": 0.5,
+                "scaleX": 1,
+                "scaleY": 1,
+                "active": true,
+                "opacity": 255,
+                "comps": [
+                  {
+                    "loai": "sp.Skeleton",
+                    "skel": "lobbytet_go.json",
+                    "anim": "rightdown"
+                  }
+                ],
+                "con": []
+              }
+            ]
+          },
+          {
+            "ten": "skinMoonFestival",
+            "x": 0,
+            "y": 0,
+            "w": 0,
+            "h": 0,
+            "anchorX": 0.5,
+            "anchorY": 0.5,
+            "scaleX": 1,
+            "scaleY": 1,
+            "active": false,
+            "opacity": 255,
+            "comps": [],
+            "con": [
+              {
+                "ten": "go_trungthu",
+                "x": -730,
+                "y": 87,
+                "w": 0,
+                "h": 0,
+                "anchorX": 0.5,
+                "anchorY": 0.5,
+                "scaleX": 1,
+                "scaleY": 1,
+                "active": true,
+                "opacity": 255,
+                "comps": [
+                  {
+                    "loai": "sp.Skeleton",
+                    "skel": "go_trungthu.json",
+                    "anim": "avatar"
+                  },
+                  {
+                    "loai": "cc.Widget",
+                    "bottom": 87,
+                    "left": 50,
+                    "alignFlags": 12
+                  }
+                ],
+                "con": []
+              },
+              {
+                "ten": "go_trungthu copy",
+                "x": 756,
+                "y": 67,
+                "w": 0,
+                "h": 0,
+                "anchorX": 0.5,
+                "anchorY": 0.5,
+                "scaleX": 1,
+                "scaleY": 1,
+                "active": true,
+                "opacity": 255,
+                "comps": [
+                  {
+                    "loai": "sp.Skeleton",
+                    "skel": "go_trungthu.json",
+                    "anim": "downright"
+                  },
+                  {
+                    "loai": "cc.Widget",
+                    "bottom": 67,
+                    "right": 24,
+                    "alignFlags": 36
+                  }
+                ],
+                "con": []
+              }
+            ]
+          },
+          {
+            "ten": "skinFooter304",
+            "x": 0,
+            "y": 50,
+            "w": 0,
+            "h": 0,
+            "anchorX": 0.5,
+            "anchorY": 0.5,
+            "scaleX": 1,
+            "scaleY": 1,
+            "active": false,
+            "opacity": 255,
+            "comps": [],
+            "con": [
+              {
+                "ten": "go_304",
+                "x": -690,
+                "y": 70,
+                "w": 0,
+                "h": 0,
+                "anchorX": 0.5,
+                "anchorY": 0.5,
+                "scaleX": 1,
+                "scaleY": 1,
+                "active": true,
+                "opacity": 255,
+                "comps": [
+                  {
+                    "loai": "sp.Skeleton",
+                    "skel": "go_304.json",
+                    "anim": "avatar"
+                  }
+                ],
+                "con": []
+              },
+              {
+                "ten": "go_304 copy",
+                "x": 730,
+                "y": 70,
+                "w": 0,
+                "h": 0,
+                "anchorX": 0.5,
+                "anchorY": 0.5,
+                "scaleX": 1,
+                "scaleY": 1,
+                "active": true,
+                "opacity": 255,
+                "comps": [
+                  {
+                    "loai": "sp.Skeleton",
+                    "skel": "go_304.json",
+                    "anim": "downright"
+                  }
+                ],
+                "con": []
+              }
+            ]
+          },
+          {
+            "ten": "skinFooterWorldcup",
+            "x": 0,
+            "y": 50,
+            "w": 0,
+            "h": 0,
+            "anchorX": 0.5,
+            "anchorY": 0.5,
+            "scaleX": 1,
+            "scaleY": 1,
+            "active": false,
+            "opacity": 255,
+            "comps": [],
+            "con": [
+              {
+                "ten": "go_wc copy",
+                "x": -758,
+                "y": 60,
+                "w": 0,
+                "h": 0,
+                "anchorX": 0.5,
+                "anchorY": 0.5,
+                "scaleX": 1,
+                "scaleY": 1,
+                "active": true,
+                "opacity": 255,
+                "comps": [
+                  {
+                    "loai": "sp.Skeleton",
+                    "skel": "go_wc.json",
+                    "anim": "avatar"
+                  }
+                ],
+                "con": []
+              },
+              {
+                "ten": "go_wc copy",
+                "x": 758,
+                "y": 60,
+                "w": 0,
+                "h": 0,
+                "anchorX": 0.5,
+                "anchorY": 0.5,
+                "scaleX": 1,
+                "scaleY": 1,
+                "active": true,
+                "opacity": 255,
+                "comps": [
+                  {
+                    "loai": "sp.Skeleton",
+                    "skel": "go_wc.json",
+                    "anim": "downright"
+                  }
+                ],
+                "con": []
+              }
+            ]
+          },
+          {
+            "ten": "Left",
+            "x": -577.5,
+            "y": 50,
+            "w": 405,
+            "h": 100,
+            "anchorX": 0.5,
+            "anchorY": 0.5,
+            "scaleX": 1,
+            "scaleY": 1,
+            "active": true,
+            "opacity": 255,
+            "comps": [
+              {
+                "loai": "cc.Sprite",
+                "frame": "boderFooterRight",
+                "sizeMode": 0
+              },
+              {
+                "loai": "cc.Widget",
+                "top": -4,
+                "alignFlags": 12
+              },
+              {
+                "loai": "cc.Button"
+              }
+            ],
+            "con": [
+              {
+                "ten": "noel_FooterL_room",
+                "x": -153.91,
+                "y": 6.15,
+                "w": 0,
+                "h": 0,
+                "anchorX": 0.5,
+                "anchorY": 0.5,
+                "scaleX": 1,
+                "scaleY": 1,
+                "active": false,
+                "opacity": 255,
+                "comps": [
+                  {
+                    "loai": "sp.Skeleton",
+                    "skel": "go_xmas.json",
+                    "anim": "avatar"
+                  }
+                ],
+                "con": []
+              },
+              {
+                "ten": "avatar_Xmas",
+                "x": -136.5,
+                "y": 16,
+                "w": 146,
+                "h": 144,
+                "anchorX": 0.5,
+                "anchorY": 0.5,
+                "scaleX": 1,
+                "scaleY": 1,
+                "active": false,
+                "opacity": 255,
+                "comps": [
+                  {
+                    "loai": "cc.Sprite",
+                    "frame": "avatar_Xmas"
+                  }
+                ],
+                "con": []
+              },
+              {
+                "ten": "ig_khung_ava",
+                "x": -192.5,
+                "y": 16,
+                "w": 112,
+                "h": 112,
+                "anchorX": 0.5,
+                "anchorY": 0.5,
+                "scaleX": 1,
+                "scaleY": 1,
+                "active": true,
+                "opacity": 255,
+                "comps": [
+                  {
+                    "loai": "cc.Sprite",
+                    "frame": "icoAvatar",
+                    "sizeMode": 0
+                  },
+                  {
+                    "loai": "cc.Widget",
+                    "bottom": 10,
+                    "left": 10,
+                    "alignFlags": 12
+                  }
+                ],
+                "con": [
+                  {
+                    "ten": "avatar@2x",
+                    "x": 56,
+                    "y": 0,
+                    "w": 100,
+                    "h": 100,
+                    "anchorX": 0.5,
+                    "anchorY": 0.5,
+                    "scaleX": 1,
+                    "scaleY": 1,
+                    "active": true,
+                    "opacity": 255,
+                    "comps": [
+                      {
+                        "loai": "cc.Mask"
+                      }
+                    ],
+                    "con": [
+                      {
+                        "ten": "icAvatar",
+                        "x": 0,
+                        "y": 0,
+                        "w": 102,
+                        "h": 102,
+                        "anchorX": 0.5,
+                        "anchorY": 0.5,
+                        "scaleX": 1,
+                        "scaleY": 1,
+                        "active": true,
+                        "opacity": 255,
+                        "comps": [
+                          {
+                            "loai": "cc.Button"
+                          }
+                        ],
+                        "con": []
+                      }
+                    ]
+                  },
+                  {
+                    "ten": "iconVip",
+                    "x": 56,
+                    "y": 66.09,
+                    "w": 49,
+                    "h": 38,
+                    "anchorX": 0.5,
+                    "anchorY": 0.5,
+                    "scaleX": 1,
+                    "scaleY": 1,
+                    "active": false,
+                    "opacity": 255,
+                    "comps": [
+                      {
+                        "loai": "cc.Sprite",
+                        "frame": "iconVipLobby"
+                      }
+                    ],
+                    "con": []
+                  }
+                ]
+              },
+              {
+                "ten": "buttonName",
+                "x": 34.3,
+                "y": 34.4,
+                "w": 213.3,
+                "h": 30,
+                "anchorX": 0.5,
+                "anchorY": 1,
+                "scaleX": 1,
+                "scaleY": 1,
+                "active": true,
+                "opacity": 255,
+                "comps": [
+                  {
+                    "loai": "cc.Button"
+                  },
+                  {
+                    "loai": "cc.Widget",
+                    "top": 15.600000000000001,
+                    "alignFlags": 1
+                  }
+                ],
+                "con": [
+                  {
+                    "ten": "NameUser",
+                    "x": -91.72,
+                    "y": 16.54,
+                    "w": 102,
+                    "h": 20,
+                    "anchorX": 0.5,
+                    "anchorY": 1,
+                    "scaleX": 1,
+                    "scaleY": 1,
+                    "active": true,
+                    "opacity": 255,
+                    "comps": [
+                      {
+                        "loai": "cc.Label",
+                        "text": "SAMUEL",
+                        "co": 16,
+                        "canhNgang": 1,
+                        "font": "Font-export.fnt"
+                      }
+                    ],
+                    "con": []
+                  }
+                ]
+              },
+              {
+                "ten": "buttonMoney",
+                "x": 51.2,
+                "y": 0.7,
+                "w": 258.6,
+                "h": 39.3,
+                "anchorX": 0.5,
+                "anchorY": 1,
+                "scaleX": 1,
+                "scaleY": 1,
+                "active": true,
+                "opacity": 255,
+                "comps": [
+                  {
+                    "loai": "cc.Button"
+                  }
+                ],
+                "con": [
+                  {
+                    "ten": "moneyLabel",
+                    "x": -109.2,
+                    "y": 17.22,
+                    "w": 213,
+                    "h": 20,
+                    "anchorX": 0.5,
+                    "anchorY": 1,
+                    "scaleX": 1,
+                    "scaleY": 1,
+                    "active": true,
+                    "opacity": 255,
+                    "comps": [
+                      {
+                        "loai": "cc.Label",
+                        "text": "$ 9.999.000.000",
+                        "co": 16,
+                        "canhNgang": 1,
+                        "font": "Font-export.fnt"
+                      }
+                    ],
+                    "con": []
+                  }
+                ]
+              },
+              {
+                "ten": "BtnActivePhone",
+                "x": 33.62,
+                "y": 62,
+                "w": 200,
+                "h": 51,
+                "anchorX": 0.5,
+                "anchorY": 0.5,
+                "scaleX": 1,
+                "scaleY": 1,
+                "active": false,
+                "opacity": 255,
+                "comps": [
+                  {
+                    "loai": "cc.Button"
+                  }
+                ],
+                "con": [
+                  {
+                    "ten": "Background",
+                    "x": -0.61,
+                    "y": 0,
+                    "w": 160,
+                    "h": 50,
+                    "anchorX": 0.5,
+                    "anchorY": 0.5,
+                    "scaleX": 1,
+                    "scaleY": 1,
+                    "active": true,
+                    "opacity": 255,
+                    "comps": [
+                      {
+                        "loai": "cc.Sprite",
+                        "frame": "icTinhChi",
+                        "sizeMode": 0,
+                        "type": 1
+                      }
+                    ],
+                    "con": [
+                      {
+                        "ten": "Label",
+                        "x": 0.4,
+                        "y": 3.8,
+                        "w": 143,
+                        "h": 36,
+                        "anchorX": 0.5,
+                        "anchorY": 0.5,
+                        "scaleX": 1,
+                        "scaleY": 1,
+                        "active": true,
+                        "opacity": 255,
+                        "comps": [
+                          {
+                            "loai": "cc.Label",
+                            "text": "Kích Hoạt Nhận 1,500 VND",
+                            "co": 18,
+                            "canhNgang": 1,
+                            "font": "Font_HelveticaNeue_Effect-export.fnt"
+                          }
+                        ],
+                        "con": []
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "ten": "Right",
+            "x": 577.5,
+            "y": 50,
+            "w": 405,
+            "h": 100,
+            "anchorX": 0.5,
+            "anchorY": 0.5,
+            "scaleX": 1,
+            "scaleY": 1,
+            "active": true,
+            "opacity": 255,
+            "comps": [
+              {
+                "loai": "cc.Sprite",
+                "frame": "boderFooterLeft"
+              },
+              {
+                "loai": "cc.Widget",
+                "alignFlags": 36
+              },
+              {
+                "loai": "cc.Layout"
+              },
+              {
+                "loai": "cc.Button"
+              }
+            ],
+            "con": [
+              {
+                "ten": "noel_FooterR_room",
+                "x": 144.81,
+                "y": -13.22,
+                "w": 0,
+                "h": 0,
+                "anchorX": 0.5,
+                "anchorY": 0.5,
+                "scaleX": 1,
+                "scaleY": 1,
+                "active": false,
+                "opacity": 255,
+                "comps": [
+                  {
+                    "loai": "sp.Skeleton",
+                    "skel": "go_xmas.json",
+                    "anim": "rightdown"
+                  }
+                ],
+                "con": []
+              },
+              {
+                "ten": "buttonChoiNhanh@2x",
+                "x": 92.5,
+                "y": -2,
+                "w": 180,
+                "h": 100,
+                "anchorX": 0.5,
+                "anchorY": 0.5,
+                "scaleX": 1,
+                "scaleY": 1,
+                "active": true,
+                "opacity": 255,
+                "comps": [
+                  {
+                    "loai": "cc.Button"
+                  },
+                  {
+                    "loai": "cc.Widget",
+                    "top": 2,
+                    "bottom": -2,
+                    "right": 20,
+                    "alignFlags": 37
+                  }
+                ],
+                "con": [
+                  {
+                    "ten": "txtChoiNhanh@2x",
+                    "x": 0,
+                    "y": -30,
+                    "w": 163,
+                    "h": 25,
+                    "anchorX": 0.5,
+                    "anchorY": 0.5,
+                    "scaleX": 1,
+                    "scaleY": 1,
+                    "active": true,
+                    "opacity": 255,
+                    "comps": [
+                      {
+                        "loai": "cc.Sprite",
+                        "frame": "txtChoiNhanh"
+                      }
+                    ],
+                    "con": []
+                  },
+                  {
+                    "ten": "iConChoiNhanh@2x",
+                    "x": 0,
+                    "y": 10,
+                    "w": 68,
+                    "h": 37,
+                    "anchorX": 0.5,
+                    "anchorY": 0.5,
+                    "scaleX": 1,
+                    "scaleY": 1,
+                    "active": true,
+                    "opacity": 255,
+                    "comps": [
+                      {
+                        "loai": "cc.Sprite",
+                        "frame": "icChoiNhanh"
+                      }
+                    ],
+                    "con": []
+                  }
+                ]
+              },
+              {
+                "ten": "buttonTaoBan@2x",
+                "x": -87.5,
+                "y": 0,
+                "w": 180,
+                "h": 100,
+                "anchorX": 0.5,
+                "anchorY": 0.5,
+                "scaleX": 1,
+                "scaleY": 1,
+                "active": true,
+                "opacity": 255,
+                "comps": [
+                  {
+                    "loai": "cc.Button"
+                  },
+                  {
+                    "loai": "cc.Widget",
+                    "left": 25,
+                    "alignFlags": 13
+                  }
+                ],
+                "con": [
+                  {
+                    "ten": "txtTaoBan@2x",
+                    "x": 0,
+                    "y": -30,
+                    "w": 110,
+                    "h": 32,
+                    "anchorX": 0.5,
+                    "anchorY": 0.5,
+                    "scaleX": 1,
+                    "scaleY": 1,
+                    "active": true,
+                    "opacity": 255,
+                    "comps": [
+                      {
+                        "loai": "cc.Sprite",
+                        "frame": "txtTaoBan"
+                      }
+                    ],
+                    "con": []
+                  },
+                  {
+                    "ten": "iconTaoBan@2x",
+                    "x": 0,
+                    "y": 10,
+                    "w": 68,
+                    "h": 37,
+                    "anchorX": 0.5,
+                    "anchorY": 0.5,
+                    "scaleX": 1,
+                    "scaleY": 1,
+                    "active": true,
+                    "opacity": 255,
+                    "comps": [
+                      {
+                        "loai": "cc.Sprite",
+                        "frame": "icTaoBan"
+                      }
+                    ],
+                    "con": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ten": "letBorder@2x",
+        "x": -835,
+        "y": 176,
+        "w": 206,
+        "h": 362,
+        "anchorX": 0.5,
+        "anchorY": 1,
+        "scaleX": 1,
+        "scaleY": 1,
+        "active": true,
+        "opacity": 255,
+        "comps": [
+          {
+            "loai": "cc.Sprite",
+            "frame": "borderLeft"
+          }
+        ],
+        "con": [
+          {
+            "ten": "BtnHuongDan",
+            "x": 135,
+            "y": -220,
+            "w": 100,
+            "h": 100,
+            "anchorX": 0.5,
+            "anchorY": 0.5,
+            "scaleX": 1,
+            "scaleY": 1,
+            "active": true,
+            "opacity": 255,
+            "comps": [
+              {
+                "loai": "cc.Button"
+              }
+            ],
+            "con": [
+              {
+                "ten": "iconHuongDan@2x",
+                "x": 0,
+                "y": 0,
+                "w": 42,
+                "h": 40,
+                "anchorX": 0.5,
+                "anchorY": 0.5,
+                "scaleX": 1,
+                "scaleY": 1,
+                "active": true,
+                "opacity": 255,
+                "comps": [
+                  {
+                    "loai": "cc.Sprite",
+                    "frame": "icHuongDan",
+                    "sizeMode": 0
+                  }
+                ],
+                "con": []
+              }
+            ]
+          },
+          {
+            "ten": "btnXepHang",
+            "x": 135,
+            "y": -120,
+            "w": 100,
+            "h": 100,
+            "anchorX": 0.5,
+            "anchorY": 0.5,
+            "scaleX": 1,
+            "scaleY": 1,
+            "active": true,
+            "opacity": 255,
+            "comps": [
+              {
+                "loai": "cc.Button"
+              }
+            ],
+            "con": [
+              {
+                "ten": "iConXepHang@2x",
+                "x": 0,
+                "y": -6.99,
+                "w": 58,
+                "h": 56,
+                "anchorX": 0.5,
+                "anchorY": 0.5,
+                "scaleX": 1,
+                "scaleY": 1,
+                "active": true,
+                "opacity": 255,
+                "comps": [
+                  {
+                    "loai": "cc.Sprite",
+                    "frame": "icRank",
+                    "sizeMode": 0
+                  }
+                ],
+                "con": []
+              }
+            ]
+          },
+          {
+            "ten": "btnTinTuc",
+            "x": 119.23,
+            "y": -93.07,
+            "w": 160,
+            "h": 60,
+            "anchorX": 0.5,
+            "anchorY": 0.5,
+            "scaleX": 1,
+            "scaleY": 1,
+            "active": false,
+            "opacity": 255,
+            "comps": [
+              {
+                "loai": "cc.Button"
+              }
+            ],
+            "con": [
+              {
+                "ten": "iConPhongTrong@2x",
+                "x": 13.08,
+                "y": -14.08,
+                "w": 57,
+                "h": 72,
+                "anchorX": 0.5,
+                "anchorY": 0.5,
+                "scaleX": 1,
+                "scaleY": 1,
+                "active": true,
+                "opacity": 255,
+                "comps": [
+                  {
+                    "loai": "cc.Sprite",
+                    "frame": "iConNews",
+                    "sizeMode": 0
+                  }
+                ],
+                "con": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ten": "Phom",
+        "x": 631.72,
+        "y": -33.31,
+        "w": 291,
+        "h": 439,
+        "anchorX": 0.5,
+        "anchorY": 0.5,
+        "scaleX": 1,
+        "scaleY": 1,
+        "active": true,
+        "opacity": 80,
+        "comps": [
+          {
+            "loai": "cc.Sprite",
+            "frame": null
+          }
+        ],
+        "con": [
+          {
+            "ten": "tien",
+            "x": -5.64,
+            "y": -185,
+            "w": 173,
+            "h": 25,
+            "anchorX": 0.5,
+            "anchorY": 0.5,
+            "scaleX": 1,
+            "scaleY": 1,
+            "active": false,
+            "opacity": 255,
+            "comps": [
+              {
+                "loai": "cc.Sprite",
+                "frame": "tien"
+              }
+            ],
+            "con": []
+          }
+        ]
+      }
+    ]
+  }
+}

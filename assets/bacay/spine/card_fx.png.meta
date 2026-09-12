@@ -1,6 +1,6 @@
 {
   "ver": "2.3.7",
-  "uuid": "9811a546-0075-4b43-93c2-fccee1474d22",
+  "uuid": "b95b7d78-a191-4c41-a915-cb487e7c814a",
   "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
@@ -14,9 +14,9 @@
   "subMetas": {
     "card_fx": {
       "ver": "1.0.6",
-      "uuid": "f23acdd0-8d25-4cb4-b94f-1fe39464546a",
+      "uuid": "d47a9e6b-c20c-4a75-997c-0c64419020f6",
       "importer": "sprite-frame",
-      "rawTextureUuid": "9811a546-0075-4b43-93c2-fccee1474d22",
+      "rawTextureUuid": "b95b7d78-a191-4c41-a915-cb487e7c814a",
       "trimType": "none",
       "trimThreshold": 1,
       "rotated": false,

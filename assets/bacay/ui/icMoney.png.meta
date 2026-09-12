@@ -1,6 +1,6 @@
 {
   "ver": "2.3.7",
-  "uuid": "fdc9a655-0000-4b2e-b530-59c871614cd7",
+  "uuid": "811bc19a-324f-4f23-989d-029bbc843f37",
   "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
@@ -14,9 +14,9 @@
   "subMetas": {
     "icMoney": {
       "ver": "1.0.6",
-      "uuid": "81463a76-a5d4-4c7d-910b-27a5a10f263f",
+      "uuid": "472c25f7-1217-44fd-b76f-0981b8f46fe9",
       "importer": "sprite-frame",
-      "rawTextureUuid": "fdc9a655-0000-4b2e-b530-59c871614cd7",
+      "rawTextureUuid": "811bc19a-324f-4f23-989d-029bbc843f37",
       "trimType": "none",
       "trimThreshold": 1,
       "rotated": false,

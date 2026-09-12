@@ -36,6 +36,16 @@ const CAN_SINH = [
   { bo_cuc: 'ghe', ra: 'GheNguoiChoi', mo_ta: 'ghế người chơi' },
   { bo_cuc: 'labai', ra: 'LaBai', mo_ta: 'một lá bài' },
   { bo_cuc: 'moi', ra: 'NutMoi', mo_ta: 'nút mời ở ghế trống' },
+  { bo_cuc: 'sanh', ra: 'SanhChonBan', mo_ta: 'sảnh chọn bàn' },
+  { bo_cuc: 'chip_red', ra: 'ChipDo', mo_ta: 'chip red' },
+  { bo_cuc: 'chip_blue', ra: 'ChipXanh', mo_ta: 'chip blue' },
+  { bo_cuc: 'chip_green', ra: 'ChipXanhLa', mo_ta: 'chip green' },
+  { bo_cuc: 'chip_yellow', ra: 'ChipVang', mo_ta: 'chip yellow' },
+  { bo_cuc: 'chip_orange', ra: 'ChipCam', mo_ta: 'chip orange' },
+  { bo_cuc: 'chip_pink', ra: 'ChipHong', mo_ta: 'chip pink' },
+  { bo_cuc: 'chip_purple', ra: 'ChipTim', mo_ta: 'chip purple' },
+  { bo_cuc: 'chip_cyan', ra: 'ChipXanhNhat', mo_ta: 'chip cyan' },
+  { bo_cuc: 'chip_brown', ra: 'ChipNau', mo_ta: 'chip brown' },
 ];
 
 /**
@@ -57,6 +67,9 @@ const DOI_TEN = {
   'Chat.json': 'chat.json',
   'EffectCard.json': 'card_fx.json',
   'Font_HelveticaNeue-export.fnt': 'helv.fnt',
+  'iconVipLobby': 'ic_vip',
+  'tien': 'ic_tien',
+  'bg': 'lobby_bg',
   'caorua_tinh diem.json': 'tinhdiem.json',
 };
 
@@ -81,6 +94,22 @@ const CAT_BO = {
   ig_subscribe_get_out: 'nút đuổi người — giao thức của ta chưa có lệnh KICK',
   btn_kick: 'nút đuổi người — như trên',
   icKickOut: 'biểu tượng đuổi người — như trên',
+
+  // ── Sảnh: trang trí theo mùa của Go88 ──────────────────────────────
+  // Sảnh của họ có skin lễ tết chồng lên nhau, mỗi bộ một spine riêng. Giữ lại là
+  // gánh thêm ~10 spine cho thứ ta không dùng, và người đọc sau sẽ tưởng game có
+  // hệ thống skin theo mùa.
+  avatar_Xmas: 'trang trí Noel',
+  noel_FooterL_room: 'trang trí Noel (chân trái)',
+  noel_FooterR_room: 'trang trí Noel (chân phải)',
+  go_trungthu: 'trang trí Trung Thu',
+  'go_trungthu copy': 'trang trí Trung Thu (bản sao)',
+  go_304: 'trang trí 30/4',
+  'go_304 copy': 'trang trí 30/4 (bản sao)',
+  'go_wc copy': 'trang trí World Cup',
+  skinHalloween: 'trang trí Halloween — cắt cả cụm',
+  bottomL: 'trang trí Tết (góc dưới trái)',
+  bottomR: 'trang trí Tết (góc dưới phải)',
 };
 
 // ── Chỉ mục asset trong bundle của TA ─────────────────────────────────

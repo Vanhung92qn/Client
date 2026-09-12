@@ -1,0 +1,34 @@
+{
+  "nguon": "BaCay/prefabs/chipYellow_0b548e69.prefab",
+  "mo_ta": "chip yellow",
+  "soNodeGoc": 1,
+  "soNodeRut": 1,
+  "boQua": [
+    {
+      "loai": "component",
+      "node": "chipYellow",
+      "chi_tiet": "3a939AMQ1VBB6/VJuEuAFe5",
+      "ly_do": "script riêng của Go88, ta gắn script của mình"
+    }
+  ],
+  "cay": {
+    "ten": "chipYellow",
+    "x": 0,
+    "y": 0,
+    "w": 44,
+    "h": 36,
+    "anchorX": 0.5,
+    "anchorY": 0.5,
+    "scaleX": 1,
+    "scaleY": 1,
+    "active": true,
+    "opacity": 255,
+    "comps": [
+      {
+        "loai": "cc.Sprite",
+        "frame": "ChipYellow"
+      }
+    ],
+    "con": []
+  }
+}

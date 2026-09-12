@@ -111,6 +111,9 @@ const DANH_MUC = [
     ly_do: 'bitmap font cho nhãn trong bong bóng chat',
   },
 
+  { nguon: '_shared/images/iconVipLobby.png', dich: 'art/ic_vip.png', ly_do: 'huy hiệu VIP cạnh avatar ngoài sảnh' },
+  { nguon: '_shared/images/tien.png', dich: 'art/ic_tien.png', ly_do: 'biểu tượng tiền ngoài sảnh' },
+
   // ── Spine ───────────────────────────────────────────────────────────
   {
     nguon: '_shared/skeletons/skeleton_4d9f506e.json',

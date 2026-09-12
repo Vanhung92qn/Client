@@ -1,6 +1,6 @@
 {
   "ver": "2.3.7",
-  "uuid": "ae12038c-e649-4d06-8ef2-c320691982ee",
+  "uuid": "d6e91520-37b8-4251-bbde-58ba9015943d",
   "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
@@ -14,9 +14,9 @@
   "subMetas": {
     "efLoadingBar": {
       "ver": "1.0.6",
-      "uuid": "09bc25e8-b11e-4aa2-8ede-6c4149cfc36a",
+      "uuid": "8a576300-b06b-4241-a440-bcbaadca3a9c",
       "importer": "sprite-frame",
-      "rawTextureUuid": "ae12038c-e649-4d06-8ef2-c320691982ee",
+      "rawTextureUuid": "d6e91520-37b8-4251-bbde-58ba9015943d",
       "trimType": "none",
       "trimThreshold": 1,
       "rotated": false,

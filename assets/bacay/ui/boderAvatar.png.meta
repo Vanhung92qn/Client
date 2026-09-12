@@ -1,6 +1,6 @@
 {
   "ver": "2.3.7",
-  "uuid": "ce8b7543-f1aa-46f8-8735-d34de37e6c7c",
+  "uuid": "6219a46d-d927-4575-b16f-15e28d1d7603",
   "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
@@ -14,9 +14,9 @@
   "subMetas": {
     "boderAvatar": {
       "ver": "1.0.6",
-      "uuid": "e9445978-2d13-4e2e-b7bd-410f7808f4e7",
+      "uuid": "ece7573f-4cdd-458f-b88f-daa967c900c0",
       "importer": "sprite-frame",
-      "rawTextureUuid": "ce8b7543-f1aa-46f8-8735-d34de37e6c7c",
+      "rawTextureUuid": "6219a46d-d927-4575-b16f-15e28d1d7603",
       "trimType": "none",
       "trimThreshold": 1,
       "rotated": false,

@@ -46,6 +46,16 @@ const CAN_RUT = [
   { tep: '_shared/prefabs/PlayerView_201107e0.prefab', ten: 'ghe', mo_ta: 'ghế người chơi' },
   { tep: '_shared/prefabs/Card_bc_bc29c05f.prefab', ten: 'labai', mo_ta: 'một lá bài' },
   { tep: '_shared/prefabs/BtnInvite_875cabc3.prefab', ten: 'moi', mo_ta: 'nút mời ở ghế trống' },
+  { tep: '_shared/prefabs/RoomScenebinhThuongXocDia_25d010ef.prefab', ten: 'sanh', mo_ta: 'sảnh chọn bàn' },
+  { tep: 'BaCay/prefabs/chipRed_3023057f.prefab', ten: 'chip_red', mo_ta: 'chip red' },
+  { tep: 'BaCay/prefabs/chipBlue_2cfd2cdc.prefab', ten: 'chip_blue', mo_ta: 'chip blue' },
+  { tep: 'BaCay/prefabs/chipGreen_8930a802.prefab', ten: 'chip_green', mo_ta: 'chip green' },
+  { tep: 'BaCay/prefabs/chipYellow_0b548e69.prefab', ten: 'chip_yellow', mo_ta: 'chip yellow' },
+  { tep: 'BaCay/prefabs/chipOrange_2cf9dc6d.prefab', ten: 'chip_orange', mo_ta: 'chip orange' },
+  { tep: 'BaCay/prefabs/chipPink_677d2481.prefab', ten: 'chip_pink', mo_ta: 'chip pink' },
+  { tep: 'BaCay/prefabs/chipPupple_e8e6b950.prefab', ten: 'chip_purple', mo_ta: 'chip purple' },
+  { tep: 'BaCay/prefabs/chipCyan_9f85b0f3.prefab', ten: 'chip_cyan', mo_ta: 'chip cyan' },
+  { tep: 'BaCay/prefabs/chipBrown_b7c62c66.prefab', ten: 'chip_brown', mo_ta: 'chip brown' },
 ];
 
 /** Component hiển thị mang sang được. Ngoài danh sách này là script riêng của Go88. */

@@ -22,6 +22,7 @@ Chạy:  python tools/bacay/cut-frames.py
 import io
 import json
 import os
+import plistlib
 import re
 import sys
 
@@ -47,6 +48,7 @@ CAN_CAT = {
         "icLoadingBattle": None,
         "btnDanhbai": None,
         "borderThangSapLang": None,
+        "icTinhChi": None,
         "icInfoUser": None,
         "boderInfo": None,
         "icHeadChat": None,
@@ -62,6 +64,25 @@ CAN_CAT = {
         "icMoney": None,
         "btnMoney": None,
     },
+    "_shared/plist/atlas_0b1f9c46.plist": {
+        "boderFooterLeft": None,
+        "boderFooterRight": None,
+        "borderLeft": None,
+        "borderMask": None,
+        "iConNews": None,
+        "icChoiNhanh": None,
+        "icHuongDan": None,
+        "icRank": None,
+        "icTaoBan": None,
+        "txtChoiNhanh": None,
+        "txtTaoBan": None,
+    },
+    "_shared/plist/atlas_eaf90a0b.plist": {
+        "bg": "lobby_bg",
+    },
+    "_shared/plist/atlas_80971fb1.plist": {
+        "icoAvatar": None,
+    },
 }
 
 
@@ -70,39 +91,45 @@ def so(chuoi):
 
 
 def doc_plist(path):
-    """Trả {tên frame: thông số}. Chỉ đọc khối <key>frames</key>."""
-    xml = io.open(path, encoding="utf-8").read()
-    dau = xml.index("<key>frames</key>")
-    than = xml[dau:]
+    """Trả {tên frame: thông số}.
+
+    🔴 DÙNG plistlib CHỨ KHÔNG TỰ PARSE BẰNG REGEX.
+
+    Bản đầu tôi tự bắt cặp `<key>…</key><dict>…</dict>` bằng regex không tham lam.
+    Nó dừng GIỮA CHỪNG khi gặp `<dict>` lồng nhau, và hậu quả là im lặng: những frame
+    nằm sau chỗ vỡ đơn giản không tồn tại. `boderFooterLeft` cắt được, `boderFooterRight`
+    thì không, dù cả hai nằm cạnh nhau trong cùng một tệp.
+
+    May là bộ sinh prefab bắt được ("thiếu asset"), chứ nếu tôi không có chốt đó thì
+    sảnh sẽ thiếu đúng một viền và chẳng ai biết vì sao.
+    """
+    with open(path, "rb") as f:
+        goc = plistlib.load(f)
 
     ra = {}
-    for m in re.finditer(r"<key>([^<]+)</key>\s*<dict>(.*?)</dict>", than, re.S):
-        ten, body = m.group(1), m.group(2)
-        if "<key>frame</key>" not in body:
-            break
-
-        def lay(k):
-            mm = re.search(rf"<key>{k}</key>\s*<string>([^<]*)</string>", body)
-            return mm.group(1) if mm else None
-
-        f = so(lay("frame"))
-        off = so(lay("offset")) or [0, 0]
-        src = so(lay("sourceSize")) or [f[2], f[3]]
+    for ten, f in (goc.get("frames") or {}).items():
+        fr = so(f.get("frame"))
+        off = so(f.get("offset")) or [0, 0]
+        src = so(f.get("sourceSize")) or [fr[2], fr[3]]
         ra[ten] = {
-            "x": int(f[0]), "y": int(f[1]), "w": int(f[2]), "h": int(f[3]),
+            "x": int(fr[0]), "y": int(fr[1]), "w": int(fr[2]), "h": int(fr[3]),
             "offX": off[0], "offY": off[1],
             "srcW": int(src[0]), "srcH": int(src[1]),
-            "rotated": bool(re.search(r"<key>rotated</key>\s*<true\s*/>", body)),
+            "rotated": bool(f.get("rotated") or f.get("textureRotated")),
         }
+
+    if not ra:
+        raise SystemExit(f"Plist không có frame nào: {path}")
     return ra
 
 
 def anh_cua_plist(plist_path):
-    xml = io.open(plist_path, encoding="utf-8").read()
-    m = re.search(r"<key>textureFileName</key>\s*<string>([^<]+)</string>", xml)
-    if not m:
+    with open(plist_path, "rb") as f:
+        meta = (plistlib.load(f).get("metadata") or {})
+    ten = meta.get("textureFileName") or meta.get("realTextureFileName")
+    if not ten:
         raise SystemExit(f"Plist không khai textureFileName: {plist_path}")
-    return os.path.join(os.path.dirname(plist_path), m.group(1))
+    return os.path.join(os.path.dirname(plist_path), ten)
 
 
 def main():

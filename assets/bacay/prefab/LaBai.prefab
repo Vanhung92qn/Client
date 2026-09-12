@@ -243,7 +243,7 @@
     "_playTimes": 0,
     "_isAniComplete": true,
     "_N$skeletonData": {
-      "__uuid__": "fca3141a-810c-4172-8061-80d3783d2d70"
+      "__uuid__": "eb40e8ff-13e7-4344-955b-049e2a8cc4b2"
     },
     "_N$_defaultCacheMode": 0,
     "_N$debugSlots": false,
@@ -261,7 +261,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "+q2MTdzZr2YzDftnYPm8QH",
+    "fileId": "kkN1y+Fmd4EcaXXJeI+n6L",
     "sync": false
   },
   {
@@ -272,7 +272,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "XVAJiDGV79jTZEaX86xiZR",
+    "fileId": "fE9rY/fYxItPCHILSQimYp",
     "sync": false
   },
   {
@@ -355,7 +355,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "8ace8aa1-e4ac-4fd2-b5b4-8e2c513daddd"
+      "__uuid__": "767e92b6-0668-4c94-a874-98af7b9e302d"
     },
     "_type": 0,
     "_sizeMode": 0,
@@ -379,7 +379,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "IiTBaV4OQRUcddI3hAKu2a",
+    "fileId": "FzJqb+mGN3yk/ss1eTPqga",
     "sync": false
   },
   {
@@ -462,7 +462,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "8ace8aa1-e4ac-4fd2-b5b4-8e2c513daddd"
+      "__uuid__": "767e92b6-0668-4c94-a874-98af7b9e302d"
     },
     "_type": 0,
     "_sizeMode": 0,
@@ -486,7 +486,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "p8Wox6AbL8YzSrxWtOteHw",
+    "fileId": "JdU+2TVqtbq9UKflooEAan",
     "sync": false
   },
   {
@@ -565,7 +565,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "1TotfkdECs0i3p6KGbOUIv",
+    "fileId": "1YYDUXejJ3rQTS8mFVsyjW",
     "sync": false
   }
 ]
