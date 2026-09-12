@@ -55,25 +55,22 @@ var CHUNG = {
 /**
  * Địa chỉ máy chủ game bài.
  *
- * Chạy xem thử trong Cocos (`localhost` / `file://`) thì trỏ vào máy dev — lúc đó chưa
- * có tên miền nào. Chạy thật thì bám theo `NetConfig.HOST`, để đổi tên miền một chỗ là
- * xong, đúng cách CDN đang làm.
+ * LUÔN trỏ ra endpoint công khai, kể cả khi xem thử trong Cocos Creator. Lý do rất đời
+ * thường: máy chủ nằm trên VPS, còn Cocos thì mở ở máy cá nhân — mặc định `127.0.0.1`
+ * nghe thì "an toàn" nhưng thực tế là trỏ vào một cái máy không có server nào, và lỗi
+ * duy nhất thấy được là màn hình đứng im.
+ *
+ * Bám theo `NetConfig.HOST` để đổi tên miền một chỗ là xong, đúng cách CDN đang làm.
+ *
+ * Ai chạy server ngay trên máy mình thì ghi đè bằng tham số địa chỉ:
+ *     ?cardws=ws://127.0.0.1:5310/ws
  */
 function diaChiMayChu() {
-    if (typeof window === 'undefined' || !window.location) {
-        return 'ws://127.0.0.1:5310/ws';
-    }
-    var host = window.location.hostname || '';
-    var cucBo = host === 'localhost' || host === '127.0.0.1' || host === ''
-        || /^192\.168\./.test(host) || /^10\./.test(host);
+    var mien = 'wss://card.' + (netConfig.HOST || 'bay789x.me') + '/ws';
+    if (typeof window === 'undefined' || !window.location) return mien;
 
-    if (cucBo) {
-        // Đổi nhanh khi thử trên máy khác:  ?cardws=ws://192.168.1.9:5310/ws
-        var q = /[?&]cardws=([^&]+)/.exec(window.location.search || '');
-        if (q) return decodeURIComponent(q[1]);
-        return 'ws://127.0.0.1:5310/ws';
-    }
-    return 'wss://card.' + (netConfig.HOST || 'bay789x.me') + '/ws';
+    var q = /[?&]cardws=([^&]+)/.exec(window.location.search || '');
+    return q ? decodeURIComponent(q[1]) : mien;
 }
 
 /** Token đăng nhập — đúng token mà cả client đang dùng, không phát token riêng. */
