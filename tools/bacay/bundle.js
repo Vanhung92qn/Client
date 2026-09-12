@@ -379,6 +379,22 @@ function main() {
       const pngDich = muc.dich.replace(/\.plist$/, '.png');
       const pngDst = chep(pngNguon, pngDich);
 
+      // 🔴 PLIST TRO TOI ANH BANG TEN TUONG DOI, y het .atlas cua spine va .fnt.
+      // Doi ten tep ma quen sua dong nay thi Cocos khong tim ra texture: editor hien
+      // "Raw Texture File: None" va MOI frame trong atlas thanh o trong suot.
+      // Prefab van hop le, validate.js van xanh, check-refs.js van xanh.
+      //
+      // Toi da viet dung canh bao nay cho .atlas va .fnt o commit truoc ma QUEN AP
+      // CHO .plist — cung mot loai loi, ba dinh dang.
+      {
+        let noiDungPlist = fs.readFileSync(dst, 'utf8');
+        const tenMoi = path.basename(pngDich);
+        noiDungPlist = noiDungPlist.replace(
+          /(<key>(?:real)?[Tt]extureFileName<\/key>\s*<string>)[^<]*(<\/string>)/g,
+          `$1${tenMoi}$2`);
+        fs.writeFileSync(dst, noiDungPlist, 'utf8');
+      }
+
       const frames = docPlist(dst);
       const size = kichThuocPng(pngDst);
       const texUuid = P.uuid4();

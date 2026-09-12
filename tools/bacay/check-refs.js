@@ -50,6 +50,49 @@ function uuidCoThat() {
   return co;
 }
 
+/**
+ * Kiem tep tro toi anh bang TEN TUONG DOI — plist, .atlas cua spine, .fnt.
+ *
+ * Ba dinh dang nay deu ghi ten anh BEN TRONG noi dung, khong phai uuid. Doi ten tep
+ * ma quen sua dong do thi Cocos khong tim ra texture, va hau qua HOAN TOAN IM LANG:
+ * anh trong suot, chu rong tuech, prefab van hop le, ca hai bo kiem kia van xanh.
+ *
+ * Toi da dinh dung loi nay BA LAN o ba dinh dang khac nhau. Nen gio kiem bang may.
+ */
+function kiemTenTuongDoi() {
+  const loi = [];
+
+  const quet = (d) => {
+    for (const ten of fs.readdirSync(d)) {
+      const p = path.join(d, ten);
+      if (fs.statSync(p).isDirectory()) { quet(p); continue; }
+
+      let canhAnh = [];
+      if (ten.endsWith('.plist')) {
+        const tho = fs.readFileSync(p, 'utf8');
+        canhAnh = [...tho.matchAll(/<key>(?:real)?[Tt]extureFileName<\/key>\s*<string>([^<]+)<\/string>/g)]
+          .map((m) => m[1]);
+      } else if (ten.endsWith('.atlas')) {
+        canhAnh = fs.readFileSync(p, 'utf8').split(String.fromCharCode(10))
+          .filter(function (l) { return /[.]png\s*$/.test(l.trim()); });
+      } else if (ten.endsWith('.fnt')) {
+        const m = /file="([^"]+)"/.exec(fs.readFileSync(p, 'utf8'));
+        if (m) canhAnh = [m[1]];
+      } else continue;
+
+      for (const anh of canhAnh) {
+        const dich = path.join(path.dirname(p), anh.trim());
+        if (!fs.existsSync(dich)) {
+          loi.push(`${path.relative(ASSETS, p)}  →  "${anh.trim()}" KHÔNG tồn tại cạnh nó`);
+        }
+      }
+    }
+  };
+
+  quet(BUNDLE);
+  return loi;
+}
+
 function main() {
   const co = uuidCoThat();
   const thuMuc = path.join(BUNDLE, 'prefab');
@@ -77,6 +120,16 @@ function main() {
   }
 
   console.log(`\nTổng ${tongRef} tham chiếu trong ${tep.length} prefab.`);
+
+  const loiTen = kiemTenTuongDoi();
+  if (loiTen.length) {
+    console.error(`
+❌ ${loiTen.length} tệp trỏ tới ảnh KHÔNG tồn tại (plist / .atlas / .fnt):`);
+    for (const x of loiTen) console.error('   ' + x);
+    hong += loiTen.length;
+  } else {
+    console.log('✅ Mọi plist / .atlas / .fnt đều trỏ tới ảnh có thật cạnh nó.');
+  }
 
   if (hong) {
     console.error(`\n❌ ${hong} uuid trỏ vào hư không. Gần như chắc chắn là bộ sinh bundle đã ` +

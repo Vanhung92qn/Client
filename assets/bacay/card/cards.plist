@@ -386,8 +386,8 @@
   <key>metadata</key>
   <dict>
     <key>format</key><integer>2</integer>
-    <key>realTextureFileName</key><string>atlas_1c6a6bd1.png</string>
-    <key>textureFileName</key><string>atlas_1c6a6bd1.png</string>
+    <key>realTextureFileName</key><string>cards.png</string>
+    <key>textureFileName</key><string>cards.png</string>
     <key>size</key><string>{1062,971}</string>
   </dict>
 </dict>

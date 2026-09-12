@@ -120,9 +120,9 @@
   <key>metadata</key>
   <dict>
     <key>format</key><integer>2</integer>
-    <key>realTextureFileName</key><string>atlas_1ae528df.png</string>
+    <key>realTextureFileName</key><string>table.png</string>
     <key>size</key><string>{430,712}</string>
-    <key>textureFileName</key><string>atlas_1ae528df.png</string>
+    <key>textureFileName</key><string>table.png</string>
   </dict>
 </dict>
 </plist>
