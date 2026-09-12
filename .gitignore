@@ -39,3 +39,6 @@ Thumbs.db
 ehthumbs.db
 Desktop.ini
 $RECYCLE.BIN/
+
+# Bản biên dịch tạm của bài kiểm giao thức (sinh lại bằng tsc)
+tools/bacay/smoke/net/

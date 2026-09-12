@@ -45,6 +45,19 @@ interface ChoGui {
     tien: boolean;
 }
 
+/**
+ * Ghi lỗi. Có `cc` thì dùng, không thì `console`.
+ *
+ * Tầng này KHÔNG được phụ thuộc cứng vào Cocos: nó phải chạy được cả ngoài engine để
+ * viết được bài kiểm giao thức bằng Node. Một `cc.error` trần là đủ để cả tệp không
+ * nạp nổi ngoài trình duyệt Cocos.
+ */
+function ghiLoi(e: any): void {
+    const g: any = typeof globalThis !== "undefined" ? globalThis : {};
+    if (g.cc && typeof g.cc.error === "function") g.cc.error(e);
+    else if (typeof console !== "undefined") console.error(e);
+}
+
 /** Sinh khoá chống trùng. Không cần chuẩn RFC, chỉ cần đủ khó trùng. */
 function khoaMoi(): string {
     let s = "";
@@ -281,7 +294,7 @@ export default class Transport {
 
     private phatSuKien(env: Envelope): void {
         for (let i = 0; i < this.nghePush.length; i++) {
-            try { this.nghePush[i](env); } catch (e) { cc.error(e); }
+            try { this.nghePush[i](env); } catch (e) { ghiLoi(e); }
         }
     }
 
@@ -336,7 +349,7 @@ export default class Transport {
         if (this.trangThai === t) return;
         this.trangThai = t;
         for (let i = 0; i < this.ngheTrangThai.length; i++) {
-            try { this.ngheTrangThai[i](t); } catch (e) { cc.error(e); }
+            try { this.ngheTrangThai[i](t); } catch (e) { ghiLoi(e); }
         }
     }
 
