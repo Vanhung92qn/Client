@@ -16,12 +16,12 @@
 
 'use strict';
 
-const crypto = require('crypto');
 const { default: Transport } = require('./net/Transport');
-const { MsgType, MsgRes, Err, SharedCmd } = require('./net/Envelope');
+const { MsgType, SharedCmd } = require('./net/Envelope');
+const { taoToken, docSecret } = require('./token');
 
 const URL = process.argv[2] || 'ws://127.0.0.1:5310/ws';
-const SECRET = process.argv[3] || 'smoke-test-secret';
+const SECRET = docSecret(process.argv[3]);
 
 const G_BACAY = 51;
 const CMD_FLIP = 51001;
@@ -31,39 +31,6 @@ const CMD_FLIPPED = 51103;
 const CMD_SHOWDOWN = 51104;
 const CMD_EXTRATIME = 51105;
 const CMD_SETTLE = 51106;
-
-/**
- * Dựng token đúng khuôn hệ cũ — xem LegacyTokenValidator.
- *   phần mã  = base64( TripleDES-ECB-PKCS7( khoá, JSON ) )
- *   khoá     = 24 byte ASCII đầu của md5hex("System.Byte[]")
- *   chữ ký   = sha256hex( "{secret}.{phần mã}" )
- *   token    = "{phần mã}.{chữ ký}"
- */
-function taoToken(userId, nick, secret) {
-    const md5hex = crypto.createHash('md5').update('System.Byte[]', 'ascii').digest('hex');
-    const key = Buffer.from(md5hex.slice(0, 24), 'ascii');
-
-    const json = JSON.stringify({
-        UserID: userId,
-        NickName: nick,
-        ServiceID: 1,
-        AvatarID: 0,
-        IPAddress: '127.0.0.1',
-        // 🔴 GIỜ ĐỊA PHƯƠNG, không phải UTC.
-        // Hệ cũ phát token bằng DateTime.Now và bộ kiểm cũng so bằng DateTime.Now.
-        // Ghi giờ UTC thì ở múi +7 token sinh ra đã "hết hạn" 6 tiếng trước khi kịp dùng —
-        // và thông báo lỗi chỉ nói "token không hợp lệ", không nói vì sao.
-        ExpiredAt: new Date(Date.now() + 3600e3 - new Date().getTimezoneOffset() * 60000)
-            .toISOString().replace('Z', ''),
-    });
-
-    const c = crypto.createCipheriv('des-ede3', key, null);
-    c.setAutoPadding(true);
-    const phanMa = Buffer.concat([c.update(json, 'ascii'), c.final()]).toString('base64');
-
-    const chuKy = crypto.createHash('sha256').update(`${secret}.${phanMa}`, 'utf8').digest('hex');
-    return `${phanMa}.${chuKy}`;
-}
 
 const cho = (ms) => new Promise((r) => setTimeout(r, ms));
 
@@ -116,7 +83,10 @@ async function main() {
 
     // ── 4. Xem một ván trọn vẹn ─────────────────────────────────────
     console.log('\nChờ một ván chạy…');
-    await cho(25_000);
+    // Chờ TỚI KHI thấy chia tiền, không ngủ một khoảng cố định. Một ván mất 23 giây
+    // (1+4+3+7+4+4) nên ngủ 25 giây là sát quá — chỉ cần bot ngồi chậm một nhịp là
+    // bài kiểm đỏ vì lý do không liên quan gì tới thứ nó định kiểm.
+    for (let i = 0; i < 60 && !ketQua.settle; i++) await cho(1000);
 
     // ── 5. Resync — ảnh chụp đầy đủ ─────────────────────────────────
     const rs = await net.resync(G_BACAY).catch((e) => ({ e: -1, _loi: e.message }));
