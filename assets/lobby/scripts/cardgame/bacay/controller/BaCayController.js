@@ -199,11 +199,33 @@ var BaCayPha = require('BaCayPha');
             if (this.baiCuaToi.length && this.gheCuaToi >= 0) {
                 this.dungBai(this.gheCuaToi, this.baiCuaToi, true);
             }
-            // Bài người khác: chỉ biết SỐ LÁ, úp hết.
+
+            // Bài người khác. Ba mức thông tin, tuỳ pha server đang ở:
+            //   • `hand` có   → đã tới pha so bài, ngửa hết và hiện điểm
+            //   • chỉ `cards` → còn úp; `flipped` cho biết họ đã nắn được mấy lá
+            //   • không gì cả → chưa vào ván
             for (var i = 0; i < (d.seats || []).length; i++) {
                 var s = d.seats[i];
                 if (s.seat === this.gheCuaToi || !s.cards) continue;
-                this.dungBai(s.seat, null, true);
+
+                if (s.hand && s.hand.length) {
+                    this.dungBai(s.seat, s.hand, true);
+                    this.hienDiem({ seat: s.seat, point: s.point, baTay: s.baTay });
+                } else {
+                    this.dungBai(s.seat, null, true);
+                    if (s.flipped) this.aiDoLat({ seat: s.seat, count: s.flipped });
+                }
+            }
+
+            // Lá rút thêm đang nằm trên bàn — nối lại giữa pha hoà vẫn phải thấy.
+            var rut = (d.seats || [])
+                .filter(function (x) { return typeof x.extra === 'number'; })
+                .map(function (x) { return { seat: x.seat, card: x.extra }; });
+            if (rut.length && this.rutThemLa) {
+                var self = this;
+                this.rutThemLa.hien(d.extraRound || 1, rut, function (seat) {
+                    return self.mocRutThemCuaGhe(seat);
+                });
             }
 
             this.datPha(d.phase, d.endsInMs);
