@@ -29,6 +29,25 @@ npx tsc --target es2017 --lib es2017,dom --module commonjs --skipLibCheck ^
 node tools/bacay/smoke/smoke.js
 ```
 
+## Ba bài kiểm
+
+| Tệp | Kiểm gì | Có chạm tiền không |
+|---|---|---|
+| `smoke.js` | một ván trọn vẹn qua tầng vận chuyển thật | có — chỉ chạy với **ví dev** |
+| `reconnect.js` | rớt mạng giữa ván → nối lại → đối soát sổ | có — chỉ chạy với **ví dev** |
+| `ketnoi.js` | endpoint công khai mang được WebSocket | **không** — chỉ đăng nhập + nhịp tim |
+
+`ketnoi.js` cố ý không vào bàn: bản chạy thật cắm ví THẬT, mà vào bàn là server thu tiền
+sàn ngay. Đường truyền chứng minh được mà không cần chạm tới một đồng nào.
+
+```
+node tools/bacay/smoke/ketnoi.js wss://card.bay789x.me/ws ^
+  C:\IIS\Service\CardGame.Server\appsettings.Production.json
+```
+
+Nó còn giữ im lặng 45 giây để bắt proxy cắt kết nối nhàn rỗi — thứ chỉ lộ ra khi đi qua
+Cloudflare, không bao giờ thấy khi chạy `127.0.0.1`.
+
 ## Nó khẳng định gì
 
 - Đăng nhập bằng token đúng khuôn hệ cũ (TripleDES + SHA256)
