@@ -11,6 +11,20 @@
  */
 
 (function () {
+    /**
+     * Chạy hoạt cảnh của một spine, lấy tên NGAY TRONG PREFAB.
+     *
+     * 🔴 Đừng ghi cứng tên "animation". Sáu spine của Ba Cây thì bốn cái mang tên khác:
+     * "3tay", "2 nha hoa diem", "sobaitiep", "DemNguoc10s". Gọi sai tên thì Cocos không
+     * ném lỗi — nó chỉ đứng im, và ta ngồi tìm xem tại sao hiệu ứng không chạy.
+     */
+    function chay(sk, lap) {
+        if (!sk) return;
+        var ten = sk._animationName || sk.animation || 'animation';
+        sk.node.active = true;
+        sk.setAnimation(0, ten, lap === undefined ? !!sk.loop : lap);
+    }
+
     cc.BangDiemView = cc.Class({
         'extends': cc.Component,
 
@@ -63,24 +77,17 @@
                 if (!baTay && !laBu) this.lbDiem.string = String(diem);
             }
 
-            if (this.spTinhDiem) {
-                this.spTinhDiem.node.active = true;
-                this.spTinhDiem.setAnimation(0, 'animation', false);
-            }
+            chay(this.spTinhDiem, false);
         },
 
         /** Ăn gấp ba vì J-Q-K cùng cơ. */
         thuongJQK: function () {
-            if (!this.spJQK) return;
-            this.spJQK.node.active = true;
-            this.spJQK.setAnimation(0, 'animation', false);
+            chay(this.spJQK, false);
         },
 
         /** Hoà ở đỉnh — sắp phải rút thêm lá. */
         baoHoa: function () {
-            if (!this.spHoaDiem) return;
-            this.spHoaDiem.node.active = true;
-            this.spHoaDiem.setAnimation(0, 'animation', false);
+            chay(this.spHoaDiem);
         },
     });
 }).call(this);

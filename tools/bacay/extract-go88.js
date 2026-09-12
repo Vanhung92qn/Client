@@ -144,7 +144,22 @@ function rut(tuyetDoi, chiMuc, boQua) {
 
     const pos = n._position || {};
     const cs = n._contentSize || {};
-    const ap = n._anchorPoint || {};
+    /**
+     * 🔴 ĐIỂM NEO: "vắng cả khoá" và "vắng một thành phần" là HAI chuyện khác nhau.
+     *
+     * Cocos chỉ ghi ra thứ khác mặc định:
+     *   • `_anchorPoint` VẮNG HẲN     → node giữ mặc định của node, tức (0.5, 0.5)
+     *   • `_anchorPoint: { y: 0.5 }`  → có ghi, nên `x` vắng nghĩa là **0**
+     *                                   (mặc định của `cc.Vec2` là 0,0)
+     *
+     * Gộp hai trường hợp rồi mặc định 0.5 thì đúng ở vế đầu và SAI ở vế sau. Sai kiểu
+     * này không làm gãy gì cả: nhãn vẫn hiện, chỉ là nở sang hai bên rồi đè lên chữ bên
+     * cạnh — đúng cảnh "Bàn1001" dính vào nhau. Đếm được 79/903 node của Go88 rơi vào
+     * vế sau, trong đó có `NameUser`, `moneyLabel`, `letBorder@2x` của sảnh.
+     */
+    const apGoc = n._anchorPoint;
+    const neoMacDinh = apGoc ? 0 : 0.5;
+    const ap = apGoc || {};
 
     const kq = {
       ten: n._name,
@@ -152,8 +167,8 @@ function rut(tuyetDoi, chiMuc, boQua) {
       y: Math.round(so(pos.y, n._trs ? so(n._trs[1], 0) : 0) * 100) / 100,
       w: so(cs.width, 0),
       h: so(cs.height, 0),
-      anchorX: so(ap.x, 0.5),
-      anchorY: so(ap.y, 0.5),
+      anchorX: so(ap.x, neoMacDinh),
+      anchorY: so(ap.y, neoMacDinh),
       scaleX: so(n._scaleX, 1),
       scaleY: so(n._scaleY, 1),
       active: n._active !== false,
@@ -187,20 +202,70 @@ function rut(tuyetDoi, chiMuc, boQua) {
         continue;
       }
 
-      const mo = { loai: t };
+      // `_enabled` cho MỌI component, rút ở một chỗ duy nhất.
+      // Go88 có tắt hẳn vài component mà vẫn để nguyên trong prefab — ví dụ
+      // `cc.Layout` ở cụm nút phải của sảnh. Dựng ra mà BẬT thì nó tự xếp lại hai
+      // nút, sai chỗ so với thiết kế, và không có gì báo.
+      const mo = { loai: t, batTat: c._enabled !== false };
       if (t === 'cc.Sprite') {
         mo.frame = tenAsset(c._spriteFrame);
         mo.sizeMode = c._sizeMode;
         mo.type = c._type;
+        mo.trimmed = c._isTrimmedMode;
+
+        // 🔴 Sprite kiểu ĐỔ DẦN (`_type: 3`) dùng bốn tham số dưới để biết đổ theo
+        // hướng nào. `_fillType: 2` là đổ theo VÒNG TRÒN — đây chính là vòng đếm ngược
+        // quanh ảnh đại diện và đồng hồ giữa bàn. Thiếu chúng thì đặt `progress` bao
+        // nhiêu cũng không có gì chuyển động, mà cũng không có lỗi nào.
+        mo.fillType = so(c._fillType, undefined);
+        mo.fillStart = so(c._fillStart, undefined);
+        mo.fillRange = so(c._fillRange, undefined);
+        const fc = c._fillCenter;
+        if (fc && typeof fc === 'object') mo.fillCenter = [so(fc.x, 0), so(fc.y, 0)];
       } else if (t === 'cc.Label') {
         mo.text = c._string;
         mo.co = c._fontSize;
         mo.canhNgang = c._N$horizontalAlign;
+        mo.canhDoc = c._N$verticalAlign;
         mo.font = tenAsset(c._N$file);
+
+        // 🔴 Chiều cao dòng. Bỏ sót thì thư viện lấy mặc định (≈ cỡ chữ), và chữ cao
+        // hơn dòng sẽ bị cắt cụt trên dưới. Ba nhãn của bảng điểm đều đặt 50 trong khi
+        // mặc định ra 24 — hơn gấp đôi.
+        mo.lineHeight = so(c._lineHeight, undefined);
+        mo.overflow = c._N$overflow;
+        mo.wrap = c._enableWrapText;
+        // Giãn chữ ÂM: font bitmap của Go88 vẽ dư khoảng trắng hai bên nên họ kéo
+        // các ký tự sát lại. Bỏ sót thì mọi dòng chữ RỘNG HƠN thiết kế và tràn khỏi
+        // khung nền — thấy rõ nhất ở nhãn số dư trong viên thuốc trên ghế.
+        mo.spacingX = so(c._spacingX, undefined);
       } else if (t === 'sp.Skeleton') {
         mo.skel = tenAsset(c._N$skeletonData);
-        mo.anim = c.defaultAnimation;
-        mo.loop = c.loop;
+
+        // 🔴 Cocos 2.1 của Go88 ghi tên hoạt cảnh ở `_animationName`; `defaultAnimation`
+        // là khoá của trình soạn thảo và thường VẮNG. Đọc mỗi `defaultAnimation` thì ra
+        // chuỗi rỗng → spine dựng ra im lìm, không chạy hoạt cảnh nào, và không lỗi.
+        // (`caorua_tinh diem` chạy hoạt cảnh tên "3tay", không phải "animation".)
+        mo.anim = c._animationName || c.defaultAnimation || '';
+        mo.loop = c.loop !== undefined ? c.loop : (so(c._playTimes, 0) === 0);
+        mo.playTimes = so(c._playTimes, undefined);
+      } else if (t === 'cc.Mask') {
+        // Mask của Go88 có thể đang TẮT (`_enabled: false`) và kiểu 1 (hình elip).
+        // Dựng ra mask BẬT kiểu chữ nhật thì ảnh đại diện bị cắt vuông, hoặc tệ hơn là
+        // con bị che sạch khi mask không có hình.
+        mo.batTat = c._enabled !== false;
+        mo.kieu = so(c._type, 0);
+        mo.segments = so(c._segments, 64);
+      } else if (t === 'cc.Button') {
+        mo.zoomScale = so(c.zoomScale, undefined);
+        mo.transition = so(c._N$transition, undefined);
+        mo.interactable = c._N$interactable;
+        const mau = (v) => (v && typeof v === 'object'
+          ? [so(v.r, 255), so(v.g, 255), so(v.b, 255), so(v.a, 255)] : undefined);
+        mo.normalColor = mau(c._N$normalColor);
+        mo.pressedColor = mau(c._N$pressedColor || c.pressedColor);
+        mo.hoverColor = mau(c._N$hoverColor || c.hoverColor);
+        mo.disabledColor = mau(c._N$disabledColor);
       } else if (t === 'cc.Widget') {
         mo.top = c._top; mo.bottom = c._bottom; mo.left = c._left; mo.right = c._right;
         mo.alignFlags = c._alignFlags;
@@ -215,6 +280,7 @@ function rut(tuyetDoi, chiMuc, boQua) {
       } else if (t === 'cc.ProgressBar') {
         mo.mode = c._N$mode;
         mo.total = c._N$totalLength;
+        mo.progress = so(c._N$progress, undefined);
 
         // 🔴 barSprite trỏ tới cc.Sprite của MỘT NODE KHÁC (thường là node con "bar").
         // Bỏ sót thì thanh tiến độ dựng ra vẫn hợp lệ, vẫn hiện, nhưng KHÔNG BAO GIỜ
@@ -227,6 +293,26 @@ function rut(tuyetDoi, chiMuc, boQua) {
             boQua.push({ loai: 'ref', node: n._name, chi_tiet: 'barSprite', ly_do: 'không lần ra node chủ' });
           }
         }
+      } else if (t === 'cc.Layout') {
+        // 🔴 TRƯỚC ĐÂY KHÔNG RÚT GÌ CẢ, nên bộ dựng lấy MẶC ĐỊNH: lưới 40×40.
+        // Go88 dùng hàng ngang 88×32 có khoảng đệm ÂM. Hậu quả: nhãn số dư trên ghế bị
+        // xếp vào một ô lưới rồi biến mất, chỉ còn trơ lại biểu tượng "$" bên cạnh —
+        // prefab vẫn hợp lệ, vẫn không lỗi.
+        mo.layoutType = so(c._N$layoutType, 2);
+        mo.resize = so(c._resize, 0);
+        mo.layoutW = so((c._layoutSize || {}).width, 100);
+        mo.layoutH = so((c._layoutSize || {}).height, 100);
+        mo.cellW = so((c._N$cellSize || {}).width, 40);
+        mo.cellH = so((c._N$cellSize || {}).height, 40);
+        mo.startAxis = so(c._N$startAxis, 0);
+        mo.padL = so(c._N$paddingLeft, 0);
+        mo.padR = so(c._N$paddingRight, 0);
+        mo.padT = so(c._N$paddingTop, 0);
+        mo.padB = so(c._N$paddingBottom, 0);
+        mo.spacingX = so(c._N$spacingX, 0);
+        mo.spacingY = so(c._N$spacingY, 0);
+        mo.verticalDirection = so(c._N$verticalDirection, 1);
+        mo.horizontalDirection = so(c._N$horizontalDirection, 0);
       }
       kq.comps.push(mo);
     }

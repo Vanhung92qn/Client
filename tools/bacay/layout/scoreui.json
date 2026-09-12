@@ -55,7 +55,8 @@
         ],
         "comps": [
           {
-            "loai": "cc.SkeletonAnimation"
+            "loai": "cc.SkeletonAnimation",
+            "batTat": true
           }
         ],
         "con": [
@@ -79,6 +80,7 @@
             "comps": [
               {
                 "loai": "cc.Sprite",
+                "batTat": true,
                 "frame": "borderThangSapLang"
               }
             ],
@@ -104,10 +106,12 @@
             "comps": [
               {
                 "loai": "cc.Label",
+                "batTat": true,
                 "text": "BÙ",
                 "co": 20,
                 "canhNgang": 1,
-                "font": "Font_HelveticaNeue_Effect-export.fnt"
+                "font": "Font_HelveticaNeue_Effect-export.fnt",
+                "lineHeight": 50
               }
             ],
             "con": []
@@ -132,10 +136,12 @@
             "comps": [
               {
                 "loai": "cc.Label",
+                "batTat": true,
                 "text": "XĐIỂM",
                 "co": 20,
                 "canhNgang": 1,
-                "font": "Font_HelveticaNeue_Effect-export.fnt"
+                "font": "Font_HelveticaNeue_Effect-export.fnt",
+                "lineHeight": 50
               }
             ],
             "con": []
@@ -160,10 +166,12 @@
             "comps": [
               {
                 "loai": "cc.Label",
+                "batTat": true,
                 "text": "BA CÂY",
                 "co": 20,
                 "canhNgang": 1,
-                "font": "Font_HelveticaNeue_Effect-export.fnt"
+                "font": "Font_HelveticaNeue_Effect-export.fnt",
+                "lineHeight": 50
               }
             ],
             "con": []
@@ -190,7 +198,9 @@
         "comps": [
           {
             "loai": "sp.Skeleton",
+            "batTat": true,
             "skel": "caorua_tinh diem.json",
+            "anim": "3tay",
             "loop": false
           }
         ],
@@ -216,8 +226,11 @@
         "comps": [
           {
             "loai": "sp.Skeleton",
+            "batTat": true,
             "skel": "Go_JQK.json",
-            "loop": false
+            "anim": "animation",
+            "loop": false,
+            "playTimes": 1
           }
         ],
         "con": []
@@ -242,8 +255,10 @@
         "comps": [
           {
             "loai": "sp.Skeleton",
+            "batTat": true,
             "skel": "caorua_tinh diem.json",
-            "anim": "2 nha hoa diem"
+            "anim": "2 nha hoa diem",
+            "loop": true
           }
         ],
         "con": []

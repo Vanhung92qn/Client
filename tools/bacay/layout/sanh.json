@@ -115,6 +115,7 @@
     "comps": [
       {
         "loai": "cc.Widget",
+        "batTat": true,
         "alignFlags": 45,
         "originalWidth": 1560,
         "originalHeight": 720
@@ -141,11 +142,13 @@
         "comps": [
           {
             "loai": "cc.Sprite",
+            "batTat": true,
             "frame": "bg",
             "sizeMode": 0
           },
           {
             "loai": "cc.Widget",
+            "batTat": true,
             "alignFlags": 45,
             "originalWidth": 1560,
             "originalHeight": 720
@@ -173,6 +176,7 @@
         "comps": [
           {
             "loai": "cc.Widget",
+            "batTat": true,
             "alignFlags": 45,
             "originalWidth": 0,
             "originalHeight": 0
@@ -199,11 +203,14 @@
             "comps": [
               {
                 "loai": "sp.Skeleton",
+                "batTat": true,
                 "skel": "go_halloween_ce351eae.json",
-                "anim": "left"
+                "anim": "left",
+                "loop": true
               },
               {
                 "loai": "cc.Widget",
+                "batTat": true,
                 "top": 112.07400000000001,
                 "alignFlags": 1,
                 "originalWidth": 0,
@@ -232,11 +239,14 @@
             "comps": [
               {
                 "loai": "sp.Skeleton",
+                "batTat": true,
                 "skel": "go_halloween_ce351eae.json",
-                "anim": "right"
+                "anim": "right",
+                "loop": true
               },
               {
                 "loai": "cc.Widget",
+                "batTat": true,
                 "top": 112.07400000000001,
                 "alignFlags": 1,
                 "originalWidth": 0,
@@ -265,11 +275,14 @@
             "comps": [
               {
                 "loai": "sp.Skeleton",
+                "batTat": true,
                 "skel": "go_halloween_ce351eae.json",
-                "anim": "avatar"
+                "anim": "avatar",
+                "loop": true
               },
               {
                 "loai": "cc.Widget",
+                "batTat": true,
                 "bottom": 137.024,
                 "left": 41.82600000000002,
                 "alignFlags": 12,
@@ -299,11 +312,14 @@
             "comps": [
               {
                 "loai": "sp.Skeleton",
+                "batTat": true,
                 "skel": "go_halloween_ce351eae.json",
-                "anim": "rightdown"
+                "anim": "rightdown",
+                "loop": true
               },
               {
                 "loai": "cc.Widget",
+                "batTat": true,
                 "bottom": 118.566,
                 "right": 38.24599999999998,
                 "alignFlags": 36,
@@ -335,6 +351,7 @@
         "comps": [
           {
             "loai": "cc.Widget",
+            "batTat": true,
             "alignFlags": 5,
             "originalWidth": 0,
             "originalHeight": 720
@@ -349,7 +366,7 @@
         "w": 1560,
         "h": 92,
         "anchorX": 0.5,
-        "anchorY": 0.5,
+        "anchorY": 0,
         "scaleX": 1,
         "scaleY": 1,
         "active": true,
@@ -362,6 +379,7 @@
         "comps": [
           {
             "loai": "cc.Widget",
+            "batTat": true,
             "alignFlags": 4,
             "originalWidth": 0,
             "originalHeight": 0
@@ -375,7 +393,7 @@
             "w": 1560,
             "h": 200,
             "anchorX": 0.5,
-            "anchorY": 0.5,
+            "anchorY": 0,
             "scaleX": 1,
             "scaleY": 1,
             "active": true,
@@ -388,11 +406,13 @@
             "comps": [
               {
                 "loai": "cc.Sprite",
+                "batTat": true,
                 "frame": "borderMask",
                 "sizeMode": 0
               },
               {
                 "loai": "cc.Widget",
+                "batTat": true,
                 "bottom": -2,
                 "alignFlags": 4,
                 "originalWidth": 0,
@@ -440,8 +460,10 @@
                 "comps": [
                   {
                     "loai": "sp.Skeleton",
+                    "batTat": true,
                     "skel": "lobbytet_go.json",
-                    "anim": "avatar"
+                    "anim": "avatar",
+                    "loop": true
                   }
                 ],
                 "con": []
@@ -466,8 +488,10 @@
                 "comps": [
                   {
                     "loai": "sp.Skeleton",
+                    "batTat": true,
                     "skel": "lobbytet_go.json",
-                    "anim": "rightdown"
+                    "anim": "rightdown",
+                    "loop": true
                   }
                 ],
                 "con": []
@@ -513,11 +537,14 @@
                 "comps": [
                   {
                     "loai": "sp.Skeleton",
+                    "batTat": true,
                     "skel": "go_trungthu.json",
-                    "anim": "avatar"
+                    "anim": "avatar",
+                    "loop": true
                   },
                   {
                     "loai": "cc.Widget",
+                    "batTat": true,
                     "bottom": 87,
                     "left": 50,
                     "alignFlags": 12,
@@ -547,11 +574,14 @@
                 "comps": [
                   {
                     "loai": "sp.Skeleton",
+                    "batTat": true,
                     "skel": "go_trungthu.json",
-                    "anim": "downright"
+                    "anim": "downright",
+                    "loop": true
                   },
                   {
                     "loai": "cc.Widget",
+                    "batTat": true,
                     "bottom": 67,
                     "right": 24,
                     "alignFlags": 36,
@@ -602,8 +632,10 @@
                 "comps": [
                   {
                     "loai": "sp.Skeleton",
+                    "batTat": true,
                     "skel": "go_304.json",
-                    "anim": "avatar"
+                    "anim": "avatar",
+                    "loop": true
                   }
                 ],
                 "con": []
@@ -628,8 +660,10 @@
                 "comps": [
                   {
                     "loai": "sp.Skeleton",
+                    "batTat": true,
                     "skel": "go_304.json",
-                    "anim": "downright"
+                    "anim": "downright",
+                    "loop": true
                   }
                 ],
                 "con": []
@@ -675,8 +709,10 @@
                 "comps": [
                   {
                     "loai": "sp.Skeleton",
+                    "batTat": true,
                     "skel": "go_wc.json",
-                    "anim": "avatar"
+                    "anim": "avatar",
+                    "loop": true
                   }
                 ],
                 "con": []
@@ -701,8 +737,10 @@
                 "comps": [
                   {
                     "loai": "sp.Skeleton",
+                    "batTat": true,
                     "skel": "go_wc.json",
-                    "anim": "downright"
+                    "anim": "downright",
+                    "loop": true
                   }
                 ],
                 "con": []
@@ -729,18 +767,21 @@
             "comps": [
               {
                 "loai": "cc.Sprite",
+                "batTat": true,
                 "frame": "boderFooterRight",
                 "sizeMode": 0
               },
               {
                 "loai": "cc.Widget",
+                "batTat": true,
                 "top": -4,
                 "alignFlags": 12,
                 "originalWidth": 0,
                 "originalHeight": 100
               },
               {
-                "loai": "cc.Button"
+                "loai": "cc.Button",
+                "batTat": true
               }
             ],
             "con": [
@@ -764,8 +805,10 @@
                 "comps": [
                   {
                     "loai": "sp.Skeleton",
+                    "batTat": true,
                     "skel": "go_xmas.json",
-                    "anim": "avatar"
+                    "anim": "avatar",
+                    "loop": true
                   }
                 ],
                 "con": []
@@ -790,6 +833,7 @@
                 "comps": [
                   {
                     "loai": "cc.Sprite",
+                    "batTat": true,
                     "frame": "avatar_Xmas"
                   }
                 ],
@@ -801,7 +845,7 @@
                 "y": 16,
                 "w": 112,
                 "h": 112,
-                "anchorX": 0.5,
+                "anchorX": 0,
                 "anchorY": 0.5,
                 "scaleX": 1,
                 "scaleY": 1,
@@ -815,11 +859,13 @@
                 "comps": [
                   {
                     "loai": "cc.Sprite",
+                    "batTat": true,
                     "frame": "icoAvatar",
                     "sizeMode": 0
                   },
                   {
                     "loai": "cc.Widget",
+                    "batTat": true,
                     "bottom": 10,
                     "left": 10,
                     "alignFlags": 12,
@@ -847,7 +893,10 @@
                     ],
                     "comps": [
                       {
-                        "loai": "cc.Mask"
+                        "loai": "cc.Mask",
+                        "batTat": false,
+                        "kieu": 1,
+                        "segments": 52
                       }
                     ],
                     "con": [
@@ -870,7 +919,16 @@
                         ],
                         "comps": [
                           {
-                            "loai": "cc.Button"
+                            "loai": "cc.Button",
+                            "batTat": true,
+                            "zoomScale": 1.05,
+                            "transition": 3,
+                            "normalColor": [
+                              214,
+                              214,
+                              214,
+                              255
+                            ]
                           }
                         ],
                         "con": []
@@ -897,6 +955,7 @@
                     "comps": [
                       {
                         "loai": "cc.Sprite",
+                        "batTat": true,
                         "frame": "iconVipLobby"
                       }
                     ],
@@ -923,10 +982,12 @@
                 ],
                 "comps": [
                   {
-                    "loai": "cc.Button"
+                    "loai": "cc.Button",
+                    "batTat": true
                   },
                   {
                     "loai": "cc.Widget",
+                    "batTat": true,
                     "top": 15.600000000000001,
                     "alignFlags": 1,
                     "originalWidth": 0,
@@ -940,7 +1001,7 @@
                     "y": 16.54,
                     "w": 102,
                     "h": 20,
-                    "anchorX": 0.5,
+                    "anchorX": 0,
                     "anchorY": 1,
                     "scaleX": 1,
                     "scaleY": 1,
@@ -954,10 +1015,12 @@
                     "comps": [
                       {
                         "loai": "cc.Label",
+                        "batTat": true,
                         "text": "SAMUEL",
                         "co": 16,
                         "canhNgang": 1,
-                        "font": "Font-export.fnt"
+                        "font": "Font-export.fnt",
+                        "spacingX": -1
                       }
                     ],
                     "con": []
@@ -983,7 +1046,8 @@
                 ],
                 "comps": [
                   {
-                    "loai": "cc.Button"
+                    "loai": "cc.Button",
+                    "batTat": true
                   }
                 ],
                 "con": [
@@ -993,7 +1057,7 @@
                     "y": 17.22,
                     "w": 213,
                     "h": 20,
-                    "anchorX": 0.5,
+                    "anchorX": 0,
                     "anchorY": 1,
                     "scaleX": 1,
                     "scaleY": 1,
@@ -1007,10 +1071,13 @@
                     "comps": [
                       {
                         "loai": "cc.Label",
+                        "batTat": true,
                         "text": "$ 9.999.000.000",
                         "co": 16,
                         "canhNgang": 1,
-                        "font": "Font-export.fnt"
+                        "canhDoc": 1,
+                        "font": "Font-export.fnt",
+                        "spacingX": -1
                       }
                     ],
                     "con": []
@@ -1036,7 +1103,27 @@
                 ],
                 "comps": [
                   {
-                    "loai": "cc.Button"
+                    "loai": "cc.Button",
+                    "batTat": true,
+                    "transition": 3,
+                    "normalColor": [
+                      230,
+                      230,
+                      230,
+                      255
+                    ],
+                    "pressedColor": [
+                      200,
+                      200,
+                      200,
+                      255
+                    ],
+                    "disabledColor": [
+                      120,
+                      120,
+                      120,
+                      200
+                    ]
                   }
                 ],
                 "con": [
@@ -1060,6 +1147,7 @@
                     "comps": [
                       {
                         "loai": "cc.Sprite",
+                        "batTat": true,
                         "frame": "icTinhChi",
                         "sizeMode": 0,
                         "type": 1
@@ -1086,10 +1174,16 @@
                         "comps": [
                           {
                             "loai": "cc.Label",
+                            "batTat": true,
                             "text": "Kích Hoạt Nhận 1,500 VND",
                             "co": 18,
                             "canhNgang": 1,
-                            "font": "Font_HelveticaNeue_Effect-export.fnt"
+                            "canhDoc": 1,
+                            "font": "Font_HelveticaNeue_Effect-export.fnt",
+                            "lineHeight": 32,
+                            "overflow": 3,
+                            "wrap": false,
+                            "spacingX": -3
                           }
                         ],
                         "con": []
@@ -1120,19 +1214,38 @@
             "comps": [
               {
                 "loai": "cc.Sprite",
+                "batTat": true,
                 "frame": "boderFooterLeft"
               },
               {
                 "loai": "cc.Widget",
+                "batTat": true,
                 "alignFlags": 36,
                 "originalWidth": 0,
                 "originalHeight": 0
               },
               {
-                "loai": "cc.Layout"
+                "loai": "cc.Layout",
+                "batTat": false,
+                "layoutType": 1,
+                "resize": 0,
+                "layoutW": 100,
+                "layoutH": 100,
+                "cellW": 40,
+                "cellH": 40,
+                "startAxis": 0,
+                "padL": 0,
+                "padR": 20,
+                "padT": 0,
+                "padB": 0,
+                "spacingX": 0,
+                "spacingY": 0,
+                "verticalDirection": 1,
+                "horizontalDirection": 1
               },
               {
-                "loai": "cc.Button"
+                "loai": "cc.Button",
+                "batTat": true
               }
             ],
             "con": [
@@ -1156,8 +1269,10 @@
                 "comps": [
                   {
                     "loai": "sp.Skeleton",
+                    "batTat": true,
                     "skel": "go_xmas.json",
-                    "anim": "rightdown"
+                    "anim": "rightdown",
+                    "loop": true
                   }
                 ],
                 "con": []
@@ -1181,10 +1296,20 @@
                 ],
                 "comps": [
                   {
-                    "loai": "cc.Button"
+                    "loai": "cc.Button",
+                    "batTat": true,
+                    "zoomScale": 1.1,
+                    "transition": 3,
+                    "hoverColor": [
+                      214,
+                      214,
+                      214,
+                      255
+                    ]
                   },
                   {
                     "loai": "cc.Widget",
+                    "batTat": true,
                     "top": 2,
                     "bottom": -2,
                     "right": 20,
@@ -1214,6 +1339,7 @@
                     "comps": [
                       {
                         "loai": "cc.Sprite",
+                        "batTat": true,
                         "frame": "txtChoiNhanh"
                       }
                     ],
@@ -1239,6 +1365,7 @@
                     "comps": [
                       {
                         "loai": "cc.Sprite",
+                        "batTat": true,
                         "frame": "icChoiNhanh"
                       }
                     ],
@@ -1265,10 +1392,14 @@
                 ],
                 "comps": [
                   {
-                    "loai": "cc.Button"
+                    "loai": "cc.Button",
+                    "batTat": true,
+                    "zoomScale": 1.1,
+                    "transition": 3
                   },
                   {
                     "loai": "cc.Widget",
+                    "batTat": true,
                     "left": 25,
                     "alignFlags": 13,
                     "originalWidth": 0,
@@ -1296,6 +1427,7 @@
                     "comps": [
                       {
                         "loai": "cc.Sprite",
+                        "batTat": true,
                         "frame": "txtTaoBan"
                       }
                     ],
@@ -1321,6 +1453,7 @@
                     "comps": [
                       {
                         "loai": "cc.Sprite",
+                        "batTat": true,
                         "frame": "icTaoBan"
                       }
                     ],
@@ -1338,7 +1471,7 @@
         "y": 176,
         "w": 206,
         "h": 362,
-        "anchorX": 0.5,
+        "anchorX": 0,
         "anchorY": 1,
         "scaleX": 1,
         "scaleY": 1,
@@ -1352,6 +1485,7 @@
         "comps": [
           {
             "loai": "cc.Sprite",
+            "batTat": true,
             "frame": "borderLeft"
           }
         ],
@@ -1375,7 +1509,16 @@
             ],
             "comps": [
               {
-                "loai": "cc.Button"
+                "loai": "cc.Button",
+                "batTat": true,
+                "zoomScale": 1.05,
+                "transition": 3,
+                "normalColor": [
+                  214,
+                  214,
+                  214,
+                  255
+                ]
               }
             ],
             "con": [
@@ -1399,6 +1542,7 @@
                 "comps": [
                   {
                     "loai": "cc.Sprite",
+                    "batTat": true,
                     "frame": "icHuongDan",
                     "sizeMode": 0
                   }
@@ -1426,7 +1570,16 @@
             ],
             "comps": [
               {
-                "loai": "cc.Button"
+                "loai": "cc.Button",
+                "batTat": true,
+                "zoomScale": 1.05,
+                "transition": 3,
+                "normalColor": [
+                  214,
+                  214,
+                  214,
+                  255
+                ]
               }
             ],
             "con": [
@@ -1450,6 +1603,7 @@
                 "comps": [
                   {
                     "loai": "cc.Sprite",
+                    "batTat": true,
                     "frame": "icRank",
                     "sizeMode": 0
                   }
@@ -1477,7 +1631,16 @@
             ],
             "comps": [
               {
-                "loai": "cc.Button"
+                "loai": "cc.Button",
+                "batTat": true,
+                "zoomScale": 1.05,
+                "transition": 3,
+                "normalColor": [
+                  214,
+                  214,
+                  214,
+                  255
+                ]
               }
             ],
             "con": [
@@ -1501,6 +1664,7 @@
                 "comps": [
                   {
                     "loai": "cc.Sprite",
+                    "batTat": true,
                     "frame": "iConNews",
                     "sizeMode": 0
                   }
@@ -1531,6 +1695,7 @@
         "comps": [
           {
             "loai": "cc.Sprite",
+            "batTat": true,
             "frame": null
           }
         ],
@@ -1555,6 +1720,7 @@
             "comps": [
               {
                 "loai": "cc.Sprite",
+                "batTat": true,
                 "frame": "tien"
               }
             ],

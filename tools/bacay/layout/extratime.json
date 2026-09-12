@@ -50,10 +50,13 @@
         "comps": [
           {
             "loai": "cc.Label",
+            "batTat": true,
             "text": "Hòa",
             "co": 45.39999999999999,
             "canhNgang": 1,
-            "font": null
+            "canhDoc": 1,
+            "font": null,
+            "lineHeight": 62.70000000000005
           }
         ],
         "con": []
@@ -78,8 +81,10 @@
         "comps": [
           {
             "loai": "sp.Skeleton",
+            "batTat": true,
             "skel": "caorua_tinh diem.json",
-            "anim": "sobaitiep"
+            "anim": "sobaitiep",
+            "loop": true
           }
         ],
         "con": []

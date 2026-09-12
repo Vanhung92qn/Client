@@ -211,10 +211,18 @@ function layToken() {
             });
         },
 
-        /** Danh sách bàn theo mức cược. `bet = 0` là lấy tất cả. */
+        /**
+         * Danh sách bàn. Bỏ trống `bet` là lấy TẤT CẢ các mức.
+         *
+         * 🔴 Phải KHÔNG GỬI khoá `bet`, chứ không phải gửi `bet: 0`. Server đọc nó thành
+         * `long?`: vắng khoá là "mọi mức", còn có khoá thì là bộ LỌC. Gửi 0 nghĩa là
+         * "chỉ lấy bàn có mức cược bằng 0" — không bàn nào như thế, nên sảnh trả về
+         * rỗng và màn hình trắng trơn mà không một lỗi nào được in ra.
+         */
         danhSachBan: function (bet) {
+            var d = bet ? { bet: bet } : {};
             return this.net.gui(MSG.ZONE_CMD, {
-                g: BaCayPha.GAME_ID, c: CHUNG.ROOM_LIST, d: { bet: bet || 0 },
+                g: BaCayPha.GAME_ID, c: CHUNG.ROOM_LIST, d: d,
             });
         },
 

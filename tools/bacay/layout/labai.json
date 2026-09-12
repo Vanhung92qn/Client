@@ -36,7 +36,14 @@
     ],
     "comps": [
       {
-        "loai": "cc.Button"
+        "loai": "cc.Button",
+        "batTat": true,
+        "normalColor": [
+          214,
+          214,
+          214,
+          255
+        ]
       }
     ],
     "con": [
@@ -79,8 +86,10 @@
             "comps": [
               {
                 "loai": "sp.Skeleton",
+                "batTat": true,
                 "skel": "EffectCard.json",
-                "anim": "animation"
+                "anim": "animation",
+                "loop": true
               }
             ],
             "con": []
@@ -107,6 +116,7 @@
         "comps": [
           {
             "loai": "cc.Sprite",
+            "batTat": true,
             "frame": "icCardback_dup2",
             "sizeMode": 0
           }
@@ -133,6 +143,7 @@
         "comps": [
           {
             "loai": "cc.Sprite",
+            "batTat": true,
             "frame": "icCardback_dup2",
             "sizeMode": 0
           }

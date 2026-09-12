@@ -31,6 +31,7 @@
     "comps": [
       {
         "loai": "cc.Sprite",
+        "batTat": true,
         "frame": "ChipGreen"
       }
     ],

@@ -60,7 +60,9 @@ const HOAN = {
 const KHAC_CO_CHU_DICH = {
   // Gốc toàn màn hình mang canvas Roy88, và với bàn thì còn được THÊM Widget kéo bốn
   // cạnh (Go88 không cần vì họ fitWidth).
-  '': new Set(['x', 'y', 'w', 'h', 'widget', 'comps']),
+  // `props` ở đây là cc.Widget._originalWidth/Height — kích thước canvas Roy88
+  // (1561×732) thay cho Go88 (1560×720). Cùng một lý do với `w`/`h`.
+  '': new Set(['x', 'y', 'w', 'h', 'widget', 'comps', 'props']),
 
 };
 
@@ -87,6 +89,15 @@ const NEN_PHONG_TO = new Set(['bgTlmn', 'ld_bg']);
  */
 const NEO_THEM = new Set(['icChatRoom', 'icExit_2']);
 
+/**
+ * Node được CHO GIÃN bằng màn hình — xem GIAN_BANG_CHA trong gen-prefab.js.
+ *
+ * `HUD` của Go88 là 0×0 với Widget "căn giữa, không kéo". Với họ thì vô hại vì fitWidth
+ * khoá bề rộng. Với ta thì neo con vào "mép phải của HUD" là neo vào đúng giữa màn hình:
+ * nút chat và nút thoát xếp sát nhau ở giữa, không một lỗi nào được in ra.
+ */
+const GIAN_THEM = new Set(['HUD']);
+
 /** Sai số cho phép khi so số thực — Cocos ghi toạ độ dạng dấu phẩy động. */
 const SAI_SO = 0.01;
 
@@ -105,7 +116,16 @@ function dacDiem(mang, goc) {
 
     const p = n._position || {};
     const cs = n._contentSize || {};
-    const ap = n._anchorPoint || {};
+    // 🔴 Xem chú thích ở extract-go88.js: `_anchorPoint` vắng HẲN thì mặc định là
+    // (0.5, 0.5) của node; còn khi đã ghi ra mà thiếu một thành phần thì thành phần
+    // đó là **0** (mặc định của cc.Vec2).
+    //
+    // ⚠️ Bộ kiểm này TỪNG MANG ĐÚNG LỖI mà nó có nhiệm vụ bắt: cả hai bên cùng mặc
+    // định 0.5 nên lúc nào cũng khớp, và 79 node lệch neo đi lọt sạch. Bộ kiểm dùng
+    // chung một giả định sai với thứ nó kiểm thì không kiểm được gì cả.
+    const apGoc = n._anchorPoint;
+    const neoMacDinh = apGoc ? 0 : 0.5;
+    const ap = apGoc || {};
     const c = n._color || {};
     const trs = n._trs && n._trs.array ? n._trs.array : null;
 
@@ -114,8 +134,8 @@ function dacDiem(mang, goc) {
       y: trs ? trs[1] : (p.y || 0),
       w: cs.width || 0,
       h: cs.height || 0,
-      anchorX: ap.x === undefined ? 0.5 : ap.x,
-      anchorY: ap.y === undefined ? 0.5 : ap.y,
+      anchorX: ap.x === undefined ? neoMacDinh : ap.x,
+      anchorY: ap.y === undefined ? neoMacDinh : ap.y,
       scaleX: trs ? trs[7] : (n._scaleX === undefined ? 1 : n._scaleX),
       scaleY: trs ? trs[8] : (n._scaleY === undefined ? 1 : n._scaleY),
       r: c.r === undefined ? 255 : c.r,
@@ -136,6 +156,49 @@ function dacDiem(mang, goc) {
           }
         }
         return '';
+      })(),
+
+      /**
+       * Thuộc tính BÊN TRONG từng component.
+       *
+       * 🔴 Đây từng là chỗ mù lớn nhất của bộ kiểm này: nó so tên loại component
+       * ("có cc.Layout không") mà không so component đó được cấu hình ra sao. Nhờ vậy
+       * một `cc.Layout` dựng bằng MẶC ĐỊNH (lưới 40×40) vẫn khớp với `cc.Layout` của
+       * Go88 (hàng ngang 88×32, đệm âm) — và nhãn số dư trên ghế biến mất mà 165/165
+       * node vẫn báo "không lệch chỗ nào".
+       *
+       * Cùng một hình dạng với ba lần sót trước: một trường không được rút, hậu quả
+       * chỉ thấy bằng mắt.
+       */
+      props: (() => {
+        const ra = {};
+        for (const x of n._components || []) {
+          const c = mang[x.__id__];
+          if (!c || typeof c.__type__ !== 'string' || c.__type__.indexOf('.') < 0) continue;
+          for (const [k, v] of Object.entries(c)) {
+            // Bỏ những thứ KHÔNG so được giữa hai dự án: danh tính, tham chiếu asset
+            // (uuid khác nhau là đương nhiên) và tham chiếu node (chỉ số mảng khác).
+            if (k === '__type__' || k === '_name' || k === '_objFlags' || k === '_id'
+              || k === 'node' || k === '_materials') continue;
+            if (v === null || v === undefined) continue;
+
+            if (typeof v === 'object') {
+              if (v.__uuid__ !== undefined || v.__id__ !== undefined) continue;
+              // Phẳng hoá cc.Size / cc.Vec2 / cc.Color để so từng thành phần.
+              for (const [k2, v2] of Object.entries(v)) {
+                if (k2 === '__type__') continue;
+                if (typeof v2 === 'number' || typeof v2 === 'boolean') {
+                  ra[`${c.__type__}.${k}.${k2}`] = v2;
+                }
+              }
+              continue;
+            }
+            if (typeof v === 'number' || typeof v === 'boolean' || typeof v === 'string') {
+              ra[`${c.__type__}.${k}`] = v;
+            }
+          }
+        }
+        return ra;
       })(),
     });
 
@@ -178,14 +241,38 @@ function main() {
     for (const k of chung) {
       const x = a.get(k);
       const y = b.get(k);
+      // So THUỘC TÍNH COMPONENT: chỉ xét khoá Go88 có ghi ra. Cocos bỏ hẳn khoá mang
+      // giá trị mặc định, nên khoá họ CÓ ghi chính là thứ họ cố ý đặt khác mặc định —
+      // và đó đúng là thứ ta phải mang sang cho bằng được.
+      for (const [khoa, giaTri] of Object.entries(x.props || {})) {
+        const cuaTa = (y.props || {})[khoa];
+        if (gan(giaTri, cuaTa)) continue;
+
+        // Component ĐÃ HOÃN có chủ đích thì đương nhiên không có thuộc tính nào —
+        // đã liệt kê riêng ở phần "hoãn", không đếm hai lần.
+        if (HOAN[khoa.split('.').slice(0, 2).join('.')]) continue;
+
+        // `_useOriginalSize` là trường đời cũ: chỉ 6% cc.Label thật của 2.4 còn ghi nó,
+        // nên thư viện dùng chung cố ý BỎ. Ghi vào là sinh diff thừa ở mọi nhãn.
+        if (khoa === 'cc.Label._useOriginalSize') continue;
+        const tenNode = (k.split('/').pop() || '').split('#')[0];
+        const boQuaP = KHAC_CO_CHU_DICH[k]
+          || (NEO_THEM.has(tenNode) ? new Set(['props']) : null)
+          || (GIAN_THEM.has(tenNode) ? new Set(['props']) : null);
+        if (boQuaP && boQuaP.has('props')) continue;
+        lech.push(`${k || '(gốc)'} . ${khoa}:  Go88 ${JSON.stringify(giaTri)}  ≠  ${JSON.stringify(cuaTa)}`);
+      }
+
       for (const truong of Object.keys(x)) {
+        if (truong === 'props') continue;
         if (gan(x[truong], y[truong])) continue;
 
         const tenNode = (k.split('/').pop() || '').split('#')[0];
         const boQua = KHAC_CO_CHU_DICH[k]
           || (NEN_PHONG_TO.has(tenNode) ? new Set(['w', 'h']) : null)
           || (NEO_THEM.has(tenNode) ? new Set(['comps', 'widget']) : null)
-          || (COMP_THEM.has(tenNode) ? new Set(['comps']) : null);
+          || (COMP_THEM.has(tenNode) ? new Set(['comps']) : null)
+          || (GIAN_THEM.has(tenNode) ? new Set(['w', 'h', 'widget']) : null);
         if (boQua && boQua.has(truong)) {
           coChuDich.push(`${k || '(gốc)'} . ${truong}: Go88 ${JSON.stringify(x[truong])} → ${JSON.stringify(y[truong])}`);
           continue;

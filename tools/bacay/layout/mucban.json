@@ -36,7 +36,16 @@
     ],
     "comps": [
       {
-        "loai": "cc.Button"
+        "loai": "cc.Button",
+        "batTat": true,
+        "zoomScale": 1.03,
+        "transition": 3,
+        "normalColor": [
+          214,
+          214,
+          214,
+          255
+        ]
       }
     ],
     "con": [
@@ -60,6 +69,7 @@
         "comps": [
           {
             "loai": "cc.Sprite",
+            "batTat": true,
             "frame": "roomThuongXD"
           }
         ],
@@ -85,8 +95,10 @@
         "comps": [
           {
             "loai": "sp.Skeleton",
+            "batTat": true,
             "skel": "BANCHOIXOCDIAMD5.json",
-            "anim": "ANIMBANHO"
+            "anim": "ANIMBANHO",
+            "loop": true
           }
         ],
         "con": []
@@ -111,7 +123,10 @@
         "comps": [
           {
             "loai": "sp.Skeleton",
-            "skel": "BANCHOIXOCDIAMD5.json"
+            "batTat": true,
+            "skel": "BANCHOIXOCDIAMD5.json",
+            "anim": "ANIMVIP",
+            "loop": true
           }
         ],
         "con": []
@@ -136,6 +151,7 @@
         "comps": [
           {
             "loai": "cc.ProgressBar",
+            "batTat": true,
             "total": 189,
             "barSpriteNode": "bar"
           }
@@ -147,7 +163,7 @@
             "y": 0,
             "w": 189,
             "h": 40,
-            "anchorX": 0.5,
+            "anchorX": 0,
             "anchorY": 0.5,
             "scaleX": 1,
             "scaleY": 1,
@@ -161,6 +177,7 @@
             "comps": [
               {
                 "loai": "cc.Sprite",
+                "batTat": true,
                 "frame": "loadingonline",
                 "sizeMode": 0,
                 "type": 1
@@ -176,7 +193,7 @@
         "y": 1,
         "w": 60,
         "h": 40,
-        "anchorX": 0.5,
+        "anchorX": 0,
         "anchorY": 0.5,
         "scaleX": 1,
         "scaleY": 1,
@@ -190,6 +207,7 @@
         "comps": [
           {
             "loai": "cc.Sprite",
+            "batTat": true,
             "frame": "loadingBanChung",
             "sizeMode": 0,
             "type": 1
@@ -217,6 +235,7 @@
         "comps": [
           {
             "loai": "cc.Sprite",
+            "batTat": true,
             "frame": "icClock"
           }
         ],
@@ -242,10 +261,13 @@
         "comps": [
           {
             "loai": "cc.Label",
+            "batTat": true,
             "text": "100",
             "co": 21,
             "canhNgang": 1,
-            "font": "Font-export.fnt"
+            "font": "Font-export.fnt",
+            "lineHeight": 130,
+            "spacingX": 2
           }
         ],
         "con": []
@@ -270,9 +292,12 @@
         "comps": [
           {
             "loai": "cc.Label",
+            "batTat": true,
             "co": 30,
             "canhNgang": 1,
-            "font": "Font_Myriad_Number-export.fnt"
+            "font": "Font_Myriad_Number-export.fnt",
+            "lineHeight": 130,
+            "spacingX": -2
           }
         ],
         "con": []
@@ -297,10 +322,12 @@
         "comps": [
           {
             "loai": "cc.Label",
+            "batTat": true,
             "text": "0/9",
             "co": 18,
             "canhNgang": 1,
-            "font": "Font-export.fnt"
+            "font": "Font-export.fnt",
+            "lineHeight": 130
           }
         ],
         "con": []

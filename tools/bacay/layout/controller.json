@@ -1100,11 +1100,13 @@
             "comps": [
               {
                 "loai": "cc.Sprite",
+                "batTat": true,
                 "frame": "@builtin:default_sprite_splash.png@default_sprite_splash",
                 "sizeMode": 0
               },
               {
-                "loai": "cc.BlockInputEvents"
+                "loai": "cc.BlockInputEvents",
+                "batTat": true
               }
             ],
             "con": []
@@ -1129,12 +1131,27 @@
             "comps": [
               {
                 "loai": "cc.Sprite",
+                "batTat": true,
                 "frame": "Button_LatTatCa",
                 "sizeMode": 0,
                 "type": 1
               },
               {
-                "loai": "cc.Button"
+                "loai": "cc.Button",
+                "batTat": true,
+                "transition": 3,
+                "pressedColor": [
+                  255,
+                  255,
+                  255,
+                  255
+                ],
+                "disabledColor": [
+                  255,
+                  255,
+                  255,
+                  255
+                ]
               }
             ],
             "con": []
@@ -1159,6 +1176,7 @@
             "comps": [
               {
                 "loai": "cc.Sprite",
+                "batTat": true,
                 "frame": "Text_NanBai"
               }
             ],
@@ -1186,12 +1204,15 @@
         "comps": [
           {
             "loai": "cc.Sprite",
+            "batTat": true,
             "frame": "borderLoadingBattle",
             "type": 1
           },
           {
             "loai": "cc.ProgressBar",
+            "batTat": true,
             "mode": 2,
+            "progress": 0.9,
             "barSpriteNode": "bar"
           }
         ],
@@ -1202,7 +1223,7 @@
             "y": 0,
             "w": 133,
             "h": 133,
-            "anchorX": 0.5,
+            "anchorX": 0,
             "anchorY": 0.5,
             "scaleX": 1,
             "scaleY": 1,
@@ -1216,9 +1237,17 @@
             "comps": [
               {
                 "loai": "cc.Sprite",
+                "batTat": true,
                 "frame": "icLoadingBattle",
                 "sizeMode": 0,
-                "type": 3
+                "type": 3,
+                "fillType": 2,
+                "fillStart": 0.25,
+                "fillRange": 0.9,
+                "fillCenter": [
+                  0.5,
+                  0.5
+                ]
               }
             ],
             "con": []
@@ -1243,10 +1272,14 @@
             "comps": [
               {
                 "loai": "cc.Label",
+                "batTat": true,
                 "text": "20",
                 "co": 32,
                 "canhNgang": 1,
-                "font": "Font-export.fnt"
+                "canhDoc": 1,
+                "font": "Font-export.fnt",
+                "lineHeight": 130,
+                "spacingX": -4
               }
             ],
             "con": []
@@ -1272,7 +1305,8 @@
         ],
         "comps": [
           {
-            "loai": "cc.Toggle"
+            "loai": "cc.Toggle",
+            "batTat": true
           }
         ],
         "con": [
@@ -1296,6 +1330,7 @@
             "comps": [
               {
                 "loai": "cc.Sprite",
+                "batTat": true,
                 "frame": "borderCheck02_2"
               }
             ],
@@ -1321,8 +1356,10 @@
             "comps": [
               {
                 "loai": "cc.Sprite",
+                "batTat": true,
                 "frame": "icCheck02",
-                "sizeMode": 2
+                "sizeMode": 2,
+                "trimmed": false
               }
             ],
             "con": []
@@ -1333,7 +1370,7 @@
             "y": 34.17,
             "w": 187.62,
             "h": 23.75,
-            "anchorX": 0.5,
+            "anchorX": 0,
             "anchorY": 0.5,
             "scaleX": 1,
             "scaleY": 1,
@@ -1347,9 +1384,11 @@
             "comps": [
               {
                 "loai": "cc.Label",
+                "batTat": true,
                 "text": "Tự động lật",
                 "co": 18.99999999999993,
                 "canhNgang": 1,
+                "canhDoc": 1,
                 "font": "Font-export.fnt"
               }
             ],

@@ -263,7 +263,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "H0HgqoWYgaQ9LvKUD3RVny",
+    "fileId": "2AuJ9eEIAyDETGTFJYk2uU",
     "sync": false
   },
   {
@@ -348,7 +348,7 @@
     "_string": "BÙ",
     "_N$string": "BÙ",
     "_fontSize": 20,
-    "_lineHeight": 24,
+    "_lineHeight": 50,
     "_enableWrapText": false,
     "_N$file": {
       "__uuid__": "f58453e3-ecfc-4f70-8add-ce4c8488da93"
@@ -373,7 +373,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "mqGiT3B3c4meYw7xOpR2C5",
+    "fileId": "Q7zfBwB1HD7oTFYVeW1IIx",
     "sync": false
   },
   {
@@ -458,7 +458,7 @@
     "_string": "XĐIỂM",
     "_N$string": "XĐIỂM",
     "_fontSize": 20,
-    "_lineHeight": 24,
+    "_lineHeight": 50,
     "_enableWrapText": false,
     "_N$file": {
       "__uuid__": "f58453e3-ecfc-4f70-8add-ce4c8488da93"
@@ -483,7 +483,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "topk3oJO1k7nbevuv3jRVC",
+    "fileId": "4HbehcvWlS1VD1gSYLadZu",
     "sync": false
   },
   {
@@ -568,7 +568,7 @@
     "_string": "BA CÂY",
     "_N$string": "BA CÂY",
     "_fontSize": 20,
-    "_lineHeight": 24,
+    "_lineHeight": 50,
     "_enableWrapText": false,
     "_N$file": {
       "__uuid__": "f58453e3-ecfc-4f70-8add-ce4c8488da93"
@@ -593,7 +593,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "Og/eX1oqxHHu5wFxslYYDQ",
+    "fileId": "JLen/+OiwRfF2TQewDrZIv",
     "sync": false
   },
   {
@@ -604,7 +604,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "4LOvVEoSZB0qlteA53EWmZ",
+    "fileId": "gSb8DbZwY8Vztte7ZGGX57",
     "sync": false
   },
   {
@@ -686,7 +686,7 @@
     ],
     "paused": false,
     "defaultSkin": "default",
-    "defaultAnimation": "",
+    "defaultAnimation": "3tay",
     "_preCacheMode": 0,
     "_cacheMode": 0,
     "loop": false,
@@ -697,7 +697,7 @@
     "_frameCache": null,
     "_curFrame": null,
     "_skeletonCache": null,
-    "_animationName": "",
+    "_animationName": "3tay",
     "_animationQueue": [],
     "_headAniInfo": null,
     "_playTimes": 0,
@@ -721,7 +721,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "lBRQr3XvleEcMDC8tcdSKU",
+    "fileId": "m3sN21yY7SUfEGTwD2PXYP",
     "sync": false
   },
   {
@@ -803,7 +803,7 @@
     ],
     "paused": false,
     "defaultSkin": "default",
-    "defaultAnimation": "",
+    "defaultAnimation": "animation",
     "_preCacheMode": 0,
     "_cacheMode": 0,
     "loop": false,
@@ -814,10 +814,10 @@
     "_frameCache": null,
     "_curFrame": null,
     "_skeletonCache": null,
-    "_animationName": "",
+    "_animationName": "animation",
     "_animationQueue": [],
     "_headAniInfo": null,
-    "_playTimes": 0,
+    "_playTimes": 1,
     "_isAniComplete": true,
     "_N$skeletonData": {
       "__uuid__": "f3abf4fe-a32c-4df4-a07e-12277f35a6e7"
@@ -838,7 +838,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "2F7lmXbQO1ZUiyHKPjRFPF",
+    "fileId": "Kzzu8ErvOxtW4+NrvteFFs",
     "sync": false
   },
   {
@@ -955,7 +955,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "d2xguvY6MaLZ5wxqrvr8lw",
+    "fileId": "ao4GKu4ikMwQwM1MF0LUy+",
     "sync": false
   },
   {
@@ -966,7 +966,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "tfy25g1DhSnQ4CMAu/iexw",
+    "fileId": "23gy18FmRDL6Eb4Wj/MV65",
     "sync": false
   },
   {

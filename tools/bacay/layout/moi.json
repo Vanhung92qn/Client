@@ -36,10 +36,13 @@
     ],
     "comps": [
       {
-        "loai": "cc.Button"
+        "loai": "cc.Button",
+        "batTat": true,
+        "transition": 3
       },
       {
         "loai": "cc.Sprite",
+        "batTat": true,
         "frame": "boderAvatar02"
       }
     ],
@@ -64,6 +67,7 @@
         "comps": [
           {
             "loai": "cc.Sprite",
+            "batTat": true,
             "frame": "icPlus02"
           }
         ],

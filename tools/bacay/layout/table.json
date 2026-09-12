@@ -72,7 +72,10 @@
     ],
     "comps": [
       {
-        "loai": "cc.Mask"
+        "loai": "cc.Mask",
+        "batTat": true,
+        "kieu": 0,
+        "segments": 64
       }
     ],
     "con": [
@@ -96,6 +99,7 @@
         "comps": [
           {
             "loai": "cc.Sprite",
+            "batTat": true,
             "frame": "bgTlmn"
           }
         ],
@@ -121,6 +125,7 @@
         "comps": [
           {
             "loai": "cc.Widget",
+            "batTat": true,
             "top": 360,
             "bottom": 360,
             "left": 780,
@@ -150,7 +155,16 @@
             ],
             "comps": [
               {
-                "loai": "cc.Button"
+                "loai": "cc.Button",
+                "batTat": true,
+                "zoomScale": 1.1,
+                "transition": 3,
+                "normalColor": [
+                  214,
+                  214,
+                  214,
+                  255
+                ]
               }
             ],
             "con": [
@@ -174,6 +188,7 @@
                 "comps": [
                   {
                     "loai": "cc.Sprite",
+                    "batTat": true,
                     "frame": "icChatRoom"
                   }
                 ],
@@ -200,7 +215,16 @@
             ],
             "comps": [
               {
-                "loai": "cc.Button"
+                "loai": "cc.Button",
+                "batTat": true,
+                "zoomScale": 1.1,
+                "transition": 3,
+                "normalColor": [
+                  214,
+                  214,
+                  214,
+                  255
+                ]
               }
             ],
             "con": [
@@ -224,6 +248,7 @@
                 "comps": [
                   {
                     "loai": "cc.Sprite",
+                    "batTat": true,
                     "frame": "icExit_2"
                   }
                 ],
@@ -270,6 +295,7 @@
                 "comps": [
                   {
                     "loai": "cc.Sprite",
+                    "batTat": true,
                     "frame": "borderLoadingTableHide"
                   }
                 ],
@@ -281,7 +307,7 @@
                 "y": 1,
                 "w": 0,
                 "h": 50.4,
-                "anchorX": 0.5,
+                "anchorX": 0,
                 "anchorY": 0.5,
                 "scaleX": 1,
                 "scaleY": 1,
@@ -295,7 +321,9 @@
                 "comps": [
                   {
                     "loai": "cc.Label",
+                    "batTat": true,
                     "co": 28,
+                    "canhDoc": 1,
                     "font": "MyriadPro-Bold.ttf"
                   }
                 ],
@@ -307,7 +335,7 @@
                 "y": 1,
                 "w": 0,
                 "h": 50.4,
-                "anchorX": 0.5,
+                "anchorX": 0,
                 "anchorY": 0.5,
                 "scaleX": 1,
                 "scaleY": 1,
@@ -321,8 +349,10 @@
                 "comps": [
                   {
                     "loai": "cc.Label",
+                    "batTat": true,
                     "co": 28,
                     "canhNgang": 1,
+                    "canhDoc": 1,
                     "font": "MyriadPro-Bold.ttf"
                   }
                 ],
@@ -348,6 +378,7 @@
                 "comps": [
                   {
                     "loai": "cc.Sprite",
+                    "batTat": true,
                     "frame": "txtPhong"
                   }
                 ],
@@ -373,6 +404,7 @@
                 "comps": [
                   {
                     "loai": "cc.Sprite",
+                    "batTat": true,
                     "frame": "txtCUoc"
                   }
                 ],
@@ -398,6 +430,7 @@
                 "comps": [
                   {
                     "loai": "cc.Sprite",
+                    "batTat": true,
                     "frame": "borderLoadingTable"
                   }
                 ],
@@ -425,6 +458,7 @@
             "comps": [
               {
                 "loai": "cc.Sprite",
+                "batTat": true,
                 "frame": "caorua_mid_table"
               }
             ],
@@ -450,11 +484,27 @@
             "comps": [
               {
                 "loai": "cc.Sprite",
+                "batTat": true,
                 "frame": "btnDanhbai",
                 "type": 1
               },
               {
-                "loai": "cc.Button"
+                "loai": "cc.Button",
+                "batTat": true,
+                "zoomScale": 1.1,
+                "transition": 3,
+                "pressedColor": [
+                  255,
+                  255,
+                  255,
+                  255
+                ],
+                "disabledColor": [
+                  255,
+                  255,
+                  255,
+                  255
+                ]
               }
             ],
             "con": [
@@ -478,10 +528,14 @@
                 "comps": [
                   {
                     "loai": "cc.Label",
+                    "batTat": true,
                     "text": "BẮT ĐẦU",
                     "co": 18,
                     "canhNgang": 1,
-                    "font": "Font-export.fnt"
+                    "canhDoc": 1,
+                    "font": "Font-export.fnt",
+                    "wrap": false,
+                    "spacingX": -4
                   }
                 ],
                 "con": []
@@ -508,11 +562,27 @@
             "comps": [
               {
                 "loai": "cc.Sprite",
+                "batTat": true,
                 "frame": "btnDanhbai",
                 "type": 1
               },
               {
-                "loai": "cc.Button"
+                "loai": "cc.Button",
+                "batTat": true,
+                "zoomScale": 1.1,
+                "transition": 3,
+                "pressedColor": [
+                  255,
+                  255,
+                  255,
+                  255
+                ],
+                "disabledColor": [
+                  255,
+                  255,
+                  255,
+                  255
+                ]
               }
             ],
             "con": [
@@ -536,10 +606,14 @@
                 "comps": [
                   {
                     "loai": "cc.Label",
+                    "batTat": true,
                     "text": "SẴN SÀNG",
                     "co": 18,
                     "canhNgang": 1,
-                    "font": "Font-export.fnt"
+                    "canhDoc": 1,
+                    "font": "Font-export.fnt",
+                    "wrap": false,
+                    "spacingX": -4
                   }
                 ],
                 "con": []
@@ -566,11 +640,14 @@
             "comps": [
               {
                 "loai": "cc.ProgressBar",
+                "batTat": true,
                 "mode": 2,
+                "progress": 0,
                 "barSpriteNode": "bar"
               },
               {
                 "loai": "cc.Sprite",
+                "batTat": true,
                 "frame": "borderLoadingTableHide"
               }
             ],
@@ -581,7 +658,7 @@
                 "y": 0,
                 "w": 401,
                 "h": 40,
-                "anchorX": 0.5,
+                "anchorX": 0,
                 "anchorY": 0.5,
                 "scaleX": 1,
                 "scaleY": 1,
@@ -595,6 +672,7 @@
                 "comps": [
                   {
                     "loai": "cc.Sprite",
+                    "batTat": true,
                     "frame": "loadingTable",
                     "sizeMode": 0,
                     "type": 3
@@ -622,6 +700,7 @@
                 "comps": [
                   {
                     "loai": "cc.Sprite",
+                    "batTat": true,
                     "frame": "borderLoadingTable"
                   }
                 ],
@@ -647,6 +726,7 @@
                 "comps": [
                   {
                     "loai": "cc.Sprite",
+                    "batTat": true,
                     "frame": "txtVanChoi"
                   }
                 ],
@@ -676,6 +756,7 @@
         "comps": [
           {
             "loai": "cc.Sprite",
+            "batTat": true,
             "frame": "icQuanBai"
           }
         ],
@@ -701,9 +782,11 @@
         "comps": [
           {
             "loai": "cc.Label",
+            "batTat": true,
             "text": "CÀO RÙA",
             "co": 29.5,
             "canhNgang": 1,
+            "canhDoc": 1,
             "font": "MyriadPro-Bold.ttf"
           }
         ],

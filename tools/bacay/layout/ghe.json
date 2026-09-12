@@ -86,6 +86,7 @@
         "comps": [
           {
             "loai": "cc.Sprite",
+            "batTat": true,
             "frame": "boderInfo"
           }
         ],
@@ -110,10 +111,20 @@
             "comps": [
               {
                 "loai": "cc.Sprite",
+                "batTat": true,
                 "frame": "icInfoUser"
               },
               {
-                "loai": "cc.Button"
+                "loai": "cc.Button",
+                "batTat": true,
+                "zoomScale": 1.05,
+                "transition": 3,
+                "normalColor": [
+                  214,
+                  214,
+                  214,
+                  255
+                ]
               }
             ],
             "con": []
@@ -138,10 +149,20 @@
             "comps": [
               {
                 "loai": "cc.Sprite",
+                "batTat": true,
                 "frame": "icKickOut"
               },
               {
-                "loai": "cc.Button"
+                "loai": "cc.Button",
+                "batTat": true,
+                "zoomScale": 1.05,
+                "transition": 3,
+                "normalColor": [
+                  214,
+                  214,
+                  214,
+                  255
+                ]
               }
             ],
             "con": []
@@ -187,6 +208,7 @@
             "comps": [
               {
                 "loai": "cc.Sprite",
+                "batTat": true,
                 "frame": "boderAvatar"
               }
             ],
@@ -211,7 +233,10 @@
             ],
             "comps": [
               {
-                "loai": "cc.Mask"
+                "loai": "cc.Mask",
+                "batTat": false,
+                "kieu": 1,
+                "segments": 64
               }
             ],
             "con": [
@@ -234,7 +259,14 @@
                 ],
                 "comps": [
                   {
-                    "loai": "cc.Button"
+                    "loai": "cc.Button",
+                    "batTat": true,
+                    "normalColor": [
+                      214,
+                      214,
+                      214,
+                      255
+                    ]
                   }
                 ],
                 "con": []
@@ -261,6 +293,7 @@
             "comps": [
               {
                 "loai": "cc.Sprite",
+                "batTat": true,
                 "frame": "icMasterroom"
               }
             ],
@@ -286,6 +319,7 @@
             "comps": [
               {
                 "loai": "cc.Sprite",
+                "batTat": true,
                 "frame": "icMasterroom"
               }
             ],
@@ -311,6 +345,7 @@
             "comps": [
               {
                 "loai": "cc.Sprite",
+                "batTat": true,
                 "frame": "borderCheck02_2"
               }
             ],
@@ -335,6 +370,7 @@
                 "comps": [
                   {
                     "loai": "cc.Sprite",
+                    "batTat": true,
                     "frame": "icCheck02"
                   }
                 ],
@@ -362,6 +398,7 @@
             "comps": [
               {
                 "loai": "cc.Sprite",
+                "batTat": true,
                 "frame": "icExit",
                 "sizeMode": 0
               }
@@ -388,6 +425,7 @@
             "comps": [
               {
                 "loai": "cc.Sprite",
+                "batTat": true,
                 "frame": "D"
               }
             ],
@@ -413,6 +451,7 @@
             "comps": [
               {
                 "loai": "cc.Sprite",
+                "batTat": true,
                 "frame": "SB"
               }
             ],
@@ -438,6 +477,7 @@
             "comps": [
               {
                 "loai": "cc.Sprite",
+                "batTat": true,
                 "frame": "BB"
               }
             ],
@@ -463,6 +503,7 @@
             "comps": [
               {
                 "loai": "cc.Sprite",
+                "batTat": true,
                 "frame": "icExit"
               }
             ],
@@ -490,12 +531,21 @@
         "comps": [
           {
             "loai": "cc.Sprite",
+            "batTat": true,
             "frame": "efLoadingBar",
-            "type": 3
+            "type": 3,
+            "fillType": 2,
+            "fillStart": 0.25,
+            "fillCenter": [
+              0.5,
+              0.5
+            ]
           },
           {
             "loai": "cc.ProgressBar",
+            "batTat": true,
             "mode": 2,
+            "progress": 0,
             "barSpriteNode": "efLoadingBar"
           }
         ],
@@ -520,7 +570,9 @@
             "comps": [
               {
                 "loai": "sp.Skeleton",
+                "batTat": true,
                 "skel": "skeleton_4d9f506e.json",
+                "anim": "DemNguoc10s",
                 "loop": false
               }
             ],
@@ -548,6 +600,7 @@
         "comps": [
           {
             "loai": "cc.Sprite",
+            "batTat": true,
             "frame": "btnMoney"
           }
         ],
@@ -571,7 +624,23 @@
             ],
             "comps": [
               {
-                "loai": "cc.Layout"
+                "loai": "cc.Layout",
+                "batTat": true,
+                "layoutType": 1,
+                "resize": 1,
+                "layoutW": 88.25,
+                "layoutH": 32,
+                "cellW": 40,
+                "cellH": 40,
+                "startAxis": 0,
+                "padL": 0,
+                "padR": -11,
+                "padT": 0,
+                "padB": 0,
+                "spacingX": -5,
+                "spacingY": 0,
+                "verticalDirection": 1,
+                "horizontalDirection": 0
               }
             ],
             "con": [
@@ -595,6 +664,7 @@
                 "comps": [
                   {
                     "loai": "cc.Sprite",
+                    "batTat": true,
                     "frame": "icMoney"
                   }
                 ],
@@ -620,10 +690,14 @@
                 "comps": [
                   {
                     "loai": "cc.Label",
+                    "batTat": true,
                     "text": "?????",
                     "co": 20,
                     "canhNgang": 1,
-                    "font": "Font-export.fnt"
+                    "canhDoc": 1,
+                    "font": "Font-export.fnt",
+                    "lineHeight": 130,
+                    "spacingX": -4
                   }
                 ],
                 "con": []
@@ -650,10 +724,13 @@
             "comps": [
               {
                 "loai": "cc.Label",
+                "batTat": true,
                 "text": "Ẩn Danh Tính",
                 "co": 16,
                 "canhNgang": 1,
-                "font": "SourceSansPro-Regular.ttf"
+                "canhDoc": 1,
+                "font": "SourceSansPro-Regular.ttf",
+                "lineHeight": 60
               }
             ],
             "con": []
@@ -700,8 +777,10 @@
         "comps": [
           {
             "loai": "sp.Skeleton",
+            "batTat": true,
             "skel": "Chat.json",
-            "anim": "animation"
+            "anim": "animation",
+            "loop": true
           }
         ],
         "con": []
@@ -745,6 +824,7 @@
             "comps": [
               {
                 "loai": "cc.Sprite",
+                "batTat": true,
                 "frame": "icBodychat",
                 "sizeMode": 0,
                 "type": 1
@@ -771,6 +851,7 @@
                 "comps": [
                   {
                     "loai": "cc.Sprite",
+                    "batTat": true,
                     "frame": "icHeadChat"
                   }
                 ],
@@ -798,6 +879,7 @@
             "comps": [
               {
                 "loai": "cc.Sprite",
+                "batTat": true,
                 "frame": "TatTay"
               }
             ],
@@ -823,10 +905,13 @@
             "comps": [
               {
                 "loai": "cc.Label",
+                "batTat": true,
                 "text": "Ăn chốt",
                 "co": 28,
                 "canhNgang": 1,
-                "font": "Font_HelveticaNeue-export.fnt"
+                "canhDoc": 1,
+                "font": "Font_HelveticaNeue-export.fnt",
+                "lineHeight": 60
               }
             ],
             "con": []
@@ -872,6 +957,7 @@
             "comps": [
               {
                 "loai": "sp.Skeleton",
+                "batTat": true,
                 "skel": "GietCong.json",
                 "anim": "animation",
                 "loop": false

@@ -46,8 +46,11 @@ var BaCayCard = require('BaCayCard');
                 this.lbHoa.string = vong > 1 ? ('Hoà · vòng ' + vong) : 'Hoà';
             }
             if (this.spBaoHoa) {
+                // 🔴 Tên hoạt cảnh lấy NGAY TRONG PREFAB, không ghi cứng: spine này tên
+                // "sobaitiep". Gọi sai tên thì Cocos đứng im chứ không báo lỗi.
                 this.spBaoHoa.node.active = true;
-                this.spBaoHoa.setAnimation(0, 'animation', false);
+                this.spBaoHoa.setAnimation(
+                    0, this.spBaoHoa._animationName || 'animation', !!this.spBaoHoa.loop);
             }
 
             this.don();

@@ -359,9 +359,18 @@ var BaCayPha = require('BaCayPha');
 
             var self = this;
             if (this.khungBan) {
-                this.khungBan.chayDem(this.ketThucPhaLuc, this.tongPhaMs, function () {
-                    return self.net.gioServer();
-                });
+                // Thanh "ván chơi sắp bắt đầu" chỉ thuộc về lúc CHỜ và lúc CHỐT danh
+                // sách. Từ khi chia bài trở đi, nhịp thời gian nằm ở vòng đếm quanh ghế
+                // và đồng hồ giữa bàn — để nó nằm chình ình giữa bàn suốt ván thì vừa
+                // che mất bài, vừa nói dối là ván sắp bắt đầu trong khi đang chơi dở.
+                var dangCho = this.pha === BaCayPha.CHO || this.pha === BaCayPha.CHOT;
+                if (dangCho) {
+                    this.khungBan.chayDem(this.ketThucPhaLuc, this.tongPhaMs, function () {
+                        return self.net.gioServer();
+                    });
+                } else {
+                    this.khungBan.tatDem();
+                }
             }
 
             // Lớp nắn bài chỉ mở đúng pha của nó, và chỉ cho người ĐANG TRONG VÁN.
@@ -593,18 +602,25 @@ var BaCayPha = require('BaCayPha');
 
         // ── đồng hồ tròn giữa bàn ──────────────────────────────────
 
+        /**
+         * Đồng hồ tròn CHỈ sống trong pha nắn bài — nó là đồng hồ của lớp nắn bài, đi
+         * cùng `NanBai` và nút "Tự động lật" ngay cạnh.
+         *
+         * Go88 để node này TẮT SẴN trong prefab; bật nó ở mọi pha là việc code của ta tự
+         * làm, và kết quả là một vòng đếm nằm lì góc trái màn hình suốt ván, đè lên nút
+         * "Tự động lật". Prefab không sai — cách dùng mới sai.
+         */
         update: function () {
-            if (!this.ketThucPhaLuc) {
-                if (this.demTron) this.demTron.node.active = false;
-                return;
-            }
-            var con = this.ketThucPhaLuc - this.net.gioServer();
-            if (con <= 0) {
-                this.ketThucPhaLuc = 0;
+            var trongPhaNan = this.pha === BaCayPha.NAN_BAI;
+            var con = this.ketThucPhaLuc ? this.ketThucPhaLuc - this.net.gioServer() : 0;
+
+            if (!trongPhaNan || con <= 0) {
+                if (con <= 0) this.ketThucPhaLuc = 0;
                 if (this.demTron) this.demTron.node.active = false;
                 if (this.lbDemGiay) this.lbDemGiay.string = '';
                 return;
             }
+
             if (this.demTron) {
                 this.demTron.node.active = true;
                 this.demTron.progress = Math.min(1, con / Math.max(1, this.tongPhaMs));

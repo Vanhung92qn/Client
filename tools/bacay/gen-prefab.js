@@ -158,6 +158,25 @@ const CAT_BO = {
  * nút rộng 100, tâm ở 670 ⇒ mép ngoài ở 720 ⇒ cách mép màn (780) đúng 60.
  * Giữ nguyên khoảng đó ở mọi bề rộng.
  */
+/**
+ * NODE PHẢI GIÃN BẰNG CHA trước khi neo con vào mép.
+ *
+ * 🔴 Vì sao cần: `HUD` của Go88 có kích thước 0×0 và Widget alignFlags 18
+ * (giữa dọc + giữa ngang, KHÔNG kéo cạnh). Với Go88 thì vô hại — họ fitWidth nên con
+ * đặt ở toạ độ tuyệt đối ±670 lúc nào cũng đúng chỗ.
+ *
+ * Nhưng neo một node con vào "mép phải của HUD" thì mép phải ấy nằm ở ĐÚNG GIỮA màn
+ * hình, vì HUD không có bề rộng. Kết quả: nút chat và nút thoát xếp sát nhau giữa màn,
+ * cách nhau đúng 220px — và không có lỗi nào được in ra.
+ *
+ * Cho HUD kéo cả bốn cạnh thì mép của nó thành mép màn hình thật. Con KHÔNG bị xê dịch:
+ * toạ độ con tính từ ĐIỂM NEO của cha (0.5, 0.5), mà HUD nở đều hai phía nên điểm neo
+ * đứng yên.
+ */
+const GIAN_BANG_CHA = {
+  BanCaoRua: ['HUD'],
+};
+
 const NEO_MEP = {
   BanCaoRua: {
     icChatRoom: { alignFlags: 32, right: 60 },   // 32 = RIGHT
@@ -226,26 +245,55 @@ function dungComps(n, ctx) {
   const ra = [];
 
   for (const c of n.comps) {
+    const truocKhiThem = ra.length;
     switch (c.loai) {
       case 'cc.Sprite': {
         const uuid = ctx.traFrame(c.frame, n.ten);
-        ra.push(P.sprite(uuid, { type: c.type, sizeMode: c.sizeMode }));
+        const sp = P.sprite(uuid, { type: c.type, sizeMode: c.sizeMode, trimmed: c.trimmed });
+        // Tham số ĐỔ DẦN — thư viện dùng chung chưa nhận, đặt thẳng vào dữ liệu.
+        // `_fillType: 2` là đổ theo vòng tròn: vòng đếm ngược quanh ảnh đại diện.
+        if (c.fillType != null) sp.data._fillType = c.fillType;
+        if (c.fillStart != null) sp.data._fillStart = c.fillStart;
+        if (c.fillRange != null) sp.data._fillRange = c.fillRange;
+        if (c.fillCenter) {
+          sp.data._fillCenter = { __type__: 'cc.Vec2', x: c.fillCenter[0], y: c.fillCenter[1] };
+        }
+        ra.push(sp);
         break;
       }
       case 'cc.Label': {
         const o = { size: c.co, hAlign: c.canhNgang };
+        if (c.canhDoc != null) o.vAlign = c.canhDoc;
+        if (c.spacingX != null) o.spacingX = c.spacingX;
+        if (c.overflow != null) o.overflow = c.overflow;
+        if (c.wrap != null) o.wrap = c.wrap;
+        // Chiều cao dòng: thiếu thì thư viện lấy ≈ cỡ chữ và chữ bị cắt cụt.
+        if (c.lineHeight != null) o.lineHeight = c.lineHeight;
         if (c.font) {
           const u = ctx.traTep(c.font, n.ten);
           if (u) o.font = u;
         }
-        ra.push(P.label(c.text == null ? '' : String(c.text), o));
+        const lb = P.label(c.text == null ? '' : String(c.text), o);
+        // Thư viện ghi cứng `_spacingX: 0`; Go88 kéo chữ sát lại bằng số âm.
+        if (c.spacingX != null) lb.data._spacingX = c.spacingX;
+        ra.push(lb);
         break;
       }
-      case 'cc.Button':
-        ra.push(P.button({}));
+      case 'cc.Button': {
+        const o = {};
+        if (c.zoomScale != null) o.zoomScale = c.zoomScale;
+        if (c.transition != null) o.transition = c.transition;
+        if (c.interactable != null) o.interactable = c.interactable;
+        if (c.normalColor) o.normalColor = c.normalColor;
+        if (c.pressedColor) o.pressedColor = c.pressedColor;
+        if (c.hoverColor) o.hoverColor = c.hoverColor;
+        if (c.disabledColor) o.disabledColor = c.disabledColor;
+        ra.push(P.button(o));
         break;
+      }
       case 'cc.ProgressBar': {
         const o = { mode: c.mode, totalLength: c.total };
+        if (c.progress != null) o.progress = c.progress;
         if (c.barSpriteNode) {
           if (!ctx.tenDuyNhat.has(c.barSpriteNode)) {
             throw new Error(`ProgressBar ở "${n.ten}" trỏ tới node "${c.barSpriteNode}" ` +
@@ -278,15 +326,36 @@ function dungComps(n, ctx) {
         ra.push(w);
         break;
       }
-      case 'cc.Mask':
-        ra.push(P.mask({}));
+      case 'cc.Mask': {
+        const m = P.mask({ type: c.kieu });
+        // Thư viện dùng chung chưa có hai tham số này, đặt thẳng vào dữ liệu.
+        // `_enabled: false` là chuyện có thật: Go88 TẮT mask ở khung ảnh đại diện.
+        // Bật nó lên là cắt ảnh theo hình chữ nhật, hoặc che sạch con khi mask trống.
+        if (c.segments != null) m.data._segments = c.segments;
+        ra.push(m);
         break;
+      }
       case 'cc.Layout':
-        ra.push(P.layout({}));
+        // Truyền HẾT thuộc tính đã rút. Bỏ trống là nhận mặc định lưới 40×40 của thư
+        // viện — xem chú thích ở extract-go88.js, đó chính là lỗi làm mất nhãn số dư.
+        ra.push(P.layout({
+          layoutType: c.layoutType,
+          resize: c.resize,
+          size: [c.layoutW, c.layoutH],
+          cellSize: [c.cellW, c.cellH],
+          startAxis: c.startAxis,
+          padding: { L: c.padL, R: c.padR, T: c.padT, B: c.padB },
+          spacingX: c.spacingX,
+          spacingY: c.spacingY,
+          verticalDirection: c.verticalDirection,
+          horizontalDirection: c.horizontalDirection,
+        }));
         break;
       case 'sp.Skeleton': {
         const u = ctx.traTep(c.skel, n.ten);
-        ra.push(P.skeleton(u, { anim: c.anim, loop: c.loop }));
+        const sk = P.skeleton(u, { anim: c.anim, loop: c.loop });
+        if (c.playTimes != null) sk.data._playTimes = c.playTimes;
+        ra.push(sk);
         break;
       }
       case 'cc.BlockInputEvents':
@@ -307,6 +376,12 @@ function dungComps(n, ctx) {
         break;
       default:
         throw new Error(`Chưa biết dựng component ${c.loai} (node "${n.ten}")`);
+    }
+
+    // `_enabled` áp cho MỌI component vừa dựng, ở một chỗ duy nhất — đặt rải trong
+    // từng nhánh là chắc chắn có ngày sót một nhánh.
+    if (c.batTat === false) {
+      for (let i = truocKhiThem; i < ra.length; i++) ra[i].data._enabled = false;
     }
   }
 
@@ -407,6 +482,30 @@ function main() {
     const mang = P.build(goc, pfUuid);
 
     // ── Neo nút vào mép màn hình ────────────────────────────────────────
+    // Cho node cha giãn bằng màn hình TRƯỚC, rồi mới neo con vào mép của nó.
+    // Đảo thứ tự thì neo vào một cái mép chưa tồn tại.
+    for (const tenNode of GIAN_BANG_CHA[muc.ra] || []) {
+      const nd = mang.find((o) => o && o.__type__ === 'cc.Node' && o._name === tenNode);
+      if (!nd) { console.log(`      ⚠ không tìm thấy node "${tenNode}" để giãn`); continue; }
+
+      const cu = (nd._components || [])
+        .map((c) => mang[c.__id__])
+        .find((c) => c && c.__type__ === 'cc.Widget');
+
+      const w = P.widget({ alignFlags: 45, left: 0, right: 0, top: 0, bottom: 0 });
+      if (cu) {
+        Object.assign(cu, w.data);
+      } else {
+        const id = mang.length;
+        mang.push(Object.assign({ __type__: 'cc.Widget', _name: '', _objFlags: 0,
+          node: { __id__: mang.indexOf(nd) }, _enabled: true, _id: '' }, w.data));
+        nd._components.push({ __id__: id });
+      }
+      nd._contentSize.width = CANVAS[0];
+      nd._contentSize.height = CANVAS[1];
+      console.log(`      ⛶ giãn "${tenNode}" bằng màn hình — để neo mép có mép thật mà bám`);
+    }
+
     const neoMep = NEO_MEP[muc.ra];
     if (neoMep) {
       for (const [tenNode, cau] of Object.entries(neoMep)) {
