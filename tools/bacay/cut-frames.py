@@ -120,6 +120,33 @@ def doc_plist(path):
 
     if not ra:
         raise SystemExit(f"Plist không có frame nào: {path}")
+
+    # 🔴 ĐỐI CHỨNG ĐỘC LẬP — đừng tin một mình bộ parse của mình.
+    #
+    # plistlib đáng tin hơn regex nhiều, nhưng "đáng tin hơn" không phải "chắc chắn".
+    # Nên đếm lại số frame bằng một cơ chế KHÁC HẲN: đọc thô văn bản và đếm thẻ <key>
+    # trong khối frames. Hai cách đọc độc lập cùng một tệp, lệch nhau là dừng.
+    #
+    # Vì sao cần: lỗi regex trước đó lộ ra chỉ nhờ may — hai frame nằm cạnh nhau mà
+    # một cái mất. Nếu lần sau mất đúng một cái ở GIỮA thì không có gì gợi ý cả.
+    # (Ý này do phiên làm Phoenix đề xuất sau khi nghe chuyện regex.)
+    tho = io.open(path, encoding="utf-8").read()
+    dau = tho.index("<key>frames</key>")
+    cuoi = tho.index("<key>metadata</key>") if "<key>metadata</key>" in tho[dau:] else len(tho)
+    if cuoi < dau:
+        cuoi = len(tho)
+    dem_tho = tho[dau:cuoi].count("<key>") - 1        # trừ chính thẻ <key>frames</key>
+
+    # Mỗi frame có 1 khoá tên + các khoá thuộc tính bên trong, nên đếm thô sẽ LỚN HƠN.
+    # Điều phải đúng là: số frame plistlib đọc được KHÔNG được nhỏ hơn số tên frame thật.
+    ten_tho = set(re.findall(r"<key>([^<]+)</key>\s*<dict>", tho[dau:cuoi]))
+    ten_tho -= {"frames", "metadata"}      # hai khoá cấp trên, không phải frame
+    thieu = ten_tho - set(ra)
+    if thieu:
+        raise SystemExit(
+            f"ĐỐI CHỨNG LỆCH ở {os.path.basename(path)}: đọc thô thấy {len(ten_tho)} frame, "
+            f"plistlib trả {len(ra)}. Thiếu: {sorted(thieu)[:8]}")
+
     return ra
 
 
