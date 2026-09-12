@@ -63,6 +63,13 @@ const MANG_SANG = new Set([
   'cc.Sprite', 'cc.Label', 'cc.Button', 'cc.ProgressBar', 'cc.Widget',
   'cc.Layout', 'cc.Mask', 'cc.Toggle', 'sp.Skeleton', 'cc.Graphics',
   'cc.RichText', 'cc.ParticleSystem', 'cc.Animation',
+
+  // 🔴 Hai cái này TRƯỚC ĐÂY bị xếp nhầm là "script riêng của Go88" chỉ vì không có
+  // trong danh sách. Chúng là component của ENGINE.
+  // `cc.BlockInputEvents` đặc biệt đáng nhớ: nó chặn click xuyên qua lớp phủ mờ.
+  // Thiếu nó thì lúc nắn bài, người chơi bấm trúng nút nằm PHÍA SAU lớp phủ — và
+  // không có gì trên màn hình gợi ý là đang hỏng.
+  'cc.BlockInputEvents', 'cc.SkeletonAnimation',
 ]);
 
 // ── Chỉ mục uuid → tên frame, dựng từ chính .meta của Go88 ────────────
@@ -196,6 +203,14 @@ function rut(tuyetDoi, chiMuc, boQua) {
       } else if (t === 'cc.Widget') {
         mo.top = c._top; mo.bottom = c._bottom; mo.left = c._left; mo.right = c._right;
         mo.alignFlags = c._alignFlags;
+
+        // 🔴 Hai số này là kích thước TÁC GIẢ DỰNG, Cocos giữ lại để khi cờ căn lề
+        // không phủ hết hai chiều thì còn biết lấy số nào.
+        // Bỏ trống (0) thì editor tính lại từ node cha — mở prefab riêng lẻ ra
+        // 960x640 thay vì 1560x720. Không sai lúc chạy, nhưng sai lúc nhìn, và người
+        // dựng giao diện làm việc bằng mắt.
+        mo.originalWidth = so(c._originalWidth, 0);
+        mo.originalHeight = so(c._originalHeight, 0);
       } else if (t === 'cc.ProgressBar') {
         mo.mode = c._N$mode;
         mo.total = c._N$totalLength;

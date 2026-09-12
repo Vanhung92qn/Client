@@ -125,7 +125,9 @@
             "bottom": 360,
             "left": 780,
             "right": 780,
-            "alignFlags": 18
+            "alignFlags": 18,
+            "originalWidth": 0,
+            "originalHeight": 0
           }
         ],
         "con": [

@@ -24,12 +24,6 @@
     },
     {
       "loai": "component",
-      "node": "BlackLayer",
-      "chi_tiet": "cc.BlockInputEvents",
-      "ly_do": "script riêng của Go88, ta gắn script của mình"
-    },
-    {
-      "loai": "component",
       "node": "BtnFlipAll",
       "chi_tiet": "d339fGmg5hE/pI0+iDfQxgq",
       "ly_do": "script riêng của Go88, ta gắn script của mình"
@@ -1108,6 +1102,9 @@
                 "loai": "cc.Sprite",
                 "frame": "@builtin:default_sprite_splash.png@default_sprite_splash",
                 "sizeMode": 0
+              },
+              {
+                "loai": "cc.BlockInputEvents"
               }
             ],
             "con": []

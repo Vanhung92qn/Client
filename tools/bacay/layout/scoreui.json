@@ -11,12 +11,6 @@
       "ly_do": "script riêng của Go88, ta gắn script của mình"
     },
     {
-      "loai": "component",
-      "node": "New Node",
-      "chi_tiet": "cc.SkeletonAnimation",
-      "ly_do": "script riêng của Go88, ta gắn script của mình"
-    },
-    {
       "loai": "node",
       "node": "animJQK",
       "chi_tiet": "cc.PrivateNode",
@@ -59,7 +53,11 @@
           255,
           255
         ],
-        "comps": [],
+        "comps": [
+          {
+            "loai": "cc.SkeletonAnimation"
+          }
+        ],
         "con": [
           {
             "ten": "bg",

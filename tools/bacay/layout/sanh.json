@@ -115,7 +115,9 @@
     "comps": [
       {
         "loai": "cc.Widget",
-        "alignFlags": 45
+        "alignFlags": 45,
+        "originalWidth": 1560,
+        "originalHeight": 720
       }
     ],
     "con": [
@@ -144,7 +146,9 @@
           },
           {
             "loai": "cc.Widget",
-            "alignFlags": 45
+            "alignFlags": 45,
+            "originalWidth": 1560,
+            "originalHeight": 720
           }
         ],
         "con": []
@@ -169,7 +173,9 @@
         "comps": [
           {
             "loai": "cc.Widget",
-            "alignFlags": 45
+            "alignFlags": 45,
+            "originalWidth": 0,
+            "originalHeight": 0
           }
         ],
         "con": [
@@ -199,7 +205,9 @@
               {
                 "loai": "cc.Widget",
                 "top": 112.07400000000001,
-                "alignFlags": 1
+                "alignFlags": 1,
+                "originalWidth": 0,
+                "originalHeight": 0
               }
             ],
             "con": []
@@ -230,7 +238,9 @@
               {
                 "loai": "cc.Widget",
                 "top": 112.07400000000001,
-                "alignFlags": 1
+                "alignFlags": 1,
+                "originalWidth": 0,
+                "originalHeight": 0
               }
             ],
             "con": []
@@ -262,7 +272,9 @@
                 "loai": "cc.Widget",
                 "bottom": 137.024,
                 "left": 41.82600000000002,
-                "alignFlags": 12
+                "alignFlags": 12,
+                "originalWidth": 0,
+                "originalHeight": 0
               }
             ],
             "con": []
@@ -294,7 +306,9 @@
                 "loai": "cc.Widget",
                 "bottom": 118.566,
                 "right": 38.24599999999998,
-                "alignFlags": 36
+                "alignFlags": 36,
+                "originalWidth": 0,
+                "originalHeight": 0
               }
             ],
             "con": []
@@ -321,7 +335,9 @@
         "comps": [
           {
             "loai": "cc.Widget",
-            "alignFlags": 5
+            "alignFlags": 5,
+            "originalWidth": 0,
+            "originalHeight": 720
           }
         ],
         "con": []
@@ -346,7 +362,9 @@
         "comps": [
           {
             "loai": "cc.Widget",
-            "alignFlags": 4
+            "alignFlags": 4,
+            "originalWidth": 0,
+            "originalHeight": 0
           }
         ],
         "con": [
@@ -376,7 +394,9 @@
               {
                 "loai": "cc.Widget",
                 "bottom": -2,
-                "alignFlags": 4
+                "alignFlags": 4,
+                "originalWidth": 0,
+                "originalHeight": 0
               }
             ],
             "con": []
@@ -500,7 +520,9 @@
                     "loai": "cc.Widget",
                     "bottom": 87,
                     "left": 50,
-                    "alignFlags": 12
+                    "alignFlags": 12,
+                    "originalWidth": 0,
+                    "originalHeight": 0
                   }
                 ],
                 "con": []
@@ -532,7 +554,9 @@
                     "loai": "cc.Widget",
                     "bottom": 67,
                     "right": 24,
-                    "alignFlags": 36
+                    "alignFlags": 36,
+                    "originalWidth": 0,
+                    "originalHeight": 0
                   }
                 ],
                 "con": []
@@ -711,7 +735,9 @@
               {
                 "loai": "cc.Widget",
                 "top": -4,
-                "alignFlags": 12
+                "alignFlags": 12,
+                "originalWidth": 0,
+                "originalHeight": 100
               },
               {
                 "loai": "cc.Button"
@@ -796,7 +822,9 @@
                     "loai": "cc.Widget",
                     "bottom": 10,
                     "left": 10,
-                    "alignFlags": 12
+                    "alignFlags": 12,
+                    "originalWidth": 0,
+                    "originalHeight": 0
                   }
                 ],
                 "con": [
@@ -900,7 +928,9 @@
                   {
                     "loai": "cc.Widget",
                     "top": 15.600000000000001,
-                    "alignFlags": 1
+                    "alignFlags": 1,
+                    "originalWidth": 0,
+                    "originalHeight": 0
                   }
                 ],
                 "con": [
@@ -1094,7 +1124,9 @@
               },
               {
                 "loai": "cc.Widget",
-                "alignFlags": 36
+                "alignFlags": 36,
+                "originalWidth": 0,
+                "originalHeight": 0
               },
               {
                 "loai": "cc.Layout"
@@ -1156,7 +1188,9 @@
                     "top": 2,
                     "bottom": -2,
                     "right": 20,
-                    "alignFlags": 37
+                    "alignFlags": 37,
+                    "originalWidth": 0,
+                    "originalHeight": 100
                   }
                 ],
                 "con": [
@@ -1236,7 +1270,9 @@
                   {
                     "loai": "cc.Widget",
                     "left": 25,
-                    "alignFlags": 13
+                    "alignFlags": 13,
+                    "originalWidth": 0,
+                    "originalHeight": 100
                   }
                 ],
                 "con": [

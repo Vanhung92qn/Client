@@ -180,12 +180,26 @@ function dungComps(n, ctx) {
         ra.push(P.progressBar(o));
         break;
       }
-      case 'cc.Widget':
-        ra.push(P.widget({
+      case 'cc.Widget': {
+        const w = P.widget({
           top: c.top, bottom: c.bottom, left: c.left, right: c.right,
           alignFlags: c.alignFlags,
-        }));
+        });
+
+        // 🔴 `P.widget()` hardcode _originalWidth/_originalHeight = 0 và không nhận
+        // tuỳ chọn (thư viện của phiên Phoenix, tôi không sửa tệp của họ).
+        //
+        // Hai số này là kích thước tác giả dựng. Để 0 thì editor tính lại từ node cha —
+        // mở prefab riêng lẻ ra 960x640 thay vì 1560x720.
+        //
+        // ⚠ CHÉP ĐÚNG GIÁ TRỊ GO88, đừng tự tính. Bản đầu tôi gán bừa bằng contentSize
+        // của node, và lệch 9/11 Widget: Cocos chỉ ghi hai số này ở một số cờ căn lề
+        // nhất định, không phải cứ có Widget là có.
+        w.data._originalWidth = c.originalWidth || 0;
+        w.data._originalHeight = c.originalHeight || 0;
+        ra.push(w);
         break;
+      }
       case 'cc.Mask':
         ra.push(P.mask({}));
         break;
@@ -197,9 +211,16 @@ function dungComps(n, ctx) {
         ra.push(P.skeleton(u, { anim: c.anim, loop: c.loop }));
         break;
       }
+      case 'cc.BlockInputEvents':
+        // Không có dữ liệu gì, chỉ cần có mặt. Thư viện dùng chung chưa có builder
+        // nên dựng tay — đúng hình dạng một component rỗng của Cocos.
+        ra.push({ __comp: true, type: 'cc.BlockInputEvents', data: {} });
+        break;
+
       case 'cc.Toggle':
       case 'cc.Graphics':
       case 'cc.Animation':
+      case 'cc.SkeletonAnimation':
       case 'cc.ParticleSystem':
       case 'cc.RichText':
         // Có trong bố cục nhưng CHƯA cần cho bản 1. Ghi lại tường minh để không
