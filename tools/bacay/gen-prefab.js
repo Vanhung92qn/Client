@@ -134,6 +134,29 @@ const CAT_BO = {
  *  2. Nền phải PHỦ HẾT bề rộng rộng nhất, GIỮ NGUYÊN tỉ lệ (phóng to rồi cắt bớt,
  *     không kéo dẹt). Phần thừa bị Mask/khung bàn cắt đi.
  */
+/**
+ * NEO VÀO MÉP MÀN HÌNH.
+ *
+ * 🔴 Vì sao Go88 không cần mà ta cần: họ fitWidth nên bề rộng LUÔN là 1560, toạ độ
+ * ±670 lúc nào cũng nằm trong ±780. Ta fitHeight nên bề rộng co giãn 976…1708, và
+ * trên iPad 4:3 (976 rộng) thì nửa màn chỉ có 488 — hai nút ở ±670 BIẾN MẤT khỏi
+ * màn hình. Không báo lỗi, không có gì gợi ý; người chơi chỉ đơn giản không thoát
+ * được bàn.
+ *
+ * `HUD` có alignFlags 18 (căn giữa, không kéo) nên nó không cứu được hai nút này —
+ * phải neo từng nút.
+ *
+ * Số 60 = khoảng cách từ mép nút tới mép màn trong thiết kế gốc 1560 rộng:
+ * nút rộng 100, tâm ở 670 ⇒ mép ngoài ở 720 ⇒ cách mép màn (780) đúng 60.
+ * Giữ nguyên khoảng đó ở mọi bề rộng.
+ */
+const NEO_MEP = {
+  BanCaoRua: {
+    icChatRoom: { alignFlags: 32, right: 60 },   // 32 = RIGHT
+    icExit_2: { alignFlags: 8, left: 60 },       //  8 = LEFT
+  },
+};
+
 const RONG_PHU = 1720;   // 21:9 cần 1708 — lấy dư một chút cho máy dài hơn nữa
 
 const PHU_MAN_HINH = {
@@ -356,6 +379,28 @@ function main() {
     const goc = dungNode(bc.cay, ctx);
     const pfUuid = P.uuid4();
     const mang = P.build(goc, pfUuid);
+
+    // ── Neo nút vào mép màn hình ────────────────────────────────────────
+    const neoMep = NEO_MEP[muc.ra];
+    if (neoMep) {
+      for (const [tenNode, cau] of Object.entries(neoMep)) {
+        // Node ngoài cùng mang tên đó (bản trong là node con vẽ ảnh, neo theo cha).
+        const nd = mang.find((o) => o && o.__type__ === 'cc.Node' && o._name === tenNode);
+        if (!nd) { console.log(`      ⚠ không tìm thấy node "${tenNode}" để neo mép`); continue; }
+
+        const w = P.widget({
+          alignFlags: cau.alignFlags,
+          left: cau.left || 0, right: cau.right || 0,
+        });
+        const id = mang.length;
+        mang.push(Object.assign({ __type__: 'cc.Widget', _name: '', _objFlags: 0,
+          node: { __id__: mang.indexOf(nd) }, _enabled: true, _id: '' }, w.data));
+        nd._components.push({ __id__: id });
+
+        const phia = cau.alignFlags === 32 ? 'phải' : 'trái';
+        console.log(`      ⇥ neo "${tenNode}" vào mép ${phia}, cách ${cau.left || cau.right}px`);
+      }
+    }
 
     // ── Phủ màn hình ────────────────────────────────────────────────────
     const phu = PHU_MAN_HINH[muc.ra];

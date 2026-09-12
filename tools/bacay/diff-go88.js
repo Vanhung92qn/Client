@@ -71,6 +71,12 @@ const KHAC_CO_CHU_DICH = {
  */
 const NEN_PHONG_TO = new Set(['bgTlmn', 'ld_bg']);
 
+/**
+ * Node được THÊM Widget neo mép — Go88 không cần vì họ fitWidth khoá bề rộng.
+ * Xem NEO_MEP trong gen-prefab.js.
+ */
+const NEO_THEM = new Set(['icChatRoom', 'icExit_2']);
+
 /** Sai số cho phép khi so số thực — Cocos ghi toạ độ dạng dấu phẩy động. */
 const SAI_SO = 0.01;
 
@@ -167,7 +173,8 @@ function main() {
 
         const tenNode = (k.split('/').pop() || '').split('#')[0];
         const boQua = KHAC_CO_CHU_DICH[k]
-          || (NEN_PHONG_TO.has(tenNode) ? new Set(['w', 'h']) : null);
+          || (NEN_PHONG_TO.has(tenNode) ? new Set(['w', 'h']) : null)
+          || (NEO_THEM.has(tenNode) ? new Set(['comps', 'widget']) : null);
         if (boQua && boQua.has(truong)) {
           coChuDich.push(`${k || '(gốc)'} . ${truong}: Go88 ${JSON.stringify(x[truong])} → ${JSON.stringify(y[truong])}`);
           continue;
