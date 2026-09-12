@@ -147,6 +147,40 @@ const DANH_MUC = [
   },
 ];
 
+/**
+ * 🔴 GIU NGUYEN UUID CU khi sinh lai .meta.
+ *
+ * Bo sinh nay cap uuid moi moi lan chay. Chay lai bundle.js ma quen chay gen-prefab.js
+ * la moi prefab tro vao hu khong: prefab VAN HOP LE, Cocos VAN MO DUOC, chi la o anh
+ * trong. Khong mot dong loi nao.
+ *
+ * Nen: da co .meta thi giu nguyen uuid cua no, ca cap 1 lan tung khoa trong subMetas.
+ * Chay lai bao nhieu lan cung ra cung mot ket qua.
+ */
+function giuUuid(duongDan, moi) {
+  if (!fs.existsSync(duongDan)) return moi;
+
+  let cu;
+  try { cu = JSON.parse(fs.readFileSync(duongDan, 'utf8')); } catch { return moi; }
+
+  if (cu.uuid) moi.uuid = cu.uuid;
+  if (cu.textureUuid && moi.textureUuid) moi.textureUuid = cu.textureUuid;
+
+  for (const k of Object.keys(moi.subMetas || {})) {
+    const kCu = (cu.subMetas || {})[k];
+    if (kCu && kCu.uuid) moi.subMetas[k].uuid = kCu.uuid;
+    if (kCu && kCu.rawTextureUuid && moi.subMetas[k].rawTextureUuid) {
+      moi.subMetas[k].rawTextureUuid = kCu.rawTextureUuid;
+    }
+  }
+  return moi;
+}
+
+/** Ghi .meta, giu nguyen uuid neu da co. Dung THAY CHO P.writeCocosJson o moi cho ghi meta. */
+function ghiMeta(duongDan, noiDung) {
+  P.writeCocosJson(duongDan, giuUuid(duongDan, noiDung));
+}
+
 // ── Doc kich thuoc PNG tu header, khong can thu vien ──────────────────
 function kichThuocPng(abs) {
   const fd = fs.openSync(abs, 'r');
@@ -217,7 +251,13 @@ function metaAtlas(atlasUuid, texUuid, size, frames) {
       ver: '1.0.6',
       uuid: P.uuid4(),
       importer: 'sprite-frame',
-      rawTextureUuid: texUuid,
+      // 🔴 KHONG ghi rawTextureUuid o day. Doi chieu atlas THAT cua Roy88
+      // (cardgame_core/_shared/tienlenMN/images/TLMN-sprites.plist.meta): sprite-atlas
+      // meta KHONG co truong nay — anh nao thi da nam trong chinh tep .plist roi.
+      //
+      // Ghi vao con sinh mot lop bat nhat quan: no tro toi uuid cua texture, ma texture
+      // lai giu uuid CU khi sinh lai, nen atlas tro vao mot texture khong ton tai. Va
+      // check-refs.js KHONG bat duoc vi no chi soi __uuid__ trong prefab.
       trimType: 'auto',
       trimThreshold: 1,
       rotated: f.rotated,
@@ -313,14 +353,14 @@ function main() {
       const texUuid = P.uuid4();
       const mm = metaAtlas(P.uuid4(), texUuid, size, frames);
 
-      P.writeCocosJson(dst + '.meta', mm.atlas);
-      P.writeCocosJson(pngDst + '.meta', mm.tex);
+      ghiMeta(dst + '.meta', mm.atlas);
+      ghiMeta(pngDst + '.meta', mm.tex);
       console.log(`  atlas ${muc.dich}  ${Object.keys(frames).length} frame  ${size.width}x${size.height}`);
       continue;
     }
 
     if (ext === '.png') {
-      P.writeCocosJson(dst + '.meta', metaThuong(dst, path.basename(muc.dich, '.png')));
+      ghiMeta(dst + '.meta', metaThuong(dst, path.basename(muc.dich, '.png')));
       console.log(`  anh   ${muc.dich}`);
       continue;
     }
@@ -331,9 +371,9 @@ function main() {
         const dichAnhEm = muc.dich.replace(/\.json$/, path.extname(anhEm));
         const d2 = chep(anhEm, dichAnhEm);
         if (anhEm.endsWith('.png')) {
-          P.writeCocosJson(d2 + '.meta', metaThuong(d2, path.basename(dichAnhEm, '.png')));
+          ghiMeta(d2 + '.meta', metaThuong(d2, path.basename(dichAnhEm, '.png')));
         } else {
-          P.writeCocosJson(d2 + '.meta', metaTho(P.uuid4(), 'text'));
+          ghiMeta(d2 + '.meta', metaTho(P.uuid4(), 'text'));
         }
       }
 
@@ -348,13 +388,13 @@ function main() {
       }
       fs.writeFileSync(atlasPath, noiDung.join('\n'), 'utf8');
 
-      P.writeCocosJson(dst + '.meta', metaTho(P.uuid4(), 'spine-data'));
+      ghiMeta(dst + '.meta', metaTho(P.uuid4(), 'spine-data'));
       console.log(`  spine ${muc.dich}  (tro toi ${tenAnhMoi})`);
       continue;
     }
 
     if (ext === '.ttf') {
-      P.writeCocosJson(dst + '.meta', { ver: '1.1.2', uuid: P.uuid4(), importer: 'ttf-font', subMetas: {} });
+      ghiMeta(dst + '.meta', { ver: '1.1.2', uuid: P.uuid4(), importer: 'ttf-font', subMetas: {} });
       console.log(`  ttf   ${muc.dich}`);
       continue;
     }
@@ -368,14 +408,14 @@ function main() {
       const pngDst = chep(pngNguon, pngDich);
 
       const texUuid = P.uuid4();
-      P.writeCocosJson(pngDst + '.meta', metaThuong(pngDst, path.basename(pngDich, '.png')));
+      ghiMeta(pngDst + '.meta', metaThuong(pngDst, path.basename(pngDich, '.png')));
 
       let noiDung = fs.readFileSync(dst, 'utf8');
       noiDung = noiDung.replace(/file="[^"]*"/, `file="${path.basename(pngDich)}"`);
       fs.writeFileSync(dst, noiDung, 'utf8');
 
       const co = /size=(-?\d+)/.exec(noiDung);
-      P.writeCocosJson(dst + '.meta', {
+      ghiMeta(dst + '.meta', {
         ver: '2.1.2',
         uuid: P.uuid4(),
         importer: 'bitmap-font',
@@ -398,7 +438,7 @@ function main() {
   for (const ten of fs.existsSync(thuMucUi) ? fs.readdirSync(thuMucUi) : []) {
     if (!ten.endsWith('.png')) continue;
     const abs = path.join(thuMucUi, ten);
-    P.writeCocosJson(abs + '.meta', metaThuong(abs, path.basename(ten, '.png')));
+    ghiMeta(abs + '.meta', metaThuong(abs, path.basename(ten, '.png')));
     soTep++;
     soByte += fs.statSync(abs).size;
     soUi++;
@@ -407,11 +447,11 @@ function main() {
 
   // .meta cho tung thu muc con
   for (const d of DIRS) {
-    P.writeCocosJson(path.join(NEW, d) + '.meta', P.folderMeta(P.uuid4()));
+    ghiMeta(path.join(NEW, d) + '.meta', P.folderMeta(P.uuid4()));
   }
 
   // .meta cua BUNDLE
-  P.writeCocosJson(BUNDLE_META, {
+  ghiMeta(BUNDLE_META, {
     ver: '1.1.3',
     uuid: BUNDLE_UUID,
     importer: 'folder',
