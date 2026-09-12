@@ -29,6 +29,11 @@
     "scaleY": 1,
     "active": true,
     "opacity": 255,
+    "color": [
+      255,
+      255,
+      255
+    ],
     "comps": [
       {
         "loai": "cc.Button"
@@ -51,6 +56,11 @@
         "scaleY": 1,
         "active": true,
         "opacity": 255,
+        "color": [
+          255,
+          255,
+          255
+        ],
         "comps": [
           {
             "loai": "cc.Sprite",

@@ -228,6 +228,7 @@ function dungNode(n, ctx) {
     scale: [n.scaleX, n.scaleY],
     active: n.active,
     opacity: n.opacity,
+    color: n.color || [255, 255, 255],
   };
   if (ctx.tenDuyNhat.has(n.ten)) opts.ref = n.ten;
 

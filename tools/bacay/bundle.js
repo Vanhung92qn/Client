@@ -244,7 +244,7 @@ function docPlist(abs) {
   return frames;
 }
 
-function metaAtlas(atlasUuid, texUuid, size, frames) {
+function metaAtlas(atlasUuid, texUuid, size, frames, tenTex) {
   const subMetas = {};
   for (const [ten, f] of Object.entries(frames)) {
     subMetas[ten] = {
@@ -287,20 +287,51 @@ function metaAtlas(atlasUuid, texUuid, size, frames) {
       type: 'Texture Packer',
       subMetas,
     },
+    // 🔴 PNG cua atlas phai la `type: sprite` KEM MOT sprite-frame, KHONG phai `raw`.
+    //
+    // De `raw` thi Cocos coi no la texture tho, khong sinh sprite-frame nao, va MOI frame
+    // trong atlas khong bind duoc vao dau — hien ra 0x0. Prefab van hop le, editor van mo,
+    // chi la moi la bai va moi con chip deu trong.
+    // Doi chieu atlas THAT cua Roy88 (TLMN-sprites.png.meta): type "sprite", packable true,
+    // subMetas co dung mot sprite-frame ten theo tep.
     tex: {
       ver: '2.3.7',
       uuid: texUuid,
       importer: 'texture',
-      type: 'raw',
+      type: 'sprite',
       wrapMode: 'clamp',
       filterMode: 'bilinear',
       premultiplyAlpha: false,
       genMipmaps: false,
-      packable: false,
+      packable: true,
       width: size.width,
       height: size.height,
       platformSettings: {},
-      subMetas: {},
+      subMetas: {
+        [tenTex]: {
+          ver: '1.0.6',
+          uuid: P.uuid4(),
+          importer: 'sprite-frame',
+          rawTextureUuid: texUuid,
+          trimType: 'auto',
+          trimThreshold: 1,
+          rotated: false,
+          offsetX: 0,
+          offsetY: 0,
+          trimX: 0,
+          trimY: 0,
+          width: size.width,
+          height: size.height,
+          rawWidth: size.width,
+          rawHeight: size.height,
+          borderTop: 0,
+          borderBottom: 0,
+          borderLeft: 0,
+          borderRight: 0,
+          spriteType: 'normal',
+          subMetas: {},
+        },
+      },
     },
   };
 }
@@ -351,7 +382,7 @@ function main() {
       const frames = docPlist(dst);
       const size = kichThuocPng(pngDst);
       const texUuid = P.uuid4();
-      const mm = metaAtlas(P.uuid4(), texUuid, size, frames);
+      const mm = metaAtlas(P.uuid4(), texUuid, size, frames, path.basename(pngDich, '.png'));
 
       ghiMeta(dst + '.meta', mm.atlas);
       ghiMeta(pngDst + '.meta', mm.tex);

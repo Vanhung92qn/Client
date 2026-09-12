@@ -150,6 +150,13 @@ function rut(tuyetDoi, chiMuc, boQua) {
       scaleY: so(n._scaleY, 1),
       active: n._active !== false,
       opacity: so(n._opacity, 255),
+
+      // 🔴 Cocos bỏ hẳn `_color` khi nó là trắng, nên vắng mặt = trắng.
+      // Bỏ sót trường này thì mọi chữ và mọi ảnh nhuộm màu đều ra TRẮNG mà không
+      // có dấu hiệu gì. Đã dính thật: nhãn NameGame của Go88 là #074722, ra trắng.
+      color: n._color
+        ? [so(n._color.r, 255), so(n._color.g, 255), so(n._color.b, 255)]
+        : [255, 255, 255],
       comps: [],
       con: [],
     };

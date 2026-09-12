@@ -59,6 +59,11 @@
     "scaleY": 1,
     "active": true,
     "opacity": 255,
+    "color": [
+      255,
+      255,
+      255
+    ],
     "comps": [],
     "con": [
       {
@@ -73,6 +78,11 @@
         "scaleY": 1,
         "active": false,
         "opacity": 255,
+        "color": [
+          255,
+          255,
+          255
+        ],
         "comps": [
           {
             "loai": "cc.Sprite",
@@ -92,6 +102,11 @@
             "scaleY": 1,
             "active": true,
             "opacity": 255,
+            "color": [
+              255,
+              255,
+              255
+            ],
             "comps": [
               {
                 "loai": "cc.Sprite",
@@ -115,6 +130,11 @@
             "scaleY": 1,
             "active": true,
             "opacity": 255,
+            "color": [
+              255,
+              255,
+              255
+            ],
             "comps": [
               {
                 "loai": "cc.Sprite",
@@ -140,6 +160,11 @@
         "scaleY": 1,
         "active": true,
         "opacity": 255,
+        "color": [
+          255,
+          255,
+          255
+        ],
         "comps": [],
         "con": [
           {
@@ -154,6 +179,11 @@
             "scaleY": 1,
             "active": true,
             "opacity": 255,
+            "color": [
+              255,
+              255,
+              255
+            ],
             "comps": [
               {
                 "loai": "cc.Sprite",
@@ -174,6 +204,11 @@
             "scaleY": 1,
             "active": true,
             "opacity": 255,
+            "color": [
+              255,
+              255,
+              255
+            ],
             "comps": [
               {
                 "loai": "cc.Mask"
@@ -192,6 +227,11 @@
                 "scaleY": 1,
                 "active": true,
                 "opacity": 255,
+                "color": [
+                  255,
+                  255,
+                  255
+                ],
                 "comps": [
                   {
                     "loai": "cc.Button"
@@ -213,6 +253,11 @@
             "scaleY": 1,
             "active": false,
             "opacity": 255,
+            "color": [
+              255,
+              255,
+              255
+            ],
             "comps": [
               {
                 "loai": "cc.Sprite",
@@ -233,6 +278,11 @@
             "scaleY": 1,
             "active": false,
             "opacity": 255,
+            "color": [
+              255,
+              255,
+              255
+            ],
             "comps": [
               {
                 "loai": "cc.Sprite",
@@ -253,6 +303,11 @@
             "scaleY": 1,
             "active": false,
             "opacity": 255,
+            "color": [
+              255,
+              255,
+              255
+            ],
             "comps": [
               {
                 "loai": "cc.Sprite",
@@ -272,6 +327,11 @@
                 "scaleY": 1,
                 "active": true,
                 "opacity": 255,
+                "color": [
+                  255,
+                  255,
+                  255
+                ],
                 "comps": [
                   {
                     "loai": "cc.Sprite",
@@ -294,6 +354,11 @@
             "scaleY": 1,
             "active": false,
             "opacity": 255,
+            "color": [
+              255,
+              255,
+              255
+            ],
             "comps": [
               {
                 "loai": "cc.Sprite",
@@ -315,6 +380,11 @@
             "scaleY": 1,
             "active": false,
             "opacity": 255,
+            "color": [
+              255,
+              255,
+              255
+            ],
             "comps": [
               {
                 "loai": "cc.Sprite",
@@ -335,6 +405,11 @@
             "scaleY": 1,
             "active": false,
             "opacity": 255,
+            "color": [
+              255,
+              255,
+              255
+            ],
             "comps": [
               {
                 "loai": "cc.Sprite",
@@ -355,6 +430,11 @@
             "scaleY": 1,
             "active": false,
             "opacity": 255,
+            "color": [
+              255,
+              255,
+              255
+            ],
             "comps": [
               {
                 "loai": "cc.Sprite",
@@ -375,6 +455,11 @@
             "scaleY": 1,
             "active": false,
             "opacity": 255,
+            "color": [
+              255,
+              255,
+              255
+            ],
             "comps": [
               {
                 "loai": "cc.Sprite",
@@ -397,6 +482,11 @@
         "scaleY": 1,
         "active": true,
         "opacity": 255,
+        "color": [
+          255,
+          255,
+          255
+        ],
         "comps": [
           {
             "loai": "cc.Sprite",
@@ -422,6 +512,11 @@
             "scaleY": 1,
             "active": false,
             "opacity": 255,
+            "color": [
+              255,
+              255,
+              255
+            ],
             "comps": [
               {
                 "loai": "sp.Skeleton",
@@ -445,6 +540,11 @@
         "scaleY": 1,
         "active": true,
         "opacity": 255,
+        "color": [
+          255,
+          255,
+          255
+        ],
         "comps": [
           {
             "loai": "cc.Sprite",
@@ -464,6 +564,11 @@
             "scaleY": 1,
             "active": true,
             "opacity": 255,
+            "color": [
+              255,
+              255,
+              255
+            ],
             "comps": [
               {
                 "loai": "cc.Layout"
@@ -482,6 +587,11 @@
                 "scaleY": 1,
                 "active": true,
                 "opacity": 255,
+                "color": [
+                  255,
+                  255,
+                  255
+                ],
                 "comps": [
                   {
                     "loai": "cc.Sprite",
@@ -502,6 +612,11 @@
                 "scaleY": 1,
                 "active": true,
                 "opacity": 255,
+                "color": [
+                  255,
+                  255,
+                  255
+                ],
                 "comps": [
                   {
                     "loai": "cc.Label",
@@ -527,6 +642,11 @@
             "scaleY": 1,
             "active": true,
             "opacity": 255,
+            "color": [
+              255,
+              255,
+              255
+            ],
             "comps": [
               {
                 "loai": "cc.Label",
@@ -552,6 +672,11 @@
         "scaleY": 1,
         "active": true,
         "opacity": 255,
+        "color": [
+          255,
+          255,
+          255
+        ],
         "comps": [],
         "con": []
       },
@@ -567,6 +692,11 @@
         "scaleY": 1,
         "active": false,
         "opacity": 255,
+        "color": [
+          255,
+          255,
+          255
+        ],
         "comps": [
           {
             "loai": "sp.Skeleton",
@@ -588,6 +718,11 @@
         "scaleY": 1,
         "active": false,
         "opacity": 255,
+        "color": [
+          255,
+          255,
+          255
+        ],
         "comps": [],
         "con": [
           {
@@ -602,6 +737,11 @@
             "scaleY": 1,
             "active": true,
             "opacity": 255,
+            "color": [
+              255,
+              255,
+              255
+            ],
             "comps": [
               {
                 "loai": "cc.Sprite",
@@ -623,6 +763,11 @@
                 "scaleY": 1,
                 "active": true,
                 "opacity": 255,
+                "color": [
+                  255,
+                  255,
+                  255
+                ],
                 "comps": [
                   {
                     "loai": "cc.Sprite",
@@ -645,6 +790,11 @@
             "scaleY": 1,
             "active": false,
             "opacity": 255,
+            "color": [
+              255,
+              255,
+              255
+            ],
             "comps": [
               {
                 "loai": "cc.Sprite",
@@ -665,6 +815,11 @@
             "scaleY": 1,
             "active": false,
             "opacity": 255,
+            "color": [
+              255,
+              255,
+              255
+            ],
             "comps": [
               {
                 "loai": "cc.Label",
@@ -690,6 +845,11 @@
         "scaleY": 1,
         "active": true,
         "opacity": 255,
+        "color": [
+          255,
+          255,
+          255
+        ],
         "comps": [],
         "con": [
           {
@@ -704,6 +864,11 @@
             "scaleY": 1,
             "active": false,
             "opacity": 255,
+            "color": [
+              255,
+              255,
+              255
+            ],
             "comps": [
               {
                 "loai": "sp.Skeleton",

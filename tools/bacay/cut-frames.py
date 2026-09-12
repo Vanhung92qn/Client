@@ -176,12 +176,18 @@ def main():
 
             f = frames[ten]
 
-            # 1. Cắt ô trong atlas. Khi xoay, w/h trong plist là chiều ĐÃ xoay.
-            w, h = (f["h"], f["w"]) if f["rotated"] else (f["w"], f["h"])
-            o = sheet.crop((f["x"], f["y"], f["x"] + (f["w"] if not f["rotated"] else f["w"]),
-                            f["y"] + (f["h"] if not f["rotated"] else f["h"])))
+            # 1. Cắt ô trong atlas.
+            #
+            # 🔴 KHI XOAY: `frame` khai kích thước LOGIC (bằng sourceSize), còn vùng THẬT
+            # nằm trong atlas thì HOÁN NGƯỢC w/h. Cắt theo w/h khai báo là cắt sai vùng —
+            # ảnh ra đúng khung nhưng nội dung chỉ còn một dải hẹp ở giữa.
+            # Đo thật: icTaoBan khung 68x37, vùng có pixel chỉ (16,0)-(53,37), rộng 37
+            # thay vì 68. Nhìn thì "có ảnh" nên rất dễ cho qua.
+            cw, ch = (f["h"], f["w"]) if f["rotated"] else (f["w"], f["h"])
+            o = sheet.crop((f["x"], f["y"], f["x"] + cw, f["y"] + ch))
 
-            # 2. Xoay lại nếu atlas đã xoay đi.
+            # 2. Xoay lại. cocos2d-x xếp ảnh vào atlas bằng cách xoay THEO CHIỀU KIM ĐỒNG
+            # HỒ, nên khôi phục là xoay NGƯỢC chiều — đúng chiều dương của Pillow.
             if f["rotated"]:
                 o = o.rotate(90, expand=True)
 
@@ -190,6 +196,12 @@ def main():
             x = int(round((f["srcW"] - o.width) / 2 + f["offX"]))
             y = int(round((f["srcH"] - o.height) / 2 - f["offY"]))
             khung.paste(o, (x, y))
+
+            # 🔴 CHỐT: frame không bị cắt cụt (sourceColorRect == sourceSize) thì ảnh
+            # khôi phục phải LẤP ĐẦY khung. Không đầy nghĩa là cắt sai vùng.
+            if o.size != (f["srcW"], f["srcH"]):
+                thieu.append(f"{ten}: cắt ra {o.size}, đáng lẽ {(f['srcW'], f['srcH'])}")
+                continue
 
             ra = os.path.join(RA, (ten_moi or ten) + ".png")
             khung.save(ra, "PNG", optimize=True)
