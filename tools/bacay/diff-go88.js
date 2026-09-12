@@ -58,8 +58,18 @@ const HOAN = {
  * alignFlags 45 ở gốc và đều lưu 1561x732.
  */
 const KHAC_CO_CHU_DICH = {
-  '': new Set(['x', 'y', 'w', 'h', 'widget']),
+  // Gốc toàn màn hình mang canvas Roy88, và với bàn thì còn được THÊM Widget kéo bốn
+  // cạnh (Go88 không cần vì họ fitWidth).
+  '': new Set(['x', 'y', 'w', 'h', 'widget', 'comps']),
 };
+
+/**
+ * Nền được PHÓNG TO để phủ kín màn rộng, giữ nguyên tỉ lệ.
+ *
+ * Go88 fitWidth nên nền 1560 vừa khít; Roy88 fitHeight nên trên máy 19.5:9 màn rộng
+ * 1586 và nền 1560 sẽ hở hai bên. Phóng lên 1720 phủ tới 21:9.
+ */
+const NEN_PHONG_TO = new Set(['bgTlmn', 'ld_bg']);
 
 /** Sai số cho phép khi so số thực — Cocos ghi toạ độ dạng dấu phẩy động. */
 const SAI_SO = 0.01;
@@ -155,7 +165,9 @@ function main() {
       for (const truong of Object.keys(x)) {
         if (gan(x[truong], y[truong])) continue;
 
-        const boQua = KHAC_CO_CHU_DICH[k];
+        const tenNode = (k.split('/').pop() || '').split('#')[0];
+        const boQua = KHAC_CO_CHU_DICH[k]
+          || (NEN_PHONG_TO.has(tenNode) ? new Set(['w', 'h']) : null);
         if (boQua && boQua.has(truong)) {
           coChuDich.push(`${k || '(gốc)'} . ${truong}: Go88 ${JSON.stringify(x[truong])} → ${JSON.stringify(y[truong])}`);
           continue;

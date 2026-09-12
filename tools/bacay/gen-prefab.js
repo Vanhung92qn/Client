@@ -119,6 +119,28 @@ const CAT_BO = {
   bottomR: 'trang trí Tết (góc dưới phải)',
 };
 
+/**
+ * PHỦ MÀN HÌNH — chỉnh để chạy thật không hở mép, KHÔNG phải chỉnh cho editor.
+ *
+ * 🔴 Roy88 và Go88 căn màn hình NGƯỢC NHAU:
+ *     Go88  fitWidth  → khoá RỘNG 1560, chiều CAO co giãn
+ *     Roy88 fitHeight → khoá CAO  732,  chiều RỘNG co giãn 976…1627
+ *
+ * Nghĩa là art của Go88 vẽ dư theo chiều DỌC (nền bàn 1560x1170), còn ta lại cần dư
+ * theo chiều NGANG. Bê nguyên là trên iPhone 19.5:9 (rộng 1586) nền 1560 HỞ HAI BÊN.
+ *
+ * Hai việc phải làm:
+ *  1. Gốc phải giãn bằng canvas → thêm Widget kéo bốn cạnh nếu chưa có.
+ *  2. Nền phải PHỦ HẾT bề rộng rộng nhất, GIỮ NGUYÊN tỉ lệ (phóng to rồi cắt bớt,
+ *     không kéo dẹt). Phần thừa bị Mask/khung bàn cắt đi.
+ */
+const RONG_PHU = 1720;   // 21:9 cần 1708 — lấy dư một chút cho máy dài hơn nữa
+
+const PHU_MAN_HINH = {
+  BanCaoRua: { nen: 'bgTlmn', themWidgetGoc: true },
+  SanhChonBan: { nen: 'ld_bg', themWidgetGoc: false },   // gốc đã có Widget sẵn
+};
+
 // ── Chỉ mục asset trong bundle của TA ─────────────────────────────────
 /**
  * Quét mọi .meta trong `assets/bacay/` để dựng bảng: tên → uuid.
@@ -334,6 +356,36 @@ function main() {
     const goc = dungNode(bc.cay, ctx);
     const pfUuid = P.uuid4();
     const mang = P.build(goc, pfUuid);
+
+    // ── Phủ màn hình ────────────────────────────────────────────────────
+    const phu = PHU_MAN_HINH[muc.ra];
+    if (phu) {
+      const goc = mang[1];
+
+      // 1. Gốc phải giãn bằng canvas. Không có Widget thì nó đứng im ở 1560x720 và
+      //    hở mép trên mọi máy rộng hơn thế.
+      if (phu.themWidgetGoc) {
+        const w = P.widget({ alignFlags: 45, top: 0, bottom: 0, left: 0, right: 0 });
+        w.data._originalWidth = CANVAS[0];
+        w.data._originalHeight = CANVAS[1];
+        const id = mang.length;
+        mang.push(Object.assign({ __type__: 'cc.Widget', _name: '', _objFlags: 0,
+          node: { __id__: 1 }, _enabled: true, _id: '' }, w.data));
+        goc._components.push({ __id__: id });
+        console.log(`      ⤢ thêm Widget kéo bốn cạnh cho gốc — Go88 không cần vì họ fitWidth`);
+      }
+
+      // 2. Nền phủ hết bề rộng, GIỮ tỉ lệ. Phóng theo chiều rộng rồi để Mask cắt phần dư.
+      const nen = mang.find((o) => o && o.__type__ === 'cc.Node' && o._name === phu.nen);
+      if (nen && nen._contentSize.width > 0) {
+        const tyLe = nen._contentSize.height / nen._contentSize.width;
+        const rongCu = nen._contentSize.width;
+        nen._contentSize.width = RONG_PHU;
+        nen._contentSize.height = Math.round(RONG_PHU * tyLe);
+        console.log(`      ⤢ nền ${phu.nen}: ${rongCu}x${Math.round(rongCu * tyLe)} → ` +
+          `${nen._contentSize.width}x${nen._contentSize.height} (phủ tới màn 21:9, giữ tỉ lệ)`);
+      }
+    }
 
     // ── Gốc toàn màn hình: theo canvas ROY88, không theo canvas Go88 ──────
     //
