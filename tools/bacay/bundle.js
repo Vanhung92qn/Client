@@ -101,6 +101,8 @@ const DANH_MUC = [
     ly_do: 'bitmap font co vien — nhan tren nut',
   },
 
+  { nguon: '_shared/fonts/MyriadPro-Bold.ttf', dich: 'font/MyriadPro-Bold.ttf', ly_do: 'font hệ thống cho nhãn số bàn / mức cược / tên game' },
+
   // ── Spine ───────────────────────────────────────────────────────────
   {
     nguon: 'BaCay/skeletons/Go_JQK.json',
@@ -319,6 +321,12 @@ function main() {
 
       P.writeCocosJson(dst + '.meta', metaTho(P.uuid4(), 'spine-data'));
       console.log(`  spine ${muc.dich}  (tro toi ${tenAnhMoi})`);
+      continue;
+    }
+
+    if (ext === '.ttf') {
+      P.writeCocosJson(dst + '.meta', { ver: '1.1.2', uuid: P.uuid4(), importer: 'ttf-font', subMetas: {} });
+      console.log(`  ttf   ${muc.dich}`);
       continue;
     }
 

@@ -177,7 +177,20 @@ function rut(tuyetDoi, chiMuc, boQua) {
         mo.top = c._top; mo.bottom = c._bottom; mo.left = c._left; mo.right = c._right;
         mo.alignFlags = c._alignFlags;
       } else if (t === 'cc.ProgressBar') {
-        mo.mode = c._N$mode; mo.total = c._N$totalLength;
+        mo.mode = c._N$mode;
+        mo.total = c._N$totalLength;
+
+        // 🔴 barSprite trỏ tới cc.Sprite của MỘT NODE KHÁC (thường là node con "bar").
+        // Bỏ sót thì thanh tiến độ dựng ra vẫn hợp lệ, vẫn hiện, nhưng KHÔNG BAO GIỜ
+        // chạy — không có dòng lỗi nào. Bộ kiểm của tools/prefab bắt được đúng cái này.
+        const bs = lay(c._N$barSprite);
+        if (bs) {
+          const chu = lay(bs.node);
+          mo.barSpriteNode = chu ? chu._name : null;
+          if (!mo.barSpriteNode) {
+            boQua.push({ loai: 'ref', node: n._name, chi_tiet: 'barSprite', ly_do: 'không lần ra node chủ' });
+          }
+        }
       }
       kq.comps.push(mo);
     }

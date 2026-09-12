@@ -914,7 +914,8 @@
           },
           {
             "loai": "cc.ProgressBar",
-            "mode": 2
+            "mode": 2,
+            "barSpriteNode": "bar"
           }
         ],
         "con": [

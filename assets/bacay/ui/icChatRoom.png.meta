@@ -1,6 +1,6 @@
 {
   "ver": "2.3.7",
-  "uuid": "e2ac26cc-26a4-4473-b3cb-a0c679ed46bf",
+  "uuid": "16348e56-41e4-4e7c-89f6-097df677a848",
   "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
@@ -14,9 +14,9 @@
   "subMetas": {
     "icChatRoom": {
       "ver": "1.0.6",
-      "uuid": "2f08325d-d014-48d1-a0f1-c26177249bf3",
+      "uuid": "7e14209f-a0f9-42fa-923f-99c28868efce",
       "importer": "sprite-frame",
-      "rawTextureUuid": "e2ac26cc-26a4-4473-b3cb-a0c679ed46bf",
+      "rawTextureUuid": "16348e56-41e4-4e7c-89f6-097df677a848",
       "trimType": "none",
       "trimThreshold": 1,
       "rotated": false,

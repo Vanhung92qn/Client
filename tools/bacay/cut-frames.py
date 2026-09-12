@@ -37,6 +37,7 @@ CAN_CAT = {
         "icChatRoom": None,                    # None = giữ nguyên tên
         "icExit_2": None,
         "borderLoadingTableHide": None,
+        "borderLoadingTable": None,
         "txtPhong": None,
         "txtCUoc": None,
         "txtVanChoi": None,
