@@ -27,6 +27,13 @@ const BUNDLE = path.join(ASSETS, 'bacay');
 const LAYOUT = path.join(__dirname, 'layout');
 const BUILTIN = require('../prefab/lib/builtin-uuids.json').uuids;
 
+/**
+ * Canvas của Roy88, đọc từ assets/lobby/scenes/MainGame.fire.
+ * KHÁC canvas của Go88 (1560x720) — và khác cả chế độ căn: Roy88 `fitHeight`,
+ * Go88 `fitWidth`. Nghĩa là ở Roy88 chiều RỘNG mới là chiều dư ra.
+ */
+const CANVAS = [1561, 732];
+
 /** Prefab cần sinh. */
 const CAN_SINH = [
   { bo_cuc: 'table', ra: 'BanCaoRua', mo_ta: 'khung bàn' },
@@ -327,6 +334,36 @@ function main() {
     const goc = dungNode(bc.cay, ctx);
     const pfUuid = P.uuid4();
     const mang = P.build(goc, pfUuid);
+
+    // ── Gốc toàn màn hình: theo canvas ROY88, không theo canvas Go88 ──────
+    //
+    // Node gốc có Widget kéo cả bốn cạnh thì nó tự giãn bằng node cha lúc chạy, nên
+    // con số lưu chỉ là kích thước tác giả dựng. Nhưng prefab này sống trong Roy88,
+    // nên phải mang số của Roy88.
+    //
+    // Đối chứng trong chính dự án: LoadingOverlay / LoDeLobby / ShootFish — cả ba đều
+    // có Widget alignFlags 45 ở gốc và đều lưu 1561x732, đúng bằng canvas MainGame.
+    // Go88 lưu 1560x720 vì canvas của HỌ là thế.
+    {
+      const goc = mang[1];
+      const w = mang[1]._components
+        .map((x) => mang[x.__id__])
+        .find((c) => c && c.__type__ === 'cc.Widget');
+
+      const keoNgang = w && (w._alignFlags & 8) && (w._alignFlags & 32);
+      const keoDoc = w && (w._alignFlags & 1) && (w._alignFlags & 4);
+
+      if (keoNgang && keoDoc) {
+        goc._contentSize.width = CANVAS[0];
+        goc._contentSize.height = CANVAS[1];
+        w._originalWidth = CANVAS[0];
+        w._originalHeight = CANVAS[1];
+        // Neo giữa ⇒ vị trí là nửa kích thước.
+        goc._trs.array[0] = CANVAS[0] * goc._anchorPoint.x;
+        goc._trs.array[1] = CANVAS[1] * goc._anchorPoint.y;
+        console.log(`      ⤢ gốc toàn màn hình → canvas Roy88 ${CANVAS[0]}x${CANVAS[1]}`);
+      }
+    }
 
     // 🔴 CHỐT 1: node sinh ra + node cố ý cắt phải BẰNG ĐÚNG bố cục.
     // Cắt có chủ đích thì được, nhưng phải cộng lại đủ — nếu không thì một node

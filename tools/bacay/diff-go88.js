@@ -47,6 +47,20 @@ const HOAN = {
   'cc.SkeletonAnimation': 'hoạt cảnh spine phụ trên bảng điểm — chưa dùng ở bản 1',
 };
 
+/**
+ * KHÁC BIỆT CÓ CHỦ ĐÍCH — khai báo chứ không nới lỏng chốt.
+ *
+ * Node gốc toàn màn hình mang canvas của ROY88 (1561x732) chứ không phải của Go88
+ * (1560x720). Widget kéo cả bốn cạnh nên lúc chạy nó giãn bằng node cha; con số lưu
+ * chỉ là kích thước tác giả dựng, và prefab này sống trong Roy88.
+ *
+ * Đối chứng trong chính dự án: LoadingOverlay / LoDeLobby / ShootFish đều có Widget
+ * alignFlags 45 ở gốc và đều lưu 1561x732.
+ */
+const KHAC_CO_CHU_DICH = {
+  '': new Set(['x', 'y', 'w', 'h', 'widget']),
+};
+
 /** Sai số cho phép khi so số thực — Cocos ghi toạ độ dạng dấu phẩy động. */
 const SAI_SO = 0.01;
 
@@ -134,11 +148,18 @@ function main() {
 
     const lech = [];
     const hoan = [];
+    const coChuDich = [];
     for (const k of chung) {
       const x = a.get(k);
       const y = b.get(k);
       for (const truong of Object.keys(x)) {
         if (gan(x[truong], y[truong])) continue;
+
+        const boQua = KHAC_CO_CHU_DICH[k];
+        if (boQua && boQua.has(truong)) {
+          coChuDich.push(`${k || '(gốc)'} . ${truong}: Go88 ${JSON.stringify(x[truong])} → ${JSON.stringify(y[truong])}`);
+          continue;
+        }
 
         // Lệch ở `comps` mà phần thiếu TOÀN LÀ component đã hoãn thì không tính là lỗi.
         if (truong === 'comps') {
@@ -159,6 +180,7 @@ function main() {
 
     const dau = lech.length ? '❌' : '✅';
     console.log(`${dau} ${c.cua_toi.padEnd(14)} ${chung.length} node đối chiếu, ${lech.length} lệch`);
+    for (const l of coChuDich) console.log(`      ⤢ ${l}`);
     for (const l of hoan) console.log(`      ⏸ ${l}`);
     for (const l of lech.slice(0, 8)) console.log(`      ${l}`);
     if (lech.length > 8) console.log(`      … và ${lech.length - 8} chỗ nữa`);
