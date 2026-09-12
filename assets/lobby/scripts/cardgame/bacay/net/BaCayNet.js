@@ -190,15 +190,31 @@ function layToken() {
                     // nhập; nhận ra nó bằng hình dạng: có `rid` và có `seats`.
                     if (env.d && typeof env.d.rid === 'number' && env.d.seats) {
                         this.ghiNhoBan(env.d);
-                        this.phat('anhChup', env.d);
                     }
                     break;
             }
         },
 
+        /**
+         * Nhận một ảnh chụp bàn — ĐƯỜNG DUY NHẤT, bất kể nó tới từ đâu.
+         *
+         * 🔴 Ảnh chụp bàn tới theo HAI đường, và đó chính là chỗ đã hỏng một lần:
+         *
+         *   • PHẢN HỒI của `JOIN_ROOM` / `QUICK_JOIN` — khi tự mình vào bàn
+         *   • ĐẨY sau khi đăng nhập — khi server trả mình về ghế cũ lúc nối lại
+         *
+         * Trước đây chỉ đường ĐẨY phát sự kiện; đường PHẢN HỒI chỉ ghi nhớ rid rồi thôi.
+         * Hậu quả: bấm vào bàn thì server CHO NGỒI thật, nhưng màn hình không mở bàn và
+         * cũng không có lỗi nào — vì có lỗi gì đâu, lệnh thành công. Còn rớt mạng nối
+         * lại thì vào bàn ngon lành, nên nhìn càng khó hiểu.
+         *
+         * Gộp cả hai vào đây thì không còn hai lối để hỏng riêng nữa.
+         */
         ghiNhoBan: function (d) {
+            if (!d || typeof d.rid !== 'number') return;
             this.rid = d.rid;
             this.gheCuaToi = typeof d.mySeat === 'number' ? d.mySeat : -1;
+            this.phat('anhChup', d);
         },
 
         // ── lệnh ───────────────────────────────────────────────────
@@ -245,7 +261,7 @@ function layToken() {
             var self = this;
             return this.net.gui(MSG.QUICK_JOIN, { g: BaCayPha.GAME_ID, d: { bet: bet } })
                 .then(function (res) {
-                    if (!res.e && res.d) self.ghiNhoBan(res.d);
+                    if (!res.e) self.ghiNhoBan(res.d);
                     return res;
                 });
         },
@@ -255,7 +271,7 @@ function layToken() {
             var d = { rid: rid };
             if (matKhau) d.pwd = matKhau;
             return this.net.gui(MSG.JOIN_ROOM, { d: d }).then(function (res) {
-                if (!res.e && res.d) self.ghiNhoBan(res.d);
+                if (!res.e) self.ghiNhoBan(res.d);
                 return res;
             });
         },
@@ -291,10 +307,7 @@ function layToken() {
         dongBo: function () {
             var self = this;
             return this.net.resync(BaCayPha.GAME_ID).then(function (res) {
-                if (!res.e && res.d) {
-                    self.ghiNhoBan(res.d);
-                    self.phat('anhChup', res.d);
-                }
+                if (!res.e) self.ghiNhoBan(res.d);
                 return res;
             });
         },
