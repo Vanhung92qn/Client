@@ -33,6 +33,9 @@ const CAN_SINH = [
   { bo_cuc: 'scoreui', ra: 'BangDiem', mo_ta: 'bảng điểm trên ghế' },
   { bo_cuc: 'extratime', ra: 'RutThemLa', mo_ta: 'hiệu ứng rút thêm lá khi hoà' },
   { bo_cuc: 'controller', ra: 'MocViTri', mo_ta: 'mốc vị trí ghế / bài / chip' },
+  { bo_cuc: 'ghe', ra: 'GheNguoiChoi', mo_ta: 'ghế người chơi' },
+  { bo_cuc: 'labai', ra: 'LaBai', mo_ta: 'một lá bài' },
+  { bo_cuc: 'moi', ra: 'NutMoi', mo_ta: 'nút mời ở ghế trống' },
 ];
 
 /**
@@ -47,7 +50,37 @@ const DOI_TEN = {
   'Font-export.fnt': 'main.fnt',
   'Font_HelveticaNeue_Effect-export.fnt': 'effect.fnt',
   'Go_JQK.json': 'jqk.json',
+  // Atlas dùng chung của Go88 có HAI bản lưng bài trùng nhau. Bộ bài của ta chỉ
+  // giữ một, nên trỏ cả hai tên về cùng một frame.
+  'icCardback_dup2': 'icCardback',
+  'skeleton_4d9f506e.json': 'avatar_frame.json',
+  'Chat.json': 'chat.json',
+  'EffectCard.json': 'card_fx.json',
+  'Font_HelveticaNeue-export.fnt': 'helv.fnt',
   'caorua_tinh diem.json': 'tinhdiem.json',
+};
+
+/**
+ * NODE CẮT BỎ — kèm lý do, KHÔNG bỏ lặng lẽ.
+ *
+ * `PlayerView` của Go88 là ghế DÙNG CHUNG cho mọi game bài của họ, nên nó mang theo
+ * cả đồ của Poker (dealer / small blind / big blind / tất tay). Cào Rùa không có
+ * những khái niệm đó, giữ lại chỉ tổ nặng bundle và làm người đọc sau tưởng là game
+ * có tính năng ấy.
+ *
+ * Mỗi lần sinh, danh sách này được IN RA để không ai quên mình đã cắt gì.
+ */
+const CAT_BO = {
+  ig_dealer_lb: 'nhãn D (dealer) — luật Poker, Cào Rùa không có',
+  ig_smallblind_lb: 'nhãn SB (small blind) — luật Poker',
+  ig_bigblind_lb: 'nhãn BB (big blind) — luật Poker',
+  Text: 'chữ "Tất tay" (all-in) — luật Poker',
+  anim: 'hiệu ứng GietCong — của Poker',
+  ig_host_icon: 'biểu tượng chủ bàn — Cào Rùa của ta tự mở ván, không có chủ bàn',
+  iconPlatform: 'biểu tượng chủ bàn (bản thứ hai) — như trên',
+  ig_subscribe_get_out: 'nút đuổi người — giao thức của ta chưa có lệnh KICK',
+  btn_kick: 'nút đuổi người — như trên',
+  icKickOut: 'biểu tượng đuổi người — như trên',
 };
 
 // ── Chỉ mục asset trong bundle của TA ─────────────────────────────────
@@ -169,7 +202,19 @@ function dungNode(n, ctx) {
   };
   if (ctx.tenDuyNhat.has(n.ten)) opts.ref = n.ten;
 
-  return P.node(n.ten, opts, n.con.map((c) => dungNode(c, ctx)), dungComps(n, ctx));
+  const con = [];
+  for (const c of n.con) {
+    if (CAT_BO[c.ten]) {
+      let bo = 0;
+      (function dem(x) { bo++; x.con.forEach(dem); })(c);
+      ctx.cat.push(`${c.ten} (${bo} node): ${CAT_BO[c.ten]}`);
+      ctx.dem += bo;              // vẫn tính vào tổng để chốt đối chiếu không báo nhầm
+      continue;
+    }
+    con.push(dungNode(c, ctx));
+  }
+
+  return P.node(n.ten, opts, con, dungComps(n, ctx));
 }
 
 /** Tên xuất hiện ĐÚNG MỘT lần trong cây — chỉ những tên này được làm ref. */
@@ -197,9 +242,11 @@ function main() {
     const thieu = [];
     const hoan = [];
 
+    const cat = [];
     const ctx = {
       dem: 0,
       hoan,
+      cat,
       tenDuyNhat: tenDuyNhat(bc.cay),
 
       traFrame(ten, node) {
@@ -230,10 +277,12 @@ function main() {
     const pfUuid = P.uuid4();
     const mang = P.build(goc, pfUuid);
 
-    // 🔴 CHỐT 1: số node phải khớp bố cục.
+    // 🔴 CHỐT 1: node sinh ra + node cố ý cắt phải BẰNG ĐÚNG bố cục.
+    // Cắt có chủ đích thì được, nhưng phải cộng lại đủ — nếu không thì một node
+    // biến mất vì lý do khác sẽ lẫn vào đám "đã cắt" và không ai thấy.
     const soNode = mang.filter((o) => o && o.__type__ === 'cc.Node').length;
-    if (soNode !== bc.soNodeRut) {
-      throw new Error(`${muc.ra}: sinh ${soNode} node nhưng bố cục có ${bc.soNodeRut}`);
+    if (ctx.dem !== bc.soNodeRut) {
+      throw new Error(`${muc.ra}: duyệt ${ctx.dem} node nhưng bố cục có ${bc.soNodeRut}`);
     }
 
     const rap = path.join(BUNDLE, 'prefab', muc.ra + '.prefab');
@@ -241,8 +290,10 @@ function main() {
     P.writeCocosJson(rap + '.meta', P.prefabMeta(pfUuid));
 
     const dau = thieu.length ? '⚠️' : '✅';
-    console.log(`${dau} ${muc.ra.padEnd(12)} ${soNode}/${bc.soNodeRut} node, ` +
+    const catGon = cat.length ? ` (cắt ${bc.soNodeRut - soNode})` : '';
+    console.log(`${dau} ${muc.ra.padEnd(13)} ${soNode}/${bc.soNodeRut} node${catGon}, ` +
       `${mang.length} object — ${muc.mo_ta}`);
+    for (const c of cat) console.log(`      ✂ ${c}`);
 
     if (hoan.length) {
       console.log(`      hoãn ${hoan.length} component chưa cần bản 1: ${hoan.join(', ')}`);

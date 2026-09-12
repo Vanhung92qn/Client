@@ -1,0 +1,64 @@
+{
+  "nguon": "_shared/prefabs/BtnInvite_875cabc3.prefab",
+  "mo_ta": "nút mời ở ghế trống",
+  "soNodeGoc": 2,
+  "soNodeRut": 2,
+  "boQua": [
+    {
+      "loai": "component",
+      "node": "BtnInvite",
+      "chi_tiet": "ad179eQpAZM8LD5Fkqt9Ggq",
+      "ly_do": "script riêng của Go88, ta gắn script của mình"
+    },
+    {
+      "loai": "component",
+      "node": "BtnInvite",
+      "chi_tiet": "d339fGmg5hE/pI0+iDfQxgq",
+      "ly_do": "script riêng của Go88, ta gắn script của mình"
+    }
+  ],
+  "cay": {
+    "ten": "BtnInvite",
+    "x": 0,
+    "y": 0,
+    "w": 133,
+    "h": 133,
+    "anchorX": 0.5,
+    "anchorY": 0.5,
+    "scaleX": 1,
+    "scaleY": 1,
+    "active": true,
+    "opacity": 255,
+    "comps": [
+      {
+        "loai": "cc.Button"
+      },
+      {
+        "loai": "cc.Sprite",
+        "frame": "boderAvatar02"
+      }
+    ],
+    "con": [
+      {
+        "ten": "icPlus02",
+        "x": 0,
+        "y": 0,
+        "w": 63,
+        "h": 62,
+        "anchorX": 0.5,
+        "anchorY": 0.5,
+        "scaleX": 1,
+        "scaleY": 1,
+        "active": true,
+        "opacity": 255,
+        "comps": [
+          {
+            "loai": "cc.Sprite",
+            "frame": "icPlus02"
+          }
+        ],
+        "con": []
+      }
+    ]
+  }
+}

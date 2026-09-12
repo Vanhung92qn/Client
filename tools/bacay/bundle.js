@@ -103,7 +103,33 @@ const DANH_MUC = [
 
   { nguon: '_shared/fonts/MyriadPro-Bold.ttf', dich: 'font/MyriadPro-Bold.ttf', ly_do: 'font hệ thống cho nhãn số bàn / mức cược / tên game' },
 
+  { nguon: '_shared/fonts/SourceSansPro-Regular.ttf', dich: 'font/SourceSansPro-Regular.ttf', ly_do: 'font tên người chơi trên ghế' },
+  {
+    nguon: '_shared/fonts/Font_HelveticaNeue-export.fnt',
+    dich: 'font/helv.fnt',
+    nhom: ['_shared/fonts/Font_HelveticaNeue-export.png'],
+    ly_do: 'bitmap font cho nhãn trong bong bóng chat',
+  },
+
   // ── Spine ───────────────────────────────────────────────────────────
+  {
+    nguon: '_shared/skeletons/skeleton_4d9f506e.json',
+    dich: 'spine/avatar_frame.json',
+    nhom: ['_shared/skeletons/skeleton_4d9f506e.atlas', '_shared/skeletons/skeleton_4d9f506e.png'],
+    ly_do: 'hiệu ứng khung avatar trên ghế',
+  },
+  {
+    nguon: '_shared/skeletons/Chat.json',
+    dich: 'spine/chat.json',
+    nhom: ['_shared/skeletons/Chat.atlas', '_shared/skeletons/Chat.png'],
+    ly_do: 'bong bóng chat trên ghế — ta CÓ chat/emote nên cần',
+  },
+  {
+    nguon: '_shared/skeletons/EffectCard.json',
+    dich: 'spine/card_fx.json',
+    nhom: ['_shared/skeletons/EffectCard.atlas', '_shared/skeletons/EffectCard.png'],
+    ly_do: 'hiệu ứng lấp lánh trên lá bài',
+  },
   {
     nguon: 'BaCay/skeletons/Go_JQK.json',
     dich: 'spine/jqk.json',

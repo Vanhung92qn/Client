@@ -1,0 +1,721 @@
+{
+  "nguon": "_shared/prefabs/PlayerView_201107e0.prefab",
+  "mo_ta": "ghế người chơi",
+  "soNodeGoc": 33,
+  "soNodeRut": 33,
+  "boQua": [
+    {
+      "loai": "component",
+      "node": "PlayerView",
+      "chi_tiet": "a9c66ESjzZEwpZDfjilXaGp",
+      "ly_do": "script riêng của Go88, ta gắn script của mình"
+    },
+    {
+      "loai": "component",
+      "node": "icInfoUser",
+      "chi_tiet": "d339fGmg5hE/pI0+iDfQxgq",
+      "ly_do": "script riêng của Go88, ta gắn script của mình"
+    },
+    {
+      "loai": "component",
+      "node": "icKickOut",
+      "chi_tiet": "d339fGmg5hE/pI0+iDfQxgq",
+      "ly_do": "script riêng của Go88, ta gắn script của mình"
+    },
+    {
+      "loai": "component",
+      "node": "avr",
+      "chi_tiet": "63af6iNvX5M+Ix3hKfM1Qqt",
+      "ly_do": "script riêng của Go88, ta gắn script của mình"
+    },
+    {
+      "loai": "component",
+      "node": "avr",
+      "chi_tiet": "d339fGmg5hE/pI0+iDfQxgq",
+      "ly_do": "script riêng của Go88, ta gắn script của mình"
+    },
+    {
+      "loai": "component",
+      "node": "efLoadingBar",
+      "chi_tiet": "5f1a2108T5BKpCTyy+ZdMOp",
+      "ly_do": "script riêng của Go88, ta gắn script của mình"
+    },
+    {
+      "loai": "component",
+      "node": "PlayerStatusUI",
+      "chi_tiet": "267fbhnBOlFB7Lrozxru+xb",
+      "ly_do": "script riêng của Go88, ta gắn script của mình"
+    }
+  ],
+  "cay": {
+    "ten": "PlayerView",
+    "x": 0,
+    "y": 0,
+    "w": 0,
+    "h": 0,
+    "anchorX": 0.5,
+    "anchorY": 0.5,
+    "scaleX": 1,
+    "scaleY": 1,
+    "active": true,
+    "opacity": 255,
+    "comps": [],
+    "con": [
+      {
+        "ten": "boderInfo",
+        "x": -94,
+        "y": 0,
+        "w": 60,
+        "h": 144,
+        "anchorX": 0.5,
+        "anchorY": 0.5,
+        "scaleX": 1,
+        "scaleY": 1,
+        "active": false,
+        "opacity": 255,
+        "comps": [
+          {
+            "loai": "cc.Sprite",
+            "frame": "boderInfo"
+          }
+        ],
+        "con": [
+          {
+            "ten": "icInfoUser",
+            "x": -2,
+            "y": 29,
+            "w": 25,
+            "h": 50,
+            "anchorX": 0.5,
+            "anchorY": 0.5,
+            "scaleX": 1,
+            "scaleY": 1,
+            "active": true,
+            "opacity": 255,
+            "comps": [
+              {
+                "loai": "cc.Sprite",
+                "frame": "icInfoUser"
+              },
+              {
+                "loai": "cc.Button"
+              }
+            ],
+            "con": []
+          },
+          {
+            "ten": "icKickOut",
+            "x": -2.31,
+            "y": -31,
+            "w": 53,
+            "h": 56,
+            "anchorX": 0.5,
+            "anchorY": 0.5,
+            "scaleX": 1,
+            "scaleY": 1,
+            "active": true,
+            "opacity": 255,
+            "comps": [
+              {
+                "loai": "cc.Sprite",
+                "frame": "icKickOut"
+              },
+              {
+                "loai": "cc.Button"
+              }
+            ],
+            "con": []
+          }
+        ]
+      },
+      {
+        "ten": "PlayerAvarta",
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0,
+        "anchorX": 0.5,
+        "anchorY": 0.5,
+        "scaleX": 1,
+        "scaleY": 1,
+        "active": true,
+        "opacity": 255,
+        "comps": [],
+        "con": [
+          {
+            "ten": "boderAvatar@2x",
+            "x": 0,
+            "y": 0,
+            "w": 167,
+            "h": 167,
+            "anchorX": 0.5,
+            "anchorY": 0.5,
+            "scaleX": 1,
+            "scaleY": 1,
+            "active": true,
+            "opacity": 255,
+            "comps": [
+              {
+                "loai": "cc.Sprite",
+                "frame": "boderAvatar"
+              }
+            ],
+            "con": []
+          },
+          {
+            "ten": "AvartaMark",
+            "x": 0,
+            "y": 0,
+            "w": 150,
+            "h": 150,
+            "anchorX": 0.5,
+            "anchorY": 0.5,
+            "scaleX": 1,
+            "scaleY": 1,
+            "active": true,
+            "opacity": 255,
+            "comps": [
+              {
+                "loai": "cc.Mask"
+              }
+            ],
+            "con": [
+              {
+                "ten": "avr",
+                "x": 0,
+                "y": 0,
+                "w": 150,
+                "h": 160,
+                "anchorX": 0.5,
+                "anchorY": 0.5,
+                "scaleX": 1,
+                "scaleY": 1,
+                "active": true,
+                "opacity": 255,
+                "comps": [
+                  {
+                    "loai": "cc.Button"
+                  }
+                ],
+                "con": []
+              }
+            ]
+          },
+          {
+            "ten": "ig_host_icon",
+            "x": -46,
+            "y": 92,
+            "w": 57,
+            "h": 52,
+            "anchorX": 0.5,
+            "anchorY": 0.5,
+            "scaleX": 1,
+            "scaleY": 1,
+            "active": false,
+            "opacity": 255,
+            "comps": [
+              {
+                "loai": "cc.Sprite",
+                "frame": "icMasterroom"
+              }
+            ],
+            "con": []
+          },
+          {
+            "ten": "iconPlatform",
+            "x": -67,
+            "y": 90,
+            "w": 57,
+            "h": 52,
+            "anchorX": 0.5,
+            "anchorY": 0.5,
+            "scaleX": 1,
+            "scaleY": 1,
+            "active": false,
+            "opacity": 255,
+            "comps": [
+              {
+                "loai": "cc.Sprite",
+                "frame": "icMasterroom"
+              }
+            ],
+            "con": []
+          },
+          {
+            "ten": "ig_icon_ready",
+            "x": 66,
+            "y": 79,
+            "w": 43,
+            "h": 43,
+            "anchorX": 0.5,
+            "anchorY": 0.5,
+            "scaleX": 1,
+            "scaleY": 1,
+            "active": false,
+            "opacity": 255,
+            "comps": [
+              {
+                "loai": "cc.Sprite",
+                "frame": "borderCheck02_2"
+              }
+            ],
+            "con": [
+              {
+                "ten": "icCheck02",
+                "x": 0,
+                "y": 0,
+                "w": 39,
+                "h": 37,
+                "anchorX": 0.5,
+                "anchorY": 0.5,
+                "scaleX": 1,
+                "scaleY": 1,
+                "active": true,
+                "opacity": 255,
+                "comps": [
+                  {
+                    "loai": "cc.Sprite",
+                    "frame": "icCheck02"
+                  }
+                ],
+                "con": []
+              }
+            ]
+          },
+          {
+            "ten": "ig_subscribe_get_out",
+            "x": -101.52,
+            "y": -93.59,
+            "w": 38,
+            "h": 42,
+            "anchorX": 0.5,
+            "anchorY": 0.5,
+            "scaleX": 1,
+            "scaleY": 1,
+            "active": false,
+            "opacity": 255,
+            "comps": [
+              {
+                "loai": "cc.Sprite",
+                "frame": "icExit",
+                "sizeMode": 0
+              }
+            ],
+            "con": []
+          },
+          {
+            "ten": "ig_dealer_lb",
+            "x": 82,
+            "y": 109,
+            "w": 42,
+            "h": 42,
+            "anchorX": 0.5,
+            "anchorY": 0.5,
+            "scaleX": 1,
+            "scaleY": 1,
+            "active": false,
+            "opacity": 255,
+            "comps": [
+              {
+                "loai": "cc.Sprite",
+                "frame": "D"
+              }
+            ],
+            "con": []
+          },
+          {
+            "ten": "ig_smallblind_lb",
+            "x": 82,
+            "y": 109,
+            "w": 42,
+            "h": 42,
+            "anchorX": 0.5,
+            "anchorY": 0.5,
+            "scaleX": 1,
+            "scaleY": 1,
+            "active": false,
+            "opacity": 255,
+            "comps": [
+              {
+                "loai": "cc.Sprite",
+                "frame": "SB"
+              }
+            ],
+            "con": []
+          },
+          {
+            "ten": "ig_bigblind_lb",
+            "x": 82,
+            "y": 109,
+            "w": 42,
+            "h": 42,
+            "anchorX": 0.5,
+            "anchorY": 0.5,
+            "scaleX": 1,
+            "scaleY": 1,
+            "active": false,
+            "opacity": 255,
+            "comps": [
+              {
+                "loai": "cc.Sprite",
+                "frame": "BB"
+              }
+            ],
+            "con": []
+          },
+          {
+            "ten": "btn_kick",
+            "x": -111,
+            "y": 0,
+            "w": 45,
+            "h": 50,
+            "anchorX": 0.5,
+            "anchorY": 0.5,
+            "scaleX": 1,
+            "scaleY": 1,
+            "active": false,
+            "opacity": 255,
+            "comps": [
+              {
+                "loai": "cc.Sprite",
+                "frame": "icExit"
+              }
+            ],
+            "con": []
+          }
+        ]
+      },
+      {
+        "ten": "efLoadingBar",
+        "x": 0,
+        "y": 0,
+        "w": 196,
+        "h": 196,
+        "anchorX": 0.5,
+        "anchorY": 0.5,
+        "scaleX": 1,
+        "scaleY": 1,
+        "active": true,
+        "opacity": 255,
+        "comps": [
+          {
+            "loai": "cc.Sprite",
+            "frame": "efLoadingBar",
+            "type": 3
+          },
+          {
+            "loai": "cc.ProgressBar",
+            "mode": 2,
+            "barSpriteNode": "efLoadingBar"
+          }
+        ],
+        "con": [
+          {
+            "ten": "skeleton",
+            "x": 0,
+            "y": 0,
+            "w": 79,
+            "h": 148.45,
+            "anchorX": 0.5,
+            "anchorY": 0.5,
+            "scaleX": 1,
+            "scaleY": 1,
+            "active": false,
+            "opacity": 255,
+            "comps": [
+              {
+                "loai": "sp.Skeleton",
+                "skel": "skeleton_4d9f506e.json",
+                "loop": false
+              }
+            ],
+            "con": []
+          }
+        ]
+      },
+      {
+        "ten": "PlayerName",
+        "x": 1,
+        "y": -89,
+        "w": 153,
+        "h": 55,
+        "anchorX": 0.5,
+        "anchorY": 0.5,
+        "scaleX": 1,
+        "scaleY": 1,
+        "active": true,
+        "opacity": 255,
+        "comps": [
+          {
+            "loai": "cc.Sprite",
+            "frame": "btnMoney"
+          }
+        ],
+        "con": [
+          {
+            "ten": "Mn",
+            "x": 0,
+            "y": -13,
+            "w": 88.25,
+            "h": 32,
+            "anchorX": 0.5,
+            "anchorY": 0.5,
+            "scaleX": 1,
+            "scaleY": 1,
+            "active": true,
+            "opacity": 255,
+            "comps": [
+              {
+                "loai": "cc.Layout"
+              }
+            ],
+            "con": [
+              {
+                "ten": "iCon",
+                "x": -32.12,
+                "y": 0,
+                "w": 24,
+                "h": 32,
+                "anchorX": 0.5,
+                "anchorY": 0.5,
+                "scaleX": 1,
+                "scaleY": 1,
+                "active": true,
+                "opacity": 255,
+                "comps": [
+                  {
+                    "loai": "cc.Sprite",
+                    "frame": "icMoney"
+                  }
+                ],
+                "con": []
+              },
+              {
+                "ten": "mn",
+                "x": 15,
+                "y": 27,
+                "w": 80.25,
+                "h": 81.25,
+                "anchorX": 0.5,
+                "anchorY": 0.5,
+                "scaleX": 1,
+                "scaleY": 1,
+                "active": true,
+                "opacity": 255,
+                "comps": [
+                  {
+                    "loai": "cc.Label",
+                    "text": "?????",
+                    "co": 20,
+                    "canhNgang": 1,
+                    "font": "Font-export.fnt"
+                  }
+                ],
+                "con": []
+              }
+            ]
+          },
+          {
+            "ten": "name",
+            "x": 0,
+            "y": 13,
+            "w": 89.18,
+            "h": 75.6,
+            "anchorX": 0.5,
+            "anchorY": 0.5,
+            "scaleX": 1,
+            "scaleY": 1,
+            "active": true,
+            "opacity": 255,
+            "comps": [
+              {
+                "loai": "cc.Label",
+                "text": "Ẩn Danh Tính",
+                "co": 16,
+                "canhNgang": 1,
+                "font": "SourceSansPro-Regular.ttf"
+              }
+            ],
+            "con": []
+          }
+        ]
+      },
+      {
+        "ten": "BublePos",
+        "x": 50,
+        "y": 47,
+        "w": 0,
+        "h": 0,
+        "anchorX": 0.5,
+        "anchorY": 0.5,
+        "scaleX": 1,
+        "scaleY": 1,
+        "active": true,
+        "opacity": 255,
+        "comps": [],
+        "con": []
+      },
+      {
+        "ten": "ChatView",
+        "x": 92,
+        "y": 40,
+        "w": 83,
+        "h": 71,
+        "anchorX": 0.5,
+        "anchorY": 0.5,
+        "scaleX": 1,
+        "scaleY": 1,
+        "active": false,
+        "opacity": 255,
+        "comps": [
+          {
+            "loai": "sp.Skeleton",
+            "skel": "Chat.json",
+            "anim": "animation"
+          }
+        ],
+        "con": []
+      },
+      {
+        "ten": "PlayerStatusUI",
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0,
+        "anchorX": 0.5,
+        "anchorY": 0.5,
+        "scaleX": 1,
+        "scaleY": 1,
+        "active": false,
+        "opacity": 255,
+        "comps": [],
+        "con": [
+          {
+            "ten": "Background",
+            "x": 0,
+            "y": 4.74,
+            "w": 134,
+            "h": 52,
+            "anchorX": 0.5,
+            "anchorY": 0.5,
+            "scaleX": 1,
+            "scaleY": 1,
+            "active": true,
+            "opacity": 255,
+            "comps": [
+              {
+                "loai": "cc.Sprite",
+                "frame": "icBodychat",
+                "sizeMode": 0,
+                "type": 1
+              }
+            ],
+            "con": [
+              {
+                "ten": "New Sprite",
+                "x": -35.15,
+                "y": -29.6,
+                "w": 28,
+                "h": 14,
+                "anchorX": 0.5,
+                "anchorY": 0.5,
+                "scaleX": 1,
+                "scaleY": 1,
+                "active": true,
+                "opacity": 255,
+                "comps": [
+                  {
+                    "loai": "cc.Sprite",
+                    "frame": "icHeadChat"
+                  }
+                ],
+                "con": []
+              }
+            ]
+          },
+          {
+            "ten": "Text",
+            "x": 0,
+            "y": 4,
+            "w": 69,
+            "h": 26,
+            "anchorX": 0.5,
+            "anchorY": 0.5,
+            "scaleX": 1,
+            "scaleY": 1,
+            "active": false,
+            "opacity": 255,
+            "comps": [
+              {
+                "loai": "cc.Sprite",
+                "frame": "TatTay"
+              }
+            ],
+            "con": []
+          },
+          {
+            "ten": "Label",
+            "x": 0,
+            "y": 15,
+            "w": 101.5,
+            "h": 52.5,
+            "anchorX": 0.5,
+            "anchorY": 0.5,
+            "scaleX": 1,
+            "scaleY": 1,
+            "active": false,
+            "opacity": 255,
+            "comps": [
+              {
+                "loai": "cc.Label",
+                "text": "Ăn chốt",
+                "co": 28,
+                "canhNgang": 1,
+                "font": "Font_HelveticaNeue-export.fnt"
+              }
+            ],
+            "con": []
+          }
+        ]
+      },
+      {
+        "ten": "anims",
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0,
+        "anchorX": 0.5,
+        "anchorY": 0.5,
+        "scaleX": 1,
+        "scaleY": 1,
+        "active": true,
+        "opacity": 255,
+        "comps": [],
+        "con": [
+          {
+            "ten": "anim",
+            "x": 0,
+            "y": 100,
+            "w": 348.55,
+            "h": 319.9,
+            "anchorX": 0.5,
+            "anchorY": 0.5,
+            "scaleX": 1,
+            "scaleY": 1,
+            "active": false,
+            "opacity": 255,
+            "comps": [
+              {
+                "loai": "sp.Skeleton",
+                "skel": "GietCong.json",
+                "anim": "animation",
+                "loop": false
+              }
+            ],
+            "con": []
+          }
+        ]
+      }
+    ]
+  }
+}

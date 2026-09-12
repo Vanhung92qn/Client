@@ -1,0 +1,20 @@
+
+chat.png
+size: 94,94
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+HatTron
+  rotate: false
+  xy: 2, 2
+  size: 17, 17
+  orig: 17, 17
+  offset: 0, 0
+  index: -1
+bar
+  rotate: false
+  xy: 2, 21
+  size: 83, 71
+  orig: 83, 71
+  offset: 0, 0
+  index: -1

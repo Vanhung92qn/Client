@@ -1,6 +1,6 @@
 {
   "ver": "2.3.7",
-  "uuid": "8c1d0fa7-5933-4ae7-b0b9-c94a169ced21",
+  "uuid": "f12df542-3f08-4ff0-a9a8-3c488ce2a2b5",
   "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
@@ -14,9 +14,9 @@
   "subMetas": {
     "icQuanBai": {
       "ver": "1.0.6",
-      "uuid": "cc6756ce-46b9-4b0c-ac62-44c2cd94da8e",
+      "uuid": "46669979-ff71-42b8-9a00-8e7a7451aa1e",
       "importer": "sprite-frame",
-      "rawTextureUuid": "8c1d0fa7-5933-4ae7-b0b9-c94a169ced21",
+      "rawTextureUuid": "f12df542-3f08-4ff0-a9a8-3c488ce2a2b5",
       "trimType": "none",
       "trimThreshold": 1,
       "rotated": false,

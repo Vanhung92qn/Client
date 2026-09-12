@@ -43,6 +43,9 @@ const CAN_RUT = [
   { tep: 'BaCay/prefabs/BaCayController_23ef3f28.prefab', ten: 'controller', mo_ta: 'mốc vị trí ghế/bài/chip' },
   { tep: 'BaCay/prefabs/BaCayScoreUI_7d0053ce.prefab', ten: 'scoreui', mo_ta: 'bảng điểm trên ghế' },
   { tep: 'BaCay/prefabs/BaCayAnimExtratime_0e13e9ae.prefab', ten: 'extratime', mo_ta: 'hiệu ứng rút thêm lá' },
+  { tep: '_shared/prefabs/PlayerView_201107e0.prefab', ten: 'ghe', mo_ta: 'ghế người chơi' },
+  { tep: '_shared/prefabs/Card_bc_bc29c05f.prefab', ten: 'labai', mo_ta: 'một lá bài' },
+  { tep: '_shared/prefabs/BtnInvite_875cabc3.prefab', ten: 'moi', mo_ta: 'nút mời ở ghế trống' },
 ];
 
 /** Component hiển thị mang sang được. Ngoài danh sách này là script riêng của Go88. */

@@ -47,10 +47,20 @@ CAN_CAT = {
         "icLoadingBattle": None,
         "btnDanhbai": None,
         "borderThangSapLang": None,
+        "icInfoUser": None,
+        "boderInfo": None,
+        "icHeadChat": None,
+        "icBodychat": None,
+        "icPlus02": None,
+        "boderAvatar02": None,
     },
     "_shared/plist/atlas_826aa8f8.plist": {
         "icCheck02": None,
         "borderCheck02_2": None,
+        "boderAvatar": None,
+        "efLoadingBar": None,
+        "icMoney": None,
+        "btnMoney": None,
     },
 }
 

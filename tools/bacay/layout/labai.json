@@ -1,0 +1,119 @@
+{
+  "nguon": "_shared/prefabs/Card_bc_bc29c05f.prefab",
+  "mo_ta": "một lá bài",
+  "soNodeGoc": 5,
+  "soNodeRut": 5,
+  "boQua": [
+    {
+      "loai": "component",
+      "node": "Card_bc",
+      "chi_tiet": "8296fgldVJKPpaQzxQNSgJR",
+      "ly_do": "script riêng của Go88, ta gắn script của mình"
+    },
+    {
+      "loai": "component",
+      "node": "Card_bc",
+      "chi_tiet": "d339fGmg5hE/pI0+iDfQxgq",
+      "ly_do": "script riêng của Go88, ta gắn script của mình"
+    }
+  ],
+  "cay": {
+    "ten": "Card_bc",
+    "x": 0,
+    "y": 0,
+    "w": 114,
+    "h": 158,
+    "anchorX": 0.5,
+    "anchorY": 0.5,
+    "scaleX": 1,
+    "scaleY": 1,
+    "active": true,
+    "opacity": 255,
+    "comps": [
+      {
+        "loai": "cc.Button"
+      }
+    ],
+    "con": [
+      {
+        "ten": "SparklingFx",
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0,
+        "anchorX": 0.5,
+        "anchorY": 0.5,
+        "scaleX": 1,
+        "scaleY": 1,
+        "active": false,
+        "opacity": 255,
+        "comps": [],
+        "con": [
+          {
+            "ten": "SparklingFx",
+            "x": 0,
+            "y": 0,
+            "w": 191,
+            "h": 261,
+            "anchorX": 0.5,
+            "anchorY": 0.5,
+            "scaleX": 1,
+            "scaleY": 1,
+            "active": true,
+            "opacity": 255,
+            "comps": [
+              {
+                "loai": "sp.Skeleton",
+                "skel": "EffectCard.json",
+                "anim": "animation"
+              }
+            ],
+            "con": []
+          }
+        ]
+      },
+      {
+        "ten": "CardSprite",
+        "x": 0,
+        "y": 0,
+        "w": 114,
+        "h": 157,
+        "anchorX": 0.5,
+        "anchorY": 0.5,
+        "scaleX": 1,
+        "scaleY": 1,
+        "active": true,
+        "opacity": 255,
+        "comps": [
+          {
+            "loai": "cc.Sprite",
+            "frame": "icCardback_dup2",
+            "sizeMode": 0
+          }
+        ],
+        "con": []
+      },
+      {
+        "ten": "Card_bc",
+        "x": 0,
+        "y": 0,
+        "w": 114,
+        "h": 157,
+        "anchorX": 0.5,
+        "anchorY": 0.5,
+        "scaleX": 1,
+        "scaleY": 1,
+        "active": false,
+        "opacity": 255,
+        "comps": [
+          {
+            "loai": "cc.Sprite",
+            "frame": "icCardback_dup2",
+            "sizeMode": 0
+          }
+        ],
+        "con": []
+      }
+    ]
+  }
+}

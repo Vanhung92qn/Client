@@ -1,6 +1,6 @@
 {
   "ver": "2.3.7",
-  "uuid": "a1dc4cb2-872c-4efa-ba3f-6bc06457ecc7",
+  "uuid": "29a5666c-132e-4da1-8a6c-95397e20af3f",
   "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
@@ -14,9 +14,9 @@
   "subMetas": {
     "btnDanhbai": {
       "ver": "1.0.6",
-      "uuid": "acc2edfe-65ea-4fb7-8bfa-e7ea989531e4",
+      "uuid": "4a3d513d-3f96-4556-ab00-27720d43e621",
       "importer": "sprite-frame",
-      "rawTextureUuid": "a1dc4cb2-872c-4efa-ba3f-6bc06457ecc7",
+      "rawTextureUuid": "29a5666c-132e-4da1-8a6c-95397e20af3f",
       "trimType": "none",
       "trimThreshold": 1,
       "rotated": false,
