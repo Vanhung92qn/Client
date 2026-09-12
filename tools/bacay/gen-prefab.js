@@ -44,6 +44,7 @@ const CAN_SINH = [
   { bo_cuc: 'labai', ra: 'LaBai', mo_ta: 'một lá bài' },
   { bo_cuc: 'moi', ra: 'NutMoi', mo_ta: 'nút mời ở ghế trống' },
   { bo_cuc: 'sanh', ra: 'SanhChonBan', mo_ta: 'sảnh chọn bàn' },
+  { bo_cuc: 'mucban', ra: 'MucBan', mo_ta: 'một dòng bàn trong sảnh' },
   { bo_cuc: 'chip_red', ra: 'ChipDo', mo_ta: 'chip red' },
   { bo_cuc: 'chip_blue', ra: 'ChipXanh', mo_ta: 'chip blue' },
   { bo_cuc: 'chip_green', ra: 'ChipXanhLa', mo_ta: 'chip green' },
@@ -74,6 +75,7 @@ const DOI_TEN = {
   'Chat.json': 'chat.json',
   'EffectCard.json': 'card_fx.json',
   'Font_HelveticaNeue-export.fnt': 'helv.fnt',
+  'Font_Myriad_Number-export.fnt': 'so.fnt',
   'iconVipLobby': 'ic_vip',
   'tien': 'ic_tien',
   'bg': 'lobby_bg',
@@ -101,6 +103,12 @@ const CAT_BO = {
   ig_subscribe_get_out: 'nút đuổi người — giao thức của ta chưa có lệnh KICK',
   btn_kick: 'nút đuổi người — như trên',
   icKickOut: 'biểu tượng đuổi người — như trên',
+
+  // ── Dòng bàn trong sảnh: thương hiệu Xóc Đĩa MD5 ───────────────────
+  // Hàng bàn này Go88 dùng chung, nên nó đeo sẵn spine quảng cáo Xóc Đĩa MD5
+  // (1,1 MB) cho cả biển bàn lẫn huy hiệu VIP. Sai game, và nặng.
+  BANCHOIXOCDIAMD5: 'biển quảng cáo Xóc Đĩa MD5 — sai game',
+  iconVip: 'huy hiệu VIP vẽ bằng chính spine Xóc Đĩa MD5 — sai game',
 
   // ── Sảnh: trang trí theo mùa của Go88 ──────────────────────────────
   // Sảnh của họ có skin lễ tết chồng lên nhau, mỗi bộ một spine riêng. Giữ lại là
@@ -193,6 +201,24 @@ function chiMucBundle() {
 
   quet(BUNDLE);
   return { frame, tep };
+}
+
+/**
+ * uuid của prefab: ĐÃ CÓ thì giữ nguyên, chưa có thì sinh mới.
+ *
+ * 🔴 Sinh uuid mới mỗi lần chạy là đứt mọi tham chiếu trỏ tới prefab này — từ scene,
+ * từ prefab khác, từ bundle khác — và đứt IM LẶNG: Cocos chỉ thấy một uuid không tra
+ * được rồi để null. Đúng cái bẫy đã dính một lần ở bundle.js, nên vá luôn ở đây.
+ */
+function uuidGiuNguyen(duongDanPrefab) {
+  const meta = duongDanPrefab + '.meta';
+  if (fs.existsSync(meta)) {
+    try {
+      const m = JSON.parse(fs.readFileSync(meta, 'utf8'));
+      if (m.uuid) return m.uuid;
+    } catch (e) { /* .meta hỏng thì coi như chưa có, sinh mới */ }
+  }
+  return P.uuid4();
 }
 
 // ── Dựng component ────────────────────────────────────────────────────
@@ -377,7 +403,7 @@ function main() {
     };
 
     const goc = dungNode(bc.cay, ctx);
-    const pfUuid = P.uuid4();
+    const pfUuid = uuidGiuNguyen(path.join(BUNDLE, 'prefab', muc.ra + '.prefab'));
     const mang = P.build(goc, pfUuid);
 
     // ── Neo nút vào mép màn hình ────────────────────────────────────────

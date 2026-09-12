@@ -89,6 +89,12 @@ const DANH_MUC = [
   { nguon: '_shared/images/Button_LatTatCa.png', dich: 'art/btn_lat_tat_ca.png', ly_do: 'nut Lat tat ca' },
   { nguon: '_shared/images/Text_NanBai.png', dich: 'art/txt_nan_bai.png', ly_do: 'chu "Nan bai"' },
   {
+    nguon: '_shared/fonts/Font_Myriad_Number-export.fnt',
+    dich: 'font/so.fnt',
+    nhom: ['_shared/fonts/Font_Myriad_Number-export.png'],
+    ly_do: 'bitmap font so — muc cuoc toi thieu tren dong ban trong sanh',
+  },
+  {
     nguon: '_shared/fonts/Font-export.fnt',
     dich: 'font/main.fnt',
     nhom: ['_shared/fonts/Font-export.png'],

@@ -1,0 +1,310 @@
+{
+  "nguon": "_shared/prefabs/IconBanCHoiXocdia_a59c585c.prefab",
+  "mo_ta": "một dòng bàn trong sảnh",
+  "soNodeGoc": 11,
+  "soNodeRut": 11,
+  "boQua": [
+    {
+      "loai": "component",
+      "node": "IconBanCHoiXocdia",
+      "chi_tiet": "8abacWijXtD1qrWc47XBubw",
+      "ly_do": "script riêng của Go88, ta gắn script của mình"
+    },
+    {
+      "loai": "component",
+      "node": "IconBanCHoiXocdia",
+      "chi_tiet": "d339fGmg5hE/pI0+iDfQxgq",
+      "ly_do": "script riêng của Go88, ta gắn script của mình"
+    }
+  ],
+  "cay": {
+    "ten": "IconBanCHoiXocdia",
+    "x": 0,
+    "y": 38,
+    "w": 984,
+    "h": 75,
+    "anchorX": 0.5,
+    "anchorY": 0.5,
+    "scaleX": 1,
+    "scaleY": 1,
+    "active": true,
+    "opacity": 255,
+    "color": [
+      255,
+      255,
+      255
+    ],
+    "comps": [
+      {
+        "loai": "cc.Button"
+      }
+    ],
+    "con": [
+      {
+        "ten": "roomThuongXD",
+        "x": 0,
+        "y": 0,
+        "w": 984,
+        "h": 75,
+        "anchorX": 0.5,
+        "anchorY": 0.5,
+        "scaleX": 1,
+        "scaleY": 1,
+        "active": true,
+        "opacity": 255,
+        "color": [
+          255,
+          255,
+          255
+        ],
+        "comps": [
+          {
+            "loai": "cc.Sprite",
+            "frame": "roomThuongXD"
+          }
+        ],
+        "con": []
+      },
+      {
+        "ten": "BANCHOIXOCDIAMD5",
+        "x": 0,
+        "y": 0,
+        "w": 984,
+        "h": 75.5,
+        "anchorX": 0.5,
+        "anchorY": 0.5,
+        "scaleX": 1,
+        "scaleY": 1,
+        "active": true,
+        "opacity": 255,
+        "color": [
+          255,
+          255,
+          255
+        ],
+        "comps": [
+          {
+            "loai": "sp.Skeleton",
+            "skel": "BANCHOIXOCDIAMD5.json",
+            "anim": "ANIMBANHO"
+          }
+        ],
+        "con": []
+      },
+      {
+        "ten": "iconVip",
+        "x": -550,
+        "y": 0,
+        "w": 984,
+        "h": 75.5,
+        "anchorX": 0.5,
+        "anchorY": 0.5,
+        "scaleX": 1,
+        "scaleY": 1,
+        "active": true,
+        "opacity": 255,
+        "color": [
+          255,
+          255,
+          255
+        ],
+        "comps": [
+          {
+            "loai": "sp.Skeleton",
+            "skel": "BANCHOIXOCDIAMD5.json"
+          }
+        ],
+        "con": []
+      },
+      {
+        "ten": "New ProgressBar",
+        "x": 367,
+        "y": 1,
+        "w": 210,
+        "h": 40,
+        "anchorX": 0.5,
+        "anchorY": 0.5,
+        "scaleX": 1,
+        "scaleY": 1,
+        "active": true,
+        "opacity": 255,
+        "color": [
+          255,
+          255,
+          255
+        ],
+        "comps": [
+          {
+            "loai": "cc.ProgressBar",
+            "total": 189,
+            "barSpriteNode": "bar"
+          }
+        ],
+        "con": [
+          {
+            "ten": "bar",
+            "x": -105,
+            "y": 0,
+            "w": 189,
+            "h": 40,
+            "anchorX": 0.5,
+            "anchorY": 0.5,
+            "scaleX": 1,
+            "scaleY": 1,
+            "active": true,
+            "opacity": 255,
+            "color": [
+              255,
+              255,
+              255
+            ],
+            "comps": [
+              {
+                "loai": "cc.Sprite",
+                "frame": "loadingonline",
+                "sizeMode": 0,
+                "type": 1
+              }
+            ],
+            "con": []
+          }
+        ]
+      },
+      {
+        "ten": "BanXOcDiaLoading",
+        "x": 263,
+        "y": 1,
+        "w": 60,
+        "h": 40,
+        "anchorX": 0.5,
+        "anchorY": 0.5,
+        "scaleX": 1,
+        "scaleY": 1,
+        "active": false,
+        "opacity": 255,
+        "color": [
+          255,
+          255,
+          255
+        ],
+        "comps": [
+          {
+            "loai": "cc.Sprite",
+            "frame": "loadingBanChung",
+            "sizeMode": 0,
+            "type": 1
+          }
+        ],
+        "con": []
+      },
+      {
+        "ten": "icClock",
+        "x": 447.84,
+        "y": 0,
+        "w": 28,
+        "h": 32,
+        "anchorX": 0.5,
+        "anchorY": 0.5,
+        "scaleX": 1,
+        "scaleY": 1,
+        "active": false,
+        "opacity": 255,
+        "color": [
+          255,
+          255,
+          255
+        ],
+        "comps": [
+          {
+            "loai": "cc.Sprite",
+            "frame": "icClock"
+          }
+        ],
+        "con": []
+      },
+      {
+        "ten": "lblMucCuoc",
+        "x": -339.68,
+        "y": 0,
+        "w": 66.34,
+        "h": 85.31,
+        "anchorX": 0.5,
+        "anchorY": 0.5,
+        "scaleX": 1,
+        "scaleY": 1,
+        "active": true,
+        "opacity": 255,
+        "color": [
+          255,
+          255,
+          255
+        ],
+        "comps": [
+          {
+            "loai": "cc.Label",
+            "text": "100",
+            "co": 21,
+            "canhNgang": 1,
+            "font": "Font-export.fnt"
+          }
+        ],
+        "con": []
+      },
+      {
+        "ten": "lblMucCuocToiThieu",
+        "x": 22,
+        "y": -1,
+        "w": 0,
+        "h": 121.88,
+        "anchorX": 0.5,
+        "anchorY": 0.5,
+        "scaleX": 1,
+        "scaleY": 1,
+        "active": true,
+        "opacity": 255,
+        "color": [
+          255,
+          255,
+          255
+        ],
+        "comps": [
+          {
+            "loai": "cc.Label",
+            "co": 30,
+            "canhNgang": 1,
+            "font": "Font_Myriad_Number-export.fnt"
+          }
+        ],
+        "con": []
+      },
+      {
+        "ten": "lblSoNguoi",
+        "x": 368,
+        "y": 4,
+        "w": 56.25,
+        "h": 73.13,
+        "anchorX": 0.5,
+        "anchorY": 0.5,
+        "scaleX": 1,
+        "scaleY": 1,
+        "active": true,
+        "opacity": 255,
+        "color": [
+          255,
+          255,
+          255
+        ],
+        "comps": [
+          {
+            "loai": "cc.Label",
+            "text": "0/9",
+            "co": 18,
+            "canhNgang": 1,
+            "font": "Font-export.fnt"
+          }
+        ],
+        "con": []
+      }
+    ]
+  }
+}

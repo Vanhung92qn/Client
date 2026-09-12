@@ -61,7 +61,17 @@ const KHAC_CO_CHU_DICH = {
   // Gốc toàn màn hình mang canvas Roy88, và với bàn thì còn được THÊM Widget kéo bốn
   // cạnh (Go88 không cần vì họ fitWidth).
   '': new Set(['x', 'y', 'w', 'h', 'widget', 'comps']),
+
 };
+
+/**
+ * Node được THÊM component vì Go88 làm việc đó bằng script riêng của họ.
+ *
+ * `avr`: Go88 gắn `63af6iNvX5M+Ix3hKfM1Qqt` để vẽ ảnh đại diện, nên node chỉ có
+ * `cc.Button`. Ta không chép script của họ, nên phải tự cắm `cc.Sprite` làm chỗ đặt
+ * ảnh — `GheView.spAvatar` trỏ vào đó. Xem THEM_COMPONENT ở attach-scripts.js.
+ */
+const COMP_THEM = new Set(['avr']);
 
 /**
  * Nền được PHÓNG TO để phủ kín màn rộng, giữ nguyên tỉ lệ.
@@ -174,7 +184,8 @@ function main() {
         const tenNode = (k.split('/').pop() || '').split('#')[0];
         const boQua = KHAC_CO_CHU_DICH[k]
           || (NEN_PHONG_TO.has(tenNode) ? new Set(['w', 'h']) : null)
-          || (NEO_THEM.has(tenNode) ? new Set(['comps', 'widget']) : null);
+          || (NEO_THEM.has(tenNode) ? new Set(['comps', 'widget']) : null)
+          || (COMP_THEM.has(tenNode) ? new Set(['comps']) : null);
         if (boQua && boQua.has(truong)) {
           coChuDich.push(`${k || '(gốc)'} . ${truong}: Go88 ${JSON.stringify(x[truong])} → ${JSON.stringify(y[truong])}`);
           continue;

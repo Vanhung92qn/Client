@@ -31,7 +31,11 @@
       }
     ],
     "_active": true,
-    "_components": [],
+    "_components": [
+      {
+        "__id__": 26
+      }
+    ],
     "_prefab": {
       "__id__": 25
     },
@@ -259,7 +263,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "cHZb7hxIkjasHGOTx719ZS",
+    "fileId": "H0HgqoWYgaQ9LvKUD3RVny",
     "sync": false
   },
   {
@@ -369,7 +373,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "abGO+rFvc9weaKCLc6efib",
+    "fileId": "mqGiT3B3c4meYw7xOpR2C5",
     "sync": false
   },
   {
@@ -479,7 +483,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "FuseuomvRq+kQxDGdhuIMW",
+    "fileId": "topk3oJO1k7nbevuv3jRVC",
     "sync": false
   },
   {
@@ -589,7 +593,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "znIwZEEn4PkrbTiRdiFKUA",
+    "fileId": "Og/eX1oqxHHu5wFxslYYDQ",
     "sync": false
   },
   {
@@ -600,7 +604,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "SiGLAci5klKBDjRwRLGGHI",
+    "fileId": "4LOvVEoSZB0qlteA53EWmZ",
     "sync": false
   },
   {
@@ -717,7 +721,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "ueFKJeZa9gQdj26xRbY65L",
+    "fileId": "lBRQr3XvleEcMDC8tcdSKU",
     "sync": false
   },
   {
@@ -834,7 +838,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "rmiP0E/QCZld0ecDA11lV9",
+    "fileId": "2F7lmXbQO1ZUiyHKPjRFPF",
     "sync": false
   },
   {
@@ -951,7 +955,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "klstU8dC6wvoTApHKT0dUT",
+    "fileId": "d2xguvY6MaLZ5wxqrvr8lw",
     "sync": false
   },
   {
@@ -962,7 +966,38 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "sZAoQvVdM9ClRtwnh6aJoA",
+    "fileId": "tfy25g1DhSnQ4CMAu/iexw",
     "sync": false
+  },
+  {
+    "__type__": "0cfbb4WjUlCMJDV0tox6YdE",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "ndKhung": {
+      "__id__": 2
+    },
+    "ndBu": {
+      "__id__": 6
+    },
+    "lbDiem": {
+      "__id__": 10
+    },
+    "ndBaCay": {
+      "__id__": 12
+    },
+    "spTinhDiem": {
+      "__id__": 17
+    },
+    "spJQK": {
+      "__id__": 20
+    },
+    "spHoaDiem": {
+      "__id__": 23
+    },
+    "_id": ""
   }
 ]

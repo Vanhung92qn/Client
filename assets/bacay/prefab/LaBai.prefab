@@ -31,6 +31,9 @@
     "_components": [
       {
         "__id__": 13
+      },
+      {
+        "__id__": 15
       }
     ],
     "_prefab": {
@@ -261,7 +264,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "X1rVXOtntFT4gJRfVafGTO",
+    "fileId": "XYapOXqr8hASeJiZjXkfY8",
     "sync": false
   },
   {
@@ -272,7 +275,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "UAWLlWiEAs8awpcNOdfeFV",
+    "fileId": "I19PPUuIhScQMiG1OHynWa",
     "sync": false
   },
   {
@@ -379,7 +382,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "BCZNWMMBQWUMGmQunrvlE2",
+    "fileId": "dBkLl7d7OVkLiOLCidxUwb",
     "sync": false
   },
   {
@@ -486,7 +489,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "ISmhmECZcLCDdgVh0ONIEv",
+    "fileId": "uyOt9QFif2KgX8KB6Su2YU",
     "sync": false
   },
   {
@@ -565,7 +568,29 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "d5VyrzYpZD/TH/YaAud9pg",
+    "fileId": "JJVFV9qqtA34kVOjc2YBVe",
     "sync": false
+  },
+  {
+    "__type__": "c69553MWMxCgKgLBXNAdNCZ",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "spMat": {
+      "__id__": 8
+    },
+    "spLung": {
+      "__id__": 11
+    },
+    "fxSang": {
+      "__id__": 2
+    },
+    "atlas": {
+      "__uuid__": "1a1e4cdd-c508-4b05-a8f0-5104c7bf3b80"
+    },
+    "_id": ""
   }
 ]

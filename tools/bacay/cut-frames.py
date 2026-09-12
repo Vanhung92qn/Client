@@ -76,6 +76,11 @@ CAN_CAT = {
         "icTaoBan": None,
         "txtChoiNhanh": None,
         "txtTaoBan": None,
+        # ── dòng bàn trong sảnh (IconBanCHoiXocdia) ──
+        "roomThuongXD": None,
+        "loadingonline": None,
+        "loadingBanChung": None,
+        "icClock": None,
     },
     "_shared/plist/atlas_eaf90a0b.plist": {
         "bg": "lobby_bg",

@@ -47,6 +47,7 @@ const CAN_RUT = [
   { tep: '_shared/prefabs/Card_bc_bc29c05f.prefab', ten: 'labai', mo_ta: 'một lá bài' },
   { tep: '_shared/prefabs/BtnInvite_875cabc3.prefab', ten: 'moi', mo_ta: 'nút mời ở ghế trống' },
   { tep: '_shared/prefabs/RoomScenebinhThuongXocDia_25d010ef.prefab', ten: 'sanh', mo_ta: 'sảnh chọn bàn' },
+  { tep: '_shared/prefabs/IconBanCHoiXocdia_a59c585c.prefab', ten: 'mucban', mo_ta: 'một dòng bàn trong sảnh' },
   { tep: 'BaCay/prefabs/chipRed_3023057f.prefab', ten: 'chip_red', mo_ta: 'chip red' },
   { tep: 'BaCay/prefabs/chipBlue_2cfd2cdc.prefab', ten: 'chip_blue', mo_ta: 'chip blue' },
   { tep: 'BaCay/prefabs/chipGreen_8930a802.prefab', ten: 'chip_green', mo_ta: 'chip green' },

@@ -58,7 +58,11 @@
         { value: '2',  label: 'THREE_KINGDOM',     bundleName: 'tk',            mainPrefab: 'prefabs/tkView',             deps: ['slots_core']    },
 
         // ── CARD GAMES (load cardgame_core trước) ───────────────────
-        { value: '51', label: 'BA_CAY',            bundleName: '3cay',          mainPrefab: 'prefabs/3CLobby',            deps: ['cardgame_core'] },
+        // Cào Rùa dựng lại trên .NET 10 — bundle RIÊNG, không dùng chung asset với bản
+        // cũ. Vì thế `deps` để trống: nó không cần `cardgame_core`, mà khai vào thì lại
+        // kéo bộ bài cũ về — đúng cái trộn lẫn cũ–mới cần tránh. Bản '3cay' cũ vẫn nằm
+        // nguyên trong repo, chỉ là không còn lối nào vào nữa.
+        { value: '51', label: 'BA_CAY',            bundleName: 'bacay',         mainPrefab: 'prefab/SanhChonBan',         deps: []                },
         { value: '19', label: 'BACCARAT',          bundleName: 'bacarat',       mainPrefab: 'prefabs/BaCaratView',        deps: ['cardgame_core'] },
         { value: '55', label: 'MAU_BINH',          bundleName: 'maubinh',       mainPrefab: 'prefabs/MBLobby',            deps: ['cardgame_core'] },
         { value: '54', label: 'TIEN_LEN_MN',       bundleName: 'tienlenMN',     mainPrefab: 'prefabs/TLMNLobby',          deps: ['cardgame_core'] },
