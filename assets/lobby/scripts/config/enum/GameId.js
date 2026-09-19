@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Created by Nofear on 9/25/2017.
  */
 
@@ -32,6 +32,7 @@
         BACCARAT: '19',
 
         BA_CAY: '51',
+        CAO_RUA: '117', // Ba Cay be tu Go88 — chay song song voi BA_CAY cu (51) cho toi khi thay han
         PHOM: '52',
         POKER_HK: '53',
         TIEN_LEN_MN: '54',
