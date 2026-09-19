@@ -1,0 +1,29 @@
+var t = require,
+  e = module,
+  i = exports;
+"use strict";
+void 0;
+var n = this && this.__assign || function() {
+  return (n = Object.assign || function(t) {
+    for (var e, i = 1, n = arguments.length; i < n; i++) {
+      for (var o in e = arguments[i]) {
+        if (Object.prototype.hasOwnProperty.call(e, o)) {
+          t[o] = e[o];
+        }
+      }
+    }
+    return t;
+  }).apply(this, arguments);
+};
+Object.defineProperty(i, "__esModule", {
+  value: true
+});
+var o = t("./GameConfigManager"),
+  a = {
+    urlCSV: "https://web.hit.club/banner/LocalizeAll.csv"
+  };
+i.getLocalizeConfig = function() {
+  var t = o.default.getInstance().getConfig("localizationConfig");
+  return n({}, a, t);
+};
+void 0;

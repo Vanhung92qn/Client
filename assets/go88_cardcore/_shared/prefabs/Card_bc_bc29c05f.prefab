@@ -1,0 +1,355 @@
+[
+  {
+    "__type__": "cc.Prefab",
+    "_name": "Card_bc",
+    "data": {
+      "__id__": 1
+    }
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "Card_bc",
+    "_children": [
+      {
+        "__id__": 2
+      },
+      {
+        "__id__": 4
+      },
+      {
+        "__id__": 6
+      }
+    ],
+    "_level": 1,
+    "_components": [
+      {
+        "__id__": 7
+      },
+      {
+        "__id__": 8
+      },
+      {
+        "__id__": 9
+      }
+    ],
+    "_prefab": {
+      "__id__": 10
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 114,
+      "height": 158
+    },
+    "_trs": {
+      "__type__": "TypedArray",
+      "ctor": "Float64Array",
+      "array": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1
+      ]
+    }
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "SparklingFx",
+    "_parent": {
+      "__id__": 1
+    },
+    "_children": [
+      {
+        "__id__": 3
+      }
+    ],
+    "_active": false,
+    "_level": 3,
+    "_prefab": {
+      "__id__": 11
+    },
+    "_trs": {
+      "__type__": "TypedArray",
+      "ctor": "Float64Array",
+      "array": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1
+      ]
+    }
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "SparklingFx",
+    "_parent": {
+      "__id__": 2
+    },
+    "_level": 4,
+    "_components": [
+      {
+        "__id__": 12
+      }
+    ],
+    "_prefab": {
+      "__id__": 13
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 191,
+      "height": 261
+    },
+    "_trs": {
+      "__type__": "TypedArray",
+      "ctor": "Float64Array",
+      "array": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0.68,
+        0.68,
+        1
+      ]
+    }
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "CardSprite",
+    "_parent": {
+      "__id__": 1
+    },
+    "_level": 2,
+    "_components": [
+      {
+        "__id__": 5
+      }
+    ],
+    "_prefab": {
+      "__id__": 14
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 114,
+      "height": 157
+    },
+    "_trs": {
+      "__type__": "TypedArray",
+      "ctor": "Float64Array",
+      "array": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1
+      ]
+    }
+  },
+  {
+    "__type__": "cc.Sprite",
+    "node": {
+      "__id__": 4
+    },
+    "_spriteFrame": {
+      "__uuid__": "1c3a8cf2-2257-4cee-abe3-e3816392ccc5"
+    },
+    "_sizeMode": 0
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "Card_bc",
+    "_parent": {
+      "__id__": 1
+    },
+    "_active": false,
+    "_level": 2,
+    "_components": [
+      {
+        "__id__": 15
+      }
+    ],
+    "_prefab": {
+      "__id__": 16
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 114,
+      "height": 157
+    },
+    "_trs": {
+      "__type__": "TypedArray",
+      "ctor": "Float64Array",
+      "array": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1
+      ]
+    }
+  },
+  {
+    "__type__": "8296fgldVJKPpaQzxQNSgJR",
+    "node": {
+      "__id__": 1
+    },
+    "cardSprite": {
+      "__id__": 5
+    },
+    "prefabSparklingFx": {
+      "__uuid__": "af5b5ab9-6e52-4c69-a176-3637e3fa8ba1"
+    },
+    "sparklingFx": {
+      "__id__": 2
+    },
+    "cardSpriteAtlas": {
+      "__uuid__": "02470586-ac77-4228-ac32-f737c7825d9a"
+    },
+    "cardSpriteEffect": {
+      "__id__": 6
+    },
+    "cardSize": {
+      "__type__": "cc.Size",
+      "width": 114,
+      "height": 158
+    }
+  },
+  {
+    "__type__": "cc.Button",
+    "node": {
+      "__id__": 1
+    },
+    "clickEvents": [
+      {
+        "__type__": "cc.ClickEvent",
+        "target": {
+          "__id__": 1
+        },
+        "_componentId": "8296fgldVJKPpaQzxQNSgJR",
+        "handler": "onCardClicked"
+      },
+      {
+        "__type__": "cc.ClickEvent",
+        "target": {
+          "__id__": 1
+        },
+        "_componentId": "d339fGmg5hE/pI0+iDfQxgq",
+        "handler": "onTargetButtonClicked"
+      }
+    ],
+    "_N$normalColor": {
+      "__type__": "cc.Color",
+      "r": 214,
+      "g": 214,
+      "b": 214
+    },
+    "_N$target": {
+      "__id__": 1
+    }
+  },
+  {
+    "__type__": "d339fGmg5hE/pI0+iDfQxgq",
+    "node": {
+      "__id__": 1
+    },
+    "isAutoGetLocalButton": false,
+    "isAutoAddTrackEventOnClick": false,
+    "cid": "fe9dc2218d573ad84884ee1cc30e1c80529bade0"
+  },
+  {
+    "__type__": "cc.PrefabInfo",
+    "root": {
+      "__id__": 1
+    },
+    "asset": {
+      "__uuid__": "bc29c05f-4cd9-4787-8d1a-edfdb84ede1b"
+    },
+    "fileId": "27dQbXnrBMvY1eS85oeu1K"
+  },
+  {
+    "__type__": "cc.PrefabInfo",
+    "root": {
+      "__id__": 1
+    },
+    "asset": {
+      "__uuid__": "bc29c05f-4cd9-4787-8d1a-edfdb84ede1b"
+    },
+    "fileId": "44JleAqpFIYbnxwn+THF67"
+  },
+  {
+    "__type__": "sp.Skeleton",
+    "node": {
+      "__id__": 3
+    },
+    "defaultAnimation": "animation",
+    "_preCacheMode": 0,
+    "_animationName": "animation",
+    "_N$skeletonData": {
+      "__uuid__": "60ce4454-e9b0-4dcc-bff8-b1d05211a26b"
+    }
+  },
+  {
+    "__type__": "cc.PrefabInfo",
+    "root": {
+      "__id__": 1
+    },
+    "asset": {
+      "__uuid__": "bc29c05f-4cd9-4787-8d1a-edfdb84ede1b"
+    },
+    "fileId": "9acHeponlBS5/XoLPCGSlE"
+  },
+  {
+    "__type__": "cc.PrefabInfo",
+    "root": {
+      "__id__": 1
+    },
+    "asset": {
+      "__uuid__": "bc29c05f-4cd9-4787-8d1a-edfdb84ede1b"
+    },
+    "fileId": "2cb7iGtGhOubQB0aovhO9g"
+  },
+  {
+    "__type__": "cc.Sprite",
+    "node": {
+      "__id__": 6
+    },
+    "_spriteFrame": {
+      "__uuid__": "1c3a8cf2-2257-4cee-abe3-e3816392ccc5"
+    },
+    "_sizeMode": 0
+  },
+  {
+    "__type__": "cc.PrefabInfo",
+    "root": {
+      "__id__": 1
+    },
+    "asset": {
+      "__uuid__": "bc29c05f-4cd9-4787-8d1a-edfdb84ede1b"
+    },
+    "fileId": "485L3j+gFPLYuDJs1W5ydb"
+  }
+]

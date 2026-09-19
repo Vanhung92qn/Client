@@ -1,0 +1,198 @@
+[
+  {
+    "__type__": "cc.Prefab",
+    "_name": "BaCayAnimExtratime",
+    "data": {
+      "__id__": 1
+    }
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "BaCayAnimExtratime",
+    "_children": [
+      {
+        "__id__": 2
+      },
+      {
+        "__id__": 3
+      }
+    ],
+    "_level": 1,
+    "_components": [
+      {
+        "__id__": 4
+      }
+    ],
+    "_prefab": {
+      "__id__": 5
+    },
+    "_trs": {
+      "__type__": "TypedArray",
+      "ctor": "Float64Array",
+      "array": [
+        null,
+        61,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1
+      ]
+    }
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "Hòa",
+    "_parent": {
+      "__id__": 1
+    },
+    "_active": false,
+    "_level": 3,
+    "_components": [
+      {
+        "__id__": 6
+      }
+    ],
+    "_prefab": {
+      "__id__": 7
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 83.29,
+      "height": 78.12
+    },
+    "_trs": {
+      "__type__": "TypedArray",
+      "ctor": "Float64Array",
+      "array": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1
+      ]
+    }
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "Hòa so bài tiếp",
+    "_parent": {
+      "__id__": 1
+    },
+    "_level": 2,
+    "_components": [
+      {
+        "__id__": 8
+      }
+    ],
+    "_prefab": {
+      "__id__": 9
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 293,
+      "height": 60
+    },
+    "_trs": {
+      "__type__": "TypedArray",
+      "ctor": "Float64Array",
+      "array": [
+        null,
+        -63,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1
+      ]
+    }
+  },
+  {
+    "__type__": "5c877+9V39IepRTvEK5WhyJ",
+    "node": {
+      "__id__": 1
+    },
+    "animDealCardExtratime": {
+      "__id__": 3
+    },
+    "animDrawsMatchOfUser": {
+      "__id__": 2
+    }
+  },
+  {
+    "__type__": "cc.PrefabInfo",
+    "root": {
+      "__id__": 1
+    },
+    "asset": {
+      "__uuid__": "0e13e9ae-0964-4180-821c-ccb0ee53427f"
+    },
+    "fileId": "e7oqvrZR1H+4EJXwGHQjar"
+  },
+  {
+    "__type__": "cc.Label",
+    "node": {
+      "__id__": 2
+    },
+    "_materials": [
+      {
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+      }
+    ],
+    "_useOriginalSize": false,
+    "_string": "Hòa",
+    "_N$string": "Hòa",
+    "_fontSize": 45.39999999999999,
+    "_lineHeight": 62.70000000000005,
+    "_N$horizontalAlign": 1,
+    "_N$verticalAlign": 1
+  },
+  {
+    "__type__": "cc.PrefabInfo",
+    "root": {
+      "__id__": 1
+    },
+    "asset": {
+      "__uuid__": "0e13e9ae-0964-4180-821c-ccb0ee53427f"
+    },
+    "fileId": "01WZyJMyFMzbiA8JYbIFq7"
+  },
+  {
+    "__type__": "sp.Skeleton",
+    "node": {
+      "__id__": 3
+    },
+    "_materials": [
+      {
+        "__uuid__": "7afd064b-113f-480e-b793-8817d19f63c3"
+      }
+    ],
+    "defaultAnimation": "sobaitiep",
+    "_preCacheMode": 0,
+    "_animationName": "sobaitiep",
+    "_N$skeletonData": {
+      "__uuid__": "aa56c5b3-fcdb-44a6-b32a-36d8b6954190"
+    }
+  },
+  {
+    "__type__": "cc.PrefabInfo",
+    "root": {
+      "__id__": 1
+    },
+    "asset": {
+      "__uuid__": "0e13e9ae-0964-4180-821c-ccb0ee53427f"
+    },
+    "fileId": "9fNEhbSBtDnaK3/f3G9h5Z"
+  }
+]

@@ -1,0 +1,178 @@
+[
+  {
+    "__type__": "cc.Prefab",
+    "_name": "BtnInvite",
+    "data": {
+      "__id__": 1
+    }
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "BtnInvite",
+    "_children": [
+      {
+        "__id__": 2
+      }
+    ],
+    "_level": 2,
+    "_components": [
+      {
+        "__id__": 3
+      },
+      {
+        "__id__": 4
+      },
+      {
+        "__id__": 5
+      },
+      {
+        "__id__": 6
+      }
+    ],
+    "_prefab": {
+      "__id__": 7
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 133,
+      "height": 133
+    },
+    "_zIndex": 0,
+    "_trs": {
+      "__type__": "TypedArray",
+      "ctor": "Float64Array",
+      "array": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0.7,
+        0.7,
+        1
+      ]
+    }
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "icPlus02",
+    "_parent": {
+      "__id__": 1
+    },
+    "_level": 3,
+    "_components": [
+      {
+        "__id__": 8
+      }
+    ],
+    "_prefab": {
+      "__id__": 9
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 63,
+      "height": 62
+    },
+    "_zIndex": 0,
+    "_trs": {
+      "__type__": "TypedArray",
+      "ctor": "Float64Array",
+      "array": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1
+      ]
+    }
+  },
+  {
+    "__type__": "cc.Button",
+    "node": {
+      "__id__": 1
+    },
+    "clickEvents": [
+      {
+        "__type__": "cc.ClickEvent",
+        "target": {
+          "__id__": 1
+        },
+        "_componentId": "ad179eQpAZM8LD5Fkqt9Ggq",
+        "handler": "onClickInvite"
+      },
+      {
+        "__type__": "cc.ClickEvent",
+        "target": {
+          "__id__": 1
+        },
+        "_componentId": "d339fGmg5hE/pI0+iDfQxgq",
+        "handler": "onTargetButtonClicked"
+      }
+    ],
+    "_N$transition": 3,
+    "transition": 3,
+    "_N$target": {
+      "__id__": 1
+    }
+  },
+  {
+    "__type__": "ad179eQpAZM8LD5Fkqt9Ggq",
+    "node": {
+      "__id__": 1
+    }
+  },
+  {
+    "__type__": "cc.Sprite",
+    "node": {
+      "__id__": 1
+    },
+    "_spriteFrame": {
+      "__uuid__": "299e506b-d516-4a51-9184-7b7dd46b1709"
+    }
+  },
+  {
+    "__type__": "d339fGmg5hE/pI0+iDfQxgq",
+    "node": {
+      "__id__": 1
+    },
+    "isAutoGetLocalButton": false,
+    "isAutoAddTrackEventOnClick": false,
+    "cid": "e49c2f0a366adb227f2b462381db32953de3e4ca"
+  },
+  {
+    "__type__": "cc.PrefabInfo",
+    "root": {
+      "__id__": 1
+    },
+    "asset": {
+      "__uuid__": "875cabc3-eb00-48bc-902a-02f6b5d10c3c"
+    },
+    "fileId": "75Nf8TTBVPy7S2WBG5upxR"
+  },
+  {
+    "__type__": "cc.Sprite",
+    "node": {
+      "__id__": 2
+    },
+    "_spriteFrame": {
+      "__uuid__": "2fb9a550-b5ff-40f4-9a76-20289f163672"
+    }
+  },
+  {
+    "__type__": "cc.PrefabInfo",
+    "root": {
+      "__id__": 1
+    },
+    "asset": {
+      "__uuid__": "875cabc3-eb00-48bc-902a-02f6b5d10c3c"
+    },
+    "fileId": "0evQCi4TtCjKy4UPRHzNUq"
+  }
+]

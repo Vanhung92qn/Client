@@ -1,0 +1,112 @@
+[
+  {
+    "__type__": "cc.Prefab",
+    "_name": "ParticleCard",
+    "data": {
+      "__id__": 1
+    }
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "ParticleCard",
+    "_level": 1,
+    "_components": [
+      {
+        "__id__": 2
+      }
+    ],
+    "_prefab": {
+      "__id__": 3
+    },
+    "_trs": {
+      "__type__": "TypedArray",
+      "ctor": "Float64Array",
+      "array": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1
+      ]
+    }
+  },
+  {
+    "__type__": "cc.ParticleSystem",
+    "node": {
+      "__id__": 1
+    },
+    "_materials": [
+      {
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+      }
+    ],
+    "_custom": true,
+    "_file": {
+      "__uuid__": "95c154cd-97c5-4b7b-a10d-34b6a1ecb9d7"
+    },
+    "_spriteFrame": {
+      "__uuid__": "a5bf084a-ae23-4116-97b2-a9f5be28f6c7"
+    },
+    "autoRemoveOnFinish": true,
+    "totalParticles": 20,
+    "duration": 1.9600000000000009,
+    "emissionRate": 15.714285714285714,
+    "life": 2.1,
+    "_startColor": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 48,
+      "b": 48,
+      "a": 183
+    },
+    "_startColorVar": {
+      "__type__": "cc.Color",
+      "a": 51
+    },
+    "_endColor": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 48,
+      "b": 48,
+      "a": 156
+    },
+    "_endColorVar": {
+      "__type__": "cc.Color",
+      "a": 0
+    },
+    "angle": -90,
+    "angleVar": 24,
+    "startSize": 40,
+    "startSizeVar": 2,
+    "endSize": 39,
+    "posVar": {
+      "__type__": "cc.Vec2",
+      "x": 410,
+      "y": 280
+    },
+    "_positionType": 1,
+    "positionType": 1,
+    "gravity": {
+      "__type__": "cc.Vec2",
+      "y": 40
+    },
+    "speed": 143,
+    "speedVar": 39,
+    "tangentialAccel": 0
+  },
+  {
+    "__type__": "cc.PrefabInfo",
+    "root": {
+      "__id__": 1
+    },
+    "asset": {
+      "__uuid__": "c231680b-aab4-4b77-bb59-da2e9fc3a347"
+    },
+    "fileId": "d1A7qlvEpMNYMpTUIV5KKq"
+  }
+]

@@ -1,0 +1,71 @@
+[
+  {
+    "__type__": "cc.Prefab",
+    "_name": "PlayerWinEffect",
+    "data": {
+      "__id__": 1
+    }
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "PlayerWinEffect",
+    "_level": 1,
+    "_components": [
+      {
+        "__id__": 2
+      }
+    ],
+    "_prefab": {
+      "__id__": 3
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 281,
+      "height": 269
+    },
+    "_trs": {
+      "__type__": "TypedArray",
+      "ctor": "Float64Array",
+      "array": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1
+      ]
+    }
+  },
+  {
+    "__type__": "sp.Skeleton",
+    "node": {
+      "__id__": 1
+    },
+    "_materials": [
+      {
+        "__uuid__": "7afd064b-113f-480e-b793-8817d19f63c3"
+      }
+    ],
+    "defaultAnimation": "animation",
+    "_preCacheMode": 1,
+    "_cacheMode": 1,
+    "_animationName": "animation",
+    "_N$skeletonData": {
+      "__uuid__": "2cfc8600-b66a-48b8-8041-e0df12096848"
+    }
+  },
+  {
+    "__type__": "cc.PrefabInfo",
+    "root": {
+      "__id__": 1
+    },
+    "asset": {
+      "__uuid__": "791f91f2-e769-4180-b73e-77efd5391b91"
+    },
+    "fileId": "d5g4CbDNlO4rB7rPqTvQ37"
+  }
+]
