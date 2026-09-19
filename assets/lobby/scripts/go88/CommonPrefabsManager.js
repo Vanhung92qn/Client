@@ -86,6 +86,10 @@ var CommonPrefabsManager = (function () {
         if (roy88) {
             roy88.hideBusy();
         }
+        // 🔴 Nhả chốt như bản gốc (CommonPrefabsManager.js:294, 306). Chốt này do các nút
+        // Chơi nhanh / Tạo bàn bật lên để chống bấm hai lần; không nhả thì nút CHẾT VĨNH VIỄN
+        // sau lần bấm đầu, mà không có một dòng lỗi nào.
+        nhaChotBamNut();
     };
 
     // ---------------------------------------------------------------- ĐÓNG POPUP
@@ -104,6 +108,7 @@ var CommonPrefabsManager = (function () {
         if (roy88) {
             roy88.closePopup();
         }
+        nhaChotBamNut();   // bản gốc làm đúng ở đây (CommonPrefabsManager.js:238)
     };
 
     // ---------------------------------------------------------------- THÔNG BÁO
@@ -401,13 +406,22 @@ function nhanGia(onSet) {
      */
     CommonPrefabsManager.prototype.showPopupTaoBan = function (danhSachMucCuoc) {
         cc.warn('[go88] showPopupTaoBan chưa làm, mức cược: ' + JSON.stringify(danhSachMucCuoc));
-        GameConfigManagerCuaToi().isShowPopupDone = false;   // nhả chốt, nếu không nút kẹt vĩnh viễn
+        nhaChotBamNut();
         cc.PopupController.getInstance().showMessage('Tạo bàn chưa mở, mời bạn chọn bàn có sẵn.');
     };
 
     /** Lấy GameConfigManager mà không tạo phụ thuộc vòng lúc nạp module. */
     function GameConfigManagerCuaToi() {
         return require('./GameConfigManager').default.getInstance();
+    }
+
+    /**
+     * Nhả chốt chống bấm hai lần. Các nút Chơi nhanh / Tạo bàn bật `isShowPopupDone = true`
+     * rồi chờ popup hoặc loading đóng lại mới nhả. Bản gốc Go88 nhả ở 5 chỗ trong chính lớp
+     * này; thiếu là nút kẹt cứng.
+     */
+    function nhaChotBamNut() {
+        GameConfigManagerCuaToi().isShowPopupDone = false;
     }
 
 exports.default = CommonPrefabsManager;
