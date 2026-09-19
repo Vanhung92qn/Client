@@ -372,13 +372,22 @@ var BaseScene = (function (_super) {
         gamePlay.chip = assets.chip;
         gamePlay.gold = assets.gold;
         gamePlay.vip = assets.vip;
+
         /*
-         * Go88 còn cất ở đây loginDict / customerID / userID / uid / verified để các màn khác của
-         * sảnh Go88 dùng lại. Bộ 74 tệp bê sang cho Ba Cây KHÔNG đọc trường nào trong số đó
-         * (đã soát bằng grep), nên bỏ đi cho đúng nguyên tắc "mỗi thành viên phải có người gọi".
-         * 🔴 Riêng userID bắt buộc phải bỏ: ở Roy88 nó là accessor CHỈ-ĐỌC trỏ vào
-         * cc.LoginController (GamePlayManager.js:418) — gán vào sẽ ném TypeError vì tệp này chạy
-         * chế độ strict. Danh tính người chơi là của Roy88, không phải của khung Go88.
+         * 🔴 BẮT BUỘC gán userID ở đây, đúng như bản gốc Go88 (BaseScene.js:382).
+         *
+         * PlayerView.isMine() so CHUỖI: `this.userID.localeCompare(GamePlayManager.userID)`.
+         * Máy chủ bàn bài đánh dấu từng ghế bằng uid dạng "1_<số>", còn Roy88 giữ số hiệu
+         * dạng số trần. Không gán thì accessor rơi về số hiệu Roy88, hai chuỗi không bao giờ
+         * bằng nhau ⇒ isMine() LUÔN sai ⇒ người chơi không nhận ra bài của chính mình, không
+         * lật được, và không có một dòng lỗi nào. (GamePlayManager shim có sẵn setter cho
+         * đúng việc này — bản ghi chú cũ nói nó chỉ-đọc là nhầm.)
+         */
+        gamePlay.userID = data.uid;
+
+        /*
+         * Còn loginDict / customerID / uid / verified thì Go88 cất cho các màn khác của sảnh
+         * Go88 dùng; bộ 74 tệp bê sang cho Ba Cây không đọc trường nào trong số đó.
          */
 
         // Ảnh đại diện: máy chủ không trả thì lấy cái người chơi đã chọn lần trước,
