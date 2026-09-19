@@ -44,6 +44,27 @@
  * chơi về sảnh Roy88 — xem openSceneGame().
  */
 
+
+/**
+ * Dựng singleton MusicPlayer nếu chưa có.
+ *
+ * 🔴 VÌ SAO CẦN: `MusicPlayer.Instance` chỉ được gán trong `onLoad()` của chính nó — tức ở Go88
+ * nó là một component nằm sẵn trên node của CẢNH KHỞI ĐỘNG (Login.fire), mà cảnh đó không nằm
+ * trong bộ bê. Không dựng thì `MusicPlayer.getInstance()` trả về null, và cú bấm ĐẦU TIÊN vào
+ * bất kỳ nút nào cũng ném "Cannot read properties of null (reading 'playbtnClick')" — người chơi
+ * bấm vào bàn là game đứng.
+ *
+ * Âm thanh nạp bằng `cc.loader.loadRes("Sounds/…")`, tức lấy từ thư mục `resources` của gói
+ * chính. Bộ tệp âm thanh của Go88 CHƯA được bê sang, nên hiện tại nạp hụt — `playEffectWhenLoadDone`
+ * có chốt lỗi nên chỉ là im tiếng, không gãy. Bê âm thanh sang là việc riêng, làm sau.
+ */
+function baoDamMusicPlayer() {
+    if (MusicPlayer.default.getInstance()) return;
+    var node = new cc.Node('Go88MusicPlayer');
+    node.parent = cc.director.getScene();
+    node.addComponent(MusicPlayer.default);   // onLoad của nó tự gán Instance
+}
+
 var __extends = (this && this.__extends) || (function () {
     var setProto = function (d, b) {
         return (setProto = Object.setPrototypeOf ||
@@ -121,6 +142,8 @@ var BaseScene = (function (_super) {
 
         // Nối socket game bài về các móc của cảnh. Lớp con đè lên móc nào thì móc đó chạy
         // bản của lớp con, vì bind() lấy theo chuỗi nguyên mẫu lúc chạy.
+        baoDamMusicPlayer();
+
         var wsCard = WSCardGameHandle.default.getInstance();
 
         // 🔴 MỞ SOCKET Ở ĐÂY. Ở Go88, người gọi connectWS là LoadingScene.js — tệp đó KHÔNG

@@ -1,0 +1,57 @@
+[
+  {
+    "__type__": "cc.Prefab",
+    "_name": "ListChatIconConfig",
+    "data": {
+      "__id__": 1
+    }
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "ListChatIconConfig",
+    "_level": 1,
+    "_components": [
+      {
+        "__id__": 2
+      }
+    ],
+    "_prefab": {
+      "__id__": 3
+    },
+    "_trs": {
+      "__type__": "TypedArray",
+      "ctor": "Float64Array",
+      "array": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1
+      ]
+    }
+  },
+  {
+    "__type__": "1c93a3hhoBOQp4IDKlqA2tP",
+    "node": {
+      "__id__": 1
+    },
+    "iconProfap": {
+      "__uuid__": "d6735620-3c34-4925-b919-f6cbef79b57c"
+    }
+  },
+  {
+    "__type__": "cc.PrefabInfo",
+    "root": {
+      "__id__": 1
+    },
+    "asset": {
+      "__uuid__": "07dc18b6-f310-4b5e-bb32-bca03ef7d264"
+    },
+    "fileId": "bfSH7KvYtNppDkmMzYLwJ8"
+  }
+]
