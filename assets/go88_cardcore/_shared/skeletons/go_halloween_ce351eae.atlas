@@ -1,0 +1,223 @@
+
+go_halloween.png
+size: 823,523
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+HLW_Mummy
+  rotate: false
+  xy: 212, 92
+  size: 176, 177
+  orig: 176, 177
+  offset: 0, 0
+  index: -1
+HLW_MummyEye
+  rotate: false
+  xy: 107, 2
+  size: 12, 12
+  orig: 12, 12
+  offset: 0, 0
+  index: -1
+HLW_Mummy_BloodFX1
+  rotate: true
+  xy: 2, 15
+  size: 14, 82
+  orig: 14, 82
+  offset: 0, 0
+  index: -1
+HLW_Mummy_BloodFX2
+  rotate: true
+  xy: 86, 16
+  size: 13, 113
+  orig: 13, 113
+  offset: 0, 0
+  index: -1
+HLW_Mummy_BloodFX3
+  rotate: true
+  xy: 2, 2
+  size: 11, 103
+  orig: 11, 103
+  offset: 0, 0
+  index: -1
+HLW_Mummy_BloodFX4
+  rotate: true
+  xy: 121, 4
+  size: 10, 67
+  orig: 10, 67
+  offset: 0, 0
+  index: -1
+HLW_Pumkin2
+  rotate: true
+  xy: 212, 16
+  size: 74, 75
+  orig: 74, 75
+  offset: 0, 0
+  index: -1
+HLW_Pumpkin_body
+  rotate: false
+  xy: 390, 151
+  size: 124, 124
+  orig: 124, 124
+  offset: 0, 0
+  index: -1
+HLW_Pumpkin_body_dark
+  rotate: false
+  xy: 391, 25
+  size: 124, 124
+  orig: 124, 124
+  offset: 0, 0
+  index: -1
+HLW_Spider
+  rotate: false
+  xy: 251, 284
+  size: 57, 60
+  orig: 57, 60
+  offset: 0, 0
+  index: -1
+HLW_SpiderMove_00
+  rotate: false
+  xy: 516, 253
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+HLW_SpiderMove_01
+  rotate: false
+  xy: 516, 151
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+HLW_SpiderMove_02
+  rotate: false
+  xy: 517, 49
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+HLW_SpiderMove_03
+  rotate: false
+  xy: 521, 421
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+HLW_SpiderMove_04
+  rotate: false
+  xy: 623, 421
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+HLW_SpiderMove_05
+  rotate: false
+  xy: 619, 319
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+HLW_SpiderMove_06
+  rotate: false
+  xy: 721, 319
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+HLW_SpiderMove_07
+  rotate: false
+  xy: 618, 217
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+HLW_SpiderMove_08
+  rotate: false
+  xy: 720, 217
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+HLW_SpiderMove_09
+  rotate: false
+  xy: 619, 115
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+HLW_SpiderMove_10
+  rotate: false
+  xy: 721, 115
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+HLW_SpiderMove_11
+  rotate: false
+  xy: 619, 13
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+HLW_SpiderMove_12
+  rotate: false
+  xy: 721, 13
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+HLW_SpiderNest1
+  rotate: true
+  xy: 725, 422
+  size: 99, 91
+  orig: 99, 91
+  offset: 0, 0
+  index: -1
+HLW_SpiderNest2
+  rotate: true
+  xy: 375, 355
+  size: 166, 144
+  orig: 166, 144
+  offset: 0, 0
+  index: -1
+HLW_SpiderNest3
+  rotate: true
+  xy: 2, 271
+  size: 250, 247
+  orig: 250, 247
+  offset: 0, 0
+  index: -1
+HLW_SpiderString
+  rotate: true
+  xy: 190, 11
+  size: 3, 100
+  orig: 3, 100
+  offset: 0, 0
+  index: -1
+HLW_TombL_1
+  rotate: false
+  xy: 2, 31
+  size: 208, 238
+  orig: 208, 238
+  offset: 0, 0
+  index: -1
+HLW_TombL_2
+  rotate: false
+  xy: 251, 346
+  size: 122, 175
+  orig: 122, 175
+  offset: 0, 0
+  index: -1
+HLW_pumpkin_face
+  rotate: false
+  xy: 292, 14
+  size: 97, 76
+  orig: 97, 76
+  offset: 0, 0
+  index: -1
+HLW_pumpkin_face_dark
+  rotate: false
+  xy: 375, 277
+  size: 97, 76
+  orig: 97, 76
+  offset: 0, 0
+  index: -1

@@ -1,0 +1,125 @@
+
+go_xmas.png
+size: 770,162
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+FX_shine
+  rotate: false
+  xy: 602, 2
+  size: 158, 158
+  orig: 158, 158
+  offset: 0, 0
+  index: -1
+Go_String
+  rotate: false
+  xy: 762, 75
+  size: 6, 85
+  orig: 6, 85
+  offset: 0, 0
+  index: -1
+Go_ball1
+  rotate: true
+  xy: 213, 38
+  size: 62, 77
+  orig: 62, 77
+  offset: 0, 0
+  index: -1
+Go_ball2
+  rotate: true
+  xy: 403, 37
+  size: 50, 61
+  orig: 50, 61
+  offset: 0, 0
+  index: -1
+Go_deer
+  rotate: true
+  xy: 292, 34
+  size: 66, 72
+  orig: 66, 72
+  offset: 0, 0
+  index: -1
+Go_leaf1
+  rotate: true
+  xy: 571, 71
+  size: 61, 28
+  orig: 61, 28
+  offset: 0, 0
+  index: -1
+Go_leaf2
+  rotate: false
+  xy: 405, 89
+  size: 82, 43
+  orig: 82, 43
+  offset: 0, 0
+  index: -1
+Go_leaf3
+  rotate: true
+  xy: 366, 36
+  size: 64, 35
+  orig: 64, 35
+  offset: 0, 0
+  index: -1
+Go_leaf4
+  rotate: false
+  xy: 518, 36
+  size: 41, 43
+  orig: 41, 43
+  offset: 0, 0
+  index: -1
+Go_snow1
+  rotate: false
+  xy: 2, 82
+  size: 209, 50
+  orig: 209, 50
+  offset: 0, 0
+  index: -1
+Go_snow2
+  rotate: false
+  xy: 2, 44
+  size: 197, 36
+  orig: 197, 36
+  offset: 0, 0
+  index: -1
+Go_string2
+  rotate: false
+  xy: 2, 134
+  size: 598, 26
+  orig: 598, 26
+  offset: 0, 0
+  index: -1
+Go_topleaf1
+  rotate: true
+  xy: 489, 81
+  size: 51, 80
+  orig: 51, 80
+  offset: 0, 0
+  index: -1
+Go_topleaf2
+  rotate: true
+  xy: 193, 6
+  size: 30, 60
+  orig: 30, 60
+  offset: 0, 0
+  index: -1
+f_snow
+  rotate: true
+  xy: 466, 33
+  size: 46, 50
+  orig: 46, 50
+  offset: 0, 0
+  index: -1
+snow_spark2
+  rotate: false
+  xy: 2, 13
+  size: 189, 29
+  orig: 189, 29
+  offset: 0, 0
+  index: -1
+snow_spark3
+  rotate: false
+  xy: 213, 102
+  size: 190, 30
+  orig: 190, 30
+  offset: 0, 0
+  index: -1

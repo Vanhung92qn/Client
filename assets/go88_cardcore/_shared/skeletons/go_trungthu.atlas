@@ -1,0 +1,146 @@
+
+go_trungthu.png
+size: 1078,173
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+FX_shine
+  rotate: false
+  xy: 2, 13
+  size: 158, 158
+  orig: 158, 158
+  offset: 0, 0
+  index: -1
+Hit_may3
+  rotate: true
+  xy: 162, 23
+  size: 148, 75
+  orig: 148, 75
+  offset: 0, 0
+  index: -1
+Hit_may4
+  rotate: true
+  xy: 418, 35
+  size: 136, 70
+  orig: 136, 70
+  offset: 0, 0
+  index: -1
+Hit_may5
+  rotate: false
+  xy: 619, 59
+  size: 223, 112
+  orig: 223, 112
+  offset: 0, 0
+  index: -1
+Hit_may6
+  rotate: true
+  xy: 555, 50
+  size: 121, 62
+  orig: 121, 62
+  offset: 0, 0
+  index: -1
+Hit_may7
+  rotate: true
+  xy: 490, 46
+  size: 125, 63
+  orig: 125, 63
+  offset: 0, 0
+  index: -1
+Hit_teapot1
+  rotate: true
+  xy: 239, 30
+  size: 141, 110
+  orig: 141, 110
+  offset: 0, 0
+  index: -1
+Hit_teapot2
+  rotate: true
+  xy: 699, 2
+  size: 55, 51
+  orig: 55, 51
+  offset: 0, 0
+  index: -1
+Trungthu_rabbit_L_ear
+  rotate: true
+  xy: 1038, 136
+  size: 35, 38
+  orig: 35, 38
+  offset: 0, 0
+  index: -1
+Trungthu_rabbit_R_ear
+  rotate: false
+  xy: 162, 3
+  size: 46, 18
+  orig: 46, 18
+  offset: 0, 0
+  index: -1
+Trungthu_rabbit_body
+  rotate: false
+  xy: 844, 59
+  size: 110, 112
+  orig: 110, 112
+  offset: 0, 0
+  index: -1
+Trungthu_rabbit_leg
+  rotate: false
+  xy: 1038, 94
+  size: 28, 40
+  orig: 28, 40
+  offset: 0, 0
+  index: -1
+hit_cake
+  rotate: true
+  xy: 351, 32
+  size: 139, 65
+  orig: 139, 65
+  offset: 0, 0
+  index: -1
+hit_dotlight
+  rotate: false
+  xy: 589, 6
+  size: 41, 42
+  orig: 41, 42
+  offset: 0, 0
+  index: -1
+trungthu_latern_ca
+  rotate: false
+  xy: 632, 2
+  size: 65, 55
+  orig: 65, 55
+  offset: 0, 0
+  index: -1
+trungthu_latern_ga
+  rotate: true
+  xy: 956, 87
+  size: 84, 80
+  orig: 84, 80
+  offset: 0, 0
+  index: -1
+trungthu_latern_star
+  rotate: true
+  xy: 752, 4
+  size: 53, 47
+  orig: 53, 47
+  offset: 0, 0
+  index: -1
+trungthu_latern_tron
+  rotate: true
+  xy: 210, 4
+  size: 17, 20
+  orig: 17, 20
+  offset: 0, 0
+  index: -1
+trungthu_string1
+  rotate: false
+  xy: 801, 16
+  size: 248, 41
+  orig: 248, 41
+  offset: 0, 0
+  index: -1
+trungthu_string2
+  rotate: false
+  xy: 232, 5
+  size: 355, 16
+  orig: 355, 16
+  offset: 0, 0
+  index: -1

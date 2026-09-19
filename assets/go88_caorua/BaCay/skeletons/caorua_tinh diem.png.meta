@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "9ebc7f9e-7ca1-4b78-accd-a3eb236f1238",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 762,
+  "height": 760,
+  "platformSettings": {},
+  "subMetas": {
+    "caorua_tinh diem": {
+      "ver": "1.0.6",
+      "uuid": "293a5b00-6067-b87e-e64a-f1b4dace9a49",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "9ebc7f9e-7ca1-4b78-accd-a3eb236f1238",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": -3,
+      "trimX": 2,
+      "trimY": 8,
+      "width": 758,
+      "height": 750,
+      "rawWidth": 762,
+      "rawHeight": 760,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

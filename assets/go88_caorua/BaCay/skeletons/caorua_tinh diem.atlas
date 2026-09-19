@@ -1,0 +1,209 @@
+
+caorua_tinh diem.png
+size: 762,760
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+borderVictoryLine@2x00
+  rotate: false
+  xy: 419, 163
+  size: 293, 60
+  orig: 293, 60
+  offset: 0, 0
+  index: -1
+borderVictoryLine@2x01
+  rotate: false
+  xy: 542, 8
+  size: 13, 19
+  orig: 13, 19
+  offset: 0, 0
+  index: -1
+borderVictoryLine@2x02
+  rotate: true
+  xy: 736, 182
+  size: 15, 24
+  orig: 15, 24
+  offset: 0, 0
+  index: -1
+borderVictoryLine@2x03
+  rotate: true
+  xy: 714, 164
+  size: 18, 19
+  orig: 18, 19
+  offset: 0, 0
+  index: -1
+borderVictoryLine@2x04
+  rotate: false
+  xy: 755, 739
+  size: 5, 19
+  orig: 5, 19
+  offset: 0, 0
+  index: -1
+borderVictoryLine@2x05
+  rotate: true
+  xy: 714, 205
+  size: 18, 25
+  orig: 18, 25
+  offset: 0, 0
+  index: -1
+borderVictoryLine@2x06
+  rotate: false
+  xy: 714, 184
+  size: 20, 19
+  orig: 20, 19
+  offset: 0, 0
+  index: -1
+borderVictoryLine@2x07
+  rotate: false
+  xy: 659, 8
+  size: 9, 19
+  orig: 9, 19
+  offset: 0, 0
+  index: -1
+borderVictoryLine@2x08
+  rotate: false
+  xy: 557, 8
+  size: 13, 19
+  orig: 13, 19
+  offset: 0, 0
+  index: -1
+borderVictoryLine@2x09
+  rotate: false
+  xy: 617, 8
+  size: 12, 19
+  orig: 12, 19
+  offset: 0, 0
+  index: -1
+borderVictoryLine@2x10
+  rotate: true
+  xy: 735, 147
+  size: 14, 19
+  orig: 14, 19
+  offset: 0, 0
+  index: -1
+borderVictoryLine@2x11
+  rotate: false
+  xy: 631, 8
+  size: 12, 19
+  orig: 12, 19
+  offset: 0, 0
+  index: -1
+borderVictoryLine@2x12
+  rotate: false
+  xy: 572, 8
+  size: 13, 19
+  orig: 13, 19
+  offset: 0, 0
+  index: -1
+borderVictoryLine@2x13
+  rotate: false
+  xy: 645, 8
+  size: 12, 19
+  orig: 12, 19
+  offset: 0, 0
+  index: -1
+borderVictoryLine@2x14
+  rotate: false
+  xy: 587, 8
+  size: 13, 19
+  orig: 13, 19
+  offset: 0, 0
+  index: -1
+borderVictoryLine@2x15
+  rotate: false
+  xy: 602, 8
+  size: 13, 19
+  orig: 13, 19
+  offset: 0, 0
+  index: -1
+borderVictoryLine@2x16
+  rotate: true
+  xy: 714, 147
+  size: 15, 19
+  orig: 15, 19
+  offset: 0, 0
+  index: -1
+borderVictoryLine@2x17
+  rotate: false
+  xy: 741, 199
+  size: 18, 24
+  orig: 18, 24
+  offset: 0, 0
+  index: -1
+borderVictoryLine@2x18
+  rotate: true
+  xy: 735, 163
+  size: 17, 19
+  orig: 17, 19
+  offset: 0, 0
+  index: -1
+circle light_0
+  rotate: true
+  xy: 665, 46
+  size: 99, 67
+  orig: 99, 67
+  offset: 0, 0
+  index: -1
+hoasobaitiep
+  rotate: false
+  xy: 2, 148
+  size: 415, 75
+  orig: 415, 75
+  offset: 0, 0
+  index: -1
+light0
+  rotate: false
+  xy: 2, 653
+  size: 751, 105
+  orig: 751, 109
+  offset: 0, 0
+  index: -1
+light1
+  rotate: false
+  xy: 2, 546
+  size: 751, 105
+  orig: 751, 109
+  offset: 0, 0
+  index: -1
+light2
+  rotate: false
+  xy: 2, 439
+  size: 751, 105
+  orig: 751, 109
+  offset: 0, 0
+  index: -1
+light3
+  rotate: false
+  xy: 2, 332
+  size: 751, 105
+  orig: 751, 109
+  offset: 0, 0
+  index: -1
+light4
+  rotate: false
+  xy: 2, 225
+  size: 751, 105
+  orig: 751, 109
+  offset: 0, 0
+  index: -1
+tay0
+  rotate: true
+  xy: 542, 29
+  size: 132, 121
+  orig: 132, 121
+  offset: 0, 0
+  index: -1
+tay1
+  rotate: true
+  xy: 419, 24
+  size: 137, 121
+  orig: 137, 121
+  offset: 0, 0
+  index: -1
+tay2
+  rotate: false
+  xy: 2, 24
+  size: 121, 122
+  orig: 121, 122
+  offset: 0, 0
+  index: -1

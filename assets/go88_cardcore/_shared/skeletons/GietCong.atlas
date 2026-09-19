@@ -1,0 +1,34 @@
+
+GietCong.png
+size: 512,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Bang1
+  rotate: false
+  xy: 2, 44
+  size: 112, 133
+  orig: 112, 133
+  offset: 0, 0
+  index: -1
+Popup
+  rotate: false
+  xy: 260, 378
+  size: 117, 57
+  orig: 117, 57
+  offset: 0, 0
+  index: -1
+SNow
+  rotate: false
+  xy: 2, 179
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+txtCong
+  rotate: false
+  xy: 2, 2
+  size: 95, 40
+  orig: 95, 40
+  offset: 0, 0
+  index: -1

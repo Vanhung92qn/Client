@@ -1,0 +1,160 @@
+
+go_wc.png
+size: 1024,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+wc_ball
+  rotate: true
+  xy: 463, 243
+  size: 200, 197
+  orig: 200, 197
+  offset: 0, 0
+  index: -1
+wc_ball_glow
+  rotate: false
+  xy: 2, 154
+  size: 289, 289
+  orig: 289, 289
+  offset: 0, 0
+  index: -1
+wc_blackfilter1
+  rotate: true
+  xy: 293, 143
+  size: 300, 168
+  orig: 300, 168
+  offset: 0, 0
+  index: -1
+wc_firework1
+  rotate: false
+  xy: 781, 467
+  size: 8, 13
+  orig: 8, 13
+  offset: 0, 0
+  index: -1
+wc_firework2
+  rotate: false
+  xy: 117, 39
+  size: 12, 15
+  orig: 12, 15
+  offset: 0, 0
+  index: -1
+wc_firework3
+  rotate: false
+  xy: 921, 490
+  size: 15, 20
+  orig: 15, 20
+  offset: 0, 0
+  index: -1
+wc_firework4
+  rotate: false
+  xy: 2, 2
+  size: 20, 14
+  orig: 20, 14
+  offset: 0, 0
+  index: -1
+wc_flag1
+  rotate: false
+  xy: 2, 18
+  size: 113, 36
+  orig: 113, 36
+  offset: 0, 0
+  index: -1
+wc_flag2
+  rotate: true
+  xy: 463, 170
+  size: 71, 209
+  orig: 71, 209
+  offset: 0, 0
+  index: -1
+wc_flag_shine
+  rotate: false
+  xy: 674, 170
+  size: 99, 78
+  orig: 99, 78
+  offset: 0, 0
+  index: -1
+wc_kenbot1
+  rotate: true
+  xy: 662, 250
+  size: 97, 114
+  orig: 97, 114
+  offset: 0, 0
+  index: -1
+wc_kenbot2
+  rotate: false
+  xy: 194, 38
+  size: 97, 114
+  orig: 97, 114
+  offset: 0, 0
+  index: -1
+wc_kenbot3
+  rotate: true
+  xy: 293, 54
+  size: 87, 121
+  orig: 87, 121
+  offset: 0, 0
+  index: -1
+wc_kenbot4
+  rotate: false
+  xy: 662, 349
+  size: 117, 131
+  orig: 117, 131
+  offset: 0, 0
+  index: -1
+wc_kentop1
+  rotate: false
+  xy: 792, 454
+  size: 127, 56
+  orig: 127, 56
+  offset: 0, 0
+  index: -1
+wc_kentop2
+  rotate: false
+  xy: 2, 56
+  size: 190, 96
+  orig: 190, 96
+  offset: 0, 0
+  index: -1
+wc_lightpub
+  rotate: false
+  xy: 416, 107
+  size: 34, 34
+  orig: 34, 34
+  offset: 0, 0
+  index: -1
+wc_paperfirework1
+  rotate: true
+  xy: 463, 149
+  size: 19, 27
+  orig: 19, 27
+  offset: 0, 0
+  index: -1
+wc_paperfirework2
+  rotate: false
+  xy: 293, 40
+  size: 16, 12
+  orig: 16, 12
+  offset: 0, 0
+  index: -1
+wc_silk1
+  rotate: true
+  xy: 583, 482
+  size: 28, 207
+  orig: 28, 207
+  offset: 0, 0
+  index: -1
+wc_silk2
+  rotate: true
+  xy: 583, 452
+  size: 28, 43
+  orig: 28, 43
+  offset: 0, 0
+  index: -1
+wc_topstring
+  rotate: false
+  xy: 2, 445
+  size: 579, 65
+  orig: 579, 65
+  offset: 0, 0
+  index: -1
