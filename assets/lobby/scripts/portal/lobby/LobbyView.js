@@ -2085,6 +2085,20 @@ var netConfig = require("NetConfig");
               this.createDynamicView(gameId.toString());
             }
             break;
+          // Cào Rùa — bản Ba Cây bê từ Go88. 🔴 Mỗi game PHẢI có một case ở đây: thiếu thì
+          // bấm biểu tượng ngoài sảnh rơi xuống nhánh mặc định và KHÔNG có gì xảy ra, không
+          // báo lỗi. Bundle đã đăng ký ở GameBundleConfig không tự sinh ra lối vào.
+          // Mức tối thiểu vào bàn rẻ nhất là 300 (cược 100 × 3, vì luật J♥Q♥K♥ bắt trả gấp 3).
+          case cc.GameId.CAO_RUA:
+            if (cc.BalanceController.getInstance().getBalance() < 300) {
+              cc.PopupController.getInstance().showMessage(
+                "Bạn không đủ tiền để vào phòng. Tối thiểu cần 300"
+              );
+              return;
+            } else {
+              this.createDynamicView(cc.GameId.CAO_RUA);
+            }
+            break;
           case cc.GameId.MAU_BINH:
             if (cc.BalanceController.getInstance().getBalance() < 30000) {
               cc.PopupController.getInstance().showMessage(

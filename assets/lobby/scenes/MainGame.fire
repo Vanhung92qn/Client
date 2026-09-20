@@ -47916,7 +47916,7 @@
     "component": "",
     "_componentId": "2a420qeAGJAN5CQHMpCOjDb",
     "handler": "joinGameClicked",
-    "customEventData": "51"
+    "customEventData": "117"
   },
   {
     "__type__": "cc.Node",
