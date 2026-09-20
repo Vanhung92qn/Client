@@ -32,6 +32,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 // 3 module này không require ngược lại ai (đã kiểm) nên nạp thẳng ở đầu tệp được.
 var MessageCardGameHandler = require('./MessageCardGameHandler');
 var NhatKy = require('./NhatKy');
+var DongHo = require('./DongHo');
 var MessageHandlerBase = require('./MessageHandlerBase');
 var GameDefine = require('./GameDefine');
 
@@ -537,6 +538,7 @@ var WSCardGameHandle = (function () {
      */
     WSCardGameHandle.prototype.onWsReciveMessage = function (evt) {
         NhatKy.ghi('←NHẬN', evt.data);
+        DongHo.theoKhung(evt.data);
         this.isConnectError = false;
         this.hidePopupReconnect();
 

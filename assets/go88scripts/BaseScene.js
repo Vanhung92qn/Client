@@ -286,8 +286,18 @@ var BaseScene = (function (_super) {
         // Go88 gọi verifyToken() ở đây. Đã cắt — xem ghi chú đầu tệp.
 
         var gamePlay = GamePlayManager.default.getInstance();
+        // 🔴 NGƯỠNG NÀY TỪNG BỊ ĐẢO NGƯỢC — đã sửa 2026-09-20.
+        // Bản gốc Go88 (BaseScene.js:286-288) viết bằng biểu thức dấu phẩy rút gọn:
+        //     var e = 5;
+        //     if (platform != MOBILE_BROWSER && platform != DESKTOP_BROWSER || (e = 20), …)
+        // tức KHÔNG phải trình duyệt thì giữ 5, CÒN TRÌNH DUYỆT THÌ 20 giây. Lớp giả trước đây
+        // đọc ngược thành trình duyệt = 5.
+        // Hậu quả thật: người chơi chỉ cần chuyển cửa sổ quá 5 giây là client tự cắt socket và
+        // đăng nhập lại — ghế bị nhả, bot bị rút, bàn nhấp nháy, và console đầy dòng
+        // "mạng yếu: thử lại". Trên trình duyệt thì chuyển tab là chuyện thường xuyên, nên
+        // lỗi này phá đúng trường hợp hay gặp nhất.
         var reconnectThreshold = 5;
-        if (cc.sys.platform != cc.sys.MOBILE_BROWSER && cc.sys.platform != cc.sys.DESKTOP_BROWSER) {
+        if (cc.sys.platform === cc.sys.MOBILE_BROWSER || cc.sys.platform === cc.sys.DESKTOP_BROWSER) {
             reconnectThreshold = 20;
         }
         this.timeLostFocus = secondsAway;

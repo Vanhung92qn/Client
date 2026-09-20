@@ -44,7 +44,10 @@ cc.Class({
             window.__BOOT_LOG__ = window.__BOOT_LOG__ || [];
             window.__BOOT_LOG__.push(line);
         }
-        console.log('[BOOT]', JSON.stringify(line));
+        // 🔇 Xem ghi chú ở LoadingView._bootLog — chỉ in khi __BOOT_IN__ bật,
+        // nhưng vẫn luôn gom vào window.__BOOT_LOG__ để chẩn đoán khi cần.
+        if (typeof window !== 'undefined' && /[?&]bootlog=1/.test(window.location.search)) window.__BOOT_IN__ = true;
+        if (typeof window !== 'undefined' && window.__BOOT_IN__) console.log('[BOOT]', JSON.stringify(line));
     },
 
     // Hook XHR + Image fetch o DOM level → bat MOI HTTP request Cocos thuc su lam

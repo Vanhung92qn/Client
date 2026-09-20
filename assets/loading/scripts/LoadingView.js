@@ -73,7 +73,7 @@
                     win: window.innerWidth + 'x' + window.innerHeight
                 };
                 if (window.__BOOT_LOG__) window.__BOOT_LOG__.push(info);
-                console.log('[BOOT]', JSON.stringify(info));
+                if (window.__BOOT_IN__) console.log('[BOOT]', JSON.stringify(info));
             } catch (e) { console.warn('[FORCE_LANDSCAPE]', e); }
         }
 
@@ -251,6 +251,14 @@ var netConfig = require('NetConfig');
         //  F12 → Console → filter "[BOOT]"
         //  copy(window.__BOOT_LOG__)  → paste cho audit
         // ═══════════════════════════════════════════════════════════════
+        // Cờ bật in log khởi động. Đọc một lần từ URL để bật lại khi cần chẩn đoán.
+        _docCoBootLog: function () {
+            try {
+                if (typeof window === 'undefined') return;
+                if (/[?&]bootlog=1/.test(window.location.search)) window.__BOOT_IN__ = true;
+            } catch (e) { /* bỏ qua */ }
+        },
+
         _bootLog: function (tag, data) {
             var t = Date.now() - (this._bootT0 || Date.now());
             var line = { t: t + 'ms', tag: tag, src: 'LV' };
@@ -259,7 +267,12 @@ var netConfig = require('NetConfig');
                 window.__BOOT_LOG__ = window.__BOOT_LOG__ || [];
                 window.__BOOT_LOG__.push(line);
             }
-            console.log('[BOOT]', JSON.stringify(line));
+            // 🔇 Chỉ in ra console khi ĐƯỢC BẬT. Vẫn gom vào window.__BOOT_LOG__ như cũ,
+            // nên khi cần chẩn đoán vẫn lấy đủ bằng  copy(window.__BOOT_LOG__).
+            // Bật lại bằng  ?bootlog=1  trên URL, hoặc gõ  __BOOT_IN__ = true  trong console.
+            // Lý do tắt: mỗi tệp tải về sinh một dòng, console ngập tới mức không đọc nổi
+            // log của game — mà log game mới là thứ cần khi thử nghiệm.
+            if (window.__BOOT_IN__) console.log('[BOOT]', JSON.stringify(line));
         },
 
         // Hook XHR + Image fetch o DOM level → bat MOI HTTP request Cocos thuc su lam.
