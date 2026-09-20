@@ -1,9 +1,9 @@
 {
   "ver": "1.1.3",
-  "uuid": "2c88d6bb-0c10-44fa-bad6-26ebc9d480c1",
+  "uuid": "03194c99-5e6e-48d0-b230-59b2837e9956",
   "importer": "folder",
-  "isBundle": true,
-  "bundleName": "go88_caorua",
+  "isBundle": false,
+  "bundleName": "",
   "priority": 1,
   "compressionType": {},
   "optimizeHotUpdate": {},

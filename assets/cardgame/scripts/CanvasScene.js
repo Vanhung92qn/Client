@@ -23,11 +23,11 @@ Object.defineProperty(i, "__esModule", {
 //  scale ve 0 va anh nen BIEN MAT ma khong bao loi gi.
 // ─────────────────────────────────────────────────────────────────────────────
 
-var CanvasSceneGo88 = (function () {
-  function CanvasSceneGo88() {}
+var CanvasSceneBase = (function () {
+  function CanvasSceneBase() {}
 
   /** Go88 CanvasScene.js:185 — ty le co gian cho anh nen. */
-  CanvasSceneGo88.getBackgroundRatio = function () {
+  CanvasSceneBase.getBackgroundRatio = function () {
     if (cc.Canvas.instance == null) return 1;
 
     var dr = cc.Canvas.instance.designResolution;
@@ -37,8 +37,8 @@ var CanvasSceneGo88 = (function () {
     return dr.width / w > dr.height / h ? h / dr.height : w / dr.width;
   };
 
-  return CanvasSceneGo88;
+  return CanvasSceneBase;
 })();
 
-i.default = CanvasSceneGo88;
+i.default = CanvasSceneBase;
 void 0;

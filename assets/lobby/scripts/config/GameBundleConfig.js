@@ -57,9 +57,10 @@
         { value: '12', label: 'BLOCK_BUSTER',      bundleName: 'tq',            mainPrefab: 'prefabs/tqView',             deps: ['slots_core']    },
         { value: '2',  label: 'THREE_KINGDOM',     bundleName: 'tk',            mainPrefab: 'prefabs/tkView',             deps: ['slots_core']    },
 
-        // ── CARD GAMES (load cardgame_core trước) ───────────────────
+        // ── CARD GAMES ──────────────────────────────────────────────
+        // Bộ cũ dùng chung bundle `cardgame_core`; bộ mới (.NET 10) dùng `cardroom`.
         { value: '51', label: 'BA_CAY',            bundleName: '3cay',          mainPrefab: 'prefabs/3CLobby',            deps: ['cardgame_core'] },
-        { value: '117',label: 'CAO_RUA',           bundleName: 'go88_caorua',   mainPrefab: 'prefabs/CaoRuaView',         deps: ['go88_cardcore'] },
+        { value: '117',label: 'CAO_RUA',           bundleName: 'caorua',        mainPrefab: 'prefabs/CaoRuaView',         deps: ['cardroom']      },
         { value: '19', label: 'BACCARAT',          bundleName: 'bacarat',       mainPrefab: 'prefabs/BaCaratView',        deps: ['cardgame_core'] },
         { value: '55', label: 'MAU_BINH',          bundleName: 'maubinh',       mainPrefab: 'prefabs/MBLobby',            deps: ['cardgame_core'] },
         { value: '54', label: 'TIEN_LEN_MN',       bundleName: 'tienlenMN',     mainPrefab: 'prefabs/TLMNLobby',          deps: ['cardgame_core'] },

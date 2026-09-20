@@ -39,7 +39,7 @@ var n = cc._decorator,
   o = n.ccclass,
   a = n.property;
 
-var PopupBaseGo88 = cc.Class({
+var CardPopupBase = cc.Class({
   extends: cc.Component,
 
   properties: {
@@ -107,5 +107,5 @@ var PopupBaseGo88 = cc.Class({
   }
 });
 
-i.default = PopupBaseGo88;
+i.default = CardPopupBase;
 void 0;

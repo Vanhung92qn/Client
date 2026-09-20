@@ -289,7 +289,7 @@ var r = require("./GamePlayManager"),
           _.downloadAndShowImage(this.logoWebcc, t);
         }
       }
-      switch (h.default.getInstance().enviromentName.includes("go88") ? null != this.nodeDomain && (this.nodeDomain.active = true) :
+      switch (h.default.getInstance().enviromentName.includes("caorua") ? null != this.nodeDomain && (this.nodeDomain.active = true) :
         null != this.nodeDomain && (this.nodeDomain.active = false), I.getCurrentTheme()) {
         case I.ThemeType.HAPPY_NEW_YEAR:
           if (this.lsNodeNewYearDecoration.length > 0) {
