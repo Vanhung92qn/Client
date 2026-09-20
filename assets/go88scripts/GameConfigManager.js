@@ -247,6 +247,22 @@ var r = (function () {
     this.enableBackgroundMusic = null === e || void 0 === e || 0 === e.localeCompare("true");
     var i = cc.sys.localStorage.getItem("showChatBanChung");
     this.showChatBanChung = null === i || void 0 === i || 0 === i.localeCompare("true");
+
+    // 🔴 Khôi phục "Tự động sẵn sàng". Thiếu đoạn này thì công tắc người chơi TẮT trong bàn
+    // âm thầm BẬT lại sau mỗi lần tải trang — và client tự gửi sẵn sàng, cuốn họ vào ván kế
+    // tiếp (đã trừ tiền cược) trước khi kịp bấm gì.
+    //
+    // Bản gốc Go88 khôi phục ở `LobbyViewController.onLoad` (LobbyViewController.js:200-204),
+    // nhưng tệp đó thuộc SẢNH của Go88 nên không nằm trong bộ bê. `init()` là chỗ tương đương
+    // trong kiến trúc này: chạy đúng một lần lúc dựng singleton.
+    // Giữ nguyên ngữ nghĩa bản gốc: chỉ đọc khi `isCardGameSaveReadyLocal`, và KHÔNG có khoá
+    // thì giữ mặc định (bật) — đúng như Go88.
+    if (this.isCardGameSaveReadyLocal) {
+      var n = cc.sys.localStorage.getItem(i.KEY_AUTO_READY_CARDGAME);
+      if (null !== n && void 0 !== n && "" !== n) {
+        this.autoReady = "true" === n;
+      }
+    }
   };
 
   // Giong het ban goc: thieu khoa thi tra null (khong nem loi).

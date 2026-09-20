@@ -158,7 +158,43 @@ var CommonPrefabsManager = (function () {
 
         popup.onOKCallback = callback;
         popup.lbTitle.string = title;
-        popup.lbContent.string = content;
+
+        // 🔴 CHỖ NÀY PHẢI LÀ POPUP CÓ NÚT, không phải toast trôi qua.
+        //
+        // Ở Go88 đây là popup chặn màn hình có nút OK, và `hideCallBack` chỉ chạy KHI NGƯỜI CHƠI
+        // TỰ BẤM — chính cú bấm đó là bằng chứng "tôi còn ngồi đây", nên bộ đếm không-tương-tác
+        // mới được đặt lại (BaCayController.js:1247-1251). Dùng toast thì `hide()` không bao giờ
+        // chạy ⇒ bộ đếm không bao giờ về 0 ⇒ người chơi bị mời ra khỏi bàn ở ván thứ 8 mà chỉ
+        // được cảnh báo bằng một dòng chữ trôi qua.
+        //
+        // Toàn bộ mã đã bê gọi hàm này ĐÚNG MỘT CHỖ (cảnh báo ngồi im), nên đổi sang popup thật
+        // không ảnh hưởng đường nào khác.
+        var daHienPopupThat = false;
+        try {
+            var pc = cc.PopupController.getInstance();
+            var pv = pc && pc.popupView;
+            if (pv && pv.buttonBlue && pv.buttonBlue.node) {
+                var eh = new cc.Component.EventHandler();
+                eh.target = pv;                 // đúng cách Roy88 tự dựng (PopupView.js:285-287)
+                eh.component = 'PopupView';
+                eh.handler = 'closePopup';
+                pc.showPopupSimple(content, 'Đồng ý', eh);
+
+                // Chạy hideCallBack khi người chơi bấm THẬT. Dùng `once` trên node nút thay vì
+                // nhét thêm clickEvent, để không để lại rác trong mảng clickEvents của Roy88.
+                var tuDong = popup;
+                pv.buttonBlue.node.once(cc.Node.EventType.TOUCH_END, function () { tuDong.hide(); });
+                daHienPopupThat = true;
+            }
+        } catch (e) {
+            cc.warn(TAG + ' showPopupOneMessage: không dựng được popup của Roy88 — ' + e.message);
+        }
+
+        // Đường lui: thiếu PopupView thì vẫn hiện toast như trước, còn hơn im lặng.
+        if (!daHienPopupThat) {
+            popup.lbContent.string = content;
+        }
+
         this.oldCOntentThongBao = content;
         return popup;
     };
