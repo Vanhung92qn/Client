@@ -47,8 +47,8 @@ var n = this && this.__extends || function() {
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-var a = t("./CardPopupBase"),
-  s = t("./MusicPlayer"),
+var a = require("./CardPopupBase"),
+  s = require("./MusicPlayer"),
   r = cc._decorator,
   c = r.ccclass,
   l = r.property,

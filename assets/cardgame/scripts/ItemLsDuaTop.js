@@ -47,8 +47,8 @@ var n = this && this.__extends || function() {
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-var a = t("./GamePlayManager"),
-  s = t("./StringUtil"),
+var a = require("./GamePlayManager"),
+  s = require("./StringUtil"),
   r = cc._decorator,
   c = r.ccclass,
   l = r.property,

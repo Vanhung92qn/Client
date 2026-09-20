@@ -180,6 +180,14 @@ var BaseScene = (function (_super) {
     BaseScene.prototype.onLoad = function () {
         GameConfigManager.default.getInstance().isShowPopupDone = false;
 
+        // 🔴 BẮT BUỘC, y bản gốc (BaseScene.js:113 `O.currentScene = this`). Đây là ô TĨNH mà
+        // các popup dùng để với tới cảnh đang chạy. Thiếu nó thì hỏng IM LẶNG:
+        //   PopupInveteJoinRoom.js:192 gói cả thân hàm "Đồng ý" trong điều kiện
+        //       null !== BaseScene.currentScene && null !== BaseScene.currentScene.node
+        //   undefined ⇒ điều kiện false ⇒ bấm "Đồng ý" một lời mời KHÔNG LÀM GÌ CẢ, dù các
+        //   dòng phía trước đã kịp đặt inviteData/roomID. Không một dòng lỗi nào.
+        BaseScene.currentScene = this;
+
         // Go88 cho cảnh hiện dần trong 0,25 giây. Giữ nguyên để khớp cảm giác vào game.
         this.node.opacity = 0;
         this.node.runAction(cc.fadeIn(0.25));
@@ -236,6 +244,10 @@ var BaseScene = (function (_super) {
      * Chỉ gỡ đúng những callback do onLoad ở trên cắm vào.
      */
     BaseScene.prototype.onDestroy = function () {
+        // Trả ô tĩnh về null, nhưng CHỈ khi nó đang trỏ vào chính mình: nếu một cảnh khác đã
+        // kịp nhận chỗ thì xoá đi là cướp mất của cảnh đang sống.
+        if (BaseScene.currentScene === this) BaseScene.currentScene = null;
+
         var wsCard = WSCardGameHandle.default.getInstance();
         wsCard.onReceiveMessage = null;
         wsCard.onLoginSuccess = null;
@@ -719,6 +731,13 @@ var BaseScene = (function (_super) {
      * Phép so sánh tại chỗ đọc ra kết quả y hệt Go88 (khác tên cảnh Bầu Cua).
      */
     BaseScene.currentSceneName = "";
+
+    /*
+     * Tĩnh, y bản gốc (BaseScene.js:1055 `e.currentScene = null`). onLoad gán `this` vào đây;
+     * onDestroy trả về null. Các popup bê nguyên dùng nó để với tới cảnh đang chạy — xem ghi
+     * chú ở onLoad về hậu quả khi thiếu.
+     */
+    BaseScene.currentScene = null;
 
     __decorate([property(HeaderUi.default)], BaseScene.prototype, "headerUi", void 0);
     return BaseScene = BaseSceneRef = __decorate([ccclass], BaseScene);

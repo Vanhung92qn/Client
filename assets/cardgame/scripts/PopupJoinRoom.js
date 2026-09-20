@@ -47,12 +47,12 @@ var n = this && this.__extends || function() {
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-var a = t("./CardPopupBase"),
-  s = t("./GamePlayManager"),
-  r = t("./MusicPlayer"),
-  c = t("./CommonPrefabsManager"),
-  l = t("./StringUtil"),
-  h = t("./GameDefine"),
+var a = require("./CardPopupBase"),
+  s = require("./GamePlayManager"),
+  r = require("./MusicPlayer"),
+  c = require("./CommonPrefabsManager"),
+  l = require("./StringUtil"),
+  h = require("./GameDefine"),
   u = cc._decorator,
   d = u.ccclass,
   p = u.property,

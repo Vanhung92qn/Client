@@ -128,6 +128,23 @@ var CardPopupBase = cc.Class({
     this.hideCallBack = cb;
   },
 
+  // ── Ba móc mà prefab GỌI NHƯNG BẢN GỐC ĐỂ RỖNG ─────────────────────────────────────────
+  // Nút trong prefab gọi hàm theo TÊN; tên không có thì Cocos chỉ cảnh báo, không nổ — nhưng
+  // đó lại là lúc dễ tưởng "nút hỏng" và đi sửa nhầm chỗ khác. Bê nguyên văn cho đủ:
+  //   onMoveUp / onMoveDown  — bản gốc PopupBase.js:214-223 chỉ có phần gán mặc định, thân RỖNG
+  //                            (đẩy popup tránh bàn phím ảo do lớp con tự lo nếu cần).
+  //   onClickTouchDoNothing  — bản gốc BuyInViewController.js:202 cũng rỗng; nó gắn vào nền
+  //                            popup để NUỐT cú chạm, khỏi lọt xuống lớp dưới.
+  onMoveUp: function (node, ten) {
+    if (ten === undefined) ten = '';
+  },
+
+  onMoveDown: function (node, ten) {
+    if (ten === undefined) ten = '';
+  },
+
+  onClickTouchDoNothing: function () {},
+
   /** Go88: show(callback = null, thoiGian = 0.4, tyLe = 1). */
   show: function (callback, thoiGian, tyLe) {
     if (callback === undefined) callback = null;

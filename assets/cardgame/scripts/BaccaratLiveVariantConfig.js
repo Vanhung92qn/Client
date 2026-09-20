@@ -6,8 +6,8 @@ void 0;
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-var n = t("./GameConfigManager"),
-  o = t("./MessageCardGameHandler"),
+var n = require("./GameConfigManager"),
+  o = require("./MessageCardGameHandler"),
   a = function() {
     function t() {}
     Object.defineProperty(t, "config", {

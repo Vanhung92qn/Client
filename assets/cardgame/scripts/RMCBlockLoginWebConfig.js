@@ -18,7 +18,7 @@ var n = this && this.__assign || function() {
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-var o = t("./GameConfigManager"),
+var o = require("./GameConfigManager"),
   a = {
     enable: true
   };
