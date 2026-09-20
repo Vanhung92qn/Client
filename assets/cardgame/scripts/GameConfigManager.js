@@ -42,6 +42,24 @@ var n = require("./StringUtil"),
 // nen giu nguyen ten xuat, phong khi script khac tra toi.
 i.KEY_AUTO_READY_CARDGAME = "KEY_AUTO_READY_CARDGAME";
 
+// MusicPlayer nap MUON, va phai qua bi danh rieng nay. Hai ly do, ca hai deu tung lam gay that:
+//  1. MusicPlayer require nguoc lai GameConfigManager. Nap som o dau tep thi luc chay mot trong
+//     hai ben nhan duoc exports RONG -> `.default` la undefined.
+//  2. Ben trong lop (var r = (function () { function t() {...}) chu `t` bi TEN LOP che mat, nen
+//     trong than ham KHONG con goi duoc `t("./MusicPlayer")` nua — phai giu san bi danh nay.
+var napModule = t;
+var _mp = null;
+function mayHat() {
+  if (null === _mp) {
+    try {
+      _mp = napModule("./MusicPlayer");
+    } catch (loi) {
+      return null;
+    }
+  }
+  return _mp && _mp.default ? _mp.default.getInstance() : null;
+}
+
 // ── Dia chi WebSocket cua BACKEND RIENG (CardGame .NET 10, giao thuc "Simms") ────────────
 // 🔴 DAY LA CHO DUY NHAT ghi dia chi nay. Cac lop gia khac (WSCardGameHandle, ...) phai goi
 //    GameConfigManager.getInstance().getWsCardUrl(), KHONG duoc tu ghep URL o cho khac.
@@ -94,6 +112,10 @@ var r = (function () {
     this.showChatBanChung = true; // mac dinh theo ban goc; init() doc de tu localStorage
     this.isAnDanh = true; // BaCayController.js:122 - che do an danh; mac dinh theo ban goc
     this.isNewXepBaiMauBinh = true; // RoomController.js:176 - bat nut Sap Xep; mac dinh theo ban goc
+
+    // ── "Chi dang nhap thiet bi nay" (trust device) — TAT HAN, xem setEnableTrustDevice ──
+    this.trustDevice = false; // PopupSetting.js:272 doc de dat trang thai o gat
+    this.checkDeviceURL = ''; // 🔴 PHAI RONG: xem ghi chu o listcommingSoonGames ben duoi
 
     // "Bao quay" = to cao nguoi choi nghi ngo gian lan. InGameBackPopup.js:124 lay chuoi nay
     // lam noi dung popup. Giu nguyen van ban Go88 (muc tieu "hai anh em sinh doi").
@@ -185,7 +207,15 @@ var r = (function () {
     this.webccHomePage = ""; // HeaderUi.js:431/457 window.location.href -> de rong
 
     this.allowRegister = true; // HeaderUi.js:597; mac dinh theo ban goc
-    this.listcommingSoonGames = []; // HeaderUi.js:473 .indexOf("inbox"); mac dinh theo ban goc
+    // HeaderUi.js:473 .indexOf("inbox"); danh sach tinh nang bi khoa, hien "Tinh nang sap ra mat!".
+    // 🔴 "onedevice" o day la CO CHAN CO CHU DICH, khong phai gia tri mac dinh — xoa la ro du lieu:
+    // PopupSetting.onChangeTrustDevice (PopupSetting.js:334) neu KHONG thay "onedevice" trong danh
+    // sach nay se POST { action, fg_id: <van tay thiet bi> } len checkDeviceURL, tuc ban dac diem
+    // may nguoi choi sang ha tang ban goc. Chan bang chinh co san cua ban goc thay vi va ma nguon:
+    //   · onLoad  (PopupSetting.js:269) -> an luon ca hang "Chi dang nhap thiet bi nay"
+    //   · neu van cham toi        -> hien "Tinh nang sap ra mat!", KHONG goi mang
+    // checkDeviceURL de rong la lop chan thu hai, phong khi ai do go "onedevice" ra.
+    this.listcommingSoonGames = ['onedevice'];
     // HeaderUi chi doc .textKichHoat lam nhan tren header. Giu NGUYEN VAN doi tuong mac dinh
     // cua ban goc Go88 (muc tieu "sinh doi"); day la van ban, khong phai duong ra Go88.
     this.activePhoneNumberData = {
@@ -307,6 +337,56 @@ var r = (function () {
       cc.sys.localStorage.setItem(i.KEY_AUTO_READY_CARDGAME, e ? "true" : "false");
     }
     this.autoReady = e;
+  };
+
+  // ── Bon o gat con lai cua bang Cai dat (PopupSetting.js) ────────────────────────────────
+  // Ten khoa localStorage phai TRUNG KHOP voi init() o tren, neu khong thi gat xong tat game
+  // mo lai la tro ve mac dinh — hong im lang, khong co loi nao.
+
+  // PopupSetting.js:329. Y NGUYEN ban goc: chi keo am luong len khi BAT, con luc TAT khong ha
+  // ve 0 — moi cho phat hieu ung deu da tu kiem `enableSound` truoc (MusicPlayer.js:332/346/
+  // 360/384). Them setEffectsVolume(0) o nhanh tat la tu them hanh vi, dung.
+  t.prototype.setEnableSound = function (e) {
+    if (e) {
+      cc.audioEngine.setEffectsVolume(1);
+    }
+    cc.sys.localStorage.setItem("enableSound", e ? "true" : "false");
+    this.enableSound = e;
+  };
+
+  // PopupSetting.js:325. Ban goc nhan 3 tham so (e = bat/tat, n = co phat lai ngay, o = co ghi
+  // nho xuong may) roi re theo currentScene qua gan 20 tang if de chon ban nhac cua tung game;
+  // ca chum do rot ve playRandomIngameBgMusic() cho scene game bai (GameConfigManager.js:646
+  // ban goc). Ben minh chi co game bai nen goi thang nhanh do. Giu nguyen chu ky 3 tham so.
+  t.prototype.setEnableBgMusic = function (e, n, o) {
+    if (void 0 === n) n = true;
+    if (void 0 === o) o = true;
+    if (o) {
+      cc.sys.localStorage.setItem("enableBackgroundMusic", e ? "true" : "false");
+    }
+    this.enableBackgroundMusic = e;
+    this.canResetBackgroundMusic = false;
+    var s = mayHat();
+    if (null === s) return;
+    if (e) {
+      if (n) s.playRandomIngameBgMusic();
+    } else {
+      s.stopMusic();
+    }
+  };
+
+  // PopupSetting.js:345 — CHI duoc goi sau khi may chu tra ve 200. Ben minh hang "Chi dang nhap
+  // thiet bi nay" bi khoa bang listcommingSoonGames nen duong nay khong bao gio chay; giu ham
+  // lai vi PopupSetting tham chieu toi no, thieu la no ngay luc nap.
+  t.prototype.setEnableTrustDevice = function (e) {
+    cc.sys.localStorage.setItem("trustdevice", e ? "true" : "false");
+    this.trustDevice = e;
+  };
+
+  // PopupSetting.js:361 - o gat "Hien chat ban chung".
+  t.prototype.setEnableShowChatBanChung = function (e) {
+    cc.sys.localStorage.setItem("showChatBanChung", e ? "true" : "false");
+    this.showChatBanChung = e;
   };
 
   // CardGameTableController.js:166 - do lai 3 cau chat gan nhat vao popup chat.

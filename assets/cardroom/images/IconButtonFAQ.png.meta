@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "aac0463b-abf3-a27f-85e7-e3a14a69ce3e",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 35,
+  "height": 34,
+  "platformSettings": {},
+  "subMetas": {
+    "IconButtonFAQ": {
+      "ver": "1.0.6",
+      "uuid": "93e160c6-f60f-472d-aabb-3d5f0c488730",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "aac0463b-abf3-a27f-85e7-e3a14a69ce3e",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 35,
+      "height": 34,
+      "rawWidth": 35,
+      "rawHeight": 34,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

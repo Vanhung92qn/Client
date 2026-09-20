@@ -140,6 +140,17 @@ var GamePlayManager = (function () {
         this.tokenTemp = '';
         this.session_idTemp = '';
 
+        // ── Ba ô của bảng Cài đặt mà Cào Rùa KHÔNG bao giờ hiện ───────────────────────────
+        // PopupSetting.onLoad (PopupSetting.js:253-259) ĐỌC ba trường này vô điều kiện để đặt
+        // trạng thái ô gạt, rồi mới tới setBGSize() mới quyết định ẩn/hiện hàng. Thiếu trường
+        // thì initStart(undefined) — ô gạt về trạng thái lửng, không nổ nên không ai thấy.
+        // Ba hàng tương ứng đều tắt với Cào Rùa bản web:
+        //   · "Sắp xếp bài mới" chỉ hiện khi gameID === GAME.BINH (Mậu Binh)
+        //   · "Chặn đăng nhập web" và "Mã khoá" chỉ hiện khi cc.sys.isNative && đang ở Lobby
+        this.IsBlockLoginWeb = false;
+        this.IsMauBinhUsingNewXepBai = true;                // khớp GameConfigManager.isNewXepBaiMauBinh
+        this.IsMauBinhFistTimeShowQuickGuide = false;       // tên sai chính tả là của bản gốc
+
         // ── Xóc Đĩa / ktek: Ba Cây KHÔNG dùng, giữ đúng kiểu và mặc định của bản gốc ───────
         this.iskteckgame = false;                           // GameController.js:366 (đọc)
         this.spinAutoXocDia = false;                        // MainGameViewModel.js:260 (ghi)
@@ -455,6 +466,22 @@ var GamePlayManager = (function () {
     /** TableCellRoomXocDia.js:117,122 — nhớ bàn Xóc Đĩa nào đang chạy hiệu ứng nào. */
     GamePlayManager.prototype.setXocDiaIconBG = function (animName, rid) {
         this.xocdiaIconBG.set(animName, rid);
+    };
+
+    /**
+     * PopupSetting.js:451 — ô gạt "Chỉ đăng nhập ứng dụng này" (chặn đăng nhập từ web).
+     *
+     * 🔴 CỐ Ý KHÔNG nối ra mạng. Bản gốc gọi API tài khoản của Go88; đó là một đường nữa có thể
+     * mang token người chơi đi, và backend Cào Rùa không có khái niệm này. Hàng đó cũng không
+     * bao giờ hiện ra (PopupSetting.js:422 đòi cc.sys.isNative, bản web luôn false), nên hàm
+     * này chỉ tồn tại để popup không nổ lúc nạp nếu ai đó bật hàng lên.
+     *
+     * Giữ đúng giao kèo với chỗ gọi: KHÔNG đổi IsBlockLoginWeb, rồi gọi callback. Bên gọi so
+     * lại `IsBlockLoginWeb != t` và tự bật ô gạt về trạng thái cũ — người chơi thấy nó bật lên
+     * rồi trả về, tức "không làm được", đúng hơn là giả vờ đã lưu.
+     */
+    GamePlayManager.prototype.updateBlockLoginWeb = function (unusedValue, onDone) {
+        if (typeof onDone === 'function') onDone();
     };
 
     // ── Điểm nối sang Roy88 ────────────────────────────────────────────────────────────────

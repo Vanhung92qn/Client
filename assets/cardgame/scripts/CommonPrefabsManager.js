@@ -23,6 +23,15 @@ Object.defineProperty(exports, '__esModule', { value: true });
 // Tiền tố log để lọc nhanh trong Console khi test.
 var TAG = '[CommonPrefabsManager v1]';
 
+// Bundle chứa các popup dùng chung cho cả họ game bài. Tên phải khớp `bundleName` trong
+// assets/cardroom.meta VÀ cột deps của GameBundleConfig.js — lệch một chữ là getBundle() trả
+// null, popup không mở mà chỉ có một dòng warn.
+var BUNDLE_CHUNG = 'cardroom';
+
+// = GameZOrder.TOP (GameZOrder.js:14). Ghi thẳng số thay vì require: tệp này là trục, kéo thêm
+// require vào đây dễ tạo vòng. Bản gốc đặt popup ở đúng mức này.
+var Z_TOP = 100;
+
 var CommonPrefabsManager = (function () {
 
     function CommonPrefabsManager() {
@@ -229,9 +238,84 @@ var CommonPrefabsManager = (function () {
     // Những hàm dưới đây ở Go88 đều instantiate một prefab riêng. Bản tạm CHƯA có prefab nên để
     // rỗng + log rõ ràng. KHÔNG thay bằng popup Roy88 khác chức năng — làm vậy là tự vẽ luồng.
 
-    /** Go88: showPopupSetting(callbackClose = null, settingKey = ''). Gọi: RoomController:282, InGameBackPopup:111, HeaderUi:465. */
+    /**
+     * Go88: showPopupSetting(callbackClose = null, settingKey = ''). Gọi: RoomController:282,
+     * InGameBackPopup:111, HeaderUi:465.
+     *
+     * Bản gốc lấy prefab từ `this.commonPrefabs.popupSetting` — một ô @property được gán sẵn
+     * trong scene Login của Go88. Ta không bê scene đó nên nạp thẳng từ bundle dùng chung.
+     * Phần còn lại giữ y bản gốc (CommonPrefabsManager.js:253-269): gắn vào lớp popup, zIndex
+     * TOP, show() rồi mới gán callbackClose và setSettingKey.
+     *
+     * Bỏ có chủ ý một dòng cuối của bản gốc: `cc.systemEvent.emit(SbLiveState.LiveHide, …)` —
+     * đó là tín hiệu tạm ẩn khung phát trực tiếp, chỉ các game Live của Go88 nghe, ta không bê.
+     */
     CommonPrefabsManager.prototype.showPopupSetting = function (callbackClose, settingKey) {
-        this._chuaBe('showPopupSetting');
+        if (void 0 === callbackClose) callbackClose = null;
+        if (void 0 === settingKey) settingKey = '';
+
+        this._napPrefabTuBundle(BUNDLE_CHUNG, 'prefabs/PopupSetting_c88773a8', function (node) {
+            var c = node.getComponent('PopupSetting');
+            if (!c) {
+                cc.warn(TAG + ' PopupSetting thiếu component PopupSetting');
+                return;
+            }
+            if (typeof c.show === 'function') c.show();
+            c.callbackClose = callbackClose;
+            if (typeof c.setSettingKey === 'function') c.setSettingKey(settingKey);
+        });
+    };
+
+    /**
+     * Go88: showPopupPasscode / showPopupFAQRemote — hai nút của hàng "Mã khoá" trong bảng Cài
+     * đặt. Hàng đó chỉ hiện khi `cc.sys.isNative && đang ở Lobby` (PopupSetting.js:422), mà
+     * Cào Rùa chạy web nên không bao giờ chạm tới. Giữ hàm để PopupSetting không nổ lúc nạp.
+     */
+    CommonPrefabsManager.prototype.showPopupPasscode = function (callbackClose) {
+        this._chuaBe('showPopupPasscode (hàng Mã khoá chỉ có ở bản native)');
+    };
+
+    CommonPrefabsManager.prototype.showPopupFAQRemote = function (loai) {
+        this._chuaBe('showPopupFAQRemote(' + loai + ') — cấu hình FAQ tải từ hạ tầng bản gốc');
+    };
+
+    /**
+     * Nạp một prefab nằm trong bundle rồi gắn vào lớp popup. Dùng chung cho mọi popup bê từ
+     * bản gốc mà ta để trong bundle thay vì `resources`.
+     *
+     * 🔴 Bundle phải đã nạp sẵn: cả hai bundle của bộ bài đều khai trong GameBundleConfig
+     * (`caorua` kèm `deps: ['cardroom']`) nên BundleLoader nạp xong mới dựng game. Nếu vì lý
+     * do nào đó chưa có thì báo ra chứ KHÔNG tự nạp ngầm — nạp ngầm giữa ván sẽ khựng hình.
+     */
+    CommonPrefabsManager.prototype._napPrefabTuBundle = function (tenBundle, duong, khiXong) {
+        var tuDong = this;
+        var bundle = cc.assetManager.getBundle(tenBundle);
+        if (!bundle) {
+            cc.warn(TAG + ' bundle "' + tenBundle + '" chưa nạp, không mở được ' + duong);
+            tuDong.showPopupMessageUtil('Chưa tải xong dữ liệu. Thử lại nhé!');
+            return;
+        }
+
+        bundle.load(duong, cc.Prefab, function (loi, prefab) {
+            if (loi || !prefab) {
+                cc.warn(TAG + ' không nạp được ' + tenBundle + '/' + duong + ': ' + (loi && loi.message ? loi.message : loi));
+                tuDong.showPopupMessageUtil('Không mở được. Thử lại nhé!');
+                return;
+            }
+
+            var cha = tuDong._lopPopup();
+            if (!cha) {
+                cc.warn(TAG + ' không tìm được lớp để gắn ' + duong);
+                return;
+            }
+
+            var node = cc.instantiate(prefab);
+            node.parent = cha;
+            node.x = 0;
+            node.y = 0;
+            node.zIndex = Z_TOP;
+            khiXong(node);
+        });
     };
 
     /**
