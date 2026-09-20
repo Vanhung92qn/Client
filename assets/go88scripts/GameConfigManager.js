@@ -257,8 +257,13 @@ var r = (function () {
     // trong kiến trúc này: chạy đúng một lần lúc dựng singleton.
     // Giữ nguyên ngữ nghĩa bản gốc: chỉ đọc khi `isCardGameSaveReadyLocal`, và KHÔNG có khoá
     // thì giữ mặc định (bật) — đúng như Go88.
+    // 🔴 DÙNG CHUỖI THẲNG, ĐỪNG VIẾT `i.KEY_AUTO_READY_CARDGAME`. Trong hàm này `i` là BIẾN
+    // CỤC BỘ giữ giá trị "showChatBanChung" đọc từ localStorage (dòng ngay trên) — nó CHE mất
+    // `i` của module. Máy nào chưa có khoá đó thì `i` là null ⇒ ném ngay trong `init()`, mà
+    // `init()` chạy lúc dựng singleton trong `onLoad` nên CẢ GAME KHÔNG VÀO ĐƯỢC.
+    // Đã ném thật: "Cannot read properties of null (reading 'KEY_AUTO_READY_CARDGAME')".
     if (this.isCardGameSaveReadyLocal) {
-      var n = cc.sys.localStorage.getItem(i.KEY_AUTO_READY_CARDGAME);
+      var n = cc.sys.localStorage.getItem("KEY_AUTO_READY_CARDGAME");
       if (null !== n && void 0 !== n && "" !== n) {
         this.autoReady = "true" === n;
       }
