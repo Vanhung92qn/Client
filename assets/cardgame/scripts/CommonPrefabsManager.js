@@ -46,6 +46,18 @@ function _docCauHinh() {
     return _cfgMod && _cfgMod.default ? _cfgMod.default.getInstance() : null;
 }
 
+var _gpMod = null;
+function _docNguoiChoi() {
+    if (null === _gpMod) {
+        try {
+            _gpMod = require('./GamePlayManager');
+        } catch (loi) {
+            return null;
+        }
+    }
+    return _gpMod && _gpMod.default ? _gpMod.default.getInstance() : null;
+}
+
 var CommonPrefabsManager = (function () {
 
     function CommonPrefabsManager() {
@@ -53,6 +65,10 @@ var CommonPrefabsManager = (function () {
         // Go88 reset biến này trong Popup1Button (lúc bấm OK / đóng / destroy) — ta reset trong
         // hide() của popup giả để không bị "lần 2 trả null" làm chết chuỗi .setHideCallback().
         this.oldCOntentThongBao = '';
+
+        // Popup "X mời bạn vào bàn" được GIỮ LẠI giữa các lời mời để xếp hàng, không dựng mới
+        // mỗi lần. Chính popup tự đặt lại ô này về null khi đóng — xem showPopupInviRoom.
+        this.popupInveteJoinRoom = null;
 
         // Go88 tự tắt loading sau `timeout` giây (tham số thứ 3 của showLoading, mặc định 20).
         // Giữ lại vì đây là cái phanh chống kẹt vòng xoay khi backend không trả lời.
@@ -457,7 +473,44 @@ var CommonPrefabsManager = (function () {
      * Gọi: GameController:369. Go88 trả về component hoặc undefined; chỗ gọi bỏ qua giá trị trả về.
      */
     CommonPrefabsManager.prototype.showPopupInviRoom = function (fromUser, roomInfo) {
-        this._chuaBe('showPopupInviRoom');
+        var cfg = _docCauHinh();
+        // Người chơi đã bấm "Từ chối hết" thì im lặng bỏ qua — y bản gốc (dòng 748).
+        if (cfg && !cfg.IsReceiveInvite) return;
+
+        // Hai chốt còn lại của bản gốc (CommonPrefabsManager.js:751-752), giữ nguyên ý:
+        //   · không đủ tiền vào bàn đó thì đừng mời mọc — trừ bàn có nhiều hơn 1000 ghế
+        //   · vừa vào bàn nào đó trong vòng 10 giây thì bỏ qua, tránh popup chồng lên nhau
+        //     ngay lúc người chơi đang chuyển bàn
+        var gp = _docNguoiChoi();
+        if (gp && roomInfo) {
+            var thieuTien = (gp.gold < roomInfo.mM || gp.gold < roomInfo.b) && roomInfo.Mu < 1000;
+            var vuaVaoBan = (Date.now() - (gp.timeInvite || 0)) / 1000 < 10;
+            if (thieuTien || vuaVaoBan) return;
+        }
+
+        // Bản gốc GIỮ LẠI một thể hiện và gọi showInvite nhiều lần — chính popup đó xếp các lời
+        // mời vào `arrRoomDict` rồi cho lật qua lại. Dựng mới mỗi lần là mất hàng đợi đó: người
+        // chơi nhận 3 lời mời sẽ thấy 3 popup chồng lên nhau.
+        //
+        // 🔴 Ô nhớ PHẢI tên `popupInveteJoinRoom` — sai chính tả "Invete" là CỦA BẢN GỐC. Chính
+        // popup tự xoá ô này khi đóng (PopupInveteJoinRoom.js:168 và :240). Đặt tên khác thì ô
+        // của ta không bao giờ được xoá, và lời mời kế tiếp gọi showInvite trên một component
+        // đã bị huỷ — không có popup nào hiện ra nữa cho tới khi tải lại trang.
+        if (this.popupInveteJoinRoom && this.popupInveteJoinRoom.isValid) {
+            this.popupInveteJoinRoom.showInvite(fromUser, roomInfo);
+            return;
+        }
+
+        var tuDong = this;
+        this._napPrefabTuBundle(BUNDLE_CHUNG, 'prefabs/PopupInveteJoinRom_9b5e7978', function (node) {
+            var c = node.getComponent('PopupInveteJoinRoom');
+            if (!c) {
+                cc.warn(TAG + ' PopupInveteJoinRom thiếu component PopupInveteJoinRoom');
+                return;
+            }
+            tuDong.popupInveteJoinRoom = c;
+            c.showInvite(fromUser, roomInfo);
+        });
     };
 
     /**

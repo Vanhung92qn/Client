@@ -223,20 +223,7 @@ var BaseScene = (function (_super) {
         }
 
         // Vào bàn theo lời mời của người chơi khác.
-        if (null != gamePlay.inviteData && void 0 != gamePlay.inviteData) {
-            var inviteRoomId = gamePlay.roomID;
-            var invitePassword = GameConfigManager.default.getInstance().roomPassword;
-            gamePlay.inviteData = null;
-            // Liêng / Xì Tố / Poker phải ĐẶT CHỖ trước rồi mới mua chip vào bàn.
-            // Ba Cây không thuộc nhóm này nên đi nhánh vào thẳng.
-            if (gamePlay.gameID === MessageCardGame.GAME.LIENG ||
-                gamePlay.gameID === MessageCardGame.GAME.XITO ||
-                gamePlay.gameID === MessageCardGame.GAME.POKER) {
-                gamePlay.bookRoom(inviteRoomId, 0, "");
-            } else {
-                gamePlay.joinRoom(inviteRoomId, 0, invitePassword, true);
-            }
-        }
+        this.vaoBanTheoLoiMoi();
 
         this.isCallExpireCallback = false;
     };
@@ -664,9 +651,52 @@ var BaseScene = (function (_super) {
      * lớp con gọi kiểu nào cũng không gãy.
      */
     BaseScene.prototype.openSceneGame = function (sceneName, parentNode, isRetry, forceLoad) {
+        // 🔴 MỘT NGOẠI LỆ: nhận lời mời vào bàn.
+        //
+        // Ở Go88, mọi game là một CẢNH riêng, nên khi người chơi bấm "Đồng ý" ở popup lời mời
+        // thì PopupInveteJoinRoom.onClickChapNhan gọi openSceneGame(<cảnh của game>) để ĐI VÀO
+        // game, rồi onLoad của cảnh đó đọc `inviteData` và vào bàn.
+        //
+        // Ở đây Cào Rùa là một view trong sảnh Roy88, và openSceneGame nghĩa ngược lại: RỜI
+        // game. Nếu cứ để nguyên thì bấm "Đồng ý" một lời mời sẽ ĐÓNG game — đúng trái ngược
+        // với điều người chơi vừa bấm, mà không có một dòng lỗi nào.
+        //
+        // Phân biệt bằng `inviteData`: ô đó CHỈ được đặt ở đúng một chỗ (PopupInveteJoinRoom
+        // :188, ngay trước lời gọi này) và được xoá ngay khi dùng. Có nó nghĩa là "vào", không
+        // có nghĩa là "ra".
+        var gamePlay = GamePlayManager.default.getInstance();
+        if (null != gamePlay.inviteData && void 0 != gamePlay.inviteData) {
+            this.vaoBanTheoLoiMoi();
+            return;
+        }
+
         CommonPrefabsManager.default.getInstance().hideLoading();
         CommonPrefabsManager.default.getInstance().closePopup(true);
         cc.LobbyController.getInstance().destroyDynamicView(null);
+    };
+
+    /**
+     * Vào bàn mà người khác vừa mời. Tách riêng vì có HAI đường chạm tới:
+     *   · onLoad          — mở game từ đầu trong lúc đang có lời mời chờ
+     *   · openSceneGame   — bấm "Đồng ý" khi đã ở trong game (đường thường gặp)
+     */
+    BaseScene.prototype.vaoBanTheoLoiMoi = function () {
+        var gamePlay = GamePlayManager.default.getInstance();
+        if (null == gamePlay.inviteData || void 0 == gamePlay.inviteData) return;
+
+        var inviteRoomId = gamePlay.roomID;
+        var invitePassword = GameConfigManager.default.getInstance().roomPassword;
+        gamePlay.inviteData = null;
+
+        // Liêng / Xì Tố / Poker phải ĐẶT CHỖ trước rồi mới mua chip vào bàn.
+        // Ba Cây không thuộc nhóm này nên đi nhánh vào thẳng.
+        if (gamePlay.gameID === MessageCardGame.GAME.LIENG ||
+            gamePlay.gameID === MessageCardGame.GAME.XITO ||
+            gamePlay.gameID === MessageCardGame.GAME.POKER) {
+            gamePlay.bookRoom(inviteRoomId, 0, "");
+        } else {
+            gamePlay.joinRoom(inviteRoomId, 0, invitePassword, true);
+        }
     };
 
     // ------------------------------------------------- móc rỗng cho lớp con đè lên

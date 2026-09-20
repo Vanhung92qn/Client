@@ -126,6 +126,16 @@ var r = (function () {
     this.isAnDanh = true; // BaCayController.js:122 - che do an danh; mac dinh theo ban goc
     this.isNewXepBaiMauBinh = true; // RoomController.js:176 - bat nut Sap Xep; mac dinh theo ban goc
 
+    // ── Nhan loi moi vao ban ───────────────────────────────────────────────────────────
+    // CommonPrefabsManager.showPopupInviRoom kiem `IsReceiveInvite` NGAY DONG DAU: sai la popup
+    // "X moi ban vao ban" khong bao gio hien, ma lenh 305 van ve deu — nhin nhu server hong.
+    //
+    // `resetAcceptInvitaionCardGameType` quyet dinh co NHO lua chon qua lan mo game hay khong.
+    // Ban goc de 1 (GameConfigManager.js:407) = chi nho trong phien; nut "Tu choi het" tat toi
+    // luc dong game la thoi. Giu nguyen so 1, doi la doi hanh vi nguoi choi da quen.
+    this.receiveInvite = true; // mac dinh theo ban goc (dong 34)
+    this.resetAcceptInvitaionCardGameType = 1;
+
     // ── Bang xep hang (PopupXepHangGame) ───────────────────────────────────────────────
     // Hai o chon tab mac dinh: 0 = "Tong thang" + "Tuan" (PopupXepHangGame.js:128/135).
     // 🔴 Phai la SO 0 chu khong de trong: ban goc so bang `0 === ...`, de undefined thi so sanh
@@ -419,6 +429,39 @@ var r = (function () {
     cc.sys.localStorage.setItem("showChatBanChung", e ? "true" : "false");
     this.showChatBanChung = e;
   };
+
+  // "Nhan loi moi vao ban". Giu nguyen ba che do cua ban goc (GameConfigManager.js:428-449):
+  //   0 = nho xuong may (khoa "IsReceiveInvite103")
+  //   1 = chi nho trong phien   <- ta dung che do nay
+  //   2 = chi cho phep TAT, bat lai thi bo qua
+  // Chep du ca ba du hien gio chi dung mot, vi `resetAcceptInvitaionCardGameType` la thu co the
+  // doi tu cau hinh may chu ben ban goc; giu du thi doi so la chay, khong phai viet them.
+  Object.defineProperty(t.prototype, "IsReceiveInvite", {
+    get: function () {
+      switch (this.resetAcceptInvitaionCardGameType) {
+        case 0:
+          var e = cc.sys.localStorage.getItem("IsReceiveInvite103");
+          this.receiveInvite = !e || "true" === e;
+          return this.receiveInvite;
+        default:
+          return this.receiveInvite;
+      }
+    },
+    set: function (e) {
+      switch (this.resetAcceptInvitaionCardGameType) {
+        case 0:
+          cc.sys.localStorage.setItem("IsReceiveInvite103", e ? "true" : "false");
+          break;
+        case 2:
+          if (!e) this.receiveInvite = false;
+          break;
+        default:
+          this.receiveInvite = e;
+      }
+    },
+    enumerable: true,
+    configurable: true,
+  });
 
   // CardGameTableController.js:166 - do lai 3 cau chat gan nhat vao popup chat.
   // Luu y: ten ham viet hoa chu H ("getOldCHat") la LOI CHINH TA CUA BAN GOC. Giu nguyen,

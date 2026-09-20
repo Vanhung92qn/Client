@@ -512,6 +512,25 @@ var GamePlayManager = (function () {
         if (typeof onDone === 'function') onDone();
     };
 
+    /**
+     * PopupInveteJoinRoom.js:178 — nút "Từ chối hết" ở popup lời mời vào bàn.
+     *
+     * Khung y bản gốc (GamePlayManager.js:451): [6, zone, "channelPlugin", {cmd:"306", subi}].
+     * 🔴 `cmd` là CHUỖI "306" chứ không phải số 306 — bản gốc viết vậy, và SimmsFrame.DocSo đã
+     * lo đọc được cả hai kiểu. Đừng "sửa cho đúng kiểu": nếu sau này đối chiếu gói bắt được với
+     * bản gốc thì lệch một ô cũng làm mất công truy.
+     *
+     * Client tự tắt cờ nhận lời mời ngay trước khi gọi, nên dù server chưa xử lý cmd 306 thì
+     * trong phiên này người chơi vẫn không bị làm phiền nữa.
+     */
+    GamePlayManager.prototype.updateChapNhanInvite = function (nhanLoiMoi) {
+        var frame = [MessageCardGameHandler.Message.MessageType.ZonePlugin_Type, this.getZoneName(), 'channelPlugin', {
+            cmd: '306',
+            subi: nhanLoiMoi,
+        }];
+        this.sendData(JSON.stringify(frame));
+    };
+
     // ── Điểm nối sang Roy88 ────────────────────────────────────────────────────────────────
     // Bốn trường dưới đây là accessor chứ không phải biến, để trong bàn bài và ngoài sảnh Roy88
     // luôn là MỘT nguồn sự thật. Code đã bê vừa đọc vừa ghi nên phải có đủ cả get lẫn set —
