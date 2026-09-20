@@ -32,6 +32,20 @@ var BUNDLE_CHUNG = 'cardroom';
 // require vào đây dễ tạo vòng. Bản gốc đặt popup ở đúng mức này.
 var Z_TOP = 100;
 
+// GameConfigManager nạp MUỘN. Tệp này là trục mà gần như mọi script đều require tới, nên nạp
+// sớm ở đầu tệp là tự tạo vòng: bên kia sẽ nhận exports rỗng và `.default` là undefined.
+var _cfgMod = null;
+function _docCauHinh() {
+    if (null === _cfgMod) {
+        try {
+            _cfgMod = require('./GameConfigManager');
+        } catch (loi) {
+            return null;
+        }
+    }
+    return _cfgMod && _cfgMod.default ? _cfgMod.default.getInstance() : null;
+}
+
 var CommonPrefabsManager = (function () {
 
     function CommonPrefabsManager() {
@@ -386,7 +400,33 @@ var CommonPrefabsManager = (function () {
 
     /** Go88: showPopupXepHangGame(gameID, orientation, callbackClose). Gọi: RoomController:278, InGameBackPopup:133. */
     CommonPrefabsManager.prototype.showPopupXepHangGame = function (gameID, orientation, callbackClose) {
-        this._chuaBe('showPopupXepHangGame(gameID=' + gameID + ')');
+        // Bản gốc (CommonPrefabsManager.js:988-1023) rẽ hai nhánh theo hướng màn hình: dọc thì
+        // nạp prefab _portrait từ resources, ngang thì dùng prefab gắn sẵn trong scene. Cào Rùa
+        // chỉ chạy ngang nên chỉ bê nhánh ngang — bê cả hai là mang thêm một prefab không dùng.
+        //
+        // Giữ nguyên hai chốt đầu của bản gốc, cả hai đều thật sự có tác dụng:
+        //   · isShowPopupDone đang bật ⇒ không mở (chống mở chồng popup khi đang vào bàn)
+        //   · "bangxephang" trong listcommingSoonGames ⇒ hiện "sắp ra mắt"
+        // Bỏ chốt isLoginWebccNoWallet: Roy88 không có kiểu đăng nhập đó, ô luôn false.
+        var cfg = _docCauHinh();
+        if (cfg && cfg.isShowPopupDone) return;
+        if (cfg && cfg.listcommingSoonGames && cfg.listcommingSoonGames.indexOf('bangxephang') >= 0) {
+            this.showPopupMessageUtil('Tính năng sắp ra mắt');
+            return;
+        }
+
+        this._napPrefabTuBundle(BUNDLE_CHUNG, 'prefabs/PopupXepHangGame_33870f75', function (node) {
+            var c = node.getComponent('PopupXepHangGame');
+            if (!c) {
+                cc.warn(TAG + ' PopupXepHangGame thiếu component PopupXepHangGame');
+                return;
+            }
+            // Thứ tự y bản gốc: init() TRƯỚC show(). init đặt gameId, mà show() dựa vào gameId
+            // để chọn tab rồi mới gọi mạng — đảo lại là gọi với gameId chưa có.
+            if (typeof c.init === 'function') c.init(gameID);
+            if (typeof c.show === 'function') c.show();
+            c.callBackClose = callbackClose || null;
+        });
     };
 
     /** Go88: showPopupJoinRoom(). Gọi: RoomController:286 (nhập mã bàn để vào). */

@@ -77,6 +77,19 @@ var WS_CARD_PATH = "websocket"; // dung y duong dan cua Go88 that: wss://<host>/
 // CardGame/src/CardGame.Server/appsettings.Test.json -> Hosting:HttpSysPrefixes.
 var WS_CARD_SUBDOMAIN = "caorua.";
 
+/**
+ * Goc HTTP cua backend Cao Rua — CUNG MOT may chu voi WebSocket, chi khac giao thuc.
+ * Dung cho cac endpoint REST (bang xep hang...). Cho ghi de bang ?apicard=... de chay thu cuc bo,
+ * giong het cach ?wscard=... lam voi WebSocket.
+ */
+function gocApiCaoRua() {
+  if (cc.sys.isBrowser && window.location && window.location.search) {
+    var m = /[?&]apicard=([^&]+)/.exec(window.location.search);
+    if (m) return decodeURIComponent(m[1]).replace(/\/+$/, "");
+  }
+  return "https://" + WS_CARD_SUBDOMAIN + s.HOST;
+}
+
 var r = (function () {
   function t() {
     // ── Am thanh (MusicPlayer.js doc, va GHI de vao currentBgMusic/isPlayingLobbyMusicBg) ──
@@ -112,6 +125,24 @@ var r = (function () {
     this.showChatBanChung = true; // mac dinh theo ban goc; init() doc de tu localStorage
     this.isAnDanh = true; // BaCayController.js:122 - che do an danh; mac dinh theo ban goc
     this.isNewXepBaiMauBinh = true; // RoomController.js:176 - bat nut Sap Xep; mac dinh theo ban goc
+
+    // ── Bang xep hang (PopupXepHangGame) ───────────────────────────────────────────────
+    // Hai o chon tab mac dinh: 0 = "Tong thang" + "Tuan" (PopupXepHangGame.js:128/135).
+    // 🔴 Phai la SO 0 chu khong de trong: ban goc so bang `0 === ...`, de undefined thi so sanh
+    // ra false va popup mo len o tab "San hu" + "Ngay" — lech ban goc, khong bao loi.
+    this.tabLeftRankingDefault = 0;
+    this.tabRightRankingDefault = 0;
+
+    // Duong DUY NHAT cua bang xep hang ma Cao Rua di qua. Ba nhanh kia deu khong chay:
+    //   · getTopUpDownURL : chi khi isLoginWebcc = true (ta luon false)
+    //   · urlRanking      : chi khi isEnableChooseType(gid) — danh sach do khong co game bai
+    //   · lsDuatopTxURL   : lich su dua top, chi mo tu man dua top ma ta khong bat
+    // Giu ba o rong: neu sau nay co nhanh nao song day, no se hong RO RANG (URL rong) thay vi
+    // am tham ban yeu cau sang ha tang ban goc.
+    this.duatopTxURL = gocApiCaoRua() + "/api/duatop";
+    this.getTopUpDownURL = "";
+    this.urlRanking = "";
+    this.lsDuatopTxURL = "";
 
     // ── "Chi dang nhap thiet bi nay" (trust device) — TAT HAN, xem setEnableTrustDevice ──
     this.trustDevice = false; // PopupSetting.js:272 doc de dat trang thai o gat
