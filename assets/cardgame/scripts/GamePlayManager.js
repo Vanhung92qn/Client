@@ -151,6 +151,14 @@ var GamePlayManager = (function () {
         this.IsMauBinhUsingNewXepBai = true;                // khớp GameConfigManager.isNewXepBaiMauBinh
         this.IsMauBinhFistTimeShowQuickGuide = false;       // tên sai chính tả là của bản gốc
 
+        // ── Két sắt: Roy88 không có, cụm này chết với Cào Rùa ─────────────────────────────
+        // PopupUserTableInfo chỉ bật khung két sắt khi gameID thuộc [221, 9, 14] hoặc đang ở
+        // một màn Live (PopupUserTableInfo.js:105) — gid Cào Rùa là 15 và ta không bê màn Live.
+        // Vẫn khai hai ô để nếu cụm đó có bị mở ra thì hiện "0 đồng / nút Rút xám", chứ không
+        // phải "NaN" hay nút bấm được rồi gọi vào hàm rỗng.
+        this.extraMoney = 0;
+        this.isUpdateKetSat = false;
+
         // ── Xóc Đĩa / ktek: Ba Cây KHÔNG dùng, giữ đúng kiểu và mặc định của bản gốc ───────
         this.iskteckgame = false;                           // GameController.js:366 (đọc)
         this.spinAutoXocDia = false;                        // MainGameViewModel.js:260 (ghi)
@@ -279,6 +287,26 @@ var GamePlayManager = (function () {
         } else {
             frame = [MessageCardGameHandler.Message.MessageType.JoinRoom_Type, this.getZoneName(), rid, password];
         }
+        this.sendData(JSON.stringify(frame));
+    };
+
+    /**
+     * Vào bàn theo MÃ BÀN người chơi tự gõ — PopupJoinRoom.js:87.
+     *
+     * Khung 5 phần tử, khác kiểu với joinRoom ở chỗ mang thêm gid ở cuối:
+     *     [8, zone, rid, pwd, gid]
+     *
+     * 🔴 gid ở đây là gid GIAO THỨC (Ba Cây = 15), tức `GamePlayManager.gameID`, KHÔNG phải mã
+     * kế toán của backend. Chỗ gọi đã tự lấy đúng ô đó rồi truyền xuống.
+     */
+    GamePlayManager.prototype.joinRoomWithGameID = function (rid, password, gid) {
+        this.timeInvite = Date.now();
+        this.roomID = rid;
+        this.roomPassword = password;
+        // Tên hằng viết thường chữ j đầu là CỦA BẢN GỐC (MessageCardGameHandler.js:20), không
+        // phải lỗi gõ. Viết hoa thành JoinRoom... thì nhận `undefined`, khung gửi đi có ô loại
+        // rỗng và server không hiểu — im lặng, không lỗi nào.
+        var frame = [MessageCardGameHandler.Message.MessageType.joinRoomWithGameID_Type, this.getZoneName(), rid, password, gid];
         this.sendData(JSON.stringify(frame));
     };
 

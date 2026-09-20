@@ -280,6 +280,25 @@ var CommonPrefabsManager = (function () {
     };
 
     /**
+     * Go88: showPopupKetSat / showPopupMessageWithPositionUtil — thuộc cụm "két sắt" trong
+     * PopupUserTableInfo. Cả cụm KHÔNG chạy với Cào Rùa: khung `rightUI` chỉ bật khi gameID nằm
+     * trong [221, 9, 14] hoặc đang ở một màn Live (PopupUserTableInfo.js:105), mà gid Cào Rùa là
+     * 15 và ta không bê màn Live nào. Giữ hàm để không nổ nếu ai đó mở cụm đó ra.
+     *
+     * 🔴 Nếu sau này thật sự cần két sắt thì phải viết lại bằng ví BettingGameCore, TUYỆT ĐỐI
+     * không nối lại `paymentURLs.postSafeLoad` (PopupUserTableInfo.js:147) — đó là API thanh
+     * toán của hạ tầng bản gốc.
+     */
+    CommonPrefabsManager.prototype.showPopupKetSat = function (moTruoc, soTien, callbackClose) {
+        this._chuaBe('showPopupKetSat — Roy88 không có két sắt');
+    };
+
+    /** Go88: bản "message util" đặt ở vị trí khác, chỉ dùng cho màn Live. Dồn về popup thường. */
+    CommonPrefabsManager.prototype.showPopupMessageWithPositionUtil = function (noiDung) {
+        return this.showPopupMessageUtil(noiDung);
+    };
+
+    /**
      * Nạp một prefab nằm trong bundle rồi gắn vào lớp popup. Dùng chung cho mọi popup bê từ
      * bản gốc mà ta để trong bundle thay vì `resources`.
      *
@@ -372,12 +391,25 @@ var CommonPrefabsManager = (function () {
 
     /** Go88: showPopupJoinRoom(). Gọi: RoomController:286 (nhập mã bàn để vào). */
     CommonPrefabsManager.prototype.showPopupJoinRoom = function () {
-        this._chuaBe('showPopupJoinRoom');
+        this._napPrefabTuBundle(BUNDLE_CHUNG, 'prefabs/PopupJoinRoom_d157a933', function (node) {
+            var c = node.getComponent('PopupJoinRoom');
+            if (c && typeof c.show === 'function') c.show();
+            else cc.warn(TAG + ' PopupJoinRoom thiếu component PopupJoinRoom');
+        });
     };
 
-    /** Go88: showPopupPasswordTable(). Gọi: TableCellRoomXocDia:182 (bàn có mật khẩu). */
+    /**
+     * Go88: showPopupPasswordTable(). Gọi: TableCellRoomXocDia:182 (bàn có mật khẩu).
+     *
+     * Không nhận mã bàn — ĐÚNG như bản gốc. Popup đọc `GamePlayManager.roomID`, mà ô đó đã được
+     * đặt ngay dòng đầu của chính chỗ gọi (TableCellRoomXocDia.js:168) trước khi mở popup.
+     */
     CommonPrefabsManager.prototype.showPopupPasswordTable = function () {
-        this._chuaBe('showPopupPasswordTable');
+        this._napPrefabTuBundle(BUNDLE_CHUNG, 'prefabs/PopupPasswordTable_a40afa96', function (node) {
+            var c = node.getComponent('PopupPasswordTable');
+            if (c && typeof c.show === 'function') c.show();
+            else cc.warn(TAG + ' PopupPasswordTable thiếu component PopupPasswordTable');
+        });
     };
 
     /**
@@ -393,7 +425,22 @@ var CommonPrefabsManager = (function () {
      * Gọi: PlayerView:954 (bấm vào người chơi trong bàn). Chỗ gọi bỏ qua giá trị trả về.
      */
     CommonPrefabsManager.prototype.showPopupUserTableInfo = function (name, money, avatarUrl, isMine, callbackClose) {
-        this._chuaBe('showPopupUserTableInfo(' + name + ')');
+        if (void 0 === isMine) isMine = false;
+        if (void 0 === callbackClose) callbackClose = null;
+
+        // Thứ tự Y BẢN GỐC (CommonPrefabsManager.js:639-641): show() TRƯỚC rồi mới loadUI() rồi
+        // mới gán callbackClose. loadUI gọi sau show vì nó còn bật/tắt node theo dữ liệu, mà
+        // show() đặt lại scale/opacity của cả khung.
+        this._napPrefabTuBundle(BUNDLE_CHUNG, 'prefabs/PopupUserTableInfo_8148a5c5', function (node) {
+            var c = node.getComponent('PopupUserTableInfo');
+            if (!c) {
+                cc.warn(TAG + ' PopupUserTableInfo thiếu component PopupUserTableInfo');
+                return;
+            }
+            if (typeof c.show === 'function') c.show();
+            if (typeof c.loadUI === 'function') c.loadUI(name, money, avatarUrl, isMine);
+            c.callbackClose = callbackClose;
+        });
     };
 
     // --- Nhóm dưới đây là popup của SẢNH Go88 (HeaderUi gọi tới). Ba Cây chạy trong sảnh Roy88 nên
