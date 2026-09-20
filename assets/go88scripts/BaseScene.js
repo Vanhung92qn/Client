@@ -150,6 +150,7 @@ var HeaderUi = require("./HeaderUi");
 var StringUtil = require("./StringUtil");
 var GameDefine = require("./GameDefine");
 var MusicPlayer = require("./MusicPlayer");
+var NhatKy = require("./NhatKy");
 var SessionDataModule = require("./SessionData");
 
 var decorator = cc._decorator,
@@ -185,6 +186,7 @@ var BaseScene = (function (_super) {
 
         // Nối socket game bài về các móc của cảnh. Lớp con đè lên móc nào thì móc đó chạy
         // bản của lớp con, vì bind() lấy theo chuỗi nguyên mẫu lúc chạy.
+        NhatKy.cai();   // cài TRƯỚC mọi thứ khác để bắt được cả lỗi lúc dựng cảnh
         baoDamMusicPlayer();
         caiChuyenHuongCanh();
 
