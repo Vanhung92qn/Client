@@ -12,7 +12,16 @@ function detectCdnUrl() {
         || /^192\.168\./.test(host)
         || /^10\./.test(host)
         || /^172\.(1[6-9]|2[0-9]|3[0-1])\./.test(host);
-    return isLocal ? '' : 'https://res.bay789x.me/';
+
+    // 🔴 SITE THU cung phai tinh la "cuc bo". Truoc day chi loc theo localhost/IP noi bo, nen
+    // MOI ten mien cong khai — ke ca web.bay789x.me — deu bi day sang CDN cua ban LIVE. Hau qua:
+    // deploy ban moi len site thu xong mo ra van thay GIAO DIEN CU, vi chi index.html + main.js
+    // lay cuc bo con TOAN BO canh/anh/script deu tai tu res.bay789x.me. Khong mot dong loi nao.
+    // Da dinh that, va chu du an phat hien chu khong phai bo kiem tu dong.
+    // Danh sach nay la cac site CHI de thu build; bay789x.me that van di qua CDN nhu cu.
+    var laSiteThu = host === 'web.bay789x.me';
+
+    return (isLocal || laSiteThu) ? '' : 'https://res.bay789x.me/';
 }
 
 module.exports = {
