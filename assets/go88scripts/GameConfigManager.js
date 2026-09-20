@@ -54,6 +54,11 @@ i.KEY_AUTO_READY_CARDGAME = "KEY_AUTO_READY_CARDGAME";
 // ⚠️ WS_CARD_PATH chua doi chieu duoc voi backend (backend dang viet). Sai thi sua DUNG 1 dong nay.
 var WS_CARD_PATH = "websocket"; // dung y duong dan cua Go88 that: wss://<host>/websocket
 
+// Ten mien con cua backend Cao Rua. Phai khac 'bacay.' — xem ly do o getWsCardUrl().
+// Backend dang ky truc tiep tren HTTP.SYS (khong qua IIS), cau hinh o
+// CardGame/src/CardGame.Server/appsettings.Test.json -> Hosting:HttpSysPrefixes.
+var WS_CARD_SUBDOMAIN = "caorua.";
+
 var r = (function () {
   function t() {
     // ── Am thanh (MusicPlayer.js doc, va GHI de vao currentBgMusic/isPlayingLobbyMusicBg) ──
@@ -313,7 +318,11 @@ var r = (function () {
       var m = /[?&]wscard=([^&]+)/.exec(window.location.search);
       if (m) return decodeURIComponent(m[1]);
     }
-    return "wss://" + cc.SubdomainName.THREE_CARDS + s.HOST + "/" + WS_CARD_PATH;
+    // 🔴 KHONG dung cc.SubdomainName.THREE_CARDS ('bacay.'): ten mien con do la SERVER BA CAY CU
+    // (game 51) van dang chay cho nguoi choi, noi giao thuc Roy88 hoan toan khac. Tro vao do thi
+    // client Go88 gui khung Simms sang mot server khong hieu no — hong im lang, va te hon nua la
+    // dam vao he dang song. Cao Rua co ten mien con RIENG.
+    return "wss://" + WS_CARD_SUBDOMAIN + s.HOST + "/" + WS_CARD_PATH;
   };
 
   t.getInstance = function () {
