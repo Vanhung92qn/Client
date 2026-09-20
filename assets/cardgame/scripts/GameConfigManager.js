@@ -42,17 +42,31 @@ var n = require("./StringUtil"),
 // nen giu nguyen ten xuat, phong khi script khac tra toi.
 i.KEY_AUTO_READY_CARDGAME = "KEY_AUTO_READY_CARDGAME";
 
-// MusicPlayer nap MUON, va phai qua bi danh rieng nay. Hai ly do, ca hai deu tung lam gay that:
-//  1. MusicPlayer require nguoc lai GameConfigManager. Nap som o dau tep thi luc chay mot trong
-//     hai ben nhan duoc exports RONG -> `.default` la undefined.
-//  2. Ben trong lop (var r = (function () { function t() {...}) chu `t` bi TEN LOP che mat, nen
-//     trong than ham KHONG con goi duoc `t("./MusicPlayer")` nua — phai giu san bi danh nay.
-var napModule = t;
+// MusicPlayer nap MUON (trong than ham) vi no require nguoc lai chinh tep nay: nap som o dau tep
+// thi luc chay mot trong hai ben nhan duoc exports RONG -> `.default` la undefined.
+//
+// 🔴 PHAI VIET `require("./MusicPlayer")` NGUYEN VAN. Hai cach viet duoi day TRONG NHU NHAU ma
+// hau qua khac han:
+//      var nap = require; nap("./MusicPlayer");   // ❌ HONG
+//      require("./MusicPlayer");                  // ✅ DUNG
+// Bo dong goi cua Cocos do phu thuoc bang cach QUET VAN BAN tim `require("chuoi")`. Goi qua bi
+// danh thi no khong thay, nen khong ghi `"./MusicPlayer"` vao bang phu thuoc cua module nay.
+// Luc chay, require khong tra cuu duoc qua bang nen NAP LAI tep lan hai => `cc.Class` cua
+// MusicPlayer bi dang ky HAI LAN:
+//      "A Class already exists with the same __classname__ : MusicPlayer"
+// va tu do `MusicPlayer.getInstance()` tra null -> MOI nut co tieng bam deu nem
+// "Cannot read properties of null (reading 'playbtnClick')" -> khong popup nao mo duoc.
+// Da dinh dung loi nay tren ban deploy 2026-09-21; kiem lai bang cach mo
+// build/web-mobile/assets/main/index.*.js tim `GameConfigManager:[function(e,t,n){` roi doc
+// bang phu thuoc ngay sau than ham — phai thay "./MusicPlayer" trong do.
+//
+// Chu `t` o dau tep (var t = require) KHONG dung duoc trong than ham: ben trong
+// `var r = (function () { function t() {...}` no bi TEN LOP che mat.
 var _mp = null;
 function mayHat() {
   if (null === _mp) {
     try {
-      _mp = napModule("./MusicPlayer");
+      _mp = require("./MusicPlayer");
     } catch (loi) {
       return null;
     }

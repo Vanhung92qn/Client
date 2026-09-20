@@ -51,14 +51,19 @@ Object.defineProperty(i, "__esModule", {
 //     nhung khong lam hanh vi — khong popup nao trong bo game bai co o nhap.
 // ─────────────────────────────────────────────────────────────────────────────
 
-// Nap MUON GameConfigManager: no khong require nguoc lai tep nay, nhung giu cung mot kieu voi
-// cac lop gia khac cho de doc, va tranh phu thuoc thu tu nap.
-var napModule = t;
+// Nap MUON (trong than ham) de khong phu thuoc thu tu nap giua cac lop gia.
+//
+// 🔴 PHAI VIET `require("./X")` NGUYEN VAN, KHONG duoc goi qua bi danh (`var nap = require`).
+// Bo dong goi cua Cocos do phu thuoc bang cach QUET VAN BAN; goi qua bi danh thi bang phu thuoc
+// cua module nay RONG, luc chay require nap lai tep lan hai va `cc.Class` bi dang ky hai lan
+// ("A Class already exists with the same __classname__"). Xem ghi chu day du o
+// GameConfigManager.js. Da dinh that: hide() cua popup lam MusicPlayer.getInstance() thanh null
+// roi moi nut co tieng bam deu chet.
 var _cfg = null;
 function cauHinh() {
   if (null === _cfg) {
     try {
-      _cfg = napModule("./GameConfigManager");
+      _cfg = require("./GameConfigManager");
     } catch (loi) {
       return null;
     }
@@ -70,7 +75,7 @@ var _nhac = null;
 function mayHat() {
   if (null === _nhac) {
     try {
-      _nhac = napModule("./MusicPlayer");
+      _nhac = require("./MusicPlayer");
     } catch (loi) {
       return null;
     }
