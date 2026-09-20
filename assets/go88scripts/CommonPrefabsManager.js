@@ -234,9 +234,51 @@ var CommonPrefabsManager = (function () {
         this._chuaBe('showPopupSetting');
     };
 
-    /** Go88: showPopupHelpImage(gameID, ...). Gọi: RoomController:270, InGameBackPopup:119. */
+    /**
+     * Go88: showPopupHelpImage(gameID, ...). Gọi: RoomController:270, InGameBackPopup:119.
+     *
+     * 🔴 ĐƯỜNG DẪN KHÔNG ĐOÁN THEO TÊN TỆP. Bản gốc (CommonPrefabsManager.js:784-900) có một
+     * `switch (gameID)` 17 nhánh, LẶP LẠI Y HỆT ở cả hai nhánh hướng màn hình, và nhánh
+     * `case GAME.BACAY` (= 15, đúng gid Cào Rùa) trỏ `"Help/PopupHelpBaCay"`. Vì hai hướng
+     * cho cùng một tệp nên ở đây không cần rẽ theo hướng — nhưng đã KIỂM cả hai mới dám bỏ.
+     *
+     * Bỏ có chủ ý: nhánh FAQ từ xa (`popupFAQRemoteConfig`) — cấu hình tải từ hạ tầng Go88.
+     */
     CommonPrefabsManager.prototype.showPopupHelpImage = function (gameID, arg2, arg3) {
-        this._chuaBe('showPopupHelpImage(gameID=' + gameID + ')');
+        var tuDong = this;
+        var duong = 'Help/PopupHelpBaCay';
+
+        cc.loader.loadRes(duong, cc.Prefab, function (loi, prefab) {
+            if (loi || !prefab) {
+                cc.warn(TAG + ' không nạp được ' + duong + ': ' + (loi && loi.message ? loi.message : loi));
+                tuDong.showPopupMessageUtil('Không mở được hướng dẫn. Thử lại nhé!');
+                return;
+            }
+
+            var cha = tuDong._lopPopup();
+            if (!cha) {
+                cc.warn(TAG + ' không tìm được lớp để gắn popup hướng dẫn');
+                return;
+            }
+
+            var node = cc.instantiate(prefab);
+            node.parent = cha;
+            node.x = 0;
+            node.y = 0;
+
+            // Bản gốc gọi getComponent(PopupHelpImage).show(). Tra theo TÊN LỚP thay vì
+            // require thẳng, để không kéo script vào tệp này chỉ vì một lời gọi.
+            var c = node.getComponent('PopupHelpImage');
+            if (c && typeof c.show === 'function') c.show();
+            else cc.warn(TAG + ' PopupHelpBaCay thiếu component PopupHelpImage');
+        });
+    };
+
+    /** Lớp để gắn popup: ưu tiên PopupLayer của Roy88, không có thì gắn thẳng vào Canvas. */
+    CommonPrefabsManager.prototype._lopPopup = function () {
+        var l = cc.find('Canvas/PopupLayer');
+        if (l) return l;
+        return cc.Canvas.instance ? cc.Canvas.instance.node : null;
     };
 
     /** Go88: showPopupXepHangGame(gameID, orientation, callbackClose). Gọi: RoomController:278, InGameBackPopup:133. */
@@ -273,14 +315,45 @@ var CommonPrefabsManager = (function () {
     // --- Nhóm dưới đây là popup của SẢNH Go88 (HeaderUi gọi tới). Ba Cây chạy trong sảnh Roy88 nên
     //     mấy nút này của Go88 không dùng đến, nhưng phải có hàm, thiếu là bấm nhầm chết im lặng.
 
+    // ── Ba màn TIỀN/HỒ SƠ: cố ý KHÔNG bê của Go88, mà nối sang Roy88 ──────────────────
+    //
+    // 🔴 LÝ DO, và nó là lằn ranh đỏ của dự án: chỉ thị "hai anh em sinh đôi" áp cho GIAO DIỆN
+    // GAME. Còn ví / hồ sơ / số điện thoại là NGHIỆP VỤ TIỀN của Roy88. Bê form Go88 sang là mở
+    // đúng con đường gửi token, số điện thoại và OTP của người chơi sang hạ tầng Go88 — thứ bị
+    // cấm tuyệt đối. Nên ba hàm này dựng màn THẬT của Roy88, cái đang chạy và đang ra tiền.
+    //
+    // Mở được ngay TRONG cảnh game, không phải thoát về sảnh: Cào Rùa không phải cảnh riêng —
+    // nó là view động gắn vào node của LobbyView (LobbyView.js:807-840 nhánh fallback), nên
+    // `cc.LobbyController` vẫn sống, và view dựng sau có sibling index lớn hơn nên vẽ đè lên.
+    //
+    // GIỮ NGUYÊN CHỮ KÝ của Go88 ở cả ba hàm — HeaderUi đang truyền tham số thật vào.
+
     /** Gọi: HeaderUi:508 showPopupNap(tab, callback). */
     CommonPrefabsManager.prototype.showPopupNap = function (tab, callback) {
-        this._chuaBe('showPopupNap');
+        // Tham số `tab` của Go88 (TAB_LAST_SELECTED_OR_DEFAULT) không ánh xạ được sang
+        // cc.ShopTab — bỏ qua có chủ ý, chọn tab theo cấu hình của chính Roy88.
+        try {
+            var mac = cc.ShopController.getInstance().getChargeDefault();
+            var tabRoy88 = mac === 'BANK' ? cc.ShopTab.BANK
+                : mac === 'MOMO' ? cc.ShopTab.MOMO
+                    : cc.ShopTab.TOPUP;
+
+            cc.LobbyController.getInstance().createShopView(tabRoy88);
+            if (callback) callback();
+        } catch (e) {
+            cc.warn(TAG + ' showPopupNap: không mở được màn nạp của Roy88 — ' + e.message);
+            this.showPopupMessageUtil('Không mở được màn nạp. Thử lại nhé!');
+        }
     };
 
     /** Gọi: HeaderUi:515 showPopupUserInfo(tab). */
     CommonPrefabsManager.prototype.showPopupUserInfo = function (tab) {
-        this._chuaBe('showPopupUserInfo');
+        try {
+            cc.LobbyController.getInstance().createAccountView(cc.AccountTab.PROFILE);
+        } catch (e) {
+            cc.warn(TAG + ' showPopupUserInfo: không mở được hồ sơ Roy88 — ' + e.message);
+            this.showPopupMessageUtil('Không mở được hồ sơ. Thử lại nhé!');
+        }
     };
 
     /** Gọi: HeaderUi:476 showPopupMail(). */
@@ -288,9 +361,18 @@ var CommonPrefabsManager = (function () {
         this._chuaBe('showPopupMail');
     };
 
-    /** Gọi: HeaderUi:521 showPopupActivePhoneNumber(nodeKickHoat). */
+    /**
+     * Gọi: HeaderUi:521 showPopupActivePhoneNumber(nodeKickHoat).
+     * Tham số `nodeKickHoat` là node nút bên Go88 (dùng để ẩn nút sau khi kích hoạt) —
+     * màn Roy88 tự lo việc đó nên ở đây không dùng tới.
+     */
     CommonPrefabsManager.prototype.showPopupActivePhoneNumber = function (nodeKickHoat) {
-        this._chuaBe('showPopupActivePhoneNumber');
+        try {
+            cc.LobbyController.getInstance().createAccountView(cc.AccountTab.REG_PHONE);
+        } catch (e) {
+            cc.warn(TAG + ' showPopupActivePhoneNumber: không mở được màn SĐT Roy88 — ' + e.message);
+            this.showPopupMessageUtil('Không mở được màn kích hoạt. Thử lại nhé!');
+        }
     };
 
     /** Gọi: HeaderUi:501 showPopupChangeUserDisplayName(caller, hideCallback). */
