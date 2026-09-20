@@ -55,14 +55,57 @@
  * bấm vào bàn là game đứng.
  *
  * Âm thanh nạp bằng `cc.loader.loadRes("Sounds/…")`, tức lấy từ thư mục `resources` của gói
- * chính. Bộ tệp âm thanh của Go88 CHƯA được bê sang, nên hiện tại nạp hụt — `playEffectWhenLoadDone`
- * có chốt lỗi nên chỉ là im tiếng, không gãy. Bê âm thanh sang là việc riêng, làm sau.
+ * chính; bộ tệp âm thanh của Go88 đã được bê sang nên đường này chạy thật.
  */
 function baoDamMusicPlayer() {
     if (MusicPlayer.default.getInstance()) return;
     var node = new cc.Node('Go88MusicPlayer');
     node.parent = cc.director.getScene();
     node.addComponent(MusicPlayer.default);   // onLoad của nó tự gán Instance
+}
+
+/**
+ * Chuyển hướng những lần Go88 đòi nạp CẢNH của riêng nó sang đường ra của Roy88.
+ *
+ * 🔴 VÌ SAO CẦN: ở Go88 mỗi game là một CẢNH, nên `HeaderUi.onclickBack` thoát game bằng
+ * `cc.director.loadScene("LobbyNew")` (HeaderUi.js:447-449; tên cảnh ở GameDefine.js:59).
+ * Roy88 không có cảnh nào tên đó — Ba Cây là view động trong sảnh. Engine chỉ in hai dòng đỏ
+ * "not in the build settings" rồi thôi: nút Thoát bấm như hụt, KHÔNG có đường nào khác về sảnh,
+ * người chơi phải tải lại cả client. `HeaderUi.js:695` nạp cảnh Login cũng chết y như vậy.
+ *
+ * Vá ở ĐÂY chứ không sửa HeaderUi.js, vì ba lẽ: giữ nguyên mã Go88 (luật của dự án), một chỗ
+ * vá lo cho MỌI tệp Go88 gọi loadScene chứ không phải đuổi theo từng tệp, và `openSceneGame()`
+ * bên dưới đã sẵn là đường ra đúng.
+ *
+ * Phạm vi cố ý HẸP: chỉ bắt đúng những tên cảnh của Go88. Cảnh thật của Roy88 vẫn nạp như cũ —
+ * nới rộng ra là chặn nhầm đường chuyển cảnh của chính Roy88.
+ */
+function caiChuyenHuongCanh() {
+    if (cc.director.__go88DaVaChuyenCanh) return;
+    cc.director.__go88DaVaChuyenCanh = true;
+
+    var ten = GameDefine.GameConfigs.SceneName;
+    var canhGo88 = [ten.Lobby, ten.LobbyKTEK, ten.Login, ten.LoginKTEK, ten.NewScene];
+    var laCanhGo88 = function (x) { return canhGo88.indexOf(x) >= 0; };
+
+    var loadGoc = cc.director.loadScene.bind(cc.director);
+    var preloadGoc = cc.director.preloadScene.bind(cc.director);
+
+    cc.director.loadScene = function (tenCanh, onLaunched, onUnloaded) {
+        if (!laCanhGo88(tenCanh)) return loadGoc(tenCanh, onLaunched, onUnloaded);
+        CommonPrefabsManager.default.getInstance().hideLoading();
+        CommonPrefabsManager.default.getInstance().closePopup(true);
+        cc.LobbyController.getInstance().destroyDynamicView(null);
+        return true;
+    };
+
+    // Go88 hay preload rồi mới load. Ở đây không có gì để nạp, nhưng PHẢI gọi lại callback —
+    // thiếu thì vòng xoay chờ không bao giờ tắt và chốt chống bấm 2 lần không bao giờ nhả.
+    cc.director.preloadScene = function (tenCanh, onProgress, onLoaded) {
+        if (!laCanhGo88(tenCanh)) return preloadGoc(tenCanh, onProgress, onLoaded);
+        var xong = typeof onProgress === 'function' && onLoaded === undefined ? onProgress : onLoaded;
+        if (typeof xong === 'function') xong(null);
+    };
 }
 
 var __extends = (this && this.__extends) || (function () {
@@ -143,6 +186,7 @@ var BaseScene = (function (_super) {
         // Nối socket game bài về các móc của cảnh. Lớp con đè lên móc nào thì móc đó chạy
         // bản của lớp con, vì bind() lấy theo chuỗi nguyên mẫu lúc chạy.
         baoDamMusicPlayer();
+        caiChuyenHuongCanh();
 
         var wsCard = WSCardGameHandle.default.getInstance();
 

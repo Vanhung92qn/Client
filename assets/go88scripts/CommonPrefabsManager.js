@@ -70,13 +70,32 @@ var CommonPrefabsManager = (function () {
         roy88.showBusy(big);
 
         // Phanh chống kẹt — đúng như Go88 làm bằng cc.sequence(delayTime, callFunc).
+        //
+        // 🔴 CHỐT CHỐNG BẤM HAI LẦN ĐƯỢC NHẢ Ở ĐÂY, trong callback hết giờ — KHÔNG phải trong
+        // hideLoading(). Bản gốc làm đúng thứ tự này ở cả 4 biến thể showLoading
+        // (CommonPrefabsManager.js:294, 306, 328, 372: đặt isShowPopupDone = false RỒI hideLoading).
         var self = this;
         this._loadingWatchdog = setTimeout(function () {
             self._loadingWatchdog = null;
+            nhaChotBamNut();
             self.hideLoading();
         }, timeout * 1000);
     };
 
+    /**
+     * 🔴 THUẦN TUÝ — KHÔNG đụng vào isShowPopupDone. Bản gốc cũng vậy
+     * (CommonPrefabsManager.js:377-381 chỉ gọi loadingUI.hide()).
+     *
+     * Trước đây lớp giả này nhả chốt ngay trong hideLoading, và vì showLoading() gọi
+     * hideLoading() ngay ở đầu, chốt bị xoá ĐÚNG MỘT DÒNG sau khi được bật:
+     *     isShowPopupDone = true;   // HeaderUi:444, RoomController:203, :228
+     *     showLoading();            // → hideLoading() → nhả chốt luôn
+     * Tức phanh chống bấm hai lần chết ở MỌI nút vào bàn mà không có một dòng lỗi nào.
+     *
+     * Các đường nhả chốt đúng: closePopup() bên dưới (bản gốc dòng 238) — được gọi ở
+     * RoomController.onEnable:193 mỗi lần quay lại danh sách bàn — và callback hết giờ
+     * 20 giây ở showLoading() bên trên.
+     */
     CommonPrefabsManager.prototype.hideLoading = function () {
         if (this._loadingWatchdog) {
             clearTimeout(this._loadingWatchdog);
@@ -86,10 +105,6 @@ var CommonPrefabsManager = (function () {
         if (roy88) {
             roy88.hideBusy();
         }
-        // 🔴 Nhả chốt như bản gốc (CommonPrefabsManager.js:294, 306). Chốt này do các nút
-        // Chơi nhanh / Tạo bàn bật lên để chống bấm hai lần; không nhả thì nút CHẾT VĨNH VIỄN
-        // sau lần bấm đầu, mà không có một dòng lỗi nào.
-        nhaChotBamNut();
     };
 
     // ---------------------------------------------------------------- ĐÓNG POPUP
