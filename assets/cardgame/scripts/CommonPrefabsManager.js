@@ -869,15 +869,26 @@ function nhanGia(onSet) {
     };
 
     /**
-     * Popup Tạo bàn của Go88 (băng chọn mức cược + ô mật khẩu + nút OK).
-     * v1 chưa dựng lại nên báo cho người chơi biết thay vì im lặng — im lặng ở đây nghĩa là
-     * bấm "Tạo bàn" xong không có gì xảy ra và nút kẹt luôn vì isShowPopupDone còn true.
+     * Popup Tạo bàn (băng chọn mức cược + chọn số người + ô mật khẩu + nút TẠO).
+     *
+     * `danhSachMucCuoc` là mảng `b` của `cmd 311` — chỉ gồm mức cược người này ĐỦ TIỀN tạo,
+     * do máy chủ lọc theo số dư. Client không tự bịa thêm mức nào.
+     *
+     * Thứ tự y bản gốc (CommonPrefabsManager.js:516-525): `show()` TRƯỚC rồi mới `loadData()`.
+     * Đảo lại thì loadData dựng các ô mức cược xong mới bị show() đặt lại scale/opacity.
      */
     CommonPrefabsManager.prototype.showPopupTaoBan = function (danhSachMucCuoc) {
         cc.log('%c[BẤM] showPopupTaoBan', 'color:#0a0;font-weight:bold', '· tham số:', danhSachMucCuoc);
-        cc.warn('[caorua] showPopupTaoBan chưa làm, mức cược: ' + JSON.stringify(danhSachMucCuoc));
-        nhaChotBamNut();
-        cc.PopupController.getInstance().showMessage('Tạo bàn chưa mở, mời bạn chọn bàn có sẵn.');
+
+        this._napPrefabTuBundle(BUNDLE_CHUNG, 'prefabs/PopupTaoBan_5e414114', function (node) {
+            var c = node.getComponent('TaoBanViewController');
+            if (!c) {
+                cc.warn(TAG + ' PopupTaoBan thiếu component TaoBanViewController');
+                return;
+            }
+            if (typeof c.show === 'function') c.show();
+            if (typeof c.loadData === 'function') c.loadData(danhSachMucCuoc);
+        });
     };
 
     /** Lấy GameConfigManager mà không tạo phụ thuộc vòng lúc nạp module. */
