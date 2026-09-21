@@ -106,9 +106,27 @@ function cai() {
         ghi('LỖI ', 'Promise không bắt: ' + (e && e.reason ? (e.reason.stack || e.reason.message || e.reason) : '?'));
     });
 
+    // 🔴 BỌC `cc.error` LÀ CON DAO HAI LƯỠI: trình duyệt quy mọi lỗi về DÒNG NÀY thay vì nơi
+    // phát sinh thật. Chủ dự án đã gửi "NhatKy.js:112 getComponent: Type must be non-nil" — số
+    // dòng đó vô dụng, nó chỉ là chỗ mình gọi lại hàm gốc.
+    // Nên phải TỰ chụp ngăn xếp và in ra, nếu không bộ ghi log lại che mất đúng thứ nó sinh ra
+    // để soi. Bỏ 3 khung đầu (Error, hàm này, chỗ gọi cc.error trong engine) cho đỡ nhiễu.
     var cuCcError = cc.error;
     cc.error = function () {
-        try { ghi('cc.error', Array.prototype.join.call(arguments, ' ')); } catch (x) { /* bỏ qua */ }
+        var noiDung = '';
+        try { noiDung = Array.prototype.join.call(arguments, ' '); } catch (x) { /* bỏ qua */ }
+
+        var nguon = '';
+        try {
+            var khung = String(new Error().stack || '').split('\n').slice(3, 7)
+                .map(function (d) { return d.trim(); })
+                .filter(function (d) { return d && d.indexOf('NhatKy.js') < 0; });
+            if (khung.length) nguon = '\n    ← ' + khung.join('\n    ← ');
+        } catch (x) { /* bỏ qua */ }
+
+        try { ghi('cc.error', noiDung + nguon); } catch (x) { /* bỏ qua */ }
+        // In thẳng ra console kèm nguồn, vì dòng do engine in ra sẽ mang số dòng của TỆP NÀY.
+        if (nguon) { try { console.warn('[NhatKy] lỗi trên phát sinh từ:' + nguon); } catch (x) { /* bỏ qua */ } }
         return cuCcError.apply(cc, arguments);
     };
 
