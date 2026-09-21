@@ -47,17 +47,10 @@ var n = this && this.__extends || function() {
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-// ── BẢNG TRA BÍ DANH (máy sinh — ghi-bang-tra-bi-danh.js) ──────
-// Mã dịch ngược đặt bí danh một chữ cho mỗi module. Bảng này để khỏi phải cuộn ngược.
-// KHÔNG đổi tên chúng bằng tìm-kiếm-thay-thế: đoạn mở đầu __decorate khai lại đúng
-// những chữ này làm biến cục bộ, đổi là hỏng im lặng.
-//   a = BaCayController   s = GamePlayManager   r = MessageCardGameHandler
-//   c = MainGameViewModel
-// ────────────────────────────────────────────────────────────────
-var a = require("./BaCayController"),
-  s = require("./GamePlayManager"),
-  r = require("./MessageCardGameHandler"),
-  c = require("./MainGameViewModel"),
+var BaCayController = require("./BaCayController"),
+  GamePlayManager = require("./GamePlayManager"),
+  MessageCardGameHandler = require("./MessageCardGameHandler"),
+  MainGameViewModel = require("./MainGameViewModel"),
   l = cc._decorator,
   h = l.ccclass,
   u = l.property,
@@ -70,10 +63,10 @@ var a = require("./BaCayController"),
     }
     n(e, t);
     e.prototype.onLoad = function() {
-      s.default.getInstance().gameID = r.GAME.BACAY;
+      GamePlayManager.default.getInstance().gameID = MessageCardGameHandler.GAME.BACAY;
       var e = cc.instantiate(this.prefabBaCayScene);
       e.parent = this.mainUiNode;
-      this.baCayController = e.getComponent(a.default);
+      this.baCayController = e.getComponent(BaCayController.default);
       this.baCayController.mainGameViewModel = this;
       this.mainGameController = this.baCayController;
       e.active = false;
@@ -81,6 +74,6 @@ var a = require("./BaCayController"),
     };
     o([u(cc.Prefab)], e.prototype, "prefabBaCayScene", void 0);
     return e = o([h], e);
-  }(c.default);
+  }(MainGameViewModel.default);
 i.default = d;
 void 0;

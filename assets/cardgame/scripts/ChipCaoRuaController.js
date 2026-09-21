@@ -47,7 +47,7 @@ var n = this && this.__extends || function() {
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-var a = require("./ChipCaoRua"),
+var ChipCaoRua = require("./ChipCaoRua"),
   s = cc._decorator,
   r = s.ccclass,
   c = s.property,
@@ -118,7 +118,7 @@ var a = require("./ChipCaoRua"),
     };
     e.prototype.createNewChip = function(t) {
       var e = this.getIndexChipInListWithPrice(t),
-        i = cc.instantiate(this.listPrefabChip[e]).getComponent(a.default);
+        i = cc.instantiate(this.listPrefabChip[e]).getComponent(ChipCaoRua.default);
       i.node.active = false;
       i.node.parent = this.chipParent;
       i.node.position = cc.v2(0, 0);

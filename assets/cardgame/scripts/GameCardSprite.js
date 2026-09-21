@@ -47,18 +47,11 @@ var n = this && this.__extends || function() {
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-// ── BẢNG TRA BÍ DANH (máy sinh — ghi-bang-tra-bi-danh.js) ──────
-// Mã dịch ngược đặt bí danh một chữ cho mỗi module. Bảng này để khỏi phải cuộn ngược.
-// KHÔNG đổi tên chúng bằng tìm-kiếm-thay-thế: đoạn mở đầu __decorate khai lại đúng
-// những chữ này làm biến cục bộ, đổi là hỏng im lặng.
-//   a = GamePlayManager   s = MessageCardGameHandler   r = GameCardSpriteType
-//   c = XiToRequestHandler   l = GameDefine
-// ────────────────────────────────────────────────────────────────
-var a = require("./GamePlayManager"),
-  s = require("./MessageCardGameHandler"),
-  r = require("./GameCardSpriteType"),
-  c = require("./XiToRequestHandler"),
-  l = require("./GameDefine"),
+var GamePlayManager = require("./GamePlayManager"),
+  MessageCardGameHandler = require("./MessageCardGameHandler"),
+  GameCardSpriteType = require("./GameCardSpriteType"),
+  XiToRequestHandler = require("./XiToRequestHandler"),
+  GameDefine = require("./GameDefine"),
   h = cc._decorator,
   u = h.ccclass,
   d = h.property,
@@ -105,11 +98,11 @@ var a = require("./GamePlayManager"),
     e.prototype.onLoad = function() {};
     e.prototype.start = function() {};
     e.prototype.init = function(t) {
-      this.gameID = a.default.getInstance().gameID;
+      this.gameID = GamePlayManager.default.getInstance().gameID;
       this.setType(t);
     };
     e.prototype.initAndHide = function(t) {
-      this.gameID = a.default.getInstance().gameID;
+      this.gameID = GamePlayManager.default.getInstance().gameID;
       this.type = t;
       this.type = t;
       this.node.stopAllActions();
@@ -119,7 +112,7 @@ var a = require("./GamePlayManager"),
     };
     e.prototype.setType = function(t) {
       this.type = t;
-      if (this.type == r.default.TypeHIDE) {
+      if (this.type == GameCardSpriteType.default.TypeHIDE) {
         this.node.stopAllActions();
         this.cardSprite.spriteFrame = this.cardSpriteAtlas.getSpriteFrame("icCardback");
         this.isCardBack = true;
@@ -127,35 +120,35 @@ var a = require("./GamePlayManager"),
       this.node.scale = this.getScaleWithType(this.type);
     };
     e.prototype.setTypeHIDENoScale = function() {
-      this.type = r.default.TypeHIDE;
+      this.type = GameCardSpriteType.default.TypeHIDE;
       this.node.stopAllActions();
       this.cardSprite.spriteFrame = this.cardSpriteAtlas.getSpriteFrame("icCardback");
       this.isCardBack = true;
     };
     e.prototype.getScaleWithType = function(t) {
       var e = 1;
-      switch (t === r.default.TypeBIG ? e = .65 : t === r.default.TypeMEDIUM ? e = .6 : t === r.default.TypeSMALL ? e = .5 : t === r
+      switch (t === GameCardSpriteType.default.TypeBIG ? e = .65 : t === GameCardSpriteType.default.TypeMEDIUM ? e = .6 : t === GameCardSpriteType.default.TypeSMALL ? e = .5 : t === GameCardSpriteType
         .default.TypeHIDE && (e = .5), this.gameID) {
-        case s.GAME.TIENLEN:
+        case MessageCardGameHandler.GAME.TIENLEN:
           break;
-        case s.GAME.POKER:
-          t === r.default.TypeSMALL ? e = .62 : t === r.default.TypeHIDE && (e = .62);
+        case MessageCardGameHandler.GAME.POKER:
+          t === GameCardSpriteType.default.TypeSMALL ? e = .62 : t === GameCardSpriteType.default.TypeHIDE && (e = .62);
           break;
-        case s.GAME.XITO:
-          t === r.default.TypeSMALL ? e = .6 : t === r.default.TypeHIDE && (e = .6);
+        case MessageCardGameHandler.GAME.XITO:
+          t === GameCardSpriteType.default.TypeSMALL ? e = .6 : t === GameCardSpriteType.default.TypeHIDE && (e = .6);
           break;
-        case s.GAME.BINH:
-          t === r.default.TypeBIG ? e = 1 : t !== r.default.TypeHIDE && t !== r.default.TypeMEDIUM || (e = .65);
+        case MessageCardGameHandler.GAME.BINH:
+          t === GameCardSpriteType.default.TypeBIG ? e = 1 : t !== GameCardSpriteType.default.TypeHIDE && t !== GameCardSpriteType.default.TypeMEDIUM || (e = .65);
           break;
-        case s.GAME.CATTE:
-          t === r.default.TypeBIG ? e = 1 : t !== r.default.TypeHIDE && t !== r.default.TypeMEDIUM || (e = .43);
+        case MessageCardGameHandler.GAME.CATTE:
+          t === GameCardSpriteType.default.TypeBIG ? e = 1 : t !== GameCardSpriteType.default.TypeHIDE && t !== GameCardSpriteType.default.TypeMEDIUM || (e = .43);
           break;
-        case l.GameID.LIENG:
-          t === r.default.TypeBIG ? e = 1.5 : t === r.default.TypeMEDIUM ? e = 1 : t === r.default.TypeSMALL ? e = .8 : t === r.default
+        case GameDefine.GameID.LIENG:
+          t === GameCardSpriteType.default.TypeBIG ? e = 1.5 : t === GameCardSpriteType.default.TypeMEDIUM ? e = 1 : t === GameCardSpriteType.default.TypeSMALL ? e = .8 : t === GameCardSpriteType.default
             .TypeHIDE && (e = .5);
           break;
-        case l.GameID.BACAY:
-          t === r.default.TypeBIG ? e = .78 : t === r.default.TypeMEDIUM && (e = .65);
+        case GameDefine.GameID.BACAY:
+          t === GameCardSpriteType.default.TypeBIG ? e = .78 : t === GameCardSpriteType.default.TypeMEDIUM && (e = .65);
       }
       return e;
     };
@@ -190,14 +183,14 @@ var a = require("./GamePlayManager"),
       }
       this.S = t % 4 + 1;
       this.N = Math.floor(t / 4) + 1;
-      if (1 === this.N && e != s.GAME.LIENG) {
+      if (1 === this.N && e != MessageCardGameHandler.GAME.LIENG) {
         this.N = 14;
       }
-      if (0 === this.N && s.GAME.LIENG) {
+      if (0 === this.N && MessageCardGameHandler.GAME.LIENG) {
         this.N = 1;
       }
-      if (2 === this.N && e !== s.GAME.BINH && e !== s.GAME.POKER && e !== s.GAME.BACAY && e !== s.GAME.BLACK_JACK && e != s.GAME.LIENG &&
-        e != s.GAME.CATTE) {
+      if (2 === this.N && e !== MessageCardGameHandler.GAME.BINH && e !== MessageCardGameHandler.GAME.POKER && e !== MessageCardGameHandler.GAME.BACAY && e !== MessageCardGameHandler.GAME.BLACK_JACK && e != MessageCardGameHandler.GAME.LIENG &&
+        e != MessageCardGameHandler.GAME.CATTE) {
         this.N = 15;
       }
     };
@@ -208,7 +201,7 @@ var a = require("./GamePlayManager"),
       if (-1 === t) {
         t = this.gameID;
       }
-      return t === s.GAME.TIENLEN ? 13 * (this.S - 1) + this.N - 2 : 13 * (this.S - 1) + this.N - 1;
+      return t === MessageCardGameHandler.GAME.TIENLEN ? 13 * (this.S - 1) + this.N - 2 : 13 * (this.S - 1) + this.N - 1;
     };
     e.prototype.getResourceName = function() {
       var t = 0;
@@ -261,7 +254,7 @@ var a = require("./GamePlayManager"),
         e = this.node.scaleX,
         i = this.node.scaleY;
       this.node.runAction(cc.sequence(cc.scaleTo(.15, 0, i), cc.callFunc(function() {
-        t.type = r.default.TypeHIDE;
+        t.type = GameCardSpriteType.default.TypeHIDE;
         t.cardSprite.spriteFrame = t.cardSpriteAtlas.getSpriteFrame("icCardback");
         t.isCardBack = true;
       }), cc.scaleTo(.15, e, i)));
@@ -276,7 +269,7 @@ var a = require("./GamePlayManager"),
       this.setTextureWithCode(this.serverCode, -1);
       this.node.opacity = 0;
       var t = cc.instantiate(this.node);
-      t.getComponent(i).init(r.default.TypeHIDE);
+      t.getComponent(i).init(GameCardSpriteType.default.TypeHIDE);
       t.parent = this.node;
       t.position = cc.Vec2.ZERO;
       t.scale = 1;
@@ -315,7 +308,7 @@ var a = require("./GamePlayManager"),
       }
     };
     e.prototype.chonLaBaiTay = function() {
-      c.default.getInstance().sendChonLaBaiTay(this.serverCode);
+      XiToRequestHandler.default.getInstance().sendChonLaBaiTay(this.serverCode);
     };
     e.prototype.isInArray = function(t) {
       for (var e = 0; e < t.length; ++e) {
@@ -445,7 +438,7 @@ var a = require("./GamePlayManager"),
       if (void 0 === e) {
         e = false;
       }
-      if (!(a.default.getInstance().gameID != l.GameID.LIENG && a.default.getInstance().gameID != l.GameID.BACAY)) {
+      if (!(GamePlayManager.default.getInstance().gameID != GameDefine.GameID.LIENG && GamePlayManager.default.getInstance().gameID != GameDefine.GameID.BACAY)) {
         this.node.on(cc.Node.EventType.TOUCH_MOVE, function(i) {
           if (!this.isFading) {
             if (this.node.y >= .85 * this.node.height || this.node.y <= -this.node.height / 2 || this.node.x >= .5 * this.node

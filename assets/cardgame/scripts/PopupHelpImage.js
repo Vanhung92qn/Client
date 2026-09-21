@@ -47,14 +47,8 @@ var n = this && this.__extends || function() {
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-// ── BẢNG TRA BÍ DANH (máy sinh — ghi-bang-tra-bi-danh.js) ──────
-// Mã dịch ngược đặt bí danh một chữ cho mỗi module. Bảng này để khỏi phải cuộn ngược.
-// KHÔNG đổi tên chúng bằng tìm-kiếm-thay-thế: đoạn mở đầu __decorate khai lại đúng
-// những chữ này làm biến cục bộ, đổi là hỏng im lặng.
-//   a = CardPopupBase   s = MusicPlayer
-// ────────────────────────────────────────────────────────────────
-var a = require("./CardPopupBase"),
-  s = require("./MusicPlayer"),
+var CardPopupBase = require("./CardPopupBase"),
+  MusicPlayer = require("./MusicPlayer"),
   r = cc._decorator,
   c = r.ccclass,
   l = r.property,
@@ -102,8 +96,8 @@ var a = require("./CardPopupBase"),
       this.listNodeImage[0].active = true;
     };
     e.prototype.onClickNext = function() {
-      if (null != s.default.getInstance()) {
-        s.default.getInstance().playbtnClick();
+      if (null != MusicPlayer.default.getInstance()) {
+        MusicPlayer.default.getInstance().playbtnClick();
       }
       if (!(this.popup.getNumberOfRunningActions() > 0)) {
         if (null !== this.listNodeImage && void 0 !== this.listNodeImage && this.listNodeImage.length > 1) {
@@ -113,8 +107,8 @@ var a = require("./CardPopupBase"),
       }
     };
     e.prototype.onClickPre = function() {
-      if (null != s.default.getInstance()) {
-        s.default.getInstance().playbtnClick();
+      if (null != MusicPlayer.default.getInstance()) {
+        MusicPlayer.default.getInstance().playbtnClick();
       }
       if (!(this.popup.getNumberOfRunningActions() > 0)) {
         if (null !== this.listNodeImage && void 0 !== this.listNodeImage && this.listNodeImage.length > 1) {
@@ -124,8 +118,8 @@ var a = require("./CardPopupBase"),
       }
     };
     e.prototype.onClicComeTo0 = function() {
-      if (null != s.default.getInstance()) {
-        s.default.getInstance().playbtnClick();
+      if (null != MusicPlayer.default.getInstance()) {
+        MusicPlayer.default.getInstance().playbtnClick();
       }
       if (!(this.popup.getNumberOfRunningActions() > 0)) {
         if (null !== this.listNodeImage && void 0 !== this.listNodeImage && this.listNodeImage.length > 1) {
@@ -201,6 +195,6 @@ var a = require("./CardPopupBase"),
     o([l(cc.SpriteFrame)], e.prototype, "spriteFrameArrowEnable", void 0);
     o([l(cc.SpriteFrame)], e.prototype, "spriteFrameArrowDisable", void 0);
     return e = o([c], e);
-  }(a.default);
+  }(CardPopupBase.default);
 i.default = h;
 void 0;

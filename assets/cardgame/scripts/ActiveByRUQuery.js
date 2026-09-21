@@ -47,14 +47,8 @@ var n = this && this.__extends || function() {
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-// ── BẢNG TRA BÍ DANH (máy sinh — ghi-bang-tra-bi-danh.js) ──────
-// Mã dịch ngược đặt bí danh một chữ cho mỗi module. Bảng này để khỏi phải cuộn ngược.
-// KHÔNG đổi tên chúng bằng tìm-kiếm-thay-thế: đoạn mở đầu __decorate khai lại đúng
-// những chữ này làm biến cục bộ, đổi là hỏng im lặng.
-//   a = GameConfigManager   s = StringUtil
-// ────────────────────────────────────────────────────────────────
-var a = require("./GameConfigManager"),
-  s = require("./StringUtil"),
+var GameConfigManager = require("./GameConfigManager"),
+  StringUtil = require("./StringUtil"),
   r = cc._decorator,
   c = r.ccclass,
   l = r.property,
@@ -109,15 +103,15 @@ var a = require("./GameConfigManager"),
     };
     e.prototype._isQueryMatched = function() {
       try {
-        var t = s.default.getQueryStringValue(this.paramName);
-        return !s.default.isNullOrEmpty(t);
+        var t = StringUtil.default.getQueryStringValue(this.paramName);
+        return !StringUtil.default.isNullOrEmpty(t);
       } catch (t) {
         console.log("Can't get query matched:" + t);
         return false;
       }
     };
     e.prototype.applyStatus = function() {
-      if (cc.sys.isBrowser && a.default.getInstance().isWebCC()) {
+      if (cc.sys.isBrowser && GameConfigManager.default.getInstance().isWebCC()) {
         if (this.targets && this.targets.length && !this._isQueryMatched()) {
           for (var t = 0; t < this.targets.length; t++) {
             if (this.targets[t] && this.targets[t].isValid) {

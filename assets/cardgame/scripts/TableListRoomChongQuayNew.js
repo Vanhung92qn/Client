@@ -48,18 +48,11 @@ Object.defineProperty(i, "__esModule", {
   value: true
 });
 var a,
-// ── BẢNG TRA BÍ DANH (máy sinh — ghi-bang-tra-bi-danh.js) ──────
-// Mã dịch ngược đặt bí danh một chữ cho mỗi module. Bảng này để khỏi phải cuộn ngược.
-// KHÔNG đổi tên chúng bằng tìm-kiếm-thay-thế: đoạn mở đầu __decorate khai lại đúng
-// những chữ này làm biến cục bộ, đổi là hỏng im lặng.
-//   s = TableViewUtils   r = GamePlayManager   c = MessageCardGameHandler
-//   l = CardGameCommonRequest   h = GameConfigManager
-// ────────────────────────────────────────────────────────────────
-  s = require("./TableViewUtils"),
-  r = require("./GamePlayManager"),
-  c = require("./MessageCardGameHandler"),
-  l = require("./CardGameCommonRequest"),
-  h = require("./GameConfigManager"),
+  TableViewUtils = require("./TableViewUtils"),
+  GamePlayManager = require("./GamePlayManager"),
+  MessageCardGameHandler = require("./MessageCardGameHandler"),
+  CardGameCommonRequest = require("./CardGameCommonRequest"),
+  GameConfigManager = require("./GameConfigManager"),
   u = cc._decorator,
   d = u.ccclass,
   p = u.property;
@@ -114,36 +107,36 @@ var f = function(t) {
       }
       t.target = cc.director.getScene();
     }
-    var e = r.default.getInstance().gameID;
-    if (e === c.GAME.TIENLEN || e === c.GAME.TLMN) {
+    var e = GamePlayManager.default.getInstance().gameID;
+    if (e === MessageCardGameHandler.GAME.TIENLEN || e === MessageCardGameHandler.GAME.TLMN) {
       i.roomType = a.BANSOLO;
-      var n = parseInt(cc.sys.localStorage.getItem("roomtype" + r.default.getInstance().gameID));
+      var n = parseInt(cc.sys.localStorage.getItem("roomtype" + GamePlayManager.default.getInstance().gameID));
       if (!(isNaN(n) || n === a.BANRIENG)) {
         i.roomType = n;
       }
-    } else if (e === c.GAME.SAM) {
+    } else if (e === MessageCardGameHandler.GAME.SAM) {
       i.roomType = a.BANSOLO;
-      n = parseInt(cc.sys.localStorage.getItem("roomtype" + r.default.getInstance().gameID));
+      n = parseInt(cc.sys.localStorage.getItem("roomtype" + GamePlayManager.default.getInstance().gameID));
       if (!(isNaN(n) || n === a.BANRIENG)) {
         i.roomType = n;
       }
-    } else if (e === c.GAME.PHOM || e === c.GAME.BINH) {
+    } else if (e === MessageCardGameHandler.GAME.PHOM || e === MessageCardGameHandler.GAME.BINH) {
       i.roomType = a.BAN4NGUOI;
-    } else if (e === c.GAME.CATTE) {
+    } else if (e === MessageCardGameHandler.GAME.CATTE) {
       i.roomType = a.BANSOLO;
-      n = parseInt(cc.sys.localStorage.getItem("roomtype" + r.default.getInstance().gameID));
+      n = parseInt(cc.sys.localStorage.getItem("roomtype" + GamePlayManager.default.getInstance().gameID));
       if (!(isNaN(n) || n === a.BANRIENG)) {
         i.roomType = n;
       }
     } else {
-      if (e === c.GAME.XITO) {
+      if (e === MessageCardGameHandler.GAME.XITO) {
         i.roomType = a.ALLROOM;
       } else {
-        if (e === c.GAME.XOCDIA) {
+        if (e === MessageCardGameHandler.GAME.XOCDIA) {
           i.roomType = a.ALLROOM;
         } else {
-          if (!(e === c.GAME.LIENG)) {
-            c.GAME.POKER;
+          if (!(e === MessageCardGameHandler.GAME.LIENG)) {
+            MessageCardGameHandler.GAME.POKER;
           }
           i.roomType = a.ALLROOM;
         }
@@ -156,9 +149,9 @@ var f = function(t) {
     this.setLbTallAllCountPeople(0);
   };
   e.prototype.applyConfigRoom = function() {
-    var t = r.default.getInstance().gameID;
-    if (h.default.getInstance().roomChongQuaySettings.has(t)) {
-      this.roomConfig = h.default.getInstance().roomChongQuaySettings.get(t);
+    var t = GamePlayManager.default.getInstance().gameID;
+    if (GameConfigManager.default.getInstance().roomChongQuaySettings.has(t)) {
+      this.roomConfig = GameConfigManager.default.getInstance().roomChongQuaySettings.get(t);
       this._setTabNodeActive(0, this.roomConfig.showAllRoom);
       this._setTabNodeActive(1, this.roomConfig.showTablePrivate);
       this._setTabNodeActive(2, this.roomConfig.showTable2);
@@ -212,7 +205,7 @@ var f = function(t) {
     this.rs.forEach(function(e) {
       t.listRoom.push(e);
     });
-    if (!h.default.getInstance().ignorePrivateRoom) {
+    if (!GameConfigManager.default.getInstance().ignorePrivateRoom) {
       this.pR.forEach(function(e) {
         t.listRoom.push(e);
       });
@@ -220,15 +213,15 @@ var f = function(t) {
     this.srs.forEach(function(e) {
       t.listRoom.push(e);
     });
-    if (r.default.getInstance().gameID === c.GAME.XOCDIA) {
+    if (GamePlayManager.default.getInstance().gameID === MessageCardGameHandler.GAME.XOCDIA) {
       this.listRoom = this.listRoom.filter(function(t) {
-        return t.Mu !== h.default.getInstance().roomMaxUserIgnore;
+        return t.Mu !== GameConfigManager.default.getInstance().roomMaxUserIgnore;
       });
     }
     try {
-      if (!(r.default.getInstance().gameID !== c.GAME.XOCDIA && r.default.getInstance().gameID !== c.GAME.POKER && r.default
-          .getInstance().gameID !== c.GAME.LIENG && r.default.getInstance().gameID !== c.GAME.XITO && r.default.getInstance().gameID !==
-          c.GAME.BACAY)) {
+      if (!(GamePlayManager.default.getInstance().gameID !== MessageCardGameHandler.GAME.XOCDIA && GamePlayManager.default.getInstance().gameID !== MessageCardGameHandler.GAME.POKER && GamePlayManager.default
+          .getInstance().gameID !== MessageCardGameHandler.GAME.LIENG && GamePlayManager.default.getInstance().gameID !== MessageCardGameHandler.GAME.XITO && GamePlayManager.default.getInstance().gameID !==
+          MessageCardGameHandler.GAME.BACAY)) {
         this.createEmtyRoom(this.listRoom);
       }
     } catch (t) {}
@@ -244,12 +237,12 @@ var f = function(t) {
     this.listRoom.sort(function(t) {
       return true !== t.hpwd ? -1 : 1;
     });
-    if (r.default.getInstance().gameID === c.GAME.XOCDIA) {
+    if (GamePlayManager.default.getInstance().gameID === MessageCardGameHandler.GAME.XOCDIA) {
       this.listRoom.sort(function(t, e) {
         return t.Mu >= 1e3 && e.Mu >= 1e3 ? t.b === e.b ? t.Mu - e.Mu : t.b - e.b : t.Mu >= 1e3 ? -1 : 1;
       });
     }
-    if (r.default.getInstance().gameID === c.GAME.BACAY) {
+    if (GamePlayManager.default.getInstance().gameID === MessageCardGameHandler.GAME.BACAY) {
       this.listRoom.sort(function(t, e) {
         return e.uC - t.uC;
       });
@@ -391,8 +384,8 @@ var f = function(t) {
           aid: 1,
           inc: false
         };
-        if (!(r.default.getInstance().gameID !== c.GAME.POKER && r.default.getInstance().gameID !== c.GAME.LIENG && r.default
-            .getInstance().gameID !== c.GAME.BACAY)) {
+        if (!(GamePlayManager.default.getInstance().gameID !== MessageCardGameHandler.GAME.POKER && GamePlayManager.default.getInstance().gameID !== MessageCardGameHandler.GAME.LIENG && GamePlayManager.default
+            .getInstance().gameID !== MessageCardGameHandler.GAME.BACAY)) {
           s.Mu = 9;
         }
         this.listRoom.push(s);
@@ -432,7 +425,7 @@ var f = function(t) {
       this.scrollView.stopAutoScroll();
       this.scrollView.scrollToOffset(new cc.Vec2(this.scrollView.getScrollOffset().x, 0), 0, true);
       this.updateListFull(this.rs, this.pR, this.srs, true);
-      cc.sys.localStorage.setItem("roomtype" + r.default.getInstance().gameID, e);
+      cc.sys.localStorage.setItem("roomtype" + GamePlayManager.default.getInstance().gameID, e);
     }
   };
   e.prototype.showWebMobileIos = function(t) {
@@ -441,14 +434,14 @@ var f = function(t) {
     }
   };
   e.prototype.getZoneName = function() {
-    return l.default.getInstance().getZoneName();
+    return CardGameCommonRequest.default.getInstance().getZoneName();
   };
   e.prototype.setLbTallAllCountPeople = function(t) {
     if (0 !== this.lblSoNguoiRoom.length) {
-      if (r.default.getInstance().gameID === c.GAME.PHOM) {
+      if (GamePlayManager.default.getInstance().gameID === MessageCardGameHandler.GAME.PHOM) {
         this.lblSoNguoiRoom[0].string = "PH\u1eceM (" + t + ")";
       } else {
-        if (r.default.getInstance().gameID === c.GAME.BINH) {
+        if (GamePlayManager.default.getInstance().gameID === MessageCardGameHandler.GAME.BINH) {
           this.lblSoNguoiRoom[0].string = "M\u1eacU BINH (" + t + ")";
         } else {
           this.lblSoNguoiRoom[0].string = "T\u1ea4T C\u1ea2 (" + t + ")";
@@ -457,7 +450,7 @@ var f = function(t) {
     }
   };
   o([p(cc.ScrollView)], e.prototype, "scrollView", void 0);
-  o([p(s.default)], e.prototype, "listFull", void 0);
+  o([p(TableViewUtils.default)], e.prototype, "listFull", void 0);
   o([p(cc.Widget)], e.prototype, "txtTitle", void 0);
   o([p(sp.Skeleton)], e.prototype, "tabButtonSkeleton", void 0);
   o([p(cc.Label)], e.prototype, "lblSoNguoiRoom", void 0);

@@ -5,10 +5,10 @@ void 0;
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-var n = require("./GameConfigManager");
+var GameConfigManager = require("./GameConfigManager");
 
 function o() {
-  return n.default.getInstance().getConfig("app_info");
+  return GameConfigManager.default.getInstance().getConfig("app_info");
 }
 i.getAppInfoConfig = o;
 i.getBrandCodeConfig = function() {

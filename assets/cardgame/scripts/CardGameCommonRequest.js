@@ -24,18 +24,11 @@ var n = this && this.__decorate || function(t, e, i, n) {
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-// ── BẢNG TRA BÍ DANH (máy sinh — ghi-bang-tra-bi-danh.js) ──────
-// Mã dịch ngược đặt bí danh một chữ cho mỗi module. Bảng này để khỏi phải cuộn ngược.
-// KHÔNG đổi tên chúng bằng tìm-kiếm-thay-thế: đoạn mở đầu __decorate khai lại đúng
-// những chữ này làm biến cục bộ, đổi là hỏng im lặng.
-//   o = WSCardGameHandle   a = MessageCardGameHandler   s = GamePlayManager
-//   r = WSXDGamesHandle   c = GameConfigManager
-// ────────────────────────────────────────────────────────────────
-var o = require("./WSCardGameHandle"),
-  a = require("./MessageCardGameHandler"),
-  s = require("./GamePlayManager"),
-  r = require("./WSXDGamesHandle"),
-  c = require("./GameConfigManager"),
+var WSCardGameHandle = require("./WSCardGameHandle"),
+  MessageCardGameHandler = require("./MessageCardGameHandler"),
+  GamePlayManager = require("./GamePlayManager"),
+  WSXDGamesHandle = require("./WSXDGamesHandle"),
+  GameConfigManager = require("./GameConfigManager"),
   l = cc._decorator,
   h = l.ccclass,
   u = (l.property, function() {
@@ -59,56 +52,56 @@ var o = require("./WSCardGameHandle"),
       return "SimmsRoBe";
     };
     t.prototype.sendDataWSCard = function(t) {
-      if (o.default.getInstance().isSocketOpen) {
-        o.default.getInstance().ws.sendData(t);
+      if (WSCardGameHandle.default.getInstance().isSocketOpen) {
+        WSCardGameHandle.default.getInstance().ws.sendData(t);
       }
     };
     t.prototype.sendDataWSXD = function(t) {
-      if (r.default.getInstance().isSocketOpen) {
-        r.default.getInstance().ws.sendData(t);
+      if (WSXDGamesHandle.default.getInstance().isSocketOpen) {
+        WSXDGamesHandle.default.getInstance().ws.sendData(t);
       }
     };
     t.prototype.getZoneName = function() {
-      return c.default.getInstance().canUseSocketXD() ? this.getZoneNameWSXD() : this.getZoneNameWSCard();
+      return GameConfigManager.default.getInstance().canUseSocketXD() ? this.getZoneNameWSXD() : this.getZoneNameWSCard();
     };
     t.prototype.sendData = function(t) {
-      if (c.default.getInstance().canUseSocketXD()) {
+      if (GameConfigManager.default.getInstance().canUseSocketXD()) {
         this.sendDataWSXD(t);
       } else {
         this.sendDataWSCard(t);
       }
     };
     t.prototype.sendChat = function(t) {
-      var e = [a.Message.MessageType.RoomPlugin_Type, this.getZoneName(), s.default.getInstance().roomID, {
-        cmd: a.Global_Message.INGAME_USER_CHAT,
+      var e = [MessageCardGameHandler.Message.MessageType.RoomPlugin_Type, this.getZoneName(), GamePlayManager.default.getInstance().roomID, {
+        cmd: MessageCardGameHandler.Global_Message.INGAME_USER_CHAT,
         mgs: t
       }];
       this.sendData(JSON.stringify(e));
     };
     t.prototype.sendLogout = function() {
-      var t = [a.Message.MessageType.LogOut_Type, this.getZoneNameWSCard()];
+      var t = [MessageCardGameHandler.Message.MessageType.LogOut_Type, this.getZoneNameWSCard()];
       this.sendDataWSCard(JSON.stringify(t));
     };
     t.prototype.sendLeaveRoom = function() {
-      var t = [a.Message.MessageType.LeaveRoom_Type, this.getZoneName(), s.default.getInstance().roomID];
+      var t = [MessageCardGameHandler.Message.MessageType.LeaveRoom_Type, this.getZoneName(), GamePlayManager.default.getInstance().roomID];
       this.sendData(JSON.stringify(t));
     };
     t.prototype.GetListRoom = function() {
-      var t = [a.Message.MessageType.ZonePlugin_Type, this.getZoneName(), "channelPlugin", {
-        cmd: a.Global_Message.GET_TABLES,
+      var t = [MessageCardGameHandler.Message.MessageType.ZonePlugin_Type, this.getZoneName(), "channelPlugin", {
+        cmd: MessageCardGameHandler.Global_Message.GET_TABLES,
         aid: "1",
-        gid: s.default.getInstance().gameID
+        gid: GamePlayManager.default.getInstance().gameID
       }];
       this.sendData(JSON.stringify(t));
     };
     t.prototype.sendReady = function() {
-      var t = [a.Message.MessageType.RoomPlugin_Type, this.getZoneName(), s.default.getInstance().roomID, {
-        cmd: a.Global_Message.INGAME_USER_READY
+      var t = [MessageCardGameHandler.Message.MessageType.RoomPlugin_Type, this.getZoneName(), GamePlayManager.default.getInstance().roomID, {
+        cmd: MessageCardGameHandler.Global_Message.INGAME_USER_READY
       }];
       this.sendData(JSON.stringify(t));
     };
     t.prototype.sendStart = function(t) {
-      var e = [a.Message.MessageType.RoomPlugin_Type, this.getZoneName(), s.default.getInstance().roomID, {
+      var e = [MessageCardGameHandler.Message.MessageType.RoomPlugin_Type, this.getZoneName(), GamePlayManager.default.getInstance().roomID, {
         cmd: t
       }];
       this.sendData(JSON.stringify(e));
@@ -118,11 +111,11 @@ var o = require("./WSCardGameHandle"),
         i = -1;
       }
       var n = null;
-      n = -1 != i ? [a.Message.MessageType.RoomPlugin_Type, this.getZoneName(), s.default.getInstance().roomID, {
+      n = -1 != i ? [MessageCardGameHandler.Message.MessageType.RoomPlugin_Type, this.getZoneName(), GamePlayManager.default.getInstance().roomID, {
         cmd: t,
         uid: e,
         cs: [i]
-      }] : [a.Message.MessageType.RoomPlugin_Type, this.getZoneName(), s.default.getInstance().roomID, {
+      }] : [MessageCardGameHandler.Message.MessageType.RoomPlugin_Type, this.getZoneName(), GamePlayManager.default.getInstance().roomID, {
         cmd: t,
         uid: e
       }];
@@ -132,7 +125,7 @@ var o = require("./WSCardGameHandle"),
       if (void 0 === i) {
         i = [];
       }
-      var n = [a.Message.MessageType.RoomPlugin_Type, this.getZoneName(), s.default.getInstance().roomID, {
+      var n = [MessageCardGameHandler.Message.MessageType.RoomPlugin_Type, this.getZoneName(), GamePlayManager.default.getInstance().roomID, {
         cmd: t,
         uid: e,
         cs: i
@@ -140,84 +133,84 @@ var o = require("./WSCardGameHandle"),
       this.sendData(JSON.stringify(n));
     };
     t.prototype.sendInvitePlayers = function(t) {
-      var e = [a.Message.MessageType.ZonePlugin_Type, this.getZoneName(), "channelPlugin", {
-        cmd: a.Global_Message.ZONE_INVITE_USERS_REQUEST,
-        rid: s.default.getInstance().roomID,
+      var e = [MessageCardGameHandler.Message.MessageType.ZonePlugin_Type, this.getZoneName(), "channelPlugin", {
+        cmd: MessageCardGameHandler.Global_Message.ZONE_INVITE_USERS_REQUEST,
+        rid: GamePlayManager.default.getInstance().roomID,
         us: t
       }];
       this.sendData(JSON.stringify(e));
     };
     t.prototype.sendInvitePlayersKtek = function(t) {
-      var e = [a.Message.MessageType.ZonePlugin_Type, this.getZoneName(), "channelPlugin", {
-        cmd: a.Global_Message.ZONE_INVITE_USERS_REQUEST,
-        rid: s.default.getInstance().roomIDKtek,
+      var e = [MessageCardGameHandler.Message.MessageType.ZonePlugin_Type, this.getZoneName(), "channelPlugin", {
+        cmd: MessageCardGameHandler.Global_Message.ZONE_INVITE_USERS_REQUEST,
+        rid: GamePlayManager.default.getInstance().roomIDKtek,
         us: t,
-        tpgid: s.default.getInstance().gameIDKtek,
-        tpgrid: s.default.getInstance().roomIDKtek,
-        tpgTT: s.default.getInstance().tableTypeKtek,
+        tpgid: GamePlayManager.default.getInstance().gameIDKtek,
+        tpgrid: GamePlayManager.default.getInstance().roomIDKtek,
+        tpgTT: GamePlayManager.default.getInstance().tableTypeKtek,
         rn: "X\xec D\xe1ch",
-        b: s.default.getInstance().betKtek
+        b: GamePlayManager.default.getInstance().betKtek
       }];
       this.sendData(JSON.stringify(e));
     };
     t.prototype.sendGetInviteList = function() {
-      var t = [a.Message.MessageType.ZonePlugin_Type, this.getZoneName(), "channelPlugin", {
-        cmd: a.Global_Message.FIND_PLAYERS_TO_INVITE,
-        rid: s.default.getInstance().roomID
+      var t = [MessageCardGameHandler.Message.MessageType.ZonePlugin_Type, this.getZoneName(), "channelPlugin", {
+        cmd: MessageCardGameHandler.Global_Message.FIND_PLAYERS_TO_INVITE,
+        rid: GamePlayManager.default.getInstance().roomID
       }];
       this.sendData(JSON.stringify(t));
     };
     t.prototype.sendGetInviteListKtek = function(t, e) {
-      var i = [a.Message.MessageType.ZonePlugin_Type, this.getZoneName(), "channelPlugin", {
-        cmd: a.Global_Message.FIND_PLAYERS_TO_INVITE,
+      var i = [MessageCardGameHandler.Message.MessageType.ZonePlugin_Type, this.getZoneName(), "channelPlugin", {
+        cmd: MessageCardGameHandler.Global_Message.FIND_PLAYERS_TO_INVITE,
         rid: t,
         mM: e
       }];
       this.sendData(JSON.stringify(i));
     };
     t.prototype.sendKickUser = function(t) {
-      var e = [a.Message.MessageType.RoomPlugin_Type, this.getZoneName(), {
+      var e = [MessageCardGameHandler.Message.MessageType.RoomPlugin_Type, this.getZoneName(), {
         cmd: 3,
         uid: t
       }];
       this.sendData(JSON.stringify(e));
     };
     t.prototype.sendRefreshMoney = function() {
-      if (s.default.getInstance().token.length > 0) {
+      if (GamePlayManager.default.getInstance().token.length > 0) {
         this.isCanGetREFRESH_MONEY = true;
-        var t = [a.Message.MessageType.ZonePlugin_Type, this.getZoneNameWSCard(), "channelPlugin", {
-          cmd: a.Global_Message.REFRESH_MONEY
+        var t = [MessageCardGameHandler.Message.MessageType.ZonePlugin_Type, this.getZoneNameWSCard(), "channelPlugin", {
+          cmd: MessageCardGameHandler.Global_Message.REFRESH_MONEY
         }];
         this.sendDataWSCard(JSON.stringify(t));
       }
     };
     t.prototype.sendPlayerDisplayName = function() {
-      var t = [a.Message.MessageType.ZonePlugin_Type, this.getZoneName(), "channelPlugin", {
+      var t = [MessageCardGameHandler.Message.MessageType.ZonePlugin_Type, this.getZoneName(), "channelPlugin", {
         cmd: 309,
-        dn: s.default.getInstance().displayName
+        dn: GamePlayManager.default.getInstance().displayName
       }];
       this.sendData(JSON.stringify(t));
     };
     t.prototype.sendBaoQuay = function() {
-      var t = [a.Message.MessageType.RoomPlugin_Type, this.getZoneName(), s.default.getInstance().roomID, {
-        cmd: a.Global_Message.BAO_QUAY
+      var t = [MessageCardGameHandler.Message.MessageType.RoomPlugin_Type, this.getZoneName(), GamePlayManager.default.getInstance().roomID, {
+        cmd: MessageCardGameHandler.Global_Message.BAO_QUAY
       }];
       this.sendData(JSON.stringify(t));
     };
     t.prototype.fetchSettingRoom = function() {
-      var t = [a.Message.MessageType.ZonePlugin_Type, this.getZoneName(), "channelPlugin", {
-        cmd: a.Global_Message.FETCH_SETTING_ROOM,
-        gid: s.default.getInstance().gameID
+      var t = [MessageCardGameHandler.Message.MessageType.ZonePlugin_Type, this.getZoneName(), "channelPlugin", {
+        cmd: MessageCardGameHandler.Global_Message.FETCH_SETTING_ROOM,
+        gid: GamePlayManager.default.getInstance().gameID
       }];
       this.sendData(JSON.stringify(t));
     };
     t.prototype.sendSettingRoom = function(t, e, i) {
-      var n = [a.Message.MessageType.ZonePlugin_Type, this.getZoneName(), "channelPlugin", {
-        cmd: a.Global_Message.SETTING_SORT_CARD,
+      var n = [MessageCardGameHandler.Message.MessageType.ZonePlugin_Type, this.getZoneName(), "channelPlugin", {
+        cmd: MessageCardGameHandler.Global_Message.SETTING_SORT_CARD,
         nArr: t,
         fINArr: e,
         fPNArr: i,
-        gid: s.default.getInstance().gameID
+        gid: GamePlayManager.default.getInstance().gameID
       }];
       this.sendData(JSON.stringify(n));
     };

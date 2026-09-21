@@ -47,27 +47,18 @@ var n = this && this.__extends || function() {
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-// ── BẢNG TRA BÍ DANH (máy sinh — ghi-bang-tra-bi-danh.js) ──────
-// Mã dịch ngược đặt bí danh một chữ cho mỗi module. Bảng này để khỏi phải cuộn ngược.
-// KHÔNG đổi tên chúng bằng tìm-kiếm-thay-thế: đoạn mở đầu __decorate khai lại đúng
-// những chữ này làm biến cục bộ, đổi là hỏng im lặng.
-//   a = RoomController   s = MusicPlayer   r = CardGameCommonRequest
-//   c = BaseScene   l = CommonPrefabsManager   h = GamePlayManager
-//   u = GameConfigManager   d = MiniGameNode   p = GameDefine
-//   f = AnalyticService   g = AnalyticDefine   m = VersionController
-// ────────────────────────────────────────────────────────────────
-var a = require("./RoomController"),
-  s = require("./MusicPlayer"),
-  r = require("./CardGameCommonRequest"),
-  c = require("./BaseScene"),
-  l = require("./CommonPrefabsManager"),
-  h = require("./GamePlayManager"),
-  u = require("./GameConfigManager"),
-  d = require("./MiniGameNode"),
-  p = require("./GameDefine"),
-  f = require("./AnalyticService"),
-  g = require("./AnalyticDefine"),
-  m = require("./VersionController"),
+var RoomController = require("./RoomController"),
+  MusicPlayer = require("./MusicPlayer"),
+  CardGameCommonRequest = require("./CardGameCommonRequest"),
+  BaseScene = require("./BaseScene"),
+  CommonPrefabsManager = require("./CommonPrefabsManager"),
+  GamePlayManager = require("./GamePlayManager"),
+  GameConfigManager = require("./GameConfigManager"),
+  MiniGameNode = require("./MiniGameNode"),
+  GameDefine = require("./GameDefine"),
+  AnalyticService = require("./AnalyticService"),
+  AnalyticDefine = require("./AnalyticDefine"),
+  VersionController = require("./VersionController"),
   y = cc._decorator,
   S = y.ccclass,
   _ = y.property,
@@ -85,30 +76,30 @@ var a = require("./RoomController"),
     }
     n(e, t);
     e.prototype.playBackgroundMusic = function() {
-      s.default.getInstance().playRandomLobbyMusic();
+      MusicPlayer.default.getInstance().playRandomLobbyMusic();
     };
     e.prototype.onLoad = function() {
       if (t.prototype.onLoad.call(this), this.node.width = cc.winSize.width, this.node.height = cc.winSize.height, null !== this
         .prefabRoomScene && void 0 !== this.prefabRoomScene) {
         var e = cc.instantiate(this.prefabRoomScene);
-        if (e.parent = this.mainUiNode, this.roomController = e.getComponent(a.default), e.active = false, this.roomController.walkUp(
+        if (e.parent = this.mainUiNode, this.roomController = e.getComponent(RoomController.default), e.active = false, this.roomController.walkUp(
             this), this.roomController.isFade = true, cc.sys.platform === cc.sys.MOBILE_BROWSER) {
           var i = e.getComponent(cc.Widget);
           if (null !== i && void 0 !== i) {
             i.target = this.node;
           }
         }
-        h.default.getInstance().isListRoomScene = true;
-        h.default.getInstance().isInCardGame = false;
-        if (null != d.default.instance) {
-          d.default.instance.updatePositionByState();
+        GamePlayManager.default.getInstance().isListRoomScene = true;
+        GamePlayManager.default.getInstance().isInCardGame = false;
+        if (null != MiniGameNode.default.instance) {
+          MiniGameNode.default.instance.updatePositionByState();
         }
       }
       this.getlistRoomData();
-      l.default.getInstance().showLoading(true);
+      CommonPrefabsManager.default.getInstance().showLoading(true);
     };
     e.prototype.getlistRoomData = function() {
-      r.default.getInstance().GetListRoom();
+      CardGameCommonRequest.default.getInstance().GetListRoom();
     };
     e.prototype.onFocus = function(e) {
       this.timeLostFocus = e;
@@ -152,8 +143,8 @@ var a = require("./RoomController"),
         this.playBackgroundMusic();
       }
       this.roomController.isFade = false;
-      r.default.getInstance().GetListRoom();
-      m.default.getInstance().CheckForceUpdateByCurrentScene();
+      CardGameCommonRequest.default.getInstance().GetListRoom();
+      VersionController.default.getInstance().CheckForceUpdateByCurrentScene();
     };
     e.prototype.checkAndShowListRoom = function(t) {
       if (!(void 0 !== t.lr && null !== t.lr)) {
@@ -227,7 +218,7 @@ var a = require("./RoomController"),
         }
         this.node.runAction(cc.sequence(cc.delayTime(c), cc.callFunc(function() {
           if (i.roomController.isFade) {
-            l.default.getInstance().hideLoading();
+            CommonPrefabsManager.default.getInstance().hideLoading();
           }
           i.roomController.updateRoom(e);
         })));
@@ -240,14 +231,14 @@ var a = require("./RoomController"),
           i = e.mgs;
         }
         if (0 != i.length) {
-          l.default.getInstance().showPopupMessageUtil(i);
-          l.default.getInstance().hideLoading();
-          u.default.getInstance().isShowPopupDone = false;
+          CommonPrefabsManager.default.getInstance().showPopupMessageUtil(i);
+          CommonPrefabsManager.default.getInstance().hideLoading();
+          GameConfigManager.default.getInstance().isShowPopupDone = false;
         }
       }
     };
     e.prototype.showGameList = function(t) {
-      f.default.instance.trackCustomQ(g.AnaltyciEventType.CLICK, "leave_cg_" + h.default.getInstance().gameID);
+      AnalyticService.default.instance.trackCustomQ(AnalyticDefine.AnaltyciEventType.CLICK, "leave_cg_" + GamePlayManager.default.getInstance().gameID);
       var e = "";
       if (2 === t[2]) {
         e = t[5];
@@ -257,42 +248,42 @@ var a = require("./RoomController"),
       this.roomController.node.active = true;
       this.playBackgroundMusic();
       if (e.length > 0) {
-        l.default.getInstance().showPopupMessageUtil(e);
+        CommonPrefabsManager.default.getInstance().showPopupMessageUtil(e);
       }
       this.roomController.isFade = false;
-      r.default.getInstance().GetListRoom();
-      h.default.getInstance().isListRoomScene = true;
-      h.default.getInstance().isInCardGame = false;
-      if (null != d.default.instance) {
-        d.default.instance.updatePositionByState();
+      CardGameCommonRequest.default.getInstance().GetListRoom();
+      GamePlayManager.default.getInstance().isListRoomScene = true;
+      GamePlayManager.default.getInstance().isInCardGame = false;
+      if (null != MiniGameNode.default.instance) {
+        MiniGameNode.default.instance.updatePositionByState();
       }
-      h.default.getInstance().spinAutoXocDia = false;
-      m.default.getInstance().CheckForceUpdateByCurrentScene();
+      GamePlayManager.default.getInstance().spinAutoXocDia = false;
+      VersionController.default.getInstance().CheckForceUpdateByCurrentScene();
     };
     e.prototype.onWSCardJoinRoom = function(t) {
       var e = t[1];
-      l.default.getInstance().showLoading(true);
-      u.default.getInstance().isShowPopupDone = false;
+      CommonPrefabsManager.default.getInstance().showLoading(true);
+      GameConfigManager.default.getInstance().isShowPopupDone = false;
       if (e) {
-        cc.systemEvent.emit(p.GameEventMessage.JoinRoom);
-        h.default.getInstance().roomID = t[3];
+        cc.systemEvent.emit(GameDefine.GameEventMessage.JoinRoom);
+        GamePlayManager.default.getInstance().roomID = t[3];
         this.mainGameController.walkUpBase(this);
-        s.default.getInstance().playRandomIngameBgMusic();
-        u.default.getInstance().isLobbyMusicBg = false;
-        h.default.getInstance().isListRoomScene = false;
-        h.default.getInstance().isInCardGame = true;
-        if (null != d.default.instance) {
-          d.default.instance.updatePositionByState();
+        MusicPlayer.default.getInstance().playRandomIngameBgMusic();
+        GameConfigManager.default.getInstance().isLobbyMusicBg = false;
+        GamePlayManager.default.getInstance().isListRoomScene = false;
+        GamePlayManager.default.getInstance().isInCardGame = true;
+        if (null != MiniGameNode.default.instance) {
+          MiniGameNode.default.instance.updatePositionByState();
         }
       } else {
-        l.default.getInstance().hideLoading();
-        l.default.getInstance().showPopupMessageUtil(t[4]);
+        CommonPrefabsManager.default.getInstance().hideLoading();
+        CommonPrefabsManager.default.getInstance().showPopupMessageUtil(t[4]);
       }
     };
     e.prototype.checkAndShowtestData = function(t) {};
     o([_(cc.Prefab)], e.prototype, "prefabRoomScene", void 0);
     o([_(cc.Node)], e.prototype, "mainUiNode", void 0);
     return e = o([S], e);
-  }(c.default);
+  }(BaseScene.default);
 i.default = v;
 void 0;

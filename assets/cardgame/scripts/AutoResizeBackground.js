@@ -47,7 +47,7 @@ var n = this && this.__extends || function() {
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-var a = require("./CanvasScene"),
+var CanvasScene = require("./CanvasScene"),
   s = cc._decorator,
   r = s.ccclass,
   c = (s.property, function(t) {
@@ -56,7 +56,7 @@ var a = require("./CanvasScene"),
     }
     n(e, t);
     e.prototype.onLoad = function() {
-      this.node.scale = a.default.getBackgroundRatio();
+      this.node.scale = CanvasScene.default.getBackgroundRatio();
     };
     return e = o([r], e);
   }(cc.Component));

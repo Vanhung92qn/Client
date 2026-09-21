@@ -31,9 +31,9 @@ Object.defineProperty(i, "__esModule", {
 //  toi giua van moi chet — nen doi chieu bang danh sach, khong bang cam giac.
 // ─────────────────────────────────────────────────────────────────────────────
 
-var n = require("./StringUtil"),
-  o = require("./GamePlayManager"),
-  a = require("./GameDefine"),
+var StringUtil = require("./StringUtil"),
+  GamePlayManager = require("./GamePlayManager"),
+  GameDefine = require("./GameDefine"),
   // NetConfig la NGUON DUY NHAT cua Roy88 cho ten mien (assets/config/network/NetConfig.js).
   // Require theo ten tran nhu code Roy88 dang lam (vd lobby/scripts/cardgame/3cay/BCView.js:5).
   s = t("NetConfig");
@@ -377,9 +377,9 @@ var r = (function () {
   t.prototype.canUseSocketXD = function () {
     return !(
       !t.getInstance().useSocketXD ||
-      n.default.isNullOrEmpty(t.getInstance().urlSocketXD) ||
-      (o.default.getInstance().currentScene !== a.GameConfigs.SceneName.BauCua &&
-        o.default.getInstance().currentScene !== a.GameConfigs.SceneName.XocDia)
+      StringUtil.default.isNullOrEmpty(t.getInstance().urlSocketXD) ||
+      (GamePlayManager.default.getInstance().currentScene !== GameDefine.GameConfigs.SceneName.BauCua &&
+        GamePlayManager.default.getInstance().currentScene !== GameDefine.GameConfigs.SceneName.XocDia)
     );
   };
 
@@ -481,20 +481,20 @@ var r = (function () {
   // Luu y: ten ham viet hoa chu H ("getOldCHat") la LOI CHINH TA CUA BAN GOC. Giu nguyen,
   // doi ten la cho goi chet im lang.
   t.prototype.getOldCHat = function () {
-    var t = this.oldChat[o.default.getInstance().gameID.toString()];
+    var t = this.oldChat[GamePlayManager.default.getInstance().gameID.toString()];
     return null !== t && void 0 !== t ? t : [];
   };
 
   // ChatInGamePopup.js:159 - luu cau vua chat. Ban goc giu toi da 3 cau, cau moi nhat len dau.
   t.prototype.setOldChat = function (t) {
-    var e = this.oldChat[o.default.getInstance().gameID.toString()];
+    var e = this.oldChat[GamePlayManager.default.getInstance().gameID.toString()];
     if (null !== e && void 0 !== e) {
-      this.oldChat[o.default.getInstance().gameID.toString()].unshift(t);
-      if (this.oldChat[o.default.getInstance().gameID.toString()].length > 3) {
-        this.oldChat[o.default.getInstance().gameID.toString()].splice(3, 1);
+      this.oldChat[GamePlayManager.default.getInstance().gameID.toString()].unshift(t);
+      if (this.oldChat[GamePlayManager.default.getInstance().gameID.toString()].length > 3) {
+        this.oldChat[GamePlayManager.default.getInstance().gameID.toString()].splice(3, 1);
       }
     } else {
-      this.oldChat[o.default.getInstance().gameID.toString()] = [t];
+      this.oldChat[GamePlayManager.default.getInstance().gameID.toString()] = [t];
     }
   };
 

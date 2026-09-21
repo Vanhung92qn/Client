@@ -180,50 +180,38 @@ var n = this && this.__extends || function() {
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-// ── BẢNG TRA BÍ DANH (máy sinh — ghi-bang-tra-bi-danh.js) ──────
-// Mã dịch ngược đặt bí danh một chữ cho mỗi module. Bảng này để khỏi phải cuộn ngược.
-// KHÔNG đổi tên chúng bằng tìm-kiếm-thay-thế: đoạn mở đầu __decorate khai lại đúng
-// những chữ này làm biến cục bộ, đổi là hỏng im lặng.
-//   r = UIToggleSlider   c = GameConfigManager   l = CardPopupBase
-//   h = MusicPlayer   u = GamePlayManager   d = MessageCardGameHandler
-//   p = GameHTTPManager   f = CommonPrefabsManager   g = GameDefine
-//   m = CardGameCommonRequest   y = DownloadScene   S = StringUtil
-//   _ = RMCPasscodeConfig2   v = GbMathUtils   b = RMCBlockLoginWebConfig
-//   C = MiniGameNode   T = GameZOrder   E = GameLiveUtils
-//   I = GameUtils
-// ────────────────────────────────────────────────────────────────
-var r = require("./UIToggleSlider"),
-  c = require("./GameConfigManager"),
-  l = require("./CardPopupBase"),
-  h = require("./MusicPlayer"),
-  u = require("./GamePlayManager"),
-  d = require("./MessageCardGameHandler"),
-  p = require("./GameHTTPManager"),
-  f = require("./CommonPrefabsManager"),
-  g = require("./GameDefine"),
-  m = require("./CardGameCommonRequest"),
-  y = require("./DownloadScene"),
-  S = require("./StringUtil"),
-  _ = require("./RMCPasscodeConfig2"),
-  v = require("./GbMathUtils"),
-  b = require("./RMCBlockLoginWebConfig"),
-  C = require("./MiniGameNode"),
-  T = require("./GameZOrder"),
-  E = require("./GameLiveUtils"),
-  I = require("./GameUtils"),
+var UIToggleSlider = require("./UIToggleSlider"),
+  GameConfigManager = require("./GameConfigManager"),
+  CardPopupBase = require("./CardPopupBase"),
+  MusicPlayer = require("./MusicPlayer"),
+  GamePlayManager = require("./GamePlayManager"),
+  MessageCardGameHandler = require("./MessageCardGameHandler"),
+  GameHTTPManager = require("./GameHTTPManager"),
+  CommonPrefabsManager = require("./CommonPrefabsManager"),
+  GameDefine = require("./GameDefine"),
+  CardGameCommonRequest = require("./CardGameCommonRequest"),
+  DownloadScene = require("./DownloadScene"),
+  StringUtil = require("./StringUtil"),
+  RMCPasscodeConfig2 = require("./RMCPasscodeConfig2"),
+  GbMathUtils = require("./GbMathUtils"),
+  RMCBlockLoginWebConfig = require("./RMCBlockLoginWebConfig"),
+  MiniGameNode = require("./MiniGameNode"),
+  GameZOrder = require("./GameZOrder"),
+  GameLiveUtils = require("./GameLiveUtils"),
+  GameUtils = require("./GameUtils"),
   A = cc._decorator,
   P = A.ccclass,
   M = A.property,
-  O = [d.GAME.XOCDIA, d.GAME.BAU_CUA];
+  O = [MessageCardGameHandler.GAME.XOCDIA, MessageCardGameHandler.GAME.BAU_CUA];
 i.SETTING_KEY_PASSCODE = "passcode";
 i.SETTING_KEY_AUTO_READY = "autoReady";
 i.SETTING_KEY_TRUST_DEVICE = "trustDevice";
 i.SETTING_KEY_BLOCK_PUBLIC_CHAT = "blockPublicChat";
 i.SETTING_KEY_NEW_SORT_MAU_BINH = "newSortMauBinh";
 i.SETTING_KEY_BLOCK_LOGIN_WEB = "blockLoginWeb";
-var N = [g.GameConfigs.SceneName.Lode, g.GameConfigs.SceneName.LodeST, g.GameConfigs.SceneName.Volta, g.GameConfigs.SceneName.SicboLive, g
-    .GameConfigs.SceneName.DaGaLive, g.GameConfigs.SceneName.BaccaratLive, g.GameConfigs.SceneName.BauCuaLive, g.GameConfigs.SceneName
-    .TXSTLive, g.GameConfigs.SceneName.XocDiaLiveV2, g.GameConfigs.SceneName.DragonTigerLive, g.GameConfigs.SceneName.BauCuaBonus
+var N = [GameDefine.GameConfigs.SceneName.Lode, GameDefine.GameConfigs.SceneName.LodeST, GameDefine.GameConfigs.SceneName.Volta, GameDefine.GameConfigs.SceneName.SicboLive, GameDefine
+    .GameConfigs.SceneName.DaGaLive, GameDefine.GameConfigs.SceneName.BaccaratLive, GameDefine.GameConfigs.SceneName.BauCuaLive, GameDefine.GameConfigs.SceneName
+    .TXSTLive, GameDefine.GameConfigs.SceneName.XocDiaLiveV2, GameDefine.GameConfigs.SceneName.DragonTigerLive, GameDefine.GameConfigs.SceneName.BauCuaBonus
   ],
   B = function(t) {
     function e() {
@@ -256,37 +244,37 @@ var N = [g.GameConfigs.SceneName.Lode, g.GameConfigs.SceneName.LodeST, g.GameCon
     }
     n(e, t);
     e.prototype.onLoad = function() {
-      this.toggleSoundEffect.initStart(c.default.getInstance().enableSound);
+      this.toggleSoundEffect.initStart(GameConfigManager.default.getInstance().enableSound);
       this.toggleSoundEffect.onValueChange = this.onChangeSoundEffect.bind(this);
-      this.toggleBgMuSic.initStart(c.default.getInstance().enableBackgroundMusic);
+      this.toggleBgMuSic.initStart(GameConfigManager.default.getInstance().enableBackgroundMusic);
       this.toggleBgMuSic.onValueChange = this.onChangeSettingBgMusic.bind(this);
-      this.toggleAutoReady.initStart(c.default.getInstance().autoReady);
+      this.toggleAutoReady.initStart(GameConfigManager.default.getInstance().autoReady);
       this.toggleAutoReady.onValueChange = this.onChangeTuDongSanSang.bind(this);
       if (this.toggleBlockLoginWeb) {
-        this.toggleBlockLoginWeb.initStart(u.default.getInstance().IsBlockLoginWeb);
+        this.toggleBlockLoginWeb.initStart(GamePlayManager.default.getInstance().IsBlockLoginWeb);
         this.toggleBlockLoginWeb.onValueChange = this.onChangeBlockLoginWeb.bind(this);
       }
       if (this.toggleXepBaiMoiMauBinh) {
-        this.toggleXepBaiMoiMauBinh.initStart(u.default.getInstance().IsMauBinhUsingNewXepBai);
+        this.toggleXepBaiMoiMauBinh.initStart(GamePlayManager.default.getInstance().IsMauBinhUsingNewXepBai);
         this.toggleXepBaiMoiMauBinh.onValueChange = this.onChangeXepBaiMoiMauBinh.bind(this);
       }
       if (null !== this.toggleShowChatBanChung && void 0 !== this.toggleShowChatBanChung) {
-        this.toggleShowChatBanChung.initStart(c.default.getInstance().showChatBanChung);
+        this.toggleShowChatBanChung.initStart(GameConfigManager.default.getInstance().showChatBanChung);
         this.toggleShowChatBanChung.onValueChange = this.onChangeShowChatBanChung.bind(this);
       }
-      if (c.default.getInstance().listcommingSoonGames.indexOf("onedevice") >= 0) {
+      if (GameConfigManager.default.getInstance().listcommingSoonGames.indexOf("onedevice") >= 0) {
         this.nodeTrustDevice.active = false;
       } else {
         this.nodeTrustDevice.active = true;
         this.toggleTrustDevice.isMove = false;
-        this.toggleTrustDevice.initStart(c.default.getInstance().trustDevice);
+        this.toggleTrustDevice.initStart(GameConfigManager.default.getInstance().trustDevice);
         this.toggleTrustDevice.onValueChange = this.onChangeTrustDevice.bind(this);
       }
       var t = cc.sys.localStorage.getItem("currversion");
       if (null == t && (t = "1.0"), cc.sys.isNative) {
-        var e = cc.sys.localStorage.getItem(y.KEY_ACTIVE_PASSCODE);
+        var e = cc.sys.localStorage.getItem(DownloadScene.KEY_ACTIVE_PASSCODE);
         if (this.togglePasscode) {
-          this.togglePasscode.initStart(!S.default.isNullOrEmpty(e));
+          this.togglePasscode.initStart(!StringUtil.default.isNullOrEmpty(e));
         }
       }
       this.setBGSize();
@@ -300,7 +288,7 @@ var N = [g.GameConfigs.SceneName.Lode, g.GameConfigs.SceneName.LodeST, g.GameCon
         return s(this, function(a) {
           switch (a.label) {
             case 0:
-              return [4, I.delay(50)];
+              return [4, GameUtils.delay(50)];
             case 1:
               switch (a.sent(), e = null, t) {
                 case i.SETTING_KEY_PASSCODE:
@@ -321,7 +309,7 @@ var N = [g.GameConfigs.SceneName.Lode, g.GameConfigs.SceneName.LodeST, g.GameCon
                 case i.SETTING_KEY_BLOCK_LOGIN_WEB:
                   e = this.nodeBlockLoginWeb;
               }
-              return e && e.active ? (this.nodeHighlight.active = true, n = E.default.changeToWorldPos(e), o = this.nodeHighlight
+              return e && e.active ? (this.nodeHighlight.active = true, n = GameLiveUtils.default.changeToWorldPos(e), o = this.nodeHighlight
                 .parent.convertToNodeSpaceAR(n), this.nodeHighlight.position = o, [2]) : (this.nodeHighlight.active = false, [
                 2]);
           }
@@ -329,50 +317,50 @@ var N = [g.GameConfigs.SceneName.Lode, g.GameConfigs.SceneName.LodeST, g.GameCon
       });
     };
     e.prototype.onChangeSettingBgMusic = function(t) {
-      c.default.getInstance().setEnableBgMusic(t);
-      h.default.getInstance().playbtnClick();
+      GameConfigManager.default.getInstance().setEnableBgMusic(t);
+      MusicPlayer.default.getInstance().playbtnClick();
       cc.director.emit("KEY_UPDATE_SETTING");
     };
     e.prototype.onChangeSoundEffect = function(t) {
-      c.default.getInstance().setEnableSound(t);
-      h.default.getInstance().playbtnClick();
+      GameConfigManager.default.getInstance().setEnableSound(t);
+      MusicPlayer.default.getInstance().playbtnClick();
       cc.director.emit("KEY_UPDATE_SETTING");
     };
     e.prototype.onChangeTuDongSanSang = function(t) {
-      c.default.getInstance().setEnableAutoReady(t);
-      h.default.getInstance().playbtnClick();
+      GameConfigManager.default.getInstance().setEnableAutoReady(t);
+      MusicPlayer.default.getInstance().playbtnClick();
     };
     e.prototype.onChangeTrustDevice = function(t) {
-      if (h.default.getInstance().playbtnClick(), c.default.getInstance().listcommingSoonGames.indexOf("onedevice") >= 0) {
-        f.default.getInstance().showPopupMessageUtil("T\xednh n\u0103ng s\u1eafp ra m\u1eaft!");
+      if (MusicPlayer.default.getInstance().playbtnClick(), GameConfigManager.default.getInstance().listcommingSoonGames.indexOf("onedevice") >= 0) {
+        CommonPrefabsManager.default.getInstance().showPopupMessageUtil("T\xednh n\u0103ng s\u1eafp ra m\u1eaft!");
       } else {
         this.toggleTrustDevice.isMove = false;
-        f.default.getInstance().showLoading();
+        CommonPrefabsManager.default.getInstance().showLoading();
         var e = {
           action: t ? "ON" : "OFF",
-          fg_id: u.default.getInstance().fingerprint
+          fg_id: GamePlayManager.default.getInstance().fingerprint
         };
-        p.default.getInstance().sendPostHttpRequest(c.default.getInstance().checkDeviceURL, JSON.stringify(e), function(e) {
+        GameHTTPManager.default.getInstance().sendPostHttpRequest(GameConfigManager.default.getInstance().checkDeviceURL, JSON.stringify(e), function(e) {
           if (200 == e.code) {
-            c.default.getInstance().setEnableTrustDevice(t);
+            GameConfigManager.default.getInstance().setEnableTrustDevice(t);
             this.toggleTrustDevice.isMove = true;
             this.toggleTrustDevice.isOnChange(t, false);
             this.toggleTrustDevice.isMove = false;
           } else {
             if (void 0 != e.message) {
-              f.default.getInstance().showPopupMessageUtil(e.message);
+              CommonPrefabsManager.default.getInstance().showPopupMessageUtil(e.message);
             }
           }
-          f.default.getInstance().hideLoading();
+          CommonPrefabsManager.default.getInstance().hideLoading();
         }.bind(this), function(t) {
-          f.default.getInstance().hideLoading();
-          f.default.getInstance().showPopupMessageUtil(t);
+          CommonPrefabsManager.default.getInstance().hideLoading();
+          CommonPrefabsManager.default.getInstance().showPopupMessageUtil(t);
         }.bind(this));
       }
     };
     e.prototype.onChangeShowChatBanChung = function(t) {
-      c.default.getInstance().setEnableShowChatBanChung(t);
-      h.default.getInstance().playbtnClick();
+      GameConfigManager.default.getInstance().setEnableShowChatBanChung(t);
+      MusicPlayer.default.getInstance().playbtnClick();
     };
     e.prototype.onClickClose = function() {
       this.hide(this.callbackClose);
@@ -380,18 +368,18 @@ var N = [g.GameConfigs.SceneName.Lode, g.GameConfigs.SceneName.LodeST, g.GameCon
     e.prototype.checkTrustDevice = function() {
       var t = {
         action: "CKC",
-        fg_id: u.default.getInstance().fingerprint
+        fg_id: GamePlayManager.default.getInstance().fingerprint
       };
-      p.default.getInstance().sendPostHttpRequest(c.default.getInstance().checkDeviceURL, JSON.stringify(t), function(t) {
+      GameHTTPManager.default.getInstance().sendPostHttpRequest(GameConfigManager.default.getInstance().checkDeviceURL, JSON.stringify(t), function(t) {
         if ("OK" == t.status) {
-          c.default.getInstance().setEnableTrustDevice(1 == t.code);
+          GameConfigManager.default.getInstance().setEnableTrustDevice(1 == t.code);
           this.toggleTrustDevice.isMove = true;
           this.toggleTrustDevice.isOnChange(1 == t.code, false);
         }
       }.bind(this), function(t) {}.bind(this));
     };
     e.prototype.show = function(e, i, n) {
-      if (void 0 === e && (e = null), void 0 === i && (i = .4), void 0 === n && (n = 1), !(null == this.popup || c.default.getInstance()
+      if (void 0 === e && (e = null), void 0 === i && (i = .4), void 0 === n && (n = 1), !(null == this.popup || GameConfigManager.default.getInstance()
           .isShowPopupDone && this.isShowDone)) {
         t.prototype.show.call(this, e, i, n);
         if (this.nodeXepBaiMoiMauBinh) {
@@ -403,8 +391,8 @@ var N = [g.GameConfigs.SceneName.Lode, g.GameConfigs.SceneName.LodeST, g.GameCon
         if (this.nodeBlockLoginWeb) {
           this.nodeBlockLoginWeb.active = false;
         }
-        var o = O.indexOf(u.default.getInstance().gameID) >= 0,
-          a = N.indexOf(u.default.getInstance().currentScene) >= 0;
+        var o = O.indexOf(GamePlayManager.default.getInstance().gameID) >= 0,
+          a = N.indexOf(GamePlayManager.default.getInstance().currentScene) >= 0;
         if (o) {
           if (this.nodeTuDongSanSang) {
             this.nodeTuDongSanSang.active = false;
@@ -419,20 +407,20 @@ var N = [g.GameConfigs.SceneName.Lode, g.GameConfigs.SceneName.LodeST, g.GameCon
           if (this.nodeChanShowChatBanChung) {
             this.nodeChanShowChatBanChung.active = false;
           }
-        } else if (u.default.getInstance().gameID === d.GAME.BINH && c.default.getInstance().isNewXepBaiMauBinh) {
+        } else if (GamePlayManager.default.getInstance().gameID === MessageCardGameHandler.GAME.BINH && GameConfigManager.default.getInstance().isNewXepBaiMauBinh) {
           if (this.nodeXepBaiMoiMauBinh) {
             this.nodeXepBaiMoiMauBinh.active = true;
           }
           if (null !== this.nodeChanShowChatBanChung && void 0 !== this.nodeChanShowChatBanChung) {
             this.nodeChanShowChatBanChung.active = false;
           }
-        } else if (u.default.getInstance().currentScene === g.GameConfigs.SceneName.Lobby && cc.sys.isNative) {
-          var s = _.getPasscodeConfig();
+        } else if (GamePlayManager.default.getInstance().currentScene === GameDefine.GameConfigs.SceneName.Lobby && cc.sys.isNative) {
+          var s = RMCPasscodeConfig2.getPasscodeConfig();
           if (this.nodePasscode && s.enable) {
             this.nodePasscode.active = true;
           }
-          var r = b.getBlockLoginWebConfig();
-          if (this.nodeBlockLoginWeb && !S.default.isNullOrEmpty(u.default.getInstance().token) && r.enable) {
+          var r = RMCBlockLoginWebConfig.getBlockLoginWebConfig();
+          if (this.nodeBlockLoginWeb && !StringUtil.default.isNullOrEmpty(GamePlayManager.default.getInstance().token) && r.enable) {
             this.nodeBlockLoginWeb.active = true;
           }
         }
@@ -440,30 +428,30 @@ var N = [g.GameConfigs.SceneName.Lode, g.GameConfigs.SceneName.LodeST, g.GameCon
       }
     };
     e.prototype.onChangeXepBaiMoiMauBinh = function(t) {
-      u.default.getInstance().IsMauBinhUsingNewXepBai = t;
-      h.default.getInstance().playbtnClick();
-      m.default.getInstance().sendSettingRoom(t, false, u.default.getInstance().IsMauBinhFistTimeShowQuickGuide);
+      GamePlayManager.default.getInstance().IsMauBinhUsingNewXepBai = t;
+      MusicPlayer.default.getInstance().playbtnClick();
+      CardGameCommonRequest.default.getInstance().sendSettingRoom(t, false, GamePlayManager.default.getInstance().IsMauBinhFistTimeShowQuickGuide);
     };
     e.prototype.onClickedChangePasscodeBtn = function() {
       var t = this;
-      h.default.getInstance().playbtnClick();
-      f.default.getInstance().showPopupPasscode(function() {
-        var e = cc.sys.localStorage.getItem(y.KEY_ACTIVE_PASSCODE);
-        t.togglePasscode.initStart(!S.default.isNullOrEmpty(e));
+      MusicPlayer.default.getInstance().playbtnClick();
+      CommonPrefabsManager.default.getInstance().showPopupPasscode(function() {
+        var e = cc.sys.localStorage.getItem(DownloadScene.KEY_ACTIVE_PASSCODE);
+        t.togglePasscode.initStart(!StringUtil.default.isNullOrEmpty(e));
       });
     };
     e.prototype.onClickedFAQPasscodeBtn = function() {
-      h.default.getInstance().playbtnClick();
-      f.default.getInstance().showPopupFAQRemote("passcode");
+      MusicPlayer.default.getInstance().playbtnClick();
+      CommonPrefabsManager.default.getInstance().showPopupFAQRemote("passcode");
     };
     e.prototype.onChangeBlockLoginWeb = function(t) {
       var e = this;
-      h.default.getInstance().playbtnClick();
+      MusicPlayer.default.getInstance().playbtnClick();
       this.toggleBlockLoginWeb.setPreventClick(true);
-      u.default.getInstance().updateBlockLoginWeb(t, function() {
+      GamePlayManager.default.getInstance().updateBlockLoginWeb(t, function() {
         e.toggleBlockLoginWeb.setPreventClick(false);
-        if (u.default.getInstance().IsBlockLoginWeb != t) {
-          e.toggleBlockLoginWeb.initStart(u.default.getInstance().IsBlockLoginWeb);
+        if (GamePlayManager.default.getInstance().IsBlockLoginWeb != t) {
+          e.toggleBlockLoginWeb.initStart(GamePlayManager.default.getInstance().IsBlockLoginWeb);
         }
       });
     };
@@ -479,11 +467,11 @@ var N = [g.GameConfigs.SceneName.Lode, g.GameConfigs.SceneName.LodeST, g.GameCon
         cc.loader.loadRes("Test/PopupTestForceUpdate", function(t, e) {
           if (null != e) {
             var i = cc.instantiate(e);
-            i.parent = C.default.instance.popupNode;
+            i.parent = MiniGameNode.default.instance.popupNode;
             i.x = 0;
             i.y = 0;
-            i.zIndex = T.default.TOP;
-            f.default.getInstance().hideLoading();
+            i.zIndex = GameZOrder.default.TOP;
+            CommonPrefabsManager.default.getInstance().hideLoading();
           }
         }.bind(this));
       }
@@ -497,17 +485,17 @@ var N = [g.GameConfigs.SceneName.Lode, g.GameConfigs.SceneName.LodeST, g.GameCon
         }
         var n = e - 2,
           o = this.minHeight + n * this.oneRowBonusHeight;
-        this.popup.height = v.clamp(o, this.minHeight, this.maxHeight);
+        this.popup.height = GbMathUtils.clamp(o, this.minHeight, this.maxHeight);
       }
     };
-    o([M(r.default)], e.prototype, "toggleAutoReady", void 0);
-    o([M(r.default)], e.prototype, "toggleTrustDevice", void 0);
-    o([M(r.default)], e.prototype, "toggleBgMuSic", void 0);
-    o([M(r.default)], e.prototype, "toggleSoundEffect", void 0);
-    o([M(r.default)], e.prototype, "toggleShowChatBanChung", void 0);
-    o([M(r.default)], e.prototype, "togglePasscode", void 0);
-    o([M(r.default)], e.prototype, "toggleBlockLoginWeb", void 0);
-    o([M(r.default)], e.prototype, "toggleXepBaiMoiMauBinh", void 0);
+    o([M(UIToggleSlider.default)], e.prototype, "toggleAutoReady", void 0);
+    o([M(UIToggleSlider.default)], e.prototype, "toggleTrustDevice", void 0);
+    o([M(UIToggleSlider.default)], e.prototype, "toggleBgMuSic", void 0);
+    o([M(UIToggleSlider.default)], e.prototype, "toggleSoundEffect", void 0);
+    o([M(UIToggleSlider.default)], e.prototype, "toggleShowChatBanChung", void 0);
+    o([M(UIToggleSlider.default)], e.prototype, "togglePasscode", void 0);
+    o([M(UIToggleSlider.default)], e.prototype, "toggleBlockLoginWeb", void 0);
+    o([M(UIToggleSlider.default)], e.prototype, "toggleXepBaiMoiMauBinh", void 0);
     o([M(cc.Label)], e.prototype, "lbVersion", void 0);
     o([M(cc.Node)], e.prototype, "nodeTuDongSanSang", void 0);
     o([M(cc.Node)], e.prototype, "nodeTrustDevice", void 0);
@@ -522,6 +510,6 @@ var N = [g.GameConfigs.SceneName.Lode, g.GameConfigs.SceneName.LodeST, g.GameCon
     o([M], e.prototype, "maxHeight", void 0);
     o([M], e.prototype, "oneRowBonusHeight", void 0);
     return e = o([P], e);
-  }(l.default);
+  }(CardPopupBase.default);
 i.default = B;
 void 0;

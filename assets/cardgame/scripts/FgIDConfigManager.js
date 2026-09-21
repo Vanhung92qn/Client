@@ -18,14 +18,8 @@ var n = this && this.__assign || function() {
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-// ── BẢNG TRA BÍ DANH (máy sinh — ghi-bang-tra-bi-danh.js) ──────
-// Mã dịch ngược đặt bí danh một chữ cho mỗi module. Bảng này để khỏi phải cuộn ngược.
-// KHÔNG đổi tên chúng bằng tìm-kiếm-thay-thế: đoạn mở đầu __decorate khai lại đúng
-// những chữ này làm biến cục bộ, đổi là hỏng im lặng.
-//   o = GameConfigManager   a = GamePlayManager
-// ────────────────────────────────────────────────────────────────
-var o = require("./GameConfigManager"),
-  a = require("./GamePlayManager"),
+var GameConfigManager = require("./GameConfigManager"),
+  GamePlayManager = require("./GamePlayManager"),
   s = function() {
     return function() {
       this.pathInternals = [];
@@ -38,10 +32,10 @@ var r = function() {
   Object.defineProperty(t, "config", {
     get: function() {
       if (null == this._config || this._config && 0 === this._config.pathInternals.length) {
-        var t = o.default.getInstance().getConfig("fgIDConfig"),
+        var t = GameConfigManager.default.getInstance().getConfig("fgIDConfig"),
           e = new s();
         this._config = n({}, e, t);
-        a.default.getInstance().getFingerPrint();
+        GamePlayManager.default.getInstance().getFingerPrint();
       }
       return this._config;
     },
@@ -56,7 +50,7 @@ var r = function() {
       }
     });
     if (i) {
-      t.setRequestHeader("X-FG-ID", a.default.getInstance().fingerprint);
+      t.setRequestHeader("X-FG-ID", GamePlayManager.default.getInstance().fingerprint);
     }
   };
   t._config = null;

@@ -24,7 +24,7 @@ var n = this && this.__decorate || function(t, e, i, n) {
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-var o = require("./GameUtils"),
+var GameUtils = require("./GameUtils"),
   a = cc._decorator,
   s = a.ccclass;
 a.property;
@@ -43,13 +43,13 @@ var r = function() {
       if (cc.sys.os === cc.sys.OS_IOS) {
         if (jsb) {
           try {
-            var e = o.NativeInterop.Instance.getFunctionName("rotateScreen");
+            var e = GameUtils.NativeInterop.Instance.getFunctionName("rotateScreen");
             jsb.reflection.callStaticMethod("AppController", e + ":", t);
           } catch (t) {}
         }
       } else if (cc.sys.os === cc.sys.OS_ANDROID && jsb) {
         try {
-          e = o.NativeInterop.Instance.getFunctionName("setOrientation");
+          e = GameUtils.NativeInterop.Instance.getFunctionName("setOrientation");
           if (jsb) {
             jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity", e, "(I)V", t);
           }

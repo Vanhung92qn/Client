@@ -47,19 +47,12 @@ var n = this && this.__extends || function() {
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-// ── BẢNG TRA BÍ DANH (máy sinh — ghi-bang-tra-bi-danh.js) ──────
-// Mã dịch ngược đặt bí danh một chữ cho mỗi module. Bảng này để khỏi phải cuộn ngược.
-// KHÔNG đổi tên chúng bằng tìm-kiếm-thay-thế: đoạn mở đầu __decorate khai lại đúng
-// những chữ này làm biến cục bộ, đổi là hỏng im lặng.
-//   a = CardPopupBase   s = GamePlayManager   r = MusicPlayer
-//   c = CommonPrefabsManager   l = StringUtil   h = GameDefine
-// ────────────────────────────────────────────────────────────────
-var a = require("./CardPopupBase"),
-  s = require("./GamePlayManager"),
-  r = require("./MusicPlayer"),
-  c = require("./CommonPrefabsManager"),
-  l = require("./StringUtil"),
-  h = require("./GameDefine"),
+var CardPopupBase = require("./CardPopupBase"),
+  GamePlayManager = require("./GamePlayManager"),
+  MusicPlayer = require("./MusicPlayer"),
+  CommonPrefabsManager = require("./CommonPrefabsManager"),
+  StringUtil = require("./StringUtil"),
+  GameDefine = require("./GameDefine"),
   u = cc._decorator,
   d = u.ccclass,
   p = u.property,
@@ -72,26 +65,26 @@ var a = require("./CardPopupBase"),
     }
     n(e, t);
     e.prototype.onLoad = function() {
-      cc.systemEvent.on(h.GameEventMessage.JoinRoom, this.onJoinRoom, this);
+      cc.systemEvent.on(GameDefine.GameEventMessage.JoinRoom, this.onJoinRoom, this);
     };
     e.prototype.onDestroy = function() {
-      cc.systemEvent.off(h.GameEventMessage.JoinRoom, this.onJoinRoom, this);
+      cc.systemEvent.off(GameDefine.GameEventMessage.JoinRoom, this.onJoinRoom, this);
     };
     e.prototype.onJoinRoom = function() {
       this.hide(null, .4, true, false);
     };
     e.prototype.btnOKPress = function() {
-      if (r.default.getInstance().playbtnClick(), this.edbRoomID.string.length <= 0) {
-        c.default.getInstance().showPopupMessageUtil("Vui l\xf2ng nh\u1eadp \u0111\xfang s\u1ed1 b\xe0n");
+      if (MusicPlayer.default.getInstance().playbtnClick(), this.edbRoomID.string.length <= 0) {
+        CommonPrefabsManager.default.getInstance().showPopupMessageUtil("Vui l\xf2ng nh\u1eadp \u0111\xfang s\u1ed1 b\xe0n");
       } else {
         var t = parseInt(this.edbRoomID.string);
         if (Number.isNaN(t)) {
-          c.default.getInstance().showPopupMessageUtil("Vui l\xf2ng nh\u1eadp \u0111\xfang s\u1ed1 b\xe0n");
-        } else if (l.default.isNullOrEmpty(this.edbPassword.string)) {
-          c.default.getInstance().showPopupMessageUtil("Vui l\xf2ng nh\u1eadp m\u1eadt kh\u1ea9u");
+          CommonPrefabsManager.default.getInstance().showPopupMessageUtil("Vui l\xf2ng nh\u1eadp \u0111\xfang s\u1ed1 b\xe0n");
+        } else if (StringUtil.default.isNullOrEmpty(this.edbPassword.string)) {
+          CommonPrefabsManager.default.getInstance().showPopupMessageUtil("Vui l\xf2ng nh\u1eadp m\u1eadt kh\u1ea9u");
         } else {
-          var e = s.default.getInstance().gameID;
-          s.default.getInstance().joinRoomWithGameID(t, this.edbPassword.string, e);
+          var e = GamePlayManager.default.getInstance().gameID;
+          GamePlayManager.default.getInstance().joinRoomWithGameID(t, this.edbPassword.string, e);
         }
       }
     };
@@ -101,6 +94,6 @@ var a = require("./CardPopupBase"),
     o([p(cc.EditBox)], e.prototype, "edbRoomID", void 0);
     o([p(cc.EditBox)], e.prototype, "edbPassword", void 0);
     return e = o([d], e);
-  }(a.default);
+  }(CardPopupBase.default);
 i.default = f;
 void 0;

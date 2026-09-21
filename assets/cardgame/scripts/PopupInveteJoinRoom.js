@@ -47,29 +47,19 @@ var n = this && this.__extends || function() {
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-// ── BẢNG TRA BÍ DANH (máy sinh — ghi-bang-tra-bi-danh.js) ──────
-// Mã dịch ngược đặt bí danh một chữ cho mỗi module. Bảng này để khỏi phải cuộn ngược.
-// KHÔNG đổi tên chúng bằng tìm-kiếm-thay-thế: đoạn mở đầu __decorate khai lại đúng
-// những chữ này làm biến cục bộ, đổi là hỏng im lặng.
-//   a = CardPopupBase   s = StringUtil   r = MessageCardGameHandler
-//   c = CommonPrefabsManager   l = GamePlayManager   h = GameConfigManager
-//   u = GameDefine   d = BaseScene   p = KtekEventHandler
-//   f = MiniGameNode   g = GameUtils   m = FavoriteGameController
-//   y = MusicPlayer
-// ────────────────────────────────────────────────────────────────
-var a = require("./CardPopupBase"),
-  s = require("./StringUtil"),
-  r = require("./MessageCardGameHandler"),
-  c = require("./CommonPrefabsManager"),
-  l = require("./GamePlayManager"),
-  h = require("./GameConfigManager"),
-  u = require("./GameDefine"),
-  d = require("./BaseScene"),
-  p = require("./KtekEventHandler"),
-  f = require("./MiniGameNode"),
-  g = require("./GameUtils"),
-  m = require("./FavoriteGameController"),
-  y = require("./MusicPlayer"),
+var CardPopupBase = require("./CardPopupBase"),
+  StringUtil = require("./StringUtil"),
+  MessageCardGameHandler = require("./MessageCardGameHandler"),
+  CommonPrefabsManager = require("./CommonPrefabsManager"),
+  GamePlayManager = require("./GamePlayManager"),
+  GameConfigManager = require("./GameConfigManager"),
+  GameDefine = require("./GameDefine"),
+  BaseScene = require("./BaseScene"),
+  KtekEventHandler = require("./KtekEventHandler"),
+  MiniGameNode = require("./MiniGameNode"),
+  GameUtils = require("./GameUtils"),
+  FavoriteGameController = require("./FavoriteGameController"),
+  MusicPlayer = require("./MusicPlayer"),
   S = cc._decorator,
   _ = S.ccclass,
   v = S.property,
@@ -100,7 +90,7 @@ var a = require("./CardPopupBase"),
       this.displayUI(this.currentIndex);
     };
     e.prototype.displayUI = function(t) {
-      if ("2k" != h.default.getInstance().enviromentName) {
+      if ("2k" != GameConfigManager.default.getInstance().enviromentName) {
         var e = this.arrRoomDict[t];
         this.gameID = parseInt(e.gid);
         this.roomID = e.rid;
@@ -114,150 +104,150 @@ var a = require("./CardPopupBase"),
         if (null !== e.pwd && void 0 !== e.pwd) {
           this.roomPassword = e.pwd;
         }
-        this.lbMucCuoc.string = s.default.formatMoneyNumber(i);
+        this.lbMucCuoc.string = StringUtil.default.formatMoneyNumber(i);
         var n = "";
         switch (this.gameID) {
-          case r.GAME.TIENLEN:
+          case MessageCardGameHandler.GAME.TIENLEN:
             n = "Ti\u1ebfn L\xean \u0110\u1ebfm L\xe1";
             break;
-          case r.GAME.TLMN:
+          case MessageCardGameHandler.GAME.TLMN:
             n = "Ti\u1ebfn L\xean MN";
             break;
-          case r.GAME.SAM:
+          case MessageCardGameHandler.GAME.SAM:
             n = "S\xe2m L\u1ed1c";
             break;
-          case r.GAME.BACAY:
+          case MessageCardGameHandler.GAME.BACAY:
             n = "C\xe0o R\xf9a";
             break;
-          case r.GAME.BINH:
+          case MessageCardGameHandler.GAME.BINH:
             n = "M\u1eadu Binh";
             break;
-          case r.GAME.CATTE:
+          case MessageCardGameHandler.GAME.CATTE:
             n = "Catte";
             break;
-          case r.GAME.LIENG:
+          case MessageCardGameHandler.GAME.LIENG:
             n = "Li\xeang";
             break;
-          case r.GAME.POKER:
+          case MessageCardGameHandler.GAME.POKER:
             n = "Poker";
             break;
-          case r.GAME.XITO:
+          case MessageCardGameHandler.GAME.XITO:
             n = "X\xec T\u1ed1";
             break;
-          case r.GAME.PHOM:
+          case MessageCardGameHandler.GAME.PHOM:
             n = "Ph\u1ecfm";
             break;
-          case r.GAME.XOCDIA:
+          case MessageCardGameHandler.GAME.XOCDIA:
             n = "X\xf3c \u0110\u0129a";
             break;
-          case r.GAME.BAU_CUA:
+          case MessageCardGameHandler.GAME.BAU_CUA:
             n = "B\u1ea7u Cua";
-            this.lbMucCuoc.string = s.default.formatMoneyNumber(100);
+            this.lbMucCuoc.string = StringUtil.default.formatMoneyNumber(100);
             break;
-          case r.GAME.CHAN_GTS:
+          case MessageCardGameHandler.GAME.CHAN_GTS:
             n = "Ch\u1eafn";
             break;
-          case r.GAME.XIDACH:
+          case MessageCardGameHandler.GAME.XIDACH:
             n = "X\xec D\xe1ch";
             break;
           default:
             n = "Kh\xf4ng Bi\u1ebft";
         }
         this.lbNameGame.string = n;
-        if (null != f.default.instance && null !== f.default.instance.taiXiuLiveController && void 0 !== f.default.instance
+        if (null != MiniGameNode.default.instance && null !== MiniGameNode.default.instance.taiXiuLiveController && void 0 !== MiniGameNode.default.instance
           .taiXiuLiveController) {
-          f.default.instance.taiXiuLiveController.setSizeTVZero();
+          MiniGameNode.default.instance.taiXiuLiveController.setSizeTVZero();
         }
-        cc.systemEvent.emit(u.GameEventMessage.ShowInvitePopup);
+        cc.systemEvent.emit(GameDefine.GameEventMessage.ShowInvitePopup);
         this.lbPage.string = this.currentIndex + 1 + "/" + this.arrRoomDict.length;
         this.setArrowStatus();
       }
     };
     e.prototype.onClickClose = function() {
       this.hide(function() {
-        c.default.getInstance().popupInveteJoinRoom = null;
-        if (null != f.default.instance && null !== f.default.instance.taiXiuLiveController && void 0 !== f.default.instance
+        CommonPrefabsManager.default.getInstance().popupInveteJoinRoom = null;
+        if (null != MiniGameNode.default.instance && null !== MiniGameNode.default.instance.taiXiuLiveController && void 0 !== MiniGameNode.default.instance
           .taiXiuLiveController) {
-          f.default.instance.taiXiuLiveController.setSizeTVOriginal();
+          MiniGameNode.default.instance.taiXiuLiveController.setSizeTVOriginal();
         }
       });
     };
     e.prototype.onClickBg = function() {};
     e.prototype.onClickTuCHoiHet = function() {
-      h.default.getInstance().IsReceiveInvite = false;
-      l.default.getInstance().updateChapNhanInvite(false);
+      GameConfigManager.default.getInstance().IsReceiveInvite = false;
+      GamePlayManager.default.getInstance().updateChapNhanInvite(false);
       this.onClickClose();
     };
     e.prototype.onClickOK = function() {
       var t = this;
-      l.default.getInstance().checkMinMoney(this.bet, this.gameID, false, function() {
+      GamePlayManager.default.getInstance().checkMinMoney(this.bet, this.gameID, false, function() {
         t.onClickChapNhan();
       });
     };
     e.prototype.onClickChapNhan = function() {
-      if (h.default.getInstance().roomPassword = this.roomPassword, l.default.getInstance().roomID = this.roomID, c.default.getInstance()
-        .showLoading(), l.default.getInstance().inviteData = {
+      if (GameConfigManager.default.getInstance().roomPassword = this.roomPassword, GamePlayManager.default.getInstance().roomID = this.roomID, CommonPrefabsManager.default.getInstance()
+        .showLoading(), GamePlayManager.default.getInstance().inviteData = {
           roomID: this.roomID,
           roomPassword: this.roomPassword
-        }, this.onClickClose(), l.default.getInstance().timeInvite = Date.now(), null !== d.default.currentScene && void 0 !== d.default
-        .currentScene && null !== d.default.currentScene.node && void 0 !== d.default.currentScene.node) {
-        var t = g.convertToStringGameID(this.gameID);
-        switch (m.default.gI() && m.default.gI().DoSendTrackingGame(t), this.gameID) {
-          case r.GAME.LIENG:
-            d.default.currentScene.openSceneGame(u.GameConfigs.SceneName.Lieng);
+        }, this.onClickClose(), GamePlayManager.default.getInstance().timeInvite = Date.now(), null !== BaseScene.default.currentScene && void 0 !== BaseScene.default
+        .currentScene && null !== BaseScene.default.currentScene.node && void 0 !== BaseScene.default.currentScene.node) {
+        var t = GameUtils.convertToStringGameID(this.gameID);
+        switch (FavoriteGameController.default.gI() && FavoriteGameController.default.gI().DoSendTrackingGame(t), this.gameID) {
+          case MessageCardGameHandler.GAME.LIENG:
+            BaseScene.default.currentScene.openSceneGame(GameDefine.GameConfigs.SceneName.Lieng);
             break;
-          case r.GAME.PHOM:
-            d.default.currentScene.openSceneGame(u.GameConfigs.SceneName.Phom);
+          case MessageCardGameHandler.GAME.PHOM:
+            BaseScene.default.currentScene.openSceneGame(GameDefine.GameConfigs.SceneName.Phom);
             break;
-          case r.GAME.TIENLEN:
-            d.default.currentScene.openSceneGame(u.GameConfigs.SceneName.TLDL);
+          case MessageCardGameHandler.GAME.TIENLEN:
+            BaseScene.default.currentScene.openSceneGame(GameDefine.GameConfigs.SceneName.TLDL);
             break;
-          case r.GAME.BINH:
-            d.default.currentScene.openSceneGame(u.GameConfigs.SceneName.MauBinh);
+          case MessageCardGameHandler.GAME.BINH:
+            BaseScene.default.currentScene.openSceneGame(GameDefine.GameConfigs.SceneName.MauBinh);
             break;
-          case r.GAME.POKER:
-            d.default.currentScene.openSceneGame(u.GameConfigs.SceneName.Poker);
+          case MessageCardGameHandler.GAME.POKER:
+            BaseScene.default.currentScene.openSceneGame(GameDefine.GameConfigs.SceneName.Poker);
             break;
-          case r.GAME.XITO:
-            d.default.currentScene.openSceneGame(u.GameConfigs.SceneName.XiTo);
+          case MessageCardGameHandler.GAME.XITO:
+            BaseScene.default.currentScene.openSceneGame(GameDefine.GameConfigs.SceneName.XiTo);
             break;
-          case r.GAME.SAM:
-            d.default.currentScene.openSceneGame(u.GameConfigs.SceneName.SamLoc);
+          case MessageCardGameHandler.GAME.SAM:
+            BaseScene.default.currentScene.openSceneGame(GameDefine.GameConfigs.SceneName.SamLoc);
             break;
-          case r.GAME.TLMN:
-            d.default.currentScene.openSceneGame(u.GameConfigs.SceneName.TLMN);
+          case MessageCardGameHandler.GAME.TLMN:
+            BaseScene.default.currentScene.openSceneGame(GameDefine.GameConfigs.SceneName.TLMN);
             break;
-          case r.GAME.XOCDIA:
-            d.default.currentScene.openSceneGame(u.GameConfigs.SceneName.XocDia);
+          case MessageCardGameHandler.GAME.XOCDIA:
+            BaseScene.default.currentScene.openSceneGame(GameDefine.GameConfigs.SceneName.XocDia);
             break;
-          case r.GAME.BAU_CUA:
-            d.default.currentScene.openSceneGame(u.GameConfigs.SceneName.BauCua);
+          case MessageCardGameHandler.GAME.BAU_CUA:
+            BaseScene.default.currentScene.openSceneGame(GameDefine.GameConfigs.SceneName.BauCua);
             break;
-          case r.GAME.BACAY:
-            d.default.currentScene.openSceneGame(u.GameConfigs.SceneName.BaCay);
+          case MessageCardGameHandler.GAME.BACAY:
+            BaseScene.default.currentScene.openSceneGame(GameDefine.GameConfigs.SceneName.BaCay);
             break;
-          case r.GAME.CATTE:
-            d.default.currentScene.openSceneGame(u.GameConfigs.SceneName.Catte);
+          case MessageCardGameHandler.GAME.CATTE:
+            BaseScene.default.currentScene.openSceneGame(GameDefine.GameConfigs.SceneName.Catte);
             break;
-          case r.GAME.XIDACH:
-            l.default.getInstance().inviteData = null;
-            p.default.instance.setJoinRoomData(this.roomID, this.gameID, this.bet);
-            d.default.currentScene.openSceneGame(u.GameConfigs.SceneName.XiDealerL);
+          case MessageCardGameHandler.GAME.XIDACH:
+            GamePlayManager.default.getInstance().inviteData = null;
+            KtekEventHandler.default.instance.setJoinRoomData(this.roomID, this.gameID, this.bet);
+            BaseScene.default.currentScene.openSceneGame(GameDefine.GameConfigs.SceneName.XiDealerL);
         }
       }
     };
     e.prototype.onDestroy = function() {
-      c.default.getInstance().popupInveteJoinRoom = null;
+      CommonPrefabsManager.default.getInstance().popupInveteJoinRoom = null;
     };
     e.prototype.onNextClick = function() {
-      y.default.getInstance().playbtnClick();
+      MusicPlayer.default.getInstance().playbtnClick();
       if (!(this.currentIndex >= this.arrRoomDict.length - 1)) {
         this.currentIndex += 1;
         this.displayUI(this.currentIndex);
       }
     };
     e.prototype.onPreClick = function() {
-      y.default.getInstance().playbtnClick();
+      MusicPlayer.default.getInstance().playbtnClick();
       if (!(this.currentIndex <= 0)) {
         this.currentIndex -= 1;
         this.displayUI(this.currentIndex);
@@ -273,6 +263,6 @@ var a = require("./CardPopupBase"),
     o([v(cc.Node)], e.prototype, "btnPre", void 0);
     o([v(cc.Label)], e.prototype, "lbPage", void 0);
     return e = o([_], e);
-  }(a.default);
+  }(CardPopupBase.default);
 i.default = b;
 void 0;

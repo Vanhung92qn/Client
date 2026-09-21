@@ -24,17 +24,10 @@ var n = this && this.__decorate || function(t, e, i, n) {
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-// ── BẢNG TRA BÍ DANH (máy sinh — ghi-bang-tra-bi-danh.js) ──────
-// Mã dịch ngược đặt bí danh một chữ cho mỗi module. Bảng này để khỏi phải cuộn ngược.
-// KHÔNG đổi tên chúng bằng tìm-kiếm-thay-thế: đoạn mở đầu __decorate khai lại đúng
-// những chữ này làm biến cục bộ, đổi là hỏng im lặng.
-//   o = WSCardGameHandle   a = MessageCardGameHandler   s = GamePlayManager
-//   r = BaCayMessage
-// ────────────────────────────────────────────────────────────────
-var o = require("./WSCardGameHandle"),
-  a = require("./MessageCardGameHandler"),
-  s = require("./GamePlayManager"),
-  r = require("./BaCayMessage"),
+var WSCardGameHandle = require("./WSCardGameHandle"),
+  MessageCardGameHandler = require("./MessageCardGameHandler"),
+  GamePlayManager = require("./GamePlayManager"),
+  BaCayMessage = require("./BaCayMessage"),
   c = cc._decorator,
   l = c.ccclass,
   h = (c.property, function() {
@@ -53,40 +46,40 @@ var o = require("./WSCardGameHandle"),
       return "Simms";
     };
     t.prototype.sendData = function(t) {
-      if (o.default.getInstance().isSocketOpen) {
-        o.default.getInstance().ws.sendData(t);
+      if (WSCardGameHandle.default.getInstance().isSocketOpen) {
+        WSCardGameHandle.default.getInstance().ws.sendData(t);
       }
     };
     t.prototype.sendImformRoyalties = function(t) {
-      var e = [a.Message.MessageType.RoomPlugin_Type, this.getZoneName(), s.default.getInstance().roomID, {
-        cmd: r.default.INFORM_ROYALTIES,
+      var e = [MessageCardGameHandler.Message.MessageType.RoomPlugin_Type, this.getZoneName(), GamePlayManager.default.getInstance().roomID, {
+        cmd: BaCayMessage.default.INFORM_ROYALTIES,
         cs: t
       }];
       this.sendData(JSON.stringify(e));
     };
     t.prototype.sendUpdateArrangeCardsState = function(t) {
-      var e = [a.Message.MessageType.RoomPlugin_Type, this.getZoneName(), s.default.getInstance().roomID, {
-        cmd: r.default.UPDATE_ARRANGE_CARDS_STATE,
+      var e = [MessageCardGameHandler.Message.MessageType.RoomPlugin_Type, this.getZoneName(), GamePlayManager.default.getInstance().roomID, {
+        cmd: BaCayMessage.default.UPDATE_ARRANGE_CARDS_STATE,
         cs: t
       }];
       this.sendData(JSON.stringify(e));
     };
     t.prototype.sendUpdateCurrentCardsState = function(t) {
-      var e = [a.Message.MessageType.RoomPlugin_Type, this.getZoneName(), s.default.getInstance().roomID, {
-        cmd: r.default.UPDATE_CURRENT_CARDS_STATE,
+      var e = [MessageCardGameHandler.Message.MessageType.RoomPlugin_Type, this.getZoneName(), GamePlayManager.default.getInstance().roomID, {
+        cmd: BaCayMessage.default.UPDATE_CURRENT_CARDS_STATE,
         cs: t
       }];
       this.sendData(JSON.stringify(e));
     };
     t.prototype.sendRearrangeCards = function() {
-      var t = [a.Message.MessageType.RoomPlugin_Type, this.getZoneName(), s.default.getInstance().roomID, {
-        cmd: r.default.REARRANGE_CARDS
+      var t = [MessageCardGameHandler.Message.MessageType.RoomPlugin_Type, this.getZoneName(), GamePlayManager.default.getInstance().roomID, {
+        cmd: BaCayMessage.default.REARRANGE_CARDS
       }];
       this.sendData(JSON.stringify(t));
     };
     t.prototype.sendStart = function() {
-      var t = [a.Message.MessageType.RoomPlugin_Type, this.getZoneName(), s.default.getInstance().roomID, {
-        cmd: r.default.START
+      var t = [MessageCardGameHandler.Message.MessageType.RoomPlugin_Type, this.getZoneName(), GamePlayManager.default.getInstance().roomID, {
+        cmd: BaCayMessage.default.START
       }];
       this.sendData(JSON.stringify(t));
     };

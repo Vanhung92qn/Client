@@ -47,17 +47,10 @@ var n = this && this.__extends || function() {
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-// ── BẢNG TRA BÍ DANH (máy sinh — ghi-bang-tra-bi-danh.js) ──────
-// Mã dịch ngược đặt bí danh một chữ cho mỗi module. Bảng này để khỏi phải cuộn ngược.
-// KHÔNG đổi tên chúng bằng tìm-kiếm-thay-thế: đoạn mở đầu __decorate khai lại đúng
-// những chữ này làm biến cục bộ, đổi là hỏng im lặng.
-//   a = GameHTTPManager   s = GamePlayManager   r = RMCLocalizeConfig
-//   c = StringUtil
-// ────────────────────────────────────────────────────────────────
-var a = require("./GameHTTPManager"),
-  s = require("./GamePlayManager"),
-  r = require("./RMCLocalizeConfig"),
-  c = require("./StringUtil"),
+var GameHTTPManager = require("./GameHTTPManager"),
+  GamePlayManager = require("./GamePlayManager"),
+  RMCLocalizeConfig = require("./RMCLocalizeConfig"),
+  StringUtil = require("./StringUtil"),
   l = cc._decorator,
   h = l.ccclass,
   u = l.property,
@@ -83,14 +76,14 @@ var a = require("./GameHTTPManager"),
     e.prototype.onLoad = function() {
       cc.game.addPersistRootNode(this.node);
       i.Instance = this;
-      this.langID = s.default.getInstance().language;
+      this.langID = GamePlayManager.default.getInstance().language;
       this.arrayText = this.CSVToArray(this.text.text, ",");
     };
     e.prototype.fetchRemoteLanguageData = function() {
-      var t = r.getLocalizeConfig();
-      if (t && !c.default.isNullOrEmpty(t.urlCSV)) {
+      var t = RMCLocalizeConfig.getLocalizeConfig();
+      if (t && !StringUtil.default.isNullOrEmpty(t.urlCSV)) {
         var e = this;
-        a.default.getInstance().getRawHTTP(t.urlCSV + "?" + new Date().getTime().toString(), function(t) {
+        GameHTTPManager.default.getInstance().getRawHTTP(t.urlCSV + "?" + new Date().getTime().toString(), function(t) {
           e.updateCSVContent(t);
         }, function(t) {});
       }
@@ -121,7 +114,7 @@ var a = require("./GameHTTPManager"),
       for (var e = [], i = 1; i < arguments.length; i++) {
         e[i - 1] = arguments[i];
       }
-      return c.default.replacePlaceholders(this.GetKeyValue(t), e);
+      return StringUtil.default.replacePlaceholders(this.GetKeyValue(t), e);
     };
     e.prototype.GetString = function(t, e, i) {
       if (void 0 === e) {

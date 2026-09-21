@@ -47,14 +47,8 @@ var n = this && this.__extends || function() {
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-// ── BẢNG TRA BÍ DANH (máy sinh — ghi-bang-tra-bi-danh.js) ──────
-// Mã dịch ngược đặt bí danh một chữ cho mỗi module. Bảng này để khỏi phải cuộn ngược.
-// KHÔNG đổi tên chúng bằng tìm-kiếm-thay-thế: đoạn mở đầu __decorate khai lại đúng
-// những chữ này làm biến cục bộ, đổi là hỏng im lặng.
-//   a = OrientationManager   s = TableCell
-// ────────────────────────────────────────────────────────────────
-var a = require("./OrientationManager"),
-  s = require("./TableCell"),
+var OrientationManager = require("./OrientationManager"),
+  TableCell = require("./TableCell"),
   r = cc._decorator,
   c = r.ccclass,
   l = r.property,
@@ -67,7 +61,7 @@ var a = require("./OrientationManager"),
       e.lastItemData = {};
       e.itemPosMap = {};
       e.lastResetItemIndex = null;
-      e.orientation = a.Orientation.Landscape;
+      e.orientation = OrientationManager.Orientation.Landscape;
       e.listTableCell = [];
       return e;
     }
@@ -80,7 +74,7 @@ var a = require("./OrientationManager"),
       for (var a = this.listTableCell.length; a < t.length; ++a) {
         var r = cc.instantiate(this.itemPrefab);
         r.parent = this.content;
-        (c = r.getComponent(s.default)).setIndex(a);
+        (c = r.getComponent(TableCell.default)).setIndex(a);
         this.listTableCell.push(c);
       }
       for (a = 0; a < t.length; ++a) {

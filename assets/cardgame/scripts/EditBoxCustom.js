@@ -48,7 +48,7 @@ Object.defineProperty(i, "__esModule", {
   value: true
 });
 var a,
-  s = require("./GameConfigManager"),
+  GameConfigManager = require("./GameConfigManager"),
   r = cc._decorator,
   c = r.ccclass,
   l = r.property;
@@ -79,7 +79,7 @@ var h = function(t) {
   n(e, t);
   e.prototype.onLoad = function() {
     this.init();
-    if (!(s.default.getInstance().misc.isForceNoAdjustEditBox || false) && this.checkWebMobile()) {
+    if (!(GameConfigManager.default.getInstance().misc.isForceNoAdjustEditBox || false) && this.checkWebMobile()) {
       this.isForceNoScroll = true;
     }
     this.setBlur();

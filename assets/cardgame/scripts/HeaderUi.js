@@ -180,37 +180,25 @@ var n = this && this.__extends || function() {
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-// ── BẢNG TRA BÍ DANH (máy sinh — ghi-bang-tra-bi-danh.js) ──────
-// Mã dịch ngược đặt bí danh một chữ cho mỗi module. Bảng này để khỏi phải cuộn ngược.
-// KHÔNG đổi tên chúng bằng tìm-kiếm-thay-thế: đoạn mở đầu __decorate khai lại đúng
-// những chữ này làm biến cục bộ, đổi là hỏng im lặng.
-//   r = GamePlayManager   c = StringUtil   l = GameDefine
-//   h = GameConfigManager   u = CommonPrefabsManager   d = RemoteSprite
-//   p = MusicPlayer   f = CardGameCommonRequest   g = BroadCast
-//   m = MiniGameNode   y = GameHTTPManager   S = ErrorLogHandler
-//   _ = GameUtils   v = MessageBus   b = MessageType
-//   C = SessionData   T = AnalyticService   E = AnalyticDefine
-//   I = RMCThemeConfig
-// ────────────────────────────────────────────────────────────────
-var r = require("./GamePlayManager"),
-  c = require("./StringUtil"),
-  l = require("./GameDefine"),
-  h = require("./GameConfigManager"),
-  u = require("./CommonPrefabsManager"),
-  d = require("./RemoteSprite"),
-  p = require("./MusicPlayer"),
-  f = require("./CardGameCommonRequest"),
-  g = require("./BroadCast"),
-  m = require("./MiniGameNode"),
-  y = require("./GameHTTPManager"),
-  S = require("./ErrorLogHandler"),
-  _ = require("./GameUtils"),
-  v = require("./MessageBus"),
-  b = require("./MessageType"),
-  C = require("./SessionData"),
-  T = require("./AnalyticService"),
-  E = require("./AnalyticDefine"),
-  I = require("./RMCThemeConfig"),
+var GamePlayManager = require("./GamePlayManager"),
+  StringUtil = require("./StringUtil"),
+  GameDefine = require("./GameDefine"),
+  GameConfigManager = require("./GameConfigManager"),
+  CommonPrefabsManager = require("./CommonPrefabsManager"),
+  RemoteSprite = require("./RemoteSprite"),
+  MusicPlayer = require("./MusicPlayer"),
+  CardGameCommonRequest = require("./CardGameCommonRequest"),
+  BroadCast = require("./BroadCast"),
+  MiniGameNode = require("./MiniGameNode"),
+  GameHTTPManager = require("./GameHTTPManager"),
+  ErrorLogHandler = require("./ErrorLogHandler"),
+  GameUtils = require("./GameUtils"),
+  MessageBus = require("./MessageBus"),
+  MessageType = require("./MessageType"),
+  SessionData = require("./SessionData"),
+  AnalyticService = require("./AnalyticService"),
+  AnalyticDefine = require("./AnalyticDefine"),
+  RMCThemeConfig = require("./RMCThemeConfig"),
   A = cc._decorator,
   P = A.ccclass,
   M = A.property,
@@ -252,31 +240,31 @@ var r = require("./GamePlayManager"),
     n(e, t);
     i = e;
     e.prototype.onLoad = function() {
-      v.MessageBus.instance.addEventListener(b.MessageType.DepositDocumentStatusUpdate, this.onMessageReceived, this);
-      v.MessageBus.instance.addEventListener(b.MessageType.DepositDocumentHideTip, this.onMessageHideTip, this);
-      v.MessageBus.instance.addEventListener(b.MessageType.DepositComplainStatusUpdate, this.onMessageReceived, this);
-      v.MessageBus.instance.addEventListener(b.MessageType.DepositComplainHideTip, this.onMessageHideTip, this);
-      cc.director.on(l.GameEventMessage.ACTIVE_PHONE_SUCCESS, this.onActivePhoneSuccess, this);
+      MessageBus.MessageBus.instance.addEventListener(MessageType.MessageType.DepositDocumentStatusUpdate, this.onMessageReceived, this);
+      MessageBus.MessageBus.instance.addEventListener(MessageType.MessageType.DepositDocumentHideTip, this.onMessageHideTip, this);
+      MessageBus.MessageBus.instance.addEventListener(MessageType.MessageType.DepositComplainStatusUpdate, this.onMessageReceived, this);
+      MessageBus.MessageBus.instance.addEventListener(MessageType.MessageType.DepositComplainHideTip, this.onMessageHideTip, this);
+      cc.director.on(GameDefine.GameEventMessage.ACTIVE_PHONE_SUCCESS, this.onActivePhoneSuccess, this);
     };
     e.prototype.hideBackButtonOnWebccIfNeeded = function() {
-      if (h.default.getInstance().isLoginWebccNoWallet && 0 != c.default.isNullOrEmpty(h.default.getInstance().webccHomePage) && this
+      if (GameConfigManager.default.getInstance().isLoginWebccNoWallet && 0 != StringUtil.default.isNullOrEmpty(GameConfigManager.default.getInstance().webccHomePage) && this
         .btnBack) {
         this.btnBack.active = false;
       }
     };
     e.prototype.start = function() {
-      if ("FootterRoomUi" == this.node.name && (i.instance = this), null !== r.default.getInstance().displayName && void 0 !== r.default
-        .getInstance().displayName && (null != this.nameUserLb && void 0 != this.nameUserLb && (this.nameUserLb.string = r.default
+      if ("FootterRoomUi" == this.node.name && (i.instance = this), null !== GamePlayManager.default.getInstance().displayName && void 0 !== GamePlayManager.default
+        .getInstance().displayName && (null != this.nameUserLb && void 0 != this.nameUserLb && (this.nameUserLb.string = GamePlayManager.default
           .getInstance().displayName, this.processUIName()), null != this.moneyUserLb && void 0 != this.moneyUserLb && (this.moneyUserLb
-          .string = c.default.formatMoneyNumberWithColom(r.default.getInstance().gold)), this.tempGold = r.default.getInstance().gold),
-        this.updateAvarta(), null !== this.iconVip && (this.iconVip.active = false), C.SessionData.isShowingUpdateDocumentTooltip || this
-        .tryShowNodeKichHoat(), null != this.textKichHoat && void 0 != this.textKichHoat && (this.textKichHoat.string = h.default
-          .getInstance().activePhoneNumberData.textKichHoat), 0 == c.default.isNullOrEmpty(r.default.getInstance().token) ? (null != this
+          .string = StringUtil.default.formatMoneyNumberWithColom(GamePlayManager.default.getInstance().gold)), this.tempGold = GamePlayManager.default.getInstance().gold),
+        this.updateAvarta(), null !== this.iconVip && (this.iconVip.active = false), SessionData.SessionData.isShowingUpdateDocumentTooltip || this
+        .tryShowNodeKichHoat(), null != this.textKichHoat && void 0 != this.textKichHoat && (this.textKichHoat.string = GameConfigManager.default
+          .getInstance().activePhoneNumberData.textKichHoat), 0 == StringUtil.default.isNullOrEmpty(GamePlayManager.default.getInstance().token) ? (null != this
           .normalLobby && (this.normalLobby.active = true), null != this.publicLobby && (this.publicLobby.active = false)) : (null != this
           .normalLobby && (this.normalLobby.active = false), null != this.publicLobby && (this.publicLobby.active = true)), null != this
-        .logoWebcc && (this.nodeWebcc.active = false), (h.default.getInstance().isLoginWebcc || h.default.getInstance()
-          .isLoginWebccNoWallet) && this.hideNodeKichHoat(), h.default.getInstance().isLoginWebccNoWallet) {
-        if (null == h.default.getInstance().webccBrand || 0 == h.default.getInstance().webccBrand.length) {
+        .logoWebcc && (this.nodeWebcc.active = false), (GameConfigManager.default.getInstance().isLoginWebcc || GameConfigManager.default.getInstance()
+          .isLoginWebccNoWallet) && this.hideNodeKichHoat(), GameConfigManager.default.getInstance().isLoginWebccNoWallet) {
+        if (null == GameConfigManager.default.getInstance().webccBrand || 0 == GameConfigManager.default.getInstance().webccBrand.length) {
           if (null != this.logoHeader) {
             this.logoHeader.active = false;
           }
@@ -287,57 +275,57 @@ var r = require("./GamePlayManager"),
         } else if (null != this.logoHeader && (this.logoHeader.active = false), null != this.logoWebcc) {
           this.nodeWebcc.active = true;
           this.logoWebcc.node.active = true;
-          var t = _.getWccBrandUrl(h.default.getInstance().webccBrand, _.WccBrandImageType.Header280);
-          if (0 == c.default.isNullOrEmpty(t)) {
-            _.downloadAndShowImage(this.logoWebcc, t);
+          var t = GameUtils.getWccBrandUrl(GameConfigManager.default.getInstance().webccBrand, GameUtils.WccBrandImageType.Header280);
+          if (0 == StringUtil.default.isNullOrEmpty(t)) {
+            GameUtils.downloadAndShowImage(this.logoWebcc, t);
           }
         }
       }
-      if (h.default.getInstance().isLoginWebcc && (null != this.logoHeader && (this.logoHeader.active = false), null != this.logoWebcc)) {
+      if (GameConfigManager.default.getInstance().isLoginWebcc && (null != this.logoHeader && (this.logoHeader.active = false), null != this.logoWebcc)) {
         this.nodeWebcc.active = true;
         this.logoWebcc.node.active = true;
-        t = _.getWccBrandUrl(h.default.getInstance().webccBrand, _.WccBrandImageType.Header280);
-        if (0 == c.default.isNullOrEmpty(t)) {
-          _.downloadAndShowImage(this.logoWebcc, t);
+        t = GameUtils.getWccBrandUrl(GameConfigManager.default.getInstance().webccBrand, GameUtils.WccBrandImageType.Header280);
+        if (0 == StringUtil.default.isNullOrEmpty(t)) {
+          GameUtils.downloadAndShowImage(this.logoWebcc, t);
         }
       }
-      switch (h.default.getInstance().enviromentName.includes("caorua") ? null != this.nodeDomain && (this.nodeDomain.active = true) :
-        null != this.nodeDomain && (this.nodeDomain.active = false), I.getCurrentTheme()) {
-        case I.ThemeType.HAPPY_NEW_YEAR:
+      switch (GameConfigManager.default.getInstance().enviromentName.includes("caorua") ? null != this.nodeDomain && (this.nodeDomain.active = true) :
+        null != this.nodeDomain && (this.nodeDomain.active = false), RMCThemeConfig.getCurrentTheme()) {
+        case RMCThemeConfig.ThemeType.HAPPY_NEW_YEAR:
           if (this.lsNodeNewYearDecoration.length > 0) {
             for (var e = 0; e < this.lsNodeNewYearDecoration.length; e++) {
               this.lsNodeNewYearDecoration[e].active = true;
             }
           }
           break;
-        case I.ThemeType.MID_AUTUMN_FESTIVAL:
+        case RMCThemeConfig.ThemeType.MID_AUTUMN_FESTIVAL:
           if (this.lsNodeMoonFestivalDecoration.length > 0) {
             for (e = 0; e < this.lsNodeMoonFestivalDecoration.length; e++) {
               this.lsNodeMoonFestivalDecoration[e].active = true;
             }
           }
           break;
-        case I.ThemeType.NOEL:
+        case RMCThemeConfig.ThemeType.NOEL:
           if (this.lsNodeNoelDecoration.length > 0) {
             for (e = 0; e < this.lsNodeNoelDecoration.length; e++) {
               this.lsNodeNoelDecoration[e].active = true;
             }
           }
           break;
-        case I.ThemeType.VN_304:
+        case RMCThemeConfig.ThemeType.VN_304:
           if (this.lsNode304Decoration.length > 0) {
             for (e = 0; e < this.lsNode304Decoration.length; e++) {
               this.lsNode304Decoration[e].active = true;
             }
           }
           break;
-        case I.ThemeType.WORLD_CUP:
+        case RMCThemeConfig.ThemeType.WORLD_CUP:
           if (this.lsNodeWorldcupDecoration.length > 0) {
             for (e = 0; e < this.lsNodeWorldcupDecoration.length; e++) {
               this.lsNodeWorldcupDecoration[e].active = true;
             }
           }
-        case I.ThemeType.HALLOWEEN:
+        case RMCThemeConfig.ThemeType.HALLOWEEN:
           if (this.lsNodeHalloweenDecoration.length > 0) {
             for (e = 0; e < this.lsNodeHalloweenDecoration.length; e++) {
               this.lsNodeHalloweenDecoration[e].active = true;
@@ -346,8 +334,8 @@ var r = require("./GamePlayManager"),
       }
     };
     e.prototype.tryShowNodeKichHoat = function() {
-      if (this.nodeKickHoat && c.default.isNullOrEmpty(r.default.getInstance().phoneNumber) && 0 == c.default.isNullOrEmpty(r.default
-          .getInstance().token) && r.default.getInstance().numShowThongBao > 0 && r.default.getInstance().gold < 2001) {
+      if (this.nodeKickHoat && StringUtil.default.isNullOrEmpty(GamePlayManager.default.getInstance().phoneNumber) && 0 == StringUtil.default.isNullOrEmpty(GamePlayManager.default
+          .getInstance().token) && GamePlayManager.default.getInstance().numShowThongBao > 0 && GamePlayManager.default.getInstance().gold < 2001) {
         this.nodeKickHoat.active = true;
         this.nodeKickHoatBg.stopAllActions();
         this.nodeKickHoatBg.runAction(cc.repeatForever(cc.sequence(cc.scaleTo(.2, 1.1), cc.scaleTo(.2, 1))));
@@ -360,32 +348,32 @@ var r = require("./GamePlayManager"),
       }
     };
     e.prototype.onClickTrangChu = function() {
-      cc.sys.openURL(h.default.getInstance().homeUrl);
+      cc.sys.openURL(GameConfigManager.default.getInstance().homeUrl);
     };
     e.prototype.updateUI = function() {
       if (null != this.moneyUserLb && void 0 != this.moneyUserLb) {
-        this.moneyUserLb.string = c.default.formatMoneyNumberWithColom(r.default.getInstance().gold);
+        this.moneyUserLb.string = StringUtil.default.formatMoneyNumberWithColom(GamePlayManager.default.getInstance().gold);
       }
-      this.tempGold = r.default.getInstance().gold;
-      if (r.default.getInstance().gold > 2e3 && null !== this.nodeKickHoat && void 0 !== this.nodeKickHoat && this.nodeKickHoat.active) {
+      this.tempGold = GamePlayManager.default.getInstance().gold;
+      if (GamePlayManager.default.getInstance().gold > 2e3 && null !== this.nodeKickHoat && void 0 !== this.nodeKickHoat && this.nodeKickHoat.active) {
         this.nodeKickHoat.active = false;
       }
     };
     e.prototype.onDestroy = function() {
-      v.MessageBus.instance.removeEventListener(b.MessageType.DepositDocumentStatusUpdate, this);
-      v.MessageBus.instance.removeEventListener(b.MessageType.DepositDocumentHideTip, this);
-      v.MessageBus.instance.removeEventListener(b.MessageType.DepositComplainStatusUpdate, this);
-      v.MessageBus.instance.removeEventListener(b.MessageType.DepositComplainHideTip, this);
-      cc.director.off(l.GameEventMessage.ACTIVE_PHONE_SUCCESS, this.onActivePhoneSuccess, this);
+      MessageBus.MessageBus.instance.removeEventListener(MessageType.MessageType.DepositDocumentStatusUpdate, this);
+      MessageBus.MessageBus.instance.removeEventListener(MessageType.MessageType.DepositDocumentHideTip, this);
+      MessageBus.MessageBus.instance.removeEventListener(MessageType.MessageType.DepositComplainStatusUpdate, this);
+      MessageBus.MessageBus.instance.removeEventListener(MessageType.MessageType.DepositComplainHideTip, this);
+      cc.director.off(GameDefine.GameEventMessage.ACTIVE_PHONE_SUCCESS, this.onActivePhoneSuccess, this);
     };
     e.prototype.onMessageHideTip = function(t, e) {
-      if (!(C.SessionData.isShowingUpdateDocumentTooltip || C.SessionData.isShowingComplainDocumentTooltip)) {
+      if (!(SessionData.SessionData.isShowingUpdateDocumentTooltip || SessionData.SessionData.isShowingComplainDocumentTooltip)) {
         this.tryShowNodeKichHoat();
       }
     };
     e.prototype.onMessageReceived = function(t, e) {
       if (this && this.isValid) {
-        if (C.SessionData.isShowingUpdateDocumentTooltip || C.SessionData.isShowingComplainDocumentTooltip) {
+        if (SessionData.SessionData.isShowingUpdateDocumentTooltip || SessionData.SessionData.isShowingComplainDocumentTooltip) {
           this.hideNodeKichHoat();
         } else {
           this.tryShowNodeKichHoat();
@@ -393,7 +381,7 @@ var r = require("./GamePlayManager"),
       }
     };
     e.prototype.updateUIName = function() {
-      this.nameUserLb.string = r.default.getInstance().displayName;
+      this.nameUserLb.string = GamePlayManager.default.getInstance().displayName;
       this.processUIName(true);
     };
     e.prototype.processUIName = function(t) {
@@ -408,11 +396,11 @@ var r = require("./GamePlayManager"),
               e = false;
               i.label = 1;
             case 1:
-              return e ? [3, 6] : 0 != this.nameUserLb.node.getContentSize().width ? [3, 3] : [4, _.delay(20)];
+              return e ? [3, 6] : 0 != this.nameUserLb.node.getContentSize().width ? [3, 3] : [4, GameUtils.delay(20)];
             case 2:
               return i.sent(), [3, 1];
             case 3:
-              return t ? (t = false, [4, _.delay(20)]) : [3, 5];
+              return t ? (t = false, [4, GameUtils.delay(20)]) : [3, 5];
             case 4:
               i.sent();
               i.label = 5;
@@ -426,116 +414,116 @@ var r = require("./GamePlayManager"),
       });
     };
     e.prototype.showTempMeny = function(t) {
-      this.moneyUserLb.string = c.default.formatMoneyNumberWithColom(this.tempGold + t);
+      this.moneyUserLb.string = StringUtil.default.formatMoneyNumberWithColom(this.tempGold + t);
     };
     e.prototype.updateAvarta = function() {
       if (null !== this.avatar && void 0 !== this.avatar) {
         this.avatar.loadUserAvarta();
         if (null != this.avatar.spriteFrame) {
-          r.default.getInstance().spriteFrameAvatar = this.avatar.spriteFrame;
+          GamePlayManager.default.getInstance().spriteFrameAvatar = this.avatar.spriteFrame;
         }
       }
     };
     e.prototype.onclickBack = function() {
-      if (!h.default.getInstance().isShowPopupDone) {
-        T.default.instance.trackCustomQ(E.AnaltyciEventType.CLICK, "exit_cg_" + r.default.getInstance().gameID);
-        if (h.default.getInstance().isLoginWebccNoWallet) {
-          window.location.href = h.default.getInstance().webccHomePage;
+      if (!GameConfigManager.default.getInstance().isShowPopupDone) {
+        AnalyticService.default.instance.trackCustomQ(AnalyticDefine.AnaltyciEventType.CLICK, "exit_cg_" + GamePlayManager.default.getInstance().gameID);
+        if (GameConfigManager.default.getInstance().isLoginWebccNoWallet) {
+          window.location.href = GameConfigManager.default.getInstance().webccHomePage;
         } else {
           if (this.isKTEK) {
-            if (!c.default.isNullOrEmpty(h.default.getInstance().tokenFB)) {
-              h.default.getInstance().tokenFB = "";
-              r.default.getInstance().fb_id = "";
+            if (!StringUtil.default.isNullOrEmpty(GameConfigManager.default.getInstance().tokenFB)) {
+              GameConfigManager.default.getInstance().tokenFB = "";
+              GamePlayManager.default.getInstance().fb_id = "";
               cc.sys.isNative;
             }
-            f.default.getInstance().sendLogout();
+            CardGameCommonRequest.default.getInstance().sendLogout();
             cc.sys.localStorage.setItem("isAutoLogin", false);
             cc.sys.localStorage.setItem("token", "");
             cc.sys.localStorage.setItem("defaultLogin", 1);
           } else {
-            h.default.getInstance().isShowPopupDone = true;
-            p.default.getInstance().playbtnClick();
-            u.default.getInstance().showLoading();
-            cc.director.preloadScene(l.GameConfigs.SceneName.Lobby, function() {
-              u.default.getInstance().hideLoading();
-              cc.director.loadScene(l.GameConfigs.SceneName.Lobby);
+            GameConfigManager.default.getInstance().isShowPopupDone = true;
+            MusicPlayer.default.getInstance().playbtnClick();
+            CommonPrefabsManager.default.getInstance().showLoading();
+            cc.director.preloadScene(GameDefine.GameConfigs.SceneName.Lobby, function() {
+              CommonPrefabsManager.default.getInstance().hideLoading();
+              cc.director.loadScene(GameDefine.GameConfigs.SceneName.Lobby);
             });
           }
         }
       }
     };
     e.prototype.onclickHomePage = function() {
-      if (h.default.getInstance().isLoginWebccNoWallet) {
-        window.location.href = h.default.getInstance().webccHomePage;
+      if (GameConfigManager.default.getInstance().isLoginWebccNoWallet) {
+        window.location.href = GameConfigManager.default.getInstance().webccHomePage;
       } else {
-        p.default.getInstance().playbtnClick();
-        cc.sys.openURL(h.default.getInstance().homeUrl);
+        MusicPlayer.default.getInstance().playbtnClick();
+        cc.sys.openURL(GameConfigManager.default.getInstance().homeUrl);
       }
     };
     e.prototype.onClickSetting = function() {
-      p.default.getInstance().playbtnClick();
-      u.default.getInstance().showPopupSetting();
+      MusicPlayer.default.getInstance().playbtnClick();
+      CommonPrefabsManager.default.getInstance().showPopupSetting();
       this.closeMenu();
     };
     e.prototype.onClickMail = function() {
-      p.default.getInstance().playbtnClick();
-      if (c.default.isNullOrEmpty(r.default.getInstance().token)) {
-        u.default.getInstance().showPopupDangNhap(this.loginWithToken.bind(this));
+      MusicPlayer.default.getInstance().playbtnClick();
+      if (StringUtil.default.isNullOrEmpty(GamePlayManager.default.getInstance().token)) {
+        CommonPrefabsManager.default.getInstance().showPopupDangNhap(this.loginWithToken.bind(this));
       } else {
-        if (h.default.getInstance().listcommingSoonGames.indexOf("inbox") > -1) {
-          u.default.getInstance().showPopupMessageUtil("T\xednh n\u0103ng s\u1eafp ra m\u1eaft !");
+        if (GameConfigManager.default.getInstance().listcommingSoonGames.indexOf("inbox") > -1) {
+          CommonPrefabsManager.default.getInstance().showPopupMessageUtil("T\xednh n\u0103ng s\u1eafp ra m\u1eaft !");
         } else {
-          u.default.getInstance().showPopupMail();
+          CommonPrefabsManager.default.getInstance().showPopupMail();
         }
       }
     };
     e.prototype.onClickTinTuc = function() {
-      p.default.getInstance().playbtnClick();
-      if (h.default.getInstance().isLoginWebccNoWallet) {
-        u.default.getInstance().showPopupMessageUtil("T\xednh n\u0103ng s\u1eafp ra m\u1eaft !");
+      MusicPlayer.default.getInstance().playbtnClick();
+      if (GameConfigManager.default.getInstance().isLoginWebccNoWallet) {
+        CommonPrefabsManager.default.getInstance().showPopupMessageUtil("T\xednh n\u0103ng s\u1eafp ra m\u1eaft !");
       } else {
-        u.default.getInstance().showPopupMessageUtil("T\xednh n\u0103ng s\u1eafp ra m\u1eaft !");
+        CommonPrefabsManager.default.getInstance().showPopupMessageUtil("T\xednh n\u0103ng s\u1eafp ra m\u1eaft !");
         this.closeMenu();
       }
     };
     e.prototype.onClickBXH = function() {
-      p.default.getInstance().playbtnClick();
-      if (h.default.getInstance().isLoginWebccNoWallet) {
-        u.default.getInstance().showPopupMessageUtil("T\xednh n\u0103ng s\u1eafp ra m\u1eaft !");
+      MusicPlayer.default.getInstance().playbtnClick();
+      if (GameConfigManager.default.getInstance().isLoginWebccNoWallet) {
+        CommonPrefabsManager.default.getInstance().showPopupMessageUtil("T\xednh n\u0103ng s\u1eafp ra m\u1eaft !");
       } else {
-        u.default.getInstance().showPopupMessageUtil("T\xednh n\u0103ng s\u1eafp ra m\u1eaft !");
+        CommonPrefabsManager.default.getInstance().showPopupMessageUtil("T\xednh n\u0103ng s\u1eafp ra m\u1eaft !");
         this.closeMenu();
       }
     };
     e.prototype.onClickEditName = function() {
-      if (!h.default.getInstance().isLoginWebccNoWallet) {
-        p.default.getInstance().playbtnClick();
-        u.default.getInstance().showPopupChangeUserDisplayName(this);
+      if (!GameConfigManager.default.getInstance().isLoginWebccNoWallet) {
+        MusicPlayer.default.getInstance().playbtnClick();
+        CommonPrefabsManager.default.getInstance().showPopupChangeUserDisplayName(this);
       }
     };
     e.prototype.onClickAddGold = function() {
-      if (!h.default.getInstance().isLoginWebccNoWallet) {
-        p.default.getInstance().playbtnShopClick();
-        if (!(h.default.getInstance().isShowPopupDone || h.default.getInstance().isLoginWebcc)) {
-          u.default.getInstance().showPopupNap();
+      if (!GameConfigManager.default.getInstance().isLoginWebccNoWallet) {
+        MusicPlayer.default.getInstance().playbtnShopClick();
+        if (!(GameConfigManager.default.getInstance().isShowPopupDone || GameConfigManager.default.getInstance().isLoginWebcc)) {
+          CommonPrefabsManager.default.getInstance().showPopupNap();
         }
       }
     };
     e.prototype.onClickAvatar = function() {
-      if (!h.default.getInstance().isLoginWebccNoWallet) {
-        p.default.getInstance().playbtnClick();
-        u.default.getInstance().showPopupUserInfo();
+      if (!GameConfigManager.default.getInstance().isLoginWebccNoWallet) {
+        MusicPlayer.default.getInstance().playbtnClick();
+        CommonPrefabsManager.default.getInstance().showPopupUserInfo();
       }
     };
     e.prototype.onClickKickHoat = function() {
-      if (!h.default.getInstance().isLoginWebccNoWallet) {
-        p.default.getInstance().playbtnClick();
-        u.default.getInstance().showPopupActivePhoneNumber(this.nodeKickHoat);
+      if (!GameConfigManager.default.getInstance().isLoginWebccNoWallet) {
+        MusicPlayer.default.getInstance().playbtnClick();
+        CommonPrefabsManager.default.getInstance().showPopupActivePhoneNumber(this.nodeKickHoat);
       }
     };
     e.prototype.onClickMenu = function() {
-      if (!h.default.getInstance().isLoginWebccNoWallet) {
-        p.default.getInstance().playbtnClick();
+      if (!GameConfigManager.default.getInstance().isLoginWebccNoWallet) {
+        MusicPlayer.default.getInstance().playbtnClick();
         if (null !== this.nodeMenuList && void 0 !== this.nodeMenuList) {
           this.nodeMenuList.active = !this.nodeMenuList.active;
         }
@@ -560,7 +548,7 @@ var r = require("./GamePlayManager"),
         return s(this, function(e) {
           switch (e.label) {
             case 0:
-              return this.btnBack && (t = this.btnBack.getComponent(cc.Button)) ? (t.interactable = false, [4, _.delay(1e3)]) : [
+              return this.btnBack && (t = this.btnBack.getComponent(cc.Button)) ? (t.interactable = false, [4, GameUtils.delay(1e3)]) : [
                 2];
             case 1:
               return e.sent(), t.interactable = true, [2];
@@ -578,11 +566,11 @@ var r = require("./GamePlayManager"),
         if (null != this.nodeBroadCastBigWin) {
           i.nodeBroadcastBigWin = this.nodeBroadCastBigWin;
         }
-        if (null != g.default.instance) {
-          g.default.instance.show(null);
+        if (null != BroadCast.default.instance) {
+          BroadCast.default.instance.show(null);
         }
-        if (null != g.default.instanceBigWin) {
-          g.default.instanceBigWin.show(null);
+        if (null != BroadCast.default.instanceBigWin) {
+          BroadCast.default.instanceBigWin.show(null);
         }
       }
     };
@@ -590,57 +578,57 @@ var r = require("./GamePlayManager"),
       i.isActive = false;
       i.nodeBroadcast = null;
       i.nodeBroadcastBigWin = null;
-      if (null != g.default.instance) {
-        g.default.instance.hide(true);
-        g.default.instance.node.parent = m.default.instance.topUI;
+      if (null != BroadCast.default.instance) {
+        BroadCast.default.instance.hide(true);
+        BroadCast.default.instance.node.parent = MiniGameNode.default.instance.topUI;
       }
-      if (null != g.default.instanceBigWin) {
-        g.default.instanceBigWin.hide(true);
-        g.default.instanceBigWin.node.parent = m.default.instance.topUI;
+      if (null != BroadCast.default.instanceBigWin) {
+        BroadCast.default.instanceBigWin.hide(true);
+        BroadCast.default.instanceBigWin.node.parent = MiniGameNode.default.instance.topUI;
       }
     };
     e.prototype.onClickDangNhap = function() {
-      if (!h.default.getInstance().isLoginWebccNoWallet) {
-        u.default.getInstance().showPopupDangNhap(this.loginWithToken.bind(this));
+      if (!GameConfigManager.default.getInstance().isLoginWebccNoWallet) {
+        CommonPrefabsManager.default.getInstance().showPopupDangNhap(this.loginWithToken.bind(this));
       }
     };
     e.prototype.onClickDangKy = function() {
-      if (!h.default.getInstance().isLoginWebccNoWallet) {
-        if (h.default.getInstance().allowRegister) {
-          u.default.getInstance().showPopupDangKy(this.loginWithToken.bind(this));
+      if (!GameConfigManager.default.getInstance().isLoginWebccNoWallet) {
+        if (GameConfigManager.default.getInstance().allowRegister) {
+          CommonPrefabsManager.default.getInstance().showPopupDangKy(this.loginWithToken.bind(this));
         } else {
-          _.showPopupNewBrandInfo();
+          GameUtils.showPopupNewBrandInfo();
         }
       }
     };
     e.prototype.onClickFB = function() {
-      if (p.default.getInstance().playbtnClick(), h.default.getInstance().enviromentName.includes("hit")) {
-        u.default.getInstance().showPopupMessageUtil("T\xednh n\u0103ng \u0111ang ph\xe1t tri\u1ec3n");
+      if (MusicPlayer.default.getInstance().playbtnClick(), GameConfigManager.default.getInstance().enviromentName.includes("hit")) {
+        CommonPrefabsManager.default.getInstance().showPopupMessageUtil("T\xednh n\u0103ng \u0111ang ph\xe1t tri\u1ec3n");
       } else if (cc.sys.isNative) {
-        if (h.default.getInstance().isforcebrand) {
+        if (GameConfigManager.default.getInstance().isforcebrand) {
           if (cc.sys.platform == cc.sys.ANDROID) {
             e = "";
-            e = "&state=" + (c.default.isNullOrEmpty(h.default.getInstance().aff_id) ? JSON.stringify({
-              app_id: h.default.getInstance().app_id,
-              fg: r.default.getInstance().fingerprint
+            e = "&state=" + (StringUtil.default.isNullOrEmpty(GameConfigManager.default.getInstance().aff_id) ? JSON.stringify({
+              app_id: GameConfigManager.default.getInstance().app_id,
+              fg: GamePlayManager.default.getInstance().fingerprint
             }) : JSON.stringify({
-              aff_id: h.default.getInstance().aff_id,
-              app_id: h.default.getInstance().app_id,
-              fg: r.default.getInstance().fingerprint
+              aff_id: GameConfigManager.default.getInstance().aff_id,
+              app_id: GameConfigManager.default.getInstance().app_id,
+              fg: GamePlayManager.default.getInstance().fingerprint
             }));
-            i = "https://www.facebook.com/v4.0/dialog/oauth?client_id=" + h.default.getInstance().Appid_FaceBook +
-              "&response_type=token" + e + "&redirect_uri=" + h.default.getInstance().urlFBCallback;
+            i = "https://www.facebook.com/v4.0/dialog/oauth?client_id=" + GameConfigManager.default.getInstance().Appid_FaceBook +
+              "&response_type=token" + e + "&redirect_uri=" + GameConfigManager.default.getInstance().urlFBCallback;
             cc.sys.openURL(i);
           } else {
-            var t = h.default.getInstance().homeUrl;
+            var t = GameConfigManager.default.getInstance().homeUrl;
             cc.sys.openURL(t + "?isforcebrand=true");
           }
         } else {
           if (sdkbox) {
             cc.sys.localStorage.setItem("isAutoLogin", false);
-            h.default.getInstance().tokenFB = "";
+            GameConfigManager.default.getInstance().tokenFB = "";
             if (sdkbox.PluginFacebook.isLoggedIn()) {
-              h.default.getInstance().tokenFB = sdkbox.PluginFacebook.getAccessToken();
+              GameConfigManager.default.getInstance().tokenFB = sdkbox.PluginFacebook.getAccessToken();
               this.loginWithToken();
             } else {
               sdkbox.PluginFacebook.login();
@@ -650,48 +638,48 @@ var r = require("./GamePlayManager"),
         }
       } else {
         var e = "";
-        if (!c.default.isNullOrEmpty(c.default.getQueryStringValue("aff_id"))) {
-          h.default.getInstance().aff_id = c.default.getQueryStringValue("aff_id");
+        if (!StringUtil.default.isNullOrEmpty(StringUtil.default.getQueryStringValue("aff_id"))) {
+          GameConfigManager.default.getInstance().aff_id = StringUtil.default.getQueryStringValue("aff_id");
         }
-        e = "&state=" + (c.default.isNullOrEmpty(h.default.getInstance().aff_id) ? JSON.stringify({
-          app_id: h.default.getInstance().app_id,
-          fg: r.default.getInstance().fingerprint
+        e = "&state=" + (StringUtil.default.isNullOrEmpty(GameConfigManager.default.getInstance().aff_id) ? JSON.stringify({
+          app_id: GameConfigManager.default.getInstance().app_id,
+          fg: GamePlayManager.default.getInstance().fingerprint
         }) : JSON.stringify({
-          aff_id: h.default.getInstance().aff_id,
-          app_id: h.default.getInstance().app_id,
-          fg: r.default.getInstance().fingerprint
+          aff_id: GameConfigManager.default.getInstance().aff_id,
+          app_id: GameConfigManager.default.getInstance().app_id,
+          fg: GamePlayManager.default.getInstance().fingerprint
         }));
-        var i = "https://www.facebook.com/v4.0/dialog/oauth?client_id=" + h.default.getInstance().Appid_FaceBook +
-          "&response_type=token" + e + "&redirect_uri=" + h.default.getInstance().urlFBCallback;
+        var i = "https://www.facebook.com/v4.0/dialog/oauth?client_id=" + GameConfigManager.default.getInstance().Appid_FaceBook +
+          "&response_type=token" + e + "&redirect_uri=" + GameConfigManager.default.getInstance().urlFBCallback;
         window.location.href = i;
       }
     };
     e.prototype.loginWithFB = function() {
       var t = this,
         e = "";
-      if (!c.default.isNullOrEmpty(h.default.getInstance().aff_id)) {
-        e = "&aff_id=" + h.default.getInstance().aff_id;
+      if (!StringUtil.default.isNullOrEmpty(GameConfigManager.default.getInstance().aff_id)) {
+        e = "&aff_id=" + GameConfigManager.default.getInstance().aff_id;
       }
-      y.default.getInstance().sendGetHttpRequest(h.default.getInstance().urlLoginFB + h.default.getInstance().tokenFB + e + "&app_id=" + h
+      GameHTTPManager.default.getInstance().sendGetHttpRequest(GameConfigManager.default.getInstance().urlLoginFB + GameConfigManager.default.getInstance().tokenFB + e + "&app_id=" + GameConfigManager
         .default.getInstance().app_id,
         function(e) {
           var i = e.data[0].token;
           t.loginWithToken(i, e.data[0].session_id);
-          r.default.getInstance().username = e.data[0].username;
-          r.default.getInstance().displayName = e.data[0].fullname;
+          GamePlayManager.default.getInstance().username = e.data[0].username;
+          GamePlayManager.default.getInstance().displayName = e.data[0].fullname;
           if (null !== e.data[0].avatar && void 0 !== e.data[0].avatar) {
-            r.default.getInstance().avaURL = e.data[0].avatar;
+            GamePlayManager.default.getInstance().avaURL = e.data[0].avatar;
           }
           if (null !== e.data[0].fb_id && void 0 !== e.data[0].fb_id && 0 !== e.data[0].fb_id.toString().localeCompare("undefined")) {
-            r.default.getInstance().fb_id = e.data[0].fb_id;
+            GamePlayManager.default.getInstance().fb_id = e.data[0].fb_id;
           }
           if (void 0 !== e.data[0].aff_id && null !== e.data[0].aff_id) {
-            h.default.getInstance().aff_id = e.data[0].aff_id;
+            GameConfigManager.default.getInstance().aff_id = e.data[0].aff_id;
           }
         },
         function(t) {
-          u.default.getInstance().showPopupMessageUtil(t);
-          S.default.getInstance().sendLogginError(t);
+          CommonPrefabsManager.default.getInstance().showPopupMessageUtil(t);
+          ErrorLogHandler.default.getInstance().sendLogginError(t);
         });
     };
     e.prototype.loginWithToken = function(t, e) {
@@ -701,10 +689,10 @@ var r = require("./GamePlayManager"),
       if (void 0 === e) {
         e = "";
       }
-      r.default.getInstance().forceLogin = true;
-      r.default.getInstance().tokenTemp = t;
-      r.default.getInstance().session_idTemp = e;
-      cc.director.loadScene(l.GameConfigs.SceneName.Login);
+      GamePlayManager.default.getInstance().forceLogin = true;
+      GamePlayManager.default.getInstance().tokenTemp = t;
+      GamePlayManager.default.getInstance().session_idTemp = e;
+      cc.director.loadScene(GameDefine.GameConfigs.SceneName.Login);
     };
     e.prototype.onActivePhoneSuccess = function() {
       if (this.nodeKickHoat) {
@@ -726,7 +714,7 @@ var r = require("./GamePlayManager"),
     o([M(cc.Boolean)], e.prototype, "allowEnable", void 0);
     o([M(cc.Label)], e.prototype, "nameUserLb", void 0);
     o([M(cc.Label)], e.prototype, "moneyUserLb", void 0);
-    o([M(d.default)], e.prototype, "avatar", void 0);
+    o([M(RemoteSprite.default)], e.prototype, "avatar", void 0);
     o([M(cc.Node)], e.prototype, "btnBack", void 0);
     o([M(cc.Node)], e.prototype, "nodeRightUI", void 0);
     o([M(cc.Node)], e.prototype, "nodeKickHoat", void 0);

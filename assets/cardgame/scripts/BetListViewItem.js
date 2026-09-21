@@ -47,7 +47,7 @@ var n = this && this.__extends || function() {
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-var a = require("./StringUtil"),
+var StringUtil = require("./StringUtil"),
   s = cc._decorator,
   r = s.ccclass,
   c = s.property,
@@ -69,7 +69,7 @@ var a = require("./StringUtil"),
         if (null != this.icon) {
           this.icon.active = true;
         }
-        this.label.string = a.default.formatMoneyNumber(t);
+        this.label.string = StringUtil.default.formatMoneyNumber(t);
         if (this.isCheck) {
           if (this.label.string.length < 6) {
             this.label.fontSize = 30;

@@ -47,34 +47,23 @@ var n = this && this.__extends || function() {
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-// ── BẢNG TRA BÍ DANH (máy sinh — ghi-bang-tra-bi-danh.js) ──────
-// Mã dịch ngược đặt bí danh một chữ cho mỗi module. Bảng này để khỏi phải cuộn ngược.
-// KHÔNG đổi tên chúng bằng tìm-kiếm-thay-thế: đoạn mở đầu __decorate khai lại đúng
-// những chữ này làm biến cục bộ, đổi là hỏng im lặng.
-//   a = MessageCardGameHandler   s = PlayerView   r = GamePlayManager
-//   c = MessageCardGameHandler   l = StringUtil   h = GameZOrder
-//   u = CardGameCommonRequest   d = GameConfigManager   p = CommonPrefabsManager
-//   f = CardGameTableController   g = ErrorLogHandler   m = BetLabel
-//   y = ListChatIconConfig   S = EmoScript   _ = BaseScene
-//   v = GameDefine   b = RoomMessageHandler
-// ────────────────────────────────────────────────────────────────
-var a = require("./MessageCardGameHandler"),
-  s = require("./PlayerView"),
-  r = require("./GamePlayManager"),
+var MessageCardGameHandler = require("./MessageCardGameHandler"),
+  PlayerView = require("./PlayerView"),
+  GamePlayManager = require("./GamePlayManager"),
   c = require("./MessageCardGameHandler"),
-  l = require("./StringUtil"),
-  h = require("./GameZOrder"),
-  u = require("./CardGameCommonRequest"),
-  d = require("./GameConfigManager"),
-  p = require("./CommonPrefabsManager"),
-  f = require("./CardGameTableController"),
-  g = require("./ErrorLogHandler"),
-  m = require("./BetLabel"),
-  y = require("./ListChatIconConfig"),
-  S = require("./EmoScript"),
-  _ = require("./BaseScene"),
-  v = require("./GameDefine"),
-  b = require("./RoomMessageHandler"),
+  StringUtil = require("./StringUtil"),
+  GameZOrder = require("./GameZOrder"),
+  CardGameCommonRequest = require("./CardGameCommonRequest"),
+  GameConfigManager = require("./GameConfigManager"),
+  CommonPrefabsManager = require("./CommonPrefabsManager"),
+  CardGameTableController = require("./CardGameTableController"),
+  ErrorLogHandler = require("./ErrorLogHandler"),
+  BetLabel = require("./BetLabel"),
+  ListChatIconConfig = require("./ListChatIconConfig"),
+  EmoScript = require("./EmoScript"),
+  BaseScene = require("./BaseScene"),
+  GameDefine = require("./GameDefine"),
+  RoomMessageHandler = require("./RoomMessageHandler"),
   C = cc._decorator,
   T = C.ccclass,
   E = C.property,
@@ -161,10 +150,10 @@ var M = function(t) {
   }
   n(e, t);
   e.prototype.initDefaultData = function() {
-    for (var t in this.size = this.node.getContentSize(), this.state = a.GameState.WAITING, this._playedOnce = false, this
+    for (var t in this.size = this.node.getContentSize(), this.state = MessageCardGameHandler.GameState.WAITING, this._playedOnce = false, this
         ._joinedTable = false, this._dangPhatBai = false, null !== this.rutTienBtn && (this.rutTienBtn.active = false), this
         ._subscribedToGetOut = false, this._autoWithDrawMoney = false, this._moneyToAutoWithdraw = 0, this._dangKetThuc = false, this
-        .tuDongGuiSanSang = d.default.getInstance().autoReady, this._forcedQuit = false, this._forcedToLeaveRoom = false, this.loaded =
+        .tuDongGuiSanSang = GameConfigManager.default.getInstance().autoReady, this._forcedQuit = false, this._forcedToLeaveRoom = false, this.loaded =
         false, this._khongThaoTac = true, this._soVanKhongThaoTac = 0, this.bet = 0, this.maxMoneyBuyIn = 0, this.minMoneyBuyIn = 0,
         this.isHost = false, this._thisPlayerView = null, this._incognito = false, this.LeaveRoomMessage = null, this.AllPlayers) {
       var e = this.AllPlayers[t];
@@ -204,7 +193,7 @@ var M = function(t) {
       var e = cc.instantiate(this.prefabsCardGameTableController);
       e.parent = this.node;
       e.zIndex = -2;
-      this.cardGameTableController = e.getComponent(f.default);
+      this.cardGameTableController = e.getComponent(CardGameTableController.default);
       this.cardGameTableController.init(this.getNameGame(), this.getSpriteFrameName(), this.getListChatDefaultText(), this
       .getCmdStart(), this.onUserClickExit.bind(this), this);
       this.cardGameTableController.sendStart = function() {
@@ -231,8 +220,8 @@ var M = function(t) {
         var o = cc.instantiate(t.winTextEffectPrefab);
         o.parent = t.node;
         o.position = e.position;
-        o.zIndex = h.default.TOP;
-        t.winTextEffectList.push(o.getComponent(m.default));
+        o.zIndex = GameZOrder.default.TOP;
+        t.winTextEffectList.push(o.getComponent(BetLabel.default));
         o.active = false;
       }
     });
@@ -262,18 +251,18 @@ var M = function(t) {
     this.POS9.push(this.POS5[4]);
     this.POS9.push(1);
     cc.loader.loadRes("TX/ListChatIconConfig", function(t, e) {
-      if (p.default.getInstance().hideLoading(), null === e) {
+      if (CommonPrefabsManager.default.getInstance().hideLoading(), null === e) {
         ;
       } else {
         (n = cc.instantiate(e)).parent = this.node;
-        this.listChatIconConfig = n.getComponent(y.default);
+        this.listChatIconConfig = n.getComponent(ListChatIconConfig.default);
         for (var i = 0; i < this.inviteBtns.length; ++i) {
           var n;
           (n = cc.instantiate(this.listChatIconConfig.iconProfap)).parent = this.node;
           n.position = this.inviteBtns[i].position;
           n.active = false;
           n.zIndex = 1;
-          var o = n.getComponent(S.default);
+          var o = n.getComponent(EmoScript.default);
           this.emoSlotIndexPos.push(o);
         }
       }
@@ -290,8 +279,8 @@ var M = function(t) {
     this.showChat(t, i, n, e, o, a);
   };
   e.prototype.onReceiveMessage = function(t, e, i, n) {
-    switch (void 0 === n && (n = true), t != c.Global_Message.GET_TABLES && d.default.getInstance().enviromentName.includes("pre") && _
-      .default.currentSceneName != v.GameConfigs.SceneName.BauCua && g.default.getInstance().addLog(JSON.stringify(i)), t) {
+    switch (void 0 === n && (n = true), t != c.Global_Message.GET_TABLES && GameConfigManager.default.getInstance().enviromentName.includes("pre") && BaseScene
+      .default.currentSceneName != GameDefine.GameConfigs.SceneName.BauCua && ErrorLogHandler.default.getInstance().addLog(JSON.stringify(i)), t) {
       case c.Global_Message.INGAME_JOIN_TABLE_INFOS:
         this.onGetInGameTableInfo(i);
         break;
@@ -326,7 +315,7 @@ var M = function(t) {
         var f = i.bmgs;
         if (f) {
           for (var m = 0; m < f.length; m++) {
-            if (0 !== f[m].uid.localeCompare(r.default.getInstance().userID)) {
+            if (0 !== f[m].uid.localeCompare(GamePlayManager.default.getInstance().userID)) {
               this.processIngameUserChat(f[m], true);
             }
           }
@@ -349,10 +338,10 @@ var M = function(t) {
           T = b.gold,
           E = b.chip,
           I = b.safe;
-        r.default.getInstance().vip = C;
-        r.default.getInstance().gold = T;
-        r.default.getInstance().chip = E;
-        r.default.getInstance().goldSafe = I;
+        GamePlayManager.default.getInstance().vip = C;
+        GamePlayManager.default.getInstance().gold = T;
+        GamePlayManager.default.getInstance().chip = E;
+        GamePlayManager.default.getInstance().goldSafe = I;
         this.refreshMoney(b);
         break;
       case c.Global_Message.BUY_IN:
@@ -369,32 +358,32 @@ var M = function(t) {
           var N = P[O];
           M.push(N.u);
         }
-        u.default.getInstance().sendInvitePlayers(M);
-        p.default.getInstance().showPopupMessageUtil(
+        CardGameCommonRequest.default.getInstance().sendInvitePlayers(M);
+        CommonPrefabsManager.default.getInstance().showPopupMessageUtil(
           "H\u1ec7 th\u1ed1ng \u0111\xe3 g\u1eedi l\u1eddi m\u1eddi \u0111\u1ebfn ng\u01b0\u1eddi ch\u01a1i kh\xe1c!");
         break;
       case c.Global_Message.JOIN_TABLE_INVITATION:
-        if (false === this.node.active && false === r.default.getInstance().iskteckgame) {
+        if (false === this.node.active && false === GamePlayManager.default.getInstance().iskteckgame) {
           var B = i.fu,
             D = i.ri;
-          p.default.getInstance().showPopupInviRoom(B, D);
+          CommonPrefabsManager.default.getInstance().showPopupInviRoom(B, D);
         }
         break;
       case c.Global_Message.BAO_QUAY:
-        l.default.isNullOrEmpty(i.mgs) ? p.default.getInstance().showPopupMessageUtil(
-            "Ch\xfang t\xf4i s\u1ebd s\u1eed l\xfd v\xe0 th\xf4ng b\xe1o qua h\u1ed9p th\u01b0.") : p.default.getInstance()
+        StringUtil.default.isNullOrEmpty(i.mgs) ? CommonPrefabsManager.default.getInstance().showPopupMessageUtil(
+            "Ch\xfang t\xf4i s\u1ebd s\u1eed l\xfd v\xe0 th\xf4ng b\xe1o qua h\u1ed9p th\u01b0.") : CommonPrefabsManager.default.getInstance()
           .showPopupMessageUtil(i.mgs);
     }
   };
   e.prototype.sendAutoReadyPreference = function() {
-    b.default.getInstance().sendAutoReadyPref(d.default.getInstance().autoReady);
+    RoomMessageHandler.default.getInstance().sendAutoReadyPref(GameConfigManager.default.getInstance().autoReady);
   };
   e.prototype.autoSendReady = function() {
     if (this._daNgoi) {
       if (this.isHost) {
         this.sendReady();
       } else {
-        if (this.tuDongGuiSanSang || d.default.getInstance().autoReady) {
+        if (this.tuDongGuiSanSang || GameConfigManager.default.getInstance().autoReady) {
           this.sendReady();
         } else {
           if (null != this.cardGameTableController) {
@@ -406,16 +395,16 @@ var M = function(t) {
   };
   e.prototype.setTextUserbanCHung = function(t) {};
   e.prototype.onGetInGameTableInfo = function(t) {
-    p.default.getInstance().hideLoading();
+    CommonPrefabsManager.default.getInstance().hideLoading();
     this.sendAutoReadyPreference();
     this.node.opacity = 255;
     this.node.scale = 1;
     if (null !== this.mainGameViewModel.roomController && void 0 !== this.mainGameViewModel.roomController) {
       this.mainGameViewModel.roomController.node.active = false;
     }
-    if (d.default.getInstance().enviromentName.indexOf("pre") >= 0) {
-      g.default.getInstance().clearLogString();
-      g.default.getInstance().addLog(JSON.stringify(t));
+    if (GameConfigManager.default.getInstance().enviromentName.indexOf("pre") >= 0) {
+      ErrorLogHandler.default.getInstance().clearLogString();
+      ErrorLogHandler.default.getInstance().addLog(JSON.stringify(t));
     }
     if (null !== t.hpwd && void 0 !== t.hpwd && t.hpwd) {
       this.isGameAnDanh = false;
@@ -432,7 +421,7 @@ var M = function(t) {
   };
   e.prototype.onUserJoinTable = function(t) {
     var e = false;
-    if (this.state !== a.GameState.WAITING) {
+    if (this.state !== MessageCardGameHandler.GameState.WAITING) {
       e = true;
     }
     this.addPlayerWithDict(t);
@@ -460,9 +449,9 @@ var M = function(t) {
   e.prototype.setMoneyBuyInThreshold = function(t, e) {
     this.minMoneyBuyIn = t;
     this.maxMoneyBuyIn = e;
-    r.default.getInstance().minBuyIn = this.minMoneyBuyIn;
-    r.default.getInstance().maxBuyIn = this.maxMoneyBuyIn;
-    r.default.getInstance().bet = this.bet;
+    GamePlayManager.default.getInstance().minBuyIn = this.minMoneyBuyIn;
+    GamePlayManager.default.getInstance().maxBuyIn = this.maxMoneyBuyIn;
+    GamePlayManager.default.getInstance().bet = this.bet;
   };
   e.prototype.getPlayer = function(t) {
     return this.AllPlayers[t];
@@ -476,7 +465,7 @@ var M = function(t) {
   e.prototype.addPlayerWithDict = function(t) {
     var e = t.uid,
       i = t.C;
-    if (0 === e.localeCompare(r.default.getInstance().userID)) {
+    if (0 === e.localeCompare(GamePlayManager.default.getInstance().userID)) {
       this.isHost = i;
     }
     var n = t.m,
@@ -487,11 +476,11 @@ var M = function(t) {
       h = t.r,
       u = t.pid,
       d = t.pi;
-    if (this.state === a.GameState.WAITING || this.checkReconnect(t)) {
+    if (this.state === MessageCardGameHandler.GameState.WAITING || this.checkReconnect(t)) {
       d = true;
     }
     if (this._dangPhatBai) {
-      if (!(r.default.getInstance().gameID !== a.GAME.XITO && r.default.getInstance().gameID !== a.GAME.POKER)) {
+      if (!(GamePlayManager.default.getInstance().gameID !== MessageCardGameHandler.GAME.XITO && GamePlayManager.default.getInstance().gameID !== MessageCardGameHandler.GAME.POKER)) {
         d = false;
       }
     }
@@ -503,7 +492,7 @@ var M = function(t) {
       p.rM = m;
     }
     var y = this.addPlayer(l, e, i, n, o, s, c, h, u, d, p, f, g);
-    if (y.isPlaying = t.pi, this.state === a.GameState.VIEWING) {
+    if (y.isPlaying = t.pi, this.state === MessageCardGameHandler.GameState.VIEWING) {
       var S = t.cb;
       y._currentBet = S;
     }
@@ -522,9 +511,9 @@ var M = function(t) {
     }
     var y = this.getPlayerView();
     y.parent = this.node;
-    y.zIndex = h.default.BOTTOM;
+    y.zIndex = GameZOrder.default.BOTTOM;
     y.setPosition(i.posOutScreen);
-    (m = y.getComponent(s.default)).addInfo(t, e, n, o, a, r, c, l, u, g, p, f, this.isGameAnDanh);
+    (m = y.getComponent(PlayerView.default)).addInfo(t, e, n, o, a, r, c, l, u, g, p, f, this.isGameAnDanh);
     if (m.isMine()) {
       this._thisPlayerView = m;
     }
@@ -609,7 +598,7 @@ var M = function(t) {
   };
   e.prototype.buyIn = function() {};
   e.prototype.updateReadyStatus = function() {
-    if (this.state !== a.GameState.VIEWING && this.state !== a.GameState.PLAYING) {
+    if (this.state !== MessageCardGameHandler.GameState.VIEWING && this.state !== MessageCardGameHandler.GameState.PLAYING) {
       for (t = 0; t < this.players.length; ++t) {
         if ((e = this.players[t]).isHost) {
           e.node.color = cc.Color.WHITE;
@@ -651,7 +640,7 @@ var M = function(t) {
     }
   };
   e.prototype.setReadyForPlayer = function(t) {
-    if (this.state !== a.GameState.WAITING) {
+    if (this.state !== MessageCardGameHandler.GameState.WAITING) {
       ;
     } else {
       var e = this.getPlayer(t);
@@ -753,7 +742,7 @@ var M = function(t) {
     }
   };
   e.prototype.sendReady = function() {
-    u.default.getInstance().sendReady();
+    CardGameCommonRequest.default.getInstance().sendReady();
   };
   e.prototype.sendStart = function() {
     this.cardGameTableController.sendStartCmd();
@@ -767,10 +756,10 @@ var M = function(t) {
     }
     if (0 != e && e === this.players.length - 1) {
       this.sendStart();
-    } else if (r.default.getInstance().isHostSentStartWarningOtherNotReady) {
+    } else if (GamePlayManager.default.getInstance().isHostSentStartWarningOtherNotReady) {
       this.sendStart();
     } else {
-      var o = p.default.getInstance().showPopup2Button();
+      var o = CommonPrefabsManager.default.getInstance().showPopup2Button();
       o.onOKClicked = function() {
         o.hide();
         t.sendStart();
@@ -779,7 +768,7 @@ var M = function(t) {
         o.hide();
       };
       o.setContent("C\xf3 ng\u01b0\u1eddi ch\u01a1i ch\u01b0a s\u1eb5n s\xe0ng, b\u1ea1n c\xf3 mu\u1ed1n b\u1eaft \u0111\u1ea7u?");
-      r.default.getInstance().isHostSentStartWarningOtherNotReady = true;
+      GamePlayManager.default.getInstance().isHostSentStartWarningOtherNotReady = true;
       this.popupHasPlayerNotReady = o;
     }
   };
@@ -787,7 +776,7 @@ var M = function(t) {
     if (t.isMine()) {
       for (var n = false, o = this.inviteBtns[0].position, a = 0; a < this.players.length; ++a) {
         t = this.players[a];
-        if (l.default.checkVec2Equal(t.pos, o)) {
+        if (StringUtil.default.checkVec2Equal(t.pos, o)) {
           n = true;
           break;
         }
@@ -817,9 +806,9 @@ var M = function(t) {
       e.iconnReady.active = false;
       e.kickButton.active = false;
       e.runViewAction();
-      if (l.default.checkVec2Equal(e.node.position, cc.Vec2.ZERO) || this.state === a.GameState.WAITING) {
+      if (StringUtil.default.checkVec2Equal(e.node.position, cc.Vec2.ZERO) || this.state === MessageCardGameHandler.GameState.WAITING) {
         e.pos = this.getViewPositionOfViewingPlayer(e, t);
-        if (this.state !== a.GameState.VIEWING || e.isMine() || this._joinedTable) {
+        if (this.state !== MessageCardGameHandler.GameState.VIEWING || e.isMine() || this._joinedTable) {
           e.runToPos(this.size);
         } else {
           e.node.position = e.pos;
@@ -828,7 +817,7 @@ var M = function(t) {
     }
   };
   e.prototype.removePlayer = function(t) {
-    if (this.state !== a.GameState.WAITING) {
+    if (this.state !== MessageCardGameHandler.GameState.WAITING) {
       for (var e = 0; e < this.pendingJoinPlayers.length; ++e) {
         var i = this.pendingJoinPlayers[e];
         if (0 === i.userID.localeCompare(t)) {
@@ -839,7 +828,7 @@ var M = function(t) {
           this.pendingJoinPlayers.splice(e, 1);
           delete this.AllPlayers[t];
           this.updateViewingPlayerPositions();
-          if (this.autoReady && r.default.getInstance().gameID !== a.GAME.BINH) {
+          if (this.autoReady && GamePlayManager.default.getInstance().gameID !== MessageCardGameHandler.GAME.BINH) {
             if (i.isMine()) {
               this.isHost = false;
             } else {
@@ -852,7 +841,7 @@ var M = function(t) {
       var n = this.getPlayer(t);
       if (null !== n && void 0 !== n) {
         n.removeChat();
-        if (this.autoReady && r.default.getInstance().gameID !== a.GAME.BINH && n.isMine()) {
+        if (this.autoReady && GamePlayManager.default.getInstance().gameID !== MessageCardGameHandler.GAME.BINH && n.isMine()) {
           if (n.checkInThisArray(this.playersPlaying)) {
             this.pendingRemovePlayers.push(n);
             n.iconQuit.active = true;
@@ -907,10 +896,10 @@ var M = function(t) {
   };
   e.prototype.handleLeaveRoomResponse = function() {
     var t = this;
-    if (this.isClickExit = false, this.cardGameTableController.handleLeaveRoom(), !r.default.getInstance().onLogOutKickUser()) {
-      if (this.hideAllEmoticon(), r.default.getInstance().gameID == a.GAME.BACAY) {
+    if (this.isClickExit = false, this.cardGameTableController.handleLeaveRoom(), !GamePlayManager.default.getInstance().onLogOutKickUser()) {
+      if (this.hideAllEmoticon(), GamePlayManager.default.getInstance().gameID == MessageCardGameHandler.GAME.BACAY) {
         for (var e = 0; e < this.playersPlaying.length; e++) {
-          this.playersPlaying[e].getComponent(s.default).reset();
+          this.playersPlaying[e].getComponent(PlayerView.default).reset();
         }
       }
       if (this.isDelayLeave) {
@@ -924,7 +913,7 @@ var M = function(t) {
     }
   };
   e.prototype.sendLeaveRoom = function() {
-    u.default.getInstance().sendLeaveRoom();
+    CardGameCommonRequest.default.getInstance().sendLeaveRoom();
     if ("1" == cc.sys.localStorage.getItem("isPlayBauCua")) {
       cc.sys.localStorage.setItem("isPlayBauCua", "0");
     }
@@ -952,7 +941,7 @@ var M = function(t) {
       if (this.cardGameTableController) {
         if (0 === a) {
           var c = I;
-          if (0 !== e.localeCompare(r.default.getInstance().userID)) {
+          if (0 !== e.localeCompare(GamePlayManager.default.getInstance().userID)) {
             c = A;
           }
           this.cardGameTableController.loadChat(t, i, o, false, -1, c, c);
@@ -1010,9 +999,9 @@ var M = function(t) {
     this.moneys = t;
     for (var e = 0; e < this.moneys.length; e++) {
       var i = this.moneys[e].uid;
-      if (!l.default.isNullOrEmpty(i) && 0 === i.localeCompare(r.default.getInstance().userID)) {
+      if (!StringUtil.default.isNullOrEmpty(i) && 0 === i.localeCompare(GamePlayManager.default.getInstance().userID)) {
         var n = this.moneys[e].m;
-        r.default.getInstance().gold = n;
+        GamePlayManager.default.getInstance().gold = n;
         if (null !== this.mainGameViewModel && void 0 !== this.mainGameViewModel && null !== this.mainGameViewModel.headerUi &&
           void 0 !== this.mainGameViewModel.headerUi) {
           this.mainGameViewModel.headerUi.updateUI();
@@ -1025,10 +1014,10 @@ var M = function(t) {
       i = t.gold,
       n = t.chip,
       o = t.safe;
-    r.default.getInstance().vip = e;
-    r.default.getInstance().gold = i;
-    r.default.getInstance().chip = n;
-    r.default.getInstance().goldSafe = o;
+    GamePlayManager.default.getInstance().vip = e;
+    GamePlayManager.default.getInstance().gold = i;
+    GamePlayManager.default.getInstance().chip = n;
+    GamePlayManager.default.getInstance().goldSafe = o;
     if (this.gameRutTien && null !== this._thisPlayerView && void 0 !== this._thisPlayerView) {
       this._thisPlayerView._realMoney = i;
     }
@@ -1040,7 +1029,7 @@ var M = function(t) {
     return !this._dangPhatBai;
   };
   e.prototype.setHostPlayer = function(t) {
-    this.isHost = 0 === t.localeCompare(r.default.getInstance().userID);
+    this.isHost = 0 === t.localeCompare(GamePlayManager.default.getInstance().userID);
     var e = false;
     if (this.players.forEach(function(i) {
         if (0 === i.userID.localeCompare(t)) {
@@ -1061,13 +1050,13 @@ var M = function(t) {
     }
     if (this.isHost) {
       this.hostCheckAllPlayerReadyForShowButtonStartGameWhenChangeHost();
-      if (this._daNgoi && this.isHost && this.state === a.GameState.WAITING) {
+      if (this._daNgoi && this.isHost && this.state === MessageCardGameHandler.GameState.WAITING) {
         this.sendReady();
       }
     }
   };
   e.prototype.handlePendingPlayers = function() {
-    this.tuDongGuiSanSang = d.default.getInstance().autoReady;
+    this.tuDongGuiSanSang = GameConfigManager.default.getInstance().autoReady;
   };
   e.prototype.checkAndQuitRoom = function() {
     if (this._forcedQuit) {
@@ -1078,13 +1067,13 @@ var M = function(t) {
       this.handleLeaveRoomResponse();
       return true;
     }
-    if (r.default.getInstance().checkBaoTriGame()) {
-      this.state = a.GameState.WAITING;
+    if (GamePlayManager.default.getInstance().checkBaoTriGame()) {
+      this.state = MessageCardGameHandler.GameState.WAITING;
       this.sendLeaveRoom();
       return true;
     }
     if (this._subscribedToGetOut) {
-      this.state = a.GameState.WAITING;
+      this.state = MessageCardGameHandler.GameState.WAITING;
       this.sendLeaveRoom();
       return true;
     }
@@ -1099,16 +1088,16 @@ var M = function(t) {
     return false;
   };
   e.prototype.onUserClickExit = function() {
-    if (this._dangPhatBai || this.state === a.GameState.PLAYING) {
-      return this._subscribedToGetOut ? (this._subscribedToGetOut = false, p.default.getInstance().showPopupMessageUtil(
+    if (this._dangPhatBai || this.state === MessageCardGameHandler.GameState.PLAYING) {
+      return this._subscribedToGetOut ? (this._subscribedToGetOut = false, CommonPrefabsManager.default.getInstance().showPopupMessageUtil(
           "B\u1ea1n s\u1ebd \u1edf l\u1ea1i ch\u01a1i ti\u1ebfp."), this.cardGameTableController.inGameBackPopup.btnExit.spriteFrame =
         this.cardGameTableController.inGameBackPopup.iconOutRoom, void(this._thisPlayerView.iconQuit.active = false)) : (this
-        ._subscribedToGetOut = true, p.default.getInstance().showPopupMessageUtil(
+        ._subscribedToGetOut = true, CommonPrefabsManager.default.getInstance().showPopupMessageUtil(
           "B\u1ea1n s\u1ebd r\u1eddi ph\xf2ng khi k\u1ebft th\xfac v\xe1n."), this.cardGameTableController.inGameBackPopup.btnExit
         .spriteFrame = this.cardGameTableController.inGameBackPopup.iconHuyOutRoom, void(this._thisPlayerView.iconQuit.active = true));
     }
     if (this.isClickExit) {
-      p.default.getInstance().showPopupMessageUtil("B\u1ea1n s\u1ebd r\u1eddi ph\xf2ng khi k\u1ebft th\xfac v\xe1n.");
+      CommonPrefabsManager.default.getInstance().showPopupMessageUtil("B\u1ea1n s\u1ebd r\u1eddi ph\xf2ng khi k\u1ebft th\xfac v\xe1n.");
     }
     if (null !== this._thisPlayerView && void 0 !== this._thisPlayerView) {
       this._thisPlayerView.iconQuit.active = true;
@@ -1157,8 +1146,8 @@ var M = function(t) {
     this.updateViewPostions(false, true);
   };
   e.prototype.onEndGame = function() {
-    if (d.default.getInstance().enviromentName.indexOf("pre") >= 0) {
-      g.default.getInstance().sendLog([this.getTag(), this._thisPlayerView.userID, "vanchoi"], true);
+    if (GameConfigManager.default.getInstance().enviromentName.indexOf("pre") >= 0) {
+      ErrorLogHandler.default.getInstance().sendLog([this.getTag(), this._thisPlayerView.userID, "vanchoi"], true);
     }
   };
   e.prototype.onFocus = function(t) {
@@ -1262,11 +1251,11 @@ var M = function(t) {
     }
     var e = this.getPlayerView();
     e.parent = this.node;
-    e.zIndex = h.default.BOTTOM;
+    e.zIndex = GameZOrder.default.BOTTOM;
     e.position = this.inviteBtns[this.getPosanDanh4()].position;
     e.scale = this.scalePlayerOther;
     e.active = false;
-    this.playerViewpos4AnDanh = e.getComponent(s.default);
+    this.playerViewpos4AnDanh = e.getComponent(PlayerView.default);
     this.playerViewpos4AnDanh.userID = "ddasdsadsadaszzzz12a091";
     this.playerViewpos4AnDanh.isAnDanh = true;
     if (t) {
@@ -1283,7 +1272,7 @@ var M = function(t) {
   };
   e.prototype.showViewTableMessage = function() {
     this.scheduleOnce(function() {
-      p.default.getInstance().showPopupMessageUtil("B\xe0n \u0111ang ch\u01a1i, xin vui l\xf2ng ch\u1edd!");
+      CommonPrefabsManager.default.getInstance().showPopupMessageUtil("B\xe0n \u0111ang ch\u01a1i, xin vui l\xf2ng ch\u1edd!");
     }, .5);
   };
   e.prototype.processCheckToOffAnDanh4 = function() {

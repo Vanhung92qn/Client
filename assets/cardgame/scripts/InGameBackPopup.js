@@ -47,19 +47,12 @@ var n = this && this.__extends || function() {
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-// ── BẢNG TRA BÍ DANH (máy sinh — ghi-bang-tra-bi-danh.js) ──────
-// Mã dịch ngược đặt bí danh một chữ cho mỗi module. Bảng này để khỏi phải cuộn ngược.
-// KHÔNG đổi tên chúng bằng tìm-kiếm-thay-thế: đoạn mở đầu __decorate khai lại đúng
-// những chữ này làm biến cục bộ, đổi là hỏng im lặng.
-//   a = GamePlayManager   s = GameConfigManager   r = CommonPrefabsManager
-//   c = MusicPlayer   l = CardGameCommonRequest   h = RoomMessageHandler
-// ────────────────────────────────────────────────────────────────
-var a = require("./GamePlayManager"),
-  s = require("./GameConfigManager"),
-  r = require("./CommonPrefabsManager"),
-  c = require("./MusicPlayer"),
-  l = require("./CardGameCommonRequest"),
-  h = require("./RoomMessageHandler"),
+var GamePlayManager = require("./GamePlayManager"),
+  GameConfigManager = require("./GameConfigManager"),
+  CommonPrefabsManager = require("./CommonPrefabsManager"),
+  MusicPlayer = require("./MusicPlayer"),
+  CardGameCommonRequest = require("./CardGameCommonRequest"),
+  RoomMessageHandler = require("./RoomMessageHandler"),
   u = cc._decorator,
   d = u.ccclass,
   p = u.property,
@@ -85,7 +78,7 @@ var a = require("./GamePlayManager"),
         e = 100;
       }
       if (null !== this.btnAutoReady && void 0 !== this.btnAutoReady) {
-        this.btnAutoReady.isChecked = s.default.getInstance().autoReady;
+        this.btnAutoReady.isChecked = GameConfigManager.default.getInstance().autoReady;
       }
       this.node.active = true;
       this.node.position = new cc.Vec2(-this.node.parent.width / 2 - this.node.width / 2, this.node.position.y);
@@ -101,7 +94,7 @@ var a = require("./GamePlayManager"),
     };
     e.prototype.onClickHide = function() {
       var t = this;
-      c.default.getInstance().playbtnClick();
+      MusicPlayer.default.getInstance().playbtnClick();
       this.node.stopAllActions();
       this.onCloseCallback();
       this.node.runAction(cc.sequence(cc.moveTo(.5, new cc.Vec2(-this.node.parent.width / 2 - this.node.width / 2, this.node.position.y))
@@ -115,29 +108,29 @@ var a = require("./GamePlayManager"),
     };
     e.prototype.onClickSetting = function() {
       this.onClickHide();
-      r.default.getInstance().showPopupSetting();
+      CommonPrefabsManager.default.getInstance().showPopupSetting();
     };
     e.prototype.onClickAutoReady = function() {
-      s.default.getInstance().setEnableAutoReady(this.btnAutoReady.isChecked);
-      h.default.getInstance().sendAutoReadyPref(this.btnAutoReady.isChecked);
-      c.default.getInstance().playbtnClick();
+      GameConfigManager.default.getInstance().setEnableAutoReady(this.btnAutoReady.isChecked);
+      RoomMessageHandler.default.getInstance().sendAutoReadyPref(this.btnAutoReady.isChecked);
+      MusicPlayer.default.getInstance().playbtnClick();
     };
     e.prototype.onClickHelp = function() {
-      r.default.getInstance().showPopupHelpImage(a.default.getInstance().gameID);
+      CommonPrefabsManager.default.getInstance().showPopupHelpImage(GamePlayManager.default.getInstance().gameID);
       this.onClickHide();
     };
     e.prototype.onClickBaoQuay = function() {
-      var t = r.default.getInstance().showPopup2Button();
-      t.setContent(s.default.getInstance().textBaoQuay);
+      var t = CommonPrefabsManager.default.getInstance().showPopup2Button();
+      t.setContent(GameConfigManager.default.getInstance().textBaoQuay);
       t.setTextOk("B\xc1O");
       t.onOKClicked = function() {
         t.hide();
-        l.default.getInstance().sendBaoQuay();
+        CardGameCommonRequest.default.getInstance().sendBaoQuay();
       }.bind(this);
       this.onClickHide();
     };
     e.prototype.onClickBXH = function() {
-      r.default.getInstance().showPopupXepHangGame(a.default.getInstance().gameID);
+      CommonPrefabsManager.default.getInstance().showPopupXepHangGame(GamePlayManager.default.getInstance().gameID);
       this.onClickHide();
     };
     o([p(cc.Toggle)], e.prototype, "btnAutoReady", void 0);

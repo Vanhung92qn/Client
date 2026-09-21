@@ -47,7 +47,7 @@ var n = this && this.__extends || function() {
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-var a = require("./GameDefine"),
+var GameDefine = require("./GameDefine"),
   s = cc._decorator,
   r = s.ccclass,
   c = s.property,
@@ -63,7 +63,7 @@ var a = require("./GameDefine"),
     e.prototype.start = function() {};
     e.prototype.setLiengStatus = function(t) {
       if (!(t - 1 >= this.listStringText.length)) {
-        if (!(t != a.ELiengPlayState.CHECK && t != a.ELiengPlayState.CALL)) {
+        if (!(t != GameDefine.ELiengPlayState.CHECK && t != GameDefine.ELiengPlayState.CALL)) {
           3;
         }
         this.label.node.active = true;
@@ -73,7 +73,7 @@ var a = require("./GameDefine"),
     };
     e.prototype.setBaCayStatus = function(t) {
       if (!(t - 1 >= this.listStringText.length)) {
-        if (!(t != a.EBaCayPlayState.CHECK && t != a.EBaCayPlayState.CALL)) {
+        if (!(t != GameDefine.EBaCayPlayState.CHECK && t != GameDefine.EBaCayPlayState.CALL)) {
           3;
         }
         this.label.node.active = true;
@@ -87,17 +87,17 @@ var a = require("./GameDefine"),
       }
       var i = "";
       switch (t) {
-        case a.EPhomPlayerStatus.MOM:
+        case GameDefine.EPhomPlayerStatus.MOM:
           i = "M\xf3m";
           break;
-        case a.EPhomPlayerStatus.U:
+        case GameDefine.EPhomPlayerStatus.U:
           i = "\xd9";
           break;
-        case a.EPhomPlayerStatus.AN_CHOT:
+        case GameDefine.EPhomPlayerStatus.AN_CHOT:
           i = "\u0102n ch\u1ed1t";
           break;
         default:
-        case a.EPhomPlayerStatus.NONE:
+        case GameDefine.EPhomPlayerStatus.NONE:
           return void this.hide();
       }
       this.label.node.active = true;

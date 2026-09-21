@@ -47,17 +47,10 @@ var n = this && this.__extends || function() {
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-// ── BẢNG TRA BÍ DANH (máy sinh — ghi-bang-tra-bi-danh.js) ──────
-// Mã dịch ngược đặt bí danh một chữ cho mỗi module. Bảng này để khỏi phải cuộn ngược.
-// KHÔNG đổi tên chúng bằng tìm-kiếm-thay-thế: đoạn mở đầu __decorate khai lại đúng
-// những chữ này làm biến cục bộ, đổi là hỏng im lặng.
-//   a = CardPopupBase   s = GamePlayManager   r = StringUtil
-//   c = CommonPrefabsManager
-// ────────────────────────────────────────────────────────────────
-var a = require("./CardPopupBase"),
-  s = require("./GamePlayManager"),
-  r = require("./StringUtil"),
-  c = require("./CommonPrefabsManager"),
+var CardPopupBase = require("./CardPopupBase"),
+  GamePlayManager = require("./GamePlayManager"),
+  StringUtil = require("./StringUtil"),
+  CommonPrefabsManager = require("./CommonPrefabsManager"),
   l = cc._decorator,
   h = l.ccclass,
   u = l.property,
@@ -71,12 +64,12 @@ var a = require("./CardPopupBase"),
     }
     n(e, t);
     e.prototype.btnOKPress = function() {
-      if (r.default.isNullOrEmpty(this.password.string)) {
-        c.default.getInstance().showPopupMessageUtil("B\u1ea1n ch\u01b0a nh\u1eadp m\u1eadt kh\u1ea9u !");
+      if (StringUtil.default.isNullOrEmpty(this.password.string)) {
+        CommonPrefabsManager.default.getInstance().showPopupMessageUtil("B\u1ea1n ch\u01b0a nh\u1eadp m\u1eadt kh\u1ea9u !");
       } else {
         this.btnOK.interactable = false;
         var t = this.password.string;
-        s.default.getInstance().joinRoom(s.default.getInstance().roomID, this.serverID, t);
+        GamePlayManager.default.getInstance().joinRoom(GamePlayManager.default.getInstance().roomID, this.serverID, t);
         this.onClickClose();
       }
     };
@@ -84,11 +77,11 @@ var a = require("./CardPopupBase"),
       this.hide();
     };
     e.prototype.ontextChanged = function(t, e, i) {
-      e.string = r.default.removeSpecialCharacter(t);
+      e.string = StringUtil.default.removeSpecialCharacter(t);
     };
     o([u(cc.EditBox)], e.prototype, "password", void 0);
     o([u(cc.Button)], e.prototype, "btnOK", void 0);
     return e = o([h], e);
-  }(a.default);
+  }(CardPopupBase.default);
 i.default = d;
 void 0;

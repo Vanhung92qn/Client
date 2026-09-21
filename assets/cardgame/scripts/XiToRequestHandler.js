@@ -24,17 +24,10 @@ var n = this && this.__decorate || function(t, e, i, n) {
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-// ── BẢNG TRA BÍ DANH (máy sinh — ghi-bang-tra-bi-danh.js) ──────
-// Mã dịch ngược đặt bí danh một chữ cho mỗi module. Bảng này để khỏi phải cuộn ngược.
-// KHÔNG đổi tên chúng bằng tìm-kiếm-thay-thế: đoạn mở đầu __decorate khai lại đúng
-// những chữ này làm biến cục bộ, đổi là hỏng im lặng.
-//   o = WSCardGameHandle   a = MessageCardGameHandler   s = GamePlayManager
-//   r = XiToMessage
-// ────────────────────────────────────────────────────────────────
-var o = require("./WSCardGameHandle"),
-  a = require("./MessageCardGameHandler"),
-  s = require("./GamePlayManager"),
-  r = require("./XiToMessage"),
+var WSCardGameHandle = require("./WSCardGameHandle"),
+  MessageCardGameHandler = require("./MessageCardGameHandler"),
+  GamePlayManager = require("./GamePlayManager"),
+  XiToMessage = require("./XiToMessage"),
   c = cc._decorator,
   l = c.ccclass,
   h = (c.property, function() {
@@ -53,84 +46,84 @@ var o = require("./WSCardGameHandle"),
       return "Simms";
     };
     t.prototype.sendData = function(t) {
-      if (o.default.getInstance().isSocketOpen) {
-        o.default.getInstance().ws.sendData(t);
+      if (WSCardGameHandle.default.getInstance().isSocketOpen) {
+        WSCardGameHandle.default.getInstance().ws.sendData(t);
       }
     };
     t.prototype.GetListRoom = function() {
-      var t = [a.Message.MessageType.ZonePlugin_Type, this.getZoneName(), "channelPlugin", {
-        cmd: a.Global_Message.GET_TABLES,
+      var t = [MessageCardGameHandler.Message.MessageType.ZonePlugin_Type, this.getZoneName(), "channelPlugin", {
+        cmd: MessageCardGameHandler.Global_Message.GET_TABLES,
         aid: "1",
-        gid: a.GAME.XITO
+        gid: MessageCardGameHandler.GAME.XITO
       }];
       this.sendData(JSON.stringify(t));
     };
     t.prototype.sendReady = function(t) {
-      var e = [a.Message.MessageType.RoomPlugin_Type, this.getZoneName(), t, {
-        cmd: a.Global_Message.INGAME_USER_READY
+      var e = [MessageCardGameHandler.Message.MessageType.RoomPlugin_Type, this.getZoneName(), t, {
+        cmd: MessageCardGameHandler.Global_Message.INGAME_USER_READY
       }];
       this.sendData(JSON.stringify(e));
     };
     t.prototype.sendReadyToDealCard = function(t) {
-      var e = [a.Message.MessageType.RoomPlugin_Type, this.getZoneName(), t, {
-        cmd: r.default.START_BETTING
+      var e = [MessageCardGameHandler.Message.MessageType.RoomPlugin_Type, this.getZoneName(), t, {
+        cmd: XiToMessage.default.START_BETTING
       }];
       this.sendData(JSON.stringify(e));
     };
     t.prototype.sendWithdrawMoney = function(t) {
-      var e = [a.Message.MessageType.RoomPlugin_Type, this.getZoneName(), s.default.getInstance().roomID, {
-        cmd: r.default.WITHDRA_MONEY,
+      var e = [MessageCardGameHandler.Message.MessageType.RoomPlugin_Type, this.getZoneName(), GamePlayManager.default.getInstance().roomID, {
+        cmd: XiToMessage.default.WITHDRA_MONEY,
         m: t
       }];
       this.sendData(JSON.stringify(e));
     };
     t.prototype.sendWithdrawMoneyCommom = function(t) {
-      var e = [a.Message.MessageType.RoomPlugin_Type, this.getZoneName(), s.default.getInstance().roomID, {
-        cmd: r.default.BUY_IN,
+      var e = [MessageCardGameHandler.Message.MessageType.RoomPlugin_Type, this.getZoneName(), GamePlayManager.default.getInstance().roomID, {
+        cmd: XiToMessage.default.BUY_IN,
         m: t
       }];
       this.sendData(JSON.stringify(e));
     };
     t.prototype.sendStandUp = function() {
-      var t = [a.Message.MessageType.RoomPlugin_Type, this.getZoneName(), s.default.getInstance().roomID, {
-        cmd: r.default.STAND_UP
+      var t = [MessageCardGameHandler.Message.MessageType.RoomPlugin_Type, this.getZoneName(), GamePlayManager.default.getInstance().roomID, {
+        cmd: XiToMessage.default.STAND_UP
       }];
       this.sendData(JSON.stringify(t));
     };
     t.prototype.sendRaise = function(t) {
-      var e = [a.Message.MessageType.RoomPlugin_Type, this.getZoneName(), s.default.getInstance().roomID, {
-        cmd: r.default.RAISE,
+      var e = [MessageCardGameHandler.Message.MessageType.RoomPlugin_Type, this.getZoneName(), GamePlayManager.default.getInstance().roomID, {
+        cmd: XiToMessage.default.RAISE,
         b: t
       }];
       this.sendData(JSON.stringify(e));
     };
     t.prototype.sendCall = function() {
-      var t = [a.Message.MessageType.RoomPlugin_Type, this.getZoneName(), s.default.getInstance().roomID, {
-        cmd: r.default.CALL
+      var t = [MessageCardGameHandler.Message.MessageType.RoomPlugin_Type, this.getZoneName(), GamePlayManager.default.getInstance().roomID, {
+        cmd: XiToMessage.default.CALL
       }];
       this.sendData(JSON.stringify(t));
     };
     t.prototype.sendFold = function() {
-      var t = [a.Message.MessageType.RoomPlugin_Type, this.getZoneName(), s.default.getInstance().roomID, {
-        cmd: r.default.FOLD
+      var t = [MessageCardGameHandler.Message.MessageType.RoomPlugin_Type, this.getZoneName(), GamePlayManager.default.getInstance().roomID, {
+        cmd: XiToMessage.default.FOLD
       }];
       this.sendData(JSON.stringify(t));
     };
     t.prototype.sendCheck = function() {
-      var t = [a.Message.MessageType.RoomPlugin_Type, this.getZoneName(), s.default.getInstance().roomID, {
-        cmd: r.default.CHECK
+      var t = [MessageCardGameHandler.Message.MessageType.RoomPlugin_Type, this.getZoneName(), GamePlayManager.default.getInstance().roomID, {
+        cmd: XiToMessage.default.CHECK
       }];
       this.sendData(JSON.stringify(t));
     };
     t.prototype.sendStart = function() {
-      var t = [a.Message.MessageType.RoomPlugin_Type, this.getZoneName(), s.default.getInstance().roomID, {
-        cmd: r.default.START
+      var t = [MessageCardGameHandler.Message.MessageType.RoomPlugin_Type, this.getZoneName(), GamePlayManager.default.getInstance().roomID, {
+        cmd: XiToMessage.default.START
       }];
       this.sendData(JSON.stringify(t));
     };
     t.prototype.sendChonLaBaiTay = function(t) {
-      var e = [a.Message.MessageType.RoomPlugin_Type, this.getZoneName(), s.default.getInstance().roomID, {
-        cmd: r.default.SEND_LAT_BAI_TAY,
+      var e = [MessageCardGameHandler.Message.MessageType.RoomPlugin_Type, this.getZoneName(), GamePlayManager.default.getInstance().roomID, {
+        cmd: XiToMessage.default.SEND_LAT_BAI_TAY,
         cs: t
       }];
       this.sendData(JSON.stringify(e));

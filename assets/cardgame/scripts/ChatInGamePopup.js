@@ -47,22 +47,14 @@ var n = this && this.__extends || function() {
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-// ── BẢNG TRA BÍ DANH (máy sinh — ghi-bang-tra-bi-danh.js) ──────
-// Mã dịch ngược đặt bí danh một chữ cho mỗi module. Bảng này để khỏi phải cuộn ngược.
-// KHÔNG đổi tên chúng bằng tìm-kiếm-thay-thế: đoạn mở đầu __decorate khai lại đúng
-// những chữ này làm biến cục bộ, đổi là hỏng im lặng.
-//   a = ChatItem   s = CardGameCommonRequest   r = StringUtil
-//   c = MusicPlayer   l = GameConfigManager   h = GamePlayManager
-//   u = MessageCardGameHandler   d = TabIdolLiveController
-// ────────────────────────────────────────────────────────────────
-var a = require("./ChatItem"),
-  s = require("./CardGameCommonRequest"),
-  r = require("./StringUtil"),
-  c = require("./MusicPlayer"),
-  l = require("./GameConfigManager"),
-  h = require("./GamePlayManager"),
-  u = require("./MessageCardGameHandler"),
-  d = require("./TabIdolLiveController"),
+var ChatItem = require("./ChatItem"),
+  CardGameCommonRequest = require("./CardGameCommonRequest"),
+  StringUtil = require("./StringUtil"),
+  MusicPlayer = require("./MusicPlayer"),
+  GameConfigManager = require("./GameConfigManager"),
+  GamePlayManager = require("./GamePlayManager"),
+  MessageCardGameHandler = require("./MessageCardGameHandler"),
+  TabIdolLiveController = require("./TabIdolLiveController"),
   p = cc._decorator,
   f = p.ccclass,
   g = p.property,
@@ -93,7 +85,7 @@ var a = require("./ChatItem"),
       for (var i = this.listItemChat.length; i < t.length + e.length; ++i) {
         var n = cc.instantiate(this.chatItemPrefab);
         n.parent = this.contentNode;
-        (o = n.getComponent(a.default)).init(this);
+        (o = n.getComponent(ChatItem.default)).init(this);
         this.listItemChat.push(o);
       }
       for (i = 0; i < e.length; ++i) {
@@ -119,7 +111,7 @@ var a = require("./ChatItem"),
       var e = this;
       if (void 0 === t && (t = true), !(this.node.getNumberOfRunningActions() > 0)) {
         var i = 0;
-        if (h.default.getInstance().isWebMobileSafari()) {
+        if (GamePlayManager.default.getInstance().isWebMobileSafari()) {
           i = this.bonusWebMobileSafari;
         }
         this.node.position = new cc.Vec2(this.node.parent.width / 2 + this.node.width / 2, i);
@@ -129,7 +121,7 @@ var a = require("./ChatItem"),
               e.editBoxCustomChat.focus();
             }
           })));
-        if (h.default.getInstance().isEmoChat && false === this.contentEmoNode.active || false === h.default.getInstance().isEmoChat &&
+        if (GamePlayManager.default.getInstance().isEmoChat && false === this.contentEmoNode.active || false === GamePlayManager.default.getInstance().isEmoChat &&
           true === this.contentEmoNode.active) {
           this.onCLickOpenEmo();
         }
@@ -150,7 +142,7 @@ var a = require("./ChatItem"),
     };
     e.prototype.onClickHide = function() {
       var t = this;
-      c.default.getInstance().playbtnClick(.5);
+      MusicPlayer.default.getInstance().playbtnClick(.5);
       if (!(this.node.getNumberOfRunningActions() > 0)) {
         this.onCloseCallback();
         this.node.runAction(cc.sequence(cc.moveTo(.5, new cc.Vec2(this.node.parent.width / 2 + this.node.width / 2, this.node.position.y))
@@ -160,16 +152,16 @@ var a = require("./ChatItem"),
       }
     };
     e.prototype.onClickShowInputField = function() {
-      c.default.getInstance().playbtnClick(.6);
+      MusicPlayer.default.getInstance().playbtnClick(.6);
       var t = this.editBoxCustomChat.string;
-      if (!r.default.isNullOrEmpty(t)) {
+      if (!StringUtil.default.isNullOrEmpty(t)) {
         this.sendChat(t);
-        l.default.getInstance().setOldChat(t);
+        GameConfigManager.default.getInstance().setOldChat(t);
         this.editBoxCustomChat.string = "";
       }
     };
     e.prototype.sendChat = function(t) {
-      if (h.default.getInstance().gameID !== u.GAME.BAU_CUA && h.default.getInstance().gameID !== u.GAME.XOCDIA) {
+      if (GamePlayManager.default.getInstance().gameID !== MessageCardGameHandler.GAME.BAU_CUA && GamePlayManager.default.getInstance().gameID !== MessageCardGameHandler.GAME.XOCDIA) {
         this.onClickHide();
       } else if (cc.sys.platform === cc.sys.DESKTOP_BROWSER && this.scheduleOnce(function() {
           if (null !== this.node && void 0 !== this.node && 0 === this.node.getNumberOfRunningActions() && null !== this
@@ -178,26 +170,26 @@ var a = require("./ChatItem"),
           }
         }, .2), null !== this.gameController && void 0 !== this.gameController) {
         var e = this.gameController.checkSpamChat(t);
-        if (!r.default.isNullOrEmpty(e)) {
+        if (!StringUtil.default.isNullOrEmpty(e)) {
           return void(null != this.gameController.cardGameTableController && this.gameController.cardGameTableController.loadChat(e, "",
             true, -1, m, m));
         }
       }
-      s.default.getInstance().sendChat(t);
-      h.default.getInstance().lastChatTime = new Date().getTime();
-      h.default.getInstance().numChatInGame++;
-      var i = h.default.getInstance().lastChatTime - h.default.getInstance().lastChatTime1Minute;
+      CardGameCommonRequest.default.getInstance().sendChat(t);
+      GamePlayManager.default.getInstance().lastChatTime = new Date().getTime();
+      GamePlayManager.default.getInstance().numChatInGame++;
+      var i = GamePlayManager.default.getInstance().lastChatTime - GamePlayManager.default.getInstance().lastChatTime1Minute;
       if (i >= 6e4) {
-        h.default.getInstance().numChatInGame = 0;
-        h.default.getInstance().lastChatTime1Minute = h.default.getInstance().lastChatTime;
+        GamePlayManager.default.getInstance().numChatInGame = 0;
+        GamePlayManager.default.getInstance().lastChatTime1Minute = GamePlayManager.default.getInstance().lastChatTime;
       } else {
-        if (h.default.getInstance().numChatInGame >= 8) {
-          h.default.getInstance().lockChatInTime = h.default.getInstance().lastChatTime + 6e4 - i;
-          h.default.getInstance().numChatInGame = 0;
-          h.default.getInstance().lastChatTime1Minute = h.default.getInstance().lastChatTime;
+        if (GamePlayManager.default.getInstance().numChatInGame >= 8) {
+          GamePlayManager.default.getInstance().lockChatInTime = GamePlayManager.default.getInstance().lastChatTime + 6e4 - i;
+          GamePlayManager.default.getInstance().numChatInGame = 0;
+          GamePlayManager.default.getInstance().lastChatTime1Minute = GamePlayManager.default.getInstance().lastChatTime;
         }
       }
-      h.default.getInstance().countMatchNotInteract = 0;
+      GamePlayManager.default.getInstance().countMatchNotInteract = 0;
     };
     e.prototype.onEditBoxReturn = function() {
       if (this.activeBlur) {
@@ -207,7 +199,7 @@ var a = require("./ChatItem"),
       }
     };
     e.prototype.onClickEditChat = function() {
-      c.default.getInstance().playbtnClick();
+      MusicPlayer.default.getInstance().playbtnClick();
     };
     e.prototype.ontextChanged = function(t, e, i) {};
     e.prototype.onCLickOpenEmo = function() {
@@ -219,7 +211,7 @@ var a = require("./ChatItem"),
         if (this.contentChatNode) {
           this.contentChatNode.active = true;
         }
-        h.default.getInstance().isEmoChat = false;
+        GamePlayManager.default.getInstance().isEmoChat = false;
       } else {
         this.contentEmoNode.active = true;
         this.contentNode.active = false;
@@ -228,7 +220,7 @@ var a = require("./ChatItem"),
         if (this.contentChatNode) {
           this.contentChatNode.active = false;
         }
-        h.default.getInstance().isEmoChat = true;
+        GamePlayManager.default.getInstance().isEmoChat = true;
       }
     };
     e.prototype.setTrackingGameID = function(t) {
@@ -243,7 +235,7 @@ var a = require("./ChatItem"),
     o([g(cc.EditBox)], e.prototype, "editBoxCustomChat", void 0);
     o([g(cc.Node)], e.prototype, "btnChatEmo", void 0);
     o([g(cc.Node)], e.prototype, "btnChatText", void 0);
-    o([g(d.default)], e.prototype, "tabIdolLiveController", void 0);
+    o([g(TabIdolLiveController.default)], e.prototype, "tabIdolLiveController", void 0);
     o([g], e.prototype, "bonusWebMobileSafari", void 0);
     return e = o([f], e);
   }(cc.Component);

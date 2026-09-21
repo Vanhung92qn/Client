@@ -47,14 +47,8 @@ var n = this && this.__extends || function() {
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-// ── BẢNG TRA BÍ DANH (máy sinh — ghi-bang-tra-bi-danh.js) ──────
-// Mã dịch ngược đặt bí danh một chữ cho mỗi module. Bảng này để khỏi phải cuộn ngược.
-// KHÔNG đổi tên chúng bằng tìm-kiếm-thay-thế: đoạn mở đầu __decorate khai lại đúng
-// những chữ này làm biến cục bộ, đổi là hỏng im lặng.
-//   a = OrientationManager   s = StringUtil
-// ────────────────────────────────────────────────────────────────
-var a = require("./OrientationManager"),
-  s = require("./StringUtil"),
+var OrientationManager = require("./OrientationManager"),
+  StringUtil = require("./StringUtil"),
   r = cc._decorator,
   c = r.ccclass,
   l = (r.property, function(t) {
@@ -67,7 +61,7 @@ var a = require("./OrientationManager"),
     n(e, t);
     e.prototype.initValue = function(t, e, i) {
       if (void 0 === i) {
-        i = a.Orientation.Landscape;
+        i = OrientationManager.Orientation.Landscape;
       }
       this.tableViewUtils = e;
       this.data = t;
@@ -76,12 +70,12 @@ var a = require("./OrientationManager"),
       this.index = t;
     };
     e.prototype.getNewValueGYB = function(t) {
-      if (s.default.isNullOrEmpty(t)) {
+      if (StringUtil.default.isNullOrEmpty(t)) {
         return "";
       }
       try {
         var e = JSON.parse(t);
-        if (e && !s.default.isNullOrEmpty(e.sm)) {
+        if (e && !StringUtil.default.isNullOrEmpty(e.sm)) {
           return e.sm;
         }
       } catch (t) {}

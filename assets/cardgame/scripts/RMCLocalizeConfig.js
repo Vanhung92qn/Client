@@ -18,12 +18,12 @@ var n = this && this.__assign || function() {
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-var o = require("./GameConfigManager"),
+var GameConfigManager = require("./GameConfigManager"),
   a = {
     urlCSV: "https://web.hit.club/banner/LocalizeAll.csv"
   };
 i.getLocalizeConfig = function() {
-  var t = o.default.getInstance().getConfig("localizationConfig");
+  var t = GameConfigManager.default.getInstance().getConfig("localizationConfig");
   return n({}, a, t);
 };
 void 0;

@@ -47,18 +47,11 @@ var n = this && this.__extends || function() {
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-// ── BẢNG TRA BÍ DANH (máy sinh — ghi-bang-tra-bi-danh.js) ──────
-// Mã dịch ngược đặt bí danh một chữ cho mỗi module. Bảng này để khỏi phải cuộn ngược.
-// KHÔNG đổi tên chúng bằng tìm-kiếm-thay-thế: đoạn mở đầu __decorate khai lại đúng
-// những chữ này làm biến cục bộ, đổi là hỏng im lặng.
-//   a = StringUtil   s = MiniGameNode   r = RichTextCustom
-//   c = HeaderUi   l = GameConfigManager
-// ────────────────────────────────────────────────────────────────
-var a = require("./StringUtil"),
-  s = require("./MiniGameNode"),
-  r = require("./RichTextCustom"),
-  c = require("./HeaderUi"),
-  l = require("./GameConfigManager"),
+var StringUtil = require("./StringUtil"),
+  MiniGameNode = require("./MiniGameNode"),
+  RichTextCustom = require("./RichTextCustom"),
+  HeaderUi = require("./HeaderUi"),
+  GameConfigManager = require("./GameConfigManager"),
   h = cc._decorator,
   u = h.ccclass,
   d = h.property,
@@ -95,7 +88,7 @@ var a = require("./StringUtil"),
       if (i.messageDefault.length > 0) {
         this.listMessageDefault = i.messageDefault;
       }
-      var t = l.default.getInstance().broadCastConfig;
+      var t = GameConfigManager.default.getInstance().broadCastConfig;
       if (null !== t && void 0 !== t) {
         if (t.hasOwnProperty("config")) {
           var e = t.config;
@@ -119,7 +112,7 @@ var a = require("./StringUtil"),
     e.prototype.disable = function() {};
     e.prototype.registryBroadCast = function() {};
     e.prototype.update = function(t) {
-      if ("mu9" == l.default.getInstance().webccBrand) {
+      if ("mu9" == GameConfigManager.default.getInstance().webccBrand) {
         if (null != i.instance) {
           i.instance.hide(false);
         }
@@ -146,7 +139,7 @@ var a = require("./StringUtil"),
       }
     };
     e.prototype.showRandom = function() {
-      var t = a.default.getRandomInt(i.listBroadCastMessage.length);
+      var t = StringUtil.default.getRandomInt(i.listBroadCastMessage.length);
       this.show(i.listBroadCastMessage[t]);
     };
     e.prototype.onReceiveBroadCast = function(t) {
@@ -177,10 +170,10 @@ var a = require("./StringUtil"),
       if (void 0 === t) {
         t = null;
       }
-      if (null != s.default.instance) {
-        s.default.instance.updateBroadCastPosition();
+      if (null != MiniGameNode.default.instance) {
+        MiniGameNode.default.instance.updateBroadCastPosition();
       }
-      if (0 != c.default.isActive) {
+      if (0 != HeaderUi.default.isActive) {
         this.mainNode.active = true;
         if (this.timeCount > 0 && this.timeCount < this.timeChange) {
           this.isUpdatePosition = true;
@@ -220,9 +213,9 @@ var a = require("./StringUtil"),
           if (this.isSequence) {
             e = this.currIndex;
           } else {
-            if (e = a.default.getRandomInt(this.listBroadCast.length), this.listBroadCast.length > 1) {
+            if (e = StringUtil.default.getRandomInt(this.listBroadCast.length), this.listBroadCast.length > 1) {
               for (; e == this.lastMessageDefaultIndex;) {
-                e = a.default.getRandomInt(this.listBroadCast.length);
+                e = StringUtil.default.getRandomInt(this.listBroadCast.length);
               }
             }
             this.lastMessageDefaultIndex = e;
@@ -255,7 +248,7 @@ var a = require("./StringUtil"),
     e.messageDefault = [];
     e.instance = null;
     e.instanceBigWin = null;
-    o([d(r.default)], e.prototype, "content", void 0);
+    o([d(RichTextCustom.default)], e.prototype, "content", void 0);
     o([d(cc.Node)], e.prototype, "mainNode", void 0);
     o([d], e.prototype, "speed", void 0);
     return e = i = o([u], e);

@@ -47,22 +47,14 @@ var n = this && this.__extends || function() {
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-// ── BẢNG TRA BÍ DANH (máy sinh — ghi-bang-tra-bi-danh.js) ──────
-// Mã dịch ngược đặt bí danh một chữ cho mỗi module. Bảng này để khỏi phải cuộn ngược.
-// KHÔNG đổi tên chúng bằng tìm-kiếm-thay-thế: đoạn mở đầu __decorate khai lại đúng
-// những chữ này làm biến cục bộ, đổi là hỏng im lặng.
-//   a = CardPopupBase   s = BetListViewItem   r = GamePlayManager
-//   c = MessageCardGameHandler   l = MusicPlayer   h = GameConfigManager
-//   u = CommonPrefabsManager   d = StringUtil
-// ────────────────────────────────────────────────────────────────
-var a = require("./CardPopupBase"),
-  s = require("./BetListViewItem"),
-  r = require("./GamePlayManager"),
-  c = require("./MessageCardGameHandler"),
-  l = require("./MusicPlayer"),
-  h = require("./GameConfigManager"),
-  u = require("./CommonPrefabsManager"),
-  d = require("./StringUtil"),
+var CardPopupBase = require("./CardPopupBase"),
+  BetListViewItem = require("./BetListViewItem"),
+  GamePlayManager = require("./GamePlayManager"),
+  MessageCardGameHandler = require("./MessageCardGameHandler"),
+  MusicPlayer = require("./MusicPlayer"),
+  GameConfigManager = require("./GameConfigManager"),
+  CommonPrefabsManager = require("./CommonPrefabsManager"),
+  StringUtil = require("./StringUtil"),
   p = cc._decorator,
   f = p.ccclass,
   g = p.property,
@@ -93,40 +85,40 @@ var a = require("./CardPopupBase"),
     }
     n(e, t);
     e.prototype.initUser = function() {
-      var t = r.default.getInstance().gameID;
-      if (t === c.GAME.TIENLEN || t === c.GAME.TLMN) {
+      var t = GamePlayManager.default.getInstance().gameID;
+      if (t === MessageCardGameHandler.GAME.TIENLEN || t === MessageCardGameHandler.GAME.TLMN) {
         this.maxPlayer1 = 2;
         this.maxPlayer2 = 4;
         this.maxPlayer3 = 0;
         this.checkBoxPlayer3.node.active = false;
       } else {
-        if (t === c.GAME.SAM) {
+        if (t === MessageCardGameHandler.GAME.SAM) {
           this.maxPlayer1 = 2;
           this.maxPlayer2 = 5;
           this.maxPlayer3 = 0;
           this.checkBoxPlayer3.node.active = false;
         } else {
-          if (t === c.GAME.PHOM || t === c.GAME.BINH) {
+          if (t === MessageCardGameHandler.GAME.PHOM || t === MessageCardGameHandler.GAME.BINH) {
             this.maxPlayer1 = 4;
             this.maxPlayer2 = 0;
             this.maxPlayer3 = 0;
             this.checkBoxPlayer2.node.active = false;
             this.checkBoxPlayer3.node.active = false;
           } else {
-            if (t === c.GAME.CATTE) {
+            if (t === MessageCardGameHandler.GAME.CATTE) {
               this.maxPlayer1 = 2;
               this.maxPlayer2 = 6;
               this.maxPlayer3 = 0;
               this.checkBoxPlayer3.node.active = false;
             } else {
-              if (t === c.GAME.XITO) {
+              if (t === MessageCardGameHandler.GAME.XITO) {
                 this.maxPlayer1 = 5;
                 this.maxPlayer2 = 0;
                 this.maxPlayer3 = 0;
                 this.checkBoxPlayer2.node.active = false;
                 this.checkBoxPlayer3.node.active = false;
               } else {
-                if (t === c.GAME.XOCDIA) {
+                if (t === MessageCardGameHandler.GAME.XOCDIA) {
                   this.maxPlayer1 = 9;
                   this.maxPlayer2 = 30;
                   this.maxPlayer3 = 0;
@@ -134,13 +126,13 @@ var a = require("./CardPopupBase"),
                   this.checkBoxPlayer2.node.active = false;
                   this.checkBoxPlayer3.node.active = false;
                 } else {
-                  if (t === c.GAME.LIENG || t === c.GAME.POKER) {
+                  if (t === MessageCardGameHandler.GAME.LIENG || t === MessageCardGameHandler.GAME.POKER) {
                     this.maxPlayer1 = 5;
                     this.maxPlayer2 = 9;
                     this.maxPlayer3 = 0;
                     this.checkBoxPlayer3.node.active = false;
                   } else {
-                    if (t === c.GAME.SICBO) {
+                    if (t === MessageCardGameHandler.GAME.SICBO) {
                       this.maxPlayer1 = 9;
                       this.maxPlayer2 = 30;
                       this.maxPlayer3 = 0;
@@ -148,7 +140,7 @@ var a = require("./CardPopupBase"),
                       this.checkBoxPlayer2.node.active = false;
                       this.checkBoxPlayer3.node.active = false;
                     } else {
-                      if (t === c.GAME.BACAY) {
+                      if (t === MessageCardGameHandler.GAME.BACAY) {
                         this.maxPlayer1 = 9;
                         this.maxPlayer2 = 5;
                         this.maxPlayer3 = 0;
@@ -168,12 +160,12 @@ var a = require("./CardPopupBase"),
       this.lblMaxPlayer3.string = this.maxPlayer3 + " Ng\u01b0\u1eddi";
     };
     e.prototype.btnOKPress = function() {
-      if (d.default.isNullOrEmpty(this.edtPassword.string) && this.edtPassword.node.active && r.default.getInstance().gameID !== c.GAME
-        .XOCDIA && r.default.getInstance().gameID !== c.GAME.POKER && r.default.getInstance().gameID !== c.GAME.LIENG && r.default
-        .getInstance().gameID !== c.GAME.XITO && r.default.getInstance().gameID !== c.GAME.BACAY) {
-        u.default.getInstance().showPopupMessageUtil("Ch\u01b0a nh\u1eadp m\u1eadt kh\u1ea9u b\xe0n !");
-      } else if (h.default.getInstance().isShowPopupDone) {
-        u.default.getInstance().showLoading();
+      if (StringUtil.default.isNullOrEmpty(this.edtPassword.string) && this.edtPassword.node.active && GamePlayManager.default.getInstance().gameID !== MessageCardGameHandler.GAME
+        .XOCDIA && GamePlayManager.default.getInstance().gameID !== MessageCardGameHandler.GAME.POKER && GamePlayManager.default.getInstance().gameID !== MessageCardGameHandler.GAME.LIENG && GamePlayManager.default
+        .getInstance().gameID !== MessageCardGameHandler.GAME.XITO && GamePlayManager.default.getInstance().gameID !== MessageCardGameHandler.GAME.BACAY) {
+        CommonPrefabsManager.default.getInstance().showPopupMessageUtil("Ch\u01b0a nh\u1eadp m\u1eadt kh\u1ea9u b\xe0n !");
+      } else if (GameConfigManager.default.getInstance().isShowPopupDone) {
+        CommonPrefabsManager.default.getInstance().showLoading();
         this.scrollView.stopAutoScroll();
         var t = Math.abs(this.scrollView.getScrollOffset().x),
           e = Math.floor(t / 120),
@@ -194,7 +186,7 @@ var a = require("./CardPopupBase"),
           }
         }
         this.password = this.edtPassword.string;
-        r.default.getInstance().requestcreateRoom(r.default.getInstance().gameID, this.listBetItem[e].value, this.maxPlayer, this
+        GamePlayManager.default.getInstance().requestcreateRoom(GamePlayManager.default.getInstance().gameID, this.listBetItem[e].value, this.maxPlayer, this
           .password);
         this.onClickClose();
         this.btnOK.interactable = false;
@@ -211,7 +203,7 @@ var a = require("./CardPopupBase"),
       for (var i = this.listBetItem.length; i < t.length; ++i) {
         var n = cc.instantiate(this.itemPrefab);
         n.parent = this.mainContent;
-        var o = n.getComponent(s.default);
+        var o = n.getComponent(BetListViewItem.default);
         this.listBetItem.push(o);
       }
       for (i = 0; i < t.length; ++i) {
@@ -251,7 +243,7 @@ var a = require("./CardPopupBase"),
       this.previousY = this.scrollView.getScrollOffset().x;
     };
     e.prototype.onClickNext = function() {
-      l.default.getInstance().playEffect("Sounds/sfx_btn_bet");
+      MusicPlayer.default.getInstance().playEffect("Sounds/sfx_btn_bet");
       this.scrollView.stopAutoScroll();
       if (this.currentScrollIndex < this.listBetItem.length - 1) {
         this.currentScrollIndex++;
@@ -259,7 +251,7 @@ var a = require("./CardPopupBase"),
       this.scrollView.scrollToOffset(new cc.Vec2(120 * this.currentScrollIndex, this.scrollView.getScrollOffset().y), .2, true);
     };
     e.prototype.onClickPrevius = function() {
-      l.default.getInstance().playEffect("Sounds/sfx_btn_bet");
+      MusicPlayer.default.getInstance().playEffect("Sounds/sfx_btn_bet");
       this.scrollView.stopAutoScroll();
       if (this.currentScrollIndex > 0) {
         this.currentScrollIndex--;
@@ -267,7 +259,7 @@ var a = require("./CardPopupBase"),
       this.scrollView.scrollToOffset(new cc.Vec2(120 * this.currentScrollIndex, this.scrollView.getScrollOffset().y), .2, true);
     };
     e.prototype.ontextChanged = function(t, e, i) {
-      e.string = d.default.removeSpecialCharacter(t);
+      e.string = StringUtil.default.removeSpecialCharacter(t);
     };
     o([g(cc.Node)], e.prototype, "mainContent", void 0);
     o([g(cc.Prefab)], e.prototype, "itemPrefab", void 0);
@@ -281,6 +273,6 @@ var a = require("./CardPopupBase"),
     o([g(cc.Label)], e.prototype, "lblMaxPlayer3", void 0);
     o([g(cc.Button)], e.prototype, "btnOK", void 0);
     return e = o([f], e);
-  }(a.default);
+  }(CardPopupBase.default);
 i.default = m;
 void 0;

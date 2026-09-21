@@ -47,23 +47,15 @@ var n = this && this.__extends || function() {
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-// ── BẢNG TRA BÍ DANH (máy sinh — ghi-bang-tra-bi-danh.js) ──────
-// Mã dịch ngược đặt bí danh một chữ cho mỗi module. Bảng này để khỏi phải cuộn ngược.
-// KHÔNG đổi tên chúng bằng tìm-kiếm-thay-thế: đoạn mở đầu __decorate khai lại đúng
-// những chữ này làm biến cục bộ, đổi là hỏng im lặng.
-//   a = GamePlayManager   s = HeaderUi   r = CommonPrefabsManager
-//   c = MessageCardGameHandler   l = GameConfigManager   h = MusicPlayer
-//   u = CardGameCommonRequest   d = TableListRoomChongQuayNew   p = RMCThemeConfig
-// ────────────────────────────────────────────────────────────────
-var a = require("./GamePlayManager"),
-  s = require("./HeaderUi"),
-  r = require("./CommonPrefabsManager"),
-  c = require("./MessageCardGameHandler"),
-  l = require("./GameConfigManager"),
-  h = require("./MusicPlayer"),
-  u = require("./CardGameCommonRequest"),
-  d = require("./TableListRoomChongQuayNew"),
-  p = require("./RMCThemeConfig"),
+var GamePlayManager = require("./GamePlayManager"),
+  HeaderUi = require("./HeaderUi"),
+  CommonPrefabsManager = require("./CommonPrefabsManager"),
+  MessageCardGameHandler = require("./MessageCardGameHandler"),
+  GameConfigManager = require("./GameConfigManager"),
+  MusicPlayer = require("./MusicPlayer"),
+  CardGameCommonRequest = require("./CardGameCommonRequest"),
+  TableListRoomChongQuayNew = require("./TableListRoomChongQuayNew"),
+  RMCThemeConfig = require("./RMCThemeConfig"),
   f = cc._decorator,
   g = f.ccclass,
   m = f.property,
@@ -94,94 +86,94 @@ var a = require("./GamePlayManager"),
     n(e, t);
     e.prototype.onLoad = function() {
       this.nodeListRoomUI = cc.instantiate(this.prefabListRoomUI);
-      this.tableListRoomChongQuay = this.nodeListRoomUI.getComponent(d.default);
+      this.tableListRoomChongQuay = this.nodeListRoomUI.getComponent(TableListRoomChongQuayNew.default);
       this.listRoomCWidget = this.nodeListRoomUI.getComponent(cc.Widget);
       this.nodeListRoomUI.parent = this.tableViewNode;
       var t = cc.instantiate(this.prefabHeaderUI);
       t.parent = this.node;
-      t.getComponent(s.default);
+      t.getComponent(HeaderUi.default);
       this.headerWidget = t.getComponent(cc.Widget);
-      this.gameID = a.default.getInstance().gameID;
+      this.gameID = GamePlayManager.default.getInstance().gameID;
       var e = 1;
       switch (this.gameID) {
-        case c.GAME.XOCDIA:
-          a.default.getInstance().gameIDIcon = "xoc-dia@2x";
+        case MessageCardGameHandler.GAME.XOCDIA:
+          GamePlayManager.default.getInstance().gameIDIcon = "xoc-dia@2x";
           this.tableListRoomChongQuay.avtiveTab(false, false, false, false, false, false, false);
           e = .74;
           break;
-        case c.GAME.BINH:
-          a.default.getInstance().gameIDIcon = "mau-binh@2x";
+        case MessageCardGameHandler.GAME.BINH:
+          GamePlayManager.default.getInstance().gameIDIcon = "mau-binh@2x";
           this.tableListRoomChongQuay.avtiveTab(false, false, true, false, false, false, false);
           this.isChongQuay = true;
           break;
-        case c.GAME.POKER:
-          a.default.getInstance().gameIDIcon = "poker@2x";
+        case MessageCardGameHandler.GAME.POKER:
+          GamePlayManager.default.getInstance().gameIDIcon = "poker@2x";
           this.tableListRoomChongQuay.avtiveTab(false, false, false, false, false, false, false);
           break;
-        case c.GAME.XITO:
-          a.default.getInstance().gameIDIcon = "xi-to@2x";
+        case MessageCardGameHandler.GAME.XITO:
+          GamePlayManager.default.getInstance().gameIDIcon = "xi-to@2x";
           this.tableListRoomChongQuay.avtiveTab(false, false, false, false, false, false, false);
           break;
-        case c.GAME.PHOM:
-          a.default.getInstance().gameIDIcon = "phom@2x";
+        case MessageCardGameHandler.GAME.PHOM:
+          GamePlayManager.default.getInstance().gameIDIcon = "phom@2x";
           this.tableListRoomChongQuay.avtiveTab(false, false, true, false, false, false, false);
           this.isChongQuay = true;
           break;
-        case c.GAME.TLMN:
-          a.default.getInstance().gameIDIcon = "tielenmiennam@2x";
+        case MessageCardGameHandler.GAME.TLMN:
+          GamePlayManager.default.getInstance().gameIDIcon = "tielenmiennam@2x";
           this.tableListRoomChongQuay.avtiveTab(true, false, true, false, false, false, false);
           this.isChongQuay = true;
           break;
-        case c.GAME.TIENLEN:
-          a.default.getInstance().gameIDIcon = "tien-len-dem-la@2x";
+        case MessageCardGameHandler.GAME.TIENLEN:
+          GamePlayManager.default.getInstance().gameIDIcon = "tien-len-dem-la@2x";
           this.tableListRoomChongQuay.avtiveTab(true, false, true, false, false, false, false);
           this.isChongQuay = true;
           break;
-        case c.GAME.SAM:
-          a.default.getInstance().gameIDIcon = "sam@2x";
+        case MessageCardGameHandler.GAME.SAM:
+          GamePlayManager.default.getInstance().gameIDIcon = "sam@2x";
           this.tableListRoomChongQuay.avtiveTab(true, false, false, true, false, false, false);
           this.isChongQuay = true;
           break;
-        case c.GAME.LIENG:
-          a.default.getInstance().gameIDIcon = "lieng@2x";
+        case MessageCardGameHandler.GAME.LIENG:
+          GamePlayManager.default.getInstance().gameIDIcon = "lieng@2x";
           this.tableListRoomChongQuay.avtiveTab(false, false, false, false, false, false, false);
           break;
-        case c.GAME.BACAY:
-          a.default.getInstance().gameIDIcon = "37";
+        case MessageCardGameHandler.GAME.BACAY:
+          GamePlayManager.default.getInstance().gameIDIcon = "37";
           this.tableListRoomChongQuay.avtiveTab(false, false, false, false, false, false, false);
           break;
-        case c.GAME.CATTE:
-          a.default.getInstance().gameIDIcon = "catte@2x";
+        case MessageCardGameHandler.GAME.CATTE:
+          GamePlayManager.default.getInstance().gameIDIcon = "catte@2x";
           this.tableListRoomChongQuay.avtiveTab(true, false, false, false, false, false, true);
           this.isChongQuay = true;
           break;
-        case c.GAME.BAU_CUA:
-          a.default.getInstance().gameIDIcon = "bau-cua@2x";
+        case MessageCardGameHandler.GAME.BAU_CUA:
+          GamePlayManager.default.getInstance().gameIDIcon = "bau-cua@2x";
           this.tableListRoomChongQuay.avtiveTab(false, false, false, false, true, true, false);
           break;
-        case c.GAME.SICBO:
-          a.default.getInstance().gameIDIcon = "Banner3";
+        case MessageCardGameHandler.GAME.SICBO:
+          GamePlayManager.default.getInstance().gameIDIcon = "Banner3";
           this.tableListRoomChongQuay.avtiveTab(false, false, false, false, false, false, false);
           this.tableListRoomChongQuay.tabButtonSkeleton[0].node.active = false;
           this.tableListRoomChongQuay.tabButtonSkeleton[1].node.active = false;
       }
-      if (null !== this.iconSpriteAtlas && void 0 !== this.iconSpriteAtlas && null !== a.default.getInstance().gameIDIcon && void 0 !== a
+      if (null !== this.iconSpriteAtlas && void 0 !== this.iconSpriteAtlas && null !== GamePlayManager.default.getInstance().gameIDIcon && void 0 !== GamePlayManager
         .default.getInstance().gameIDIcon) {
-        var i = this.iconSpriteAtlas.getSpriteFrame(a.default.getInstance().gameIDIcon);
+        var i = this.iconSpriteAtlas.getSpriteFrame(GamePlayManager.default.getInstance().gameIDIcon);
         if (null !== i && void 0 !== i) {
           this.iconGameName.spriteFrame = i;
           this.iconGameName.node.scale = e;
         }
       }
       this.applyRoomConfig();
-      var n = p.getCurrentTheme();
+      var n = RMCThemeConfig.getCurrentTheme();
       if (this.nodeNoelDecoration.length > 0) {
         for (var o = 0; o < this.nodeNoelDecoration.length; o++) {
-          this.nodeNoelDecoration[o].active = n == p.ThemeType.NOEL;
+          this.nodeNoelDecoration[o].active = n == RMCThemeConfig.ThemeType.NOEL;
         }
       }
-      if (a.default.getInstance().gameID == c.GAME.BINH && (u.default.getInstance().fetchSettingRoom(), this.btnSetting)) {
-        this.btnSetting.active = l.default.getInstance().isNewXepBaiMauBinh;
+      if (GamePlayManager.default.getInstance().gameID == MessageCardGameHandler.GAME.BINH && (CardGameCommonRequest.default.getInstance().fetchSettingRoom(), this.btnSetting)) {
+        this.btnSetting.active = GameConfigManager.default.getInstance().isNewXepBaiMauBinh;
         var r = this.btnSetting.parent.getComponent(cc.Layout);
         if (r && this.btnSetting.active) {
           r.paddingTop = 92;
@@ -189,16 +181,16 @@ var a = require("./GamePlayManager"),
       }
     };
     e.prototype.applyRoomConfig = function() {
-      var t = a.default.getInstance().gameID;
-      if (l.default.getInstance().roomChongQuaySettings.has(t)) {
-        var e = l.default.getInstance().roomChongQuaySettings.get(t);
+      var t = GamePlayManager.default.getInstance().gameID;
+      if (GameConfigManager.default.getInstance().roomChongQuaySettings.has(t)) {
+        var e = GameConfigManager.default.getInstance().roomChongQuaySettings.get(t);
         this.btnJoinRoom.active = e.useButtonJoinRoom;
         this.btnQuickPlay.active = !e.useButtonJoinRoom;
       }
     };
     e.prototype.onEnable = function() {
-      l.default.getInstance().isLobbyMusicBg = true;
-      r.default.getInstance().closePopup(true);
+      GameConfigManager.default.getInstance().isLobbyMusicBg = true;
+      CommonPrefabsManager.default.getInstance().closePopup(true);
     };
     e.prototype.walkUp = function(t) {
       this.mainGameViewModel = t;
@@ -207,38 +199,38 @@ var a = require("./GamePlayManager"),
     };
     e.prototype.onClickChoiNhanh = function() {
       var t = this;
-      if (!l.default.getInstance().isShowPopupDone) {
-        l.default.getInstance().isShowPopupDone = true;
-        r.default.getInstance().showLoading();
+      if (!GameConfigManager.default.getInstance().isShowPopupDone) {
+        GameConfigManager.default.getInstance().isShowPopupDone = true;
+        CommonPrefabsManager.default.getInstance().showLoading();
         this.node.runAction(cc.sequence(cc.delayTime(.5), cc.callFunc(function() {
-          if (t.gameID === c.GAME.LIENG || t.gameID === c.GAME.XITO || t.gameID === c.GAME.POKER) {
-            a.default.getInstance().requestquickPlayBet(a.default.getInstance().gameID, l.default.getInstance().bet);
-          } else if (t.gameID === c.GAME.XOCDIA && a.default.getInstance().gold < 100) {
+          if (t.gameID === MessageCardGameHandler.GAME.LIENG || t.gameID === MessageCardGameHandler.GAME.XITO || t.gameID === MessageCardGameHandler.GAME.POKER) {
+            GamePlayManager.default.getInstance().requestquickPlayBet(GamePlayManager.default.getInstance().gameID, GameConfigManager.default.getInstance().bet);
+          } else if (t.gameID === MessageCardGameHandler.GAME.XOCDIA && GamePlayManager.default.getInstance().gold < 100) {
             var e = 0;
             if (null !== t.tableListRoomChongQuay && void 0 !== t.tableListRoomChongQuay && null !== t.tableListRoomChongQuay
               .listRoom && void 0 !== t.tableListRoomChongQuay.listRoom && t.tableListRoomChongQuay.listRoom.length > 0) {
               e = t.tableListRoomChongQuay.listRoom[0].rid;
             }
             if (e > 0) {
-              a.default.getInstance().joinRoom(e, 0, "");
+              GamePlayManager.default.getInstance().joinRoom(e, 0, "");
             } else {
-              a.default.getInstance().requestquickPlay(a.default.getInstance().gameID);
+              GamePlayManager.default.getInstance().requestquickPlay(GamePlayManager.default.getInstance().gameID);
             }
           } else {
-            a.default.getInstance().requestquickPlay(a.default.getInstance().gameID);
+            GamePlayManager.default.getInstance().requestquickPlay(GamePlayManager.default.getInstance().gameID);
           }
         })));
-        h.default.getInstance().playbtnClick();
+        MusicPlayer.default.getInstance().playbtnClick();
       }
     };
     e.prototype.onClickTaoBan = function() {
-      if (!l.default.getInstance().isShowPopupDone) {
-        l.default.getInstance().isShowPopupDone = true;
-        r.default.getInstance().showLoading();
+      if (!GameConfigManager.default.getInstance().isShowPopupDone) {
+        GameConfigManager.default.getInstance().isShowPopupDone = true;
+        CommonPrefabsManager.default.getInstance().showLoading();
         this.node.runAction(cc.sequence(cc.delayTime(.5), cc.callFunc(function() {
-          a.default.getInstance().requestcreateRoomResponse(a.default.getInstance().gameID);
+          GamePlayManager.default.getInstance().requestcreateRoomResponse(GamePlayManager.default.getInstance().gameID);
         })));
-        h.default.getInstance().playbtnClick();
+        MusicPlayer.default.getInstance().playbtnClick();
       }
     };
     e.prototype.updateRoom = function(t) {
@@ -253,9 +245,9 @@ var a = require("./GamePlayManager"),
         }
       }
       if (this.isChongQuay) {
-        this.timeReLoadTablleCountDown = l.default.getInstance().timeRefreshListRoomChongQuay;
+        this.timeReLoadTablleCountDown = GameConfigManager.default.getInstance().timeRefreshListRoomChongQuay;
       } else {
-        this.timeReLoadTablleCountDown = l.default.getInstance().timeRefreshListRoom;
+        this.timeReLoadTablleCountDown = GameConfigManager.default.getInstance().timeRefreshListRoom;
       }
     };
     e.prototype.showNode = function() {
@@ -268,35 +260,35 @@ var a = require("./GamePlayManager"),
       if (this.timeReLoadTablleCountDown > 0) {
         this.timeReLoadTablleCountDown -= t;
         if (this.timeReLoadTablleCountDown <= 0) {
-          u.default.getInstance().GetListRoom();
+          CardGameCommonRequest.default.getInstance().GetListRoom();
           this.isFade = false;
         }
       }
     };
     e.prototype.onClickHelp = function() {
-      h.default.getInstance().playbtnClick();
-      r.default.getInstance().showPopupHelpImage(a.default.getInstance().gameID);
+      MusicPlayer.default.getInstance().playbtnClick();
+      CommonPrefabsManager.default.getInstance().showPopupHelpImage(GamePlayManager.default.getInstance().gameID);
     };
     e.prototype.onClickTinTuc = function() {
-      h.default.getInstance().playbtnClick();
-      r.default.getInstance().showPopupMessageUtil("T\xednh n\u0103ng s\u1eafp ra m\u1eaft !");
+      MusicPlayer.default.getInstance().playbtnClick();
+      CommonPrefabsManager.default.getInstance().showPopupMessageUtil("T\xednh n\u0103ng s\u1eafp ra m\u1eaft !");
     };
     e.prototype.onClickXepHang = function() {
-      h.default.getInstance().playbtnClick();
-      r.default.getInstance().showPopupXepHangGame(a.default.getInstance().gameID);
+      MusicPlayer.default.getInstance().playbtnClick();
+      CommonPrefabsManager.default.getInstance().showPopupXepHangGame(GamePlayManager.default.getInstance().gameID);
     };
     e.prototype.onClickSetting = function() {
-      h.default.getInstance().playbtnClick();
-      r.default.getInstance().showPopupSetting();
+      MusicPlayer.default.getInstance().playbtnClick();
+      CommonPrefabsManager.default.getInstance().showPopupSetting();
     };
     e.prototype.onClickJoinRoom = function() {
-      h.default.getInstance().playbtnClick();
-      r.default.getInstance().showPopupJoinRoom();
+      MusicPlayer.default.getInstance().playbtnClick();
+      CommonPrefabsManager.default.getInstance().showPopupJoinRoom();
     };
     o([m(cc.Node)], e.prototype, "tableViewNode", void 0);
     o([m(cc.Prefab)], e.prototype, "prefabListRoomUI", void 0);
     o([m(cc.Prefab)], e.prototype, "prefabHeaderUI", void 0);
-    o([m(s.default)], e.prototype, "headerUI", void 0);
+    o([m(HeaderUi.default)], e.prototype, "headerUI", void 0);
     o([m(cc.Sprite)], e.prototype, "iconGameName", void 0);
     o([m(cc.SpriteAtlas)], e.prototype, "iconSpriteAtlas", void 0);
     o([m(cc.Node)], e.prototype, "btnQuickPlay", void 0);

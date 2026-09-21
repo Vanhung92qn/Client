@@ -47,33 +47,22 @@ var n = this && this.__extends || function() {
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-// ── BẢNG TRA BÍ DANH (máy sinh — ghi-bang-tra-bi-danh.js) ──────
-// Mã dịch ngược đặt bí danh một chữ cho mỗi module. Bảng này để khỏi phải cuộn ngược.
-// KHÔNG đổi tên chúng bằng tìm-kiếm-thay-thế: đoạn mở đầu __decorate khai lại đúng
-// những chữ này làm biến cục bộ, đổi là hỏng im lặng.
-//   a = CardPopupBase   s = MusicPlayer   r = CommonPrefabsManager
-//   c = GameHTTPManager   l = GameConfigManager   h = ItemPoint
-//   u = MessageCardGameHandler   d = StringUtil   p = ItemDuaTop
-//   f = ItemLsDuaTop   g = GameZOrder   m = PopupHelpImage
-//   y = GameUtils   S = AnalyticsManager   _ = OrientationManager
-//   v = BaccaratLiveVariantConfig
-// ────────────────────────────────────────────────────────────────
-var a = require("./CardPopupBase"),
-  s = require("./MusicPlayer"),
-  r = require("./CommonPrefabsManager"),
-  c = require("./GameHTTPManager"),
-  l = require("./GameConfigManager"),
-  h = require("./ItemPoint"),
-  u = require("./MessageCardGameHandler"),
-  d = require("./StringUtil"),
-  p = require("./ItemDuaTop"),
-  f = require("./ItemLsDuaTop"),
-  g = require("./GameZOrder"),
-  m = require("./PopupHelpImage"),
-  y = require("./GameUtils"),
-  S = require("./AnalyticsManager"),
-  _ = require("./OrientationManager"),
-  v = require("./BaccaratLiveVariantConfig"),
+var CardPopupBase = require("./CardPopupBase"),
+  MusicPlayer = require("./MusicPlayer"),
+  CommonPrefabsManager = require("./CommonPrefabsManager"),
+  GameHTTPManager = require("./GameHTTPManager"),
+  GameConfigManager = require("./GameConfigManager"),
+  ItemPoint = require("./ItemPoint"),
+  MessageCardGameHandler = require("./MessageCardGameHandler"),
+  StringUtil = require("./StringUtil"),
+  ItemDuaTop = require("./ItemDuaTop"),
+  ItemLsDuaTop = require("./ItemLsDuaTop"),
+  GameZOrder = require("./GameZOrder"),
+  PopupHelpImage = require("./PopupHelpImage"),
+  GameUtils = require("./GameUtils"),
+  AnalyticsManager = require("./AnalyticsManager"),
+  OrientationManager = require("./OrientationManager"),
+  BaccaratLiveVariantConfig = require("./BaccaratLiveVariantConfig"),
   b = cc._decorator,
   C = b.ccclass,
   T = b.property,
@@ -136,14 +125,14 @@ var a = require("./CardPopupBase"),
       t.prototype.onLoad.call(this);
       this.scrollContentViewCache = this.contendScrollView.position.y;
       this.listCachePoint = [];
-      if (0 === l.default.getInstance().tabLeftRankingDefault) {
+      if (0 === GameConfigManager.default.getInstance().tabLeftRankingDefault) {
         this.nodeTongThangOn.active = true;
         this.nodeSanHuOn.active = false;
       } else {
         this.nodeTongThangOn.active = false;
         this.nodeSanHuOn.active = true;
       }
-      if (0 === l.default.getInstance().tabRightRankingDefault) {
+      if (0 === GameConfigManager.default.getInstance().tabRightRankingDefault) {
         this.nodeTuanOn.active = true;
         this.nodeNgayOn.active = false;
       } else {
@@ -158,7 +147,7 @@ var a = require("./CardPopupBase"),
       if (void 0 === i) {
         i = .4;
       }
-      y.setFpsNormal();
+      GameUtils.setFpsNormal();
       t.prototype.show.call(this, e, i);
       this.node.runAction(cc.sequence(cc.delayTime(.1), cc.callFunc(function() {
         this.setTab(this.gameId);
@@ -169,106 +158,106 @@ var a = require("./CardPopupBase"),
       this.txtTittle.string = "\u0110ANG T\u1ea2I...";
     };
     e.prototype.SetOrientation = function(t) {
-      if (t == _.Orientation.Portrait) {
+      if (t == OrientationManager.Orientation.Portrait) {
         this.scrollContentViewBottom = -1 * this.scrollView.node.getContentSize().height;
       }
     };
     e.prototype.SetGameID = function(t) {
-      if (t == u.GAME.XITO) {
-        this.gameId = u.GAMEID.XITO;
+      if (t == MessageCardGameHandler.GAME.XITO) {
+        this.gameId = MessageCardGameHandler.GAMEID.XITO;
       } else {
-        if (t == u.GAME.BINH) {
-          this.gameId = u.GAMEID.BINH;
+        if (t == MessageCardGameHandler.GAME.BINH) {
+          this.gameId = MessageCardGameHandler.GAMEID.BINH;
         } else {
-          if (t == u.GAME.TIENLEN) {
-            this.gameId = u.GAMEID.TIENLEN;
+          if (t == MessageCardGameHandler.GAME.TIENLEN) {
+            this.gameId = MessageCardGameHandler.GAMEID.TIENLEN;
           } else {
-            if (t == u.GAME.POKER) {
-              this.gameId = u.GAMEID.POKER;
+            if (t == MessageCardGameHandler.GAME.POKER) {
+              this.gameId = MessageCardGameHandler.GAMEID.POKER;
             } else {
-              if (t == u.GAME.LIENG) {
-                this.gameId = u.GAMEID.LIENG;
+              if (t == MessageCardGameHandler.GAME.LIENG) {
+                this.gameId = MessageCardGameHandler.GAMEID.LIENG;
               } else {
-                if (t == u.GAME.SAM) {
-                  this.gameId = u.GAMEID.SAM;
+                if (t == MessageCardGameHandler.GAME.SAM) {
+                  this.gameId = MessageCardGameHandler.GAMEID.SAM;
                 } else {
-                  if (t == u.GAME.XOCDIA) {
-                    this.gameId = u.GAMEID.XOCDIA;
+                  if (t == MessageCardGameHandler.GAME.XOCDIA) {
+                    this.gameId = MessageCardGameHandler.GAMEID.XOCDIA;
                   } else {
-                    if (t == u.GAME.PHOM) {
-                      this.gameId = u.GAMEID.PHOM;
+                    if (t == MessageCardGameHandler.GAME.PHOM) {
+                      this.gameId = MessageCardGameHandler.GAMEID.PHOM;
                     } else {
-                      if (t == u.GAME.TLMN) {
-                        this.gameId = u.GAMEID.TLMN;
+                      if (t == MessageCardGameHandler.GAME.TLMN) {
+                        this.gameId = MessageCardGameHandler.GAMEID.TLMN;
                       } else {
-                        if (t == u.GAME.MINI_POKER) {
-                          this.gameId = u.GAMEID.MINI_POKER;
+                        if (t == MessageCardGameHandler.GAME.MINI_POKER) {
+                          this.gameId = MessageCardGameHandler.GAMEID.MINI_POKER;
                         } else {
-                          if (t == u.GAME.KIM_CUONG) {
-                            this.gameId = u.GAMEID.KIM_CUONG;
+                          if (t == MessageCardGameHandler.GAME.KIM_CUONG) {
+                            this.gameId = MessageCardGameHandler.GAMEID.KIM_CUONG;
                           } else {
-                            if (t == u.GAME.TAIXIU) {
-                              this.gameId = u.GAMEID.TAIXIU;
+                            if (t == MessageCardGameHandler.GAME.TAIXIU) {
+                              this.gameId = MessageCardGameHandler.GAMEID.TAIXIU;
                             } else {
-                              if (t == u.GAME.TAIXIU_MD5) {
-                                this.gameId = u.GAMEID.TAIXIU_MD5;
+                              if (t == MessageCardGameHandler.GAME.TAIXIU_MD5) {
+                                this.gameId = MessageCardGameHandler.GAMEID.TAIXIU_MD5;
                               } else {
-                                if (t == u.GAME.UP_DOWN) {
-                                  this.gameId = u.GAMEID.UP_DOWN;
+                                if (t == MessageCardGameHandler.GAME.UP_DOWN) {
+                                  this.gameId = MessageCardGameHandler.GAMEID.UP_DOWN;
                                 } else {
-                                  if (t == u.GAME.THAN_TAI) {
-                                    this.gameId = u.GAMEID.THAN_TAI;
+                                  if (t == MessageCardGameHandler.GAME.THAN_TAI) {
+                                    this.gameId = MessageCardGameHandler.GAMEID.THAN_TAI;
                                   } else {
-                                    if (t == u.GAME.BAU_CUA) {
-                                      this.gameId = u.GAMEID.BAU_CUA;
+                                    if (t == MessageCardGameHandler.GAME.BAU_CUA) {
+                                      this.gameId = MessageCardGameHandler.GAMEID.BAU_CUA;
                                     } else {
-                                      if (t == u.GAME.SICBO) {
-                                        this.gameId = u.GAMEID.SICBO;
+                                      if (t == MessageCardGameHandler.GAME.SICBO) {
+                                        this.gameId = MessageCardGameHandler.GAMEID.SICBO;
                                       } else {
-                                        if (t == u.GAME.FOOT_BALL) {
-                                          this.gameId = u.GAMEID.FOOT_BALL;
+                                        if (t == MessageCardGameHandler.GAME.FOOT_BALL) {
+                                          this.gameId = MessageCardGameHandler.GAMEID.FOOT_BALL;
                                         } else {
-                                          if (t == u.GAME.BACAY) {
-                                            this.gameId = u.GAMEID.BACAY;
+                                          if (t == MessageCardGameHandler.GAME.BACAY) {
+                                            this.gameId = MessageCardGameHandler.GAMEID.BACAY;
                                           } else {
-                                            if (t == u.GAME.CATTE) {
-                                              this.gameId = u.GAMEID.CATTE;
+                                            if (t == MessageCardGameHandler.GAME.CATTE) {
+                                              this.gameId = MessageCardGameHandler.GAMEID.CATTE;
                                             } else {
-                                              if (t == u.GAME.TAIXIU_LIVESTREAM) {
-                                                this.gameId = u.GAMEID.TAIXIU_LIVESTREAM;
+                                              if (t == MessageCardGameHandler.GAME.TAIXIU_LIVESTREAM) {
+                                                this.gameId = MessageCardGameHandler.GAMEID.TAIXIU_LIVESTREAM;
                                               } else {
-                                                if (t == u.GAME.AVIATOR) {
-                                                  this.gameId = u.GAMEID.AVIATOR;
+                                                if (t == MessageCardGameHandler.GAME.AVIATOR) {
+                                                  this.gameId = MessageCardGameHandler.GAMEID.AVIATOR;
                                                 } else {
-                                                  if (t == u.GAME.TAIXIU_LIVESTREAM) {
-                                                    this.gameId = u.GAMEID.TAIXIU_LIVESTREAM;
+                                                  if (t == MessageCardGameHandler.GAME.TAIXIU_LIVESTREAM) {
+                                                    this.gameId = MessageCardGameHandler.GAMEID.TAIXIU_LIVESTREAM;
                                                   } else {
-                                                    if (t == u.GAME.DAO_VANG) {
-                                                      this.gameId = u.GAMEID.DAO_VANG;
+                                                    if (t == MessageCardGameHandler.GAME.DAO_VANG) {
+                                                      this.gameId = MessageCardGameHandler.GAMEID.DAO_VANG;
                                                     } else {
-                                                      if (t == u.GAME.XDLIVE_V2) {
-                                                        this.gameId = u.GAMEID.XDLIVE_V2;
+                                                      if (t == MessageCardGameHandler.GAME.XDLIVE_V2) {
+                                                        this.gameId = MessageCardGameHandler.GAMEID.XDLIVE_V2;
                                                       } else {
-                                                        if (t == u.GAME.TXSTLIVE) {
-                                                          this.gameId = u.GAMEID.TXSTLIVE;
+                                                        if (t == MessageCardGameHandler.GAME.TXSTLIVE) {
+                                                          this.gameId = MessageCardGameHandler.GAMEID.TXSTLIVE;
                                                         } else {
-                                                          if (t == u.GAME.PLINKO) {
-                                                            this.gameId = u.GAMEID.PLINKO;
+                                                          if (t == MessageCardGameHandler.GAME.PLINKO) {
+                                                            this.gameId = MessageCardGameHandler.GAMEID.PLINKO;
                                                           } else {
-                                                            if (t == u.GAME.SICBOLIVE) {
-                                                              this.gameId = u.GAMEID.SICBO_LIVE;
+                                                            if (t == MessageCardGameHandler.GAME.SICBOLIVE) {
+                                                              this.gameId = MessageCardGameHandler.GAMEID.SICBO_LIVE;
                                                             } else {
-                                                              if (t == u.GAME.BACCARAT_LIVE || t == v.BaccaratLiveVariant.gameIDNumber) {
-                                                                this.gameId = v.BaccaratLiveVariant.gameID;
+                                                              if (t == MessageCardGameHandler.GAME.BACCARAT_LIVE || t == BaccaratLiveVariantConfig.BaccaratLiveVariant.gameIDNumber) {
+                                                                this.gameId = BaccaratLiveVariantConfig.BaccaratLiveVariant.gameID;
                                                               } else {
-                                                                if (t == u.GAME.DRAGONTIGER_LIVE) {
-                                                                  this.gameId = u.GAMEID.DRAGONTIGER_LIVE;
+                                                                if (t == MessageCardGameHandler.GAME.DRAGONTIGER_LIVE) {
+                                                                  this.gameId = MessageCardGameHandler.GAMEID.DRAGONTIGER_LIVE;
                                                                 } else {
-                                                                  if (t == u.GAME.BAUCUA_LIVE) {
-                                                                    this.gameId = u.GAMEID.BAUCUA_LIVE;
+                                                                  if (t == MessageCardGameHandler.GAME.BAUCUA_LIVE) {
+                                                                    this.gameId = MessageCardGameHandler.GAMEID.BAUCUA_LIVE;
                                                                   } else {
-                                                                    if (t == u.GAME.BAUCUA_BONUS) {
-                                                                      this.gameId = u.GAMEID.BAUCUA_BONUS;
+                                                                    if (t == MessageCardGameHandler.GAME.BAUCUA_BONUS) {
+                                                                      this.gameId = MessageCardGameHandler.GAMEID.BAUCUA_BONUS;
                                                                     }
                                                                   }
                                                                 }
@@ -307,98 +296,98 @@ var a = require("./CardPopupBase"),
     };
     e.prototype.SetTitleDuaTop = function(t) {
       switch (t) {
-        case u.GAMEID.XITO:
+        case MessageCardGameHandler.GAMEID.XITO:
           this.txtTittle.string = "CAO TH\u1ee6 X\xcc T\u1ed0";
           break;
-        case u.GAMEID.BINH:
+        case MessageCardGameHandler.GAMEID.BINH:
           this.txtTittle.string = "CAO TH\u1ee6 M\u1eacU BINH";
           break;
-        case u.GAMEID.TIENLEN:
+        case MessageCardGameHandler.GAMEID.TIENLEN:
           this.txtTittle.string = "CAO TH\u1ee6 TL \u0110\u1ebeM L\xc1";
           break;
-        case u.GAMEID.POKER:
+        case MessageCardGameHandler.GAMEID.POKER:
           this.txtTittle.string = "CAO TH\u1ee6 POKER";
           break;
-        case u.GAMEID.LIENG:
+        case MessageCardGameHandler.GAMEID.LIENG:
           this.txtTittle.string = "CAO TH\u1ee6 LI\xcaNG";
           break;
-        case u.GAMEID.SAM:
+        case MessageCardGameHandler.GAMEID.SAM:
           this.txtTittle.string = "CAO TH\u1ee6 S\xc2M L\u1ed0C";
           break;
-        case u.GAMEID.XOCDIA:
+        case MessageCardGameHandler.GAMEID.XOCDIA:
           this.txtTittle.string = "CAO TH\u1ee6 X\xd3C \u0110\u0128A";
           break;
-        case u.GAMEID.PHOM:
+        case MessageCardGameHandler.GAMEID.PHOM:
           this.txtTittle.string = "CAO TH\u1ee6 PH\u1eceM";
           break;
-        case u.GAMEID.TLMN:
+        case MessageCardGameHandler.GAMEID.TLMN:
           this.txtTittle.string = "CAO TH\u1ee6 TL MI\u1ec0N NAM";
           break;
-        case u.GAMEID.MINI_POKER:
+        case MessageCardGameHandler.GAMEID.MINI_POKER:
           this.txtTittle.string = "CAO TH\u1ee6 MINI POKER";
           break;
-        case u.GAMEID.KIM_CUONG:
+        case MessageCardGameHandler.GAMEID.KIM_CUONG:
           this.txtTittle.string = "CAO TH\u1ee6 KIM C\u01af\u01a0NG";
           break;
-        case u.GAMEID.TAIXIU:
+        case MessageCardGameHandler.GAMEID.TAIXIU:
           this.txtTittle.string = "CAO TH\u1ee6 T\xc0I X\u1ec8U";
           break;
-        case u.GAMEID.TAIXIU_MD5:
+        case MessageCardGameHandler.GAMEID.TAIXIU_MD5:
           this.txtTittle.string = "CAO TH\u1ee6 T\xc0I X\u1ec8U MD5";
           break;
-        case u.GAMEID.UP_DOWN:
+        case MessageCardGameHandler.GAMEID.UP_DOWN:
           this.txtTittle.string = "CAO TH\u1ee6 TR\xcaN D\u01af\u1edaI";
           break;
-        case u.GAMEID.THAN_TAI:
+        case MessageCardGameHandler.GAMEID.THAN_TAI:
           this.txtTittle.string = "CAO TH\u1ee6 TH\u1ea6N T\xc0I";
           break;
-        case u.GAMEID.BAU_CUA:
+        case MessageCardGameHandler.GAMEID.BAU_CUA:
           this.txtTittle.string = "CAO TH\u1ee6 B\u1ea6U CUA";
           break;
-        case u.GAMEID.SICBO:
+        case MessageCardGameHandler.GAMEID.SICBO:
           this.txtTittle.string = "CAO TH\u1ee6 SICBO";
           break;
-        case u.GAMEID.FOOT_BALL:
+        case MessageCardGameHandler.GAMEID.FOOT_BALL:
           this.txtTittle.string = "CAO TH\u1ee6 B\xd3NG \u0110\xc1";
           break;
-        case u.GAMEID.BACAY:
+        case MessageCardGameHandler.GAMEID.BACAY:
           this.txtTittle.string = "CAO TH\u1ee6 C\xc0O R\xd9A";
           break;
-        case u.GAMEID.CATTE:
+        case MessageCardGameHandler.GAMEID.CATTE:
           this.txtTittle.string = "CAO TH\u1ee6 CATTE";
           break;
-        case u.GAMEID.TAIXIU_LIVESTREAM:
+        case MessageCardGameHandler.GAMEID.TAIXIU_LIVESTREAM:
           this.txtTittle.string = "CAO TH\u1ee6 T\xc0I X\u1ec8U LIVESTREAM";
           break;
-        case u.GAMEID.AVIATOR:
+        case MessageCardGameHandler.GAMEID.AVIATOR:
           this.txtTittle.string = "CAO TH\u1ee6 AVIATOR";
           break;
-        case u.GAMEID.TXSTLIVE:
+        case MessageCardGameHandler.GAMEID.TXSTLIVE:
           this.txtTittle.string = "CAO TH\u1ee6 T\xc0I X\u1ec8U LIVESTREAM";
           break;
-        case u.GAMEID.SICBO_LIVE:
+        case MessageCardGameHandler.GAMEID.SICBO_LIVE:
           this.txtTittle.string = "CAO TH\u1ee6 SICBO LIVESTREAM";
           break;
-        case u.GAMEID.DRAGONTIGER_LIVE:
+        case MessageCardGameHandler.GAMEID.DRAGONTIGER_LIVE:
           this.txtTittle.string = "CAO TH\u1ee6 R\u1ed2NG H\u1ed4 LIVESTREAM";
           break;
-        case u.GAMEID.BAUCUA_BONUS:
+        case MessageCardGameHandler.GAMEID.BAUCUA_BONUS:
           this.txtTittle.string = "CAO TH\u1ee6 B\u1ea6U CUA BONUS";
       }
     };
     e.prototype.isEnableChooseDate = function(t) {
-      return 0 == t.localeCompare(u.GAMEID.AVIATOR) || 0 == t.localeCompare(u.GAMEID.DAO_VANG) || 0 == t.localeCompare(u.GAMEID.PLINKO);
+      return 0 == t.localeCompare(MessageCardGameHandler.GAMEID.AVIATOR) || 0 == t.localeCompare(MessageCardGameHandler.GAMEID.DAO_VANG) || 0 == t.localeCompare(MessageCardGameHandler.GAMEID.PLINKO);
     };
     e.prototype.isEnableChooseType = function(t) {
-      return !(0 != t.localeCompare(u.GAMEID.TAIXIU) && 0 != t.localeCompare(u.GAMEID.TAIXIU_MD5) && 0 != t.localeCompare(u.GAMEID
-          .TAIXIU_LIVESTREAM) && 0 != t.localeCompare(u.GAMEID.XOCDIA) && 0 != t.localeCompare(u.GAMEID.BAU_CUA) && 0 != t
-        .localeCompare(u.GAMEID.XDLIVE_V2) && 0 != t.localeCompare(u.GAMEID.SICBO_LIVE) && !v.BaccaratLiveVariant.isBaccaratLiveID(t) &&
-        0 != t.localeCompare(u.GAMEID.DRAGONTIGER_LIVE) && 0 != t.localeCompare(u.GAMEID.BAUCUA_LIVE) && 0 != t.localeCompare(u.GAMEID
+      return !(0 != t.localeCompare(MessageCardGameHandler.GAMEID.TAIXIU) && 0 != t.localeCompare(MessageCardGameHandler.GAMEID.TAIXIU_MD5) && 0 != t.localeCompare(MessageCardGameHandler.GAMEID
+          .TAIXIU_LIVESTREAM) && 0 != t.localeCompare(MessageCardGameHandler.GAMEID.XOCDIA) && 0 != t.localeCompare(MessageCardGameHandler.GAMEID.BAU_CUA) && 0 != t
+        .localeCompare(MessageCardGameHandler.GAMEID.XDLIVE_V2) && 0 != t.localeCompare(MessageCardGameHandler.GAMEID.SICBO_LIVE) && !BaccaratLiveVariantConfig.BaccaratLiveVariant.isBaccaratLiveID(t) &&
+        0 != t.localeCompare(MessageCardGameHandler.GAMEID.DRAGONTIGER_LIVE) && 0 != t.localeCompare(MessageCardGameHandler.GAMEID.BAUCUA_LIVE) && 0 != t.localeCompare(MessageCardGameHandler.GAMEID
           .BAUCUA_BONUS));
     };
     e.prototype.onLoadErr = function(t) {
-      r.default.getInstance().hideLoading();
-      r.default.getInstance().showPopupMessageUtil(t);
+      CommonPrefabsManager.default.getInstance().hideLoading();
+      CommonPrefabsManager.default.getInstance().showPopupMessageUtil(t);
     };
     e.prototype.onClickClose = function() {
       this.contendScrollView.active = false;
@@ -409,8 +398,8 @@ var a = require("./CardPopupBase"),
         e = "";
       }
       this.contendScrollView.scale = 0;
-      r.default.getInstance().showLoading();
-      if (l.default.getInstance().isLoginWebcc) {
+      CommonPrefabsManager.default.getInstance().showLoading();
+      if (GameConfigManager.default.getInstance().isLoginWebcc) {
         this.requestRankingForWebCC(t);
       } else {
         this.requestRanking(t, e);
@@ -418,10 +407,10 @@ var a = require("./CardPopupBase"),
     };
     e.prototype.requestRankingForWebCC = function(t) {
       var e = this,
-        i = l.default.getInstance().getTopUpDownURL + "?type=turnover&from=0&size=20&gid=" + t;
-      c.default.getInstance().sendGetHttpRequest(i, function(t) {
+        i = GameConfigManager.default.getInstance().getTopUpDownURL + "?type=turnover&from=0&size=20&gid=" + t;
+      GameHTTPManager.default.getInstance().sendGetHttpRequest(i, function(t) {
         e.nodeLoading.active = false;
-        var i = e.gameId == u.GAMEID.TAIXIU && l.default.getInstance().isLoginWebcc;
+        var i = e.gameId == MessageCardGameHandler.GAMEID.TAIXIU && GameConfigManager.default.getInstance().isLoginWebcc;
         if (null == t.event || void 0 == t.event || i) {
           e.nodePopupXepHangGame.active = true;
           e.nodePopupDuaTop.active = false;
@@ -454,7 +443,7 @@ var a = require("./CardPopupBase"),
         a = "";
       if (this.isEnableChooseDate(t) && (a = "&date=" + (0 == e.length ? this.getFormattedDate(new Date()) : e)), this.isEnableChooseType(
           t)) {
-        var s = l.default.getInstance().urlRanking,
+        var s = GameConfigManager.default.getInstance().urlRanking,
           h = "";
         if (this.nodeTongThangOn.active) {
           s += "top/";
@@ -464,16 +453,16 @@ var a = require("./CardPopupBase"),
         }
         s += t + (this.nodeNgayOn.active ? "/daily" : "/weekly") + h;
         var d = this;
-        c.default.getInstance().sendGetHttpRequest(s, function(t) {
+        GameHTTPManager.default.getInstance().sendGetHttpRequest(s, function(t) {
           switch (n.nodeLoading.active = false, n.nodeBoardInfo.active = true, n.nodeBoardLeft.active = true, n.gameId) {
-            case u.GAMEID.SICBO_LIVE:
-            case u.GAMEID.TAIXIU_MD5:
-            case u.GAMEID.DRAGONTIGER_LIVE:
-            case u.GAMEID.BAUCUA_LIVE:
-            case u.GAMEID.BAUCUA_BONUS:
+            case MessageCardGameHandler.GAMEID.SICBO_LIVE:
+            case MessageCardGameHandler.GAMEID.TAIXIU_MD5:
+            case MessageCardGameHandler.GAMEID.DRAGONTIGER_LIVE:
+            case MessageCardGameHandler.GAMEID.BAUCUA_LIVE:
+            case MessageCardGameHandler.GAMEID.BAUCUA_BONUS:
               n.nodeBoardLeft.active = false;
           }
-          if (v.BaccaratLiveVariant.isBaccaratLiveID(n.gameId)) {
+          if (BaccaratLiveVariantConfig.BaccaratLiveVariant.isBaccaratLiveID(n.gameId)) {
             n.nodeBoardLeft.active = false;
           }
           n.nodePopupXepHangGame.active = true;
@@ -483,20 +472,20 @@ var a = require("./CardPopupBase"),
           n.txtTittle.node.active = true;
           n.SetTitleBXH(n.gameId);
           n.showRank(t);
-          r.default.getInstance().hideLoading();
+          CommonPrefabsManager.default.getInstance().hideLoading();
         }, function(t) {
           if (d.node) {
             d.txtTittle.string = "";
             d.onLoadErr(t);
           }
-          r.default.getInstance().hideLoading();
+          CommonPrefabsManager.default.getInstance().hideLoading();
         }, true);
       } else {
-        s = l.default.getInstance().duatopTxURL + "?type=turnover&from=0&size=20&gid=" + t + a;
+        s = GameConfigManager.default.getInstance().duatopTxURL + "?type=turnover&from=0&size=20&gid=" + t + a;
         var p = this;
-        c.default.getInstance().sendPostHttpRequest(s, o, function(t) {
+        GameHTTPManager.default.getInstance().sendPostHttpRequest(s, o, function(t) {
           n.nodeLoading.active = false;
-          var e = n.gameId == u.GAMEID.TAIXIU && l.default.getInstance().isLoginWebcc;
+          var e = n.gameId == MessageCardGameHandler.GAMEID.TAIXIU && GameConfigManager.default.getInstance().isLoginWebcc;
           if (null == t.event || void 0 == t.event || e) {
             n.nodeBoardInfo.active = false;
             n.nodePopupXepHangGame.active = true;
@@ -518,25 +507,25 @@ var a = require("./CardPopupBase"),
             n.dataDuatop = t;
             n.showDuaTop(t);
           }
-          r.default.getInstance().hideLoading();
+          CommonPrefabsManager.default.getInstance().hideLoading();
         }, function(t) {
           if (p.node) {
             p.txtTittle.string = "";
             p.onLoadErr(t);
           }
-          r.default.getInstance().hideLoading();
+          CommonPrefabsManager.default.getInstance().hideLoading();
         });
       }
     };
     e.prototype.requestLsDuaTop = function(t, e) {
       var i,
         n = this,
-        o = l.default.getInstance().lsDuatopTxURL + "?event_type=top_reward&gid=" + t + "&date=" + e;
+        o = GameConfigManager.default.getInstance().lsDuatopTxURL + "?event_type=top_reward&gid=" + t + "&date=" + e;
       i = {};
       this.contendScrollView.scale = 0;
-      r.default.getInstance().showLoading();
+      CommonPrefabsManager.default.getInstance().showLoading();
       var a = JSON.stringify(i);
-      c.default.getInstance().sendPostHttpRequest(o, a, function(t) {
+      GameHTTPManager.default.getInstance().sendPostHttpRequest(o, a, function(t) {
         n.dataLsDuatop = t;
         n.showLsDuaTop(t);
       }, function(t) {
@@ -560,7 +549,7 @@ var a = require("./CardPopupBase"),
       return t <= Object.keys(this.listConditionReward).length && t > 0 ? this.listConditionReward[t.toString()].gift.money : 0;
     };
     e.prototype.onShowLsDuaTopClick = function() {
-      s.default.getInstance().playbtnClick();
+      MusicPlayer.default.getInstance().playbtnClick();
       this.nodePopupLsDuaTop.active = true;
       this.nodePopupDuaTop.active = false;
       this.tabDuatop.spriteFrame = this.listSpriteFrameTab[1];
@@ -572,10 +561,10 @@ var a = require("./CardPopupBase"),
       } else {
         this.requestLsDuaTop(this.gameId, this.getFormattedDate(new Date()));
       }
-      S.default.getInstance().logEvent("ClickButtonTaiXiu", JSON.parse('{"ButtonName":"TabLichSuDuaTopTX"}'));
+      AnalyticsManager.default.getInstance().logEvent("ClickButtonTaiXiu", JSON.parse('{"ButtonName":"TabLichSuDuaTopTX"}'));
     };
     e.prototype.onShowDuaTopClick = function() {
-      s.default.getInstance().playbtnClick();
+      MusicPlayer.default.getInstance().playbtnClick();
       this.nodePopupLsDuaTop.active = false;
       this.nodePopupDuaTop.active = true;
       this.tabDuatop.spriteFrame = this.listSpriteFrameTab[0];
@@ -588,7 +577,7 @@ var a = require("./CardPopupBase"),
       } else {
         this.setTab(this.gameId);
       }
-      S.default.getInstance().logEvent("ClickButtonTaiXiu", JSON.parse('{"ButtonName":"TabDuaTopTX"}'));
+      AnalyticsManager.default.getInstance().logEvent("ClickButtonTaiXiu", JSON.parse('{"ButtonName":"TabDuaTopTX"}'));
     };
     e.prototype.getFormattedDate = function(t) {
       var e = t.getFullYear(),
@@ -646,24 +635,24 @@ var a = require("./CardPopupBase"),
         e = false;
       }
       var i = t.event.user.turnover;
-      this.txTotalBet.string = d.default.formatMoneyNumberWithVietnameseUnit(i);
+      this.txTotalBet.string = StringUtil.default.formatMoneyNumberWithVietnameseUnit(i);
       var n = this.getTotalBetTargetMin();
       if (n > 0) {
-        var o = d.default.formatMoneyNumberWithVietnameseUnit(n);
+        var o = StringUtil.default.formatMoneyNumberWithVietnameseUnit(n);
         cc.sys.localStorage.setItem("TargetTurnOverDuaTop", o);
       }
       if (this.nodeTotalBet.active = true, null !== t.data && void 0 !== t.data && t.data.length > 0) {
         for (var a = 0; a < t.data.length; a++) {
           var s, c;
-          if (this.gameId === u.GAMEID.TAIXIU) {
-            c = (s = cc.instantiate(this.itemDuaTopPrefab)).getComponent(p.default);
+          if (this.gameId === MessageCardGameHandler.GAMEID.TAIXIU) {
+            c = (s = cc.instantiate(this.itemDuaTopPrefab)).getComponent(ItemDuaTop.default);
             if (a < 10 && a < this.txChatColor.length) {
               c.txtTenHienThi.node.color = this.txChatColor[a];
             } else {
               c.txtTenHienThi.node.color = this.txChatColor[this.txChatColor.length - 1];
             }
           } else {
-            c = (s = cc.instantiate(this.itemPoint)).getComponent(p.default);
+            c = (s = cc.instantiate(this.itemPoint)).getComponent(ItemDuaTop.default);
           }
           s.parent = this.contendScrollView;
           this.listCachePoint.push(c);
@@ -693,55 +682,55 @@ var a = require("./CardPopupBase"),
         }
         this.scrollView.scrollToTop();
         this.updateViewItem();
-        r.default.getInstance().hideLoading();
+        CommonPrefabsManager.default.getInstance().hideLoading();
         this.contendScrollView.scale = 1;
         this.contendScrollView.active = true;
       } else {
-        r.default.getInstance().hideLoading();
+        CommonPrefabsManager.default.getInstance().hideLoading();
       }
     };
     e.prototype.onShowLsDuaTopNextClick = function() {
-      s.default.getInstance().playbtnClick();
+      MusicPlayer.default.getInstance().playbtnClick();
       if (null != this.timeViewHistoryNext && "null" != this.timeViewHistoryNext) {
         this.requestLsDuaTop(this.gameId, this.timeViewHistoryNext);
       }
     };
     e.prototype.onShowLsDuaTopPrevClick = function() {
-      s.default.getInstance().playbtnClick();
+      MusicPlayer.default.getInstance().playbtnClick();
       if (null != this.timeViewHistoryPrev && "null" != this.timeViewHistoryPrev) {
         this.requestLsDuaTop(this.gameId, this.timeViewHistoryPrev);
       }
     };
     e.prototype.onShowRankNormalNextClick = function() {
-      s.default.getInstance().playbtnClick();
+      MusicPlayer.default.getInstance().playbtnClick();
       if (null != this.timeViewHistoryNext && "" != this.timeViewHistoryNext) {
-        r.default.getInstance().showLoading();
+        CommonPrefabsManager.default.getInstance().showLoading();
         this.requestRanking(this.gameId, this.timeViewHistoryNext);
       }
     };
     e.prototype.onShowRankNormalPrevClick = function() {
-      s.default.getInstance().playbtnClick();
+      MusicPlayer.default.getInstance().playbtnClick();
       if (null != this.timeViewHistoryPrev && "" != this.timeViewHistoryPrev) {
-        r.default.getInstance().showLoading();
+        CommonPrefabsManager.default.getInstance().showLoading();
         this.requestRanking(this.gameId, this.timeViewHistoryPrev);
       }
     };
     e.prototype.onClickShowHelpDuaTop = function() {
-      s.default.getInstance().playbtnClick();
-      r.default.getInstance().showLoading();
+      MusicPlayer.default.getInstance().playbtnClick();
+      CommonPrefabsManager.default.getInstance().showLoading();
       cc.loader.loadRes("Help/PopupHelpDuaTopTaiXiu", function(t, e) {
-        if (r.default.getInstance().hideLoading(), null === e) {
-          r.default.getInstance().showPopupMessageUtil("L\u1ed7i 404, Xin Th\u1eed l\u1ea1i!");
+        if (CommonPrefabsManager.default.getInstance().hideLoading(), null === e) {
+          CommonPrefabsManager.default.getInstance().showPopupMessageUtil("L\u1ed7i 404, Xin Th\u1eed l\u1ea1i!");
         } else {
           var i = cc.instantiate(e);
           i.parent = this.node;
           i.x = 0;
           i.y = 0;
-          i.zIndex = g.default.TOP;
-          i.getComponent(m.default).show();
+          i.zIndex = GameZOrder.default.TOP;
+          i.getComponent(PopupHelpImage.default).show();
         }
       }.bind(this));
-      S.default.getInstance().logEvent("ClickButtonTaiXiu", JSON.parse('{"ButtonName":"ShowHelpDuaTop"}'));
+      AnalyticsManager.default.getInstance().logEvent("ClickButtonTaiXiu", JSON.parse('{"ButtonName":"ShowHelpDuaTop"}'));
     };
     e.prototype.showLsDuaTop = function(t, e) {
       if (void 0 === e && (e = false), null !== t.data && void 0 !== t.data && t.data.length > 0) {
@@ -764,8 +753,8 @@ var a = require("./CardPopupBase"),
           var n,
             o,
             a = t.data[i].rank;
-          o = this.gameId === u.GAMEID.TAIXIU ? (n = cc.instantiate(this.itemLsDuaTopPrefab)).getComponent(f.default) : (n = cc
-            .instantiate(this.itemPoint)).getComponent(f.default);
+          o = this.gameId === MessageCardGameHandler.GAMEID.TAIXIU ? (n = cc.instantiate(this.itemLsDuaTopPrefab)).getComponent(ItemLsDuaTop.default) : (n = cc
+            .instantiate(this.itemPoint)).getComponent(ItemLsDuaTop.default);
           n.parent = this.contendScrollView;
           this.listCachePoint.push(o);
           if (a < 10 && a < this.txChatColor.length) {
@@ -784,11 +773,11 @@ var a = require("./CardPopupBase"),
         }
         this.scrollView.scrollToTop();
         this.updateViewItem();
-        r.default.getInstance().hideLoading();
+        CommonPrefabsManager.default.getInstance().hideLoading();
         this.contendScrollView.scale = 1;
         this.contendScrollView.active = true;
       } else {
-        r.default.getInstance().hideLoading();
+        CommonPrefabsManager.default.getInstance().hideLoading();
       }
     };
     e.prototype.showRank = function(t) {
@@ -824,18 +813,18 @@ var a = require("./CardPopupBase"),
           }
           if (!(void 0 === a.game_winlost || a.game_winlost < 0)) {
             if (0 == this.listCachePoint.length || i >= this.listCachePoint.length) {
-              o = (n = this.gameId === u.GAMEID.TAIXIU || this.gameId === u.GAMEID.AVIATOR || this.gameId == u.GAMEID.TAIXIU_MD5 || this
-                .gameId === u.GAMEID.TAIXIU_LIVESTREAM || this.gameId === u.GAMEID.XOCDIA || this.gameId === u.GAMEID.BAU_CUA || this
-                .gameId === u.GAMEID.DAO_VANG ? cc.instantiate(this.itemPointTx) : cc.instantiate(this.itemPoint)).getComponent(h
+              o = (n = this.gameId === MessageCardGameHandler.GAMEID.TAIXIU || this.gameId === MessageCardGameHandler.GAMEID.AVIATOR || this.gameId == MessageCardGameHandler.GAMEID.TAIXIU_MD5 || this
+                .gameId === MessageCardGameHandler.GAMEID.TAIXIU_LIVESTREAM || this.gameId === MessageCardGameHandler.GAMEID.XOCDIA || this.gameId === MessageCardGameHandler.GAMEID.BAU_CUA || this
+                .gameId === MessageCardGameHandler.GAMEID.DAO_VANG ? cc.instantiate(this.itemPointTx) : cc.instantiate(this.itemPoint)).getComponent(ItemPoint
                 .default);
               n.parent = this.contendScrollView;
               this.listCachePoint.push(o);
             } else {
               o = this.listCachePoint[i];
             }
-            if (!(this.gameId != u.GAMEID.TAIXIU_MD5 && this.gameId !== u.GAMEID.TAIXIU && this.gameId !== u.GAMEID.AVIATOR && this
-                .gameId !== u.GAMEID.TAIXIU_LIVESTREAM && this.gameId !== u.GAMEID.XOCDIA && this.gameId !== u.GAMEID.BAU_CUA && this
-                .gameId !== u.GAMEID.DAO_VANG)) {
+            if (!(this.gameId != MessageCardGameHandler.GAMEID.TAIXIU_MD5 && this.gameId !== MessageCardGameHandler.GAMEID.TAIXIU && this.gameId !== MessageCardGameHandler.GAMEID.AVIATOR && this
+                .gameId !== MessageCardGameHandler.GAMEID.TAIXIU_LIVESTREAM && this.gameId !== MessageCardGameHandler.GAMEID.XOCDIA && this.gameId !== MessageCardGameHandler.GAMEID.BAU_CUA && this
+                .gameId !== MessageCardGameHandler.GAMEID.DAO_VANG)) {
               if (i < 10 && i < this.txChatColor.length) {
                 o.txtTenHienThi.node.color = this.txChatColor[i];
               } else {
@@ -849,7 +838,7 @@ var a = require("./CardPopupBase"),
         }
         this.scrollView.scrollToTop();
         this.updateViewItem();
-        r.default.getInstance().hideLoading();
+        CommonPrefabsManager.default.getInstance().hideLoading();
         this.contendScrollView.scale = 1;
         this.contendScrollView.active = true;
         this.txtEmpty.node.active = false;
@@ -857,7 +846,7 @@ var a = require("./CardPopupBase"),
         if (null != this.buttonRequestPrevDay) {
           this.buttonRequestPrevDay.interactable = false;
         }
-        r.default.getInstance().hideLoading();
+        CommonPrefabsManager.default.getInstance().hideLoading();
         for (e = 0; e < this.listCachePoint.length; e++) {
           this.listCachePoint[e].node.active = false;
         }
@@ -890,8 +879,8 @@ var a = require("./CardPopupBase"),
             this.listCachePoint[t].nodeContent.active = false;
           }
         }
-        if (y.isFpsLow()) {
-          y.setFpsNormal();
+        if (GameUtils.isFpsLow()) {
+          GameUtils.setFpsNormal();
         }
       }
     };
@@ -899,31 +888,31 @@ var a = require("./CardPopupBase"),
       return t < 10 && t < this.txChatColor.length ? this.txChatColor[t] : this.txChatColor[10];
     };
     e.prototype.onClickTongThang = function() {
-      s.default.getInstance().playbtnClick();
+      MusicPlayer.default.getInstance().playbtnClick();
       this.nodeTongThangOn.active = true;
       this.nodeSanHuOn.active = false;
-      r.default.getInstance().showLoading();
+      CommonPrefabsManager.default.getInstance().showLoading();
       this.requestRanking(this.gameId, "");
     };
     e.prototype.onClickSanHu = function() {
-      s.default.getInstance().playbtnClick();
+      MusicPlayer.default.getInstance().playbtnClick();
       this.nodeTongThangOn.active = false;
       this.nodeSanHuOn.active = true;
-      r.default.getInstance().showLoading();
+      CommonPrefabsManager.default.getInstance().showLoading();
       this.requestRanking(this.gameId, "");
     };
     e.prototype.onClickTuan = function() {
-      s.default.getInstance().playbtnClick();
+      MusicPlayer.default.getInstance().playbtnClick();
       this.nodeTuanOn.active = true;
       this.nodeNgayOn.active = false;
-      r.default.getInstance().showLoading();
+      CommonPrefabsManager.default.getInstance().showLoading();
       this.requestRanking(this.gameId, "");
     };
     e.prototype.onClickNgay = function() {
-      s.default.getInstance().playbtnClick();
+      MusicPlayer.default.getInstance().playbtnClick();
       this.nodeTuanOn.active = false;
       this.nodeNgayOn.active = true;
-      r.default.getInstance().showLoading();
+      CommonPrefabsManager.default.getInstance().showLoading();
       this.requestRanking(this.gameId, "");
     };
     o([T(cc.Node)], e.prototype, "nodePopupXepHangGame", void 0);
@@ -965,6 +954,6 @@ var a = require("./CardPopupBase"),
     o([T(cc.Node)], e.prototype, "nodeBoardLeft", void 0);
     o([T(cc.Label)], e.prototype, "txtEmpty", void 0);
     return e = o([C], e);
-  }(a.default);
+  }(CardPopupBase.default);
 i.default = E;
 void 0;

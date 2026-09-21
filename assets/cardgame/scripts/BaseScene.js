@@ -140,16 +140,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 Object.defineProperty(exports, "__esModule", { value: true });
 
-// ── BẢNG TRA BÍ DANH (máy sinh — ghi-bang-tra-bi-danh.js) ──────
-// Mã dịch ngược đặt bí danh một chữ cho mỗi module. Bảng này để khỏi phải cuộn ngược.
-// KHÔNG đổi tên chúng bằng tìm-kiếm-thay-thế: đoạn mở đầu __decorate khai lại đúng
-// những chữ này làm biến cục bộ, đổi là hỏng im lặng.
-//   MessageCardGame      = MessageCardGameHandler   WSCardGameHandle     = WSCardGameHandle   GamePlayManager      = GamePlayManager
-//   CommonPrefabsManager = CommonPrefabsManager   GameConfigManager    = GameConfigManager   BroadCast            = BroadCast
-//   HeaderUi             = HeaderUi   StringUtil           = StringUtil   GameDefine           = GameDefine
-//   MusicPlayer          = MusicPlayer   NhatKy               = NhatKy   SessionDataModule    = SessionData
-// ────────────────────────────────────────────────────────────────
-var MessageCardGame = require("./MessageCardGameHandler");
+var MessageCardGameHandler = require("./MessageCardGameHandler");
 var WSCardGameHandle = require("./WSCardGameHandle");
 var GamePlayManager = require("./GamePlayManager");
 var CommonPrefabsManager = require("./CommonPrefabsManager");
@@ -160,7 +151,7 @@ var StringUtil = require("./StringUtil");
 var GameDefine = require("./GameDefine");
 var MusicPlayer = require("./MusicPlayer");
 var NhatKy = require("./NhatKy");
-var SessionDataModule = require("./SessionData");
+var SessionData = require("./SessionData");
 
 var decorator = cc._decorator,
     ccclass = decorator.ccclass,
@@ -358,7 +349,7 @@ var BaseScene = (function (_super) {
         gamePlay.session_id = "";
         wsCard.isReconnectOnClose = false;
         wsCard.isNeedLogin = false;
-        SessionDataModule.SessionData.reset();
+        SessionData.SessionData.reset();
 
         var message;
         if (null == gamePlay.MessageLogOut) {
@@ -388,11 +379,11 @@ var BaseScene = (function (_super) {
         var gamePlay = GamePlayManager.default.getInstance();
 
         switch (cmd) {
-            case MessageCardGame.Global_Message.GET_TABLES:
+            case MessageCardGameHandler.Global_Message.GET_TABLES:
                 this.onGetListTableSuccess(raw, data);
                 break;
 
-            case MessageCardGame.Global_Message.ERROR_MESSAGE:
+            case MessageCardGameHandler.Global_Message.ERROR_MESSAGE:
                 this.onErrorMessage(raw, data);
                 if (this.isQuickPlay) {
                     this.isQuickPlay = false;
@@ -400,25 +391,25 @@ var BaseScene = (function (_super) {
                 }
                 break;
 
-            case MessageCardGame.Global_Message.USER_INFO:
+            case MessageCardGameHandler.Global_Message.USER_INFO:
                 this.onUserInfoRespone(data, applyGameConfig);
                 break;
 
-            case MessageCardGame.Global_Message.CREATE_TABLE_RESPONSE:
+            case MessageCardGameHandler.Global_Message.CREATE_TABLE_RESPONSE:
                 this.onReceiveCreateRoomRespone(raw, data);
                 break;
 
-            case MessageCardGame.Global_Message.QUICK_PLAY:
-            case MessageCardGame.Global_Message.QUICK_PLAY_WITH_BET:
+            case MessageCardGameHandler.Global_Message.QUICK_PLAY:
+            case MessageCardGameHandler.Global_Message.QUICK_PLAY_WITH_BET:
                 this.onReceiveQuickPlay(raw, data);
                 break;
 
-            case MessageCardGame.Global_Message.CREATE_TABLE:
+            case MessageCardGameHandler.Global_Message.CREATE_TABLE:
                 // Tạo bàn: bỏ qua bước kiểm tiền tối thiểu vì máy chủ đã chốt mức cược.
                 this.onReceiveQuickPlay(raw, data, true);
                 break;
 
-            case MessageCardGame.Global_Message.BOOK_ROOM:
+            case MessageCardGameHandler.Global_Message.BOOK_ROOM:
                 var hasPassword = false;
                 if (null !== data.hpwd && void 0 !== data.hpwd) {
                     hasPassword = data.hpwd;
@@ -431,8 +422,8 @@ var BaseScene = (function (_super) {
                 this.onBookRoomResponse(data.tfb, data.rid, data.sid, data.mMBI, data.MMBI, data.b, hasPassword);
                 break;
 
-            case MessageCardGame.Global_Message.REFRESH_MONEY:
-            case MessageCardGame.Global_Message.REFRESH_MONEY_SYN:
+            case MessageCardGameHandler.Global_Message.REFRESH_MONEY:
+            case MessageCardGameHandler.Global_Message.REFRESH_MONEY_SYN:
                 var assets = data.As;
                 gamePlay.vip = assets.vip;
                 gamePlay.gold = assets.gold;
@@ -443,7 +434,7 @@ var BaseScene = (function (_super) {
                 }
                 break;
 
-            case MessageCardGame.Global_Message.FETCH_SETTING_ROOM:
+            case MessageCardGameHandler.Global_Message.FETCH_SETTING_ROOM:
                 this.fetchSettingLobbyRoom(data);
                 break;
         }
@@ -533,7 +524,7 @@ var BaseScene = (function (_super) {
      */
     BaseScene.prototype.openReconnectRoom = function (gameId) {
         var gamePlay = GamePlayManager.default.getInstance();
-        if (gameId === MessageCardGame.GAME.BACAY) {
+        if (gameId === MessageCardGameHandler.GAME.BACAY) {
             if (null != gamePlay.reconnectData) {
                 var reconnectRoomId = gamePlay.reconnectData.rid;
                 var reconnectPassword = gamePlay.reconnectData.pwd;
@@ -567,9 +558,9 @@ var BaseScene = (function (_super) {
         if (this.isQuickPlay) {
             // Chơi nhanh: không hỏi, vào thẳng.
             this.isQuickPlay = false;
-            if (gameId === MessageCardGame.GAME.LIENG ||
-                gameId === MessageCardGame.GAME.XITO ||
-                gameId === MessageCardGame.GAME.POKER) {
+            if (gameId === MessageCardGameHandler.GAME.LIENG ||
+                gameId === MessageCardGameHandler.GAME.XITO ||
+                gameId === MessageCardGameHandler.GAME.POKER) {
                 gamePlay.joinRoomAndBuyIn(roomId, serverId, GameConfigManager.default.getInstance().roomPassword, minBuyIn);
             } else {
                 gamePlay.joinRoom(roomId, serverId, GameConfigManager.default.getInstance().roomPassword);
@@ -619,9 +610,9 @@ var BaseScene = (function (_super) {
             GameConfigManager.default.getInstance().bet = bet;
             GameConfigManager.default.getInstance().isShowPopupDone = false;
 
-            if (gameId === MessageCardGame.GAME.LIENG ||
-                gameId === MessageCardGame.GAME.XITO ||
-                gameId === MessageCardGame.GAME.POKER) {
+            if (gameId === MessageCardGameHandler.GAME.LIENG ||
+                gameId === MessageCardGameHandler.GAME.XITO ||
+                gameId === MessageCardGameHandler.GAME.POKER) {
                 // Nhóm phải đặt chỗ: xin chỗ trước, đáp sẽ rơi vào onBookRoomResponse.
                 this.checkMinMoney(bet, gameId, isCreateTable, true, function () {
                     var moneyBuyIn = roomInfo.MMBI;
@@ -711,9 +702,9 @@ var BaseScene = (function (_super) {
 
         // Liêng / Xì Tố / Poker phải ĐẶT CHỖ trước rồi mới mua chip vào bàn.
         // Ba Cây không thuộc nhóm này nên đi nhánh vào thẳng.
-        if (gamePlay.gameID === MessageCardGame.GAME.LIENG ||
-            gamePlay.gameID === MessageCardGame.GAME.XITO ||
-            gamePlay.gameID === MessageCardGame.GAME.POKER) {
+        if (gamePlay.gameID === MessageCardGameHandler.GAME.LIENG ||
+            gamePlay.gameID === MessageCardGameHandler.GAME.XITO ||
+            gamePlay.gameID === MessageCardGameHandler.GAME.POKER) {
             gamePlay.bookRoom(inviteRoomId, 0, "");
         } else {
             gamePlay.joinRoom(inviteRoomId, 0, invitePassword, true);

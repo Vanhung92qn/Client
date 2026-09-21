@@ -24,21 +24,13 @@ var n = this && this.__decorate || function(t, e, i, n) {
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-// ── BẢNG TRA BÍ DANH (máy sinh — ghi-bang-tra-bi-danh.js) ──────
-// Mã dịch ngược đặt bí danh một chữ cho mỗi module. Bảng này để khỏi phải cuộn ngược.
-// KHÔNG đổi tên chúng bằng tìm-kiếm-thay-thế: đoạn mở đầu __decorate khai lại đúng
-// những chữ này làm biến cục bộ, đổi là hỏng im lặng.
-//   o = StringUtil   a = GameConfigManager   s = CommonPrefabsManager
-//   r = GamePlayManager   c = MessageCardGameHandler   l = GbBrandChecker
-//   h = RMCAppInfoConfig
-// ────────────────────────────────────────────────────────────────
-var o = require("./StringUtil"),
-  a = require("./GameConfigManager"),
-  s = require("./CommonPrefabsManager"),
-  r = require("./GamePlayManager"),
-  c = require("./MessageCardGameHandler"),
-  l = require("./GbBrandChecker"),
-  h = require("./RMCAppInfoConfig"),
+var StringUtil = require("./StringUtil"),
+  GameConfigManager = require("./GameConfigManager"),
+  CommonPrefabsManager = require("./CommonPrefabsManager"),
+  GamePlayManager = require("./GamePlayManager"),
+  MessageCardGameHandler = require("./MessageCardGameHandler"),
+  GbBrandChecker = require("./GbBrandChecker"),
+  RMCAppInfoConfig = require("./RMCAppInfoConfig"),
   u = cc._decorator,
   d = u.ccclass,
   p = (u.property, .07),
@@ -294,15 +286,15 @@ function C(t, e, i, n) {
       e += a * n;
       if (Math.abs(e - i) < Math.abs(a * n * 2)) {
         e = i;
-        t.string = o.default.formatMoneyNumberWithColom(e);
+        t.string = StringUtil.default.formatMoneyNumberWithColom(e);
         t.unschedule(s);
       } else {
-        t.string = o.default.formatMoneyNumberWithColom(e);
+        t.string = StringUtil.default.formatMoneyNumberWithColom(e);
       }
     };
     t.schedule(s, p);
   } else {
-    t.string = o.default.formatMoneyNumberWithColom(i);
+    t.string = StringUtil.default.formatMoneyNumberWithColom(i);
   }
 }
 i.setFpsNormal = function() {};
@@ -387,15 +379,15 @@ i.runAnimationMoneyDotFormat = function(t, e, i, n) {
       e += a * n;
       if (Math.abs(e - i) < Math.abs(a * n * 2)) {
         e = i;
-        t.string = o.default.formatMoneyNumberWithDot(e);
+        t.string = StringUtil.default.formatMoneyNumberWithDot(e);
         t.unschedule(s);
       } else {
-        t.string = o.default.formatMoneyNumberWithDot(e);
+        t.string = StringUtil.default.formatMoneyNumberWithDot(e);
       }
     };
     t.schedule(s, p);
   } else {
-    t.string = o.default.formatMoneyNumberWithDot(i);
+    t.string = StringUtil.default.formatMoneyNumberWithDot(i);
   }
 };
 i.runAnimationMoney = function(t, e, i, n) {
@@ -409,15 +401,15 @@ i.runAnimationMoney = function(t, e, i, n) {
       e += a * n;
       if (Math.abs(e - i) < Math.abs(a * n * 2)) {
         e = i;
-        t.string = o.default.formatMoneyNumber(e);
+        t.string = StringUtil.default.formatMoneyNumber(e);
         t.unschedule(s);
       } else {
-        t.string = o.default.formatMoneyNumber(e);
+        t.string = StringUtil.default.formatMoneyNumber(e);
       }
     };
     t.schedule(s, p);
   } else {
-    t.string = o.default.formatMoneyNumber(i);
+    t.string = StringUtil.default.formatMoneyNumber(i);
   }
 };
 i.runAnimationMoneyWithColom = C;
@@ -431,15 +423,15 @@ i.runAnimationMoneyWithDot = function(t, e, i, n) {
       e += a * n;
       if (Math.abs(e - i) < Math.abs(a * n * 2)) {
         e = i;
-        t.string = o.default.formatMoneyNumberWithDot(e);
+        t.string = StringUtil.default.formatMoneyNumberWithDot(e);
         t.unschedule(s);
       } else {
-        t.string = o.default.formatMoneyNumberWithDot(e);
+        t.string = StringUtil.default.formatMoneyNumberWithDot(e);
       }
     };
     t.schedule(s, p);
   } else {
-    t.string = o.default.formatMoneyNumberWithDot(i);
+    t.string = StringUtil.default.formatMoneyNumberWithDot(i);
   }
 };
 var T = function() {
@@ -480,7 +472,7 @@ function P(t) {
 
 function M() {
   var t = localStorage.getItem("KEY_STORE_FINGER_PRINT");
-  if (o.default.isNullOrEmpty(t)) {
+  if (StringUtil.default.isNullOrEmpty(t)) {
     t = cc.sys.isNative ? cc.sys.os === cc.sys.OS_ANDROID ? B() : cc.sys.os === cc.sys.OS_IOS ? O() : N() : N();
   }
   localStorage.setItem("KEY_STORE_FINGER_PRINT", t);
@@ -659,24 +651,24 @@ i.isRunningStandalone = function() {
 };
 i.isActivePublicLobby = function() {
   if (cc.sys.isNative) {
-    var t = a.default.getInstance().publicLobbyConfig;
+    var t = GameConfigManager.default.getInstance().publicLobbyConfig;
     if (t) {
       var e;
-      if (void 0 != t.activeAndroid && 0 == t.activeAndroid && cc.sys.os == cc.sys.OS_ANDROID && (e = D()) && a.default.getInstance()
+      if (void 0 != t.activeAndroid && 0 == t.activeAndroid && cc.sys.os == cc.sys.OS_ANDROID && (e = D()) && GameConfigManager.default.getInstance()
         .isDisablePublicLobby(e)) {
         return false;
       }
-      if (void 0 != t.activeiOS && 0 == t.activeiOS && cc.sys.os == cc.sys.OS_IOS && (e = D()) && a.default.getInstance()
+      if (void 0 != t.activeiOS && 0 == t.activeiOS && cc.sys.os == cc.sys.OS_IOS && (e = D()) && GameConfigManager.default.getInstance()
         .isDisablePublicLobby(e)) {
         return false;
       }
     }
   }
-  return 1 == cc.sys.isNative && "true" == a.default.getInstance().isActivePublicLobbyApp || 0 == cc.sys.isNative && "true" == a.default
+  return 1 == cc.sys.isNative && "true" == GameConfigManager.default.getInstance().isActivePublicLobbyApp || 0 == cc.sys.isNative && "true" == GameConfigManager.default
     .getInstance().isActivePublicLobbyWeb;
 };
 i.getBrand = function() {
-  var t = a.default.getInstance().enviromentName;
+  var t = GameConfigManager.default.getInstance().enviromentName;
   return (t = (t = (t = t.replace("test", "")).replace("pre", "")).replace("prepro", "")).toUpperCase();
 };
 i.isTablet = function() {
@@ -974,23 +966,23 @@ i.formatUrl = function(t) {
     .replace(/:/g, "%3A")).replace(/https_/g, "https:");
 };
 i.showPopupNewBrandInfo = function() {
-  if (0 == a.default.getInstance().isforcebrand) {
+  if (0 == GameConfigManager.default.getInstance().isforcebrand) {
     return false;
   }
-  var t = a.default.getInstance().newHomeUrl;
+  var t = GameConfigManager.default.getInstance().newHomeUrl;
   if (t.includes("play")) {
     t = t.split("play.")[1];
   }
-  var e = s.default.getInstance().showPopup1Button();
+  var e = CommonPrefabsManager.default.getInstance().showPopup1Button();
   e.btnBackground.interactable = false;
   e.nodeButton.width = 250;
   e.nodeButton.height = 75;
-  e.lbOk.string = "T\u1ea3i " + a.default.getInstance().newBrandName;
-  e.lbContent.string = "T\u1eeb ng\xe0y " + a.default.getInstance().newBrandTime + ", " + a.default.getInstance().homeUrl.split("play.")[
-      1] + " chuy\u1ec3n sang c\u1ed5ng game " + a.default.getInstance().newBrandName +
+  e.lbOk.string = "T\u1ea3i " + GameConfigManager.default.getInstance().newBrandName;
+  e.lbContent.string = "T\u1eeb ng\xe0y " + GameConfigManager.default.getInstance().newBrandTime + ", " + GameConfigManager.default.getInstance().homeUrl.split("play.")[
+      1] + " chuy\u1ec3n sang c\u1ed5ng game " + GameConfigManager.default.getInstance().newBrandName +
     ", m\u1eddi b\u1ea1n \u0111\u0103ng k\xfd t\u1ea1i " + t;
   e.onOKCallback = function() {
-    cc.sys.openURL("https://" + a.default.getInstance().newHomeUrl);
+    cc.sys.openURL("https://" + GameConfigManager.default.getInstance().newHomeUrl);
   }.bind(this);
   return true;
 };
@@ -1005,11 +997,11 @@ i.transformAvatarString = function(t) {
   }).join("");
 };
 i.updateLiveChatInhouseUrl = function() {
-  if (a.default.getInstance().isUseLiveChatInhouse) {
-    var t = a.default.getInstance().liveChatOriginalUrl;
-    t = "" != r.default.getInstance().session_id ? t.replace("{xtoken}", r.default.getInstance().session_id) : t.replace(
+  if (GameConfigManager.default.getInstance().isUseLiveChatInhouse) {
+    var t = GameConfigManager.default.getInstance().liveChatOriginalUrl;
+    t = "" != GamePlayManager.default.getInstance().session_id ? t.replace("{xtoken}", GamePlayManager.default.getInstance().session_id) : t.replace(
       "?xtoken={xtoken}", "");
-    a.default.getInstance().liveChatUrl = t;
+    GameConfigManager.default.getInstance().liveChatUrl = t;
     cc.sys.localStorage.setItem("KEY_URL_SUPPORT_LIVE_CHAT", t);
   }
 };
@@ -1035,44 +1027,44 @@ i.convertDateFormat = function(t) {
 i.convertToStringGameID = function(t) {
   var e = "";
   switch (t) {
-    case c.GAME.XITO:
-      e = c.GAMEID.XITO;
+    case MessageCardGameHandler.GAME.XITO:
+      e = MessageCardGameHandler.GAMEID.XITO;
       break;
-    case c.GAME.BINH:
-      e = c.GAMEID.BINH;
+    case MessageCardGameHandler.GAME.BINH:
+      e = MessageCardGameHandler.GAMEID.BINH;
       break;
-    case c.GAME.TIENLEN:
-      e = c.GAMEID.TIENLEN;
+    case MessageCardGameHandler.GAME.TIENLEN:
+      e = MessageCardGameHandler.GAMEID.TIENLEN;
       break;
-    case c.GAME.POKER:
-      e = c.GAMEID.POKER;
+    case MessageCardGameHandler.GAME.POKER:
+      e = MessageCardGameHandler.GAMEID.POKER;
       break;
-    case c.GAME.BACAY:
-      e = c.GAMEID.BACAY;
+    case MessageCardGameHandler.GAME.BACAY:
+      e = MessageCardGameHandler.GAMEID.BACAY;
       break;
-    case c.GAME.LIENG:
-      e = c.GAMEID.LIENG;
+    case MessageCardGameHandler.GAME.LIENG:
+      e = MessageCardGameHandler.GAMEID.LIENG;
       break;
-    case c.GAME.SAM:
-      e = c.GAMEID.SAM;
+    case MessageCardGameHandler.GAME.SAM:
+      e = MessageCardGameHandler.GAMEID.SAM;
       break;
-    case c.GAME.PHOM:
-      e = c.GAMEID.PHOM;
+    case MessageCardGameHandler.GAME.PHOM:
+      e = MessageCardGameHandler.GAMEID.PHOM;
       break;
-    case c.GAME.TLMN:
-      e = c.GAMEID.TLMN;
+    case MessageCardGameHandler.GAME.TLMN:
+      e = MessageCardGameHandler.GAMEID.TLMN;
       break;
-    case c.GAME.CATTE:
-      e = c.GAMEID.CATTE;
+    case MessageCardGameHandler.GAME.CATTE:
+      e = MessageCardGameHandler.GAMEID.CATTE;
       break;
-    case c.GAME.XOCDIA:
-      e = c.GAMEID.XOCDIA;
+    case MessageCardGameHandler.GAME.XOCDIA:
+      e = MessageCardGameHandler.GAMEID.XOCDIA;
       break;
-    case c.GAME.BAU_CUA:
-      e = c.GAMEID.BAU_CUA;
+    case MessageCardGameHandler.GAME.BAU_CUA:
+      e = MessageCardGameHandler.GAMEID.BAU_CUA;
       break;
-    case c.GAME.XIDACH:
-      e = c.GAMEID.XIDACH;
+    case MessageCardGameHandler.GAME.XIDACH:
+      e = MessageCardGameHandler.GAMEID.XIDACH;
   }
   return e;
 };
@@ -1086,15 +1078,15 @@ i.runAnimationMoneyDecimal = function(t, e, i, n) {
         e += a * n;
         if (Math.abs(e - i) < Math.abs(a * n * 2)) {
           e = i;
-          t.string = o.default.formatMoneyNumberDecimal(e);
+          t.string = StringUtil.default.formatMoneyNumberDecimal(e);
           t.unschedule(s);
         } else {
-          t.string = o.default.formatMoneyNumberDecimal(e);
+          t.string = StringUtil.default.formatMoneyNumberDecimal(e);
         }
       };
       t.schedule(s, p);
     } else {
-      t.string = o.default.formatMoneyNumberDecimal(i);
+      t.string = StringUtil.default.formatMoneyNumberDecimal(i);
     }
   }
 };
@@ -1108,13 +1100,13 @@ i.countUppercase = function(t) {
   return e;
 };
 i.getPopupPositionCenter = function() {
-  var t = h.getBrandCodeConfig(),
-    e = new l.BrandChecker(t);
+  var t = RMCAppInfoConfig.getBrandCodeConfig(),
+    e = new GbBrandChecker.BrandChecker(t);
   return e.isG0() ? cc.Vec2.ZERO : (e.isGTh, new cc.Vec2(cc.winSize.width / 2, cc.winSize.height / 2));
 };
 i.setPopupPosition = function(t) {
-  var e = h.getBrandCodeConfig(),
-    i = new l.BrandChecker(e);
+  var e = RMCAppInfoConfig.getBrandCodeConfig(),
+    i = new GbBrandChecker.BrandChecker(e);
   if (i.isG0()) {
     t.x = 0;
     t.y = 0;

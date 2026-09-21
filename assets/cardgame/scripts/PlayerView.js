@@ -181,35 +181,24 @@ Object.defineProperty(i, "__esModule", {
   value: true
 });
 var r,
-// ── BẢNG TRA BÍ DANH (máy sinh — ghi-bang-tra-bi-danh.js) ──────
-// Mã dịch ngược đặt bí danh một chữ cho mỗi module. Bảng này để khỏi phải cuộn ngược.
-// KHÔNG đổi tên chúng bằng tìm-kiếm-thay-thế: đoạn mở đầu __decorate khai lại đúng
-// những chữ này làm biến cục bộ, đổi là hỏng im lặng.
-//   c = GamePlayManager   l = StringUtil   h = GameCardSprite
-//   u = BetLabel   d = PopBubbleUtil   p = GameZOrder
-//   f = GameCardSpriteType   g = ActionProgressTo   m = GameDefine
-//   y = CardGameCommonRequest   S = RemoteSprite   _ = PlayerStatusUI
-//   v = MusicPlayer   b = MessageCardGameHandler   C = CommonPrefabsManager
-//   T = GameConfigManager   E = GameUtils   I = GameController
-// ────────────────────────────────────────────────────────────────
-  c = require("./GamePlayManager"),
-  l = require("./StringUtil"),
-  h = require("./GameCardSprite"),
-  u = require("./BetLabel"),
-  d = require("./PopBubbleUtil"),
-  p = require("./GameZOrder"),
-  f = require("./GameCardSpriteType"),
-  g = require("./ActionProgressTo"),
-  m = require("./GameDefine"),
-  y = require("./CardGameCommonRequest"),
-  S = require("./RemoteSprite"),
-  _ = require("./PlayerStatusUI"),
-  v = require("./MusicPlayer"),
-  b = require("./MessageCardGameHandler"),
-  C = require("./CommonPrefabsManager"),
-  T = require("./GameConfigManager"),
-  E = require("./GameUtils"),
-  I = require("./GameController"),
+  GamePlayManager = require("./GamePlayManager"),
+  StringUtil = require("./StringUtil"),
+  GameCardSprite = require("./GameCardSprite"),
+  BetLabel = require("./BetLabel"),
+  PopBubbleUtil = require("./PopBubbleUtil"),
+  GameZOrder = require("./GameZOrder"),
+  GameCardSpriteType = require("./GameCardSpriteType"),
+  ActionProgressTo = require("./ActionProgressTo"),
+  GameDefine = require("./GameDefine"),
+  CardGameCommonRequest = require("./CardGameCommonRequest"),
+  RemoteSprite = require("./RemoteSprite"),
+  PlayerStatusUI = require("./PlayerStatusUI"),
+  MusicPlayer = require("./MusicPlayer"),
+  MessageCardGameHandler = require("./MessageCardGameHandler"),
+  CommonPrefabsManager = require("./CommonPrefabsManager"),
+  GameConfigManager = require("./GameConfigManager"),
+  GameUtils = require("./GameUtils"),
+  GameController = require("./GameController"),
   A = cc._decorator,
   P = A.ccclass,
   M = A.property;
@@ -304,7 +293,7 @@ var O = function(t) {
   e.prototype.InitData = function(t) {
     this.userID = t.uid;
     this.lbName.string = t.dn;
-    this.lbMoney.string = l.default.formatMoneyNumber(t.m);
+    this.lbMoney.string = StringUtil.default.formatMoneyNumber(t.m);
     this.shakeDiskBets = [];
     for (var e = 0; e < 6; ++e) {
       this.shakeDiskBets.push(0);
@@ -316,7 +305,7 @@ var O = function(t) {
       return s(this, function(t) {
         switch (t.label) {
           case 0:
-            return [4, E.delay(50)];
+            return [4, GameUtils.delay(50)];
           case 1:
             return t.sent(), this.lbName.node.getContentSize().width > this.widthCutString && (this.lbName.string = this.lbName
               .string.substring(0, 10) + ".."), [2];
@@ -328,17 +317,17 @@ var O = function(t) {
     if (void 0 === f) {
       f = false;
     }
-    if (c.default.getInstance().gameID == m.GameID.BACAY) {
+    if (GamePlayManager.default.getInstance().gameID == GameDefine.GameID.BACAY) {
       this.reset();
     }
     this.userID = e;
     if (this.isMine()) {
-      this.lbName.string = c.default.getInstance().displayName;
-      this.lbMoney.string = l.default.formatMoneyNumber(n);
+      this.lbName.string = GamePlayManager.default.getInstance().displayName;
+      this.lbMoney.string = StringUtil.default.formatMoneyNumber(n);
     } else {
       if (false === f) {
         this.lbName.string = t;
-        this.lbMoney.string = l.default.formatMoneyNumber(n);
+        this.lbMoney.string = StringUtil.default.formatMoneyNumber(n);
       }
       this.userDisplayName = t;
       this.isAnDanh = f;
@@ -362,26 +351,26 @@ var O = function(t) {
     if (null !== this.iconHost && void 0 !== this.iconHost) {
       this.iconHost.active = this.isHost;
     }
-    if (l.default.isNullOrEmpty(p)) {
+    if (StringUtil.default.isNullOrEmpty(p)) {
       p = "Avatar0";
     }
     if (null !== this.avarta && void 0 !== this.avarta) {
       if (this.isMine()) {
-        if (c.default.getInstance().avaURL.includes("-")) {
-          c.default.getInstance().avaURL = E.transformAvatarString(c.default.getInstance().avaURL);
+        if (GamePlayManager.default.getInstance().avaURL.includes("-")) {
+          GamePlayManager.default.getInstance().avaURL = GameUtils.transformAvatarString(GamePlayManager.default.getInstance().avaURL);
         }
-        this.avatarUrl = c.default.getInstance().avaURL;
+        this.avatarUrl = GamePlayManager.default.getInstance().avaURL;
         if (0 == this.avatarUrl.includes("Avatar") || this.avatarUrl.includes("NaN")) {
           this.avatarUrl = "Avatar0";
         }
         this.avarta.loadImage(this.avatarUrl);
       } else {
         if (p.includes("-")) {
-          p = E.transformAvatarString(p);
+          p = GameUtils.transformAvatarString(p);
         }
         this.avatarUrl = p;
         if (0 == this.avatarUrl.includes("Avatar") || this.avatarUrl.includes("NaN")) {
-          this.avatarUrl = "Avatar" + Math.floor(l.default.getRandomInt(59));
+          this.avatarUrl = "Avatar" + Math.floor(StringUtil.default.getRandomInt(59));
         }
         if (false === f) {
           this.avarta.loadImage(this.avatarUrl);
@@ -392,7 +381,7 @@ var O = function(t) {
   e.prototype.showAnDanhWhenDone = function() {
     if (this.isAnDanh) {
       this.lbName.string = this.userDisplayName;
-      this.lbMoney.string = l.default.formatMoneyNumber(this._money);
+      this.lbMoney.string = StringUtil.default.formatMoneyNumber(this._money);
       this.moneyUIDangShow = this._money;
       this.isAnDanh = false;
       this.processCutLongString();
@@ -402,11 +391,11 @@ var O = function(t) {
     }
   };
   e.prototype.isMine = function() {
-    return void 0 != this.userID && null != this.userID && 0 == this.userID.localeCompare(c.default.getInstance().userID);
+    return void 0 != this.userID && null != this.userID && 0 == this.userID.localeCompare(GamePlayManager.default.getInstance().userID);
   };
   e.prototype.setMoney = function(t) {
     if (false === this.isAnDanh) {
-      this.lbMoney.string = l.default.formatMoneyNumber(t);
+      this.lbMoney.string = StringUtil.default.formatMoneyNumber(t);
     }
     this._money = t;
     this.moneyUIDangShow = this._money;
@@ -458,8 +447,8 @@ var O = function(t) {
     if (void 0 === e && (e = true), null === this.bubbleChat || void 0 === this.bubbleChat) {
       var n = cc.instantiate(this.bubbleFxPrefab);
       n.parent = this.layerChatBubble ? this.layerChatBubble : this.node.parent;
-      n.zIndex = p.default.CHAT_BUBLES;
-      this.bubbleChat = n.getComponent(d.default);
+      n.zIndex = GameZOrder.default.CHAT_BUBLES;
+      this.bubbleChat = n.getComponent(PopBubbleUtil.default);
     } else {
       this.bubbleChat.stopAllActions();
     }
@@ -474,7 +463,7 @@ var O = function(t) {
     this.bubbleChat.node.position = new cc.Vec2(this.node.position.x + this.bubbleFxPos.position.x * this.node.scale, o);
     this.bubbleChat.initPos(new cc.Vec2(this.node.position.x + this.bubbleFxPos.position.x * this.node.scale, o), new cc.Vec2(this.node
       .position.x - this.bubbleFxPos.position.x * this.node.scale, a));
-    if (c.default.getInstance().gameID === b.GAME.BACAY && this.isMine()) {
+    if (GamePlayManager.default.getInstance().gameID === MessageCardGameHandler.GAME.BACAY && this.isMine()) {
       this.bubbleChat.showBubbleReverse(true);
     } else {
       this.bubbleChat.showBubbleReverse(this.node.position.x > 200);
@@ -511,8 +500,8 @@ var O = function(t) {
     if (void 0 === o && (o = void 0), null === this.bubbleFx || void 0 === this.bubbleFx) {
       var a = cc.instantiate(this.bubbleFxPrefab);
       a.parent = this.node.parent;
-      a.zIndex = p.default.CHAT_BUBLES;
-      this.bubbleFx = a.getComponent(d.default);
+      a.zIndex = GameZOrder.default.CHAT_BUBLES;
+      this.bubbleFx = a.getComponent(PopBubbleUtil.default);
     } else {
       this.bubbleFx.node.stopAllActions();
       this.bubbleFx._isPopping = false;
@@ -529,7 +518,7 @@ var O = function(t) {
     this.bubbleFx.node.active = true;
     this.bubbleFx.node.opacity = 255;
     this.bubbleFx.showBubbleReverse(n);
-    if (c.default.getInstance().gameID === b.GAME.XITO) {
+    if (GamePlayManager.default.getInstance().gameID === MessageCardGameHandler.GAME.XITO) {
       this.bubbleFx.showBubbleReverse(this.node.position.x < 200);
     }
     if (i) {
@@ -563,8 +552,8 @@ var O = function(t) {
     if (void 0 === o && (o = void 0), null === this.bubbleSpecial || void 0 === this.bubbleSpecial) {
       var a = cc.instantiate(this.bubbleFxPrefab);
       a.parent = this.node.parent;
-      a.zIndex = p.default.CHAT_BUBLES;
-      this.bubbleSpecial = a.getComponent(d.default);
+      a.zIndex = GameZOrder.default.CHAT_BUBLES;
+      this.bubbleSpecial = a.getComponent(PopBubbleUtil.default);
     } else {
       this.bubbleSpecial.node.stopAllActions();
       this.bubbleSpecial._isPopping = false;
@@ -620,14 +609,14 @@ var O = function(t) {
       this.isShowAnimBonusMoney = true;
       var o = cc.instantiate(this.loseTextEffectPrefab);
       o.parent = this.node.parent;
-      o.zIndex = p.default.TOP;
+      o.zIndex = GameZOrder.default.TOP;
       var a = this.node.scale;
       o.position = new cc.Vec2(this.node.position.x, this.node.position.y - n * a);
       if (null != this.textEffectNode && void 0 != this.textEffectNode) {
         this.textEffectNode.active = true;
       }
       this.textEffectNode = o;
-      o.getComponent(u.default).setNumberWithPrefix(t, false, "+");
+      o.getComponent(BetLabel.default).setNumberWithPrefix(t, false, "+");
       o.scaleX = 0;
       o.runAction(cc.sequence(cc.delayTime(i), cc.scaleTo(.2, a), cc.moveBy(.3, new cc.Vec2(0, n * a * 2)), cc.delayTime(e - 1), cc
         .fadeOut(.5), cc.callFunc(function() {
@@ -639,14 +628,14 @@ var O = function(t) {
     if (void 0 === i && (i = 25), 0 != t) {
       var n = cc.instantiate(t > 0 ? this.winTextEffectPrefab : this.loseTextEffectPrefab);
       n.parent = this.node.parent;
-      n.zIndex = p.default.TOP;
+      n.zIndex = GameZOrder.default.TOP;
       var o = this.node.scale;
       n.position = new cc.Vec2(this.node.position.x, this.node.position.y - i * o);
       if (null != this.textEffectNode && void 0 != this.textEffectNode) {
         this.textEffectNode.active = true;
       }
       this.textEffectNode = n;
-      n.getComponent(u.default).setNumber(t, false);
+      n.getComponent(BetLabel.default).setNumber(t, false);
       n.scaleX = .2 * o;
       n.runAction(cc.sequence(cc.scaleTo(.2, o), cc.moveBy(.3, new cc.Vec2(0, i * o * 2)), cc.delayTime(e - 1), cc.fadeOut(.5), cc
         .callFunc(function() {
@@ -663,7 +652,7 @@ var O = function(t) {
     }
     var i = cc.instantiate(this.upbaiEffectPrefab);
     i.parent = this.node.parent;
-    i.zIndex = p.default.TOP;
+    i.zIndex = GameZOrder.default.TOP;
     var n = this.node.scale;
     i.position = new cc.Vec2(this.node.position.x, this.node.position.y - e * n);
     this.textEffectNode = i;
@@ -687,7 +676,7 @@ var O = function(t) {
     }
   };
   e.prototype.runToPos = function(t, e) {
-    if (void 0 === e && (e = false), this.node.position.x === I.posOutScreen.x && this.node.position.y === I.posOutScreen.y && (this.pos
+    if (void 0 === e && (e = false), this.node.position.x === GameController.posOutScreen.x && this.node.position.y === GameController.posOutScreen.y && (this.pos
         .x <= 0 && this.pos.y <= 0 ? this.node.position = new cc.Vec2(-t.width / 2, -t.height / 2) : this.pos.x <= 0 && this.pos.y >=
         0 ? this.node.position = new cc.Vec2(-t.width / 2, t.height / 2) : this.pos.x >= 0 && this.pos.y <= 0 ? this.node.position =
         new cc.Vec2(t.width / 2, -t.height / 2) : this.pos.x >= 0 && this.pos.y >= 0 && (this.node.position = new cc.Vec2(t.width / 2, t
@@ -718,9 +707,9 @@ var O = function(t) {
     var e = cc.instantiate(t);
     e.parent = this.node.parent;
     e.position = new cc.Vec2(0, 0);
-    e.zIndex = p.default.MIDDLE + this.cards.length;
-    var i = e.getComponent(h.default);
-    i.init(f.default.TypeHIDE);
+    e.zIndex = GameZOrder.default.MIDDLE + this.cards.length;
+    var i = e.getComponent(GameCardSprite.default);
+    i.init(GameCardSpriteType.default.TypeHIDE);
     this.cards.push(i);
     e.active = false;
     return i;
@@ -732,17 +721,17 @@ var O = function(t) {
   };
   e.prototype.initMauBinhCard = function(t) {
     for (var e = this.cards.length, i = this.isMine(), n = e; n < 13; ++n) {
-      this.createNewCard(t).node.zIndex = i ? p.default.MIDDLE_TOP_2 + 1 + n : 15 - n;
+      this.createNewCard(t).node.zIndex = i ? GameZOrder.default.MIDDLE_TOP_2 + 1 + n : 15 - n;
     }
   };
   e.prototype.initCatteCard = function(t) {
     for (var e = this.cards.length, i = this.isMine(), n = e; n < 6; ++n) {
-      this.createNewCard(t).node.zIndex = i ? p.default.MIDDLE_TOP_2 + 1 + n : 15 - n;
+      this.createNewCard(t).node.zIndex = i ? GameZOrder.default.MIDDLE_TOP_2 + 1 + n : 15 - n;
     }
   };
   e.prototype.iniBaCayCard = function(t) {
     for (var e = this.cards.length, i = this.isMine(), n = e; n < 3; ++n) {
-      this.createNewCard(t).node.zIndex = i ? p.default.MIDDLE_TOP_2 + 1 + n : 15 - n;
+      this.createNewCard(t).node.zIndex = i ? GameZOrder.default.MIDDLE_TOP_2 + 1 + n : 15 - n;
     }
   };
   e.prototype.hideAllCard = function(t) {
@@ -752,7 +741,7 @@ var O = function(t) {
     for (var e = 0; e < this.cards.length; ++e) {
       var i = this.cards[e];
       i.node.stopAllActions();
-      i.init(f.default.TypeHIDE);
+      i.init(GameCardSpriteType.default.TypeHIDE);
       i.setColor(cc.Color.WHITE);
       i.node.position = new cc.Vec2(0, 0);
       i.node.active = t;
@@ -767,7 +756,7 @@ var O = function(t) {
       var n = this.cards[i],
         o = t[i];
       if (e) {
-        n.setTextureWithCode(o, c.default.getInstance().gameID);
+        n.setTextureWithCode(o, GamePlayManager.default.getInstance().gameID);
       }
     }
   };
@@ -789,8 +778,8 @@ var O = function(t) {
         var n = cc.instantiate(t);
         n.parent = this.node.parent;
         n.position = new cc.Vec2(0, 0);
-        var o = n.getComponent(h.default);
-        o.init(f.default.TypeHIDE);
+        var o = n.getComponent(GameCardSprite.default);
+        o.init(GameCardSpriteType.default.TypeHIDE);
         this.cards.push(o);
         n.active = false;
       }
@@ -803,7 +792,7 @@ var O = function(t) {
     for (var e = 0; e < 2; ++e) {
       var i = this.cards[e];
       i.node.stopAllActions();
-      i.init(f.default.TypeHIDE);
+      i.init(GameCardSpriteType.default.TypeHIDE);
       i.node.position = new cc.Vec2(0, 0);
       i.node.active = t;
     }
@@ -831,17 +820,17 @@ var O = function(t) {
   e.prototype.setPhomStatus = function(t) {
     var e = false;
     switch (1 != this.indexPos && 3 != this.indexPos || (e = true), t) {
-      case m.EPhomPlayerStatus.MOM:
+      case GameDefine.EPhomPlayerStatus.MOM:
         this.showBubbleFx("M\xf3m", 0, true, e);
         break;
-      case m.EPhomPlayerStatus.U:
+      case GameDefine.EPhomPlayerStatus.U:
         this.showBubbleFx("\xd9", 0, true, e);
         break;
-      case m.EPhomPlayerStatus.AN_CHOT:
+      case GameDefine.EPhomPlayerStatus.AN_CHOT:
         this.showBubbleFx("\u0102n Ch\u1ed1t", 0, true, e);
         break;
       default:
-      case m.EPhomPlayerStatus.NONE:
+      case GameDefine.EPhomPlayerStatus.NONE:
         return void this.removeBubbleFx();
     }
   };
@@ -855,7 +844,7 @@ var O = function(t) {
     }
     this.playerStatusUI.node.y = 70;
     this.playerStatusUI.setLiengStatus(t);
-    if (t == m.ELiengPlayState.FOLD) {
+    if (t == GameDefine.ELiengPlayState.FOLD) {
       this.showUpBaiFxForPlayer(3);
     }
   };
@@ -919,7 +908,7 @@ var O = function(t) {
     this.borderInfo.active = false;
   };
   e.prototype._kickUser = function() {
-    y.default.getInstance().sendKickUser(this.userID);
+    CardGameCommonRequest.default.getInstance().sendKickUser(this.userID);
   };
   e.prototype.destroyMe = function() {
     if (null !== this.bubbleFx && void 0 !== this.bubbleFx) {
@@ -954,15 +943,15 @@ var O = function(t) {
     this.listCardOnHandTL = [];
   };
   e.prototype.showPopupUserTableInfo = function() {
-    if (v.default.getInstance().playbtnClick(), this.isAnDanh) {
-      C.default.getInstance().showPopupMessageUtil("Ng\u01b0\u1eddi Ch\u01a1i \u1ea8n Danh");
-    } else if (!T.default.getInstance().isLoginWebcc || !this.isMine()) {
+    if (MusicPlayer.default.getInstance().playbtnClick(), this.isAnDanh) {
+      CommonPrefabsManager.default.getInstance().showPopupMessageUtil("Ng\u01b0\u1eddi Ch\u01a1i \u1ea8n Danh");
+    } else if (!GameConfigManager.default.getInstance().isLoginWebcc || !this.isMine()) {
       var t = this.moneyUIDangShow;
-      if (!(c.default.getInstance().gameID != m.GameID.LIENG && c.default.getInstance().gameID != m.GameID.POKER && c.default
-          .getInstance().gameID != m.GameID.XITO)) {
+      if (!(GamePlayManager.default.getInstance().gameID != GameDefine.GameID.LIENG && GamePlayManager.default.getInstance().gameID != GameDefine.GameID.POKER && GamePlayManager.default
+          .getInstance().gameID != GameDefine.GameID.XITO)) {
         t = this._realMoney;
       }
-      C.default.getInstance().showPopupUserTableInfo(this.lbName.string, t, this.avatarUrl, this.isMine());
+      CommonPrefabsManager.default.getInstance().showPopupUserTableInfo(this.lbName.string, t, this.avatarUrl, this.isMine());
     }
   };
   e.prototype.setPlayerViewBauCua = function() {
@@ -1029,13 +1018,13 @@ var O = function(t) {
   o([M(cc.Prefab)], e.prototype, "loseTextEffectPrefab", void 0);
   o([M(cc.Prefab)], e.prototype, "upbaiEffectPrefab", void 0);
   o([M(cc.Prefab)], e.prototype, "textResultPrefab", void 0);
-  o([M(g.default)], e.prototype, "countDownProgressTo", void 0);
+  o([M(ActionProgressTo.default)], e.prototype, "countDownProgressTo", void 0);
   o([M(cc.Node)], e.prototype, "chatIconView", void 0);
   o([M(cc.Node)], e.prototype, "nodePlayerAvatar", void 0);
   o([M(cc.Node)], e.prototype, "nodePlayerName", void 0);
-  o([M(_.default)], e.prototype, "playerStatusUI", void 0);
+  o([M(PlayerStatusUI.default)], e.prototype, "playerStatusUI", void 0);
   o([M(cc.Node)], e.prototype, "borderInfo", void 0);
-  o([M(S.default)], e.prototype, "avarta", void 0);
+  o([M(RemoteSprite.default)], e.prototype, "avarta", void 0);
   o([M(sp.Skeleton)], e.prototype, "skeletonEffect", void 0);
   o([M(sp.Skeleton)], e.prototype, "skeletonCountDown", void 0);
   o([M(cc.Node)], e.prototype, "iconDola", void 0);

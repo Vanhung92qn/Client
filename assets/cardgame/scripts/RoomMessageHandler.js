@@ -47,18 +47,11 @@ var n = this && this.__extends || function() {
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-// ── BẢNG TRA BÍ DANH (máy sinh — ghi-bang-tra-bi-danh.js) ──────
-// Mã dịch ngược đặt bí danh một chữ cho mỗi module. Bảng này để khỏi phải cuộn ngược.
-// KHÔNG đổi tên chúng bằng tìm-kiếm-thay-thế: đoạn mở đầu __decorate khai lại đúng
-// những chữ này làm biến cục bộ, đổi là hỏng im lặng.
-//   a = MessageCardGameHandler   s = NetworkConfig   r = GamePlayManager
-//   c = MessageHandlerBase   l = GameConfigManager
-// ────────────────────────────────────────────────────────────────
-var a = require("./MessageCardGameHandler"),
-  s = require("./NetworkConfig"),
-  r = require("./GamePlayManager"),
-  c = require("./MessageHandlerBase"),
-  l = require("./GameConfigManager"),
+var MessageCardGameHandler = require("./MessageCardGameHandler"),
+  NetworkConfig = require("./NetworkConfig"),
+  GamePlayManager = require("./GamePlayManager"),
+  MessageHandlerBase = require("./MessageHandlerBase"),
+  GameConfigManager = require("./GameConfigManager"),
   h = cc._decorator,
   u = h.ccclass,
   d = (h.property, function(t) {
@@ -85,38 +78,38 @@ var a = require("./MessageCardGameHandler"),
       return this.instance;
     };
     e.prototype.genMessage = function(t, e) {
-      var i = [a.Message.MessageType.RoomPlugin_Type, s.getZoneName(), t, e];
+      var i = [MessageCardGameHandler.Message.MessageType.RoomPlugin_Type, NetworkConfig.getZoneName(), t, e];
       return JSON.stringify(i);
     };
     e.prototype.requestListRoom = function(t) {
       this.printLog("requestListRoom gameID: " + t);
-      var e = [a.Message.MessageType.ZonePlugin_Type, s.getZoneName(), "channelPlugin", {
-        cmd: a.RoomCommand.GET_TABLES,
+      var e = [MessageCardGameHandler.Message.MessageType.ZonePlugin_Type, NetworkConfig.getZoneName(), "channelPlugin", {
+        cmd: MessageCardGameHandler.RoomCommand.GET_TABLES,
         aid: 1,
         gid: t
       }];
       this.sendData(JSON.stringify(e));
-      r.default.getInstance().gameID = t;
+      GamePlayManager.default.getInstance().gameID = t;
     };
     e.prototype.requestBuyIn = function(t) {
-      var e = [a.Message.MessageType.RoomPlugin_Type, s.getZoneName(), r.default.getInstance().roomID, {
-        cmd: a.RoomCommand.BUY_IN,
+      var e = [MessageCardGameHandler.Message.MessageType.RoomPlugin_Type, NetworkConfig.getZoneName(), GamePlayManager.default.getInstance().roomID, {
+        cmd: MessageCardGameHandler.RoomCommand.BUY_IN,
         m: t
       }];
       this.sendData(JSON.stringify(e));
     };
     e.prototype.requestBookRoom = function(t, e, i) {
-      r.default.getInstance().roomID = t;
-      var n = [a.Message.MessageType.ZonePlugin_Type, "Simms", "channelPlugin", {
-        cmd: a.Global_Message.BOOK_ROOM,
+      GamePlayManager.default.getInstance().roomID = t;
+      var n = [MessageCardGameHandler.Message.MessageType.ZonePlugin_Type, "Simms", "channelPlugin", {
+        cmd: MessageCardGameHandler.Global_Message.BOOK_ROOM,
         rid: t
       }];
       this.sendData(JSON.stringify(n));
     };
     e.prototype.sendAutoReadyPref = function(t) {
-      if (l.default.getInstance().misc && l.default.getInstance().misc.sendAutoReadyPref) {
-        var e = [a.Message.MessageType.ZonePlugin_Type, "Simms", "channelPlugin", {
-          cmd: a.Global_Message.SET_AUTO_READY,
+      if (GameConfigManager.default.getInstance().misc && GameConfigManager.default.getInstance().misc.sendAutoReadyPref) {
+        var e = [MessageCardGameHandler.Message.MessageType.ZonePlugin_Type, "Simms", "channelPlugin", {
+          cmd: MessageCardGameHandler.Global_Message.SET_AUTO_READY,
           aRd: t + ""
         }];
         this.sendData(JSON.stringify(e));
@@ -129,42 +122,42 @@ var a = require("./MessageCardGameHandler"),
       if (void 0 === o) {
         o = "";
       }
-      r.default.getInstance().roomID = t;
-      var s = [a.Message.MessageType.JoinRoom_Type, "Simms", t, i];
+      GamePlayManager.default.getInstance().roomID = t;
+      var s = [MessageCardGameHandler.Message.MessageType.JoinRoom_Type, "Simms", t, i];
       this.sendData(JSON.stringify(s));
     };
     e.prototype.receiveMessage = function(t, e, i) {
       switch (t) {
-        case a.RoomCommand.BUY_IN:
+        case MessageCardGameHandler.RoomCommand.BUY_IN:
           this.printLog("receiveMessage RoomCommand.BUY_IN");
           null != this.onReceiveBuyIn && this.onReceiveBuyIn(i);
           break;
-        case a.RoomCommand.INGAME_JOIN_TABLE_INFOS:
+        case MessageCardGameHandler.RoomCommand.INGAME_JOIN_TABLE_INFOS:
           this.printLog("receiveMessage RoomCommand.JOIN_TABLE_INFOS");
           null != this.onReceiveTableInfos && this.onReceiveTableInfos(e, i);
           break;
-        case a.RoomCommand.INGAME_USER_LEAVE_AND_JOIN_TABLE:
+        case MessageCardGameHandler.RoomCommand.INGAME_USER_LEAVE_AND_JOIN_TABLE:
           this.printLog("receiveMessage RoomCommand.USER_LEAVE_AND_JOIN_TABLE");
           null != this.onReceiveUpdateUser && this.onReceiveUpdateUser(e, i);
           break;
-        case a.RoomCommand.GET_TABLES:
+        case MessageCardGameHandler.RoomCommand.GET_TABLES:
           this.printLog("receiveMessage RoomCommand.GET_TABLES");
           null != this.onReceiveListRoom && this.onReceiveListRoom(e, i);
           break;
-        case a.Global_Message.BOOK_ROOM:
+        case MessageCardGameHandler.Global_Message.BOOK_ROOM:
           this.onReceiveBookRoom(e, i);
           break;
-        case a.Global_Message.CREATE_TABLE_RESPONSE:
+        case MessageCardGameHandler.Global_Message.CREATE_TABLE_RESPONSE:
           this.onReceiveCreateRoomRespone(e, i);
           break;
-        case a.Global_Message.QUICK_PLAY:
-        case a.Global_Message.QUICK_PLAY_WITH_BET:
-        case a.Global_Message.CREATE_TABLE:
+        case MessageCardGameHandler.Global_Message.QUICK_PLAY:
+        case MessageCardGameHandler.Global_Message.QUICK_PLAY_WITH_BET:
+        case MessageCardGameHandler.Global_Message.CREATE_TABLE:
           this.onReceiveQuickPlay(e, i);
       }
     };
     e.instance = null;
     return e = i = o([u], e);
-  }(c.default));
+  }(MessageHandlerBase.default));
 i.default = d;
 void 0;

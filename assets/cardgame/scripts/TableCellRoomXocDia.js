@@ -47,25 +47,16 @@ var n = this && this.__extends || function() {
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-// ── BẢNG TRA BÍ DANH (máy sinh — ghi-bang-tra-bi-danh.js) ──────
-// Mã dịch ngược đặt bí danh một chữ cho mỗi module. Bảng này để khỏi phải cuộn ngược.
-// KHÔNG đổi tên chúng bằng tìm-kiếm-thay-thế: đoạn mở đầu __decorate khai lại đúng
-// những chữ này làm biến cục bộ, đổi là hỏng im lặng.
-//   a = AnalyticDefine   s = AnalyticService   r = GameUtils
-//   c = GameConfigManager   l = GamePlayManager   h = MusicPlayer
-//   u = StringUtil   d = TableCell   p = CommonPrefabsManager
-//   f = MessageCardGameHandler
-// ────────────────────────────────────────────────────────────────
-var a = require("./AnalyticDefine"),
-  s = require("./AnalyticService"),
-  r = require("./GameUtils"),
-  c = require("./GameConfigManager"),
-  l = require("./GamePlayManager"),
-  h = require("./MusicPlayer"),
-  u = require("./StringUtil"),
-  d = require("./TableCell"),
-  p = require("./CommonPrefabsManager"),
-  f = require("./MessageCardGameHandler"),
+var AnalyticDefine = require("./AnalyticDefine"),
+  AnalyticService = require("./AnalyticService"),
+  GameUtils = require("./GameUtils"),
+  GameConfigManager = require("./GameConfigManager"),
+  GamePlayManager = require("./GamePlayManager"),
+  MusicPlayer = require("./MusicPlayer"),
+  StringUtil = require("./StringUtil"),
+  TableCell = require("./TableCell"),
+  CommonPrefabsManager = require("./CommonPrefabsManager"),
+  MessageCardGameHandler = require("./MessageCardGameHandler"),
   g = cc._decorator,
   m = g.ccclass,
   y = g.property,
@@ -92,19 +83,19 @@ var a = require("./AnalyticDefine"),
     }
     n(e, t);
     e.prototype.initValue = function(e, i) {
-      if (t.prototype.initValue.call(this, e, i), this.isHpwd = e.hpwd, this.lbMucCuoc.string = u.default.formatMoneyNumber(e.b), this
-        .lbSoNguoi.string = Math.max(0, e.uC) + "/" + e.Mu, null !== e.jpa && void 0 !== e.jpa || (this.lbMucTienCuocMin.string = u
+      if (t.prototype.initValue.call(this, e, i), this.isHpwd = e.hpwd, this.lbMucCuoc.string = StringUtil.default.formatMoneyNumber(e.b), this
+        .lbSoNguoi.string = Math.max(0, e.uC) + "/" + e.Mu, null !== e.jpa && void 0 !== e.jpa || (this.lbMucTienCuocMin.string = StringUtil
           .default.formatMoneyNumber(e.mM)), this.iconLock.active = e.hpwd, this.processBar.progress = e.uC / e.Mu, this.lbMucTienCuocMin
-        .node.x = 22, e.Mu >= 1e3 && l.default.getInstance().gameID === f.GAME.XOCDIA) {
+        .node.x = 22, e.Mu >= 1e3 && GamePlayManager.default.getInstance().gameID === MessageCardGameHandler.GAME.XOCDIA) {
         this.lbMucCuoc.node.active = false;
         this.lbSoNguoi.string = Math.max(0, e.uC).toString();
         this.processBar.progress = 0;
         if (null !== e.jpa && void 0 !== e.jpa) {
-          r.runAnimationMoneyWithColom(this.lbMucTienCuocMin, this.oldTienCuocToiThieu, e.jpa, 4.5);
+          GameUtils.runAnimationMoneyWithColom(this.lbMucTienCuocMin, this.oldTienCuocToiThieu, e.jpa, 4.5);
           this.oldTienCuocToiThieu = e.jpa;
           this.lbMucTienCuocMin.node.x = 27;
         } else {
-          this.lbMucTienCuocMin.string = u.default.formatMoneyNumberWithColom(this.oldTienCuocToiThieu);
+          this.lbMucTienCuocMin.string = StringUtil.default.formatMoneyNumberWithColom(this.oldTienCuocToiThieu);
         }
         if (null !== this.iconBanXOcDia && void 0 !== this.iconBanXOcDia) {
           this.iconBanXOcDia.active = true;
@@ -112,8 +103,8 @@ var a = require("./AnalyticDefine"),
         }
         var n = false;
         this.indextempe = 0;
-        if (this.index < c.default.getInstance().listImageXDBanChung.length) {
-          this.indextempe = c.default.getInstance().listImageXDBanChung[this.index];
+        if (this.index < GameConfigManager.default.getInstance().listImageXDBanChung.length) {
+          this.indextempe = GameConfigManager.default.getInstance().listImageXDBanChung[this.index];
           n = this.indextempe < 0;
           this.indextempe = Math.abs(this.indextempe) - 1;
           if (n) {
@@ -123,12 +114,12 @@ var a = require("./AnalyticDefine"),
             }
             if (this.indextempe < this.listAnim.length) {
               this.setRoomAnim(this.listAnim[this.indextempe]);
-              l.default.getInstance().setXocDiaIconBG(this.listAnim[this.indextempe], e.rid);
+              GamePlayManager.default.getInstance().setXocDiaIconBG(this.listAnim[this.indextempe], e.rid);
             }
           } else {
             if (this.indextempe < this.listAnimBanThuong.length) {
               this.setRoomAnim(this.listAnimBanThuong[this.indextempe]);
-              l.default.getInstance().setXocDiaIconBG(this.listAnimBanThuong[this.indextempe], e.rid);
+              GamePlayManager.default.getInstance().setXocDiaIconBG(this.listAnimBanThuong[this.indextempe], e.rid);
             } else {
               if (false === this.bgSprite.node.active) {
                 this.bgSprite.node.active = true;
@@ -144,7 +135,7 @@ var a = require("./AnalyticDefine"),
           this.bgSprite.spriteFrame = this.spriteBanChung;
           this.bgSpine.node.active = false;
         }
-        if (e.b > c.default.getInstance().banVipMinBet) {
+        if (e.b > GameConfigManager.default.getInstance().banVipMinBet) {
           if (!this.iconBanVip.active) {
             this.iconBanVip.active = true;
           }
@@ -160,7 +151,7 @@ var a = require("./AnalyticDefine"),
         this.bgSpine.node.active = false;
         this.iconBanVip.active = false;
       }
-      if (c.default.getInstance().isLoginWebcc || c.default.getInstance().isLoginWebccNoWallet) {
+      if (GameConfigManager.default.getInstance().isLoginWebcc || GameConfigManager.default.getInstance().isLoginWebccNoWallet) {
         this.iconBanVip.active = false;
       }
     };
@@ -169,33 +160,33 @@ var a = require("./AnalyticDefine"),
       if (false === this.bgSpine.node.active) {
         this.bgSpine.node.active = true;
       }
-      if (!u.default.isNullOrEmpty(t)) {
+      if (!StringUtil.default.isNullOrEmpty(t)) {
         this.bgSpine.setAnimation(0, t, true);
       }
     };
     e.prototype.onClickChoseRoom = function() {
-      if (l.default.getInstance().roomID = this.data.rid, s.default.instance.trackCustomQ(a.AnaltyciEventType.CLICK, "join_cg_" + l
+      if (GamePlayManager.default.getInstance().roomID = this.data.rid, AnalyticService.default.instance.trackCustomQ(AnalyticDefine.AnaltyciEventType.CLICK, "join_cg_" + GamePlayManager
           .default.getInstance().gameID), -1 === this.data.rid) {
-        p.default.getInstance().showLoading();
-        l.default.getInstance().requestcreateRoom(l.default.getInstance().gameID, this.data.b, this.data.Mu);
-      } else if (l.default.getInstance().gameID === f.GAME.POKER || l.default.getInstance().gameID === f.GAME.LIENG || l.default
-        .getInstance().gameID === f.GAME.XITO) {
-        l.default.getInstance().bookRoom(this.data.rid, 0, "");
-        p.default.getInstance().showLoading();
+        CommonPrefabsManager.default.getInstance().showLoading();
+        GamePlayManager.default.getInstance().requestcreateRoom(GamePlayManager.default.getInstance().gameID, this.data.b, this.data.Mu);
+      } else if (GamePlayManager.default.getInstance().gameID === MessageCardGameHandler.GAME.POKER || GamePlayManager.default.getInstance().gameID === MessageCardGameHandler.GAME.LIENG || GamePlayManager.default
+        .getInstance().gameID === MessageCardGameHandler.GAME.XITO) {
+        GamePlayManager.default.getInstance().bookRoom(this.data.rid, 0, "");
+        CommonPrefabsManager.default.getInstance().showLoading();
       } else {
-        if (l.default.getInstance().gold < this.data.mM && this.data.Mu < 1e3) {
-          p.default.getInstance().showPopupMessageUtil("B\u1ea1n kh\xf4ng \u0111\u1ee7 ti\u1ec1n v\xe0o ph\xf2ng!");
-          return void(c.default.getInstance().isShowPopupDone = false);
+        if (GamePlayManager.default.getInstance().gold < this.data.mM && this.data.Mu < 1e3) {
+          CommonPrefabsManager.default.getInstance().showPopupMessageUtil("B\u1ea1n kh\xf4ng \u0111\u1ee7 ti\u1ec1n v\xe0o ph\xf2ng!");
+          return void(GameConfigManager.default.getInstance().isShowPopupDone = false);
         }
         if (this.isHpwd) {
-          p.default.getInstance().showPopupPasswordTable();
+          CommonPrefabsManager.default.getInstance().showPopupPasswordTable();
         } else {
-          p.default.getInstance().showLoading();
-          l.default.getInstance().joinRoom(this.data.rid, 0, "");
+          CommonPrefabsManager.default.getInstance().showLoading();
+          GamePlayManager.default.getInstance().joinRoom(this.data.rid, 0, "");
         }
       }
-      h.default.getInstance().playbtnClick();
-      l.default.getInstance().idTamBanMd5 = this.indextempe;
+      MusicPlayer.default.getInstance().playbtnClick();
+      GamePlayManager.default.getInstance().idTamBanMd5 = this.indextempe;
     };
     o([y(cc.Label)], e.prototype, "lbMucCuoc", void 0);
     o([y(cc.Label)], e.prototype, "lbSoNguoi", void 0);
@@ -209,6 +200,6 @@ var a = require("./AnalyticDefine"),
     o([y(cc.SpriteFrame)], e.prototype, "spriteBanChung", void 0);
     o([y([cc.SpriteFrame])], e.prototype, "listspriteBanChungXocDia", void 0);
     return e = o([m], e);
-  }(d.default);
+  }(TableCell.default);
 i.default = S;
 void 0;

@@ -47,7 +47,7 @@ var n = this && this.__extends || function() {
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-var a = require("./GameZOrder"),
+var GameZOrder = require("./GameZOrder"),
   s = cc._decorator,
   r = s.ccclass,
   c = s.property,
@@ -66,7 +66,7 @@ var a = require("./GameZOrder"),
     }
     n(e, t);
     e.prototype.start = function() {
-      this.node.zIndex = a.default.SCORE_UI;
+      this.node.zIndex = GameZOrder.default.SCORE_UI;
     };
     e.prototype.onDestroy = function() {};
     e.prototype.setScore = function(t, e) {

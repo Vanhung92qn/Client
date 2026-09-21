@@ -19,7 +19,7 @@ Object.defineProperty(i, "__esModule", {
   value: true
 });
 var o,
-  a = require("./GameConfigManager");
+  GameConfigManager = require("./GameConfigManager");
 (function(t) {
   t[t.DEFAULT = 0] = "DEFAULT";
   t[t.EURO = 1] = "EURO";
@@ -35,7 +35,7 @@ var s = {
 };
 
 function r() {
-  var t = a.default.getInstance().getConfig("themeConfig");
+  var t = GameConfigManager.default.getInstance().getConfig("themeConfig");
   return n({}, s, t);
 }
 i.getThemeConfig = r;

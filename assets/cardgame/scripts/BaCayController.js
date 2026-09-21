@@ -47,38 +47,26 @@ var n = this && this.__extends || function() {
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-// ── BẢNG TRA BÍ DANH (máy sinh — ghi-bang-tra-bi-danh.js) ──────
-// Mã dịch ngược đặt bí danh một chữ cho mỗi module. Bảng này để khỏi phải cuộn ngược.
-// KHÔNG đổi tên chúng bằng tìm-kiếm-thay-thế: đoạn mở đầu __decorate khai lại đúng
-// những chữ này làm biến cục bộ, đổi là hỏng im lặng.
-//   a = GameController   s = MessageCardGameHandler   r = GamePlayManager
-//   c = BaCayMessage   l = BaCayScoreUI   h = MusicPlayer
-//   u = GameCardSprite   d = GameCardSpriteType   p = GameZOrder
-//   f = BaCayRequest   g = CommonPrefabsManager   m = GameConfigManager
-//   y = PoolManager   S = ChipCaoRuaController   _ = StringUtil
-//   v = ParticleCaoRua   b = ProcessCountdown   C = BaCayAnimExtratime
-//   T = CardGameCommonRequest   E = AnalyticsManager
-// ────────────────────────────────────────────────────────────────
-var a = require("./GameController"),
-  s = require("./MessageCardGameHandler"),
-  r = require("./GamePlayManager"),
-  c = require("./BaCayMessage"),
-  l = require("./BaCayScoreUI"),
-  h = require("./MusicPlayer"),
-  u = require("./GameCardSprite"),
-  d = require("./GameCardSpriteType"),
-  p = require("./GameZOrder"),
-  f = require("./BaCayRequest"),
-  g = require("./CommonPrefabsManager"),
-  m = require("./GameConfigManager"),
-  y = require("./PoolManager"),
-  S = require("./ChipCaoRuaController"),
-  _ = require("./StringUtil"),
-  v = require("./ParticleCaoRua"),
-  b = require("./ProcessCountdown"),
-  C = require("./BaCayAnimExtratime"),
-  T = require("./CardGameCommonRequest"),
-  E = require("./AnalyticsManager"),
+var GameController = require("./GameController"),
+  MessageCardGameHandler = require("./MessageCardGameHandler"),
+  GamePlayManager = require("./GamePlayManager"),
+  BaCayMessage = require("./BaCayMessage"),
+  BaCayScoreUI = require("./BaCayScoreUI"),
+  MusicPlayer = require("./MusicPlayer"),
+  GameCardSprite = require("./GameCardSprite"),
+  GameCardSpriteType = require("./GameCardSpriteType"),
+  GameZOrder = require("./GameZOrder"),
+  BaCayRequest = require("./BaCayRequest"),
+  CommonPrefabsManager = require("./CommonPrefabsManager"),
+  GameConfigManager = require("./GameConfigManager"),
+  PoolManager = require("./PoolManager"),
+  ChipCaoRuaController = require("./ChipCaoRuaController"),
+  StringUtil = require("./StringUtil"),
+  ParticleCaoRua = require("./ParticleCaoRua"),
+  ProcessCountdown = require("./ProcessCountdown"),
+  BaCayAnimExtratime = require("./BaCayAnimExtratime"),
+  CardGameCommonRequest = require("./CardGameCommonRequest"),
+  AnalyticsManager = require("./AnalyticsManager"),
   I = cc._decorator,
   A = I.ccclass,
   P = I.property,
@@ -131,7 +119,7 @@ var a = require("./GameController"),
     n(e, t);
     e.prototype.initDefaultData = function() {
       t.prototype.initDefaultData.call(this);
-      if (m.default.getInstance().isAnDanh) {
+      if (GameConfigManager.default.getInstance().isAnDanh) {
         this.isGameAnDanh = false;
         this.isGameAnDanhCheck = false;
       }
@@ -199,20 +187,20 @@ var a = require("./GameController"),
       this.POS9.push(8);
       this.POS9.push(1);
       var e = cc.instantiate(this.prefabsGameCard),
-        i = e.getComponent(u.default);
-      i.init(d.default.TypeBIG);
+        i = e.getComponent(GameCardSprite.default);
+      i.init(GameCardSpriteType.default.TypeBIG);
       this.cardSizeBig = new cc.Vec2(e.getContentSize().width * e.scale, e.getContentSize().height * e.scale);
-      i.init(d.default.TypeHIDE);
+      i.init(GameCardSpriteType.default.TypeHIDE);
       this.cardSizeHiden = new cc.Vec2(e.getContentSize().width * e.scale, e.getContentSize().height * e.scale);
-      i.init(d.default.TypeMEDIUM);
+      i.init(GameCardSpriteType.default.TypeMEDIUM);
       this.cardSizeMedium = new cc.Vec2(e.getContentSize().width * e.scale, e.getContentSize().height * e.scale);
       e.destroy();
       this.distanceCard = new cc.Vec2(.4 * this.cardSizeMedium.x, .5 * this.cardSizeMedium.y);
-      this.poolScoreUI = y.PoolManager.getInstance().addPool(this.poolLiengScoreUIName, new y.PoolComponent());
+      this.poolScoreUI = PoolManager.PoolManager.getInstance().addPool(this.poolLiengScoreUIName, new PoolManager.PoolComponent());
       this.toggleAutoFlipAllCard.node.position = new cc.Vec2(-cc.winSize.width / 2 + 100, -cc.winSize.height / 2 + 60);
-      if (null == this.configCaoRua && null != m.default.getInstance().remoteConfig && m.default.getInstance().remoteConfig
+      if (null == this.configCaoRua && null != GameConfigManager.default.getInstance().remoteConfig && GameConfigManager.default.getInstance().remoteConfig
         .hasOwnProperty("configCaoRua")) {
-        this.configCaoRua = m.default.getInstance().remoteConfig.configCaoRua;
+        this.configCaoRua = GameConfigManager.default.getInstance().remoteConfig.configCaoRua;
         if (this.configCaoRua.hasOwnProperty("amountMatchShowPopNotInteract")) {
           this.amountMatchShowPopNotInteract = this.configCaoRua.amountMatchShowPopNotInteract;
         }
@@ -253,28 +241,28 @@ var a = require("./GameController"),
     };
     e.prototype.onReceiveMessage = function(e, i, n) {
       switch (t.prototype.onReceiveMessage.call(this, e, i, n), e) {
-        case c.default.DEAL_CARDS:
-        case c.default.UPDATE_ARRANGE_CARDS_STATE:
-        case c.default.FINISH_GAME:
-        case c.default.START_BETTING:
-        case c.default.REARRANGE_CARDS:
-        case c.default.INFORM_ROYALTIES:
-        case c.default.UPDATE_CURRENT_CARDS_STATE:
-        case c.default.ARRANGED:
+        case BaCayMessage.default.DEAL_CARDS:
+        case BaCayMessage.default.UPDATE_ARRANGE_CARDS_STATE:
+        case BaCayMessage.default.FINISH_GAME:
+        case BaCayMessage.default.START_BETTING:
+        case BaCayMessage.default.REARRANGE_CARDS:
+        case BaCayMessage.default.INFORM_ROYALTIES:
+        case BaCayMessage.default.UPDATE_CURRENT_CARDS_STATE:
+        case BaCayMessage.default.ARRANGED:
           this.onBaCayEventReciveHandle(i, n);
       }
     };
     e.prototype.onBaCayEventReciveHandle = function(t, e) {
       if (null !== e && void 0 !== e) {
         switch (e.cmd) {
-          case c.default.DEAL_CARDS:
+          case BaCayMessage.default.DEAL_CARDS:
             this.isAutoFlipCard = this.isAutoFlipCardTarget;
             var i = e.cs,
               n = e.lpi;
             this.startGame(i, n);
             this.startProcessCountdown(e.T / 1e3);
             break;
-          case c.default.START_BETTING:
+          case BaCayMessage.default.START_BETTING:
             var o = e.T;
             o /= 1e3;
             this.hideALLForStart();
@@ -283,15 +271,15 @@ var a = require("./GameController"),
             this.resetNanBai();
             this.checkAndClearCardOfMine();
             break;
-          case c.default.UPDATE_ARRANGE_CARDS_STATE:
+          case BaCayMessage.default.UPDATE_ARRANGE_CARDS_STATE:
             e.uid;
             e.iar;
             null !== e.r && void 0 !== e.r && parseInt(e.r);
             break;
-          case c.default.FINISH_GAME:
+          case BaCayMessage.default.FINISH_GAME:
             this.finishThisGame(e);
             break;
-          case c.default.ARRANGED:
+          case BaCayMessage.default.ARRANGED:
             this.Arranged(e);
         }
       }
@@ -309,9 +297,9 @@ var a = require("./GameController"),
     e.prototype.onSwitchButtonAutoFlipAllCard = function(t, e) {
       this.isAutoFlipCardTarget = t.isChecked;
       if (this.isAutoFlipCardTarget) {
-        E.default.getInstance().logEvent("UserUseAutoFlipAllCard");
+        AnalyticsManager.default.getInstance().logEvent("UserUseAutoFlipAllCard");
       } else {
-        E.default.getInstance().logEvent("UserNotUseAutoFlipAllCard");
+        AnalyticsManager.default.getInstance().logEvent("UserNotUseAutoFlipAllCard");
       }
     };
     e.prototype.onGetInGameTableInfo = function(e) {
@@ -335,17 +323,17 @@ var a = require("./GameController"),
       if (null !== e.hpwd && void 0 !== e.hpwd) {
         c = e.hpwd;
       }
-      this.state = s.GameState.WAITING;
+      this.state = MessageCardGameHandler.GameState.WAITING;
       if (!(4 !== n && 5 !== n)) {
-        this.state = s.GameState.VIEWING;
+        this.state = MessageCardGameHandler.GameState.VIEWING;
       }
       this.setGameConfig(i, n, o, a, this.maxUserInRoom, c);
       var l = e.ps;
-      if (this.createListPlayerWhenGetTableInfo(l), this.updateViewPostions(true), this.state === s.GameState.VIEWING) {
+      if (this.createListPlayerWhenGetTableInfo(l), this.updateViewPostions(true), this.state === MessageCardGameHandler.GameState.VIEWING) {
         if (null !== e.re && void 0 !== e.re && e.re) {
           for (var h, u = l.length, d = 0; d < u; d++) {
             var p = l[d];
-            if (0 === p.uid.localeCompare(r.default.getInstance().userID)) {
+            if (0 === p.uid.localeCompare(GamePlayManager.default.getInstance().userID)) {
               h = p.cs;
               if (null !== p.rr && void 0 !== p.rr) {
                 u = p.rr;
@@ -380,7 +368,7 @@ var a = require("./GameController"),
       return 3;
     };
     e.prototype.checkReconnect = function(t) {
-      return t.uid.localeCompare(r.default.getInstance().userID) && null !== t.re && void 0 !== t.re && false === t.re;
+      return t.uid.localeCompare(GamePlayManager.default.getInstance().userID) && null !== t.re && void 0 !== t.re && false === t.re;
     };
     e.prototype.reset = function() {
       this.acps = [];
@@ -422,7 +410,7 @@ var a = require("./GameController"),
       this.chipController.ClearAllChipInTable();
       this.chipController.BetForUserReconect(e, this.betOfTable);
       this.showuserAnDanh();
-      this.state = s.GameState.PLAYING;
+      this.state = MessageCardGameHandler.GameState.PLAYING;
       this._playedOnce = true;
       this.daBaoBinh = false;
       var i = this._thisPlayerView;
@@ -430,16 +418,16 @@ var a = require("./GameController"),
       i.node.position = this.listBtnInvitePos[0].position;
       for (var n = 0; n < t.length; n++) {
         var o = t[n];
-        (a = i.cards[t.length - n - 1]).setType(d.default.TypeMEDIUM);
-        a.setTextureWithCode(o, r.default.getInstance().gameID);
+        (a = i.cards[t.length - n - 1]).setType(GameCardSpriteType.default.TypeMEDIUM);
+        a.setTextureWithCode(o, GamePlayManager.default.getInstance().gameID);
         a.node.active = true;
       }
       for (n = 0; n < 3; ++n) {
         var a;
         (a = i.cards[n]).index = n;
         a.node.position = this.getPlayerCardPositionMineBig(0, n);
-        a.setType(d.default.TypeBIG);
-        a.node.zIndex = p.default.MIDDLE_TOP_2 + (3 - n) + 1;
+        a.setType(GameCardSpriteType.default.TypeBIG);
+        a.node.zIndex = GameZOrder.default.MIDDLE_TOP_2 + (3 - n) + 1;
       }
     };
     e.prototype.getViewPositionOfPlayer = function(t, e) {
@@ -472,7 +460,7 @@ var a = require("./GameController"),
     };
     e.prototype.startGame = function(t, e) {
       var i = this;
-      h.default.getInstance().playEffect("Sounds/chiabai");
+      MusicPlayer.default.getInstance().playEffect("Sounds/chiabai");
       this.hideALLForStart();
       try {
         if (null != this.popupHasPlayerNotReady) {
@@ -480,12 +468,12 @@ var a = require("./GameController"),
         }
       } catch (t) {}
       if (this._dangKetThuc && this.handlePendingPlayers(), this._dangPhatBai = true, this.listCardMine = [], this.totalCardFliped = 0,
-        this.isDidFlipAllCard = false, this.cardGameTableController.startGameUI(), this.locPlayingPlayer(e), this.state = s.GameState
+        this.isDidFlipAllCard = false, this.cardGameTableController.startGameUI(), this.locPlayingPlayer(e), this.state = MessageCardGameHandler.GameState
         .PLAYING, null !== this._thisPlayerView && void 0 !== this._thisPlayerView && t.length > 0) {
         this._thisPlayerView.setArrayCard(t, false);
         for (var n = [], o = 0; o < this._thisPlayerView.cards.length; ++o) {
           var a = this._thisPlayerView.cards[o];
-          a.decodeCard(t[t.length - 1 - o], r.default.getInstance().gameID);
+          a.decodeCard(t[t.length - 1 - o], GamePlayManager.default.getInstance().gameID);
           a.index = o;
           if (this._thisPlayerView.isMine()) {
             n.push(a.getSuit());
@@ -524,8 +512,8 @@ var a = require("./GameController"),
               this.listCardMine.push(c);
               var f = this.getPlayerCardPositionMineBig(o.indexPos, r),
                 g = f.mag();
-              c.setType(d.default.TypeBIG);
-              c.node.zIndex = p.default.MIDDLE_TOP_2 + (3 - r) + 1;
+              c.setType(GameCardSpriteType.default.TypeBIG);
+              c.node.zIndex = GameZOrder.default.MIDDLE_TOP_2 + (3 - r) + 1;
               l = g / 1300;
               if (this.isAutoFlipCard) {
                 u = cc.sequence(cc.delayTime(h), cc.callFunc(this.phatBaiFX, this, c), cc.moveTo(l, f));
@@ -537,7 +525,7 @@ var a = require("./GameController"),
               }
               c.node.runAction(u);
             } else {
-              c.setType(d.default.TypeMEDIUM);
+              c.setType(GameCardSpriteType.default.TypeMEDIUM);
               u = cc.sequence(cc.delayTime(h), cc.moveTo(l, this.getPlayerCardPosition(o.indexPos, r, this.distanceCard)).easing(cc
                 .easeBackOut()));
               c.node.runAction(u);
@@ -567,23 +555,23 @@ var a = require("./GameController"),
             var n = e[t],
               a = o.getPlayer(n.uid),
               r = null;
-            (r = cc.instantiate(o.prefabsGameCard).getComponent(u.default)).node.parent = o.node;
+            (r = cc.instantiate(o.prefabsGameCard).getComponent(GameCardSprite.default)).node.parent = o.node;
             if (a.isMine()) {
-              r.init(d.default.TypeBIG);
-              r.node.zIndex = p.default.TOP + 10;
+              r.init(GameCardSpriteType.default.TypeBIG);
+              r.node.zIndex = GameZOrder.default.TOP + 10;
             } else {
-              r.init(d.default.TypeMEDIUM);
-              r.node.zIndex = p.default.MIDDLE_TOP_2 + 10;
+              r.init(GameCardSpriteType.default.TypeMEDIUM);
+              r.node.zIndex = GameZOrder.default.MIDDLE_TOP_2 + 10;
             }
             r.setServerCode(n.cs);
             o.listCardExtratime.push(r);
             var c = cc.moveTo(.3, o.getPlayerCardExtratimePosition(a.indexPos, 0, new cc.Vec2(0, 0))),
               l = cc.sequence(c, cc.delayTime(.1), cc.callFunc(function() {
-                if (i.state === s.GameState.PLAYING) {
+                if (i.state === MessageCardGameHandler.GameState.PLAYING) {
                   r.runActionFlip2();
                 }
               }), cc.delayTime(.3), cc.callFunc(function() {
-                if (i.state === s.GameState.PLAYING) {
+                if (i.state === MessageCardGameHandler.GameState.PLAYING) {
                   i.addScoreUIForExtratime(a, i.getScoreOfCard(r));
                 }
               }), cc.delayTime(2.5), cc.callFunc(function() {
@@ -608,14 +596,14 @@ var a = require("./GameController"),
         s = null;
       if (3 != this.listCardReview.length) {
         s = cc.instantiate(this.prefabsGameCard);
-        this.listCardReview.push(s.getComponent(u.default));
+        this.listCardReview.push(s.getComponent(GameCardSprite.default));
       } else {
         s = this.listCardReview[a].node;
       }
       var c = cc.instantiate(this.prefabsGameCard);
-      c.getComponent(u.default).setServerCode(t);
-      c.getComponent(u.default).enableTouch(this.callBackCardFlip.bind(this), true);
-      c.getComponent(u.default).isFading = false;
+      c.getComponent(GameCardSprite.default).setServerCode(t);
+      c.getComponent(GameCardSprite.default).enableTouch(this.callBackCardFlip.bind(this), true);
+      c.getComponent(GameCardSprite.default).isFading = false;
       c.active = true;
       c.opacity = 255;
       c.position = cc.Vec2.ZERO;
@@ -625,11 +613,11 @@ var a = require("./GameController"),
       s.opacity = 0;
       s.setPosition(i.x, i.y);
       s.active = true;
-      s.zIndex = p.default.TOP_MOST + (3 - e) + 1;
-      var l = s.getComponent(u.default);
+      s.zIndex = GameZOrder.default.TOP_MOST + (3 - e) + 1;
+      var l = s.getComponent(GameCardSprite.default);
       l.node.width;
-      l.setType(d.default.TypeBIG);
-      l.setTextureWithCode(t, r.default.getInstance().gameID);
+      l.setType(GameCardSpriteType.default.TypeBIG);
+      l.setTextureWithCode(t, GamePlayManager.default.getInstance().gameID);
       s.scale;
       var f = 1.5 * l.cardSprite.node.width;
       c.runAction(cc.sequence(cc.delayTime(o), cc.callFunc(function() {
@@ -637,7 +625,7 @@ var a = require("./GameController"),
       })));
       s.setScale(n);
       s.runAction(cc.sequence(cc.delayTime(o), cc.callFunc(function() {
-        h.default.getInstance().playEffect("Sounds/gameto/sfx_gameto_preflop_card_distribution");
+        MusicPlayer.default.getInstance().playEffect("Sounds/gameto/sfx_gameto_preflop_card_distribution");
       }), cc.delayTime(.6), cc.callFunc(function() {
         if (0 == this.blackLayer.opacity) {
           this.blackLayer.opacity = 1;
@@ -645,7 +633,7 @@ var a = require("./GameController"),
           this.blackLayer.runAction(cc.fadeTo(.2, 179));
         }
         this.nodeNanBai.active = true;
-        this.nodeNanBai.zIndex = p.default.TOP_MOST;
+        this.nodeNanBai.zIndex = GameZOrder.default.TOP_MOST;
         var t = cc.moveTo(.25, new cc.Vec2((2 - a) * (f + 30) - 30 - f, 0));
         t.easing(cc.easeBackOut());
         var e = cc.scaleTo(.25, 1.5);
@@ -657,16 +645,16 @@ var a = require("./GameController"),
     e.prototype.playParticleCard = function() {
       if (-1 != this.isSameSuit) {
         if (1 == this.isSameSuit) {
-          this.particleCaoRua.PlayParticle(v.TypeParticleCard.SPADE);
+          this.particleCaoRua.PlayParticle(ParticleCaoRua.TypeParticleCard.SPADE);
         } else {
           if (2 == this.isSameSuit) {
-            this.particleCaoRua.PlayParticle(v.TypeParticleCard.CLUB);
+            this.particleCaoRua.PlayParticle(ParticleCaoRua.TypeParticleCard.CLUB);
           } else {
             if (3 == this.isSameSuit) {
-              this.particleCaoRua.PlayParticle(v.TypeParticleCard.DIAMOND);
+              this.particleCaoRua.PlayParticle(ParticleCaoRua.TypeParticleCard.DIAMOND);
             } else {
               if (4 == this.isSameSuit) {
-                this.particleCaoRua.PlayParticle(v.TypeParticleCard.HEART);
+                this.particleCaoRua.PlayParticle(ParticleCaoRua.TypeParticleCard.HEART);
               }
             }
           }
@@ -677,16 +665,16 @@ var a = require("./GameController"),
       this.totalCardFliped++;
       if (this.totalCardFliped >= 3) {
         this.flipAllCard();
-        E.default.getInstance().logEvent("ShowAllCardCaoRua", JSON.parse('{"ShowCard":"ViewCardLittleByLittle"}'));
+        AnalyticsManager.default.getInstance().logEvent("ShowAllCardCaoRua", JSON.parse('{"ShowCard":"ViewCardLittleByLittle"}'));
       }
       this.sendArranged(t.serverCode);
-      r.default.getInstance().countMatchNotInteract = 0;
+      GamePlayManager.default.getInstance().countMatchNotInteract = 0;
     };
     e.prototype.buttonFlipAllCardClick = function() {
       this.flipAllCard();
       for (var t = [], e = 0; e < this.playersPlaying.length; ++e) {
         var i = this.playersPlaying[e];
-        if (i.isMine() && this.state === s.GameState.PLAYING) {
+        if (i.isMine() && this.state === MessageCardGameHandler.GameState.PLAYING) {
           for (var n = 0; n < i.cards.length; n++) {
             t.push(i.cards[n].serverCode);
           }
@@ -694,8 +682,8 @@ var a = require("./GameController"),
         }
       }
       this.sendArayArranged(t);
-      r.default.getInstance().countMatchNotInteract = 0;
-      E.default.getInstance().logEvent("ShowAllCardCaoRua", JSON.parse('{"ShowCard":"ClickButtonShowAll"}'));
+      GamePlayManager.default.getInstance().countMatchNotInteract = 0;
+      AnalyticsManager.default.getInstance().logEvent("ShowAllCardCaoRua", JSON.parse('{"ShowCard":"ClickButtonShowAll"}'));
     };
     e.prototype.flipAllCard = function(t) {
       if (void 0 === t) {
@@ -710,7 +698,7 @@ var a = require("./GameController"),
         }
       }
       if (!this.isDidFlipAllCard && null != this._thisPlayerView) {
-        h.default.getInstance().playbtnClick();
+        MusicPlayer.default.getInstance().playbtnClick();
         this.isDidFlipAllCard = true;
         for (var i = 0; i < this.listCardBacks.length; i++) {
           this.listCardBacks[i].destroy();
@@ -718,7 +706,7 @@ var a = require("./GameController"),
         this.listCardBacks = [];
         this.endFlipCard(t);
         for (var n = 0; n < this.playersPlaying.length; ++n) {
-          if (this.playersPlaying[n].isMine() && this.state === s.GameState.PLAYING) {
+          if (this.playersPlaying[n].isMine() && this.state === MessageCardGameHandler.GameState.PLAYING) {
             this._khongThaoTac = false;
             break;
           }
@@ -734,7 +722,7 @@ var a = require("./GameController"),
       this.listBtnInvitePos[0].position;
       for (var e = 0, i = this.listCardReview.length - 1; i >= 0; i--) {
         var n = this.listCardReview[i];
-        n.node.zIndex = p.default.TOP;
+        n.node.zIndex = GameZOrder.default.TOP;
         if (null != this.listCardMine[i]) {
           n.node.runAction(cc.sequence(cc.delayTime(e), cc.moveTo(.35, this.listCardMine[i].node.position).easing(cc.easeBackOut())));
           n.node.runAction(cc.sequence(cc.delayTime(e), cc.scaleTo(.35, this.listCardMine[i].node.scale).easing(cc.easeBackOut())));
@@ -747,12 +735,12 @@ var a = require("./GameController"),
       e.node.opacity = 255;
     };
     e.prototype.onClickXepLai = function() {
-      f.default.getInstance().sendRearrangeCards();
+      BaCayRequest.default.getInstance().sendRearrangeCards();
     };
     e.prototype.finishPhatBai = function() {
       this._dangPhatBai = false;
       if (!this._thisPlayerView.checkInThisArray(this.playersPlaying)) {
-        this.state = s.GameState.VIEWING;
+        this.state = MessageCardGameHandler.GameState.VIEWING;
       }
       this.players.forEach(function(t) {
         t.isMine();
@@ -809,7 +797,7 @@ var a = require("./GameController"),
         for (var o = (l = this.players[n]).isMine(), a = 0; a < l.cards.length; a++) {
           var s = l.cards[a];
           if (o) {
-            s.node.zIndex = p.default.MIDDLE_TOP_2 + (3 - a) + 1;
+            s.node.zIndex = GameZOrder.default.MIDDLE_TOP_2 + (3 - a) + 1;
           }
         }
       }
@@ -834,7 +822,7 @@ var a = require("./GameController"),
                 g = f[a];
                 (s = l.cards[f.length - a - 1]).index = f.length - a - 1;
                 s.setServerCode(g);
-                s.setType(d.default.TypeBIG);
+                s.setType(GameCardSpriteType.default.TypeBIG);
               }
             }
           } else {
@@ -842,7 +830,7 @@ var a = require("./GameController"),
               var g = f[a],
                 s = l.cards[a];
               if (false === this.isGameAnDanhCheck) {
-                s.setType(d.default.TypeMEDIUM);
+                s.setType(GameCardSpriteType.default.TypeMEDIUM);
                 s.setServerCode(g);
               }
             }
@@ -922,7 +910,7 @@ var a = require("./GameController"),
     };
     e.prototype.setHidenThisCard = function(t, e) {
       e.setColor(cc.Color.WHITE);
-      e.setType(d.default.TypeHIDE);
+      e.setType(GameCardSpriteType.default.TypeHIDE);
       e.node.active = true;
       e.node.opacity = 255;
     };
@@ -938,8 +926,8 @@ var a = require("./GameController"),
       }
       for (var i = [], n = null, o = this.getMaxScoreOfAllPlayer(), a = 0; a < this.playersPlaying.length; ++a) {
         var r = this.playersPlaying[a];
-        if (!(r.isMine() && this.state === s.GameState.VIEWING)) {
-          if (this.state === s.GameState.PLAYING) {
+        if (!(r.isMine() && this.state === MessageCardGameHandler.GameState.VIEWING)) {
+          if (this.state === MessageCardGameHandler.GameState.PLAYING) {
             if (r.isMine()) {
               n = r;
             } else {
@@ -948,7 +936,7 @@ var a = require("./GameController"),
           }
         }
       }
-      if (this.state === s.GameState.PLAYING) {
+      if (this.state === MessageCardGameHandler.GameState.PLAYING) {
         var c = 0,
           l = 3 / this.playersPlaying.length,
           h = false,
@@ -982,7 +970,7 @@ var a = require("./GameController"),
       return t;
     };
     e.prototype.addScoreUIForExtratime = function(t, e) {
-      var i = cc.instantiate(this.prefabBaCayScoreUI).getComponent(l.default);
+      var i = cc.instantiate(this.prefabBaCayScoreUI).getComponent(BaCayScoreUI.default);
       i.setScore(e, true);
       i.node.parent = this.node;
       var n = this.listCardPositionExtratime[t.indexPos].position;
@@ -991,7 +979,7 @@ var a = require("./GameController"),
       } else {
         i.node.setPosition(cc.v2(n.x, n.y - 70));
       }
-      i.node.zIndex = p.default.MIDDLE_TOP_2 + 94;
+      i.node.zIndex = GameZOrder.default.MIDDLE_TOP_2 + 94;
       i.node.opacity = 255;
       i.fade(0, 2.2, t.isMine(), false, false);
       i.setFadeOutCallback(function(t) {
@@ -1008,7 +996,7 @@ var a = require("./GameController"),
       }
       var a = this.getTotalScore(t);
       if (!t.isMine() || 999 != a || 0 != e) {
-        var s = cc.instantiate(this.prefabBaCayScoreUI).getComponent(l.default);
+        var s = cc.instantiate(this.prefabBaCayScoreUI).getComponent(BaCayScoreUI.default);
         s.setScore(a, true);
         s.node.parent = this.node;
         var r = this.listPlayerCardPos[t.indexPos].position;
@@ -1018,7 +1006,7 @@ var a = require("./GameController"),
           s.node.setPosition(cc.v2(r.x - 40, r.y - 140));
         }
         s.node.y += 60;
-        s.node.zIndex = p.default.TOP_MOST;
+        s.node.zIndex = GameZOrder.default.TOP_MOST;
         s.node.opacity = 255;
         var c = i;
         if (1 == e) {
@@ -1077,13 +1065,13 @@ var a = require("./GameController"),
       if (void 0 === t) {
         t = -1;
       }
-      T.default.getInstance().sendArranged(c.default.ARRANGED, this.getUserIDOfMine(), t);
+      CardGameCommonRequest.default.getInstance().sendArranged(BaCayMessage.default.ARRANGED, this.getUserIDOfMine(), t);
     };
     e.prototype.sendArayArranged = function(t) {
       if (void 0 === t) {
         t = [];
       }
-      T.default.getInstance().sendArrayArranged(c.default.ARRANGED, this.getUserIDOfMine(), t);
+      CardGameCommonRequest.default.getInstance().sendArrayArranged(BaCayMessage.default.ARRANGED, this.getUserIDOfMine(), t);
     };
     e.prototype.getDelayTime = function(t) {
       var e = this.getTotalTypeScore(),
@@ -1191,9 +1179,9 @@ var a = require("./GameController"),
       return e;
     };
     e.prototype.showResultExtraTime = function() {
-      var t = cc.instantiate(this.prefabBaCayAnimExtratime).getComponent(C.default);
+      var t = cc.instantiate(this.prefabBaCayAnimExtratime).getComponent(BaCayAnimExtratime.default);
       t.node.parent = this.particleCaoRua.node;
-      t.node.zIndex = p.default.TOP_MOST;
+      t.node.zIndex = GameZOrder.default.TOP_MOST;
       t.showAnimDealCardExtratime();
       this.animMatchExtratime = t;
       for (var e = this.getMaxScoreOfAllPlayer(), i = 0; i < this.players.length; ++i) {
@@ -1206,7 +1194,7 @@ var a = require("./GameController"),
             n.hideAllCard(false);
           }
         } else {
-          if (o == e && this.state === s.GameState.PLAYING) {
+          if (o == e && this.state === MessageCardGameHandler.GameState.PLAYING) {
             if (n.isMine()) {
               if (this.isAutoFlipCard) {
                 this.flipCloseCardOfMine(n);
@@ -1234,11 +1222,11 @@ var a = require("./GameController"),
     };
     e.prototype.showResultTable = function() {
       this.removeEffect();
-      h.default.getInstance().playEffect("Sounds/finished");
+      MusicPlayer.default.getInstance().playEffect("Sounds/finished");
       this.updateReadyStatus();
       for (var t = [], e = 0; e < this.players.length; ++e) {
         var i = this.players[e];
-        if (i.removeBubbleFx(), this.state === s.GameState.VIEWING && i.isMine()) {
+        if (i.removeBubbleFx(), this.state === MessageCardGameHandler.GameState.VIEWING && i.isMine()) {
           i.mauBinhSoBai = false;
         } else {
           i.setMoney(i._money);
@@ -1254,15 +1242,15 @@ var a = require("./GameController"),
       }
       if (this.chipController.setListPositionOfUser(t), this.chipController.GetChipForUser(), this.countMatch++, this
         .enableKickUserIfNotInteract) {
-        if (0 == this.isAutoFlipCard && r.default.getInstance().countMatchNotInteract++, r.default.getInstance().countMatchNotInteract ==
+        if (0 == this.isAutoFlipCard && GamePlayManager.default.getInstance().countMatchNotInteract++, GamePlayManager.default.getInstance().countMatchNotInteract ==
           this.amountMatchShowPopNotInteract) {
-          g.default.getInstance().showPopupOneMessage("TH\xd4NG B\xc1O", "Sau " + this.amountMatchKickUserAffterNotInteract +
+          CommonPrefabsManager.default.getInstance().showPopupOneMessage("TH\xd4NG B\xc1O", "Sau " + this.amountMatchKickUserAffterNotInteract +
             " v\xe1n \u0111\u1ea5u n\u1eefa b\u1ea1n s\u1ebd \u0111\u01b0\u1ee3c m\u1eddi ra kh\u1ecfi ph\xf2ng n\u1ebfu kh\xf4ng c\xf3 t\u01b0\u01a1ng t\xe1c!",
             null).setHideCallback(function() {
-            r.default.getInstance().countMatchNotInteract = 0;
+            GamePlayManager.default.getInstance().countMatchNotInteract = 0;
           });
         }
-        if (r.default.getInstance().countMatchNotInteract == this.amountMatchShowPopNotInteract + this
+        if (GamePlayManager.default.getInstance().countMatchNotInteract == this.amountMatchShowPopNotInteract + this
           .amountMatchKickUserAffterNotInteract) {
           this.handleKickOutUser();
         }
@@ -1270,19 +1258,19 @@ var a = require("./GameController"),
     };
     e.prototype.onUserClickExit = function() {
       t.prototype.onUserClickExit.call(this);
-      if (this.state != s.GameState.PLAYING) {
-        E.default.getInstance().logEvent("UserLeaveRoomCaoRua", JSON.parse('{"AmountMatch":"' + this.countMatch + '"}'));
+      if (this.state != MessageCardGameHandler.GameState.PLAYING) {
+        AnalyticsManager.default.getInstance().logEvent("UserLeaveRoomCaoRua", JSON.parse('{"AmountMatch":"' + this.countMatch + '"}'));
       }
     };
     e.prototype.handleKickOutUser = function() {
-      if ((this._dangPhatBai || this.state === s.GameState.PLAYING) && !this._subscribedToGetOut) {
+      if ((this._dangPhatBai || this.state === MessageCardGameHandler.GameState.PLAYING) && !this._subscribedToGetOut) {
         this._subscribedToGetOut = true;
         return void(null !== this._thisPlayerView && void 0 !== this._thisPlayerView && (this._thisPlayerView.iconQuit.active = true));
       }
       if (null !== this._thisPlayerView && void 0 !== this._thisPlayerView) {
         this._thisPlayerView.iconQuit.active = true;
       }
-      r.default.getInstance().countMatchNotInteract = 0;
+      GamePlayManager.default.getInstance().countMatchNotInteract = 0;
       this.sendLeaveRoom();
     };
     e.prototype.handlePendingPlayers = function() {
@@ -1291,8 +1279,8 @@ var a = require("./GameController"),
       } else if (this._forcedToLeaveRoom) {
         this.handleLeaveRoomResponse();
       } else {
-        if (r.default.getInstance().checkBaoTriGame()) {
-          this.state = s.GameState.WAITING;
+        if (GamePlayManager.default.getInstance().checkBaoTriGame()) {
+          this.state = MessageCardGameHandler.GameState.WAITING;
           return void this.sendLeaveRoom();
         }
         if (this.players.forEach(function(t) {
@@ -1300,16 +1288,16 @@ var a = require("./GameController"),
           }), this.removeEffect(), this.listEffect.forEach(function(t) {
             t.destroy();
           }), this.listEffect = [], this.reset(), this._subscribedToGetOut) {
-          this.state = s.GameState.WAITING;
-          r.default.getInstance().countMatchNotInteract = 0;
+          this.state = MessageCardGameHandler.GameState.WAITING;
+          GamePlayManager.default.getInstance().countMatchNotInteract = 0;
           this.sendLeaveRoom();
-          return void E.default.getInstance().logEvent("UserLeaveRoomCaoRua", JSON.parse('{"AmountMatch":"' + this.countMatch + '"}'));
+          return void AnalyticsManager.default.getInstance().logEvent("UserLeaveRoomCaoRua", JSON.parse('{"AmountMatch":"' + this.countMatch + '"}'));
         }
         if (this._khongThaoTac && this._daNgoi) {
           if (this._soVanKhongThaoTac++, 3 == this._soVanKhongThaoTac) {
-            r.default.getInstance().countMatchNotInteract = 0;
+            GamePlayManager.default.getInstance().countMatchNotInteract = 0;
             this.sendLeaveRoom();
-            return void E.default.getInstance().logEvent("UserLeaveRoomCaoRua", JSON.parse('{"AmountMatch":"' + this.countMatch + '"}'));
+            return void AnalyticsManager.default.getInstance().logEvent("UserLeaveRoomCaoRua", JSON.parse('{"AmountMatch":"' + this.countMatch + '"}'));
           }
         } else {
           this._soVanKhongThaoTac = 0;
@@ -1318,7 +1306,7 @@ var a = require("./GameController"),
         this.updateMoneys();
         this._dangKetThuc = false;
         this.removePendingPlayers();
-        this.state = s.GameState.WAITING;
+        this.state = MessageCardGameHandler.GameState.WAITING;
         this.updateReadyStatus();
         for (var e = 0; e < this.players.length; e++) {
           var i = this.players[e];
@@ -1343,7 +1331,7 @@ var a = require("./GameController"),
         } else {
           for (var n = 0; n < i.cards.length; ++n) {
             var o = i.cards[n];
-            o.setType(d.default.TypeMEDIUM);
+            o.setType(GameCardSpriteType.default.TypeMEDIUM);
             o.node.active = true;
             o.node.position = this.getPlayerCardPosition(i.indexPos, n, this.distanceCard);
           }
@@ -1356,7 +1344,7 @@ var a = require("./GameController"),
     };
     e.prototype.showViewTableMessage = function() {
       this.node.runAction(cc.sequence(cc.delayTime(.7), cc.callFunc(function() {
-        g.default.getInstance().showPopupMessageUtil("B\xe0n \u0111ang ch\u01a1i, xin vui l\xf2ng ch\u1edd!");
+        CommonPrefabsManager.default.getInstance().showPopupMessageUtil("B\xe0n \u0111ang ch\u01a1i, xin vui l\xf2ng ch\u1edd!");
       })));
     };
     e.prototype.getPlayerCardPositionMineBig = function(t, e) {
@@ -1409,9 +1397,9 @@ var a = require("./GameController"),
         this.showPlayerViewBauCua(e, true);
         e.iconnReady.active = false;
         e.kickButton.active = false;
-        if (_.default.checkVec2Equal(e.node.position, cc.Vec2.ZERO) || this.state === s.GameState.WAITING) {
+        if (StringUtil.default.checkVec2Equal(e.node.position, cc.Vec2.ZERO) || this.state === MessageCardGameHandler.GameState.WAITING) {
           e.pos = this.getViewPositionOfPlayer(e, t);
-          if (this.state !== s.GameState.VIEWING || e.isMine() || this._joinedTable) {
+          if (this.state !== MessageCardGameHandler.GameState.VIEWING || e.isMine() || this._joinedTable) {
             e.runToPos(this.size);
           } else {
             e.node.position = e.pos;
@@ -1426,12 +1414,12 @@ var a = require("./GameController"),
     o([P(cc.Prefab)], e.prototype, "prefabBaCayAnimExtratime", void 0);
     o([P(cc.Node)], e.prototype, "nodeNanBai", void 0);
     o([P(cc.Node)], e.prototype, "blackLayer", void 0);
-    o([P(b.default)], e.prototype, "processTimeCountdown", void 0);
-    o([P(S.default)], e.prototype, "chipController", void 0);
-    o([P(v.default)], e.prototype, "particleCaoRua", void 0);
+    o([P(ProcessCountdown.default)], e.prototype, "processTimeCountdown", void 0);
+    o([P(ChipCaoRuaController.default)], e.prototype, "chipController", void 0);
+    o([P(ParticleCaoRua.default)], e.prototype, "particleCaoRua", void 0);
     o([P(cc.Node)], e.prototype, "btnFlipAllCard", void 0);
     o([P(cc.Toggle)], e.prototype, "toggleAutoFlipAllCard", void 0);
     return e = o([A], e);
-  }(a.default);
+  }(GameController.default);
 i.default = M;
 void 0;

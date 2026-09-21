@@ -47,17 +47,10 @@ var n = this && this.__extends || function() {
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-// ── BẢNG TRA BÍ DANH (máy sinh — ghi-bang-tra-bi-danh.js) ──────
-// Mã dịch ngược đặt bí danh một chữ cho mỗi module. Bảng này để khỏi phải cuộn ngược.
-// KHÔNG đổi tên chúng bằng tìm-kiếm-thay-thế: đoạn mở đầu __decorate khai lại đúng
-// những chữ này làm biến cục bộ, đổi là hỏng im lặng.
-//   a = GamePlayManager   s = MusicPlayer   r = CardGameCommonRequest
-//   c = CommonPrefabsManager
-// ────────────────────────────────────────────────────────────────
-var a = require("./GamePlayManager"),
-  s = require("./MusicPlayer"),
-  r = require("./CardGameCommonRequest"),
-  c = require("./CommonPrefabsManager"),
+var GamePlayManager = require("./GamePlayManager"),
+  MusicPlayer = require("./MusicPlayer"),
+  CardGameCommonRequest = require("./CardGameCommonRequest"),
+  CommonPrefabsManager = require("./CommonPrefabsManager"),
   l = cc._decorator,
   h = l.ccclass,
   u = (l.property, function(t) {
@@ -71,12 +64,12 @@ var a = require("./GamePlayManager"),
       var t = new Date();
       if (!((t.getTime() - this.oldClickTime) / 1e3 < 2)) {
         this.oldClickTime = t.getTime();
-        s.default.getInstance().playbtnClick();
-        if (a.default.getInstance().roomPassword) {
-          c.default.getInstance().showPopupMessageUtil(
+        MusicPlayer.default.getInstance().playbtnClick();
+        if (GamePlayManager.default.getInstance().roomPassword) {
+          CommonPrefabsManager.default.getInstance().showPopupMessageUtil(
             "Kh\xf4ng th\u1ec3 m\u1eddi ng\u01b0\u1eddi ch\u01a1i kh\xe1c do b\xe0n ch\u01a1i c\xf3 m\u1eadt kh\u1ea9u!");
         } else {
-          r.default.getInstance().sendGetInviteList();
+          CardGameCommonRequest.default.getInstance().sendGetInviteList();
         }
       }
     };

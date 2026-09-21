@@ -6,17 +6,10 @@ void 0;
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-// ── BẢNG TRA BÍ DANH (máy sinh — ghi-bang-tra-bi-danh.js) ──────
-// Mã dịch ngược đặt bí danh một chữ cho mỗi module. Bảng này để khỏi phải cuộn ngược.
-// KHÔNG đổi tên chúng bằng tìm-kiếm-thay-thế: đoạn mở đầu __decorate khai lại đúng
-// những chữ này làm biến cục bộ, đổi là hỏng im lặng.
-//   n = LocalizeManager   o = StringUtil   a = FgIDConfigManager
-//   s = GamePlayManager
-// ────────────────────────────────────────────────────────────────
-var n = require("./LocalizeManager"),
-  o = require("./StringUtil"),
-  a = require("./FgIDConfigManager"),
-  s = require("./GamePlayManager"),
+var LocalizeManager = require("./LocalizeManager"),
+  StringUtil = require("./StringUtil"),
+  FgIDConfigManager = require("./FgIDConfigManager"),
+  GamePlayManager = require("./GamePlayManager"),
   r = "Kh\xf4ng th\u1ec3 k\u1ebft n\u1ed1i \u0111\u1ebfn m\xe1y ch\u1ee7, xin h\xe3y th\u1eed l\u1ea1i.",
   c = "K\u1ebft n\u1ed1i \u0111\u1ebfn m\xe1y ch\u1ee7 th\u1ea5t b\u1ea1i!",
   l = function() {
@@ -48,12 +41,12 @@ var n = require("./LocalizeManager"),
       };
       l.onerror = function() {
         var t = r;
-        if (!o.default.isNullOrEmpty(l.responseText)) {
+        if (!StringUtil.default.isNullOrEmpty(l.responseText)) {
           var e = null;
           try {
             e = JSON.parse(l.responseText);
           } catch (t) {}
-          if (!(null === e || void 0 === e || o.default.isNullOrEmpty(e.msg))) {
+          if (!(null === e || void 0 === e || StringUtil.default.isNullOrEmpty(e.msg))) {
             t = e.msg;
           }
         }
@@ -65,12 +58,12 @@ var n = require("./LocalizeManager"),
       l.timeout = 3e4;
       l.open("GET", t, true);
       if (n) {
-        if (!o.default.isNullOrEmpty(s.default.getInstance().session_id)) {
-          l.setRequestHeader("X-TOKEN", s.default.getInstance().session_id);
+        if (!StringUtil.default.isNullOrEmpty(GamePlayManager.default.getInstance().session_id)) {
+          l.setRequestHeader("X-TOKEN", GamePlayManager.default.getInstance().session_id);
           l.setRequestHeader("Content-Type", "application/json");
         }
       }
-      a.FgIDConfigManager.checkAddFgIDToHeader(l, t);
+      FgIDConfigManager.FgIDConfigManager.checkAddFgIDToHeader(l, t);
       l.send();
     };
     t.prototype.sendGetHttpRequestWithMap = function(t, e, i, n, l) {
@@ -94,12 +87,12 @@ var n = require("./LocalizeManager"),
       };
       h.onerror = function() {
         var t = r;
-        if (!o.default.isNullOrEmpty(h.responseText)) {
+        if (!StringUtil.default.isNullOrEmpty(h.responseText)) {
           var e = null;
           try {
             e = JSON.parse(h.responseText);
           } catch (t) {}
-          if (!(null === e || void 0 === e || o.default.isNullOrEmpty(e.msg))) {
+          if (!(null === e || void 0 === e || StringUtil.default.isNullOrEmpty(e.msg))) {
             t = e.msg;
           }
         }
@@ -111,8 +104,8 @@ var n = require("./LocalizeManager"),
       h.timeout = 3e4;
       h.open("GET", t, true);
       if (l) {
-        if (!o.default.isNullOrEmpty(s.default.getInstance().session_id)) {
-          h.setRequestHeader("X-TOKEN", s.default.getInstance().session_id);
+        if (!StringUtil.default.isNullOrEmpty(GamePlayManager.default.getInstance().session_id)) {
+          h.setRequestHeader("X-TOKEN", GamePlayManager.default.getInstance().session_id);
           h.setRequestHeader("Content-Type", "application/json");
         }
       }
@@ -121,7 +114,7 @@ var n = require("./LocalizeManager"),
           h.setRequestHeader(e, t);
         });
       }
-      a.FgIDConfigManager.checkAddFgIDToHeader(h, t);
+      FgIDConfigManager.FgIDConfigManager.checkAddFgIDToHeader(h, t);
       h.send();
     };
     t.prototype.sendGetHttpRequestNoJson = function(t, e, i) {
@@ -138,12 +131,12 @@ var n = require("./LocalizeManager"),
       };
       n.onerror = function() {
         var t = r;
-        if (!o.default.isNullOrEmpty(n.responseText)) {
+        if (!StringUtil.default.isNullOrEmpty(n.responseText)) {
           var e = null;
           try {
             e = JSON.parse(n.responseText);
           } catch (t) {}
-          if (!(null === e || void 0 === e || o.default.isNullOrEmpty(e.msg))) {
+          if (!(null === e || void 0 === e || StringUtil.default.isNullOrEmpty(e.msg))) {
             t = e.msg;
           }
         }
@@ -154,7 +147,7 @@ var n = require("./LocalizeManager"),
       };
       n.timeout = 3e4;
       n.open("GET", t, true);
-      a.FgIDConfigManager.checkAddFgIDToHeader(n, t);
+      FgIDConfigManager.FgIDConfigManager.checkAddFgIDToHeader(n, t);
       n.send();
     };
     t.prototype.sendGetHttpRequestWithToken = function(t, e, i) {
@@ -171,12 +164,12 @@ var n = require("./LocalizeManager"),
       };
       n.onerror = function() {
         var t = r;
-        if (!o.default.isNullOrEmpty(n.responseText)) {
+        if (!StringUtil.default.isNullOrEmpty(n.responseText)) {
           var e = null;
           try {
             e = JSON.parse(n.responseText);
           } catch (t) {}
-          if (!(null === e || void 0 === e || o.default.isNullOrEmpty(e.msg))) {
+          if (!(null === e || void 0 === e || StringUtil.default.isNullOrEmpty(e.msg))) {
             t = e.msg;
           }
         }
@@ -187,8 +180,8 @@ var n = require("./LocalizeManager"),
       };
       n.timeout = 3e4;
       n.open("GET", t, true);
-      n.setRequestHeader("X-TOKEN", s.default.getInstance().session_id);
-      a.FgIDConfigManager.checkAddFgIDToHeader(n, t);
+      n.setRequestHeader("X-TOKEN", GamePlayManager.default.getInstance().session_id);
+      FgIDConfigManager.FgIDConfigManager.checkAddFgIDToHeader(n, t);
       n.send();
       return n;
     };
@@ -239,11 +232,11 @@ var n = require("./LocalizeManager"),
             }
           } else {
             var a = r;
-            if (!o.default.isNullOrEmpty(t.responseText)) {
+            if (!StringUtil.default.isNullOrEmpty(t.responseText)) {
               try {
                 var s = JSON.parse(t.responseText);
-                if (null === s || void 0 === s || o.default.isNullOrEmpty(s.msg)) {
-                  if (!(null === s || void 0 === s || o.default.isNullOrEmpty(s.message))) {
+                if (null === s || void 0 === s || StringUtil.default.isNullOrEmpty(s.msg)) {
+                  if (!(null === s || void 0 === s || StringUtil.default.isNullOrEmpty(s.message))) {
                     a = s.message;
                   }
                 } else {
@@ -261,12 +254,12 @@ var n = require("./LocalizeManager"),
       };
       t.onerror = function() {
         var e = r;
-        if (!o.default.isNullOrEmpty(t.responseText)) {
+        if (!StringUtil.default.isNullOrEmpty(t.responseText)) {
           var i = null;
           try {
             i = JSON.parse(t.responseText);
           } catch (t) {}
-          if (!(null === i || void 0 === i || o.default.isNullOrEmpty(i.msg))) {
+          if (!(null === i || void 0 === i || StringUtil.default.isNullOrEmpty(i.msg))) {
             e = i.msg;
           }
         }
@@ -277,13 +270,13 @@ var n = require("./LocalizeManager"),
       };
       t.timeout = d > 0 ? d : 3e4;
       t.open("POST", e, true);
-      if (!o.default.isNullOrEmpty(s.default.getInstance().session_id)) {
+      if (!StringUtil.default.isNullOrEmpty(GamePlayManager.default.getInstance().session_id)) {
         if (true === h) {
-          t.setRequestHeader("X-TOKEN", s.default.getInstance().session_id);
+          t.setRequestHeader("X-TOKEN", GamePlayManager.default.getInstance().session_id);
         }
         t.setRequestHeader("Content-Type", "application/json");
       }
-      a.FgIDConfigManager.checkAddFgIDToHeader(t, e);
+      FgIDConfigManager.FgIDConfigManager.checkAddFgIDToHeader(t, e);
       t.send(i);
     };
     t.prototype.sendPostHttpRequestWithMap = function(t, e, i, n, a, l, h, u) {
@@ -310,11 +303,11 @@ var n = require("./LocalizeManager"),
             }
           } else {
             var a = r;
-            if (!o.default.isNullOrEmpty(d.responseText)) {
+            if (!StringUtil.default.isNullOrEmpty(d.responseText)) {
               try {
                 var s = JSON.parse(d.responseText);
-                if (null === s || void 0 === s || o.default.isNullOrEmpty(s.msg)) {
-                  if (!(null === s || void 0 === s || o.default.isNullOrEmpty(s.message))) {
+                if (null === s || void 0 === s || StringUtil.default.isNullOrEmpty(s.msg)) {
+                  if (!(null === s || void 0 === s || StringUtil.default.isNullOrEmpty(s.message))) {
                     a = s.message;
                   }
                 } else {
@@ -332,12 +325,12 @@ var n = require("./LocalizeManager"),
       };
       d.onerror = function() {
         var t = r;
-        if (!o.default.isNullOrEmpty(d.responseText)) {
+        if (!StringUtil.default.isNullOrEmpty(d.responseText)) {
           var e = null;
           try {
             e = JSON.parse(d.responseText);
           } catch (t) {}
-          if (!(null === e || void 0 === e || o.default.isNullOrEmpty(e.msg))) {
+          if (!(null === e || void 0 === e || StringUtil.default.isNullOrEmpty(e.msg))) {
             t = e.msg;
           }
         }
@@ -348,9 +341,9 @@ var n = require("./LocalizeManager"),
       };
       d.timeout = u > 0 ? u : 3e4;
       d.open("POST", t, true);
-      if (!o.default.isNullOrEmpty(s.default.getInstance().session_id)) {
+      if (!StringUtil.default.isNullOrEmpty(GamePlayManager.default.getInstance().session_id)) {
         if (true === l) {
-          d.setRequestHeader("X-TOKEN", s.default.getInstance().session_id);
+          d.setRequestHeader("X-TOKEN", GamePlayManager.default.getInstance().session_id);
         }
         d.setRequestHeader("Content-Type", "application/json");
       }
@@ -387,7 +380,7 @@ var n = require("./LocalizeManager"),
           }
         } else {
           try {
-            if (o.default.isNullOrEmpty(t.responseText)) {
+            if (StringUtil.default.isNullOrEmpty(t.responseText)) {
               if (i) {
                 i({
                   code: t.status,
@@ -414,7 +407,7 @@ var n = require("./LocalizeManager"),
     };
     t.prototype.onXHRError = function(t, e, i) {
       try {
-        o.default.isNullOrEmpty(t.responseText);
+        StringUtil.default.isNullOrEmpty(t.responseText);
       } catch (e) {
         return void(i && i({
           code: t.status,
@@ -456,8 +449,8 @@ var n = require("./LocalizeManager"),
       a.timeout = 3e4;
       a.open("GET", t, true);
       if (n) {
-        if (!o.default.isNullOrEmpty(s.default.getInstance().session_id)) {
-          a.setRequestHeader("X-TOKEN", s.default.getInstance().session_id);
+        if (!StringUtil.default.isNullOrEmpty(GamePlayManager.default.getInstance().session_id)) {
+          a.setRequestHeader("X-TOKEN", GamePlayManager.default.getInstance().session_id);
         }
       }
       a.send();
@@ -484,12 +477,12 @@ var n = require("./LocalizeManager"),
       };
       r.open("GET", t, true);
       if (n) {
-        if (!o.default.isNullOrEmpty(s.default.getInstance().session_id)) {
-          r.setRequestHeader("X-TOKEN", s.default.getInstance().session_id);
+        if (!StringUtil.default.isNullOrEmpty(GamePlayManager.default.getInstance().session_id)) {
+          r.setRequestHeader("X-TOKEN", GamePlayManager.default.getInstance().session_id);
           r.setRequestHeader("Content-Type", "application/json");
         }
       }
-      a.FgIDConfigManager.checkAddFgIDToHeader(r, t);
+      FgIDConfigManager.FgIDConfigManager.checkAddFgIDToHeader(r, t);
       r.send();
     };
     t.prototype.postHTTP = function(t, e, i, n, r) {
@@ -514,13 +507,13 @@ var n = require("./LocalizeManager"),
       };
       h.timeout = 3e4;
       h.open("POST", t, true);
-      if (!o.default.isNullOrEmpty(s.default.getInstance().session_id)) {
+      if (!StringUtil.default.isNullOrEmpty(GamePlayManager.default.getInstance().session_id)) {
         if (true === r) {
-          h.setRequestHeader("X-TOKEN", s.default.getInstance().session_id);
+          h.setRequestHeader("X-TOKEN", GamePlayManager.default.getInstance().session_id);
         }
         h.setRequestHeader("Content-Type", "application/json");
       }
-      a.FgIDConfigManager.checkAddFgIDToHeader(h, t);
+      FgIDConfigManager.FgIDConfigManager.checkAddFgIDToHeader(h, t);
       h.send(e);
     };
     t.prototype.getRawHTTP = function(t, e, i, a) {
@@ -538,13 +531,13 @@ var n = require("./LocalizeManager"),
       r.ontimeout = function() {
         i({
           code: r.status,
-          msg: n.default.getInstance().GetString("ConnectToServerFail")
+          msg: LocalizeManager.default.getInstance().GetString("ConnectToServerFail")
         });
       };
       r.open("GET", t, true);
       if (a) {
-        if (!o.default.isNullOrEmpty(s.default.getInstance().session_id)) {
-          r.setRequestHeader("X-TOKEN", s.default.getInstance().session_id);
+        if (!StringUtil.default.isNullOrEmpty(GamePlayManager.default.getInstance().session_id)) {
+          r.setRequestHeader("X-TOKEN", GamePlayManager.default.getInstance().session_id);
           r.setRequestHeader("Content-Type", "application/json");
         }
       }
@@ -556,10 +549,10 @@ var n = require("./LocalizeManager"),
           e(t.responseText);
         } else {
           try {
-            if (o.default.isNullOrEmpty(t.responseText)) {
+            if (StringUtil.default.isNullOrEmpty(t.responseText)) {
               i({
                 code: t.status,
-                msg: n.default.getInstance().GetString("NetworkUnstablePleaseTryAgain")
+                msg: LocalizeManager.default.getInstance().GetString("NetworkUnstablePleaseTryAgain")
               });
             } else {
               i({

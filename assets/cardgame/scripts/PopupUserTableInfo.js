@@ -47,25 +47,16 @@ var n = this && this.__extends || function() {
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-// ── BẢNG TRA BÍ DANH (máy sinh — ghi-bang-tra-bi-danh.js) ──────
-// Mã dịch ngược đặt bí danh một chữ cho mỗi module. Bảng này để khỏi phải cuộn ngược.
-// KHÔNG đổi tên chúng bằng tìm-kiếm-thay-thế: đoạn mở đầu __decorate khai lại đúng
-// những chữ này làm biến cục bộ, đổi là hỏng im lặng.
-//   a = CardPopupBase   s = StringUtil   r = RemoteSprite
-//   c = GameConfigManager   l = CommonPrefabsManager   h = GameHTTPManager
-//   u = GamePlayManager   d = GameDefine   p = PlinkoController
-//   f = PaymentDefine
-// ────────────────────────────────────────────────────────────────
-var a = require("./CardPopupBase"),
-  s = require("./StringUtil"),
-  r = require("./RemoteSprite"),
-  c = require("./GameConfigManager"),
-  l = require("./CommonPrefabsManager"),
-  h = require("./GameHTTPManager"),
-  u = require("./GamePlayManager"),
-  d = require("./GameDefine"),
-  p = require("./PlinkoController"),
-  f = require("./PaymentDefine"),
+var CardPopupBase = require("./CardPopupBase"),
+  StringUtil = require("./StringUtil"),
+  RemoteSprite = require("./RemoteSprite"),
+  GameConfigManager = require("./GameConfigManager"),
+  CommonPrefabsManager = require("./CommonPrefabsManager"),
+  GameHTTPManager = require("./GameHTTPManager"),
+  GamePlayManager = require("./GamePlayManager"),
+  GameDefine = require("./GameDefine"),
+  PlinkoController = require("./PlinkoController"),
+  PaymentDefine = require("./PaymentDefine"),
   g = cc._decorator,
   m = g.ccclass,
   y = g.property,
@@ -87,8 +78,8 @@ var a = require("./CardPopupBase"),
     }
     n(e, t);
     e.prototype.onLoad = function() {
-      if (c.default.getInstance().lsGameIDAllowShowBtnNapPopupUserInfo) {
-        this.lsGameIDAllowShowBtnNapPopupUserInfo = c.default.getInstance().lsGameIDAllowShowBtnNapPopupUserInfo;
+      if (GameConfigManager.default.getInstance().lsGameIDAllowShowBtnNapPopupUserInfo) {
+        this.lsGameIDAllowShowBtnNapPopupUserInfo = GameConfigManager.default.getInstance().lsGameIDAllowShowBtnNapPopupUserInfo;
       }
     };
     e.prototype.onClickClose = function() {
@@ -104,44 +95,44 @@ var a = require("./CardPopupBase"),
         this.lbName.string = t;
       }
       var o = e;
-      if (p.default.getInstance() && p.default.getInstance().isInGamePlinko && (o -= p.default.getInstance().TotalMoneyWin) < 0) {
+      if (PlinkoController.default.getInstance() && PlinkoController.default.getInstance().isInGamePlinko && (o -= PlinkoController.default.getInstance().TotalMoneyWin) < 0) {
         o = 0;
       }
-      this.lbMoney.string = s.default.formatMoneyNumberWithColom(o);
+      this.lbMoney.string = StringUtil.default.formatMoneyNumberWithColom(o);
       this.sprAvatar.loadImage(i);
       this.rightUI.active = false;
       this.money = o;
-      if ((this.lsGameIDAllowShowBtnNapPopupUserInfo.indexOf(u.default.getInstance().gameID) >= 0 || u.default.getInstance()
-          .currentScene == d.GameConfigs.SceneName.LiveStream || u.default.getInstance().currentScene == d.GameConfigs.SceneName
-          .XocDiaLiveV2 || u.default.getInstance().currentScene == d.GameConfigs.SceneName.Volta || u.default.getInstance()
-          .currentScene == d.GameConfigs.SceneName.DaGaLive || u.default.getInstance().currentScene == d.GameConfigs.SceneName
-          .BauCuaLive || u.default.getInstance().currentScene == d.GameConfigs.SceneName.BauCuaBonus) && n) {
+      if ((this.lsGameIDAllowShowBtnNapPopupUserInfo.indexOf(GamePlayManager.default.getInstance().gameID) >= 0 || GamePlayManager.default.getInstance()
+          .currentScene == GameDefine.GameConfigs.SceneName.LiveStream || GamePlayManager.default.getInstance().currentScene == GameDefine.GameConfigs.SceneName
+          .XocDiaLiveV2 || GamePlayManager.default.getInstance().currentScene == GameDefine.GameConfigs.SceneName.Volta || GamePlayManager.default.getInstance()
+          .currentScene == GameDefine.GameConfigs.SceneName.DaGaLive || GamePlayManager.default.getInstance().currentScene == GameDefine.GameConfigs.SceneName
+          .BauCuaLive || GamePlayManager.default.getInstance().currentScene == GameDefine.GameConfigs.SceneName.BauCuaBonus) && n) {
         this.rightUI.active = true;
         this.money = o;
-        this.lbMoneyKetSat.string = s.default.formatMoneyNumberWithColom(u.default.getInstance().extraMoney);
+        this.lbMoneyKetSat.string = StringUtil.default.formatMoneyNumberWithColom(GamePlayManager.default.getInstance().extraMoney);
         this.updateButtonRutKetStatus();
-        if (u.default.getInstance().isUpdateKetSat) {
+        if (GamePlayManager.default.getInstance().isUpdateKetSat) {
           this.onGetMoneyUser_API(this.money);
         }
       }
     };
     e.prototype.onClickRutKet = function() {
-      if (u.default.getInstance().extraMoney <= 0) {
+      if (GamePlayManager.default.getInstance().extraMoney <= 0) {
         this.showMessageUlti("Kh\xf4ng c\xf3 ti\u1ec1n trong k\xe9t s\u1eaft !");
       } else {
         if (null != this.callbackClose) {
-          l.default.getInstance().showPopupKetSat(true, this.money, this.callbackClose.bind(this));
+          CommonPrefabsManager.default.getInstance().showPopupKetSat(true, this.money, this.callbackClose.bind(this));
         } else {
-          l.default.getInstance().showPopupKetSat(true, this.money);
+          CommonPrefabsManager.default.getInstance().showPopupKetSat(true, this.money);
         }
         this.hideWithoutAnimation();
       }
     };
     e.prototype.onClickNap = function() {
       if (null != this.callbackClose) {
-        l.default.getInstance().showPopupNap(f.TAB_LAST_SELECTED_OR_DEFAULT, this.callbackClose.bind(this));
+        CommonPrefabsManager.default.getInstance().showPopupNap(PaymentDefine.TAB_LAST_SELECTED_OR_DEFAULT, this.callbackClose.bind(this));
       } else {
-        l.default.getInstance().showPopupNap(f.TAB_LAST_SELECTED_OR_DEFAULT);
+        CommonPrefabsManager.default.getInstance().showPopupNap(PaymentDefine.TAB_LAST_SELECTED_OR_DEFAULT);
       }
       this.hide();
     };
@@ -150,47 +141,47 @@ var a = require("./CardPopupBase"),
       if (void 0 === t) {
         t = 0;
       }
-      if (!(c.default.getInstance().listcommingSoonGames.indexOf("ketsat") > -1 || c.default.getInstance().isLoginWebcc || c.default
+      if (!(GameConfigManager.default.getInstance().listcommingSoonGames.indexOf("ketsat") > -1 || GameConfigManager.default.getInstance().isLoginWebcc || GameConfigManager.default
           .getInstance().isLoginWebccNoWallet)) {
-        l.default.getInstance().showLoading();
-        h.default.getInstance().sendPostHttpRequest(c.default.getInstance().paymentURLs.postSafeLoad, "", function(i) {
+        CommonPrefabsManager.default.getInstance().showLoading();
+        GameHTTPManager.default.getInstance().sendPostHttpRequest(GameConfigManager.default.getInstance().paymentURLs.postSafeLoad, "", function(i) {
           if (0 === i.status.localeCompare("OK") && null !== i.data[0] && void 0 !== i.data[0]) {
             var n = i.data[0].main_balance;
-            if (p.default.getInstance() && p.default.getInstance().isInGamePlinko && (n -= p.default.getInstance().TotalMoneyWin) <
+            if (PlinkoController.default.getInstance() && PlinkoController.default.getInstance().isInGamePlinko && (n -= PlinkoController.default.getInstance().TotalMoneyWin) <
               0) {
               n = 0;
             }
-            e.lbMoney.string = s.default.formatMoneyNumberWithColom(n);
-            e.lbMoneyKetSat.string = s.default.formatMoneyNumberWithColom(i.data[0].extra_balance);
+            e.lbMoney.string = StringUtil.default.formatMoneyNumberWithColom(n);
+            e.lbMoneyKetSat.string = StringUtil.default.formatMoneyNumberWithColom(i.data[0].extra_balance);
             if (t > 0) {
-              e.lbMoney.string = s.default.formatMoneyNumberWithColom(t);
+              e.lbMoney.string = StringUtil.default.formatMoneyNumberWithColom(t);
             }
-            u.default.getInstance().extraMoney = i.data[0].extra_balance;
-            u.default.getInstance().isUpdateKetSat = false;
+            GamePlayManager.default.getInstance().extraMoney = i.data[0].extra_balance;
+            GamePlayManager.default.getInstance().isUpdateKetSat = false;
             e.updateButtonRutKetStatus();
           } else {
             e.showMessageUlti("Kh\xf4ng th\u1ec3 c\u1eadp nh\u1eadt ti\u1ec1n k\xe9t s\u1eaft. Vui l\xf2ng th\u1eed l\u1ea1i !");
           }
-          l.default.getInstance().hideLoading();
+          CommonPrefabsManager.default.getInstance().hideLoading();
         }, function(t) {
           e.showMessageUlti("Kh\xf4ng th\u1ec3 c\u1eadp nh\u1eadt ti\u1ec1n k\xe9t s\u1eaft. Vui l\xf2ng th\u1eed l\u1ea1i !");
         });
       }
     };
     e.prototype.showMessageUlti = function(t) {
-      if (u.default.getInstance().currentScene === d.GameConfigs.SceneName.XocDiaLive || u.default.getInstance().currentScene === d
+      if (GamePlayManager.default.getInstance().currentScene === GameDefine.GameConfigs.SceneName.XocDiaLive || GamePlayManager.default.getInstance().currentScene === GameDefine
         .GameConfigs.SceneName.Volta) {
-        l.default.getInstance().showPopupMessageWithPositionUtil(t);
+        CommonPrefabsManager.default.getInstance().showPopupMessageWithPositionUtil(t);
       } else {
-        l.default.getInstance().showPopupMessageUtil(t);
+        CommonPrefabsManager.default.getInstance().showPopupMessageUtil(t);
       }
     };
     e.prototype.updateButtonRutKetStatus = function() {
-      this.btnRutKet.interactable = !(u.default.getInstance().extraMoney <= 0);
-      this.btnRutKet.enableAutoGrayEffect = u.default.getInstance().extraMoney <= 0;
-      this.lbRutKetNode.color = u.default.getInstance().extraMoney <= 0 ? new cc.Color(85, 85, 85, 255) : cc.Color.WHITE;
+      this.btnRutKet.interactable = !(GamePlayManager.default.getInstance().extraMoney <= 0);
+      this.btnRutKet.enableAutoGrayEffect = GamePlayManager.default.getInstance().extraMoney <= 0;
+      this.lbRutKetNode.color = GamePlayManager.default.getInstance().extraMoney <= 0 ? new cc.Color(85, 85, 85, 255) : cc.Color.WHITE;
     };
-    o([y(r.default)], e.prototype, "sprAvatar", void 0);
+    o([y(RemoteSprite.default)], e.prototype, "sprAvatar", void 0);
     o([y(cc.Label)], e.prototype, "lbName", void 0);
     o([y(cc.Label)], e.prototype, "lbMoney", void 0);
     o([y(cc.Label)], e.prototype, "lbMoneyKetSat", void 0);
@@ -199,6 +190,6 @@ var a = require("./CardPopupBase"),
     o([y(cc.Button)], e.prototype, "btnRutKet", void 0);
     o([y], e.prototype, "maxLengthName", void 0);
     return e = o([m], e);
-  }(a.default);
+  }(CardPopupBase.default);
 i.default = S;
 void 0;

@@ -47,14 +47,8 @@ var n = this && this.__extends || function() {
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-// ── BẢNG TRA BÍ DANH (máy sinh — ghi-bang-tra-bi-danh.js) ──────
-// Mã dịch ngược đặt bí danh một chữ cho mỗi module. Bảng này để khỏi phải cuộn ngược.
-// KHÔNG đổi tên chúng bằng tìm-kiếm-thay-thế: đoạn mở đầu __decorate khai lại đúng
-// những chữ này làm biến cục bộ, đổi là hỏng im lặng.
-//   a = GameConfigManager   s = EditBoxCustom
-// ────────────────────────────────────────────────────────────────
-var a = require("./GameConfigManager"),
-  s = require("./EditBoxCustom"),
+var GameConfigManager = require("./GameConfigManager"),
+  EditBoxCustom = require("./EditBoxCustom"),
   r = cc._decorator,
   c = r.ccclass,
   l = r.property,
@@ -73,7 +67,7 @@ var a = require("./GameConfigManager"),
     e.prototype.onLoad = function() {
       this.originalFontSize = this.editBox.fontSize;
       this.init();
-      if (!(a.default.getInstance().misc.isForceNoAdjustEditBox || false) && this.checkWebMobile()) {
+      if (!(GameConfigManager.default.getInstance().misc.isForceNoAdjustEditBox || false) && this.checkWebMobile()) {
         this.isForceNoScrollStart = this.isForceNoScroll = true;
       }
       this.setScreenType();
@@ -84,7 +78,7 @@ var a = require("./GameConfigManager"),
       if (this.isAllowRotate && this.isForceNoScroll && this.editBox && this.checkWebMobile()) {
         var e = this.editBox._impl;
         if (e) {
-          if (t == s.ScreenType.Portrait) {
+          if (t == EditBoxCustom.ScreenType.Portrait) {
             e.offsetXXX = this.offsetXOnRotate;
             e.offsetYYY = this.offsetYOnRotate;
             e.xxforceUpdate = true;
@@ -124,7 +118,7 @@ var a = require("./GameConfigManager"),
     };
     e.prototype.setScreenType = function() {
       this.screenType = this.getScreenType();
-      if (this.screenType == s.ScreenType.Landscape) {
+      if (this.screenType == EditBoxCustom.ScreenType.Landscape) {
         this.isForceNoScroll = this.isForceNoScrollStart;
       } else {
         this.isForceNoScroll = false;
@@ -139,6 +133,6 @@ var a = require("./GameConfigManager"),
     o([l], e.prototype, "offsetXOnRotate", void 0);
     o([l], e.prototype, "offsetYOnRotate", void 0);
     return e = o([c], e);
-  }(s.default);
+  }(EditBoxCustom.default);
 i.default = h;
 void 0;

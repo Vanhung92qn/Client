@@ -47,17 +47,10 @@ var n = this && this.__extends || function() {
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-// ── BẢNG TRA BÍ DANH (máy sinh — ghi-bang-tra-bi-danh.js) ──────
-// Mã dịch ngược đặt bí danh một chữ cho mỗi module. Bảng này để khỏi phải cuộn ngược.
-// KHÔNG đổi tên chúng bằng tìm-kiếm-thay-thế: đoạn mở đầu __decorate khai lại đúng
-// những chữ này làm biến cục bộ, đổi là hỏng im lặng.
-//   a = InvitePlayersItemControl   s = StringUtil   r = CardGameCommonRequest
-//   c = MusicPlayer
-// ────────────────────────────────────────────────────────────────
-var a = require("./InvitePlayersItemControl"),
-  s = require("./StringUtil"),
-  r = require("./CardGameCommonRequest"),
-  c = require("./MusicPlayer"),
+var InvitePlayersItemControl = require("./InvitePlayersItemControl"),
+  StringUtil = require("./StringUtil"),
+  CardGameCommonRequest = require("./CardGameCommonRequest"),
+  MusicPlayer = require("./MusicPlayer"),
   l = cc._decorator,
   h = l.ccclass,
   u = l.property,
@@ -77,10 +70,10 @@ var a = require("./InvitePlayersItemControl"),
         var i = t[e],
           n = cc.instantiate(this.prefabInvitePlayerItem);
         n.parent = this.contentNode;
-        var o = n.getComponent(a.default);
+        var o = n.getComponent(InvitePlayersItemControl.default);
         o.playerId = i.u;
         o.lblName.getComponent(cc.Label).string = i.dn;
-        o.lblMoney.getComponent(cc.Label).string = s.default.formatMoneyNumber(i.m);
+        o.lblMoney.getComponent(cc.Label).string = StringUtil.default.formatMoneyNumber(i.m);
         o.init(this);
         this.listItem.push(o);
       }
@@ -98,12 +91,12 @@ var a = require("./InvitePlayersItemControl"),
             t.push(i.playerId);
           }
         }
-        r.default.getInstance().sendInvitePlayers(t);
+        CardGameCommonRequest.default.getInstance().sendInvitePlayers(t);
       }
     };
     e.prototype.onClickHide = function() {
       var t = this;
-      c.default.getInstance().playbtnClick();
+      MusicPlayer.default.getInstance().playbtnClick();
       if (!(this.node.getNumberOfRunningActions() > 0)) {
         this.node.runAction(cc.sequence(cc.moveTo(.5, new cc.Vec2(this.node.parent.width / 2 + this.node.width / 2, this.node.position.y))
           .easing(cc.easeExponentialOut()), cc.callFunc(function() {

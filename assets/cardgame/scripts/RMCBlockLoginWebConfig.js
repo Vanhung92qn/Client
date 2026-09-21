@@ -18,12 +18,12 @@ var n = this && this.__assign || function() {
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-var o = require("./GameConfigManager"),
+var GameConfigManager = require("./GameConfigManager"),
   a = {
     enable: true
   };
 i.getBlockLoginWebConfig = function() {
-  var t = o.default.getInstance().getConfig("blockLoginWebConfig");
+  var t = GameConfigManager.default.getInstance().getConfig("blockLoginWebConfig");
   return n({}, a, t);
 };
 void 0;

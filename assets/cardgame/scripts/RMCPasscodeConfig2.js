@@ -18,13 +18,13 @@ var n = this && this.__assign || function() {
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-var o = require("./GameConfigManager"),
+var GameConfigManager = require("./GameConfigManager"),
   a = {
     enable: true,
     urlAnalytic: ""
   };
 i.getPasscodeConfig = function() {
-  var t = o.default.getInstance().getConfig("passCodeConfig");
+  var t = GameConfigManager.default.getInstance().getConfig("passCodeConfig");
   return n({}, a, t);
 };
 void 0;

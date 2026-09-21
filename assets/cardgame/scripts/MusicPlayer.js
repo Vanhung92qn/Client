@@ -180,17 +180,10 @@ var n = this && this.__extends || function() {
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-// ── BẢNG TRA BÍ DANH (máy sinh — ghi-bang-tra-bi-danh.js) ──────
-// Mã dịch ngược đặt bí danh một chữ cho mỗi module. Bảng này để khỏi phải cuộn ngược.
-// KHÔNG đổi tên chúng bằng tìm-kiếm-thay-thế: đoạn mở đầu __decorate khai lại đúng
-// những chữ này làm biến cục bộ, đổi là hỏng im lặng.
-//   r = GameUtils   c = StringUtil   l = GameConfigManager
-//   h = RMCThemeConfig
-// ────────────────────────────────────────────────────────────────
-var r = require("./GameUtils"),
-  c = require("./StringUtil"),
-  l = require("./GameConfigManager"),
-  h = require("./RMCThemeConfig"),
+var GameUtils = require("./GameUtils"),
+  StringUtil = require("./StringUtil"),
+  GameConfigManager = require("./GameConfigManager"),
+  RMCThemeConfig = require("./RMCThemeConfig"),
   u = cc._decorator,
   d = u.ccclass,
   p = (u.property, function(t) {
@@ -217,7 +210,7 @@ var r = require("./GameUtils"),
       i.Instance = this;
     };
     e.prototype.lateUpdate = function() {
-      if (false !== l.default.getInstance().enableBackgroundMusic && this.onPlayMusic && (this.countTimeCheckMusic += 1, !(this
+      if (false !== GameConfigManager.default.getInstance().enableBackgroundMusic && this.onPlayMusic && (this.countTimeCheckMusic += 1, !(this
           .countTimeCheckMusic < 5) && (this.countTimeCheckMusic = 0, cc.audioEngine.isMusicPlaying() && !cc.sys.isNative))) {
         var t = cc.sys.__audioSupport.context;
         if ("suspended" === t.state) {
@@ -228,15 +221,15 @@ var r = require("./GameUtils"),
     e.prototype.init = function() {};
     e.prototype.stopMusic = function() {
       cc.audioEngine.stopMusic();
-      l.default.getInstance().currentBgMusic = "";
-      l.default.getInstance().isPlayingLobbyMusicBg = false;
+      GameConfigManager.default.getInstance().currentBgMusic = "";
+      GameConfigManager.default.getInstance().isPlayingLobbyMusicBg = false;
     };
     e.prototype.PauseMusic = function() {
       cc.audioEngine.pauseMusic();
       this.onPlayMusic = false;
     };
     e.prototype.ResumeMusic = function() {
-      if (false !== l.default.getInstance().enableBackgroundMusic) {
+      if (false !== GameConfigManager.default.getInstance().enableBackgroundMusic) {
         cc.audioEngine.resumeMusic();
         this.onPlayMusic = true;
       }
@@ -246,32 +239,32 @@ var r = require("./GameUtils"),
         e = 1;
       }
       if (!this.isLostFocus) {
-        if (false !== l.default.getInstance().enableBackgroundMusic && (c.default.isNullOrEmpty(t) || c.default.isNullOrEmpty(l.default
-            .getInstance().currentBgMusic) || 0 !== l.default.getInstance().currentBgMusic.localeCompare(t))) {
+        if (false !== GameConfigManager.default.getInstance().enableBackgroundMusic && (StringUtil.default.isNullOrEmpty(t) || StringUtil.default.isNullOrEmpty(GameConfigManager.default
+            .getInstance().currentBgMusic) || 0 !== GameConfigManager.default.getInstance().currentBgMusic.localeCompare(t))) {
           cc.audioEngine.setMusicVolume(e);
-          l.default.getInstance().currentBgMusic = t;
+          GameConfigManager.default.getInstance().currentBgMusic = t;
           cc.loader.loadRes(t, cc.AudioClip, this.playBgMusicWhenLoadDone.bind(this));
         }
       }
     };
     e.prototype.playBgMusicWhenLoadDone = function(t, e) {
       if (null === t || void 0 === t) {
-        if (false === l.default.getInstance().enableBackgroundMusic) {
-          l.default.getInstance().currentBgMusic = "";
-          return void(l.default.getInstance().isPlayingLobbyMusicBg = false);
+        if (false === GameConfigManager.default.getInstance().enableBackgroundMusic) {
+          GameConfigManager.default.getInstance().currentBgMusic = "";
+          return void(GameConfigManager.default.getInstance().isPlayingLobbyMusicBg = false);
         }
         cc.audioEngine.stopMusic();
         cc.audioEngine.playMusic(e, true);
       }
     };
     e.prototype.playRandomIngameBgMusic = function() {
-      l.default.getInstance().isPlayingLobbyMusicBg = false;
+      GameConfigManager.default.getInstance().isPlayingLobbyMusicBg = false;
       this.playRandomBackgroundMusic(["Sounds/ig/ig_music_1", "Sounds/ig/ig_music_2", "Sounds/ig/ig_music_3"]);
     };
     e.prototype.playRandomLobbyMusic = function() {
-      if (true !== l.default.getInstance().isPlayingLobbyMusicBg) {
-        if (true === l.default.getInstance().enableBackgroundMusic) {
-          l.default.getInstance().isPlayingLobbyMusicBg = true;
+      if (true !== GameConfigManager.default.getInstance().isPlayingLobbyMusicBg) {
+        if (true === GameConfigManager.default.getInstance().enableBackgroundMusic) {
+          GameConfigManager.default.getInstance().isPlayingLobbyMusicBg = true;
         }
         if (cc.audioEngine.getMusicVolume() < 1) {
           cc.audioEngine.setMusicVolume(1);
@@ -280,9 +273,9 @@ var r = require("./GameUtils"),
       }
     };
     e.prototype.playRandomBgMusicFromRemoteConfig = function() {
-      var t = l.default.getInstance().listLobbyBgMusic;
+      var t = GameConfigManager.default.getInstance().listLobbyBgMusic;
       if (t && t.length > 0) {
-        var e = c.default.getRandomInt(t.length);
+        var e = StringUtil.default.getRandomInt(t.length);
         this.playBackgroundMusic(t[e]);
       } else {
         this.playBackgroundMusic("Sounds/lobby/BGM_lobby_default");
@@ -290,7 +283,7 @@ var r = require("./GameUtils"),
     };
     e.prototype.playRandomBackgroundMusic = function(t) {
       if (0 !== t.length) {
-        var e = c.default.getRandomInt(t.length);
+        var e = StringUtil.default.getRandomInt(t.length);
         this.playBackgroundMusic(t[e]);
       }
     };
@@ -298,26 +291,26 @@ var r = require("./GameUtils"),
       this.playRandomLobbyBgMusic();
     };
     e.prototype.playRandomLobbyBgMusic = function() {
-      switch (h.getCurrentTheme()) {
-        case h.ThemeType.HAPPY_NEW_YEAR:
+      switch (RMCThemeConfig.getCurrentTheme()) {
+        case RMCThemeConfig.ThemeType.HAPPY_NEW_YEAR:
           this.playBackgroundMusic("Sounds/lobby/BGM-Newyear");
           break;
-        case h.ThemeType.NOEL:
+        case RMCThemeConfig.ThemeType.NOEL:
           this.playBackgroundMusic("Sounds/lobby/BGM_Noel_Hitclub");
           break;
-        case h.ThemeType.WORLD_CUP:
+        case RMCThemeConfig.ThemeType.WORLD_CUP:
           this.playBackgroundMusic("Sounds/lobby/BGM_Worldcup");
           break;
-        case h.ThemeType.VN_304:
+        case RMCThemeConfig.ThemeType.VN_304:
           this.playBackgroundMusic("Sounds/lobby/BGM_304");
           break;
-        case h.ThemeType.MID_AUTUMN_FESTIVAL:
+        case RMCThemeConfig.ThemeType.MID_AUTUMN_FESTIVAL:
           this.playBackgroundMusic("Sounds/lobby/BGM-MoonFestival");
           break;
-        case h.ThemeType.HALLOWEEN:
+        case RMCThemeConfig.ThemeType.HALLOWEEN:
           this.playBackgroundMusic("Sounds/lobby/BGM-Halloween");
           break;
-        case h.ThemeType.DEFAULT:
+        case RMCThemeConfig.ThemeType.DEFAULT:
         default:
           this.playRandomBgMusicFromRemoteConfig();
       }
@@ -336,7 +329,7 @@ var r = require("./GameUtils"),
         i = null;
       }
       if (!this.isLostFocus) {
-        if (false !== l.default.getInstance().enableSound) {
+        if (false !== GameConfigManager.default.getInstance().enableSound) {
           if (0 == e) {
             cc.loader.loadRes(t, cc.AudioClip, this.playEffectWhenLoadDone.bind(this));
           } else {
@@ -350,7 +343,7 @@ var r = require("./GameUtils"),
         e = null;
       }
       if (!this.isLostFocus) {
-        if (false !== l.default.getInstance().enableSound) {
+        if (false !== GameConfigManager.default.getInstance().enableSound) {
           cc.loader.loadRes(t, cc.AudioClip, function(t, i) {
             if ((null === t || void 0 === t) && null != i && void 0 != i) {
               var n = cc.audioEngine.playEffect(i, false);
@@ -364,7 +357,7 @@ var r = require("./GameUtils"),
     };
     e.prototype.playEffectWithClip = function(t) {
       if (!this.isLostFocus) {
-        if (false !== l.default.getInstance().enableSound && null != t && void 0 != t) {
+        if (false !== GameConfigManager.default.getInstance().enableSound && null != t && void 0 != t) {
           cc.audioEngine.playEffect(t, false);
         }
       }
@@ -388,7 +381,7 @@ var r = require("./GameUtils"),
     };
     e.prototype.playEffectLoop = function(t) {
       if (!this.isLostFocus) {
-        if (false !== l.default.getInstance().enableSound) {
+        if (false !== GameConfigManager.default.getInstance().enableSound) {
           cc.loader.loadRes(t, cc.AudioClip, this.playEffectWhenLoadDoneLoop.bind(this));
         }
       }
@@ -429,7 +422,7 @@ var r = require("./GameUtils"),
         return s(this, function(e) {
           switch (e.label) {
             case 0:
-              return this.allowPlayBtnClick = false, [4, r.delay(1e3 * t)];
+              return this.allowPlayBtnClick = false, [4, GameUtils.delay(1e3 * t)];
             case 1:
               return e.sent(), this.allowPlayBtnClick = true, [2];
           }

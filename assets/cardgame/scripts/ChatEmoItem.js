@@ -47,14 +47,8 @@ var n = this && this.__extends || function() {
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-// ── BẢNG TRA BÍ DANH (máy sinh — ghi-bang-tra-bi-danh.js) ──────
-// Mã dịch ngược đặt bí danh một chữ cho mỗi module. Bảng này để khỏi phải cuộn ngược.
-// KHÔNG đổi tên chúng bằng tìm-kiếm-thay-thế: đoạn mở đầu __decorate khai lại đúng
-// những chữ này làm biến cục bộ, đổi là hỏng im lặng.
-//   a = ChatInGamePopup   s = GamePlayManager
-// ────────────────────────────────────────────────────────────────
-var a = require("./ChatInGamePopup"),
-  s = require("./GamePlayManager"),
+var ChatInGamePopup = require("./ChatInGamePopup"),
+  GamePlayManager = require("./GamePlayManager"),
   r = cc._decorator,
   c = r.ccclass,
   l = r.property,
@@ -67,9 +61,9 @@ var a = require("./ChatInGamePopup"),
     n(e, t);
     e.prototype.onClickThis = function(t, e) {
       this.chatInGamePopup.sendChat(e);
-      s.default.getInstance().countMatchNotInteract = 0;
+      GamePlayManager.default.getInstance().countMatchNotInteract = 0;
     };
-    o([l(a.default)], e.prototype, "chatInGamePopup", void 0);
+    o([l(ChatInGamePopup.default)], e.prototype, "chatInGamePopup", void 0);
     return e = o([c], e);
   }(cc.Component);
 i.default = h;

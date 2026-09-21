@@ -47,14 +47,8 @@ var n = this && this.__extends || function() {
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-// ── BẢNG TRA BÍ DANH (máy sinh — ghi-bang-tra-bi-danh.js) ──────
-// Mã dịch ngược đặt bí danh một chữ cho mỗi module. Bảng này để khỏi phải cuộn ngược.
-// KHÔNG đổi tên chúng bằng tìm-kiếm-thay-thế: đoạn mở đầu __decorate khai lại đúng
-// những chữ này làm biến cục bộ, đổi là hỏng im lặng.
-//   a = GamePlayManager   s = StringUtil
-// ────────────────────────────────────────────────────────────────
-var a = require("./GamePlayManager"),
-  s = require("./StringUtil"),
+var GamePlayManager = require("./GamePlayManager"),
+  StringUtil = require("./StringUtil"),
   r = cc._decorator,
   c = r.ccclass,
   l = r.property,
@@ -81,12 +75,12 @@ var a = require("./GamePlayManager"),
     }
     n(e, t);
     e.prototype.loadUI = function(t, e, i, n, o, r, c, l, h) {
-      if (void 0 === c && (c = 0), c > 0 && (this.txtReward.string = s.default.formatMoneyNumberWithDot(c), this.txtReward.node.active =
+      if (void 0 === c && (c = 0), c > 0 && (this.txtReward.string = StringUtil.default.formatMoneyNumberWithDot(c), this.txtReward.node.active =
           true, this.iconGold.node.active = true, this.iconGold.spriteFrame = this.listIconMedal[t - 1]), 5 == t && null != this
         .lineBreak && (this.lineBreak.active = true), this.icoPassTotalBet.active = h, this.icoFailTotalBet.active = !h, l ? (this
           .txtReward.node.opacity = 255, this.iconGold.node.opacity = 255) : (this.txtReward.node.opacity = 80, this.iconGold.node
-          .opacity = 80), this.txtTargetTotalBet.node.active = true, this.txtTargetTotalBet.string = s.default
-        .formatMoneyNumberWithVietnameseUnit(r), !s.default.isNullOrEmpty(n) && a.default.getInstance().userID.indexOf(n) >= 0 ? this
+          .opacity = 80), this.txtTargetTotalBet.node.active = true, this.txtTargetTotalBet.string = StringUtil.default
+        .formatMoneyNumberWithVietnameseUnit(r), !StringUtil.default.isNullOrEmpty(n) && GamePlayManager.default.getInstance().userID.indexOf(n) >= 0 ? this
         .selected.active = true : this.selected.active = false, void 0 != t && null != t) {
         if (this.spriteLineOn.active = t % 2 != 0, t <= 3) {
           switch (this.txtRank.node.active = false, t) {
@@ -115,8 +109,8 @@ var a = require("./GamePlayManager"),
           this.txtRank.string = t.toString();
         }
       }
-      if (s.default.isNullOrEmpty(e)) {
-        if (s.default.isNullOrEmpty(o)) {
+      if (StringUtil.default.isNullOrEmpty(e)) {
+        if (StringUtil.default.isNullOrEmpty(o)) {
           this.txtTenHienThi.string = "";
         } else {
           this.txtTenHienThi.string = o.toString();
@@ -124,7 +118,7 @@ var a = require("./GamePlayManager"),
       } else {
         this.txtTenHienThi.string = e.toString();
       }
-      this.txtTongPoint.string = void 0 != i && null != i ? s.default.formatMoneyNumberWithColom(i) : "0";
+      this.txtTongPoint.string = void 0 != i && null != i ? StringUtil.default.formatMoneyNumberWithColom(i) : "0";
     };
     o([l(cc.Label)], e.prototype, "txtRank", void 0);
     o([l(cc.Sprite)], e.prototype, "icoRank", void 0);

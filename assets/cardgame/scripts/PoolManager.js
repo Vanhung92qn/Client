@@ -47,7 +47,7 @@ var n = this && this.__extends || function() {
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-var a = require("./GameUtils"),
+var GameUtils = require("./GameUtils"),
   s = cc._decorator,
   r = s.ccclass,
   c = (s.property, function() {
@@ -183,7 +183,7 @@ var h = function(t) {
 i.PoolComponent = h;
 var u = function() {
   function t() {
-    this.mapPool = new a.MapString();
+    this.mapPool = new GameUtils.MapString();
   }
   var e;
   e = t;
