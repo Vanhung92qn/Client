@@ -1,0 +1,84 @@
+[
+  {
+    "__type__": "cc.Prefab",
+    "_name": "CardSet",
+    "data": {
+      "__id__": 1
+    }
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "CardSet",
+    "_level": 1,
+    "_components": [
+      {
+        "__id__": 2
+      },
+      {
+        "__id__": 3
+      }
+    ],
+    "_prefab": {
+      "__id__": 4
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 2,
+      "height": 100
+    },
+    "_zIndex": 0,
+    "_trs": {
+      "__type__": "TypedArray",
+      "ctor": "Float64Array",
+      "array": [
+        null,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1
+      ]
+    }
+  },
+  {
+    "__type__": "cc.Layout",
+    "node": {
+      "__id__": 1
+    },
+    "_layoutSize": {
+      "__type__": "cc.Size",
+      "width": 2,
+      "height": 100
+    },
+    "_resize": 1,
+    "_N$layoutType": 1,
+    "_N$spacingX": -40,
+    "_N$affectedByScale": true
+  },
+  {
+    "__type__": "c75ffbI14JEkbarIVN5EOrb",
+    "node": {
+      "__id__": 1
+    },
+    "layout": {
+      "__id__": 2
+    },
+    "prefabCard": {
+      "__uuid__": "bc29c05f-4cd9-4787-8d1a-edfdb84ede1b"
+    }
+  },
+  {
+    "__type__": "cc.PrefabInfo",
+    "root": {
+      "__id__": 1
+    },
+    "asset": {
+      "__uuid__": "3086d11a-53b3-4495-a5e2-ba0eb80ae704"
+    },
+    "fileId": "b0zVY+JzROG4iJccUetxb+"
+  }
+]
