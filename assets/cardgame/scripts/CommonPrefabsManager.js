@@ -187,6 +187,7 @@ var CommonPrefabsManager = (function () {
      * đó, nhưng trả về popup giả "câm" thay vì null để không làm nổ chuỗi gọi.
      */
     CommonPrefabsManager.prototype.showPopupOneMessage = function (title, content, callback) {
+        cc.log('%c[BẤM] showPopupOneMessage', 'color:#0a0;font-weight:bold', '· tham số:', title, content, callback);
         if (callback === undefined) { callback = null; }
 
         var trungNoiDung = (this.oldCOntentThongBao.localeCompare(content) === 0);
@@ -281,6 +282,7 @@ var CommonPrefabsManager = (function () {
      * đó là tín hiệu tạm ẩn khung phát trực tiếp, chỉ các game Live của Go88 nghe, ta không bê.
      */
     CommonPrefabsManager.prototype.showPopupSetting = function (callbackClose, settingKey) {
+        cc.log('%c[BẤM] showPopupSetting', 'color:#0a0;font-weight:bold', '· tham số:', callbackClose, settingKey);
         if (void 0 === callbackClose) callbackClose = null;
         if (void 0 === settingKey) settingKey = '';
 
@@ -302,10 +304,12 @@ var CommonPrefabsManager = (function () {
      * Cào Rùa chạy web nên không bao giờ chạm tới. Giữ hàm để PopupSetting không nổ lúc nạp.
      */
     CommonPrefabsManager.prototype.showPopupPasscode = function (callbackClose) {
+        cc.log('%c[BẤM] showPopupPasscode', 'color:#0a0;font-weight:bold', '· tham số:', callbackClose);
         this._chuaBe('showPopupPasscode (hàng Mã khoá chỉ có ở bản native)');
     };
 
     CommonPrefabsManager.prototype.showPopupFAQRemote = function (loai) {
+        cc.log('%c[BẤM] showPopupFAQRemote', 'color:#0a0;font-weight:bold', '· tham số:', loai);
         this._chuaBe('showPopupFAQRemote(' + loai + ') — cấu hình FAQ tải từ hạ tầng bản gốc');
     };
 
@@ -320,6 +324,7 @@ var CommonPrefabsManager = (function () {
      * toán của hạ tầng bản gốc.
      */
     CommonPrefabsManager.prototype.showPopupKetSat = function (moTruoc, soTien, callbackClose) {
+        cc.log('%c[BẤM] showPopupKetSat', 'color:#0a0;font-weight:bold', '· tham số:', moTruoc, soTien, callbackClose);
         this._chuaBe('showPopupKetSat — Roy88 không có két sắt');
     };
 
@@ -332,22 +337,39 @@ var CommonPrefabsManager = (function () {
      * Nạp một prefab nằm trong bundle rồi gắn vào lớp popup. Dùng chung cho mọi popup bê từ
      * bản gốc mà ta để trong bundle thay vì `resources`.
      *
-     * 🔴 Bundle phải đã nạp sẵn: cả hai bundle của bộ bài đều khai trong GameBundleConfig
-     * (`caorua` kèm `deps: ['cardroom']`) nên BundleLoader nạp xong mới dựng game. Nếu vì lý
-     * do nào đó chưa có thì báo ra chứ KHÔNG tự nạp ngầm — nạp ngầm giữa ván sẽ khựng hình.
+     * 🔴 KHÔNG được coi bundle là "chắc chắn còn đó". `caorua` khai `deps: ['cardroom']` nên
+     * BundleLoader nạp nó trước khi dựng game — NHƯNG BundleLoader còn có bộ thu gom rác tự
+     * thả bundle rảnh sau 45 giây, và trước bản vá 2026-09-21 nó chỉ né đúng bundle GAME chứ
+     * không né bundle PHỤ THUỘC. Ngồi trong bàn quá 45 giây là `cardroom` bị thả:
+     *     [BundleLoader] GC: Releasing idle bundle "cardroom" (idle: 60s)
+     * rồi mọi popup đều báo "Chưa tải xong dữ liệu".
+     * Gốc đã vá ở BundleLoader.gcIdleBundles. Đây là lớp chắn thứ hai: thiếu thì TỰ NẠP LẠI
+     * thay vì bó tay — người chơi thấy chậm một nhịp còn hơn là bấm không ra gì.
      */
     CommonPrefabsManager.prototype._napPrefabTuBundle = function (tenBundle, duong, khiXong) {
         var tuDong = this;
         var bundle = cc.assetManager.getBundle(tenBundle);
+
         if (!bundle) {
-            cc.warn(TAG + ' bundle "' + tenBundle + '" chưa nạp, không mở được ' + duong);
-            tuDong.showPopupMessageUtil('Chưa tải xong dữ liệu. Thử lại nhé!');
+            cc.warn(TAG + ' bundle "' + tenBundle + '" không còn trong bộ nhớ (nhiều khả năng bị GC thả) — nạp lại rồi mở ' + duong);
+            tuDong.showLoading();
+            cc.assetManager.loadBundle(tenBundle, function (loi, bd) {
+                tuDong.hideLoading();
+                if (loi || !bd) {
+                    cc.error(TAG + ' nạp lại bundle "' + tenBundle + '" THẤT BẠI: ' + (loi && loi.message ? loi.message : loi));
+                    tuDong.showPopupMessageUtil('Chưa tải xong dữ liệu. Thử lại nhé!');
+                    return;
+                }
+                cc.log(TAG + ' đã nạp lại bundle "' + tenBundle + '", mở tiếp ' + duong);
+                tuDong._napPrefabTuBundle(tenBundle, duong, khiXong);
+            });
             return;
         }
 
+        cc.log(TAG + ' nạp prefab ' + tenBundle + '/' + duong);
         bundle.load(duong, cc.Prefab, function (loi, prefab) {
             if (loi || !prefab) {
-                cc.warn(TAG + ' không nạp được ' + tenBundle + '/' + duong + ': ' + (loi && loi.message ? loi.message : loi));
+                cc.error(TAG + ' không nạp được ' + tenBundle + '/' + duong + ': ' + (loi && loi.message ? loi.message : loi));
                 tuDong.showPopupMessageUtil('Không mở được. Thử lại nhé!');
                 return;
             }
@@ -378,6 +400,7 @@ var CommonPrefabsManager = (function () {
      * Bỏ có chủ ý: nhánh FAQ từ xa (`popupFAQRemoteConfig`) — cấu hình tải từ hạ tầng Go88.
      */
     CommonPrefabsManager.prototype.showPopupHelpImage = function (gameID, arg2, arg3) {
+        cc.log('%c[BẤM] showPopupHelpImage', 'color:#0a0;font-weight:bold', '· tham số:', gameID, arg2, arg3);
         var tuDong = this;
         var duong = 'Help/PopupHelpBaCay';
 
@@ -416,6 +439,7 @@ var CommonPrefabsManager = (function () {
 
     /** Go88: showPopupXepHangGame(gameID, orientation, callbackClose). Gọi: RoomController:278, InGameBackPopup:133. */
     CommonPrefabsManager.prototype.showPopupXepHangGame = function (gameID, orientation, callbackClose) {
+        cc.log('%c[BẤM] showPopupXepHangGame', 'color:#0a0;font-weight:bold', '· tham số:', gameID, orientation, callbackClose);
         // Bản gốc (CommonPrefabsManager.js:988-1023) rẽ hai nhánh theo hướng màn hình: dọc thì
         // nạp prefab _portrait từ resources, ngang thì dùng prefab gắn sẵn trong scene. Cào Rùa
         // chỉ chạy ngang nên chỉ bê nhánh ngang — bê cả hai là mang thêm một prefab không dùng.
@@ -425,7 +449,12 @@ var CommonPrefabsManager = (function () {
         //   · "bangxephang" trong listcommingSoonGames ⇒ hiện "sắp ra mắt"
         // Bỏ chốt isLoginWebccNoWallet: Roy88 không có kiểu đăng nhập đó, ô luôn false.
         var cfg = _docCauHinh();
-        if (cfg && cfg.isShowPopupDone) return;
+        // Log chốt này vì nó THOÁT IM LẶNG: không có dòng nào thì người test chỉ thấy bấm mà
+        // không ra gì, và đi tìm nhầm ở chỗ khác. isShowPopupDone kẹt bật là lỗi đã gặp thật.
+        if (cfg && cfg.isShowPopupDone) {
+            cc.warn(TAG + ' showPopupXepHangGame BỎ QUA: isShowPopupDone đang bật (chốt chống mở chồng popup)');
+            return;
+        }
         if (cfg && cfg.listcommingSoonGames && cfg.listcommingSoonGames.indexOf('bangxephang') >= 0) {
             this.showPopupMessageUtil('Tính năng sắp ra mắt');
             return;
@@ -447,6 +476,7 @@ var CommonPrefabsManager = (function () {
 
     /** Go88: showPopupJoinRoom(). Gọi: RoomController:286 (nhập mã bàn để vào). */
     CommonPrefabsManager.prototype.showPopupJoinRoom = function () {
+        cc.log('%c[BẤM] showPopupJoinRoom', 'color:#0a0;font-weight:bold');
         this._napPrefabTuBundle(BUNDLE_CHUNG, 'prefabs/PopupJoinRoom_d157a933', function (node) {
             var c = node.getComponent('PopupJoinRoom');
             if (c && typeof c.show === 'function') c.show();
@@ -461,6 +491,7 @@ var CommonPrefabsManager = (function () {
      * đặt ngay dòng đầu của chính chỗ gọi (TableCellRoomXocDia.js:168) trước khi mở popup.
      */
     CommonPrefabsManager.prototype.showPopupPasswordTable = function () {
+        cc.log('%c[BẤM] showPopupPasswordTable', 'color:#0a0;font-weight:bold');
         this._napPrefabTuBundle(BUNDLE_CHUNG, 'prefabs/PopupPasswordTable_a40afa96', function (node) {
             var c = node.getComponent('PopupPasswordTable');
             if (c && typeof c.show === 'function') c.show();
@@ -473,9 +504,14 @@ var CommonPrefabsManager = (function () {
      * Gọi: GameController:369. Go88 trả về component hoặc undefined; chỗ gọi bỏ qua giá trị trả về.
      */
     CommonPrefabsManager.prototype.showPopupInviRoom = function (fromUser, roomInfo) {
+        cc.log('%c[BẤM] showPopupInviRoom', 'color:#0a0;font-weight:bold', '· tham số:', fromUser, roomInfo);
         var cfg = _docCauHinh();
-        // Người chơi đã bấm "Từ chối hết" thì im lặng bỏ qua — y bản gốc (dòng 748).
-        if (cfg && !cfg.IsReceiveInvite) return;
+        // Người chơi đã bấm "Từ chối hết" thì bỏ qua — y bản gốc (dòng 748). Ghi log vì đây là
+        // đường THOÁT IM LẶNG: nhìn từ ngoài giống hệt "lời mời không tới nơi".
+        if (cfg && !cfg.IsReceiveInvite) {
+            cc.warn(TAG + ' showPopupInviRoom BỎ QUA: người chơi đã tắt nhận lời mời');
+            return;
+        }
 
         // Hai chốt còn lại của bản gốc (CommonPrefabsManager.js:751-752), giữ nguyên ý:
         //   · không đủ tiền vào bàn đó thì đừng mời mọc — trừ bàn có nhiều hơn 1000 ghế
@@ -485,7 +521,12 @@ var CommonPrefabsManager = (function () {
         if (gp && roomInfo) {
             var thieuTien = (gp.gold < roomInfo.mM || gp.gold < roomInfo.b) && roomInfo.Mu < 1000;
             var vuaVaoBan = (Date.now() - (gp.timeInvite || 0)) / 1000 < 10;
-            if (thieuTien || vuaVaoBan) return;
+            if (thieuTien || vuaVaoBan) {
+                cc.warn(TAG + ' showPopupInviRoom BỎ QUA: '
+                    + (thieuTien ? 'không đủ tiền vào bàn đó (có ' + gp.gold + ', cần ' + roomInfo.mM + ')'
+                                 : 'vừa vào bàn khác trong 10 giây'));
+                return;
+            }
         }
 
         // Bản gốc GIỮ LẠI một thể hiện và gọi showInvite nhiều lần — chính popup đó xếp các lời
@@ -518,6 +559,7 @@ var CommonPrefabsManager = (function () {
      * Gọi: PlayerView:954 (bấm vào người chơi trong bàn). Chỗ gọi bỏ qua giá trị trả về.
      */
     CommonPrefabsManager.prototype.showPopupUserTableInfo = function (name, money, avatarUrl, isMine, callbackClose) {
+        cc.log('%c[BẤM] showPopupUserTableInfo', 'color:#0a0;font-weight:bold', '· tham số:', name, money, avatarUrl);
         if (void 0 === isMine) isMine = false;
         if (void 0 === callbackClose) callbackClose = null;
 
@@ -554,6 +596,7 @@ var CommonPrefabsManager = (function () {
 
     /** Gọi: HeaderUi:508 showPopupNap(tab, callback). */
     CommonPrefabsManager.prototype.showPopupNap = function (tab, callback) {
+        cc.log('%c[BẤM] showPopupNap', 'color:#0a0;font-weight:bold', '· tham số:', tab, callback);
         // Tham số `tab` của Go88 (TAB_LAST_SELECTED_OR_DEFAULT) không ánh xạ được sang
         // cc.ShopTab — bỏ qua có chủ ý, chọn tab theo cấu hình của chính Roy88.
         try {
@@ -572,6 +615,7 @@ var CommonPrefabsManager = (function () {
 
     /** Gọi: HeaderUi:515 showPopupUserInfo(tab). */
     CommonPrefabsManager.prototype.showPopupUserInfo = function (tab) {
+        cc.log('%c[BẤM] showPopupUserInfo', 'color:#0a0;font-weight:bold', '· tham số:', tab);
         try {
             cc.LobbyController.getInstance().createAccountView(cc.AccountTab.PROFILE);
         } catch (e) {
@@ -582,6 +626,7 @@ var CommonPrefabsManager = (function () {
 
     /** Gọi: HeaderUi:476 showPopupMail(). */
     CommonPrefabsManager.prototype.showPopupMail = function () {
+        cc.log('%c[BẤM] showPopupMail', 'color:#0a0;font-weight:bold');
         this._chuaBe('showPopupMail');
     };
 
@@ -591,6 +636,7 @@ var CommonPrefabsManager = (function () {
      * màn Roy88 tự lo việc đó nên ở đây không dùng tới.
      */
     CommonPrefabsManager.prototype.showPopupActivePhoneNumber = function (nodeKickHoat) {
+        cc.log('%c[BẤM] showPopupActivePhoneNumber', 'color:#0a0;font-weight:bold', '· tham số:', nodeKickHoat);
         try {
             cc.LobbyController.getInstance().createAccountView(cc.AccountTab.REG_PHONE);
         } catch (e) {
@@ -601,6 +647,7 @@ var CommonPrefabsManager = (function () {
 
     /** Gọi: HeaderUi:501 showPopupChangeUserDisplayName(caller, hideCallback). */
     CommonPrefabsManager.prototype.showPopupChangeUserDisplayName = function (caller, hideCallback) {
+        cc.log('%c[BẤM] showPopupChangeUserDisplayName', 'color:#0a0;font-weight:bold', '· tham số:', caller, hideCallback);
         this._chuaBe('showPopupChangeUserDisplayName');
     };
 
@@ -610,11 +657,13 @@ var CommonPrefabsManager = (function () {
      *    gửi tài khoản/mật khẩu sang hạ tầng Go88 đều bị cấm. Để rỗng.
      */
     CommonPrefabsManager.prototype.showPopupDangNhap = function (loginCallback, parentNode) {
+        cc.log('%c[BẤM] showPopupDangNhap', 'color:#0a0;font-weight:bold', '· tham số:', loginCallback, parentNode);
         this._chuaBe('showPopupDangNhap — đăng nhập do Roy88 lo, không dựng lại form bản gốc');
     };
 
     /** Gọi: HeaderUi:598 showPopupDangKy(loginCallback, parentNode). Lý do để rỗng: như showPopupDangNhap. */
     CommonPrefabsManager.prototype.showPopupDangKy = function (loginCallback, parentNode) {
+        cc.log('%c[BẤM] showPopupDangKy', 'color:#0a0;font-weight:bold', '· tham số:', loginCallback, parentNode);
         this._chuaBe('showPopupDangKy — đăng ký do Roy88 lo, không dựng lại form bản gốc');
     };
 
@@ -751,6 +800,7 @@ function nhanGia(onSet) {
      * đọc tiếp `.password.node.active`; thiếu là ném TypeError ngay dòng sau.
      */
     CommonPrefabsManager.prototype.showPopupBuyIn = function (maxBuyIn, minBuyIn, bet, tuHien) {
+        cc.log('%c[BẤM] showPopupBuyIn', 'color:#0a0;font-weight:bold', '· tham số:', maxBuyIn, minBuyIn, bet);
         cc.warn('[caorua] showPopupBuyIn chưa làm (Ba Cây không dùng buy-in): ' + minBuyIn + '–' + maxBuyIn);
         this.popupBuyIn = { password: { node: { active: false } }, hide: function () {} };
         return this.popupBuyIn;
@@ -762,6 +812,7 @@ function nhanGia(onSet) {
      * bấm "Tạo bàn" xong không có gì xảy ra và nút kẹt luôn vì isShowPopupDone còn true.
      */
     CommonPrefabsManager.prototype.showPopupTaoBan = function (danhSachMucCuoc) {
+        cc.log('%c[BẤM] showPopupTaoBan', 'color:#0a0;font-weight:bold', '· tham số:', danhSachMucCuoc);
         cc.warn('[caorua] showPopupTaoBan chưa làm, mức cược: ' + JSON.stringify(danhSachMucCuoc));
         nhaChotBamNut();
         cc.PopupController.getInstance().showMessage('Tạo bàn chưa mở, mời bạn chọn bàn có sẵn.');

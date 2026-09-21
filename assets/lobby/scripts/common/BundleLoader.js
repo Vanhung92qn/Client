@@ -31,6 +31,7 @@
             // ═══════════════════════════════════════════════════════════════
             this._lastUsed = {};           // bundleName → timestamp(ms) khi được dùng lần cuối
             this._activeGame = null;       // bundle game ĐANG mở → GC né, không release (tránh vỡ game)
+            this._activeDeps = [];         // deps của game đang mở → GC cũng phải né (xem gcIdleBundles)
             this._idleThreshold = 45000;   // 45s không dùng → auto release (giảm từ 120s: iOS RAM)
             this._gcInterval = 30000;      // Check GC mỗi 30s
             this._gcScheduled = false;     // Flag để tránh schedule nhiều lần
@@ -67,6 +68,9 @@
                 return;
             }
             this._activeGame = config.bundleName;   // đánh dấu game đang mở → GC né
+            // …và nhớ luôn deps của nó để GC né theo. Nhớ ở ĐÂY vì `_activeGame` chỉ giữ
+            // bundleName, còn GameBundleConfig lại tra theo gameId — không lần ngược được.
+            this._activeDeps = config.deps || [];
 
             var self = this;
             var label = config.label;
@@ -248,6 +252,17 @@
         };
 
         /**
+         * Danh sách bundle phụ thuộc của game ĐANG mở. Rỗng nếu không có game nào mở.
+         *
+         * Tra ngược từ `_activeGame` (là bundleName) về config để lấy `deps`. Không đọc thẳng
+         * biến nào khác vì `_activeGame` là nguồn sự thật duy nhất cho "đang mở game gì".
+         */
+        BundleLoader.prototype._layDepsCuaGameDangMo = function () {
+            if (!this._activeGame) return [];
+            return this._activeDeps || [];
+        };
+
+        /**
          * Garbage collect idle bundles - giải phóng bundle không dùng lâu
          * 🎯 Đây là CORE của memory management trong game production
          */
@@ -260,6 +275,19 @@
                 
                 // Game ĐANG mở → KHÔNG release (tránh free texture đang dùng → vỡ game)
                 if (bundleName === this._activeGame) continue;
+
+                // 🔴 …và cả BUNDLE PHỤ THUỘC của game đang mở.
+                //
+                // Trước bản vá này GC chỉ né đúng bundle game, nên bundle dùng chung mà game
+                // đang mở vẫn cần (cardroom cho Cào Rùa, cardgame_core cho bộ bài cũ,
+                // slots_core cho slot) bị thu hồi sau 45 giây NGỒI TRONG BÀN. Lỗi chỉ lộ ra ở
+                // game nào nạp tài nguyên THEO YÊU CẦU: Cào Rùa mở popup bằng
+                // `cc.assetManager.getBundle('cardroom')`, GC dọn xong thì hàm đó trả null và
+                // popup không mở được nữa — người chơi chỉ thấy "Chưa tải xong dữ liệu".
+                // Đo thật 2026-09-21:
+                //     [BundleLoader] GC: Releasing idle bundle "cardroom" (idle: 60s)
+                // Game nạp hết tài nguyên ngay lúc vào bàn thì không lộ, nhưng vẫn sai như nhau.
+                if (this._layDepsCuaGameDangMo().indexOf(bundleName) >= 0) continue;
 
                 // Kiểm tra bundle có thật sự tồn tại không
                 var bundle = cc.assetManager.getBundle(bundleName);
@@ -418,7 +446,7 @@
                 cc.assetManager.removeBundle(bundle);
                 delete this._bundles[bundleName];
                 delete this._lastUsed[bundleName];
-                if (this._activeGame === bundleName) this._activeGame = null;
+                if (this._activeGame === bundleName) { this._activeGame = null; this._activeDeps = []; }
                 console.log('[BundleLoader] Released (free VRAM): ' + bundleName);
             }
         };
