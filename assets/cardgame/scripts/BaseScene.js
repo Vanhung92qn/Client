@@ -140,6 +140,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 Object.defineProperty(exports, "__esModule", { value: true });
 
+// ── BẢNG TRA BÍ DANH (máy sinh — ghi-bang-tra-bi-danh.js) ──────
+// Mã dịch ngược đặt bí danh một chữ cho mỗi module. Bảng này để khỏi phải cuộn ngược.
+// KHÔNG đổi tên chúng bằng tìm-kiếm-thay-thế: đoạn mở đầu __decorate khai lại đúng
+// những chữ này làm biến cục bộ, đổi là hỏng im lặng.
+//   MessageCardGame      = MessageCardGameHandler   WSCardGameHandle     = WSCardGameHandle   GamePlayManager      = GamePlayManager
+//   CommonPrefabsManager = CommonPrefabsManager   GameConfigManager    = GameConfigManager   BroadCast            = BroadCast
+//   HeaderUi             = HeaderUi   StringUtil           = StringUtil   GameDefine           = GameDefine
+//   MusicPlayer          = MusicPlayer   NhatKy               = NhatKy   SessionDataModule    = SessionData
+// ────────────────────────────────────────────────────────────────
 var MessageCardGame = require("./MessageCardGameHandler");
 var WSCardGameHandle = require("./WSCardGameHandle");
 var GamePlayManager = require("./GamePlayManager");

@@ -47,6 +47,16 @@ var n = this && this.__extends || function() {
 Object.defineProperty(i, "__esModule", {
   value: true
 });
+// ── BẢNG TRA BÍ DANH (máy sinh — ghi-bang-tra-bi-danh.js) ──────
+// Mã dịch ngược đặt bí danh một chữ cho mỗi module. Bảng này để khỏi phải cuộn ngược.
+// KHÔNG đổi tên chúng bằng tìm-kiếm-thay-thế: đoạn mở đầu __decorate khai lại đúng
+// những chữ này làm biến cục bộ, đổi là hỏng im lặng.
+//   a = CardPopupBase   s = StringUtil   r = MessageCardGameHandler
+//   c = CommonPrefabsManager   l = GamePlayManager   h = GameConfigManager
+//   u = GameDefine   d = BaseScene   p = KtekEventHandler
+//   f = MiniGameNode   g = GameUtils   m = FavoriteGameController
+//   y = MusicPlayer
+// ────────────────────────────────────────────────────────────────
 var a = require("./CardPopupBase"),
   s = require("./StringUtil"),
   r = require("./MessageCardGameHandler"),

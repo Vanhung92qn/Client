@@ -6,6 +6,12 @@ void 0;
 Object.defineProperty(i, "__esModule", {
   value: true
 });
+// ── BẢNG TRA BÍ DANH (máy sinh — ghi-bang-tra-bi-danh.js) ──────
+// Mã dịch ngược đặt bí danh một chữ cho mỗi module. Bảng này để khỏi phải cuộn ngược.
+// KHÔNG đổi tên chúng bằng tìm-kiếm-thay-thế: đoạn mở đầu __decorate khai lại đúng
+// những chữ này làm biến cục bộ, đổi là hỏng im lặng.
+//   n = GameConfigManager   o = MessageCardGameHandler
+// ────────────────────────────────────────────────────────────────
 var n = require("./GameConfigManager"),
   o = require("./MessageCardGameHandler"),
   a = function() {

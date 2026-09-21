@@ -181,6 +181,17 @@ Object.defineProperty(i, "__esModule", {
   value: true
 });
 var r,
+// ── BẢNG TRA BÍ DANH (máy sinh — ghi-bang-tra-bi-danh.js) ──────
+// Mã dịch ngược đặt bí danh một chữ cho mỗi module. Bảng này để khỏi phải cuộn ngược.
+// KHÔNG đổi tên chúng bằng tìm-kiếm-thay-thế: đoạn mở đầu __decorate khai lại đúng
+// những chữ này làm biến cục bộ, đổi là hỏng im lặng.
+//   c = GamePlayManager   l = StringUtil   h = GameCardSprite
+//   u = BetLabel   d = PopBubbleUtil   p = GameZOrder
+//   f = GameCardSpriteType   g = ActionProgressTo   m = GameDefine
+//   y = CardGameCommonRequest   S = RemoteSprite   _ = PlayerStatusUI
+//   v = MusicPlayer   b = MessageCardGameHandler   C = CommonPrefabsManager
+//   T = GameConfigManager   E = GameUtils   I = GameController
+// ────────────────────────────────────────────────────────────────
   c = require("./GamePlayManager"),
   l = require("./StringUtil"),
   h = require("./GameCardSprite"),

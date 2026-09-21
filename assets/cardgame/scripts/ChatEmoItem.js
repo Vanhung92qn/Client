@@ -47,6 +47,12 @@ var n = this && this.__extends || function() {
 Object.defineProperty(i, "__esModule", {
   value: true
 });
+// ── BẢNG TRA BÍ DANH (máy sinh — ghi-bang-tra-bi-danh.js) ──────
+// Mã dịch ngược đặt bí danh một chữ cho mỗi module. Bảng này để khỏi phải cuộn ngược.
+// KHÔNG đổi tên chúng bằng tìm-kiếm-thay-thế: đoạn mở đầu __decorate khai lại đúng
+// những chữ này làm biến cục bộ, đổi là hỏng im lặng.
+//   a = ChatInGamePopup   s = GamePlayManager
+// ────────────────────────────────────────────────────────────────
 var a = require("./ChatInGamePopup"),
   s = require("./GamePlayManager"),
   r = cc._decorator,
