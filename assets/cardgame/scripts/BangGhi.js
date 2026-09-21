@@ -66,6 +66,31 @@ function chuanHoa(khung) {
     }
 }
 
+/**
+ * Khung RA do NGƯỜI BẤM NÚT sinh ra, không phải do client phản xạ với khung vào.
+ * Phát lại chỉ bơm được khung VÀO nên KHÔNG thể tái tạo một cú bấm — để chúng trong phép so
+ * là lần nào cũng báo thiếu, và một phép thử lúc nào cũng đỏ thì chẳng ai còn nhìn.
+ *
+ * Phân loại này lấy từ giao thức chứ không đoán:
+ *   do người bấm : 3 vào bàn · 4 rời bàn · 8 vào theo id · 300 danh sách bàn · 303/304/305 mời
+ *                  307 chơi nhanh · 308 tạo bàn · 310 làm mới tiền
+ *   client tự trả: 1 đăng nhập (ngay khi socket mở) · 5 sẵn sàng (đáp 204) · 1504 xếp bài (đáp 1500)
+ * Phần "client tự trả" mới là phần đáng gác: `1504` chính là thứ máy chủ dùng làm `DaLo` để
+ * quyết bù thưởng bộ JQK (SimmsBaCayTable.cs:612-628). Sai thứ tự lá ở đây là sai TIỀN.
+ */
+var CMD_NGUOI_BAM = [300, 303, 304, 305, 307, 308, 310];
+function laDoNguoiBam(khung) {
+    try {
+        var a = JSON.parse(khung);
+        if (!Array.isArray(a)) return false;
+        if (a[0] === 3 || a[0] === 4 || a[0] === 8) return true;   // vào/rời bàn
+        var o = a[a.length - 1];
+        return !!(o && typeof o === 'object' && CMD_NGUOI_BAM.indexOf(o.cmd) >= 0);
+    } catch (loi) {
+        return false;
+    }
+}
+
 var CHE_DO_TAT = 0;
 var CHE_DO_GHI = 1;
 var CHE_DO_PHAT = 2;
@@ -120,14 +145,26 @@ var BangGhi = {
      * Phát lại: bơm từng khung VÀO theo đúng thứ tự, chờ client lắng xuống, thu khung RA,
      * rồi so với bản ghi gốc.
      *
-     * Chờ giữa hai khung là CỐ Ý: client xử lý khung rồi mới gửi đáp, có chỗ còn qua một
-     * `runAction(delayTime)`. Bơm dồn dập thì thứ tự khung RA đảo lộn và báo lệch giả.
+     * 🔴 BƠM THEO ĐÚNG NHỊP ĐÃ GHI, không bơm dồn.
+     * Bản đầu bơm cách nhau 60ms rồi so sau 600ms. Bản ghi mẫu đầu tiên của chủ dự án
+     * (`docs/caorua-banghi-*.json`) lật tẩy ngay: client trả `cmd 1504` mãi 3,9–4,1 giây sau khi
+     * nhận `1500`, vì nó còn chạy hoạt cảnh chia bài. Bơm 60ms thì cả 31 khung vào hết trong 1,9s
+     * và phép so chốt sổ ở giây 2,5 — trước lúc client kịp trả lời. Kết quả: báo "LỆCH 2/8" mà
+     * cả 2 đều là báo động giả.
+     *
+     * Nén thời gian lại cũng không cứu được: hoạt cảnh trong client dài CỐ ĐỊNH, không nén theo.
+     * Nén 2× thì khung của ván sau sẽ tới trước khi client trả lời xong ván trước — lệch thứ tự,
+     * lại báo giả. Nên ở đây giữ nguyên nhịp thật; phát lại bản ghi 69 giây thì tốn 69 giây.
+     * Một phép thử chạy vài phút mà tin được vẫn hơn một phép thử chạy 3 giây mà phải đoán.
      */
-    phatLai: function (banGhiGoc, khiXong) {
+    phatLai: function (banGhiGoc, khiXong, tuyChon) {
         if (!socketGia) {
             cc.error('[BangGhi] chưa vào game — mở game rồi hãy phát lại');
             return;
         }
+        tuyChon = tuyChon || {};
+        // Chờ lắng sau khung cuối phải dài hơn độ trễ chậm nhất của client (đo được ~4,1s).
+        var choLang = tuyChon.choLang != null ? tuyChon.choLang : 6000;
         cheDo = CHE_DO_PHAT;
         raThuDuoc = [];
 
@@ -136,7 +173,7 @@ var BangGhi = {
 
         function buoc() {
             if (i >= dsVao.length) {
-                setTimeout(function () { BangGhi._soSanh(banGhiGoc, khiXong); }, 600);
+                setTimeout(function () { BangGhi._soSanh(banGhiGoc, khiXong); }, choLang);
                 return;
             }
             var k = dsVao[i++];
@@ -145,20 +182,41 @@ var BangGhi = {
             } catch (loi) {
                 cc.error('[BangGhi] khung %d làm client ném lỗi: %s', i, loi && loi.message);
             }
-            setTimeout(buoc, 60);
+            if (i % 10 === 0) cc.log('[BangGhi] … %d/%d khung vào', i, dsVao.length);
+            // Khoảng cách THẬT giữa hai khung liên tiếp. Bản ghi cũ không có `t` thì lùi về 60ms.
+            var truoc = dsVao[i - 1];
+            var sau = dsVao[i];
+            var cach = (sau && sau.t && truoc && truoc.t) ? (sau.t - truoc.t) : 60;
+            if (!(cach >= 0)) cach = 60;
+            setTimeout(buoc, cach);
         }
 
-        cc.log('%c[BangGhi] PHÁT LẠI %d khung vào…', 'color:#06c;font-weight:bold', dsVao.length);
+        var tong = dsVao.length && dsVao[dsVao.length - 1].t && dsVao[0].t
+            ? Math.round((dsVao[dsVao.length - 1].t - dsVao[0].t) / 1000) : 0;
+        cc.log('%c[BangGhi] PHÁT LẠI %d khung vào — theo nhịp thật, ~%d giây…',
+            'color:#06c;font-weight:bold', dsVao.length, tong + Math.round(choLang / 1000));
         buoc();
     },
 
     _soSanh: function (banGhiGoc, khiXong) {
         cheDo = CHE_DO_TAT;
 
-        var mongDoi = banGhiGoc
-            .filter(function (x) { return x.huong === 'ra'; })
+        var raGoc = banGhiGoc.filter(function (x) { return x.huong === 'ra'; });
+        var boQua = raGoc.filter(function (x) { return laDoNguoiBam(x.khung); });
+
+        var mongDoi = raGoc
+            .filter(function (x) { return !laDoNguoiBam(x.khung); })
             .map(function (x) { return chuanHoa(x.khung); });
-        var thucTe = raThuDuoc.map(chuanHoa);
+        var thucTe = raThuDuoc
+            .filter(function (k) { return !laDoNguoiBam(k); })
+            .map(chuanHoa);
+
+        // Nói rõ đã bỏ gì — một bộ thử âm thầm cắt bớt phạm vi thì đọc như đã soát hết.
+        if (boQua.length) {
+            cc.log('[BangGhi] bỏ %d khung do NGƯỜI BẤM (phát lại không tái tạo được cú bấm): %s',
+                boQua.length,
+                boQua.map(function (x) { return x.khung.slice(0, 48); }).join(' · '));
+        }
 
         var lech = [];
         var n = Math.max(mongDoi.length, thucTe.length);
