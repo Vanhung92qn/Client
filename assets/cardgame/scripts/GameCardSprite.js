@@ -1,9 +1,9 @@
 var t = require,
   e = module,
-  i = exports;
+  moduleExports = exports;
 "use strict";
 void 0;
-var n = this && this.__extends || function() {
+var __extends = this && this.__extends || function() {
     var t = function(e, i) {
       return (t = Object.setPrototypeOf || {
           __proto__: []
@@ -26,7 +26,7 @@ var n = this && this.__extends || function() {
       e.prototype = null === i ? Object.create(i) : (n.prototype = i.prototype, new n());
     };
   }(),
-  o = this && this.__decorate || function(t, e, i, n) {
+  __decorate = this && this.__decorate || function(t, e, i, n) {
     var o,
       a = arguments.length,
       s = a < 3 ? e : null === n ? n = Object.getOwnPropertyDescriptor(e, i) : n;
@@ -44,7 +44,7 @@ var n = this && this.__extends || function() {
     }
     return s;
   };
-Object.defineProperty(i, "__esModule", {
+Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
 var GamePlayManager = require("./GamePlayManager"),
@@ -52,66 +52,66 @@ var GamePlayManager = require("./GamePlayManager"),
   GameCardSpriteType = require("./GameCardSpriteType"),
   XiToRequestHandler = require("./XiToRequestHandler"),
   GameDefine = require("./GameDefine"),
-  h = cc._decorator,
-  u = h.ccclass,
-  d = h.property,
-  p = function(t) {
-    function e() {
-      var e = null !== t && t.apply(this, arguments) || this;
-      e.cardSprite = null;
-      e.prefabSparklingFx = null;
-      e.S = -1;
-      e.N = -1;
-      e.type = -1;
-      e.cardName = "";
-      e.serverCode = -1;
-      e.isFading = false;
-      e.isSelected = false;
-      e.isAllowClick = false;
-      e.isShowSelected = true;
-      e.isCardBack = true;
-      e.clickCallback = null;
-      e.firstSelectPosition = null;
-      e.sparklingFx = null;
-      e.cardSpriteAtlas = null;
-      e.cardSpriteEffect = null;
-      e.emptyCardMauBinh = null;
-      e.tempTouchEmptyCardMauBinh = null;
-      e.originalPosMauBinh = null;
-      e.indexChildMauBinh = 0;
-      e.cardSize = cc.Size.ZERO;
-      e.index = 0;
-      e.isBlackFace = false;
-      e.isInBottomMauBinh = false;
-      e.isRotationY = false;
-      e.isRotationX = false;
-      e.delayTime = 0;
-      e.rotateTime = 0;
-      e.rotaionStart = 0;
-      e.rotationByValue = 0;
-      e.countTime = 0;
-      return e;
+  ccDecorator = cc._decorator,
+  ccclass = ccDecorator.ccclass,
+  property = ccDecorator.property,
+  GameCardSprite = function(Base) {
+    function GameCardSprite() {
+      var _this = null !== Base && Base.apply(this, arguments) || this;
+      _this.cardSprite = null;
+      _this.prefabSparklingFx = null;
+      _this.S = -1;
+      _this.N = -1;
+      _this.type = -1;
+      _this.cardName = "";
+      _this.serverCode = -1;
+      _this.isFading = false;
+      _this.isSelected = false;
+      _this.isAllowClick = false;
+      _this.isShowSelected = true;
+      _this.isCardBack = true;
+      _this.clickCallback = null;
+      _this.firstSelectPosition = null;
+      _this.sparklingFx = null;
+      _this.cardSpriteAtlas = null;
+      _this.cardSpriteEffect = null;
+      _this.emptyCardMauBinh = null;
+      _this.tempTouchEmptyCardMauBinh = null;
+      _this.originalPosMauBinh = null;
+      _this.indexChildMauBinh = 0;
+      _this.cardSize = cc.Size.ZERO;
+      _this.index = 0;
+      _this.isBlackFace = false;
+      _this.isInBottomMauBinh = false;
+      _this.isRotationY = false;
+      _this.isRotationX = false;
+      _this.delayTime = 0;
+      _this.rotateTime = 0;
+      _this.rotaionStart = 0;
+      _this.rotationByValue = 0;
+      _this.countTime = 0;
+      return _this;
     }
-    var i;
-    n(e, t);
-    i = e;
-    e.prototype.onLoad = function() {};
-    e.prototype.start = function() {};
-    e.prototype.init = function(t) {
+    var GameCardSpriteClass;
+    __extends(GameCardSprite, Base);
+    GameCardSpriteClass = GameCardSprite;
+    GameCardSprite.prototype.onLoad = function() {};
+    GameCardSprite.prototype.start = function() {};
+    GameCardSprite.prototype.init = function(type) {
       this.gameID = GamePlayManager.default.getInstance().gameID;
-      this.setType(t);
+      this.setType(type);
     };
-    e.prototype.initAndHide = function(t) {
+    GameCardSprite.prototype.initAndHide = function(type) {
       this.gameID = GamePlayManager.default.getInstance().gameID;
-      this.type = t;
-      this.type = t;
+      this.type = type;
+      this.type = type;
       this.node.stopAllActions();
       this.cardSprite.spriteFrame = this.cardSpriteAtlas.getSpriteFrame("icCardback");
       this.isCardBack = true;
       this.node.scale = this.getScaleWithType(this.type);
     };
-    e.prototype.setType = function(t) {
-      this.type = t;
+    GameCardSprite.prototype.setType = function(type) {
+      this.type = type;
       if (this.type == GameCardSpriteType.default.TypeHIDE) {
         this.node.stopAllActions();
         this.cardSprite.spriteFrame = this.cardSpriteAtlas.getSpriteFrame("icCardback");
@@ -119,214 +119,214 @@ var GamePlayManager = require("./GamePlayManager"),
       }
       this.node.scale = this.getScaleWithType(this.type);
     };
-    e.prototype.setTypeHIDENoScale = function() {
+    GameCardSprite.prototype.setTypeHIDENoScale = function() {
       this.type = GameCardSpriteType.default.TypeHIDE;
       this.node.stopAllActions();
       this.cardSprite.spriteFrame = this.cardSpriteAtlas.getSpriteFrame("icCardback");
       this.isCardBack = true;
     };
-    e.prototype.getScaleWithType = function(t) {
-      var e = 1;
-      switch (t === GameCardSpriteType.default.TypeBIG ? e = .65 : t === GameCardSpriteType.default.TypeMEDIUM ? e = .6 : t === GameCardSpriteType.default.TypeSMALL ? e = .5 : t === GameCardSpriteType
-        .default.TypeHIDE && (e = .5), this.gameID) {
+    GameCardSprite.prototype.getScaleWithType = function(type) {
+      var scale = 1;
+      switch (type === GameCardSpriteType.default.TypeBIG ? scale = .65 : type === GameCardSpriteType.default.TypeMEDIUM ? scale = .6 : type === GameCardSpriteType.default.TypeSMALL ? scale = .5 : type === GameCardSpriteType
+        .default.TypeHIDE && (scale = .5), this.gameID) {
         case MessageCardGameHandler.GAME.TIENLEN:
           break;
         case MessageCardGameHandler.GAME.POKER:
-          t === GameCardSpriteType.default.TypeSMALL ? e = .62 : t === GameCardSpriteType.default.TypeHIDE && (e = .62);
+          type === GameCardSpriteType.default.TypeSMALL ? scale = .62 : type === GameCardSpriteType.default.TypeHIDE && (scale = .62);
           break;
         case MessageCardGameHandler.GAME.XITO:
-          t === GameCardSpriteType.default.TypeSMALL ? e = .6 : t === GameCardSpriteType.default.TypeHIDE && (e = .6);
+          type === GameCardSpriteType.default.TypeSMALL ? scale = .6 : type === GameCardSpriteType.default.TypeHIDE && (scale = .6);
           break;
         case MessageCardGameHandler.GAME.BINH:
-          t === GameCardSpriteType.default.TypeBIG ? e = 1 : t !== GameCardSpriteType.default.TypeHIDE && t !== GameCardSpriteType.default.TypeMEDIUM || (e = .65);
+          type === GameCardSpriteType.default.TypeBIG ? scale = 1 : type !== GameCardSpriteType.default.TypeHIDE && type !== GameCardSpriteType.default.TypeMEDIUM || (scale = .65);
           break;
         case MessageCardGameHandler.GAME.CATTE:
-          t === GameCardSpriteType.default.TypeBIG ? e = 1 : t !== GameCardSpriteType.default.TypeHIDE && t !== GameCardSpriteType.default.TypeMEDIUM || (e = .43);
+          type === GameCardSpriteType.default.TypeBIG ? scale = 1 : type !== GameCardSpriteType.default.TypeHIDE && type !== GameCardSpriteType.default.TypeMEDIUM || (scale = .43);
           break;
         case GameDefine.GameID.LIENG:
-          t === GameCardSpriteType.default.TypeBIG ? e = 1.5 : t === GameCardSpriteType.default.TypeMEDIUM ? e = 1 : t === GameCardSpriteType.default.TypeSMALL ? e = .8 : t === GameCardSpriteType.default
-            .TypeHIDE && (e = .5);
+          type === GameCardSpriteType.default.TypeBIG ? scale = 1.5 : type === GameCardSpriteType.default.TypeMEDIUM ? scale = 1 : type === GameCardSpriteType.default.TypeSMALL ? scale = .8 : type === GameCardSpriteType.default
+            .TypeHIDE && (scale = .5);
           break;
         case GameDefine.GameID.BACAY:
-          t === GameCardSpriteType.default.TypeBIG ? e = .78 : t === GameCardSpriteType.default.TypeMEDIUM && (e = .65);
+          type === GameCardSpriteType.default.TypeBIG ? scale = .78 : type === GameCardSpriteType.default.TypeMEDIUM && (scale = .65);
       }
-      return e;
+      return scale;
     };
-    e.prototype.setTextureWithCode = function(t, e) {
-      this.decodeCard(t, e);
-      var i = this.getResourceName(),
-        n = this.cardSpriteAtlas.getSpriteFrame(i);
-      if (!(null === n || void 0 === n)) {
-        this.cardSprite.spriteFrame = n;
+    GameCardSprite.prototype.setTextureWithCode = function(serverCode, gameID) {
+      this.decodeCard(serverCode, gameID);
+      var resourceName = this.getResourceName(),
+        spriteFrame = this.cardSpriteAtlas.getSpriteFrame(resourceName);
+      if (!(null === spriteFrame || void 0 === spriteFrame)) {
+        this.cardSprite.spriteFrame = spriteFrame;
         this.isCardBack = false;
       }
     };
-    e.prototype.setTextureWithCodeHaveCheck = function(t, e) {
-      if (t >= 0) {
-        this.setTextureWithCode(t, e);
+    GameCardSprite.prototype.setTextureWithCodeHaveCheck = function(serverCode, gameID) {
+      if (serverCode >= 0) {
+        this.setTextureWithCode(serverCode, gameID);
       } else {
         this.setTypeHIDENoScale();
         this.setBlackFace(true);
-        this.serverCode = t;
+        this.serverCode = serverCode;
       }
     };
-    e.prototype.setServerCode = function(t) {
-      this.decodeCard(t);
+    GameCardSprite.prototype.setServerCode = function(serverCode) {
+      this.decodeCard(serverCode);
     };
-    e.prototype.decodeCard = function(t, e) {
-      if (void 0 === e) {
-        e = -1;
+    GameCardSprite.prototype.decodeCard = function(serverCode, gameID) {
+      if (void 0 === gameID) {
+        gameID = -1;
       }
-      this.serverCode = t;
-      if (-1 === e) {
-        e = this.gameID;
+      this.serverCode = serverCode;
+      if (-1 === gameID) {
+        gameID = this.gameID;
       }
-      this.S = t % 4 + 1;
-      this.N = Math.floor(t / 4) + 1;
-      if (1 === this.N && e != MessageCardGameHandler.GAME.LIENG) {
+      this.S = serverCode % 4 + 1;
+      this.N = Math.floor(serverCode / 4) + 1;
+      if (1 === this.N && gameID != MessageCardGameHandler.GAME.LIENG) {
         this.N = 14;
       }
       if (0 === this.N && MessageCardGameHandler.GAME.LIENG) {
         this.N = 1;
       }
-      if (2 === this.N && e !== MessageCardGameHandler.GAME.BINH && e !== MessageCardGameHandler.GAME.POKER && e !== MessageCardGameHandler.GAME.BACAY && e !== MessageCardGameHandler.GAME.BLACK_JACK && e != MessageCardGameHandler.GAME.LIENG &&
-        e != MessageCardGameHandler.GAME.CATTE) {
+      if (2 === this.N && gameID !== MessageCardGameHandler.GAME.BINH && gameID !== MessageCardGameHandler.GAME.POKER && gameID !== MessageCardGameHandler.GAME.BACAY && gameID !== MessageCardGameHandler.GAME.BLACK_JACK && gameID != MessageCardGameHandler.GAME.LIENG &&
+        gameID != MessageCardGameHandler.GAME.CATTE) {
         this.N = 15;
       }
     };
-    e.prototype.encodeCard = function(t) {
-      if (void 0 === t) {
-        t = -1;
+    GameCardSprite.prototype.encodeCard = function(gameID) {
+      if (void 0 === gameID) {
+        gameID = -1;
       }
-      if (-1 === t) {
-        t = this.gameID;
+      if (-1 === gameID) {
+        gameID = this.gameID;
       }
-      return t === MessageCardGameHandler.GAME.TIENLEN ? 13 * (this.S - 1) + this.N - 2 : 13 * (this.S - 1) + this.N - 1;
+      return gameID === MessageCardGameHandler.GAME.TIENLEN ? 13 * (this.S - 1) + this.N - 2 : 13 * (this.S - 1) + this.N - 1;
     };
-    e.prototype.getResourceName = function() {
-      var t = 0;
-      return (t = 15 == this.N ? 2 : 14 == this.N ? 1 : this.N) > 0 ? (this.cardName = "icCard" + t.toString() + " " + this
-        .getSuitInVietnamese(), "icCard" + t.toString() + this.getSuitInVietnamese()) : "icCardback";
+    GameCardSprite.prototype.getResourceName = function() {
+      var resourceRank = 0;
+      return (resourceRank = 15 == this.N ? 2 : 14 == this.N ? 1 : this.N) > 0 ? (this.cardName = "icCard" + resourceRank.toString() + " " + this
+        .getSuitInVietnamese(), "icCard" + resourceRank.toString() + this.getSuitInVietnamese()) : "icCardback";
     };
-    e.prototype.getSuitInVietnamese = function() {
+    GameCardSprite.prototype.getSuitInVietnamese = function() {
       return 1 === this.S ? "D" : 2 === this.S ? "C" : 3 === this.S ? "B" : 4 === this.S ? "A" : "-1";
     };
-    e.prototype.getNuocInVietnamese = function() {
+    GameCardSprite.prototype.getNuocInVietnamese = function() {
       return 2 === this.N ? "2" : 14 === this.N ? "A" : 13 === this.N ? "K" : 12 === this.N ? "Q" : 11 === this.N ? "J" : this.N
       .toString();
     };
-    e.prototype.getChatInVietnamese = function() {
+    GameCardSprite.prototype.getChatInVietnamese = function() {
       return 1 === this.S ? "b\xedch" : 2 === this.S ? "chu\u1ed3n" : 3 === this.S ? "r\xf4" : 4 === this.S ? "c\u01a1" : "-1";
     };
-    e.prototype.getCardNameCatte = function() {
+    GameCardSprite.prototype.getCardNameCatte = function() {
       return this.serverCode >= 0 ? this.getNuocInVietnamese() + " " + this.getChatInVietnamese() : "Thi\u1ec7p";
     };
-    e.prototype.getSuit = function() {
+    GameCardSprite.prototype.getSuit = function() {
       return this.S;
     };
-    e.prototype.initSparkles = function() {
+    GameCardSprite.prototype.initSparkles = function() {
       this.sparklingFx = cc.instantiate(this.prefabSparklingFx);
       this.sparklingFx.parent = this.node;
       this.sparklingFx.position = new cc.Vec2(0, 0);
       this.sparklingFx.active = false;
     };
-    e.prototype.sparkles = function() {
-      var t = cc.sequence(cc.fadeTo(.3, 150), cc.fadeTo(.3, 255));
-      this.sparklingFx.runAction(cc.repeatForever(t));
+    GameCardSprite.prototype.sparkles = function() {
+      var blinkAction = cc.sequence(cc.fadeTo(.3, 150), cc.fadeTo(.3, 255));
+      this.sparklingFx.runAction(cc.repeatForever(blinkAction));
     };
-    e.prototype.stopSparkling = function() {
+    GameCardSprite.prototype.stopSparkling = function() {
       if (null !== this.sparklingFx && void 0 !== this.sparklingFx) {
         if (!(true !== this.sparklingFx.active)) {
           this.sparklingFx.active = false;
         }
       }
     };
-    e.prototype.runActionFlip = function() {
-      var t = this,
-        e = this.node.scaleX,
-        i = this.node.scaleY;
-      this.node.runAction(cc.sequence(cc.scaleTo(.15, 0, i), cc.callFunc(function() {
-        t.setTextureWithCode(t.serverCode, -1);
-      }), cc.scaleTo(.15, e, i)));
+    GameCardSprite.prototype.runActionFlip = function() {
+      var _this = this,
+        scaleX = this.node.scaleX,
+        scaleY = this.node.scaleY;
+      this.node.runAction(cc.sequence(cc.scaleTo(.15, 0, scaleY), cc.callFunc(function() {
+        _this.setTextureWithCode(_this.serverCode, -1);
+      }), cc.scaleTo(.15, scaleX, scaleY)));
     };
-    e.prototype.runActionFlipToHideAnim = function() {
-      var t = this,
-        e = this.node.scaleX,
-        i = this.node.scaleY;
-      this.node.runAction(cc.sequence(cc.scaleTo(.15, 0, i), cc.callFunc(function() {
-        t.type = GameCardSpriteType.default.TypeHIDE;
-        t.cardSprite.spriteFrame = t.cardSpriteAtlas.getSpriteFrame("icCardback");
-        t.isCardBack = true;
-      }), cc.scaleTo(.15, e, i)));
+    GameCardSprite.prototype.runActionFlipToHideAnim = function() {
+      var _this = this,
+        scaleX = this.node.scaleX,
+        scaleY = this.node.scaleY;
+      this.node.runAction(cc.sequence(cc.scaleTo(.15, 0, scaleY), cc.callFunc(function() {
+        _this.type = GameCardSpriteType.default.TypeHIDE;
+        _this.cardSprite.spriteFrame = _this.cardSpriteAtlas.getSpriteFrame("icCardback");
+        _this.isCardBack = true;
+      }), cc.scaleTo(.15, scaleX, scaleY)));
     };
-    e.prototype.runActionFlipToHide = function(t) {
-      var e = this;
-      this.cardSprite.node.runAction(cc.sequence(cc.delayTime(t), cc.callFunc(function() {
-        e.runActionFlipToHideAnim();
+    GameCardSprite.prototype.runActionFlipToHide = function(delay) {
+      var _this = this;
+      this.cardSprite.node.runAction(cc.sequence(cc.delayTime(delay), cc.callFunc(function() {
+        _this.runActionFlipToHideAnim();
       })));
     };
-    e.prototype.runActionFlip3D = function() {
+    GameCardSprite.prototype.runActionFlip3D = function() {
       this.setTextureWithCode(this.serverCode, -1);
       this.node.opacity = 0;
-      var t = cc.instantiate(this.node);
-      t.getComponent(i).init(GameCardSpriteType.default.TypeHIDE);
-      t.parent = this.node;
-      t.position = cc.Vec2.ZERO;
-      t.scale = 1;
-      t.runAction(cc.rotateTo(1.5, -90));
+      var backCardNode = cc.instantiate(this.node);
+      backCardNode.getComponent(GameCardSpriteClass).init(GameCardSpriteType.default.TypeHIDE);
+      backCardNode.parent = this.node;
+      backCardNode.position = cc.Vec2.ZERO;
+      backCardNode.scale = 1;
+      backCardNode.runAction(cc.rotateTo(1.5, -90));
     };
-    e.prototype.runActionFlip2 = function(t, e) {
-      var i = this;
-      if (void 0 === t && (t = 0), void 0 === e && (e = null), 0 != this.isCardBack) {
+    GameCardSprite.prototype.runActionFlip2 = function(delay, onDone) {
+      var _this = this;
+      if (void 0 === delay && (delay = 0), void 0 === onDone && (onDone = null), 0 != this.isCardBack) {
         this.isCardBack = false;
-        var n = this.node.scale,
-          o = cc.scaleTo(.15, 0, 1.2 * n).easing(cc.easeSineInOut()),
-          a = cc.skewTo(.15, 10, 0).easing(cc.easeSineOut()),
-          s = cc.scaleTo(.15, n, n).easing(cc.easeSineInOut()),
-          r = cc.skewTo(.15, 0, 0).easing(cc.easeSineOut());
-        this.node.runAction(cc.sequence(cc.delayTime(t), cc.spawn(o, a), cc.callFunc(function() {
-          i.setTextureWithCode(i.serverCode, -1);
-        }), cc.spawn(s, r), cc.callFunc(function() {
-          if (e) {
-            e();
+        var scale = this.node.scale,
+          shrinkAction = cc.scaleTo(.15, 0, 1.2 * scale).easing(cc.easeSineInOut()),
+          skewAction = cc.skewTo(.15, 10, 0).easing(cc.easeSineOut()),
+          restoreScaleAction = cc.scaleTo(.15, scale, scale).easing(cc.easeSineInOut()),
+          restoreSkewAction = cc.skewTo(.15, 0, 0).easing(cc.easeSineOut());
+        this.node.runAction(cc.sequence(cc.delayTime(delay), cc.spawn(shrinkAction, skewAction), cc.callFunc(function() {
+          _this.setTextureWithCode(_this.serverCode, -1);
+        }), cc.spawn(restoreScaleAction, restoreSkewAction), cc.callFunc(function() {
+          if (onDone) {
+            onDone();
           }
         })));
       }
     };
-    e.prototype.runActionFlipCloseCard2 = function(t) {
-      var e = this;
-      if (void 0 === t && (t = 0), !this.isCardBack) {
-        var i = this.node.scale,
-          n = cc.scaleTo(.15, 0, 1.2 * i).easing(cc.easeSineInOut()),
-          o = cc.skewTo(.15, 10, 0).easing(cc.easeSineOut()),
-          a = cc.scaleTo(.15, i, i).easing(cc.easeSineInOut()),
-          s = cc.skewTo(.15, 0, 0).easing(cc.easeSineOut());
-        this.node.runAction(cc.sequence(cc.delayTime(t), cc.spawn(n, o), cc.callFunc(function() {
-          e.cardSprite.spriteFrame = e.cardSpriteAtlas.getSpriteFrame("icCardback");
-          e.isCardBack = true;
-        }), cc.spawn(a, s), cc.callFunc(function() {})));
+    GameCardSprite.prototype.runActionFlipCloseCard2 = function(delay) {
+      var _this = this;
+      if (void 0 === delay && (delay = 0), !this.isCardBack) {
+        var scale = this.node.scale,
+          shrinkAction = cc.scaleTo(.15, 0, 1.2 * scale).easing(cc.easeSineInOut()),
+          skewAction = cc.skewTo(.15, 10, 0).easing(cc.easeSineOut()),
+          restoreScaleAction = cc.scaleTo(.15, scale, scale).easing(cc.easeSineInOut()),
+          restoreSkewAction = cc.skewTo(.15, 0, 0).easing(cc.easeSineOut());
+        this.node.runAction(cc.sequence(cc.delayTime(delay), cc.spawn(shrinkAction, skewAction), cc.callFunc(function() {
+          _this.cardSprite.spriteFrame = _this.cardSpriteAtlas.getSpriteFrame("icCardback");
+          _this.isCardBack = true;
+        }), cc.spawn(restoreScaleAction, restoreSkewAction), cc.callFunc(function() {})));
       }
     };
-    e.prototype.chonLaBaiTay = function() {
+    GameCardSprite.prototype.chonLaBaiTay = function() {
       XiToRequestHandler.default.getInstance().sendChonLaBaiTay(this.serverCode);
     };
-    e.prototype.isInArray = function(t) {
-      for (var e = 0; e < t.length; ++e) {
-        if (t[e].serverCode === this.serverCode) {
+    GameCardSprite.prototype.isInArray = function(cardList) {
+      for (var index = 0; index < cardList.length; ++index) {
+        if (cardList[index].serverCode === this.serverCode) {
           return true;
         }
       }
       return false;
     };
-    e.prototype.Rotationby = function(t, e, i, n) {
-      if (void 0 === n) {
-        n = true;
+    GameCardSprite.prototype.Rotationby = function(delay, rotateTime, rotationByValue, isRotationY) {
+      if (void 0 === isRotationY) {
+        isRotationY = true;
       }
       this.node.is3DNode = true;
-      this.delayTime = t;
-      this.rotateTime = e;
-      this.rotationByValue = i;
-      if (n) {
+      this.delayTime = delay;
+      this.rotateTime = rotateTime;
+      this.rotationByValue = rotationByValue;
+      if (isRotationY) {
         this.isRotationY = true;
         this.isRotationX = false;
         this.rotaionStart = this.node.eulerAngles.y;
@@ -338,15 +338,15 @@ var GamePlayManager = require("./GamePlayManager"),
       }
       this.countTime = 0;
     };
-    e.prototype.update = function(t) {
+    GameCardSprite.prototype.update = function(dt) {
       if (this.isRotationY || this.isRotationX) {
         if (this.delayTime > 0) {
-          this.delayTime -= t;
+          this.delayTime -= dt;
           if (this.delayTime < 0) {
             this.countTime = Math.abs(this.delayTime);
           }
         } else {
-          this.countTime += t;
+          this.countTime += dt;
           if (this.isRotationY) {
             this.node.eulerAngles = new cc.Vec3(0, this.rotaionStart + this.countTime / this.rotateTime * this.rotationByValue, 0);
             if (this.cardSpriteEffect.active && this.countTime >= this.rotateTime / 2) {
@@ -368,25 +368,25 @@ var GamePlayManager = require("./GamePlayManager"),
         }
       }
     };
-    e.prototype.setColor = function(t) {
-      this.cardSprite.node.color = t;
+    GameCardSprite.prototype.setColor = function(color) {
+      this.cardSprite.node.color = color;
     };
-    e.prototype.setBlackFace = function(t) {
-      if (void 0 === t) {
-        t = true;
+    GameCardSprite.prototype.setBlackFace = function(isBlackFace) {
+      if (void 0 === isBlackFace) {
+        isBlackFace = true;
       }
-      this.isBlackFace = t;
-      if (t) {
+      this.isBlackFace = isBlackFace;
+      if (isBlackFace) {
         this.setColor(cc.color(130, 130, 130));
       } else {
         this.setColor(cc.color(255, 255, 255));
       }
     };
-    e.prototype.checkTouchInThis = function(t, e) {
-      return !(t > this.node.position.x + this.node.width / 2 || t < this.node.position.x - this.node.width / 2 || e > this.node.position
-        .y + this.node.height / 2 || e < this.node.position.y - this.node.height / 2);
+    GameCardSprite.prototype.checkTouchInThis = function(x, y) {
+      return !(x > this.node.position.x + this.node.width / 2 || x < this.node.position.x - this.node.width / 2 || y > this.node.position
+        .y + this.node.height / 2 || y < this.node.position.y - this.node.height / 2);
     };
-    e.prototype.reset = function() {
+    GameCardSprite.prototype.reset = function() {
       this.serverCode = -1;
       this.N = -1;
       this.S = -1;
@@ -401,7 +401,7 @@ var GamePlayManager = require("./GamePlayManager"),
       this.node.opacity = 255;
       this.node.scale = 1;
     };
-    e.prototype.resetCattle = function() {
+    GameCardSprite.prototype.resetCattle = function() {
       this.serverCode = -1;
       this.N = -1;
       this.S = -1;
@@ -411,61 +411,61 @@ var GamePlayManager = require("./GamePlayManager"),
       this.node.stopAllActions();
       this.node.opacity = 255;
     };
-    e.prototype.setHighLight = function(t) {
+    GameCardSprite.prototype.setHighLight = function(isHighLight) {
       if (null != this.sparklingFx) {
-        this.sparklingFx.active = t;
-        if (t) {
+        this.sparklingFx.active = isHighLight;
+        if (isHighLight) {
           this.sparkles();
         }
       }
     };
-    e.prototype.setScale = function(t) {
+    GameCardSprite.prototype.setScale = function(scale) {
       if (null != this.sparklingFx) {
-        this.sparklingFx.scale = t;
+        this.sparklingFx.scale = scale;
       }
-      this.setContentSize(new cc.Size(this.cardSize.width * t, this.cardSize.height * t));
+      this.setContentSize(new cc.Size(this.cardSize.width * scale, this.cardSize.height * scale));
     };
-    e.prototype.setContentSize = function(t) {
+    GameCardSprite.prototype.setContentSize = function(size) {
       this.cardSprite.node.setScale(1);
       this.node.setScale(1);
-      this.node.setContentSize(t.width, t.height);
-      this.cardSprite.node.setContentSize(t.width, t.height);
+      this.node.setContentSize(size.width, size.height);
+      this.cardSprite.node.setContentSize(size.width, size.height);
     };
-    e.prototype.enableTouch = function(t, e) {
-      if (void 0 === t) {
-        t = null;
+    GameCardSprite.prototype.enableTouch = function(onDragOut, allowHorizontalDrag) {
+      if (void 0 === onDragOut) {
+        onDragOut = null;
       }
-      if (void 0 === e) {
-        e = false;
+      if (void 0 === allowHorizontalDrag) {
+        allowHorizontalDrag = false;
       }
       if (!(GamePlayManager.default.getInstance().gameID != GameDefine.GameID.LIENG && GamePlayManager.default.getInstance().gameID != GameDefine.GameID.BACAY)) {
-        this.node.on(cc.Node.EventType.TOUCH_MOVE, function(i) {
+        this.node.on(cc.Node.EventType.TOUCH_MOVE, function(touchEvent) {
           if (!this.isFading) {
             if (this.node.y >= .85 * this.node.height || this.node.y <= -this.node.height / 2 || this.node.x >= .5 * this.node
               .width || this.node.x <= -this.node.width / 2) {
-              if (null != t) {
-                t(this);
+              if (null != onDragOut) {
+                onDragOut(this);
               }
               this.fadeOut(.5);
             } else {
-              this.node.y += i.getDelta().y;
-              if (e) {
-                this.node.x += i.getDelta().x;
+              this.node.y += touchEvent.getDelta().y;
+              if (allowHorizontalDrag) {
+                this.node.x += touchEvent.getDelta().x;
               }
             }
           }
         }.bind(this));
-        this.node.on(cc.Node.EventType.TOUCH_END, function(i) {
+        this.node.on(cc.Node.EventType.TOUCH_END, function(touchEvent) {
           if (!this.isFading) {
             if (this.node.y >= .85 * this.node.height || this.node.y <= -this.node.height / 2) {
-              if (null != t) {
-                t(this);
+              if (null != onDragOut) {
+                onDragOut(this);
               }
               this.fadeOut(.5);
             } else {
-              if (e && (this.node.x >= .5 * this.node.width || this.node.x <= -this.node.width / 2)) {
-                if (null != t) {
-                  t(this);
+              if (allowHorizontalDrag && (this.node.x >= .5 * this.node.width || this.node.x <= -this.node.width / 2)) {
+                if (null != onDragOut) {
+                  onDragOut(this);
                 }
                 this.fadeOut(.5);
               }
@@ -474,48 +474,48 @@ var GamePlayManager = require("./GamePlayManager"),
         }.bind(this));
       }
     };
-    e.prototype.fadeOut = function(t) {
+    GameCardSprite.prototype.fadeOut = function(duration) {
       this.isFading = true;
-      this.node.runAction(cc.sequence(cc.fadeOut(t), cc.callFunc(function() {
+      this.node.runAction(cc.sequence(cc.fadeOut(duration), cc.callFunc(function() {
         this.node.active = false;
         this.node.opacity = 255;
         this.isFading = false;
       }.bind(this))));
     };
-    e.prototype.setClickEnabled = function(t, e, i) {
-      if (void 0 === e) {
-        e = true;
+    GameCardSprite.prototype.setClickEnabled = function(isAllowClick, isShowSelected, clickCallback) {
+      if (void 0 === isShowSelected) {
+        isShowSelected = true;
       }
-      if (void 0 === i) {
-        i = null;
+      if (void 0 === clickCallback) {
+        clickCallback = null;
       }
-      this.isAllowClick = t;
-      this.clickCallback = i;
-      this.isShowSelected = e;
+      this.isAllowClick = isAllowClick;
+      this.clickCallback = clickCallback;
+      this.isShowSelected = isShowSelected;
     };
-    e.prototype.setCardSelected = function(t, e) {
-      if (void 0 === e && (e = true), !(this.isSelected == t || this.isBlackFace && t)) {
-        if (t && (this.firstSelectPosition || (this.firstSelectPosition = this.node.position)), this.isSelected = t, this.node
-          .stopAllActions(), e) {
+    GameCardSprite.prototype.setCardSelected = function(isSelected, isAnimated) {
+      if (void 0 === isAnimated && (isAnimated = true), !(this.isSelected == isSelected || this.isBlackFace && isSelected)) {
+        if (isSelected && (this.firstSelectPosition || (this.firstSelectPosition = this.node.position)), this.isSelected = isSelected, this.node
+          .stopAllActions(), isAnimated) {
           if (this.isSelected) {
             this.node.runAction(cc.moveTo(.07, this.firstSelectPosition.x, this.firstSelectPosition.y + 25));
           } else {
             this.node.runAction(cc.moveTo(.07, 0, 0));
           }
         } else {
-          var i = cc.Vec2.ZERO;
+          var targetPosition = cc.Vec2.ZERO;
           if (this.isSelected) {
-            i = new cc.Vec2(0, this.firstSelectPosition.y + 25);
+            targetPosition = new cc.Vec2(0, this.firstSelectPosition.y + 25);
           }
-          this.node.x = i.x;
-          this.node.y = i.y;
+          this.node.x = targetPosition.x;
+          this.node.y = targetPosition.y;
         }
       }
     };
-    e.prototype.getSelected = function() {
+    GameCardSprite.prototype.getSelected = function() {
       return this.node.position.y >= 5;
     };
-    e.prototype.onCardClicked = function(t) {
+    GameCardSprite.prototype.onCardClicked = function(t) {
       if (0 != this.isAllowClick) {
         if (this.isShowSelected) {
           this.setCardSelected(!this.isSelected);
@@ -525,23 +525,23 @@ var GamePlayManager = require("./GamePlayManager"),
         }
       }
     };
-    e.prototype.getData = function() {
+    GameCardSprite.prototype.getData = function() {
       return {
         S: this.S,
         N: this.N,
         serverCode: this.serverCode
       };
     };
-    e.prototype.getNSam = function() {
+    GameCardSprite.prototype.getNSam = function() {
       return 14 == this.N ? 1 : 15 == this.N ? 2 : this.N;
     };
-    o([d(cc.Sprite)], e.prototype, "cardSprite", void 0);
-    o([d(cc.Prefab)], e.prototype, "prefabSparklingFx", void 0);
-    o([d(cc.Node)], e.prototype, "sparklingFx", void 0);
-    o([d(cc.SpriteAtlas)], e.prototype, "cardSpriteAtlas", void 0);
-    o([d(cc.Node)], e.prototype, "cardSpriteEffect", void 0);
-    o([d(cc.Size)], e.prototype, "cardSize", void 0);
-    return e = i = o([u], e);
+    __decorate([property(cc.Sprite)], GameCardSprite.prototype, "cardSprite", void 0);
+    __decorate([property(cc.Prefab)], GameCardSprite.prototype, "prefabSparklingFx", void 0);
+    __decorate([property(cc.Node)], GameCardSprite.prototype, "sparklingFx", void 0);
+    __decorate([property(cc.SpriteAtlas)], GameCardSprite.prototype, "cardSpriteAtlas", void 0);
+    __decorate([property(cc.Node)], GameCardSprite.prototype, "cardSpriteEffect", void 0);
+    __decorate([property(cc.Size)], GameCardSprite.prototype, "cardSize", void 0);
+    return GameCardSprite = GameCardSpriteClass = __decorate([ccclass], GameCardSprite);
   }(cc.Component);
-i.default = p;
+moduleExports.default = GameCardSprite;
 void 0;

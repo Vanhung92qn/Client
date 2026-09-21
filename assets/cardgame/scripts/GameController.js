@@ -1,9 +1,9 @@
 var t = require,
   e = module,
-  i = exports;
+  moduleExports = exports;
 "use strict";
 void 0;
-var n = this && this.__extends || function() {
+var __extends = this && this.__extends || function() {
     var t = function(e, i) {
       return (t = Object.setPrototypeOf || {
           __proto__: []
@@ -26,7 +26,7 @@ var n = this && this.__extends || function() {
       e.prototype = null === i ? Object.create(i) : (n.prototype = i.prototype, new n());
     };
   }(),
-  o = this && this.__decorate || function(t, e, i, n) {
+  __decorate = this && this.__decorate || function(t, e, i, n) {
     var o,
       a = arguments.length,
       s = a < 3 ? e : null === n ? n = Object.getOwnPropertyDescriptor(e, i) : n;
@@ -44,13 +44,13 @@ var n = this && this.__extends || function() {
     }
     return s;
   };
-Object.defineProperty(i, "__esModule", {
+Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
 var MessageCardGameHandler = require("./MessageCardGameHandler"),
   PlayerView = require("./PlayerView"),
   GamePlayManager = require("./GamePlayManager"),
-  c = require("./MessageCardGameHandler"),
+  MessageCardGame = require("./MessageCardGameHandler"),
   StringUtil = require("./StringUtil"),
   GameZOrder = require("./GameZOrder"),
   CardGameCommonRequest = require("./CardGameCommonRequest"),
@@ -64,104 +64,104 @@ var MessageCardGameHandler = require("./MessageCardGameHandler"),
   BaseScene = require("./BaseScene"),
   GameDefine = require("./GameDefine"),
   RoomMessageHandler = require("./RoomMessageHandler"),
-  C = cc._decorator,
-  T = C.ccclass,
-  E = C.property,
-  I = new cc.Color(61, 253, 255, 255),
-  A = new cc.Color(235, 118, 0, 255),
-  P = new cc.Color(255, 45, 45, 255);
-i.posOutScreen = new cc.Vec3(5e3, 5e3, 5e3);
-var M = function(t) {
-  function e() {
-    var e = null !== t && t.apply(this, arguments) || this;
-    e.mainGameViewModel = null;
-    e.playerAvartaPrefabs = null;
-    e.btnInvitePrefabs = null;
-    e.prefabsGameCard = null;
-    e.listBtnInvitePos = [];
-    e.POS2 = [];
-    e.POS3 = [];
-    e.POS4 = [];
-    e.POS5 = [];
-    e.POS6 = [];
-    e.POS7 = [];
-    e.POS8 = [];
-    e.POS9 = [];
-    e.POS2_2 = [];
-    e.POS5_2 = [];
-    e.state = 0;
-    e.gameState = 1;
-    e.bet = 0;
-    e.isHost = false;
-    e.AllPlayers = {};
-    e.players = [];
-    e.playersPlaying = [];
-    e._outOfSightPlayers = [];
-    e.pendingJoinPlayers = [];
-    e.pendingRemovePlayers = [];
-    e._dangKetThuc = false;
-    e._dangXocDia = true;
-    e._ngungNhanCuoc = true;
-    e.tuDongGuiSanSang = false;
-    e.gameRutTien = false;
-    e.autoReady = false;
-    e._playedOnce = false;
-    e._joinedTable = false;
-    e._dangPhatBai = false;
-    e._subscribedToGetOut = false;
-    e._autoWithDrawMoney = false;
-    e._moneyToAutoWithdraw = 0;
-    e._daNgoi = true;
-    e._forcedQuit = false;
-    e._forcedToLeaveRoom = false;
-    e.loaded = false;
-    e._khongThaoTac = true;
-    e._soVanKhongThaoTac = 0;
-    e.isClickExit = false;
-    e.isDelayLeave = false;
-    e._incognito = false;
-    e.inviteBtns = [];
-    e.rutTienBtn = null;
-    e.scalePlayerViewMine = .9;
-    e.scalePlayerOther = .7;
-    e.moneys = [];
-    e.isClick = false;
-    e.prefabsCardGameTableController = null;
-    e.cardGameTableController = null;
-    e.tuChoiGame = false;
-    e.isInBgMode = false;
-    e.oldClickTime = 0;
-    e.isGameAnDanh = false;
-    e.isGameAnDanhCheck = false;
-    e.winEffectPrefab = null;
-    e.winEffectList = [];
-    e.winTextEffectPrefab = null;
-    e.winTextEffectList = [];
-    e.nodepoolingPlayerView = null;
-    e.listChatIconConfig = null;
-    e.emoSlotIndexPos = [];
-    e.playerViewpos4AnDanh = null;
-    e.maxUserInRoom = -1;
-    e.totalCoinInGame = 0;
-    e.coPass = false;
-    e.popupHasPlayerNotReady = null;
-    e.listChatHistory = [];
-    return e;
+  ccDecorator = cc._decorator,
+  ccclass = ccDecorator.ccclass,
+  property = ccDecorator.property,
+  colorChatMine = new cc.Color(61, 253, 255, 255),
+  colorChatOther = new cc.Color(235, 118, 0, 255),
+  colorChatSystem = new cc.Color(255, 45, 45, 255);
+moduleExports.posOutScreen = new cc.Vec3(5e3, 5e3, 5e3);
+var GameController = function(_super) {
+  function GameController() {
+    var _this = null !== _super && _super.apply(this, arguments) || this;
+    _this.mainGameViewModel = null;
+    _this.playerAvartaPrefabs = null;
+    _this.btnInvitePrefabs = null;
+    _this.prefabsGameCard = null;
+    _this.listBtnInvitePos = [];
+    _this.POS2 = [];
+    _this.POS3 = [];
+    _this.POS4 = [];
+    _this.POS5 = [];
+    _this.POS6 = [];
+    _this.POS7 = [];
+    _this.POS8 = [];
+    _this.POS9 = [];
+    _this.POS2_2 = [];
+    _this.POS5_2 = [];
+    _this.state = 0;
+    _this.gameState = 1;
+    _this.bet = 0;
+    _this.isHost = false;
+    _this.AllPlayers = {};
+    _this.players = [];
+    _this.playersPlaying = [];
+    _this._outOfSightPlayers = [];
+    _this.pendingJoinPlayers = [];
+    _this.pendingRemovePlayers = [];
+    _this._dangKetThuc = false;
+    _this._dangXocDia = true;
+    _this._ngungNhanCuoc = true;
+    _this.tuDongGuiSanSang = false;
+    _this.gameRutTien = false;
+    _this.autoReady = false;
+    _this._playedOnce = false;
+    _this._joinedTable = false;
+    _this._dangPhatBai = false;
+    _this._subscribedToGetOut = false;
+    _this._autoWithDrawMoney = false;
+    _this._moneyToAutoWithdraw = 0;
+    _this._daNgoi = true;
+    _this._forcedQuit = false;
+    _this._forcedToLeaveRoom = false;
+    _this.loaded = false;
+    _this._khongThaoTac = true;
+    _this._soVanKhongThaoTac = 0;
+    _this.isClickExit = false;
+    _this.isDelayLeave = false;
+    _this._incognito = false;
+    _this.inviteBtns = [];
+    _this.rutTienBtn = null;
+    _this.scalePlayerViewMine = .9;
+    _this.scalePlayerOther = .7;
+    _this.moneys = [];
+    _this.isClick = false;
+    _this.prefabsCardGameTableController = null;
+    _this.cardGameTableController = null;
+    _this.tuChoiGame = false;
+    _this.isInBgMode = false;
+    _this.oldClickTime = 0;
+    _this.isGameAnDanh = false;
+    _this.isGameAnDanhCheck = false;
+    _this.winEffectPrefab = null;
+    _this.winEffectList = [];
+    _this.winTextEffectPrefab = null;
+    _this.winTextEffectList = [];
+    _this.nodepoolingPlayerView = null;
+    _this.listChatIconConfig = null;
+    _this.emoSlotIndexPos = [];
+    _this.playerViewpos4AnDanh = null;
+    _this.maxUserInRoom = -1;
+    _this.totalCoinInGame = 0;
+    _this.coPass = false;
+    _this.popupHasPlayerNotReady = null;
+    _this.listChatHistory = [];
+    return _this;
   }
-  n(e, t);
-  e.prototype.initDefaultData = function() {
-    for (var t in this.size = this.node.getContentSize(), this.state = MessageCardGameHandler.GameState.WAITING, this._playedOnce = false, this
+  __extends(GameController, _super);
+  GameController.prototype.initDefaultData = function() {
+    for (var userId in this.size = this.node.getContentSize(), this.state = MessageCardGameHandler.GameState.WAITING, this._playedOnce = false, this
         ._joinedTable = false, this._dangPhatBai = false, null !== this.rutTienBtn && (this.rutTienBtn.active = false), this
         ._subscribedToGetOut = false, this._autoWithDrawMoney = false, this._moneyToAutoWithdraw = 0, this._dangKetThuc = false, this
         .tuDongGuiSanSang = GameConfigManager.default.getInstance().autoReady, this._forcedQuit = false, this._forcedToLeaveRoom = false, this.loaded =
         false, this._khongThaoTac = true, this._soVanKhongThaoTac = 0, this.bet = 0, this.maxMoneyBuyIn = 0, this.minMoneyBuyIn = 0,
         this.isHost = false, this._thisPlayerView = null, this._incognito = false, this.LeaveRoomMessage = null, this.AllPlayers) {
-      var e = this.AllPlayers[t];
-      if (null !== e && void 0 !== e) {
-        for (var i = 0; i < e.coins.length; i++) {
-          e.coins[i].removeFromParent(true);
+      var player = this.AllPlayers[userId];
+      if (null !== player && void 0 !== player) {
+        for (var coinIndex = 0; coinIndex < player.coins.length; coinIndex++) {
+          player.coins[coinIndex].removeFromParent(true);
         }
-        e.destroyMe();
+        player.destroyMe();
       }
     }
     this.players = [];
@@ -174,26 +174,26 @@ var M = function(t) {
     }
     this.moneys = [];
   };
-  e.prototype.hide = function() {
+  GameController.prototype.hide = function() {
     this.node.active = false;
     this.isClickExit = false;
   };
-  e.prototype.setMiniGameNode = function() {};
-  e.prototype.walkUpBase = function(t) {
-    this.mainGameViewModel = t;
+  GameController.prototype.setMiniGameNode = function() {};
+  GameController.prototype.walkUpBase = function(mainGameViewModel) {
+    this.mainGameViewModel = mainGameViewModel;
     this.node.active = true;
     this.node.opacity = 0;
     this.node.scale = 0;
     this.initDefaultData();
     this.setMiniGameNode();
   };
-  e.prototype.onLoad = function() {
-    var t = this;
+  GameController.prototype.onLoad = function() {
+    var _this = this;
     if (this.nodepoolingPlayerView = new cc.NodePool(), null != this.prefabsCardGameTableController) {
-      var e = cc.instantiate(this.prefabsCardGameTableController);
-      e.parent = this.node;
-      e.zIndex = -2;
-      this.cardGameTableController = e.getComponent(CardGameTableController.default);
+      var tableControllerNode = cc.instantiate(this.prefabsCardGameTableController);
+      tableControllerNode.parent = this.node;
+      tableControllerNode.zIndex = -2;
+      this.cardGameTableController = tableControllerNode.getComponent(CardGameTableController.default);
       this.cardGameTableController.init(this.getNameGame(), this.getSpriteFrameName(), this.getListChatDefaultText(), this
       .getCmdStart(), this.onUserClickExit.bind(this), this);
       this.cardGameTableController.sendStart = function() {
@@ -205,24 +205,24 @@ var M = function(t) {
     this.POS3 = [];
     this.POS5 = [];
     this.POS7 = [];
-    this.listBtnInvitePos.forEach(function(e) {
-      var i = cc.instantiate(t.btnInvitePrefabs);
-      if (i.parent = t.node, i.zIndex = -1, i.position = e.position, t.inviteBtns.push(i), null !== t.winEffectPrefab && void 0 !==
-        t.winEffectPrefab) {
-        var n = cc.instantiate(t.winEffectPrefab);
-        n.parent = t.node;
-        n.position = e.position;
-        n.zIndex = -1;
-        t.winEffectList.push(n);
-        n.active = false;
+    this.listBtnInvitePos.forEach(function(posNode) {
+      var inviteBtnNode = cc.instantiate(_this.btnInvitePrefabs);
+      if (inviteBtnNode.parent = _this.node, inviteBtnNode.zIndex = -1, inviteBtnNode.position = posNode.position, _this.inviteBtns.push(inviteBtnNode), null !== _this.winEffectPrefab && void 0 !==
+        _this.winEffectPrefab) {
+        var winEffectNode = cc.instantiate(_this.winEffectPrefab);
+        winEffectNode.parent = _this.node;
+        winEffectNode.position = posNode.position;
+        winEffectNode.zIndex = -1;
+        _this.winEffectList.push(winEffectNode);
+        winEffectNode.active = false;
       }
-      if (null !== t.winTextEffectPrefab && void 0 !== t.winTextEffectPrefab) {
-        var o = cc.instantiate(t.winTextEffectPrefab);
-        o.parent = t.node;
-        o.position = e.position;
-        o.zIndex = GameZOrder.default.TOP;
-        t.winTextEffectList.push(o.getComponent(BetLabel.default));
-        o.active = false;
+      if (null !== _this.winTextEffectPrefab && void 0 !== _this.winTextEffectPrefab) {
+        var winTextEffectNode = cc.instantiate(_this.winTextEffectPrefab);
+        winTextEffectNode.parent = _this.node;
+        winTextEffectNode.position = posNode.position;
+        winTextEffectNode.zIndex = GameZOrder.default.TOP;
+        _this.winTextEffectList.push(winTextEffectNode.getComponent(BetLabel.default));
+        winTextEffectNode.active = false;
       }
     });
     this.POS3.push(0);
@@ -250,135 +250,135 @@ var M = function(t) {
     this.POS9.push(this.POS7[5]);
     this.POS9.push(this.POS5[4]);
     this.POS9.push(1);
-    cc.loader.loadRes("TX/ListChatIconConfig", function(t, e) {
-      if (CommonPrefabsManager.default.getInstance().hideLoading(), null === e) {
+    cc.loader.loadRes("TX/ListChatIconConfig", function(error, chatIconConfigPrefab) {
+      if (CommonPrefabsManager.default.getInstance().hideLoading(), null === chatIconConfigPrefab) {
         ;
       } else {
-        (n = cc.instantiate(e)).parent = this.node;
-        this.listChatIconConfig = n.getComponent(ListChatIconConfig.default);
-        for (var i = 0; i < this.inviteBtns.length; ++i) {
-          var n;
-          (n = cc.instantiate(this.listChatIconConfig.iconProfap)).parent = this.node;
-          n.position = this.inviteBtns[i].position;
-          n.active = false;
-          n.zIndex = 1;
-          var o = n.getComponent(EmoScript.default);
-          this.emoSlotIndexPos.push(o);
+        (spawnedNode = cc.instantiate(chatIconConfigPrefab)).parent = this.node;
+        this.listChatIconConfig = spawnedNode.getComponent(ListChatIconConfig.default);
+        for (var slotIndex = 0; slotIndex < this.inviteBtns.length; ++slotIndex) {
+          var spawnedNode;
+          (spawnedNode = cc.instantiate(this.listChatIconConfig.iconProfap)).parent = this.node;
+          spawnedNode.position = this.inviteBtns[slotIndex].position;
+          spawnedNode.active = false;
+          spawnedNode.zIndex = 1;
+          var emoScript = spawnedNode.getComponent(EmoScript.default);
+          this.emoSlotIndexPos.push(emoScript);
         }
       }
     }.bind(this));
   };
-  e.prototype.processIngameUserChat = function(t, e) {
-    if (void 0 === e) {
-      e = false;
+  GameController.prototype.processIngameUserChat = function(chatData, isFromBatch) {
+    if (void 0 === isFromBatch) {
+      isFromBatch = false;
     }
-    var i = t.uid,
-      n = t.mgs,
-      o = t.dn,
-      a = t.c;
-    this.showChat(t, i, n, e, o, a);
+    var userId = chatData.uid,
+      message = chatData.mgs,
+      displayName = chatData.dn,
+      chatType = chatData.c;
+    this.showChat(chatData, userId, message, isFromBatch, displayName, chatType);
   };
-  e.prototype.onReceiveMessage = function(t, e, i, n) {
-    switch (void 0 === n && (n = true), t != c.Global_Message.GET_TABLES && GameConfigManager.default.getInstance().enviromentName.includes("pre") && BaseScene
-      .default.currentSceneName != GameDefine.GameConfigs.SceneName.BauCua && ErrorLogHandler.default.getInstance().addLog(JSON.stringify(i)), t) {
-      case c.Global_Message.INGAME_JOIN_TABLE_INFOS:
-        this.onGetInGameTableInfo(i);
+  GameController.prototype.onReceiveMessage = function(cmd, raw, data, applyGameConfig) {
+    switch (void 0 === applyGameConfig && (applyGameConfig = true), cmd != MessageCardGame.Global_Message.GET_TABLES && GameConfigManager.default.getInstance().enviromentName.includes("pre") && BaseScene
+      .default.currentSceneName != GameDefine.GameConfigs.SceneName.BauCua && ErrorLogHandler.default.getInstance().addLog(JSON.stringify(data)), cmd) {
+      case MessageCardGame.Global_Message.INGAME_JOIN_TABLE_INFOS:
+        this.onGetInGameTableInfo(data);
         break;
-      case c.Global_Message.SET_AUTO_READY:
-        cc.error(i);
+      case MessageCardGame.Global_Message.SET_AUTO_READY:
+        cc.error(data);
         break;
-      case c.Global_Message.INGAME_USER_LEAVE_AND_JOIN_TABLE:
-        var o = i.t,
-          a = i.p;
-        1 === o ? this.onUserJoinTable(a) : 2 === o && this.onUserLeaveTable(a);
+      case MessageCardGame.Global_Message.INGAME_USER_LEAVE_AND_JOIN_TABLE:
+        var joinLeaveType = data.t,
+          playerData = data.p;
+        1 === joinLeaveType ? this.onUserJoinTable(playerData) : 2 === joinLeaveType && this.onUserLeaveTable(playerData);
         break;
-      case c.Global_Message.UPDATE_BATCH_PLAYER_IN_ROOM:
-        if (null !== i.ps && void 0 !== i.ps) {
-          for (var s = 0; s < i.ps.length; ++s) {
-            o = i.ps[s].t;
-            var h = i.ps[s].p;
-            if (1 === o) {
-              this.onUserJoinTable(h);
+      case MessageCardGame.Global_Message.UPDATE_BATCH_PLAYER_IN_ROOM:
+        if (null !== data.ps && void 0 !== data.ps) {
+          for (var playerIndex = 0; playerIndex < data.ps.length; ++playerIndex) {
+            joinLeaveType = data.ps[playerIndex].t;
+            var batchPlayerData = data.ps[playerIndex].p;
+            if (1 === joinLeaveType) {
+              this.onUserJoinTable(batchPlayerData);
             } else {
-              if (2 === o) {
-                this.onUserLeaveTable(h);
+              if (2 === joinLeaveType) {
+                this.onUserLeaveTable(batchPlayerData);
               }
             }
           }
         }
-        null !== i.tTU && void 0 !== i.tTU && this.setTextUserbanCHung(i.tTU);
+        null !== data.tTU && void 0 !== data.tTU && this.setTextUserbanCHung(data.tTU);
         break;
-      case c.Global_Message.INGAME_USER_CHAT:
-        this.processIngameUserChat(i);
+      case MessageCardGame.Global_Message.INGAME_USER_CHAT:
+        this.processIngameUserChat(data);
         break;
-      case c.Global_Message.BATCH_INGAME_USER_CHAT:
-        var f = i.bmgs;
-        if (f) {
-          for (var m = 0; m < f.length; m++) {
-            if (0 !== f[m].uid.localeCompare(GamePlayManager.default.getInstance().userID)) {
-              this.processIngameUserChat(f[m], true);
+      case MessageCardGame.Global_Message.BATCH_INGAME_USER_CHAT:
+        var batchChatMessages = data.bmgs;
+        if (batchChatMessages) {
+          for (var chatIndex = 0; chatIndex < batchChatMessages.length; chatIndex++) {
+            if (0 !== batchChatMessages[chatIndex].uid.localeCompare(GamePlayManager.default.getInstance().userID)) {
+              this.processIngameUserChat(batchChatMessages[chatIndex], true);
             }
           }
         }
         break;
-      case c.Global_Message.INGAME_SEND_READY_TO_COUNT_DOWN:
+      case MessageCardGame.Global_Message.INGAME_SEND_READY_TO_COUNT_DOWN:
         this.autoSendReady();
         break;
-      case c.Global_Message.INGAME_USER_READY:
-        var y = i.uid;
-        this.setReadyForPlayer(y);
+      case MessageCardGame.Global_Message.INGAME_USER_READY:
+        var userId = data.uid;
+        this.setReadyForPlayer(userId);
         break;
-      case c.Global_Message.INGAME_UPDATE_MONEY:
-        var S = i.ps;
-        this.updateMoneysMsg(S);
+      case MessageCardGame.Global_Message.INGAME_UPDATE_MONEY:
+        var moneyList = data.ps;
+        this.updateMoneysMsg(moneyList);
         break;
-      case c.Global_Message.REFRESH_MONEY:
-        var b = i.As,
-          C = b.vip,
-          T = b.gold,
-          E = b.chip,
-          I = b.safe;
-        GamePlayManager.default.getInstance().vip = C;
-        GamePlayManager.default.getInstance().gold = T;
-        GamePlayManager.default.getInstance().chip = E;
-        GamePlayManager.default.getInstance().goldSafe = I;
-        this.refreshMoney(b);
+      case MessageCardGame.Global_Message.REFRESH_MONEY:
+        var assets = data.As,
+          vip = assets.vip,
+          gold = assets.gold,
+          chip = assets.chip,
+          goldSafe = assets.safe;
+        GamePlayManager.default.getInstance().vip = vip;
+        GamePlayManager.default.getInstance().gold = gold;
+        GamePlayManager.default.getInstance().chip = chip;
+        GamePlayManager.default.getInstance().goldSafe = goldSafe;
+        this.refreshMoney(assets);
         break;
-      case c.Global_Message.BUY_IN:
-        y = i.uid;
-        var A = i.m;
-        this.moneyWithdrawalResponse(y, A);
+      case MessageCardGame.Global_Message.BUY_IN:
+        userId = data.uid;
+        var money = data.m;
+        this.moneyWithdrawalResponse(userId, money);
         break;
-      case c.Global_Message.INGAME_CHANGE_HOST:
-        y = i.uid;
-        this.setHostPlayer(y);
+      case MessageCardGame.Global_Message.INGAME_CHANGE_HOST:
+        userId = data.uid;
+        this.setHostPlayer(userId);
         break;
-      case c.Global_Message.FIND_PLAYERS_TO_INVITE:
-        for (var P = i.us, M = [], O = 0; O < P.length; O++) {
-          var N = P[O];
-          M.push(N.u);
+      case MessageCardGame.Global_Message.FIND_PLAYERS_TO_INVITE:
+        for (var foundUsers = data.us, inviteUserIds = [], userIndex = 0; userIndex < foundUsers.length; userIndex++) {
+          var foundUser = foundUsers[userIndex];
+          inviteUserIds.push(foundUser.u);
         }
-        CardGameCommonRequest.default.getInstance().sendInvitePlayers(M);
+        CardGameCommonRequest.default.getInstance().sendInvitePlayers(inviteUserIds);
         CommonPrefabsManager.default.getInstance().showPopupMessageUtil(
           "H\u1ec7 th\u1ed1ng \u0111\xe3 g\u1eedi l\u1eddi m\u1eddi \u0111\u1ebfn ng\u01b0\u1eddi ch\u01a1i kh\xe1c!");
         break;
-      case c.Global_Message.JOIN_TABLE_INVITATION:
+      case MessageCardGame.Global_Message.JOIN_TABLE_INVITATION:
         if (false === this.node.active && false === GamePlayManager.default.getInstance().iskteckgame) {
-          var B = i.fu,
-            D = i.ri;
-          CommonPrefabsManager.default.getInstance().showPopupInviRoom(B, D);
+          var fromUser = data.fu,
+            roomInfo = data.ri;
+          CommonPrefabsManager.default.getInstance().showPopupInviRoom(fromUser, roomInfo);
         }
         break;
-      case c.Global_Message.BAO_QUAY:
-        StringUtil.default.isNullOrEmpty(i.mgs) ? CommonPrefabsManager.default.getInstance().showPopupMessageUtil(
+      case MessageCardGame.Global_Message.BAO_QUAY:
+        StringUtil.default.isNullOrEmpty(data.mgs) ? CommonPrefabsManager.default.getInstance().showPopupMessageUtil(
             "Ch\xfang t\xf4i s\u1ebd s\u1eed l\xfd v\xe0 th\xf4ng b\xe1o qua h\u1ed9p th\u01b0.") : CommonPrefabsManager.default.getInstance()
-          .showPopupMessageUtil(i.mgs);
+          .showPopupMessageUtil(data.mgs);
     }
   };
-  e.prototype.sendAutoReadyPreference = function() {
+  GameController.prototype.sendAutoReadyPreference = function() {
     RoomMessageHandler.default.getInstance().sendAutoReadyPref(GameConfigManager.default.getInstance().autoReady);
   };
-  e.prototype.autoSendReady = function() {
+  GameController.prototype.autoSendReady = function() {
     if (this._daNgoi) {
       if (this.isHost) {
         this.sendReady();
@@ -393,8 +393,8 @@ var M = function(t) {
       }
     }
   };
-  e.prototype.setTextUserbanCHung = function(t) {};
-  e.prototype.onGetInGameTableInfo = function(t) {
+  GameController.prototype.setTextUserbanCHung = function(t) {};
+  GameController.prototype.onGetInGameTableInfo = function(tableInfo) {
     CommonPrefabsManager.default.getInstance().hideLoading();
     this.sendAutoReadyPreference();
     this.node.opacity = 255;
@@ -404,333 +404,333 @@ var M = function(t) {
     }
     if (GameConfigManager.default.getInstance().enviromentName.indexOf("pre") >= 0) {
       ErrorLogHandler.default.getInstance().clearLogString();
-      ErrorLogHandler.default.getInstance().addLog(JSON.stringify(t));
+      ErrorLogHandler.default.getInstance().addLog(JSON.stringify(tableInfo));
     }
-    if (null !== t.hpwd && void 0 !== t.hpwd && t.hpwd) {
+    if (null !== tableInfo.hpwd && void 0 !== tableInfo.hpwd && tableInfo.hpwd) {
       this.isGameAnDanh = false;
       this.isGameAnDanhCheck = false;
     }
     if (this.cardGameTableController) {
-      if (t.cH) {
-        this.listChatHistory = t.cH;
+      if (tableInfo.cH) {
+        this.listChatHistory = tableInfo.cH;
       } else {
         this.listChatHistory = [];
       }
       this.cardGameTableController.loadChatHistory();
     }
   };
-  e.prototype.onUserJoinTable = function(t) {
-    var e = false;
+  GameController.prototype.onUserJoinTable = function(playerData) {
+    var isGameInProgress = false;
     if (this.state !== MessageCardGameHandler.GameState.WAITING) {
-      e = true;
+      isGameInProgress = true;
     }
-    this.addPlayerWithDict(t);
-    if (e) {
+    this.addPlayerWithDict(playerData);
+    if (isGameInProgress) {
       this.updateViewingPlayerPositions();
     } else {
       this.updateReadyStatus();
       this.updateViewPostions(false, true);
     }
   };
-  e.prototype.onUserLeaveTable = function(t) {
-    var e = t.uid;
-    this.removePlayer(e);
+  GameController.prototype.onUserLeaveTable = function(playerData) {
+    var userId = playerData.uid;
+    this.removePlayer(userId);
   };
-  e.prototype.setGameConfig = function(t, e, i, n, o, a) {
-    if (this.bet = t, this.gameState = e, this.remainingTime = i, this.assetID = n, this.maxUser = o, this.coPass = a, null != this
+  GameController.prototype.setGameConfig = function(bet, gameState, remainingTime, assetId, maxUser, hasPassword) {
+    if (this.bet = bet, this.gameState = gameState, this.remainingTime = remainingTime, this.assetID = assetId, this.maxUser = maxUser, this.coPass = hasPassword, null != this
       .cardGameTableController) {
-      var s = this.isGameAnDanh;
-      if (a) {
-        s = false;
+      var isAnonymous = this.isGameAnDanh;
+      if (hasPassword) {
+        isAnonymous = false;
       }
-      this.cardGameTableController.setGameConfig(t, s, a);
+      this.cardGameTableController.setGameConfig(bet, isAnonymous, hasPassword);
     }
   };
-  e.prototype.setMoneyBuyInThreshold = function(t, e) {
-    this.minMoneyBuyIn = t;
-    this.maxMoneyBuyIn = e;
+  GameController.prototype.setMoneyBuyInThreshold = function(minMoneyBuyIn, maxMoneyBuyIn) {
+    this.minMoneyBuyIn = minMoneyBuyIn;
+    this.maxMoneyBuyIn = maxMoneyBuyIn;
     GamePlayManager.default.getInstance().minBuyIn = this.minMoneyBuyIn;
     GamePlayManager.default.getInstance().maxBuyIn = this.maxMoneyBuyIn;
     GamePlayManager.default.getInstance().bet = this.bet;
   };
-  e.prototype.getPlayer = function(t) {
-    return this.AllPlayers[t];
+  GameController.prototype.getPlayer = function(userId) {
+    return this.AllPlayers[userId];
   };
-  e.prototype.getRmcDefaul = function() {
+  GameController.prototype.getRmcDefaul = function() {
     return 3;
   };
-  e.prototype.checkReconnect = function(t) {
+  GameController.prototype.checkReconnect = function(playerData) {
     return false;
   };
-  e.prototype.addPlayerWithDict = function(t) {
-    var e = t.uid,
-      i = t.C;
-    if (0 === e.localeCompare(GamePlayManager.default.getInstance().userID)) {
-      this.isHost = i;
+  GameController.prototype.addPlayerWithDict = function(playerData) {
+    var userId = playerData.uid,
+      isHost = playerData.C;
+    if (0 === userId.localeCompare(GamePlayManager.default.getInstance().userID)) {
+      this.isHost = isHost;
     }
-    var n = t.m,
-      o = t.pS,
-      s = this.getRmcDefaul(),
-      c = t.sit,
-      l = t.dn,
-      h = t.r,
-      u = t.pid,
-      d = t.pi;
-    if (this.state === MessageCardGameHandler.GameState.WAITING || this.checkReconnect(t)) {
-      d = true;
+    var money = playerData.m,
+      playerState = playerData.pS,
+      remainingCards = this.getRmcDefaul(),
+      seatIndex = playerData.sit,
+      displayName = playerData.dn,
+      isReady = playerData.r,
+      pid = playerData.pid,
+      isAtTable = playerData.pi;
+    if (this.state === MessageCardGameHandler.GameState.WAITING || this.checkReconnect(playerData)) {
+      isAtTable = true;
     }
     if (this._dangPhatBai) {
       if (!(GamePlayManager.default.getInstance().gameID !== MessageCardGameHandler.GAME.XITO && GamePlayManager.default.getInstance().gameID !== MessageCardGameHandler.GAME.POKER)) {
-        d = false;
+        isAtTable = false;
       }
     }
-    var p = t.As,
-      f = t.a,
-      g = 0;
-    if (null !== t.id && void 0 !== t.id && (g = t.id), null !== t.rM && void 0 !== t.rM) {
-      var m = t.rM;
-      p.rM = m;
+    var assets = playerData.As,
+      avatar = playerData.a,
+      accountId = 0;
+    if (null !== playerData.id && void 0 !== playerData.id && (accountId = playerData.id), null !== playerData.rM && void 0 !== playerData.rM) {
+      var realMoney = playerData.rM;
+      assets.rM = realMoney;
     }
-    var y = this.addPlayer(l, e, i, n, o, s, c, h, u, d, p, f, g);
-    if (y.isPlaying = t.pi, this.state === MessageCardGameHandler.GameState.VIEWING) {
-      var S = t.cb;
-      y._currentBet = S;
-    }
-  };
-  e.prototype.createListPlayerWhenGetTableInfo = function(t) {
-    for (var e = 0; e < t.length; ++e) {
-      var i = t[e];
-      this.addPlayerWithDict(i);
+    var player = this.addPlayer(displayName, userId, isHost, money, playerState, remainingCards, seatIndex, isReady, pid, isAtTable, assets, avatar, accountId);
+    if (player.isPlaying = playerData.pi, this.state === MessageCardGameHandler.GameState.VIEWING) {
+      var currentBet = playerData.cb;
+      player._currentBet = currentBet;
     }
   };
-  e.prototype.addPlayer = function(t, e, n, o, a, r, c, l, u, d, p, f, g) {
-    var m = this.getPlayer(e);
-    if (null !== m && void 0 !== m) {
-      this.removePendingPlayerWith(e);
-      return m;
+  GameController.prototype.createListPlayerWhenGetTableInfo = function(playerDataList) {
+    for (var playerIndex = 0; playerIndex < playerDataList.length; ++playerIndex) {
+      var playerData = playerDataList[playerIndex];
+      this.addPlayerWithDict(playerData);
     }
-    var y = this.getPlayerView();
-    y.parent = this.node;
-    y.zIndex = GameZOrder.default.BOTTOM;
-    y.setPosition(i.posOutScreen);
-    (m = y.getComponent(PlayerView.default)).addInfo(t, e, n, o, a, r, c, l, u, g, p, f, this.isGameAnDanh);
-    if (m.isMine()) {
-      this._thisPlayerView = m;
+  };
+  GameController.prototype.addPlayer = function(displayName, userId, isHost, money, playerState, remainingCards, seatIndex, isReady, pid, isAtTable, assets, avatar, accountId) {
+    var player = this.getPlayer(userId);
+    if (null !== player && void 0 !== player) {
+      this.removePendingPlayerWith(userId);
+      return player;
     }
-    this.AllPlayers[m.userID] = m;
-    if (d || m.isMine()) {
-      this.players.push(m);
+    var playerNode = this.getPlayerView();
+    playerNode.parent = this.node;
+    playerNode.zIndex = GameZOrder.default.BOTTOM;
+    playerNode.setPosition(moduleExports.posOutScreen);
+    (player = playerNode.getComponent(PlayerView.default)).addInfo(displayName, userId, isHost, money, playerState, remainingCards, seatIndex, isReady, pid, accountId, assets, avatar, this.isGameAnDanh);
+    if (player.isMine()) {
+      this._thisPlayerView = player;
+    }
+    this.AllPlayers[player.userID] = player;
+    if (isAtTable || player.isMine()) {
+      this.players.push(player);
     } else {
-      this.pendingJoinPlayers.push(m);
+      this.pendingJoinPlayers.push(player);
     }
-    if (m.isMine()) {
-      m.node.scale = this.scalePlayerViewMine;
+    if (player.isMine()) {
+      player.node.scale = this.scalePlayerViewMine;
     } else {
-      m.node.scale = this.scalePlayerOther;
+      player.node.scale = this.scalePlayerOther;
     }
-    return m;
+    return player;
   };
-  e.prototype.sortVectorPlayers = function() {
-    this.players.sort(function(t, e) {
-      return t.sit > e.sit ? 1 : t.sit < e.sit ? -1 : 0;
+  GameController.prototype.sortVectorPlayers = function() {
+    this.players.sort(function(playerA, playerB) {
+      return playerA.sit > playerB.sit ? 1 : playerA.sit < playerB.sit ? -1 : 0;
     });
   };
-  e.prototype.showHideInviteBtn = function() {
+  GameController.prototype.showHideInviteBtn = function() {
     if (-1 == this.maxUserInRoom) {
-      for (var t = 0; t < this.inviteBtns.length; ++t) {
-        this.inviteBtns[t].active = true;
+      for (var btnIndex = 0; btnIndex < this.inviteBtns.length; ++btnIndex) {
+        this.inviteBtns[btnIndex].active = true;
       }
     } else {
-      var e = true;
-      for (t = 0; t < this.inviteBtns.length; ++t) {
-        if (t >= this.maxUserInRoom) {
-          e = false;
+      var isVisible = true;
+      for (btnIndex = 0; btnIndex < this.inviteBtns.length; ++btnIndex) {
+        if (btnIndex >= this.maxUserInRoom) {
+          isVisible = false;
         }
-        this.inviteBtns[this.POS9[t]].active = e;
+        this.inviteBtns[this.POS9[btnIndex]].active = isVisible;
       }
     }
   };
-  e.prototype.updateViewPostions = function(t, e, i) {
-    if (void 0 === t) {
-      t = false;
+  GameController.prototype.updateViewPostions = function(instant, skipMine, applyInstantToMine) {
+    if (void 0 === instant) {
+      instant = false;
     }
-    if (void 0 === e) {
-      e = false;
+    if (void 0 === skipMine) {
+      skipMine = false;
     }
-    if (void 0 === i) {
-      i = false;
+    if (void 0 === applyInstantToMine) {
+      applyInstantToMine = false;
     }
     this.showHideInviteBtn();
     this.sortVectorPlayers();
-    for (var n = 0; n < this.players.length; ++n) {
-      (o = this.players[n]).index = n;
+    for (var playerIndex = 0; playerIndex < this.players.length; ++playerIndex) {
+      (player = this.players[playerIndex]).index = playerIndex;
     }
-    for (n = 0; n < this.players.length; ++n) {
-      var o = this.players[n];
-      this.showPlayerViewBauCua(o, true);
-      o.stopViewAction();
-      o.pos = this.getViewPositionOfPlayer(o, n);
-      if (o.indexPos < this.inviteBtns.length && o.node.active) {
-        this.inviteBtns[o.indexPos].active = false;
+    for (playerIndex = 0; playerIndex < this.players.length; ++playerIndex) {
+      var player = this.players[playerIndex];
+      this.showPlayerViewBauCua(player, true);
+      player.stopViewAction();
+      player.pos = this.getViewPositionOfPlayer(player, playerIndex);
+      if (player.indexPos < this.inviteBtns.length && player.node.active) {
+        this.inviteBtns[player.indexPos].active = false;
       }
-      if (!e || e && !o.isMine()) {
-        if (o.isMine() && o.isMine() && !i) {
-          o.runToPos(this.size);
+      if (!skipMine || skipMine && !player.isMine()) {
+        if (player.isMine() && player.isMine() && !applyInstantToMine) {
+          player.runToPos(this.size);
         } else {
-          o.runToPos(this.size, t);
+          player.runToPos(this.size, instant);
         }
       }
     }
     this.updateViewingPlayerPositions();
     this._joinedTable = true;
   };
-  e.prototype.getViewPositionOfPlayer = function(t, e) {
-    var i = -1;
+  GameController.prototype.getViewPositionOfPlayer = function(player, playerIndex) {
+    var myIndex = -1;
     if (null !== this._thisPlayerView && void 0 !== this._thisPlayerView) {
-      i = this._thisPlayerView.index;
+      myIndex = this._thisPlayerView.index;
     }
-    var n = this.inviteBtns.length;
-    if (i >= 0) {
-      e = (e + n - i) % n;
+    var slotCount = this.inviteBtns.length;
+    if (myIndex >= 0) {
+      playerIndex = (playerIndex + slotCount - myIndex) % slotCount;
     }
-    t.indexPos = e;
-    return this.inviteBtns[e].position;
+    player.indexPos = playerIndex;
+    return this.inviteBtns[playerIndex].position;
   };
-  e.prototype.buyIn = function() {};
-  e.prototype.updateReadyStatus = function() {
+  GameController.prototype.buyIn = function() {};
+  GameController.prototype.updateReadyStatus = function() {
     if (this.state !== MessageCardGameHandler.GameState.VIEWING && this.state !== MessageCardGameHandler.GameState.PLAYING) {
-      for (t = 0; t < this.players.length; ++t) {
-        if ((e = this.players[t]).isHost) {
-          e.node.color = cc.Color.WHITE;
+      for (playerIndex = 0; playerIndex < this.players.length; ++playerIndex) {
+        if ((player = this.players[playerIndex]).isHost) {
+          player.node.color = cc.Color.WHITE;
         } else {
-          if (e.isReady) {
-            e.node.color = cc.Color.WHITE;
-            e.iconnReady.active = true;
+          if (player.isReady) {
+            player.node.color = cc.Color.WHITE;
+            player.iconnReady.active = true;
           } else {
-            e.isReady = false;
-            e.iconnReady.active = false;
+            player.isReady = false;
+            player.iconnReady.active = false;
           }
-          if (this.isHost && false === e.isMine()) {
-            e.kickButton.active = false;
+          if (this.isHost && false === player.isMine()) {
+            player.kickButton.active = false;
           }
         }
       }
     } else {
-      for (var t = 0; t < this.players.length; ++t) {
-        var e;
-        (e = this.players[t]).node.color = cc.Color.WHITE;
-        e.isReady = false;
-        e.iconnReady.active = false;
+      for (var playerIndex = 0; playerIndex < this.players.length; ++playerIndex) {
+        var player;
+        (player = this.players[playerIndex]).node.color = cc.Color.WHITE;
+        player.isReady = false;
+        player.iconnReady.active = false;
       }
     }
   };
-  e.prototype.moneyWithdrawalResponse = function(t, e) {
-    for (var i = 0; i < this.players.length; ++i) {
-      if (0 === (n = this.players[i]).userID.localeCompare(t)) {
-        n._money = e;
-        return void n.setMoney(e);
+  GameController.prototype.moneyWithdrawalResponse = function(userId, money) {
+    for (var playerIndex = 0; playerIndex < this.players.length; ++playerIndex) {
+      if (0 === (player = this.players[playerIndex]).userID.localeCompare(userId)) {
+        player._money = money;
+        return void player.setMoney(money);
       }
     }
-    for (i = 0; i < this.pendingJoinPlayers.length; ++i) {
-      var n;
-      if (0 === (n = this.pendingJoinPlayers[i]).userID.localeCompare(t)) {
-        n._money = e;
-        return void n.setMoney(e);
+    for (playerIndex = 0; playerIndex < this.pendingJoinPlayers.length; ++playerIndex) {
+      var player;
+      if (0 === (player = this.pendingJoinPlayers[playerIndex]).userID.localeCompare(userId)) {
+        player._money = money;
+        return void player.setMoney(money);
       }
     }
   };
-  e.prototype.setReadyForPlayer = function(t) {
+  GameController.prototype.setReadyForPlayer = function(userId) {
     if (this.state !== MessageCardGameHandler.GameState.WAITING) {
       ;
     } else {
-      var e = this.getPlayer(t);
-      if (null === e || void 0 === e) {
+      var player = this.getPlayer(userId);
+      if (null === player || void 0 === player) {
         return;
       }
-      if (e.isReady) {
+      if (player.isReady) {
         return;
       }
-      if (e.isMine() && null != this.cardGameTableController) {
+      if (player.isMine() && null != this.cardGameTableController) {
         this.cardGameTableController.readyBtn.active = false;
       }
-      e.isReady = true;
-      if (!e.isHost) {
-        e.iconnReady.active = true;
+      player.isReady = true;
+      if (!player.isHost) {
+        player.iconnReady.active = true;
       }
       if (this.isHost) {
         this.hostCheckAllPlayerReadyForShowButtonStartGameWhenUserReady();
       }
     }
   };
-  e.prototype.hostCheckAllPlayerReadyForShowButtonStartWhenRemovePlayer = function() {
+  GameController.prototype.hostCheckAllPlayerReadyForShowButtonStartWhenRemovePlayer = function() {
     this.checkAllPlayerReadyForShowButtonStartWhenRemovePlayer();
   };
-  e.prototype.checkAllPlayerReadyForShowButtonStartWhenRemovePlayer = function() {
-    for (var t = 0, e = 0; e < this.players.length; ++e) {
-      var i = this.players[e];
-      if (!i.isMine() && i.isReady) {
-        t++;
+  GameController.prototype.checkAllPlayerReadyForShowButtonStartWhenRemovePlayer = function() {
+    for (var readyCount = 0, playerIndex = 0; playerIndex < this.players.length; ++playerIndex) {
+      var player = this.players[playerIndex];
+      if (!player.isMine() && player.isReady) {
+        readyCount++;
       }
     }
-    if (!(t !== this.players.length - 1 || 0 == t || this._dangPhatBai)) {
+    if (!(readyCount !== this.players.length - 1 || 0 == readyCount || this._dangPhatBai)) {
       if (null != this.cardGameTableController && this.players.length >= 2) {
         this.cardGameTableController.startBtn.active = true;
       }
     }
-    if (t > 0 && !this._dangPhatBai && null != this.cardGameTableController && this.players.length >= 2) {
+    if (readyCount > 0 && !this._dangPhatBai && null != this.cardGameTableController && this.players.length >= 2) {
       this.cardGameTableController.startBtn.active = true;
     }
   };
-  e.prototype.checkShowButtonStartWhenRemovePlayer = function() {
+  GameController.prototype.checkShowButtonStartWhenRemovePlayer = function() {
     if (!this._dangPhatBai && this.players.length >= 2 && null != this.cardGameTableController) {
       this.cardGameTableController.startBtn.active = true;
     }
   };
-  e.prototype.hostCheckAllPlayerReadyForShowButtonStartGameWhenUserReady = function() {
+  GameController.prototype.hostCheckAllPlayerReadyForShowButtonStartGameWhenUserReady = function() {
     this.checkAllPlayerReadyForShowButtonStartGameWhenUserReady();
   };
-  e.prototype.checkAllPlayerReadyForShowButtonStartGameWhenUserReady = function() {
-    for (var t = 0, e = 0; e < this.players.length; ++e) {
-      var i = this.players[e];
-      if (false === i.isMine() && i.isReady) {
-        t++;
+  GameController.prototype.checkAllPlayerReadyForShowButtonStartGameWhenUserReady = function() {
+    for (var readyCount = 0, playerIndex = 0; playerIndex < this.players.length; ++playerIndex) {
+      var player = this.players[playerIndex];
+      if (false === player.isMine() && player.isReady) {
+        readyCount++;
       }
     }
-    if (t === this.players.length - 1 && 0 != t && this.players.length >= 2 && null != this.cardGameTableController) {
+    if (readyCount === this.players.length - 1 && 0 != readyCount && this.players.length >= 2 && null != this.cardGameTableController) {
       this.cardGameTableController.startBtn.active = true;
       if (this.isHost && this.tuChoiGame) {
         this.cardGameTableController.sendStart();
       }
     }
-    if (t > 0 && !this._dangPhatBai && this.players.length >= 2 && null != this.cardGameTableController) {
+    if (readyCount > 0 && !this._dangPhatBai && this.players.length >= 2 && null != this.cardGameTableController) {
       this.cardGameTableController.startBtn.active = true;
     }
   };
-  e.prototype.checkShowButtonStartGameWhenUserReady = function() {
+  GameController.prototype.checkShowButtonStartGameWhenUserReady = function() {
     if (!this._dangPhatBai && this.players.length >= 2 && null != this.cardGameTableController) {
       this.cardGameTableController.startBtn.active = true;
     }
   };
-  e.prototype.hostCheckAllPlayerReadyForShowButtonStartGameWhenChangeHost = function() {
+  GameController.prototype.hostCheckAllPlayerReadyForShowButtonStartGameWhenChangeHost = function() {
     this.checkAllPlayerReadyForShowButtonStartGameWhenChangeHost();
   };
-  e.prototype.checkAllPlayerReadyForShowButtonStartGameWhenChangeHost = function() {
+  GameController.prototype.checkAllPlayerReadyForShowButtonStartGameWhenChangeHost = function() {
     if (this.isHost) {
       if (null != this.cardGameTableController) {
         this.cardGameTableController.readyBtn.active = false;
       }
-      for (var t = 0, e = 0; e < this.players.length; ++e) {
-        var i = this.players[e];
-        if (!i.isMine() && i.isReady) {
-          t++;
+      for (var readyCount = 0, playerIndex = 0; playerIndex < this.players.length; ++playerIndex) {
+        var player = this.players[playerIndex];
+        if (!player.isMine() && player.isReady) {
+          readyCount++;
         }
       }
-      if (t > 0 && this.checkGameIsDOneAndWaitingToStart() && null != this.cardGameTableController && this.players.length >= 2) {
+      if (readyCount > 0 && this.checkGameIsDOneAndWaitingToStart() && null != this.cardGameTableController && this.players.length >= 2) {
         this.cardGameTableController.startBtn.active = true;
       }
     }
   };
-  e.prototype.checkShowButtonStartGameWhenChangeHost = function() {
+  GameController.prototype.checkShowButtonStartGameWhenChangeHost = function() {
     if (this.isHost) {
       if (null != this.cardGameTableController) {
         this.cardGameTableController.readyBtn.active = false;
@@ -741,137 +741,137 @@ var M = function(t) {
       }
     }
   };
-  e.prototype.sendReady = function() {
+  GameController.prototype.sendReady = function() {
     CardGameCommonRequest.default.getInstance().sendReady();
   };
-  e.prototype.sendStart = function() {
+  GameController.prototype.sendStart = function() {
     this.cardGameTableController.sendStartCmd();
   };
-  e.prototype.hostSendStartGame = function() {
-    for (var t = this, e = 0, i = 0; i < this.players.length; ++i) {
-      var n = this.players[i];
-      if (false === n.isMine() && n.isReady) {
-        e++;
+  GameController.prototype.hostSendStartGame = function() {
+    for (var _this = this, readyCount = 0, playerIndex = 0; playerIndex < this.players.length; ++playerIndex) {
+      var player = this.players[playerIndex];
+      if (false === player.isMine() && player.isReady) {
+        readyCount++;
       }
     }
-    if (0 != e && e === this.players.length - 1) {
+    if (0 != readyCount && readyCount === this.players.length - 1) {
       this.sendStart();
     } else if (GamePlayManager.default.getInstance().isHostSentStartWarningOtherNotReady) {
       this.sendStart();
     } else {
-      var o = CommonPrefabsManager.default.getInstance().showPopup2Button();
-      o.onOKClicked = function() {
-        o.hide();
-        t.sendStart();
+      var confirmPopup = CommonPrefabsManager.default.getInstance().showPopup2Button();
+      confirmPopup.onOKClicked = function() {
+        confirmPopup.hide();
+        _this.sendStart();
       };
-      o.onCancelClicked = function() {
-        o.hide();
+      confirmPopup.onCancelClicked = function() {
+        confirmPopup.hide();
       };
-      o.setContent("C\xf3 ng\u01b0\u1eddi ch\u01a1i ch\u01b0a s\u1eb5n s\xe0ng, b\u1ea1n c\xf3 mu\u1ed1n b\u1eaft \u0111\u1ea7u?");
+      confirmPopup.setContent("C\xf3 ng\u01b0\u1eddi ch\u01a1i ch\u01b0a s\u1eb5n s\xe0ng, b\u1ea1n c\xf3 mu\u1ed1n b\u1eaft \u0111\u1ea7u?");
       GamePlayManager.default.getInstance().isHostSentStartWarningOtherNotReady = true;
-      this.popupHasPlayerNotReady = o;
+      this.popupHasPlayerNotReady = confirmPopup;
     }
   };
-  e.prototype.getViewPositionOfViewingPlayer = function(t, e) {
-    if (t.isMine()) {
-      for (var n = false, o = this.inviteBtns[0].position, a = 0; a < this.players.length; ++a) {
-        t = this.players[a];
-        if (StringUtil.default.checkVec2Equal(t.pos, o)) {
-          n = true;
+  GameController.prototype.getViewPositionOfViewingPlayer = function(player, playerIndex) {
+    if (player.isMine()) {
+      for (var isFirstSlotTaken = false, firstSlotPosition = this.inviteBtns[0].position, index = 0; index < this.players.length; ++index) {
+        player = this.players[index];
+        if (StringUtil.default.checkVec2Equal(player.pos, firstSlotPosition)) {
+          isFirstSlotTaken = true;
           break;
         }
       }
-      if (!n) {
-        t.indexPos = 0;
-        return o;
+      if (!isFirstSlotTaken) {
+        player.indexPos = 0;
+        return firstSlotPosition;
       }
     }
-    for (a = 0; a < this.inviteBtns.length; ++a) {
-      var s = this.inviteBtns[a];
-      if (s.active) {
-        t.indexPos = a;
-        s.active = false;
-        return s.position;
+    for (index = 0; index < this.inviteBtns.length; ++index) {
+      var slotNode = this.inviteBtns[index];
+      if (slotNode.active) {
+        player.indexPos = index;
+        slotNode.active = false;
+        return slotNode.position;
       }
     }
-    return new cc.Vec2(i.posOutScreen.x, i.posOutScreen.y);
+    return new cc.Vec2(moduleExports.posOutScreen.x, moduleExports.posOutScreen.y);
   };
-  e.prototype.updateViewingPlayerPositions = function() {
-    this.pendingJoinPlayers.sort(function(t, e) {
-      return t.sit > e.sit ? 1 : t.sit < e.sit ? -1 : 0;
+  GameController.prototype.updateViewingPlayerPositions = function() {
+    this.pendingJoinPlayers.sort(function(playerA, playerB) {
+      return playerA.sit > playerB.sit ? 1 : playerA.sit < playerB.sit ? -1 : 0;
     });
-    for (var t = 0; t < this.pendingJoinPlayers.length; ++t) {
-      var e = this.pendingJoinPlayers[t];
-      this.showPlayerViewBauCua(e, true);
-      e.iconnReady.active = false;
-      e.kickButton.active = false;
-      e.runViewAction();
-      if (StringUtil.default.checkVec2Equal(e.node.position, cc.Vec2.ZERO) || this.state === MessageCardGameHandler.GameState.WAITING) {
-        e.pos = this.getViewPositionOfViewingPlayer(e, t);
-        if (this.state !== MessageCardGameHandler.GameState.VIEWING || e.isMine() || this._joinedTable) {
-          e.runToPos(this.size);
+    for (var playerIndex = 0; playerIndex < this.pendingJoinPlayers.length; ++playerIndex) {
+      var player = this.pendingJoinPlayers[playerIndex];
+      this.showPlayerViewBauCua(player, true);
+      player.iconnReady.active = false;
+      player.kickButton.active = false;
+      player.runViewAction();
+      if (StringUtil.default.checkVec2Equal(player.node.position, cc.Vec2.ZERO) || this.state === MessageCardGameHandler.GameState.WAITING) {
+        player.pos = this.getViewPositionOfViewingPlayer(player, playerIndex);
+        if (this.state !== MessageCardGameHandler.GameState.VIEWING || player.isMine() || this._joinedTable) {
+          player.runToPos(this.size);
         } else {
-          e.node.position = e.pos;
+          player.node.position = player.pos;
         }
       }
     }
   };
-  e.prototype.removePlayer = function(t) {
+  GameController.prototype.removePlayer = function(userId) {
     if (this.state !== MessageCardGameHandler.GameState.WAITING) {
-      for (var e = 0; e < this.pendingJoinPlayers.length; ++e) {
-        var i = this.pendingJoinPlayers[e];
-        if (0 === i.userID.localeCompare(t)) {
-          if (void 0 != this.inviteBtns[i.indexPos] && null != this.inviteBtns[i.indexPos]) {
-            this.inviteBtns[i.indexPos].active = true;
-            this.emoSlotIndexPos[i.indexPos].hide();
+      for (var playerIndex = 0; playerIndex < this.pendingJoinPlayers.length; ++playerIndex) {
+        var viewingPlayer = this.pendingJoinPlayers[playerIndex];
+        if (0 === viewingPlayer.userID.localeCompare(userId)) {
+          if (void 0 != this.inviteBtns[viewingPlayer.indexPos] && null != this.inviteBtns[viewingPlayer.indexPos]) {
+            this.inviteBtns[viewingPlayer.indexPos].active = true;
+            this.emoSlotIndexPos[viewingPlayer.indexPos].hide();
           }
-          this.pendingJoinPlayers.splice(e, 1);
-          delete this.AllPlayers[t];
+          this.pendingJoinPlayers.splice(playerIndex, 1);
+          delete this.AllPlayers[userId];
           this.updateViewingPlayerPositions();
           if (this.autoReady && GamePlayManager.default.getInstance().gameID !== MessageCardGameHandler.GAME.BINH) {
-            if (i.isMine()) {
+            if (viewingPlayer.isMine()) {
               this.isHost = false;
             } else {
               this._daNgoi;
             }
           }
-          return void i.destroyMe();
+          return void viewingPlayer.destroyMe();
         }
       }
-      var n = this.getPlayer(t);
-      if (null !== n && void 0 !== n) {
-        n.removeChat();
-        if (this.autoReady && GamePlayManager.default.getInstance().gameID !== MessageCardGameHandler.GAME.BINH && n.isMine()) {
-          if (n.checkInThisArray(this.playersPlaying)) {
-            this.pendingRemovePlayers.push(n);
-            n.iconQuit.active = true;
+      var player = this.getPlayer(userId);
+      if (null !== player && void 0 !== player) {
+        player.removeChat();
+        if (this.autoReady && GamePlayManager.default.getInstance().gameID !== MessageCardGameHandler.GAME.BINH && player.isMine()) {
+          if (player.checkInThisArray(this.playersPlaying)) {
+            this.pendingRemovePlayers.push(player);
+            player.iconQuit.active = true;
           } else {
-            this.players.splice(n.index, 1);
+            this.players.splice(player.index, 1);
             this.updateViewPostions(false, true);
-            n.node.removeFromParent(true);
-            delete this.AllPlayers[t];
+            player.node.removeFromParent(true);
+            delete this.AllPlayers[userId];
           }
         } else {
-          this.pendingRemovePlayers.push(n);
-          n.iconQuit.active = true;
+          this.pendingRemovePlayers.push(player);
+          player.iconQuit.active = true;
         }
       }
     } else {
-      for (e = 0; e < this.players.length; e++) {
-        var o = this.players[e];
-        if (0 === o.userID.localeCompare(t)) {
-          this.emoSlotIndexPos[o.indexPos].hide();
-          o.removeChat();
-          o.cards.forEach(function(t) {
-            t.node.removeFromParent(true);
+      for (playerIndex = 0; playerIndex < this.players.length; playerIndex++) {
+        var seatedPlayer = this.players[playerIndex];
+        if (0 === seatedPlayer.userID.localeCompare(userId)) {
+          this.emoSlotIndexPos[seatedPlayer.indexPos].hide();
+          seatedPlayer.removeChat();
+          seatedPlayer.cards.forEach(function(card) {
+            card.node.removeFromParent(true);
           });
           if (this.players.length <= 1 && null != this.cardGameTableController) {
             this.cardGameTableController.stopProgressStartGame();
             this.cardGameTableController.hideReadyBtn();
           }
-          o.node.removeFromParent(true);
-          this.players.splice(e, 1);
-          delete this.AllPlayers[t];
+          seatedPlayer.node.removeFromParent(true);
+          this.players.splice(playerIndex, 1);
+          delete this.AllPlayers[userId];
           break;
         }
       }
@@ -888,23 +888,23 @@ var M = function(t) {
       }
     }
   };
-  e.prototype.onLogOut = function() {};
-  e.prototype.hideAllEmoticon = function() {
-    for (var t = 0; t < this.emoSlotIndexPos.length; t++) {
-      this.emoSlotIndexPos[t].hide();
+  GameController.prototype.onLogOut = function() {};
+  GameController.prototype.hideAllEmoticon = function() {
+    for (var slotIndex = 0; slotIndex < this.emoSlotIndexPos.length; slotIndex++) {
+      this.emoSlotIndexPos[slotIndex].hide();
     }
   };
-  e.prototype.handleLeaveRoomResponse = function() {
-    var t = this;
+  GameController.prototype.handleLeaveRoomResponse = function() {
+    var _this = this;
     if (this.isClickExit = false, this.cardGameTableController.handleLeaveRoom(), !GamePlayManager.default.getInstance().onLogOutKickUser()) {
       if (this.hideAllEmoticon(), GamePlayManager.default.getInstance().gameID == MessageCardGameHandler.GAME.BACAY) {
-        for (var e = 0; e < this.playersPlaying.length; e++) {
-          this.playersPlaying[e].getComponent(PlayerView.default).reset();
+        for (var playerIndex = 0; playerIndex < this.playersPlaying.length; playerIndex++) {
+          this.playersPlaying[playerIndex].getComponent(PlayerView.default).reset();
         }
       }
       if (this.isDelayLeave) {
         this.node.runAction(cc.sequence(cc.delayTime(3), cc.callFunc(function() {
-          t.mainGameViewModel.showGameList(t.LeaveRoomMessage);
+          _this.mainGameViewModel.showGameList(_this.LeaveRoomMessage);
         })));
         this.isDelayLeave = false;
       } else {
@@ -912,7 +912,7 @@ var M = function(t) {
       }
     }
   };
-  e.prototype.sendLeaveRoom = function() {
+  GameController.prototype.sendLeaveRoom = function() {
     CardGameCommonRequest.default.getInstance().sendLeaveRoom();
     if ("1" == cc.sys.localStorage.getItem("isPlayBauCua")) {
       cc.sys.localStorage.setItem("isPlayBauCua", "0");
@@ -922,86 +922,86 @@ var M = function(t) {
     }
     this.isClickExit = true;
   };
-  e.prototype.getMinePlayer = function() {
-    for (var t = 0; t < this.players.length; ++t) {
-      var e = this.players[t];
-      if (e.isMine()) {
-        return e;
+  GameController.prototype.getMinePlayer = function() {
+    for (var playerIndex = 0; playerIndex < this.players.length; ++playerIndex) {
+      var player = this.players[playerIndex];
+      if (player.isMine()) {
+        return player;
       }
     }
     return null;
   };
-  e.prototype.showChat = function(t, e, i, n, o, a) {
-    if (void 0 === n && (n = false), void 0 === o && (o = ""), void 0 === a && (a = 0), 0 !== i.length && " " !== i && !this
+  GameController.prototype.showChat = function(chatData, userId, message, isFromBatch, displayName, chatType) {
+    if (void 0 === isFromBatch && (isFromBatch = false), void 0 === displayName && (displayName = ""), void 0 === chatType && (chatType = 0), 0 !== message.length && " " !== message && !this
       .isGameAnDanhCheck) {
-      if (0 === a) {
-        var s = this.getPlayer(e);
-        this.showChatForVisibliePlayer(s, i, n);
+      if (0 === chatType) {
+        var player = this.getPlayer(userId);
+        this.showChatForVisibliePlayer(player, message, isFromBatch);
       }
       if (this.cardGameTableController) {
-        if (0 === a) {
-          var c = I;
-          if (0 !== e.localeCompare(GamePlayManager.default.getInstance().userID)) {
-            c = A;
+        if (0 === chatType) {
+          var nameColor = colorChatMine;
+          if (0 !== userId.localeCompare(GamePlayManager.default.getInstance().userID)) {
+            nameColor = colorChatOther;
           }
-          this.cardGameTableController.loadChat(t, i, o, false, -1, c, c);
+          this.cardGameTableController.loadChat(chatData, message, displayName, false, -1, nameColor, nameColor);
         } else {
-          this.cardGameTableController.loadChat(t, i, "", true, -1, P, P);
+          this.cardGameTableController.loadChat(chatData, message, "", true, -1, colorChatSystem, colorChatSystem);
         }
       }
     }
   };
-  e.prototype.getListChatDefaultText = function() {
+  GameController.prototype.getListChatDefaultText = function() {
     return ["\u0110\xe1nh l\u1eb9 \u0111i pa", "Heo \u0111\xe2u, heo \u0111\xe2u", "Gi\u1ebft c\xf3ng m\u1ea5y ch\xfa", "Xui vl",
       "Th\xfai heo n\xe8", "Nu\xf4i heo h\u1ea3 c\u01b0ng", "M\xecnh anh ch\u1ea5p h\u1ebft", "T\u1edbi Tr\u1eafng n\xe8",
       "Th\u1eafng r\u1ed3i yeah yeah"
     ];
   };
-  e.prototype.locPlayingPlayer = function(t) {
-    var e = [];
+  GameController.prototype.locPlayingPlayer = function(playingUserIds) {
+    var playingPlayers = [];
     this.players = [];
-    for (var i = 0; i < t.length; ++i) {
-      var n = this.AllPlayers[t[i]];
-      if (null !== n && void 0 !== n) {
-        e.push(n);
-        this.players.push(n);
+    for (var playerIndex = 0; playerIndex < playingUserIds.length; ++playerIndex) {
+      var player = this.AllPlayers[playingUserIds[playerIndex]];
+      if (null !== player && void 0 !== player) {
+        playingPlayers.push(player);
+        this.players.push(player);
       }
     }
-    for (var o in this.pendingJoinPlayers = [], this.AllPlayers) {
-      var a = this.AllPlayers[o];
-      if (!(null === a || void 0 === a || a.checkInThisArray(e))) {
-        if (a.isMine()) {
-          this.players.push(a);
+    for (var userId in this.pendingJoinPlayers = [], this.AllPlayers) {
+      var otherPlayer = this.AllPlayers[userId];
+      if (!(null === otherPlayer || void 0 === otherPlayer || otherPlayer.checkInThisArray(playingPlayers))) {
+        if (otherPlayer.isMine()) {
+          this.players.push(otherPlayer);
         } else {
-          this.pendingJoinPlayers.push(a);
+          this.pendingJoinPlayers.push(otherPlayer);
         }
       }
     }
     this.playersPlaying = [];
-    this.playersPlaying = e;
+    this.playersPlaying = playingPlayers;
     this.updateViewPostions(false, true);
   };
-  e.prototype.startBetting = function(t) {
-    if (!(t <= 0)) {
+  GameController.prototype.startBetting = function(remainingTime) {
+    if (!(remainingTime <= 0)) {
       if (this.players.length <= 1) {
         if (null != this.cardGameTableController) {
           this.cardGameTableController.stopProgressStartGame();
         }
       } else {
         if (null != this.cardGameTableController) {
-          this.cardGameTableController.startBetting(t, 7);
+          this.cardGameTableController.startBetting(remainingTime, 7);
         }
       }
     }
   };
-  e.prototype.updateMoneys = function() {};
-  e.prototype.updateMoneysMsg = function(t) {
-    this.moneys = t;
-    for (var e = 0; e < this.moneys.length; e++) {
-      var i = this.moneys[e].uid;
-      if (!StringUtil.default.isNullOrEmpty(i) && 0 === i.localeCompare(GamePlayManager.default.getInstance().userID)) {
-        var n = this.moneys[e].m;
-        GamePlayManager.default.getInstance().gold = n;
+  GameController.prototype.updateMoneys = function() {};
+  GameController.prototype.updateMoneysMsg = function(moneyList) {
+    this.moneys = moneyList;
+    for (var moneyIndex = 0; moneyIndex < this.moneys.length; moneyIndex++) {
+      var userId = this.moneys[moneyIndex].uid;
+      if (!StringUtil.default.isNullOrEmpty(userId) && 0 === userId.localeCompare(GamePlayManager.default.getInstance().userID)) {
+        var money = this.moneys[moneyIndex].m;
+        GamePlayManager.default.getInstance().gold = money;
         if (null !== this.mainGameViewModel && void 0 !== this.mainGameViewModel && null !== this.mainGameViewModel.headerUi &&
           void 0 !== this.mainGameViewModel.headerUi) {
           this.mainGameViewModel.headerUi.updateUI();
@@ -1009,43 +1009,43 @@ var M = function(t) {
       }
     }
   };
-  e.prototype.refreshMoney = function(t) {
-    var e = t.vip,
-      i = t.gold,
-      n = t.chip,
-      o = t.safe;
-    GamePlayManager.default.getInstance().vip = e;
-    GamePlayManager.default.getInstance().gold = i;
-    GamePlayManager.default.getInstance().chip = n;
-    GamePlayManager.default.getInstance().goldSafe = o;
+  GameController.prototype.refreshMoney = function(assets) {
+    var vip = assets.vip,
+      gold = assets.gold,
+      chip = assets.chip,
+      goldSafe = assets.safe;
+    GamePlayManager.default.getInstance().vip = vip;
+    GamePlayManager.default.getInstance().gold = gold;
+    GamePlayManager.default.getInstance().chip = chip;
+    GamePlayManager.default.getInstance().goldSafe = goldSafe;
     if (this.gameRutTien && null !== this._thisPlayerView && void 0 !== this._thisPlayerView) {
-      this._thisPlayerView._realMoney = i;
+      this._thisPlayerView._realMoney = gold;
     }
   };
-  e.prototype.removeNodeFromParent = function(t, e) {
-    e.removeFromParent(true);
+  GameController.prototype.removeNodeFromParent = function(t, node) {
+    node.removeFromParent(true);
   };
-  e.prototype.checkGameIsDOneAndWaitingToStart = function() {
+  GameController.prototype.checkGameIsDOneAndWaitingToStart = function() {
     return !this._dangPhatBai;
   };
-  e.prototype.setHostPlayer = function(t) {
-    this.isHost = 0 === t.localeCompare(GamePlayManager.default.getInstance().userID);
-    var e = false;
-    if (this.players.forEach(function(i) {
-        if (0 === i.userID.localeCompare(t)) {
-          i.isHost = true;
-          i.iconnReady.active = false;
-          i.iconHost.active = true;
-          e = true;
+  GameController.prototype.setHostPlayer = function(userId) {
+    this.isHost = 0 === userId.localeCompare(GamePlayManager.default.getInstance().userID);
+    var isHostFound = false;
+    if (this.players.forEach(function(player) {
+        if (0 === player.userID.localeCompare(userId)) {
+          player.isHost = true;
+          player.iconnReady.active = false;
+          player.iconHost.active = true;
+          isHostFound = true;
         } else {
-          i.isHost = false;
-          i.iconHost.active = false;
+          player.isHost = false;
+          player.iconHost.active = false;
         }
-      }), !e) {
-      var i = this.getPlayer(t);
-      if (null !== i && void 0 !== i) {
-        i.isHost = true;
-        i.iconHost.active = true;
+      }), !isHostFound) {
+      var player = this.getPlayer(userId);
+      if (null !== player && void 0 !== player) {
+        player.isHost = true;
+        player.iconHost.active = true;
       }
     }
     if (this.isHost) {
@@ -1055,10 +1055,10 @@ var M = function(t) {
       }
     }
   };
-  e.prototype.handlePendingPlayers = function() {
+  GameController.prototype.handlePendingPlayers = function() {
     this.tuDongGuiSanSang = GameConfigManager.default.getInstance().autoReady;
   };
-  e.prototype.checkAndQuitRoom = function() {
+  GameController.prototype.checkAndQuitRoom = function() {
     if (this._forcedQuit) {
       this.onLogOut();
       return true;
@@ -1087,7 +1087,7 @@ var M = function(t) {
     }
     return false;
   };
-  e.prototype.onUserClickExit = function() {
+  GameController.prototype.onUserClickExit = function() {
     if (this._dangPhatBai || this.state === MessageCardGameHandler.GameState.PLAYING) {
       return this._subscribedToGetOut ? (this._subscribedToGetOut = false, CommonPrefabsManager.default.getInstance().showPopupMessageUtil(
           "B\u1ea1n s\u1ebd \u1edf l\u1ea1i ch\u01a1i ti\u1ebfp."), this.cardGameTableController.inGameBackPopup.btnExit.spriteFrame =
@@ -1104,70 +1104,70 @@ var M = function(t) {
     }
     this.sendLeaveRoom();
   };
-  e.prototype.setDelayLeaveRoom = function() {
+  GameController.prototype.setDelayLeaveRoom = function() {
     if (this.isClickExit) {
       this.isDelayLeave = true;
     } else {
       this.isDelayLeave = false;
     }
   };
-  e.prototype.getCmdStart = function() {
-    return c.Global_Message.START_GAME_CARD;
+  GameController.prototype.getCmdStart = function() {
+    return MessageCardGame.Global_Message.START_GAME_CARD;
   };
-  e.prototype.getNameGame = function() {
+  GameController.prototype.getNameGame = function() {
     return "";
   };
-  e.prototype.getTag = function() {
+  GameController.prototype.getTag = function() {
     return "";
   };
-  e.prototype.getSpriteFrameName = function() {
+  GameController.prototype.getSpriteFrameName = function() {
     return null;
   };
-  e.prototype.removePendingPlayers = function() {
-    for (var t = 0; t < this.pendingRemovePlayers.length; t++) {
-      for (var e = this.pendingRemovePlayers[t], i = 0; i < this.players.length; i++) {
-        var n = this.players[i];
-        if (0 === n.userID.localeCompare(e.userID)) {
-          delete this.AllPlayers[e.userID];
+  GameController.prototype.removePendingPlayers = function() {
+    for (var pendingIndex = 0; pendingIndex < this.pendingRemovePlayers.length; pendingIndex++) {
+      for (var pendingPlayer = this.pendingRemovePlayers[pendingIndex], playerIndex = 0; playerIndex < this.players.length; playerIndex++) {
+        var player = this.players[playerIndex];
+        if (0 === player.userID.localeCompare(pendingPlayer.userID)) {
+          delete this.AllPlayers[pendingPlayer.userID];
           true;
-          this.players.splice(i, 1);
-          this.reAddPlayerViewToPooling(n);
+          this.players.splice(playerIndex, 1);
+          this.reAddPlayerViewToPooling(player);
           break;
         }
       }
     }
-    for (t = 0; t < this.pendingJoinPlayers.length; t++) {
-      (e = this.pendingJoinPlayers[t]).index = this.players.length;
-      this.players.push(e);
-      e.pos = this.getViewPositionOfPlayer(e, e.index);
+    for (pendingIndex = 0; pendingIndex < this.pendingJoinPlayers.length; pendingIndex++) {
+      (pendingPlayer = this.pendingJoinPlayers[pendingIndex]).index = this.players.length;
+      this.players.push(pendingPlayer);
+      pendingPlayer.pos = this.getViewPositionOfPlayer(pendingPlayer, pendingPlayer.index);
     }
     this.pendingJoinPlayers = [];
     this.pendingRemovePlayers = [];
     this.updateViewPostions(false, true);
   };
-  e.prototype.onEndGame = function() {
+  GameController.prototype.onEndGame = function() {
     if (GameConfigManager.default.getInstance().enviromentName.indexOf("pre") >= 0) {
       ErrorLogHandler.default.getInstance().sendLog([this.getTag(), this._thisPlayerView.userID, "vanchoi"], true);
     }
   };
-  e.prototype.onFocus = function(t) {
+  GameController.prototype.onFocus = function(t) {
     this.isInBgMode = false;
   };
-  e.prototype.onLostFocus = function() {
+  GameController.prototype.onLostFocus = function() {
     this.isInBgMode = true;
   };
-  e.prototype.checkNeedRemoveAnnDanh = function() {
-    for (var t = 0; t < this.playersPlaying.length; ++t) {
-      if (this.playersPlaying[t].isMine()) {
+  GameController.prototype.checkNeedRemoveAnnDanh = function() {
+    for (var playerIndex = 0; playerIndex < this.playersPlaying.length; ++playerIndex) {
+      if (this.playersPlaying[playerIndex].isMine()) {
         return true;
       }
     }
     return false;
   };
-  e.prototype.showuserAnDanh = function() {
+  GameController.prototype.showuserAnDanh = function() {
     if (false !== this.checkNeedRemoveAnnDanh()) {
-      for (var t = 0; t < this.playersPlaying.length; ++t) {
-        this.playersPlaying[t].showAnDanhWhenDone();
+      for (var playerIndex = 0; playerIndex < this.playersPlaying.length; ++playerIndex) {
+        this.playersPlaying[playerIndex].showAnDanhWhenDone();
       }
       if (null != this.cardGameTableController) {
         this.cardGameTableController.setGameId(this.coPass);
@@ -1175,137 +1175,137 @@ var M = function(t) {
       this.isGameAnDanhCheck = false;
     }
   };
-  e.prototype.runWinAction = function(t, e) {
-    var i = this.winEffectList[e];
-    i.stopAllActions();
-    i.active = true;
-    i.runAction(cc.sequence(cc.delayTime(t), cc.callFunc(function() {
-      i.active = false;
+  GameController.prototype.runWinAction = function(duration, slotIndex) {
+    var winEffectNode = this.winEffectList[slotIndex];
+    winEffectNode.stopAllActions();
+    winEffectNode.active = true;
+    winEffectNode.runAction(cc.sequence(cc.delayTime(duration), cc.callFunc(function() {
+      winEffectNode.active = false;
     })));
   };
-  e.prototype.showMoneyFxForPlayerWin = function(t, e, i, n, o, a, s) {
-    if (void 0 === s && (s = 25), !(t <= 0)) {
-      var r = this.winTextEffectList[i].node;
-      r.stopAllActions();
-      r.active = true;
-      r.position = new cc.Vec2(o, a - s * n);
-      this.winTextEffectList[i].setNumber(t, false);
-      r.scaleX = .2 * n;
-      r.opacity = 255;
-      r.runAction(cc.sequence(cc.scaleTo(.2, n), cc.moveBy(.3, new cc.Vec2(0, s * n * 2)), cc.delayTime(e - 1), cc.fadeOut(.5), cc
+  GameController.prototype.showMoneyFxForPlayerWin = function(money, duration, slotIndex, scale, posX, posY, offsetY) {
+    if (void 0 === offsetY && (offsetY = 25), !(money <= 0)) {
+      var winTextNode = this.winTextEffectList[slotIndex].node;
+      winTextNode.stopAllActions();
+      winTextNode.active = true;
+      winTextNode.position = new cc.Vec2(posX, posY - offsetY * scale);
+      this.winTextEffectList[slotIndex].setNumber(money, false);
+      winTextNode.scaleX = .2 * scale;
+      winTextNode.opacity = 255;
+      winTextNode.runAction(cc.sequence(cc.scaleTo(.2, scale), cc.moveBy(.3, new cc.Vec2(0, offsetY * scale * 2)), cc.delayTime(duration - 1), cc.fadeOut(.5), cc
         .callFunc(function() {
-          r.active = false;
+          winTextNode.active = false;
         })));
     }
   };
-  e.prototype.getPlayerView = function() {
+  GameController.prototype.getPlayerView = function() {
     return cc.instantiate(this.playerAvartaPrefabs);
   };
-  e.prototype.reAddPlayerViewToPooling = function(t) {
-    t.destroyMe();
+  GameController.prototype.reAddPlayerViewToPooling = function(player) {
+    player.destroyMe();
   };
-  e.prototype.getEmoIndex = function(t) {
+  GameController.prototype.getEmoIndex = function(chatMessage) {
     if (null !== this.listChatIconConfig && void 0 !== this.listChatIconConfig) {
-      var e = this.listChatIconConfig.dataMaping[t];
-      if (null !== e && void 0 !== e) {
-        return e;
+      var emoIndex = this.listChatIconConfig.dataMaping[chatMessage];
+      if (null !== emoIndex && void 0 !== emoIndex) {
+        return emoIndex;
       }
     }
     return -1;
   };
-  e.prototype.checkAndShowEmo = function(t, e) {
+  GameController.prototype.checkAndShowEmo = function(player, chatMessage) {
     if (null !== this.listChatIconConfig && void 0 !== this.listChatIconConfig) {
-      var i = this.listChatIconConfig.dataMaping[e];
-      if (null !== i && void 0 !== i) {
-        return !(t.indexPos < this.emoSlotIndexPos.length) || (this.emoSlotIndexPos[t.indexPos].setAnim(i), this.emoSlotIndexPos[t
-            .indexPos].node.zIndex = t.node.zIndex + 1, this.emoSlotIndexPos[t.indexPos].node.scale = t.node.scale, this
-          .emoSlotIndexPos[t.indexPos].node.position = t.node.position, true);
+      var emoIndex = this.listChatIconConfig.dataMaping[chatMessage];
+      if (null !== emoIndex && void 0 !== emoIndex) {
+        return !(player.indexPos < this.emoSlotIndexPos.length) || (this.emoSlotIndexPos[player.indexPos].setAnim(emoIndex), this.emoSlotIndexPos[player
+            .indexPos].node.zIndex = player.node.zIndex + 1, this.emoSlotIndexPos[player.indexPos].node.scale = player.node.scale, this
+          .emoSlotIndexPos[player.indexPos].node.position = player.node.position, true);
       }
     }
     return false;
   };
-  e.prototype.showChatForVisibliePlayer = function(t, e, i) {
-    if (void 0 === i) {
-      i = false;
+  GameController.prototype.showChatForVisibliePlayer = function(player, message, isFromBatch) {
+    if (void 0 === isFromBatch) {
+      isFromBatch = false;
     }
-    if (null !== t && void 0 !== t) {
-      if (!this.checkAndShowEmo(t, e)) {
-        t.showChat(e);
+    if (null !== player && void 0 !== player) {
+      if (!this.checkAndShowEmo(player, message)) {
+        player.showChat(message);
       }
     }
   };
-  e.prototype.showPlayerViewBauCua = function(t, e) {
-    if (t.node.active !== e) {
-      t.node.active = e;
+  GameController.prototype.showPlayerViewBauCua = function(player, isVisible) {
+    if (player.node.active !== isVisible) {
+      player.node.active = isVisible;
     }
   };
-  e.prototype.checkSpamChat = function() {
+  GameController.prototype.checkSpamChat = function() {
     return "";
   };
-  e.prototype.getPosanDanh4 = function() {
+  GameController.prototype.getPosanDanh4 = function() {
     return 1;
   };
-  e.prototype.initUserAnDanh4 = function(t) {
-    if (void 0 === t) {
-      t = false;
+  GameController.prototype.initUserAnDanh4 = function(isViewing) {
+    if (void 0 === isViewing) {
+      isViewing = false;
     }
-    var e = this.getPlayerView();
-    e.parent = this.node;
-    e.zIndex = GameZOrder.default.BOTTOM;
-    e.position = this.inviteBtns[this.getPosanDanh4()].position;
-    e.scale = this.scalePlayerOther;
-    e.active = false;
-    this.playerViewpos4AnDanh = e.getComponent(PlayerView.default);
+    var playerNode = this.getPlayerView();
+    playerNode.parent = this.node;
+    playerNode.zIndex = GameZOrder.default.BOTTOM;
+    playerNode.position = this.inviteBtns[this.getPosanDanh4()].position;
+    playerNode.scale = this.scalePlayerOther;
+    playerNode.active = false;
+    this.playerViewpos4AnDanh = playerNode.getComponent(PlayerView.default);
     this.playerViewpos4AnDanh.userID = "ddasdsadsadaszzzz12a091";
     this.playerViewpos4AnDanh.isAnDanh = true;
-    if (t) {
+    if (isViewing) {
       this.playerViewpos4AnDanh.runViewAction();
     }
   };
-  e.prototype.showHideuserAnDanh4 = function(t) {
+  GameController.prototype.showHideuserAnDanh4 = function(isVisible) {
     if (null !== this.playerViewpos4AnDanh && void 0 !== this.playerViewpos4AnDanh) {
-      this.playerViewpos4AnDanh.node.active = t;
-      for (var e = 0; e < this.playerViewpos4AnDanh.cards.length; ++e) {
-        this.playerViewpos4AnDanh.cards[e].node.active = t;
+      this.playerViewpos4AnDanh.node.active = isVisible;
+      for (var cardIndex = 0; cardIndex < this.playerViewpos4AnDanh.cards.length; ++cardIndex) {
+        this.playerViewpos4AnDanh.cards[cardIndex].node.active = isVisible;
       }
     }
   };
-  e.prototype.showViewTableMessage = function() {
+  GameController.prototype.showViewTableMessage = function() {
     this.scheduleOnce(function() {
       CommonPrefabsManager.default.getInstance().showPopupMessageUtil("B\xe0n \u0111ang ch\u01a1i, xin vui l\xf2ng ch\u1edd!");
     }, .5);
   };
-  e.prototype.processCheckToOffAnDanh4 = function() {
-    for (var t = 0, e = 0; e < this.players.length; e++) {
-      if (!this.players[e].isAnDanh) {
-        t++;
+  GameController.prototype.processCheckToOffAnDanh4 = function() {
+    for (var nonAnonymousPlayerCount = 0, playerIndex = 0; playerIndex < this.players.length; playerIndex++) {
+      if (!this.players[playerIndex].isAnDanh) {
+        nonAnonymousPlayerCount++;
       }
     }
-    if (t >= 4) {
+    if (nonAnonymousPlayerCount >= 4) {
       this.playerViewpos4AnDanh.node.active = false;
     }
   };
-  e.prototype.removePendingPlayerWith = function(t) {
-    for (var e = 0; e < this.pendingRemovePlayers.length; ++e) {
-      if (0 === this.pendingRemovePlayers[e].userID.localeCompare(t)) {
-        this.pendingRemovePlayers.splice(e, 1);
+  GameController.prototype.removePendingPlayerWith = function(userId) {
+    for (var pendingIndex = 0; pendingIndex < this.pendingRemovePlayers.length; ++pendingIndex) {
+      if (0 === this.pendingRemovePlayers[pendingIndex].userID.localeCompare(userId)) {
+        this.pendingRemovePlayers.splice(pendingIndex, 1);
         break;
       }
     }
   };
-  e.prototype.getChatHistory = function() {
+  GameController.prototype.getChatHistory = function() {
     return this.listChatHistory;
   };
-  e.prototype.onWsCardClose = function() {};
-  o([E(cc.Prefab)], e.prototype, "playerAvartaPrefabs", void 0);
-  o([E(cc.Prefab)], e.prototype, "btnInvitePrefabs", void 0);
-  o([E(cc.Prefab)], e.prototype, "prefabsGameCard", void 0);
-  o([E([cc.Node])], e.prototype, "listBtnInvitePos", void 0);
-  o([E(cc.Node)], e.prototype, "rutTienBtn", void 0);
-  o([E(cc.Prefab)], e.prototype, "prefabsCardGameTableController", void 0);
-  o([E(cc.Prefab)], e.prototype, "winEffectPrefab", void 0);
-  o([E(cc.Prefab)], e.prototype, "winTextEffectPrefab", void 0);
-  return e = o([T], e);
+  GameController.prototype.onWsCardClose = function() {};
+  __decorate([property(cc.Prefab)], GameController.prototype, "playerAvartaPrefabs", void 0);
+  __decorate([property(cc.Prefab)], GameController.prototype, "btnInvitePrefabs", void 0);
+  __decorate([property(cc.Prefab)], GameController.prototype, "prefabsGameCard", void 0);
+  __decorate([property([cc.Node])], GameController.prototype, "listBtnInvitePos", void 0);
+  __decorate([property(cc.Node)], GameController.prototype, "rutTienBtn", void 0);
+  __decorate([property(cc.Prefab)], GameController.prototype, "prefabsCardGameTableController", void 0);
+  __decorate([property(cc.Prefab)], GameController.prototype, "winEffectPrefab", void 0);
+  __decorate([property(cc.Prefab)], GameController.prototype, "winTextEffectPrefab", void 0);
+  return GameController = __decorate([ccclass], GameController);
 }(cc.Component);
-i.default = M;
+moduleExports.default = GameController;
 void 0;

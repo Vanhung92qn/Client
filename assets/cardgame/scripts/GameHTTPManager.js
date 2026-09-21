@@ -1,576 +1,576 @@
-var t = require,
-  e = module,
-  i = exports;
+var requireRef = require,
+  moduleRef = module,
+  moduleExports = exports;
 "use strict";
 void 0;
-Object.defineProperty(i, "__esModule", {
+Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
 var LocalizeManager = require("./LocalizeManager"),
   StringUtil = require("./StringUtil"),
   FgIDConfigManager = require("./FgIDConfigManager"),
   GamePlayManager = require("./GamePlayManager"),
-  r = "Kh\xf4ng th\u1ec3 k\u1ebft n\u1ed1i \u0111\u1ebfn m\xe1y ch\u1ee7, xin h\xe3y th\u1eed l\u1ea1i.",
-  c = "K\u1ebft n\u1ed1i \u0111\u1ebfn m\xe1y ch\u1ee7 th\u1ea5t b\u1ea1i!",
-  l = function() {
-    function t() {}
-    t.getInstance = function() {
+  defaultErrorMsg = "Kh\xf4ng th\u1ec3 k\u1ebft n\u1ed1i \u0111\u1ebfn m\xe1y ch\u1ee7, xin h\xe3y th\u1eed l\u1ea1i.",
+  msgTimeoutError = "K\u1ebft n\u1ed1i \u0111\u1ebfn m\xe1y ch\u1ee7 th\u1ea5t b\u1ea1i!",
+  GameHTTPManager = function() {
+    function GameHTTPManager() {}
+    GameHTTPManager.getInstance = function() {
       if (!(null !== this.Instance && void 0 !== this.Instance)) {
-        this.Instance = new t();
+        this.Instance = new GameHTTPManager();
       }
       return this.Instance;
     };
-    t.prototype.sendGetHttpRequest = function(t, e, i, n) {
-      if (void 0 === n) {
-        n = false;
+    GameHTTPManager.prototype.sendGetHttpRequest = function(url, onSuccess, onErrorMessage, useToken) {
+      if (void 0 === useToken) {
+        useToken = false;
       }
-      var l = new XMLHttpRequest();
-      l.onreadystatechange = function() {
-        if (4 == l.readyState) {
-          if (l.status >= 200 && l.status < 400) {
-            var t = l.responseText,
-              n = null;
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function() {
+        if (4 == xhr.readyState) {
+          if (xhr.status >= 200 && xhr.status < 400) {
+            var responseText = xhr.responseText,
+              responseData = null;
             try {
-              n = JSON.parse(t);
-            } catch (t) {}
-            e(n);
+              responseData = JSON.parse(responseText);
+            } catch (parseError) {}
+            onSuccess(responseData);
           } else {
-            i(r);
+            onErrorMessage(defaultErrorMsg);
           }
         }
       };
-      l.onerror = function() {
-        var t = r;
-        if (!StringUtil.default.isNullOrEmpty(l.responseText)) {
-          var e = null;
+      xhr.onerror = function() {
+        var message = defaultErrorMsg;
+        if (!StringUtil.default.isNullOrEmpty(xhr.responseText)) {
+          var errorData = null;
           try {
-            e = JSON.parse(l.responseText);
-          } catch (t) {}
-          if (!(null === e || void 0 === e || StringUtil.default.isNullOrEmpty(e.msg))) {
-            t = e.msg;
+            errorData = JSON.parse(xhr.responseText);
+          } catch (parseError) {}
+          if (!(null === errorData || void 0 === errorData || StringUtil.default.isNullOrEmpty(errorData.msg))) {
+            message = errorData.msg;
           }
         }
-        i(t);
+        onErrorMessage(message);
       };
-      l.ontimeout = function() {
-        i(c);
+      xhr.ontimeout = function() {
+        onErrorMessage(msgTimeoutError);
       };
-      l.timeout = 3e4;
-      l.open("GET", t, true);
-      if (n) {
+      xhr.timeout = 3e4;
+      xhr.open("GET", url, true);
+      if (useToken) {
         if (!StringUtil.default.isNullOrEmpty(GamePlayManager.default.getInstance().session_id)) {
-          l.setRequestHeader("X-TOKEN", GamePlayManager.default.getInstance().session_id);
-          l.setRequestHeader("Content-Type", "application/json");
+          xhr.setRequestHeader("X-TOKEN", GamePlayManager.default.getInstance().session_id);
+          xhr.setRequestHeader("Content-Type", "application/json");
         }
       }
-      FgIDConfigManager.FgIDConfigManager.checkAddFgIDToHeader(l, t);
-      l.send();
+      FgIDConfigManager.FgIDConfigManager.checkAddFgIDToHeader(xhr, url);
+      xhr.send();
     };
-    t.prototype.sendGetHttpRequestWithMap = function(t, e, i, n, l) {
-      if (void 0 === l) {
-        l = false;
+    GameHTTPManager.prototype.sendGetHttpRequestWithMap = function(url, onSuccess, onErrorMessage, headerMap, useToken) {
+      if (void 0 === useToken) {
+        useToken = false;
       }
-      var h = new XMLHttpRequest();
-      h.onreadystatechange = function() {
-        if (4 == h.readyState) {
-          if (h.status >= 200 && h.status < 400) {
-            var t = h.responseText,
-              n = null;
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function() {
+        if (4 == xhr.readyState) {
+          if (xhr.status >= 200 && xhr.status < 400) {
+            var responseText = xhr.responseText,
+              responseData = null;
             try {
-              n = JSON.parse(t);
-            } catch (t) {}
-            e(n);
+              responseData = JSON.parse(responseText);
+            } catch (parseError) {}
+            onSuccess(responseData);
           } else {
-            i(r);
+            onErrorMessage(defaultErrorMsg);
           }
         }
       };
-      h.onerror = function() {
-        var t = r;
-        if (!StringUtil.default.isNullOrEmpty(h.responseText)) {
-          var e = null;
+      xhr.onerror = function() {
+        var message = defaultErrorMsg;
+        if (!StringUtil.default.isNullOrEmpty(xhr.responseText)) {
+          var errorData = null;
           try {
-            e = JSON.parse(h.responseText);
-          } catch (t) {}
-          if (!(null === e || void 0 === e || StringUtil.default.isNullOrEmpty(e.msg))) {
-            t = e.msg;
+            errorData = JSON.parse(xhr.responseText);
+          } catch (parseError) {}
+          if (!(null === errorData || void 0 === errorData || StringUtil.default.isNullOrEmpty(errorData.msg))) {
+            message = errorData.msg;
           }
         }
-        i(t);
+        onErrorMessage(message);
       };
-      h.ontimeout = function() {
-        i(c);
+      xhr.ontimeout = function() {
+        onErrorMessage(msgTimeoutError);
       };
-      h.timeout = 3e4;
-      h.open("GET", t, true);
-      if (l) {
+      xhr.timeout = 3e4;
+      xhr.open("GET", url, true);
+      if (useToken) {
         if (!StringUtil.default.isNullOrEmpty(GamePlayManager.default.getInstance().session_id)) {
-          h.setRequestHeader("X-TOKEN", GamePlayManager.default.getInstance().session_id);
-          h.setRequestHeader("Content-Type", "application/json");
+          xhr.setRequestHeader("X-TOKEN", GamePlayManager.default.getInstance().session_id);
+          xhr.setRequestHeader("Content-Type", "application/json");
         }
       }
-      if (n) {
-        n.forEach(function(t, e) {
-          h.setRequestHeader(e, t);
+      if (headerMap) {
+        headerMap.forEach(function(headerValue, headerName) {
+          xhr.setRequestHeader(headerName, headerValue);
         });
       }
-      FgIDConfigManager.FgIDConfigManager.checkAddFgIDToHeader(h, t);
-      h.send();
+      FgIDConfigManager.FgIDConfigManager.checkAddFgIDToHeader(xhr, url);
+      xhr.send();
     };
-    t.prototype.sendGetHttpRequestNoJson = function(t, e, i) {
-      var n = new XMLHttpRequest();
-      n.onreadystatechange = function() {
-        if (4 == n.readyState) {
-          if (n.status >= 200 && n.status < 400) {
-            var t = n.responseText;
-            e(t);
+    GameHTTPManager.prototype.sendGetHttpRequestNoJson = function(url, onSuccess, onErrorMessage) {
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function() {
+        if (4 == xhr.readyState) {
+          if (xhr.status >= 200 && xhr.status < 400) {
+            var responseText = xhr.responseText;
+            onSuccess(responseText);
           } else {
-            i(r);
+            onErrorMessage(defaultErrorMsg);
           }
         }
       };
-      n.onerror = function() {
-        var t = r;
-        if (!StringUtil.default.isNullOrEmpty(n.responseText)) {
-          var e = null;
+      xhr.onerror = function() {
+        var message = defaultErrorMsg;
+        if (!StringUtil.default.isNullOrEmpty(xhr.responseText)) {
+          var errorData = null;
           try {
-            e = JSON.parse(n.responseText);
-          } catch (t) {}
-          if (!(null === e || void 0 === e || StringUtil.default.isNullOrEmpty(e.msg))) {
-            t = e.msg;
+            errorData = JSON.parse(xhr.responseText);
+          } catch (parseError) {}
+          if (!(null === errorData || void 0 === errorData || StringUtil.default.isNullOrEmpty(errorData.msg))) {
+            message = errorData.msg;
           }
         }
-        i(t);
+        onErrorMessage(message);
       };
-      n.ontimeout = function() {
-        i(c);
+      xhr.ontimeout = function() {
+        onErrorMessage(msgTimeoutError);
       };
-      n.timeout = 3e4;
-      n.open("GET", t, true);
-      FgIDConfigManager.FgIDConfigManager.checkAddFgIDToHeader(n, t);
-      n.send();
+      xhr.timeout = 3e4;
+      xhr.open("GET", url, true);
+      FgIDConfigManager.FgIDConfigManager.checkAddFgIDToHeader(xhr, url);
+      xhr.send();
     };
-    t.prototype.sendGetHttpRequestWithToken = function(t, e, i) {
-      var n = new XMLHttpRequest();
-      n.onreadystatechange = function() {
-        if (4 == n.readyState) {
-          if (n.status >= 200 && n.status < 400) {
-            var t = n.responseText;
-            e(JSON.parse(t));
+    GameHTTPManager.prototype.sendGetHttpRequestWithToken = function(url, onSuccess, onErrorMessage) {
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function() {
+        if (4 == xhr.readyState) {
+          if (xhr.status >= 200 && xhr.status < 400) {
+            var responseText = xhr.responseText;
+            onSuccess(JSON.parse(responseText));
           } else {
-            i(r);
+            onErrorMessage(defaultErrorMsg);
           }
         }
       };
-      n.onerror = function() {
-        var t = r;
-        if (!StringUtil.default.isNullOrEmpty(n.responseText)) {
-          var e = null;
+      xhr.onerror = function() {
+        var message = defaultErrorMsg;
+        if (!StringUtil.default.isNullOrEmpty(xhr.responseText)) {
+          var errorData = null;
           try {
-            e = JSON.parse(n.responseText);
-          } catch (t) {}
-          if (!(null === e || void 0 === e || StringUtil.default.isNullOrEmpty(e.msg))) {
-            t = e.msg;
+            errorData = JSON.parse(xhr.responseText);
+          } catch (parseError) {}
+          if (!(null === errorData || void 0 === errorData || StringUtil.default.isNullOrEmpty(errorData.msg))) {
+            message = errorData.msg;
           }
         }
-        i(t);
+        onErrorMessage(message);
       };
-      n.ontimeout = function() {
-        i(c);
+      xhr.ontimeout = function() {
+        onErrorMessage(msgTimeoutError);
       };
-      n.timeout = 3e4;
-      n.open("GET", t, true);
-      n.setRequestHeader("X-TOKEN", GamePlayManager.default.getInstance().session_id);
-      FgIDConfigManager.FgIDConfigManager.checkAddFgIDToHeader(n, t);
-      n.send();
-      return n;
+      xhr.timeout = 3e4;
+      xhr.open("GET", url, true);
+      xhr.setRequestHeader("X-TOKEN", GamePlayManager.default.getInstance().session_id);
+      FgIDConfigManager.FgIDConfigManager.checkAddFgIDToHeader(xhr, url);
+      xhr.send();
+      return xhr;
     };
-    t.prototype.sendPostHttpRequest = function(e, i, n, o, a, s, r) {
-      if (void 0 === a) {
-        a = true;
+    GameHTTPManager.prototype.sendPostHttpRequest = function(url, body, onSuccess, onErrorMessage, useToken, useRawTextOn400, timeoutMs) {
+      if (void 0 === useToken) {
+        useToken = true;
       }
-      if (void 0 === s) {
-        s = false;
+      if (void 0 === useRawTextOn400) {
+        useRawTextOn400 = false;
       }
-      if (void 0 === r) {
-        r = 0;
+      if (void 0 === timeoutMs) {
+        timeoutMs = 0;
       }
-      t.getInstance().sendPostHttpRequestBase(cc.loader.getXMLHttpRequest(), e, i, n, o, a, s, r);
+      GameHTTPManager.getInstance().sendPostHttpRequestBase(cc.loader.getXMLHttpRequest(), url, body, onSuccess, onErrorMessage, useToken, useRawTextOn400, timeoutMs);
     };
-    t.prototype.sendPostHttpRequestUseFb = function(e, i, n, o, a, s, r) {
-      if (void 0 === a) {
-        a = true;
+    GameHTTPManager.prototype.sendPostHttpRequestUseFb = function(url, body, onSuccess, onErrorMessage, useToken, useRawTextOn400, timeoutMs) {
+      if (void 0 === useToken) {
+        useToken = true;
       }
-      if (void 0 === s) {
-        s = false;
+      if (void 0 === useRawTextOn400) {
+        useRawTextOn400 = false;
       }
-      if (void 0 === r) {
-        r = 0;
+      if (void 0 === timeoutMs) {
+        timeoutMs = 0;
       }
-      t.getInstance().sendPostHttpRequestBase(fb2.getXMLHttpRequest(), e, i, n, o, a, s, r);
+      GameHTTPManager.getInstance().sendPostHttpRequestBase(fb2.getXMLHttpRequest(), url, body, onSuccess, onErrorMessage, useToken, useRawTextOn400, timeoutMs);
     };
-    t.prototype.sendPostHttpRequestBase = function(t, e, i, n, l, h, u, d) {
-      if (void 0 === h) {
-        h = true;
+    GameHTTPManager.prototype.sendPostHttpRequestBase = function(xhr, url, body, onSuccess, onErrorMessage, useToken, useRawTextOn400, timeoutMs) {
+      if (void 0 === useToken) {
+        useToken = true;
       }
-      if (void 0 === u) {
-        u = false;
+      if (void 0 === useRawTextOn400) {
+        useRawTextOn400 = false;
       }
-      if (void 0 === d) {
-        d = 0;
+      if (void 0 === timeoutMs) {
+        timeoutMs = 0;
       }
-      t.onreadystatechange = function() {
-        if (4 == t.readyState) {
-          if (t.status >= 200 && t.status < 400) {
-            var e = t.responseText,
-              i = null;
+      xhr.onreadystatechange = function() {
+        if (4 == xhr.readyState) {
+          if (xhr.status >= 200 && xhr.status < 400) {
+            var responseText = xhr.responseText,
+              responseData = null;
             try {
-              i = JSON.parse(e);
-            } catch (t) {}
-            if (i) {
-              n(i);
+              responseData = JSON.parse(responseText);
+            } catch (parseError) {}
+            if (responseData) {
+              onSuccess(responseData);
             }
           } else {
-            var a = r;
-            if (!StringUtil.default.isNullOrEmpty(t.responseText)) {
+            var message = defaultErrorMsg;
+            if (!StringUtil.default.isNullOrEmpty(xhr.responseText)) {
               try {
-                var s = JSON.parse(t.responseText);
-                if (null === s || void 0 === s || StringUtil.default.isNullOrEmpty(s.msg)) {
-                  if (!(null === s || void 0 === s || StringUtil.default.isNullOrEmpty(s.message))) {
-                    a = s.message;
+                var errorData = JSON.parse(xhr.responseText);
+                if (null === errorData || void 0 === errorData || StringUtil.default.isNullOrEmpty(errorData.msg)) {
+                  if (!(null === errorData || void 0 === errorData || StringUtil.default.isNullOrEmpty(errorData.message))) {
+                    message = errorData.message;
                   }
                 } else {
-                  a = s.msg;
+                  message = errorData.msg;
                 }
-              } catch (e) {
-                if (true === u && 400 === t.status) {
-                  a = t.responseText;
+              } catch (parseError) {
+                if (true === useRawTextOn400 && 400 === xhr.status) {
+                  message = xhr.responseText;
                 }
               }
             }
-            l(a);
+            onErrorMessage(message);
           }
         }
       };
-      t.onerror = function() {
-        var e = r;
-        if (!StringUtil.default.isNullOrEmpty(t.responseText)) {
-          var i = null;
+      xhr.onerror = function() {
+        var message = defaultErrorMsg;
+        if (!StringUtil.default.isNullOrEmpty(xhr.responseText)) {
+          var errorData = null;
           try {
-            i = JSON.parse(t.responseText);
-          } catch (t) {}
-          if (!(null === i || void 0 === i || StringUtil.default.isNullOrEmpty(i.msg))) {
-            e = i.msg;
+            errorData = JSON.parse(xhr.responseText);
+          } catch (parseError) {}
+          if (!(null === errorData || void 0 === errorData || StringUtil.default.isNullOrEmpty(errorData.msg))) {
+            message = errorData.msg;
           }
         }
-        l(e);
+        onErrorMessage(message);
       };
-      t.ontimeout = function() {
-        l(c);
+      xhr.ontimeout = function() {
+        onErrorMessage(msgTimeoutError);
       };
-      t.timeout = d > 0 ? d : 3e4;
-      t.open("POST", e, true);
+      xhr.timeout = timeoutMs > 0 ? timeoutMs : 3e4;
+      xhr.open("POST", url, true);
       if (!StringUtil.default.isNullOrEmpty(GamePlayManager.default.getInstance().session_id)) {
-        if (true === h) {
-          t.setRequestHeader("X-TOKEN", GamePlayManager.default.getInstance().session_id);
+        if (true === useToken) {
+          xhr.setRequestHeader("X-TOKEN", GamePlayManager.default.getInstance().session_id);
         }
-        t.setRequestHeader("Content-Type", "application/json");
+        xhr.setRequestHeader("Content-Type", "application/json");
       }
-      FgIDConfigManager.FgIDConfigManager.checkAddFgIDToHeader(t, e);
-      t.send(i);
+      FgIDConfigManager.FgIDConfigManager.checkAddFgIDToHeader(xhr, url);
+      xhr.send(body);
     };
-    t.prototype.sendPostHttpRequestWithMap = function(t, e, i, n, a, l, h, u) {
-      if (void 0 === l) {
-        l = true;
+    GameHTTPManager.prototype.sendPostHttpRequestWithMap = function(url, body, onSuccess, onErrorMessage, headerMap, useToken, useRawTextOn400, timeoutMs) {
+      if (void 0 === useToken) {
+        useToken = true;
       }
-      if (void 0 === h) {
-        h = false;
+      if (void 0 === useRawTextOn400) {
+        useRawTextOn400 = false;
       }
-      if (void 0 === u) {
-        u = 0;
+      if (void 0 === timeoutMs) {
+        timeoutMs = 0;
       }
-      var d = cc.loader.getXMLHttpRequest();
-      d.onreadystatechange = function() {
-        if (4 == d.readyState) {
-          if (d.status >= 200 && d.status < 400) {
-            var t = d.responseText,
-              e = null;
+      var xhr = cc.loader.getXMLHttpRequest();
+      xhr.onreadystatechange = function() {
+        if (4 == xhr.readyState) {
+          if (xhr.status >= 200 && xhr.status < 400) {
+            var responseText = xhr.responseText,
+              responseData = null;
             try {
-              e = JSON.parse(t);
-            } catch (t) {}
-            if (e) {
-              i(e);
+              responseData = JSON.parse(responseText);
+            } catch (parseError) {}
+            if (responseData) {
+              onSuccess(responseData);
             }
           } else {
-            var a = r;
-            if (!StringUtil.default.isNullOrEmpty(d.responseText)) {
+            var message = defaultErrorMsg;
+            if (!StringUtil.default.isNullOrEmpty(xhr.responseText)) {
               try {
-                var s = JSON.parse(d.responseText);
-                if (null === s || void 0 === s || StringUtil.default.isNullOrEmpty(s.msg)) {
-                  if (!(null === s || void 0 === s || StringUtil.default.isNullOrEmpty(s.message))) {
-                    a = s.message;
+                var errorData = JSON.parse(xhr.responseText);
+                if (null === errorData || void 0 === errorData || StringUtil.default.isNullOrEmpty(errorData.msg)) {
+                  if (!(null === errorData || void 0 === errorData || StringUtil.default.isNullOrEmpty(errorData.message))) {
+                    message = errorData.message;
                   }
                 } else {
-                  a = s.msg;
+                  message = errorData.msg;
                 }
-              } catch (t) {
-                if (true === h && 400 === d.status) {
-                  a = d.responseText;
+              } catch (parseError) {
+                if (true === useRawTextOn400 && 400 === xhr.status) {
+                  message = xhr.responseText;
                 }
               }
             }
-            n(a);
+            onErrorMessage(message);
           }
         }
       };
-      d.onerror = function() {
-        var t = r;
-        if (!StringUtil.default.isNullOrEmpty(d.responseText)) {
-          var e = null;
+      xhr.onerror = function() {
+        var message = defaultErrorMsg;
+        if (!StringUtil.default.isNullOrEmpty(xhr.responseText)) {
+          var errorData = null;
           try {
-            e = JSON.parse(d.responseText);
-          } catch (t) {}
-          if (!(null === e || void 0 === e || StringUtil.default.isNullOrEmpty(e.msg))) {
-            t = e.msg;
+            errorData = JSON.parse(xhr.responseText);
+          } catch (parseError) {}
+          if (!(null === errorData || void 0 === errorData || StringUtil.default.isNullOrEmpty(errorData.msg))) {
+            message = errorData.msg;
           }
         }
-        n(t);
+        onErrorMessage(message);
       };
-      d.ontimeout = function() {
-        n(c);
+      xhr.ontimeout = function() {
+        onErrorMessage(msgTimeoutError);
       };
-      d.timeout = u > 0 ? u : 3e4;
-      d.open("POST", t, true);
+      xhr.timeout = timeoutMs > 0 ? timeoutMs : 3e4;
+      xhr.open("POST", url, true);
       if (!StringUtil.default.isNullOrEmpty(GamePlayManager.default.getInstance().session_id)) {
-        if (true === l) {
-          d.setRequestHeader("X-TOKEN", GamePlayManager.default.getInstance().session_id);
+        if (true === useToken) {
+          xhr.setRequestHeader("X-TOKEN", GamePlayManager.default.getInstance().session_id);
         }
-        d.setRequestHeader("Content-Type", "application/json");
+        xhr.setRequestHeader("Content-Type", "application/json");
       }
-      if (a) {
-        a.forEach(function(t, e) {
-          d.setRequestHeader(e, t);
+      if (headerMap) {
+        headerMap.forEach(function(headerValue, headerName) {
+          xhr.setRequestHeader(headerName, headerValue);
         });
       }
-      d.send(e);
+      xhr.send(body);
     };
-    t.prototype.onXHRBinaryReady = function(t, e, i) {
-      if (4 == t.readyState && t.status >= 200 && t.status < 400) {
-        var n = t.response;
-        if (e) {
-          e(n);
+    GameHTTPManager.prototype.onXHRBinaryReady = function(xhr, onSuccess, onError) {
+      if (4 == xhr.readyState && xhr.status >= 200 && xhr.status < 400) {
+        var binaryData = xhr.response;
+        if (onSuccess) {
+          onSuccess(binaryData);
         }
       }
     };
-    t.prototype.onXHRReady = function(t, e, i) {
-      if (4 == t.readyState) {
-        if (t.status >= 200 && t.status < 400) {
-          var n = t.responseText,
-            a = null;
+    GameHTTPManager.prototype.onXHRReady = function(xhr, onSuccess, onError) {
+      if (4 == xhr.readyState) {
+        if (xhr.status >= 200 && xhr.status < 400) {
+          var responseText = xhr.responseText,
+            responseData = null;
           try {
-            a = JSON.parse(n);
-          } catch (e) {
-            return void(i && i({
-              code: t.status,
-              msg: t.responseText
+            responseData = JSON.parse(responseText);
+          } catch (parseError) {
+            return void(onError && onError({
+              code: xhr.status,
+              msg: xhr.responseText
             }));
           }
-          if (e) {
-            e(a);
+          if (onSuccess) {
+            onSuccess(responseData);
           }
         } else {
           try {
-            if (StringUtil.default.isNullOrEmpty(t.responseText)) {
-              if (i) {
-                i({
-                  code: t.status,
-                  msg: r
+            if (StringUtil.default.isNullOrEmpty(xhr.responseText)) {
+              if (onError) {
+                onError({
+                  code: xhr.status,
+                  msg: defaultErrorMsg
                 });
               }
             } else {
-              a = null;
-              a = JSON.parse(t.responseText);
-              if (i) {
-                i(a);
+              responseData = null;
+              responseData = JSON.parse(xhr.responseText);
+              if (onError) {
+                onError(responseData);
               }
             }
-          } catch (e) {
-            if (i) {
-              i({
-                code: t.status,
-                msg: e
+          } catch (parseError) {
+            if (onError) {
+              onError({
+                code: xhr.status,
+                msg: parseError
               });
             }
           }
         }
       }
     };
-    t.prototype.onXHRError = function(t, e, i) {
+    GameHTTPManager.prototype.onXHRError = function(xhr, onSuccess, onError) {
       try {
-        StringUtil.default.isNullOrEmpty(t.responseText);
-      } catch (e) {
-        return void(i && i({
-          code: t.status,
-          msg: e
+        StringUtil.default.isNullOrEmpty(xhr.responseText);
+      } catch (readError) {
+        return void(onError && onError({
+          code: xhr.status,
+          msg: readError
         }));
       }
-      var n = null;
+      var errorData = null;
       try {
-        n = JSON.parse(t.responseText);
-      } catch (e) {
-        return void(i && i({
-          code: t.status,
-          msg: r
+        errorData = JSON.parse(xhr.responseText);
+      } catch (parseError) {
+        return void(onError && onError({
+          code: xhr.status,
+          msg: defaultErrorMsg
         }));
       }
-      i(n);
+      onError(errorData);
     };
-    t.prototype.getHTTPBinary = function(t, e, i, n) {
-      if (void 0 === n) {
-        n = false;
+    GameHTTPManager.prototype.getHTTPBinary = function(url, onSuccess, onError, useToken) {
+      if (void 0 === useToken) {
+        useToken = false;
       }
-      var a = new XMLHttpRequest(),
-        r = this;
-      a.responseType = "arraybuffer";
-      a.onreadystatechange = function() {
-        r.onXHRBinaryReady(a, e, i);
+      var xhr = new XMLHttpRequest(),
+        _this = this;
+      xhr.responseType = "arraybuffer";
+      xhr.onreadystatechange = function() {
+        _this.onXHRBinaryReady(xhr, onSuccess, onError);
       };
-      a.onerror = function(t) {
-        r.onXHRError(a, e, i);
+      xhr.onerror = function(errorEvent) {
+        _this.onXHRError(xhr, onSuccess, onError);
       };
-      a.ontimeout = function() {
-        if (i) {
-          i({
-            code: a.status,
-            msg: c
+      xhr.ontimeout = function() {
+        if (onError) {
+          onError({
+            code: xhr.status,
+            msg: msgTimeoutError
           });
         }
       };
-      a.timeout = 3e4;
-      a.open("GET", t, true);
-      if (n) {
+      xhr.timeout = 3e4;
+      xhr.open("GET", url, true);
+      if (useToken) {
         if (!StringUtil.default.isNullOrEmpty(GamePlayManager.default.getInstance().session_id)) {
-          a.setRequestHeader("X-TOKEN", GamePlayManager.default.getInstance().session_id);
+          xhr.setRequestHeader("X-TOKEN", GamePlayManager.default.getInstance().session_id);
         }
       }
-      a.send();
+      xhr.send();
     };
-    t.prototype.getHTTP = function(t, e, i, n) {
-      if (void 0 === n) {
-        n = false;
+    GameHTTPManager.prototype.getHTTP = function(url, onSuccess, onError, useToken) {
+      if (void 0 === useToken) {
+        useToken = false;
       }
-      var r = new XMLHttpRequest(),
-        l = this;
-      r.onreadystatechange = function() {
-        l.onXHRReady(r, e, i);
+      var xhr = new XMLHttpRequest(),
+        _this = this;
+      xhr.onreadystatechange = function() {
+        _this.onXHRReady(xhr, onSuccess, onError);
       };
-      r.onerror = function() {
-        l.onXHRError(r, e, i);
+      xhr.onerror = function() {
+        _this.onXHRError(xhr, onSuccess, onError);
       };
-      r.ontimeout = function() {
-        if (i) {
-          i({
-            code: r.status,
-            msg: c
+      xhr.ontimeout = function() {
+        if (onError) {
+          onError({
+            code: xhr.status,
+            msg: msgTimeoutError
           });
         }
       };
-      r.open("GET", t, true);
-      if (n) {
+      xhr.open("GET", url, true);
+      if (useToken) {
         if (!StringUtil.default.isNullOrEmpty(GamePlayManager.default.getInstance().session_id)) {
-          r.setRequestHeader("X-TOKEN", GamePlayManager.default.getInstance().session_id);
-          r.setRequestHeader("Content-Type", "application/json");
+          xhr.setRequestHeader("X-TOKEN", GamePlayManager.default.getInstance().session_id);
+          xhr.setRequestHeader("Content-Type", "application/json");
         }
       }
-      FgIDConfigManager.FgIDConfigManager.checkAddFgIDToHeader(r, t);
-      r.send();
+      FgIDConfigManager.FgIDConfigManager.checkAddFgIDToHeader(xhr, url);
+      xhr.send();
     };
-    t.prototype.postHTTP = function(t, e, i, n, r) {
-      if (void 0 === r) {
-        r = true;
+    GameHTTPManager.prototype.postHTTP = function(url, body, onSuccess, onError, useToken) {
+      if (void 0 === useToken) {
+        useToken = true;
       }
-      var l = this,
-        h = new XMLHttpRequest();
-      h.onreadystatechange = function() {
-        l.onXHRReady(h, i, n);
+      var _this = this,
+        xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function() {
+        _this.onXHRReady(xhr, onSuccess, onError);
       };
-      h.onerror = function() {
-        l.onXHRError(h, i, n);
+      xhr.onerror = function() {
+        _this.onXHRError(xhr, onSuccess, onError);
       };
-      h.ontimeout = function() {
-        if (n) {
-          n({
-            code: h.status,
-            msg: c
+      xhr.ontimeout = function() {
+        if (onError) {
+          onError({
+            code: xhr.status,
+            msg: msgTimeoutError
           });
         }
       };
-      h.timeout = 3e4;
-      h.open("POST", t, true);
+      xhr.timeout = 3e4;
+      xhr.open("POST", url, true);
       if (!StringUtil.default.isNullOrEmpty(GamePlayManager.default.getInstance().session_id)) {
-        if (true === r) {
-          h.setRequestHeader("X-TOKEN", GamePlayManager.default.getInstance().session_id);
+        if (true === useToken) {
+          xhr.setRequestHeader("X-TOKEN", GamePlayManager.default.getInstance().session_id);
         }
-        h.setRequestHeader("Content-Type", "application/json");
+        xhr.setRequestHeader("Content-Type", "application/json");
       }
-      FgIDConfigManager.FgIDConfigManager.checkAddFgIDToHeader(h, t);
-      h.send(e);
+      FgIDConfigManager.FgIDConfigManager.checkAddFgIDToHeader(xhr, url);
+      xhr.send(body);
     };
-    t.prototype.getRawHTTP = function(t, e, i, a) {
-      if (void 0 === a) {
-        a = false;
+    GameHTTPManager.prototype.getRawHTTP = function(url, onSuccess, onError, useToken) {
+      if (void 0 === useToken) {
+        useToken = false;
       }
-      var r = new XMLHttpRequest(),
-        c = this;
-      r.onreadystatechange = function() {
-        c.onRawXHRReady(r, e, i);
+      var xhr = new XMLHttpRequest(),
+        _this = this;
+      xhr.onreadystatechange = function() {
+        _this.onRawXHRReady(xhr, onSuccess, onError);
       };
-      r.onerror = function() {
-        c.onXHRError(r, e, i);
+      xhr.onerror = function() {
+        _this.onXHRError(xhr, onSuccess, onError);
       };
-      r.ontimeout = function() {
-        i({
-          code: r.status,
+      xhr.ontimeout = function() {
+        onError({
+          code: xhr.status,
           msg: LocalizeManager.default.getInstance().GetString("ConnectToServerFail")
         });
       };
-      r.open("GET", t, true);
-      if (a) {
+      xhr.open("GET", url, true);
+      if (useToken) {
         if (!StringUtil.default.isNullOrEmpty(GamePlayManager.default.getInstance().session_id)) {
-          r.setRequestHeader("X-TOKEN", GamePlayManager.default.getInstance().session_id);
-          r.setRequestHeader("Content-Type", "application/json");
+          xhr.setRequestHeader("X-TOKEN", GamePlayManager.default.getInstance().session_id);
+          xhr.setRequestHeader("Content-Type", "application/json");
         }
       }
-      r.send();
+      xhr.send();
     };
-    t.prototype.onRawXHRReady = function(t, e, i) {
-      if (4 == t.readyState) {
-        if (200 == t.status) {
-          e(t.responseText);
+    GameHTTPManager.prototype.onRawXHRReady = function(xhr, onSuccess, onError) {
+      if (4 == xhr.readyState) {
+        if (200 == xhr.status) {
+          onSuccess(xhr.responseText);
         } else {
           try {
-            if (StringUtil.default.isNullOrEmpty(t.responseText)) {
-              i({
-                code: t.status,
+            if (StringUtil.default.isNullOrEmpty(xhr.responseText)) {
+              onError({
+                code: xhr.status,
                 msg: LocalizeManager.default.getInstance().GetString("NetworkUnstablePleaseTryAgain")
               });
             } else {
-              i({
-                code: t.status,
-                msg: t.responseText
+              onError({
+                code: xhr.status,
+                msg: xhr.responseText
               });
             }
-          } catch (e) {
-            i({
-              code: t.status,
-              msg: e
+          } catch (error) {
+            onError({
+              code: xhr.status,
+              msg: error
             });
           }
         }
       }
     };
-    t.Instance = null;
-    return t;
+    GameHTTPManager.Instance = null;
+    return GameHTTPManager;
   }();
-i.default = l;
+moduleExports.default = GameHTTPManager;
 void 0;

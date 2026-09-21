@@ -1,9 +1,9 @@
-var t = require,
-  e = module,
-  i = exports;
+var requireRef = require,
+  moduleRef = module,
+  moduleExports = exports;
 "use strict";
 void 0;
-var n = this && this.__decorate || function(t, e, i, n) {
+var __decorate = this && this.__decorate || function(t, e, i, n) {
   var o,
     a = arguments.length,
     s = a < 3 ? e : null === n ? n = Object.getOwnPropertyDescriptor(e, i) : n;
@@ -21,7 +21,7 @@ var n = this && this.__decorate || function(t, e, i, n) {
   }
   return s;
 };
-Object.defineProperty(i, "__esModule", {
+Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
 var StringUtil = require("./StringUtil"),
@@ -31,64 +31,64 @@ var StringUtil = require("./StringUtil"),
   MessageCardGameHandler = require("./MessageCardGameHandler"),
   GbBrandChecker = require("./GbBrandChecker"),
   RMCAppInfoConfig = require("./RMCAppInfoConfig"),
-  u = cc._decorator,
-  d = u.ccclass,
-  p = (u.property, .07),
-  f = ["game-icon.png", "header.png", "logo.png", "image.png", "icon-mini.png"];
-(function(t) {
-  t[t.Logo512 = 0] = "Logo512";
-  t[t.Header280 = 1] = "Header280";
-  t[t.Header724 = 2] = "Header724";
-  t[t.Splash1700 = 3] = "Splash1700";
-  t[t.Logo144 = 4] = "Logo144";
-})(i.WccBrandImageType || (i.WccBrandImageType = {}));
-i.getWccBrandUrl = function(t, e) {
+  ccDecorator = cc._decorator,
+  ccclass = ccDecorator.ccclass,
+  moneyTickInterval = (ccDecorator.property, .07),
+  brandImageFileNames = ["game-icon.png", "header.png", "logo.png", "image.png", "icon-mini.png"];
+(function(WccBrandImageType) {
+  WccBrandImageType[WccBrandImageType.Logo512 = 0] = "Logo512";
+  WccBrandImageType[WccBrandImageType.Header280 = 1] = "Header280";
+  WccBrandImageType[WccBrandImageType.Header724 = 2] = "Header724";
+  WccBrandImageType[WccBrandImageType.Splash1700 = 3] = "Splash1700";
+  WccBrandImageType[WccBrandImageType.Logo144 = 4] = "Logo144";
+})(moduleExports.WccBrandImageType || (moduleExports.WccBrandImageType = {}));
+moduleExports.getWccBrandUrl = function(webccBrand, imageType) {
   try {
-    var i = window.location.origin + "/splash/brands/" + t + "/" + f[e] + "?kt=" + Date.now();
-    console.warn("getWccBrandUrl", i);
-    return i;
-  } catch (t) {
+    var url = window.location.origin + "/splash/brands/" + webccBrand + "/" + brandImageFileNames[imageType] + "?kt=" + Date.now();
+    console.warn("getWccBrandUrl", url);
+    return url;
+  } catch (error) {
     return "";
   }
 };
-i.downloadAndShowImage = function(t, e, i) {
-  if (null != t && t.isValid && null != e && e.length > 0) {
-    if (e.indexOf("http") >= 0) {
-      cc.loader.load(e, function(n, o) {
-        if (null === n || void 0 === n) {
+moduleExports.downloadAndShowImage = function(sprite, urlOrResPath, onLoaded) {
+  if (null != sprite && sprite.isValid && null != urlOrResPath && urlOrResPath.length > 0) {
+    if (urlOrResPath.indexOf("http") >= 0) {
+      cc.loader.load(urlOrResPath, function(loadError, texture) {
+        if (null === loadError || void 0 === loadError) {
           try {
-            if (null != t && t.isValid && null != o) {
-              var a = new cc.SpriteFrame(o);
-              t.spriteFrame = a;
-              if (i) {
-                i(a);
+            if (null != sprite && sprite.isValid && null != texture) {
+              var spriteFrame = new cc.SpriteFrame(texture);
+              sprite.spriteFrame = spriteFrame;
+              if (onLoaded) {
+                onLoaded(spriteFrame);
               }
             }
-          } catch (t) {
-            cc.warn("Can't load image from URL " + e, t);
-            if (i) {
-              i();
+          } catch (error) {
+            cc.warn("Can't load image from URL " + urlOrResPath, error);
+            if (onLoaded) {
+              onLoaded();
             }
           }
         } else {
-          cc.warn("Can't download from " + e);
+          cc.warn("Can't download from " + urlOrResPath);
         }
       });
     } else {
-      cc.loader.loadRes(e, function(n, o) {
-        if (null === n || void 0 === n) {
+      cc.loader.loadRes(urlOrResPath, function(loadError, texture) {
+        if (null === loadError || void 0 === loadError) {
           try {
-            if (null != t && t.isValid && null != o) {
-              var a = new cc.SpriteFrame(o);
-              t.spriteFrame = a;
-              if (i) {
-                i(a);
+            if (null != sprite && sprite.isValid && null != texture) {
+              var spriteFrame = new cc.SpriteFrame(texture);
+              sprite.spriteFrame = spriteFrame;
+              if (onLoaded) {
+                onLoaded(spriteFrame);
               }
             }
-          } catch (t) {
-            cc.warn("Can't load image from URL " + e, t);
-            if (i) {
-              i();
+          } catch (error) {
+            cc.warn("Can't load image from URL " + urlOrResPath, error);
+            if (onLoaded) {
+              onLoaded();
             }
           }
         }
@@ -96,570 +96,570 @@ i.downloadAndShowImage = function(t, e, i) {
     }
   }
 };
-var g = function() {
-  function t() {
+var MapString = function() {
+  function MapString() {
     this.map = {};
   }
-  t.prototype.getLength = function() {
+  MapString.prototype.getLength = function() {
     return Object.keys(this.map).length;
   };
-  t.prototype.set = function(t, e) {
-    this.map[t] = e;
+  MapString.prototype.set = function(key, value) {
+    this.map[key] = value;
   };
-  t.prototype.get = function(t) {
-    return this.map[t];
+  MapString.prototype.get = function(key) {
+    return this.map[key];
   };
-  t.prototype.forEach = function(t) {
-    var e = Object.keys(this.map);
-    if (null != e && void 0 != e) {
-      for (var i = 0; i < e.length; i++) {
-        if (!(null == e[i] && void 0 == e[i])) {
-          t(e[i], this.map[e[i]]);
+  MapString.prototype.forEach = function(callback) {
+    var keys = Object.keys(this.map);
+    if (null != keys && void 0 != keys) {
+      for (var index = 0; index < keys.length; index++) {
+        if (!(null == keys[index] && void 0 == keys[index])) {
+          callback(keys[index], this.map[keys[index]]);
         }
       }
     }
   };
-  t.prototype.getListKeys = function() {
+  MapString.prototype.getListKeys = function() {
     return Object.keys(this.map);
   };
-  t.prototype.isContainKey = function(t) {
-    return void 0 != this.map[t];
+  MapString.prototype.isContainKey = function(key) {
+    return void 0 != this.map[key];
   };
-  t.prototype.removeKey = function(t) {
-    delete this.map[t];
+  MapString.prototype.removeKey = function(key) {
+    delete this.map[key];
   };
-  t.prototype.clear = function() {
-    for (var t = Object.keys(this.map), e = 0; e < t.length; e++) {
-      this.removeKey(t[e]);
+  MapString.prototype.clear = function() {
+    for (var keys = Object.keys(this.map), index = 0; index < keys.length; index++) {
+      this.removeKey(keys[index]);
     }
   };
-  return t = n([d], t);
+  return MapString = __decorate([ccclass], MapString);
 }();
-i.MapString = g;
-var m = function() {
-  function t() {
+moduleExports.MapString = MapString;
+var NativeInterop = function() {
+  function NativeInterop() {
     this.section = "default";
     this.mapping = {};
     this.refreshSectionName();
   }
-  Object.defineProperty(t, "Instance", {
+  Object.defineProperty(NativeInterop, "Instance", {
     get: function() {
-      if (!t._instance) {
-        t._instance = new t();
+      if (!NativeInterop._instance) {
+        NativeInterop._instance = new NativeInterop();
       }
-      return t._instance;
+      return NativeInterop._instance;
     },
     enumerable: true,
     configurable: true
   });
-  t.prototype.getFunctionName = function(t) {
-    return this.mapping && t && this.mapping[this.section] && this.mapping[this.section][t] || t;
+  NativeInterop.prototype.getFunctionName = function(defaultFunctionName) {
+    return this.mapping && defaultFunctionName && this.mapping[this.section] && this.mapping[this.section][defaultFunctionName] || defaultFunctionName;
   };
-  t.prototype.init = function() {};
-  t.prototype.setMapping = function(t) {
-    if (t) {
-      this.mapping = t;
+  NativeInterop.prototype.init = function() {};
+  NativeInterop.prototype.setMapping = function(mapping) {
+    if (mapping) {
+      this.mapping = mapping;
     } else {
       console.error("SKIPPED Trying to set empty mapping");
     }
   };
-  t.prototype.refreshSectionName = function() {
+  NativeInterop.prototype.refreshSectionName = function() {
     this.section = this.getSectionName();
   };
-  t.prototype.getSectionName = function() {
-    var t = "default";
+  NativeInterop.prototype.getSectionName = function() {
+    var sectionName = "default";
     if (cc.sys.isNative) {
-      if (t = "default", cc.sys.os === cc.sys.OS_ANDROID) {
+      if (sectionName = "default", cc.sys.os === cc.sys.OS_ANDROID) {
         try {
           if (void 0 != jsb) {
-            t = jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity", "getAppName", "()Ljava/lang/String;");
+            sectionName = jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity", "getAppName", "()Ljava/lang/String;");
           }
-        } catch (e) {
-          console.error("ERROR getting bundle id " + e);
-          t = "default";
+        } catch (error) {
+          console.error("ERROR getting bundle id " + error);
+          sectionName = "default";
         }
       } else if (cc.sys.os === cc.sys.OS_IOS) {
         try {
           if (void 0 != jsb) {
-            t = jsb.reflection.callStaticMethod("AppController", "getAppName");
+            sectionName = jsb.reflection.callStaticMethod("AppController", "getAppName");
           }
-        } catch (e) {
-          console.error("ERROR getting bundle id " + e);
-          t = "default";
+        } catch (error) {
+          console.error("ERROR getting bundle id " + error);
+          sectionName = "default";
         }
       }
     }
-    return t;
+    return sectionName;
   };
-  t._instance = null;
-  return t;
+  NativeInterop._instance = null;
+  return NativeInterop;
 }();
-i.NativeInterop = m;
-var y = function() {
-  function t() {
+moduleExports.NativeInterop = NativeInterop;
+var MapInt = function() {
+  function MapInt() {
     this.map = {};
   }
-  t.prototype.getLength = function() {
+  MapInt.prototype.getLength = function() {
     return Object.keys(this.map).length;
   };
-  t.prototype.set = function(t, e) {
-    this.map[t] = e;
+  MapInt.prototype.set = function(key, value) {
+    this.map[key] = value;
   };
-  t.prototype.get = function(t) {
-    return this.map[t];
+  MapInt.prototype.get = function(key) {
+    return this.map[key];
   };
-  t.prototype.forEach = function(t) {
-    for (var e = Object.keys(this.map), i = 0; i < e.length; i++) {
-      t(e[i], this.map[e[i]]);
+  MapInt.prototype.forEach = function(callback) {
+    for (var keys = Object.keys(this.map), index = 0; index < keys.length; index++) {
+      callback(keys[index], this.map[keys[index]]);
     }
   };
-  t.prototype.isContainKey = function(t) {
-    return void 0 != this.map[t];
+  MapInt.prototype.isContainKey = function(key) {
+    return void 0 != this.map[key];
   };
-  t.prototype.removeKey = function(t) {
-    delete this.map[t];
+  MapInt.prototype.removeKey = function(key) {
+    delete this.map[key];
   };
-  t.prototype.clear = function() {
-    for (var t = Object.keys(this.map), e = 0; e < t.length; e++) {
-      this.removeKey(parseInt(t[e]));
+  MapInt.prototype.clear = function() {
+    for (var keys = Object.keys(this.map), index = 0; index < keys.length; index++) {
+      this.removeKey(parseInt(keys[index]));
     }
   };
-  return t = n([d], t);
+  return MapInt = __decorate([ccclass], MapInt);
 }();
-i.MapInt = y;
-i.changeParentNode = function(t, e, i) {
-  if (void 0 === i && (i = 1), t.parent != e) {
-    var n = function(t) {
-        var e = t,
-          i = e.angle;
+moduleExports.MapInt = MapInt;
+moduleExports.changeParentNode = function(node, newParent, scale) {
+  if (void 0 === scale && (scale = 1), node.parent != newParent) {
+    var getWorldAngle = function(fromNode) {
+        var currentNode = fromNode,
+          totalAngle = currentNode.angle;
         do {
-          i += (e = e.parent).angle;
-        } while (null != e.parent);
-        return i %= 360;
+          totalAngle += (currentNode = currentNode.parent).angle;
+        } while (null != currentNode.parent);
+        return totalAngle %= 360;
       },
-      o = n(t) - n(e),
-      a = t.convertToWorldSpaceAR(cc.v2(0, 0)),
-      s = e.convertToNodeSpaceAR(a);
-    t.parent = e;
-    t.position = s;
-    t.angle = o;
-    t.scale = i;
+      angle = getWorldAngle(node) - getWorldAngle(newParent),
+      worldPos = node.convertToWorldSpaceAR(cc.v2(0, 0)),
+      localPos = newParent.convertToNodeSpaceAR(worldPos);
+    node.parent = newParent;
+    node.position = localPos;
+    node.angle = angle;
+    node.scale = scale;
   }
 };
-var S = 60;
+var DEFAULT_FPS = 60;
 
-function _(t, e) {
-  if (void 0 === e) {
-    e = false;
+function isValidJSON(value, requireObject) {
+  if (void 0 === requireObject) {
+    requireObject = false;
   }
   try {
-    return !(e && !b(t)) && (JSON.stringify(t), true);
-  } catch (t) {
+    return !(requireObject && !isObject(value)) && (JSON.stringify(value), true);
+  } catch (error) {
     return false;
   }
 }
 
-function v(t, e) {
-  for (var i in e) {
-    if (e.hasOwnProperty(i)) {
-      if (b(e[i]) && b(t[i])) {
-        t[i] = v(t[i], e[i]);
+function mergeObjects(target, source) {
+  for (var key in source) {
+    if (source.hasOwnProperty(key)) {
+      if (isObject(source[key]) && isObject(target[key])) {
+        target[key] = mergeObjects(target[key], source[key]);
       } else {
-        t[i] = e[i];
+        target[key] = source[key];
       }
     }
   }
-  return t;
+  return target;
 }
 
-function b(t) {
-  return t && "object" == typeof t && !Array.isArray(t);
+function isObject(value) {
+  return value && "object" == typeof value && !Array.isArray(value);
 }
 
-function C(t, e, i, n) {
-  if (void 0 === n) {
-    n = .6;
+function runAnimationMoneyWithColom(label, currentValue, targetValue, duration) {
+  if (void 0 === duration) {
+    duration = .6;
   }
-  var a = (i - e) / n;
-  if (t.unscheduleAllCallbacks(), 0 != a) {
-    var s = function(n) {
-      e += a * n;
-      if (Math.abs(e - i) < Math.abs(a * n * 2)) {
-        e = i;
-        t.string = StringUtil.default.formatMoneyNumberWithColom(e);
-        t.unschedule(s);
+  var speed = (targetValue - currentValue) / duration;
+  if (label.unscheduleAllCallbacks(), 0 != speed) {
+    var tick = function(deltaTime) {
+      currentValue += speed * deltaTime;
+      if (Math.abs(currentValue - targetValue) < Math.abs(speed * deltaTime * 2)) {
+        currentValue = targetValue;
+        label.string = StringUtil.default.formatMoneyNumberWithColom(currentValue);
+        label.unschedule(tick);
       } else {
-        t.string = StringUtil.default.formatMoneyNumberWithColom(e);
+        label.string = StringUtil.default.formatMoneyNumberWithColom(currentValue);
       }
     };
-    t.schedule(s, p);
+    label.schedule(tick, moneyTickInterval);
   } else {
-    t.string = StringUtil.default.formatMoneyNumberWithColom(i);
+    label.string = StringUtil.default.formatMoneyNumberWithColom(targetValue);
   }
 }
-i.setFpsNormal = function() {};
-i.setFpsLow = function() {};
-i.isFpsLow = function() {
-  return S < 59;
+moduleExports.setFpsNormal = function() {};
+moduleExports.setFpsLow = function() {};
+moduleExports.isFpsLow = function() {
+  return DEFAULT_FPS < 59;
 };
-i.setFPS = function(t) {};
-i.setFpsCurrent = function() {};
-i.setFpsKeepUpdate = function() {};
-i.parseBool = function(t) {
-  if ("string" == typeof t) {
-    if ("true" === (t = t.trim().toLowerCase())) {
+moduleExports.setFPS = function(fps) {};
+moduleExports.setFpsCurrent = function() {};
+moduleExports.setFpsKeepUpdate = function() {};
+moduleExports.parseBool = function(value) {
+  if ("string" == typeof value) {
+    if ("true" === (value = value.trim().toLowerCase())) {
       return true;
     }
-    if ("false" === t) {
+    if ("false" === value) {
       return false;
     }
-    if ("1" === t) {
+    if ("1" === value) {
       return true;
     }
-    if ("0" === t) {
+    if ("0" === value) {
       return false;
     }
   }
-  return ("number" != typeof t || !isNaN(t)) && Boolean(t);
+  return ("number" != typeof value || !isNaN(value)) && Boolean(value);
 };
-i.convertUint8ArrayToBinaryString = function(t) {
-  var e,
-    i = t.length,
-    n = "";
-  for (e = 0; e < i; e++) {
-    n += String.fromCharCode(t[e]);
+moduleExports.convertUint8ArrayToBinaryString = function(bytes) {
+  var index,
+    length = bytes.length,
+    binaryString = "";
+  for (index = 0; index < length; index++) {
+    binaryString += String.fromCharCode(bytes[index]);
   }
-  return n;
+  return binaryString;
 };
-i.getNodeByPath = function(t, e) {
-  for (var i = e.split("/"), n = null, o = 0; o < i.length; o++) {
-    var a = i[o];
-    if (null === (n = t.getChildByName(a)) || void 0 === n) {
+moduleExports.getNodeByPath = function(node, path) {
+  for (var pathParts = path.split("/"), child = null, index = 0; index < pathParts.length; index++) {
+    var childName = pathParts[index];
+    if (null === (child = node.getChildByName(childName)) || void 0 === child) {
       return null;
     }
-    t = n;
+    node = child;
   }
-  return n;
+  return child;
 };
-i.versionCompareHandle = function(t, e) {
-  for (var i = t.split("."), n = e.split("."), o = 0; o < i.length; ++o) {
-    var a = parseInt(i[o]),
-      s = parseInt(n[o] || 0);
-    if (a !== s) {
-      return a - s;
+moduleExports.versionCompareHandle = function(versionA, versionB) {
+  for (var partsA = versionA.split("."), partsB = versionB.split("."), index = 0; index < partsA.length; ++index) {
+    var numberA = parseInt(partsA[index]),
+      numberB = parseInt(partsB[index] || 0);
+    if (numberA !== numberB) {
+      return numberA - numberB;
     }
   }
-  return n.length > i.length ? -1 : 0;
+  return partsB.length > partsA.length ? -1 : 0;
 };
-i.mergeJSON = function(t, e) {
-  if (!_(t) || !_(e)) {
+moduleExports.mergeJSON = function(target, source) {
+  if (!isValidJSON(target) || !isValidJSON(source)) {
     throw new Error("Invalid JSON input");
   }
-  return v(t, e);
+  return mergeObjects(target, source);
 };
-i.isValidJSON = _;
-i.mergeObjects = v;
-i.isObject = b;
-i.versionCompareHandleNew = function(t, e) {
-  for (var i = t.split("."), n = e.split("."), o = 0; o < i.length; ++o) {
-    if (parseInt(i[o]) !== parseInt(n[o] || 0)) {
+moduleExports.isValidJSON = isValidJSON;
+moduleExports.mergeObjects = mergeObjects;
+moduleExports.isObject = isObject;
+moduleExports.versionCompareHandleNew = function(versionA, versionB) {
+  for (var partsA = versionA.split("."), partsB = versionB.split("."), index = 0; index < partsA.length; ++index) {
+    if (parseInt(partsA[index]) !== parseInt(partsB[index] || 0)) {
       return -1;
     }
   }
-  return n.length > i.length ? -1 : 0;
+  return partsB.length > partsA.length ? -1 : 0;
 };
-i.runAnimationMoneyDotFormat = function(t, e, i, n) {
-  if (void 0 === n) {
-    n = .6;
+moduleExports.runAnimationMoneyDotFormat = function(label, currentValue, targetValue, duration) {
+  if (void 0 === duration) {
+    duration = .6;
   }
-  var a = (i - e) / n;
-  if (0 != a) {
-    t.unscheduleAllCallbacks();
-    var s = function(n) {
-      e += a * n;
-      if (Math.abs(e - i) < Math.abs(a * n * 2)) {
-        e = i;
-        t.string = StringUtil.default.formatMoneyNumberWithDot(e);
-        t.unschedule(s);
+  var speed = (targetValue - currentValue) / duration;
+  if (0 != speed) {
+    label.unscheduleAllCallbacks();
+    var tick = function(deltaTime) {
+      currentValue += speed * deltaTime;
+      if (Math.abs(currentValue - targetValue) < Math.abs(speed * deltaTime * 2)) {
+        currentValue = targetValue;
+        label.string = StringUtil.default.formatMoneyNumberWithDot(currentValue);
+        label.unschedule(tick);
       } else {
-        t.string = StringUtil.default.formatMoneyNumberWithDot(e);
+        label.string = StringUtil.default.formatMoneyNumberWithDot(currentValue);
       }
     };
-    t.schedule(s, p);
+    label.schedule(tick, moneyTickInterval);
   } else {
-    t.string = StringUtil.default.formatMoneyNumberWithDot(i);
+    label.string = StringUtil.default.formatMoneyNumberWithDot(targetValue);
   }
 };
-i.runAnimationMoney = function(t, e, i, n) {
-  if (void 0 === n) {
-    n = .6;
+moduleExports.runAnimationMoney = function(label, currentValue, targetValue, duration) {
+  if (void 0 === duration) {
+    duration = .6;
   }
-  var a = (i - e) / n;
-  if (0 != a) {
-    t.unscheduleAllCallbacks();
-    var s = function(n) {
-      e += a * n;
-      if (Math.abs(e - i) < Math.abs(a * n * 2)) {
-        e = i;
-        t.string = StringUtil.default.formatMoneyNumber(e);
-        t.unschedule(s);
+  var speed = (targetValue - currentValue) / duration;
+  if (0 != speed) {
+    label.unscheduleAllCallbacks();
+    var tick = function(deltaTime) {
+      currentValue += speed * deltaTime;
+      if (Math.abs(currentValue - targetValue) < Math.abs(speed * deltaTime * 2)) {
+        currentValue = targetValue;
+        label.string = StringUtil.default.formatMoneyNumber(currentValue);
+        label.unschedule(tick);
       } else {
-        t.string = StringUtil.default.formatMoneyNumber(e);
+        label.string = StringUtil.default.formatMoneyNumber(currentValue);
       }
     };
-    t.schedule(s, p);
+    label.schedule(tick, moneyTickInterval);
   } else {
-    t.string = StringUtil.default.formatMoneyNumber(i);
+    label.string = StringUtil.default.formatMoneyNumber(targetValue);
   }
 };
-i.runAnimationMoneyWithColom = C;
-i.runAnimationMoneyWithDot = function(t, e, i, n) {
-  if (void 0 === n) {
-    n = .6;
+moduleExports.runAnimationMoneyWithColom = runAnimationMoneyWithColom;
+moduleExports.runAnimationMoneyWithDot = function(label, currentValue, targetValue, duration) {
+  if (void 0 === duration) {
+    duration = .6;
   }
-  var a = (i - e) / n;
-  if (t.unscheduleAllCallbacks(), 0 != a) {
-    var s = function(n) {
-      e += a * n;
-      if (Math.abs(e - i) < Math.abs(a * n * 2)) {
-        e = i;
-        t.string = StringUtil.default.formatMoneyNumberWithDot(e);
-        t.unschedule(s);
+  var speed = (targetValue - currentValue) / duration;
+  if (label.unscheduleAllCallbacks(), 0 != speed) {
+    var tick = function(deltaTime) {
+      currentValue += speed * deltaTime;
+      if (Math.abs(currentValue - targetValue) < Math.abs(speed * deltaTime * 2)) {
+        currentValue = targetValue;
+        label.string = StringUtil.default.formatMoneyNumberWithDot(currentValue);
+        label.unschedule(tick);
       } else {
-        t.string = StringUtil.default.formatMoneyNumberWithDot(e);
+        label.string = StringUtil.default.formatMoneyNumberWithDot(currentValue);
       }
     };
-    t.schedule(s, p);
+    label.schedule(tick, moneyTickInterval);
   } else {
-    t.string = StringUtil.default.formatMoneyNumberWithDot(i);
+    label.string = StringUtil.default.formatMoneyNumberWithDot(targetValue);
   }
 };
-var T = function() {
-  return function(t) {
-    this.ID = t;
-    this.Number = I(t);
-    this.Type = E(t);
+var CardData = function() {
+  return function(cardId) {
+    this.ID = cardId;
+    this.Number = getCardNumber(cardId);
+    this.Type = getCardType(cardId);
   };
 }();
 
-function E(t) {
-  return t % 4 + 1;
+function getCardType(cardId) {
+  return cardId % 4 + 1;
 }
 
-function I(t) {
-  return Math.floor(t / 4) + 1;
+function getCardNumber(cardId) {
+  return Math.floor(cardId / 4) + 1;
 }
 
-function A(t) {
-  return new T(t);
+function getCardData(cardId) {
+  return new CardData(cardId);
 }
 
-function P(t) {
-  for (var e, i = 0; i < t.length; i++) {
-    for (var n = i + 1; n < t.length; n++) {
-      if (I(t[i]) > I(t[n])) {
-        e = [t[n], t[i]];
-        t[i] = e[0];
-        t[n] = e[1];
+function sortListCards(cardIds) {
+  for (var swapPair, indexA = 0; indexA < cardIds.length; indexA++) {
+    for (var indexB = indexA + 1; indexB < cardIds.length; indexB++) {
+      if (getCardNumber(cardIds[indexA]) > getCardNumber(cardIds[indexB])) {
+        swapPair = [cardIds[indexB], cardIds[indexA]];
+        cardIds[indexA] = swapPair[0];
+        cardIds[indexB] = swapPair[1];
       }
     }
   }
-  for (i = 0; i < t.length; i++) {
-    I(t[i]) + " ";
+  for (indexA = 0; indexA < cardIds.length; indexA++) {
+    getCardNumber(cardIds[indexA]) + " ";
   }
-  return t;
+  return cardIds;
 }
 
-function M() {
-  var t = localStorage.getItem("KEY_STORE_FINGER_PRINT");
-  if (StringUtil.default.isNullOrEmpty(t)) {
-    t = cc.sys.isNative ? cc.sys.os === cc.sys.OS_ANDROID ? B() : cc.sys.os === cc.sys.OS_IOS ? O() : N() : N();
+function getFakeFingerPrint() {
+  var fingerPrint = localStorage.getItem("KEY_STORE_FINGER_PRINT");
+  if (StringUtil.default.isNullOrEmpty(fingerPrint)) {
+    fingerPrint = cc.sys.isNative ? cc.sys.os === cc.sys.OS_ANDROID ? generateFingerPrintAndroid() : cc.sys.os === cc.sys.OS_IOS ? generateFingerPrintIOS() : generateFingerPrintDefault() : generateFingerPrintDefault();
   }
-  localStorage.setItem("KEY_STORE_FINGER_PRINT", t);
-  return t;
+  localStorage.setItem("KEY_STORE_FINGER_PRINT", fingerPrint);
+  return fingerPrint;
 }
 
-function O() {
-  var t = "0123456789ABCDEF";
+function generateFingerPrintIOS() {
+  var hexChars = "0123456789ABCDEF";
 
-  function e(e) {
-    for (var i = "", n = 0; n < e; n++) {
-      i += t[Math.floor(16 * Math.random())];
+  function randomHex(length) {
+    for (var result = "", index = 0; index < length; index++) {
+      result += hexChars[Math.floor(16 * Math.random())];
     }
-    return i;
+    return result;
   }
-  for (var i = Date.now().toString(16).toUpperCase(), n = i.slice(0, 8), o = 8 - n.length, a = 0; a < o; a++) {
-    n += t[Math.floor(16 * Math.random())];
+  for (var nowHex = Date.now().toString(16).toUpperCase(), part1 = nowHex.slice(0, 8), padCount = 8 - part1.length, padIndex = 0; padIndex < padCount; padIndex++) {
+    part1 += hexChars[Math.floor(16 * Math.random())];
   }
-  var s = i.slice(8, 12);
-  o = 4 - s.length;
-  for (a = 0; a < o; a++) {
-    s += t[Math.floor(16 * Math.random())];
+  var part2 = nowHex.slice(8, 12);
+  padCount = 4 - part2.length;
+  for (padIndex = 0; padIndex < padCount; padIndex++) {
+    part2 += hexChars[Math.floor(16 * Math.random())];
   }
-  var r = i.slice(12, 16);
-  o = 4 - r.length;
-  for (a = 0; a < o; a++) {
-    r += t[Math.floor(16 * Math.random())];
+  var part3 = nowHex.slice(12, 16);
+  padCount = 4 - part3.length;
+  for (padIndex = 0; padIndex < padCount; padIndex++) {
+    part3 += hexChars[Math.floor(16 * Math.random())];
   }
-  return n + "-" + s + "-" + r + "-" + e(4) + "-" + e(12);
+  return part1 + "-" + part2 + "-" + part3 + "-" + randomHex(4) + "-" + randomHex(12);
 }
 
-function N() {
-  for (var t = Date.now().toString(16), e = "", i = 0; i < 32 - t.length; i++) {
-    e += "0123456789abcdef" [Math.floor(16 * Math.random())];
+function generateFingerPrintDefault() {
+  for (var nowHex = Date.now().toString(16), randomPart = "", index = 0; index < 32 - nowHex.length; index++) {
+    randomPart += "0123456789abcdef" [Math.floor(16 * Math.random())];
   }
-  return t + e;
+  return nowHex + randomPart;
 }
 
-function B() {
-  for (var t = Date.now().toString(16), e = "", i = 0; i < 16 - t.length; i++) {
-    e += "0123456789abcdef" [Math.floor(16 * Math.random())];
+function generateFingerPrintAndroid() {
+  for (var nowHex = Date.now().toString(16), randomPart = "", index = 0; index < 16 - nowHex.length; index++) {
+    randomPart += "0123456789abcdef" [Math.floor(16 * Math.random())];
   }
-  return t + e;
+  return nowHex + randomPart;
 }
 
-function D() {
-  var t = "hit.web";
+function getBundleId() {
+  var bundleId = "hit.web";
   if (cc.sys.isNative) {
-    if (t = "hit.app", cc.sys.os === cc.sys.OS_ANDROID) {
-      var e = m.Instance.getFunctionName("getBundleid");
+    if (bundleId = "hit.app", cc.sys.os === cc.sys.OS_ANDROID) {
+      var methodName = NativeInterop.Instance.getFunctionName("getBundleid");
       try {
         if (void 0 != jsb) {
-          t = jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity", e, "()Ljava/lang/String;");
+          bundleId = jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity", methodName, "()Ljava/lang/String;");
         }
-      } catch (t) {
-        console.error("ERROR getting bundle id " + t);
+      } catch (error) {
+        console.error("ERROR getting bundle id " + error);
       }
     } else if (cc.sys.os === cc.sys.OS_IOS) {
       try {
         if (void 0 != jsb) {
-          e = m.Instance.getFunctionName("getBundleid");
-          t = jsb.reflection.callStaticMethod("AppController", e);
+          methodName = NativeInterop.Instance.getFunctionName("getBundleid");
+          bundleId = jsb.reflection.callStaticMethod("AppController", methodName);
         }
-      } catch (t) {
-        console.error("ERROR getting bundle id " + t);
+      } catch (error) {
+        console.error("ERROR getting bundle id " + error);
       }
     }
   }
-  if (!(void 0 != t && null != t && "" != t)) {
-    t = i.bundleId_default;
+  if (!(void 0 != bundleId && null != bundleId && "" != bundleId)) {
+    bundleId = moduleExports.bundleId_default;
   }
-  return t;
+  return bundleId;
 }
 
-function R(t) {
-  return t.charAt(0).toUpperCase() + t.slice(1);
+function capitalizeFirstLetter(text) {
+  return text.charAt(0).toUpperCase() + text.slice(1);
 }
 
-function L(t) {
+function openUrlWithDom(url) {
   try {
-    var e = document.createElement("a");
-    e.href = t;
-    e.target = "_blank";
-    e.rel = "noopener";
-    e.style.position = "fixed";
-    e.style.top = "-1000px";
-    document.body.appendChild(e);
-    e.click();
-    document.body.removeChild(e);
-  } catch (e) {
-    cc.sys.openURL(t);
+    var anchor = document.createElement("a");
+    anchor.href = url;
+    anchor.target = "_blank";
+    anchor.rel = "noopener";
+    anchor.style.position = "fixed";
+    anchor.style.top = "-1000px";
+    document.body.appendChild(anchor);
+    anchor.click();
+    document.body.removeChild(anchor);
+  } catch (error) {
+    cc.sys.openURL(url);
   }
 }
-i.CardData = T;
-i.getCardType = E;
-i.getCardNumber = I;
-i.getCardData = A;
-i.getPhomSanh = function(t, e) {
-  if (void 0 === e) {
-    e = true;
+moduleExports.CardData = CardData;
+moduleExports.getCardType = getCardType;
+moduleExports.getCardNumber = getCardNumber;
+moduleExports.getCardData = getCardData;
+moduleExports.getPhomSanh = function(cardIds, removeFound) {
+  if (void 0 === removeFound) {
+    removeFound = true;
   }
-  var i = [
+  var straights = [
     []
   ];
-  P(t);
-  for (var n = [], o = -1, a = 0; a < t.length - 2; a++) {
-    if (E(t[a]) != E(t[a + 1]) || I(t[a + 1]) - I(t[a]) != 1) {
-      if (n.length >= 3) {
-        i.push(n);
-        if (e) {
-          t.splice(o, n.length);
-          a = 0;
+  sortListCards(cardIds);
+  for (var currentStraightPairs = [], startIndex = -1, index = 0; index < cardIds.length - 2; index++) {
+    if (getCardType(cardIds[index]) != getCardType(cardIds[index + 1]) || getCardNumber(cardIds[index + 1]) - getCardNumber(cardIds[index]) != 1) {
+      if (currentStraightPairs.length >= 3) {
+        straights.push(currentStraightPairs);
+        if (removeFound) {
+          cardIds.splice(startIndex, currentStraightPairs.length);
+          index = 0;
         }
       }
-      o = -1;
-      n = [];
+      startIndex = -1;
+      currentStraightPairs = [];
     } else {
-      if (-1 == o) {
-        o = a;
+      if (-1 == startIndex) {
+        startIndex = index;
       }
-      n.push(t[a], t[a + 1]);
+      currentStraightPairs.push(cardIds[index], cardIds[index + 1]);
     }
   }
-  return i;
+  return straights;
 };
-i.getSameCard = function(t, e) {
-  if (void 0 === e) {
-    e = true;
+moduleExports.getSameCard = function(cardIds, removeFound) {
+  if (void 0 === removeFound) {
+    removeFound = true;
   }
-  var i = [
+  var sets = [
     []
   ];
-  P(t);
-  for (var n = [], o = 0; o < t.length - 3; o++) {
-    if (I(t[o]) == I(t[o + 1]) && I(t[o + 1]) == I(t[o + 2])) {
-      n.push(t[o], t[o + 1], t[o + 2]);
-      if (o + 4 < t.length && I(o) == I(o + 4)) {
-        n.push(t[o + 4]);
+  sortListCards(cardIds);
+  for (var currentSet = [], index = 0; index < cardIds.length - 3; index++) {
+    if (getCardNumber(cardIds[index]) == getCardNumber(cardIds[index + 1]) && getCardNumber(cardIds[index + 1]) == getCardNumber(cardIds[index + 2])) {
+      currentSet.push(cardIds[index], cardIds[index + 1], cardIds[index + 2]);
+      if (index + 4 < cardIds.length && getCardNumber(index) == getCardNumber(index + 4)) {
+        currentSet.push(cardIds[index + 4]);
       }
-      if (e) {
-        t.splice(o, n.length);
-        o = 0;
+      if (removeFound) {
+        cardIds.splice(index, currentSet.length);
+        index = 0;
       }
-      i.push(n);
-      n = [];
+      sets.push(currentSet);
+      currentSet = [];
     }
   }
-  return i;
+  return sets;
 };
-i.getPairSorted = function(t, e) {
-  if (void 0 === e) {
-    e = true;
+moduleExports.getPairSorted = function(cardIds, removeFound) {
+  if (void 0 === removeFound) {
+    removeFound = true;
   }
-  var i = [];
-  P(t);
-  for (var n = 0; n < t.length - 1; n++) {
-    if (I(t[n]) == I(t[n + 1])) {
-      i.push(t[n], t[n + 1]);
-      if (e) {
-        t.splice(n, 2);
-        n = 0;
+  var pairedCards = [];
+  sortListCards(cardIds);
+  for (var index = 0; index < cardIds.length - 1; index++) {
+    if (getCardNumber(cardIds[index]) == getCardNumber(cardIds[index + 1])) {
+      pairedCards.push(cardIds[index], cardIds[index + 1]);
+      if (removeFound) {
+        cardIds.splice(index, 2);
+        index = 0;
       }
     }
   }
-  return i;
+  return pairedCards;
 };
-i.sortListCards = P;
-i.getListCardData = function(t) {
-  for (var e = [], i = 0; i < t.length; i++) {
-    e.push(A(t[i]));
+moduleExports.sortListCards = sortListCards;
+moduleExports.getListCardData = function(cardIds) {
+  for (var cardDataList = [], index = 0; index < cardIds.length; index++) {
+    cardDataList.push(getCardData(cardIds[index]));
   }
-  return e;
+  return cardDataList;
 };
-i.isRunningStandalone = function() {
+moduleExports.isRunningStandalone = function() {
   return navigator.standalone || window.matchMedia("(display-mode: standalone)").matches;
 };
-i.isActivePublicLobby = function() {
+moduleExports.isActivePublicLobby = function() {
   if (cc.sys.isNative) {
-    var t = GameConfigManager.default.getInstance().publicLobbyConfig;
-    if (t) {
-      var e;
-      if (void 0 != t.activeAndroid && 0 == t.activeAndroid && cc.sys.os == cc.sys.OS_ANDROID && (e = D()) && GameConfigManager.default.getInstance()
-        .isDisablePublicLobby(e)) {
+    var publicLobbyConfig = GameConfigManager.default.getInstance().publicLobbyConfig;
+    if (publicLobbyConfig) {
+      var bundleId;
+      if (void 0 != publicLobbyConfig.activeAndroid && 0 == publicLobbyConfig.activeAndroid && cc.sys.os == cc.sys.OS_ANDROID && (bundleId = getBundleId()) && GameConfigManager.default.getInstance()
+        .isDisablePublicLobby(bundleId)) {
         return false;
       }
-      if (void 0 != t.activeiOS && 0 == t.activeiOS && cc.sys.os == cc.sys.OS_IOS && (e = D()) && GameConfigManager.default.getInstance()
-        .isDisablePublicLobby(e)) {
+      if (void 0 != publicLobbyConfig.activeiOS && 0 == publicLobbyConfig.activeiOS && cc.sys.os == cc.sys.OS_IOS && (bundleId = getBundleId()) && GameConfigManager.default.getInstance()
+        .isDisablePublicLobby(bundleId)) {
         return false;
       }
     }
@@ -667,80 +667,80 @@ i.isActivePublicLobby = function() {
   return 1 == cc.sys.isNative && "true" == GameConfigManager.default.getInstance().isActivePublicLobbyApp || 0 == cc.sys.isNative && "true" == GameConfigManager.default
     .getInstance().isActivePublicLobbyWeb;
 };
-i.getBrand = function() {
-  var t = GameConfigManager.default.getInstance().enviromentName;
-  return (t = (t = (t = t.replace("test", "")).replace("pre", "")).replace("prepro", "")).toUpperCase();
+moduleExports.getBrand = function() {
+  var brandName = GameConfigManager.default.getInstance().enviromentName;
+  return (brandName = (brandName = (brandName = brandName.replace("test", "")).replace("pre", "")).replace("prepro", "")).toUpperCase();
 };
-i.isTablet = function() {
+moduleExports.isTablet = function() {
   if (cc.sys.platform === cc.sys.IPAD) {
     return true;
   }
   if (cc.sys.isNative) {
-    var t = jsb.device.getDPI(),
-      e = cc.view.getFrameSize(),
-      i = e.width / t,
-      n = e.height / t,
-      o = Math.sqrt(Math.pow(i, 2) + Math.pow(n, 2));
-    return (o = Math.round(100 * o) / 100) >= 7;
+    var dpi = jsb.device.getDPI(),
+      frameSize = cc.view.getFrameSize(),
+      widthInch = frameSize.width / dpi,
+      heightInch = frameSize.height / dpi,
+      diagonalInch = Math.sqrt(Math.pow(widthInch, 2) + Math.pow(heightInch, 2));
+    return (diagonalInch = Math.round(100 * diagonalInch) / 100) >= 7;
   }
   if (cc.sys.platform === cc.sys.MOBILE_BROWSER) {
-    var a = navigator.userAgent.toLowerCase();
-    return /(ipad|tablet|(android(?!.*mobile))|(windows(?!.*phone)(.*touch))|kindle|playbook|silk|(puffin(?!.*(IP|AP|WP))))/.test(a);
+    var userAgent = navigator.userAgent.toLowerCase();
+    return /(ipad|tablet|(android(?!.*mobile))|(windows(?!.*phone)(.*touch))|kindle|playbook|silk|(puffin(?!.*(IP|AP|WP))))/.test(userAgent);
   }
   return false;
 };
-i.convertToHMS = function(t) {
+moduleExports.convertToHMS = function(totalSeconds) {
   return {
-    hours: Math.floor(t / 3600),
-    minutes: Math.floor(t % 3600 / 60),
-    seconds: t % 60
+    hours: Math.floor(totalSeconds / 3600),
+    minutes: Math.floor(totalSeconds % 3600 / 60),
+    seconds: totalSeconds % 60
   };
 };
-i.setOrientation = function(t) {
-  if (void 0 === t && (t = 0), cc.sys.isNative) {
+moduleExports.setOrientation = function(orientation) {
+  if (void 0 === orientation && (orientation = 0), cc.sys.isNative) {
     if (cc.sys.os === cc.sys.OS_IOS) {
       if (jsb) {
         try {
-          var e = m.Instance.getFunctionName("rotateScreen");
-          jsb.reflection.callStaticMethod("AppController", e + ":", t);
-        } catch (t) {}
+          var methodName = NativeInterop.Instance.getFunctionName("rotateScreen");
+          jsb.reflection.callStaticMethod("AppController", methodName + ":", orientation);
+        } catch (error) {}
       }
     } else if (cc.sys.os === cc.sys.OS_ANDROID && jsb) {
       try {
-        e = m.Instance.getFunctionName("setOrientation");
+        methodName = NativeInterop.Instance.getFunctionName("setOrientation");
         if (jsb) {
-          jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity", e, "(I)V");
+          jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity", methodName, "(I)V");
         }
-      } catch (t) {}
+      } catch (error) {}
     }
   }
 };
-i.changeOrientation = function(t) {
-  var e = false;
+moduleExports.changeOrientation = function(orientation) {
+  var calledNative = false;
   if (cc.sys.isNative) {
     if (cc.sys.os === cc.sys.OS_IOS) {
       if (jsb) {
         try {
-          e = true;
-          var i = m.Instance.getFunctionName("rotateScreen");
-          jsb.reflection.callStaticMethod("AppController", i + ":", t);
-        } catch (t) {}
+          calledNative = true;
+          var methodName = NativeInterop.Instance.getFunctionName("rotateScreen");
+          jsb.reflection.callStaticMethod("AppController", methodName + ":", orientation);
+        } catch (error) {}
       }
     } else if (cc.sys.os === cc.sys.OS_ANDROID && jsb) {
       try {
-        i = m.Instance.getFunctionName("setOrientation");
+        methodName = NativeInterop.Instance.getFunctionName("setOrientation");
         if (jsb) {
-          e = true;
-          jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity", i, "(I)V", t);
+          calledNative = true;
+          jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity", methodName, "(I)V", orientation);
         }
-      } catch (t) {}
+      } catch (error) {}
     }
   }
-  if (e) {
-    if (0 == t || 2 == t) {
+  if (calledNative) {
+    if (0 == orientation || 2 == orientation) {
       cc.view.setOrientation(cc.macro.ORIENTATION_PORTRAIT);
     } else {
-      if (1 == t || 3 == t) {
+      if (1 == orientation || 3 == orientation) {
         cc.view.setOrientation(cc.macro.ORIENTATION_LANDSCAPE);
       } else {
         cc.view.setOrientation(cc.macro.ORIENTATION_AUTO);
@@ -748,392 +748,392 @@ i.changeOrientation = function(t) {
     }
   }
 };
-i.getFakeFingerPrint = M;
-i.bundleId_default = "hit.comp.app";
-i.getBundleId = D;
-i.setKeepScreenOn = function(t) {
+moduleExports.getFakeFingerPrint = getFakeFingerPrint;
+moduleExports.bundleId_default = "hit.comp.app";
+moduleExports.getBundleId = getBundleId;
+moduleExports.setKeepScreenOn = function(keepOn) {
   try {
     if (cc.sys.isNative) {
       if (cc.sys.os === cc.sys.OS_ANDROID) {
-        var e = m.Instance.getFunctionName("setKeepScreenOn");
+        var methodName = NativeInterop.Instance.getFunctionName("setKeepScreenOn");
         if (jsb) {
-          jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity", e, "(Z)V", t);
+          jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity", methodName, "(Z)V", keepOn);
         }
       } else {
         if (cc.sys.os === cc.sys.OS_IOS && jsb) {
-          e = m.Instance.getFunctionName("setKeepScreenOn");
-          jsb.reflection.callStaticMethod("AppController", e + ":", t);
+          methodName = NativeInterop.Instance.getFunctionName("setKeepScreenOn");
+          jsb.reflection.callStaticMethod("AppController", methodName + ":", keepOn);
         }
       }
     }
-  } catch (t) {
-    console.log(t);
+  } catch (error) {
+    console.log(error);
   }
 };
-i.saveBase64Image = function(t) {
+moduleExports.saveBase64Image = function(base64Image) {
   try {
     if (cc.sys.isNative) {
       if (cc.sys.os === cc.sys.OS_ANDROID) {
-        var e = m.Instance.getFunctionName("saveImageToPhotoLibrary");
+        var methodName = NativeInterop.Instance.getFunctionName("saveImageToPhotoLibrary");
         if (jsb) {
-          jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity", e, "(Ljava/lang/String;)V", t);
+          jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity", methodName, "(Ljava/lang/String;)V", base64Image);
         }
       } else {
         if (cc.sys.os === cc.sys.OS_IOS && jsb) {
-          e = m.Instance.getFunctionName("saveImageToPhotoLibrary");
-          jsb.reflection.callStaticMethod("AppController", e + ":", t);
+          methodName = NativeInterop.Instance.getFunctionName("saveImageToPhotoLibrary");
+          jsb.reflection.callStaticMethod("AppController", methodName + ":", base64Image);
         }
       }
     }
-  } catch (t) {
-    console.log(t);
+  } catch (error) {
+    console.log(error);
   }
 };
-i.isSupportSendSMS = function() {
+moduleExports.isSupportSendSMS = function() {
   try {
     if (cc.sys.isNative) {
       if (cc.sys.os === cc.sys.OS_ANDROID) {
-        var t = m.Instance.getFunctionName("isSupportSendSMS");
+        var methodName = NativeInterop.Instance.getFunctionName("isSupportSendSMS");
         if (jsb) {
-          return jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity", t, "()Z");
+          return jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity", methodName, "()Z");
         }
       } else if (cc.sys.os === cc.sys.OS_IOS && jsb) {
-        t = m.Instance.getFunctionName("isSupportSendSMS");
-        return jsb.reflection.callStaticMethod("AppController", t);
+        methodName = NativeInterop.Instance.getFunctionName("isSupportSendSMS");
+        return jsb.reflection.callStaticMethod("AppController", methodName);
       }
     }
-  } catch (t) {
-    console.log(t);
+  } catch (error) {
+    console.log(error);
   }
   return false;
 };
-i.sendSMS = function(t, e) {
+moduleExports.sendSMS = function(phoneNumber, content) {
   try {
     if (cc.sys.isNative) {
       if (cc.sys.os === cc.sys.OS_ANDROID) {
-        var i = m.Instance.getFunctionName("sendSMS");
+        var methodName = NativeInterop.Instance.getFunctionName("sendSMS");
         if (jsb) {
-          jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity", i, "(Ljava/lang/String;Ljava/lang/String;)V", t, e);
+          jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity", methodName, "(Ljava/lang/String;Ljava/lang/String;)V", phoneNumber, content);
         }
       } else {
         if (cc.sys.os === cc.sys.OS_IOS && jsb) {
-          i = m.Instance.getFunctionName("sendSMS");
-          jsb.reflection.callStaticMethod("AppController", i + ":withContent:", t, e);
+          methodName = NativeInterop.Instance.getFunctionName("sendSMS");
+          jsb.reflection.callStaticMethod("AppController", methodName + ":withContent:", phoneNumber, content);
         }
       }
     }
-  } catch (t) {
-    console.log(t);
+  } catch (error) {
+    console.log(error);
   }
 };
-i.getIdentifier = function() {
-  var t = "none";
+moduleExports.getIdentifier = function() {
+  var identifier = "none";
   if (cc.sys.isNative) {
     if (cc.sys.os === cc.sys.OS_ANDROID) {
-      var e = m.Instance.getFunctionName("getIdentifier");
+      var methodName = NativeInterop.Instance.getFunctionName("getIdentifier");
       try {
         if (void 0 != jsb) {
-          t = jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity", e, "()Ljava/lang/String;");
+          identifier = jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity", methodName, "()Ljava/lang/String;");
         }
-      } catch (t) {
-        console.error("ERROR getting bundle id " + t);
+      } catch (error) {
+        console.error("ERROR getting bundle id " + error);
       }
     } else if (cc.sys.os === cc.sys.OS_IOS) {
       try {
         if (void 0 != jsb) {
-          e = m.Instance.getFunctionName("getIdentifier");
-          t = jsb.reflection.callStaticMethod("AppController", e);
+          methodName = NativeInterop.Instance.getFunctionName("getIdentifier");
+          identifier = jsb.reflection.callStaticMethod("AppController", methodName);
         }
-      } catch (t) {
-        console.error("ERROR getting bundle id " + t);
+      } catch (error) {
+        console.error("ERROR getting bundle id " + error);
       }
     }
   }
-  if (!(void 0 != t && null != t && "" != t)) {
-    t = M();
+  if (!(void 0 != identifier && null != identifier && "" != identifier)) {
+    identifier = getFakeFingerPrint();
   }
-  return t;
+  return identifier;
 };
-i.getDeviceName = function() {
-  var t = "none";
+moduleExports.getDeviceName = function() {
+  var deviceName = "none";
   if (cc.sys.isNative) {
     if (cc.sys.os === cc.sys.OS_ANDROID) {
-      var e = m.Instance.getFunctionName("getDeviceName");
+      var methodName = NativeInterop.Instance.getFunctionName("getDeviceName");
       try {
         if (void 0 != jsb) {
-          t = jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity", e, "()Ljava/lang/String;");
+          deviceName = jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity", methodName, "()Ljava/lang/String;");
         }
-      } catch (t) {
-        console.log("ERROR getting bundle id " + t);
+      } catch (error) {
+        console.log("ERROR getting bundle id " + error);
       }
     } else if (cc.sys.os === cc.sys.OS_IOS) {
       try {
         if (void 0 != jsb) {
-          e = m.Instance.getFunctionName("getDeviceName");
-          t = jsb.reflection.callStaticMethod("AppController", e);
+          methodName = NativeInterop.Instance.getFunctionName("getDeviceName");
+          deviceName = jsb.reflection.callStaticMethod("AppController", methodName);
         }
-      } catch (t) {
-        console.log("ERROR getting bundle id " + t);
+      } catch (error) {
+        console.log("ERROR getting bundle id " + error);
       }
     }
   } else {
     try {
-      t = window.navigator.userAgent;
-    } catch (t) {
-      console.log("ERROR getting bundle id " + t);
+      deviceName = window.navigator.userAgent;
+    } catch (error) {
+      console.log("ERROR getting bundle id " + error);
     }
   }
-  return t;
+  return deviceName;
 };
-i.writeTextToClipboard = function(t) {
+moduleExports.writeTextToClipboard = function(text) {
   try {
     if (cc.sys.platform === cc.sys.MOBILE_BROWSER || cc.sys.platform === cc.sys.DESKTOP_BROWSER) {
       try {
-        window.navigator.clipboard.writeText(t).then(function() {}, function(t) {});
-      } catch (t) {}
+        window.navigator.clipboard.writeText(text).then(function() {}, function(error) {});
+      } catch (error) {}
     } else if (cc.sys.isNative && void 0 != jsb) {
       if (cc.sys.os === cc.sys.OS_ANDROID) {
-        var e = m.Instance.getFunctionName("setClipboardContent");
+        var methodName = NativeInterop.Instance.getFunctionName("setClipboardContent");
         if (jsb) {
-          jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity", e, "(Ljava/lang/String;)V", t);
+          jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity", methodName, "(Ljava/lang/String;)V", text);
         }
       } else {
         if (cc.sys.os === cc.sys.OS_IOS) {
-          e = m.Instance.getFunctionName("setClipboardContent");
-          jsb.reflection.callStaticMethod("AppController", e + ":", t);
+          methodName = NativeInterop.Instance.getFunctionName("setClipboardContent");
+          jsb.reflection.callStaticMethod("AppController", methodName + ":", text);
         }
       }
     }
-  } catch (t) {
-    console.log(t);
+  } catch (error) {
+    console.log(error);
   }
 };
-i.readTextFromClipboard = function() {
+moduleExports.readTextFromClipboard = function() {
   try {
     if (cc.sys.isNative && void 0 != jsb) {
       if (cc.sys.os === cc.sys.OS_ANDROID) {
-        var t = m.Instance.getFunctionName("getClipboardContent");
+        var methodName = NativeInterop.Instance.getFunctionName("getClipboardContent");
         if (jsb) {
-          return jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity", t, "()Ljava/lang/String;");
+          return jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity", methodName, "()Ljava/lang/String;");
         }
       } else if (cc.sys.os === cc.sys.OS_IOS && jsb) {
-        t = m.Instance.getFunctionName("getClipboardContent");
-        return jsb.reflection.callStaticMethod("AppController", t);
+        methodName = NativeInterop.Instance.getFunctionName("getClipboardContent");
+        return jsb.reflection.callStaticMethod("AppController", methodName);
       }
     }
-  } catch (t) {
-    console.log(t);
+  } catch (error) {
+    console.log(error);
   }
   return "";
 };
-i.isOldAppIOS = function() {
+moduleExports.isOldAppIOS = function() {
   return false;
 };
-i.downloadBinary = function(t, e) {
-  var i = cc.loader.getXMLHttpRequest(),
-    n = "Load binary data failed: " + t;
-  i.open("GET", t, true);
-  i.responseType = "arraybuffer";
-  i.onload = function() {
-    var t = i.response;
-    if (t) {
-      var o = new Uint8Array(t);
-      e(null, o);
+moduleExports.downloadBinary = function(url, onDone) {
+  var xhr = cc.loader.getXMLHttpRequest(),
+    errorPrefix = "Load binary data failed: " + url;
+  xhr.open("GET", url, true);
+  xhr.responseType = "arraybuffer";
+  xhr.onload = function() {
+    var buffer = xhr.response;
+    if (buffer) {
+      var bytes = new Uint8Array(buffer);
+      onDone(null, bytes);
     } else {
-      e({
-        status: i.status,
-        errorMessage: n + "(no response)"
+      onDone({
+        status: xhr.status,
+        errorMessage: errorPrefix + "(no response)"
       });
     }
   };
-  i.onerror = function() {
-    e({
-      status: i.status,
-      errorMessage: n + "(error)"
+  xhr.onerror = function() {
+    onDone({
+      status: xhr.status,
+      errorMessage: errorPrefix + "(error)"
     });
   };
-  i.ontimeout = function() {
-    e({
-      status: i.status,
-      errorMessage: n + "(time out)"
+  xhr.ontimeout = function() {
+    onDone({
+      status: xhr.status,
+      errorMessage: errorPrefix + "(time out)"
     });
   };
-  i.send(null);
+  xhr.send(null);
 };
-i.capitalizeFirstLetter = R;
-i.formatUrl = function(t) {
-  return t = (t = (t = (t = (t = (t = t.replace(/https:/g, "https_")).replace(/{/g, "%7B")).replace(/}/g, "%7D")).replace(/"/g, "%22"))
+moduleExports.capitalizeFirstLetter = capitalizeFirstLetter;
+moduleExports.formatUrl = function(url) {
+  return url = (url = (url = (url = (url = (url = url.replace(/https:/g, "https_")).replace(/{/g, "%7B")).replace(/}/g, "%7D")).replace(/"/g, "%22"))
     .replace(/:/g, "%3A")).replace(/https_/g, "https:");
 };
-i.showPopupNewBrandInfo = function() {
+moduleExports.showPopupNewBrandInfo = function() {
   if (0 == GameConfigManager.default.getInstance().isforcebrand) {
     return false;
   }
-  var t = GameConfigManager.default.getInstance().newHomeUrl;
-  if (t.includes("play")) {
-    t = t.split("play.")[1];
+  var newHomeUrl = GameConfigManager.default.getInstance().newHomeUrl;
+  if (newHomeUrl.includes("play")) {
+    newHomeUrl = newHomeUrl.split("play.")[1];
   }
-  var e = CommonPrefabsManager.default.getInstance().showPopup1Button();
-  e.btnBackground.interactable = false;
-  e.nodeButton.width = 250;
-  e.nodeButton.height = 75;
-  e.lbOk.string = "T\u1ea3i " + GameConfigManager.default.getInstance().newBrandName;
-  e.lbContent.string = "T\u1eeb ng\xe0y " + GameConfigManager.default.getInstance().newBrandTime + ", " + GameConfigManager.default.getInstance().homeUrl.split("play.")[
+  var popup = CommonPrefabsManager.default.getInstance().showPopup1Button();
+  popup.btnBackground.interactable = false;
+  popup.nodeButton.width = 250;
+  popup.nodeButton.height = 75;
+  popup.lbOk.string = "T\u1ea3i " + GameConfigManager.default.getInstance().newBrandName;
+  popup.lbContent.string = "T\u1eeb ng\xe0y " + GameConfigManager.default.getInstance().newBrandTime + ", " + GameConfigManager.default.getInstance().homeUrl.split("play.")[
       1] + " chuy\u1ec3n sang c\u1ed5ng game " + GameConfigManager.default.getInstance().newBrandName +
-    ", m\u1eddi b\u1ea1n \u0111\u0103ng k\xfd t\u1ea1i " + t;
-  e.onOKCallback = function() {
+    ", m\u1eddi b\u1ea1n \u0111\u0103ng k\xfd t\u1ea1i " + newHomeUrl;
+  popup.onOKCallback = function() {
     cc.sys.openURL("https://" + GameConfigManager.default.getInstance().newHomeUrl);
   }.bind(this);
   return true;
 };
-i.delay = function(t) {
-  return new Promise(function(e) {
-    return setTimeout(e, t);
+moduleExports.delay = function(delayMs) {
+  return new Promise(function(resolve) {
+    return setTimeout(resolve, delayMs);
   });
 };
-i.transformAvatarString = function(t) {
-  return t.split("-").map(function(t, e) {
-    return 0 === e ? R(t) : t.replace(/^0+/, "");
+moduleExports.transformAvatarString = function(avatarString) {
+  return avatarString.split("-").map(function(part, index) {
+    return 0 === index ? capitalizeFirstLetter(part) : part.replace(/^0+/, "");
   }).join("");
 };
-i.updateLiveChatInhouseUrl = function() {
+moduleExports.updateLiveChatInhouseUrl = function() {
   if (GameConfigManager.default.getInstance().isUseLiveChatInhouse) {
-    var t = GameConfigManager.default.getInstance().liveChatOriginalUrl;
-    t = "" != GamePlayManager.default.getInstance().session_id ? t.replace("{xtoken}", GamePlayManager.default.getInstance().session_id) : t.replace(
+    var liveChatUrl = GameConfigManager.default.getInstance().liveChatOriginalUrl;
+    liveChatUrl = "" != GamePlayManager.default.getInstance().session_id ? liveChatUrl.replace("{xtoken}", GamePlayManager.default.getInstance().session_id) : liveChatUrl.replace(
       "?xtoken={xtoken}", "");
-    GameConfigManager.default.getInstance().liveChatUrl = t;
-    cc.sys.localStorage.setItem("KEY_URL_SUPPORT_LIVE_CHAT", t);
+    GameConfigManager.default.getInstance().liveChatUrl = liveChatUrl;
+    cc.sys.localStorage.setItem("KEY_URL_SUPPORT_LIVE_CHAT", liveChatUrl);
   }
 };
-i.convertTimeToString = function(t, e) {
-  if (void 0 === e) {
-    e = "\n";
+moduleExports.convertTimeToString = function(timestamp, separator) {
+  if (void 0 === separator) {
+    separator = "\n";
   }
-  var i = new Date(t),
-    n = i.getFullYear(),
-    o = ("0" + (i.getMonth() + 1)).slice(-2);
-  return ("0" + i.getDate()).slice(-2) + "-" + o + "-" + n + e + ("0" + i.getHours()).slice(-2) + ":" + ("0" + i.getMinutes()).slice(-2) +
-    ":" + ("0" + i.getSeconds()).slice(-2);
+  var date = new Date(timestamp),
+    year = date.getFullYear(),
+    month = ("0" + (date.getMonth() + 1)).slice(-2);
+  return ("0" + date.getDate()).slice(-2) + "-" + month + "-" + year + separator + ("0" + date.getHours()).slice(-2) + ":" + ("0" + date.getMinutes()).slice(-2) +
+    ":" + ("0" + date.getSeconds()).slice(-2);
 };
-i.convertDateFormat = function(t) {
-  var e = t.split(" "),
-    i = e[0],
-    n = e[1],
-    o = i.split("-"),
-    a = o[0],
-    s = o[1];
-  return o[2] + "-" + s + "-" + a + " " + n;
+moduleExports.convertDateFormat = function(dateTime) {
+  var parts = dateTime.split(" "),
+    datePart = parts[0],
+    timePart = parts[1],
+    dateFields = datePart.split("-"),
+    year = dateFields[0],
+    month = dateFields[1];
+  return dateFields[2] + "-" + month + "-" + year + " " + timePart;
 };
-i.convertToStringGameID = function(t) {
-  var e = "";
-  switch (t) {
+moduleExports.convertToStringGameID = function(gameType) {
+  var gameId = "";
+  switch (gameType) {
     case MessageCardGameHandler.GAME.XITO:
-      e = MessageCardGameHandler.GAMEID.XITO;
+      gameId = MessageCardGameHandler.GAMEID.XITO;
       break;
     case MessageCardGameHandler.GAME.BINH:
-      e = MessageCardGameHandler.GAMEID.BINH;
+      gameId = MessageCardGameHandler.GAMEID.BINH;
       break;
     case MessageCardGameHandler.GAME.TIENLEN:
-      e = MessageCardGameHandler.GAMEID.TIENLEN;
+      gameId = MessageCardGameHandler.GAMEID.TIENLEN;
       break;
     case MessageCardGameHandler.GAME.POKER:
-      e = MessageCardGameHandler.GAMEID.POKER;
+      gameId = MessageCardGameHandler.GAMEID.POKER;
       break;
     case MessageCardGameHandler.GAME.BACAY:
-      e = MessageCardGameHandler.GAMEID.BACAY;
+      gameId = MessageCardGameHandler.GAMEID.BACAY;
       break;
     case MessageCardGameHandler.GAME.LIENG:
-      e = MessageCardGameHandler.GAMEID.LIENG;
+      gameId = MessageCardGameHandler.GAMEID.LIENG;
       break;
     case MessageCardGameHandler.GAME.SAM:
-      e = MessageCardGameHandler.GAMEID.SAM;
+      gameId = MessageCardGameHandler.GAMEID.SAM;
       break;
     case MessageCardGameHandler.GAME.PHOM:
-      e = MessageCardGameHandler.GAMEID.PHOM;
+      gameId = MessageCardGameHandler.GAMEID.PHOM;
       break;
     case MessageCardGameHandler.GAME.TLMN:
-      e = MessageCardGameHandler.GAMEID.TLMN;
+      gameId = MessageCardGameHandler.GAMEID.TLMN;
       break;
     case MessageCardGameHandler.GAME.CATTE:
-      e = MessageCardGameHandler.GAMEID.CATTE;
+      gameId = MessageCardGameHandler.GAMEID.CATTE;
       break;
     case MessageCardGameHandler.GAME.XOCDIA:
-      e = MessageCardGameHandler.GAMEID.XOCDIA;
+      gameId = MessageCardGameHandler.GAMEID.XOCDIA;
       break;
     case MessageCardGameHandler.GAME.BAU_CUA:
-      e = MessageCardGameHandler.GAMEID.BAU_CUA;
+      gameId = MessageCardGameHandler.GAMEID.BAU_CUA;
       break;
     case MessageCardGameHandler.GAME.XIDACH:
-      e = MessageCardGameHandler.GAMEID.XIDACH;
+      gameId = MessageCardGameHandler.GAMEID.XIDACH;
   }
-  return e;
+  return gameId;
 };
-i.runAnimationMoneyDecimal = function(t, e, i, n) {
-  if (void 0 === n && (n = .6), Number.isInteger(e) && Number.isInteger(i)) {
-    C(t, e, i, n);
+moduleExports.runAnimationMoneyDecimal = function(label, currentValue, targetValue, duration) {
+  if (void 0 === duration && (duration = .6), Number.isInteger(currentValue) && Number.isInteger(targetValue)) {
+    runAnimationMoneyWithColom(label, currentValue, targetValue, duration);
   } else {
-    var a = (i - e) / n;
-    if (t.unscheduleAllCallbacks(), 0 != a) {
-      var s = function(n) {
-        e += a * n;
-        if (Math.abs(e - i) < Math.abs(a * n * 2)) {
-          e = i;
-          t.string = StringUtil.default.formatMoneyNumberDecimal(e);
-          t.unschedule(s);
+    var speed = (targetValue - currentValue) / duration;
+    if (label.unscheduleAllCallbacks(), 0 != speed) {
+      var tick = function(deltaTime) {
+        currentValue += speed * deltaTime;
+        if (Math.abs(currentValue - targetValue) < Math.abs(speed * deltaTime * 2)) {
+          currentValue = targetValue;
+          label.string = StringUtil.default.formatMoneyNumberDecimal(currentValue);
+          label.unschedule(tick);
         } else {
-          t.string = StringUtil.default.formatMoneyNumberDecimal(e);
+          label.string = StringUtil.default.formatMoneyNumberDecimal(currentValue);
         }
       };
-      t.schedule(s, p);
+      label.schedule(tick, moneyTickInterval);
     } else {
-      t.string = StringUtil.default.formatMoneyNumberDecimal(i);
+      label.string = StringUtil.default.formatMoneyNumberDecimal(targetValue);
     }
   }
 };
-i.countUppercase = function(t) {
-  for (var e = 0, i = 0, n = t; i < n.length; i++) {
-    var o = n[i];
-    if (o >= "A" && o <= "Z") {
-      e++;
+moduleExports.countUppercase = function(text) {
+  for (var count = 0, index = 0, chars = text; index < chars.length; index++) {
+    var character = chars[index];
+    if (character >= "A" && character <= "Z") {
+      count++;
     }
   }
-  return e;
+  return count;
 };
-i.getPopupPositionCenter = function() {
-  var t = RMCAppInfoConfig.getBrandCodeConfig(),
-    e = new GbBrandChecker.BrandChecker(t);
-  return e.isG0() ? cc.Vec2.ZERO : (e.isGTh, new cc.Vec2(cc.winSize.width / 2, cc.winSize.height / 2));
+moduleExports.getPopupPositionCenter = function() {
+  var brandCode = RMCAppInfoConfig.getBrandCodeConfig(),
+    brandChecker = new GbBrandChecker.BrandChecker(brandCode);
+  return brandChecker.isG0() ? cc.Vec2.ZERO : (brandChecker.isGTh, new cc.Vec2(cc.winSize.width / 2, cc.winSize.height / 2));
 };
-i.setPopupPosition = function(t) {
-  var e = RMCAppInfoConfig.getBrandCodeConfig(),
-    i = new GbBrandChecker.BrandChecker(e);
-  if (i.isG0()) {
-    t.x = 0;
-    t.y = 0;
+moduleExports.setPopupPosition = function(node) {
+  var brandCode = RMCAppInfoConfig.getBrandCodeConfig(),
+    brandChecker = new GbBrandChecker.BrandChecker(brandCode);
+  if (brandChecker.isG0()) {
+    node.x = 0;
+    node.y = 0;
   } else {
-    i.isGTh();
-    t.x = cc.winSize.width / 2;
-    t.y = cc.winSize.height / 2;
+    brandChecker.isGTh();
+    node.x = cc.winSize.width / 2;
+    node.y = cc.winSize.height / 2;
   }
 };
-i.callOpenUrl = function(t, e) {
-  if (void 0 === e) {
-    e = false;
+moduleExports.callOpenUrl = function(url, useDelay) {
+  if (void 0 === useDelay) {
+    useDelay = false;
   }
-  var i = function() {
+  var openUrl = function() {
     if (cc.sys.isBrowser) {
-      L(t);
+      openUrlWithDom(url);
     } else {
-      cc.sys.openURL(t);
+      cc.sys.openURL(url);
     }
   };
-  if (e) {
+  if (useDelay) {
     setTimeout(function() {
-      i();
+      openUrl();
     }, 100);
   } else {
-    i();
+    openUrl();
   }
 };
-i.openUrlWithDom = L;
+moduleExports.openUrlWithDom = openUrlWithDom;
 void 0;

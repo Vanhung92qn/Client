@@ -1,9 +1,9 @@
 var t = require,
   e = module,
-  i = exports;
+  moduleExports = exports;
 "use strict";
 void 0;
-var n = this && this.__extends || function() {
+var __extends = this && this.__extends || function() {
     var t = function(e, i) {
       return (t = Object.setPrototypeOf || {
           __proto__: []
@@ -26,7 +26,7 @@ var n = this && this.__extends || function() {
       e.prototype = null === i ? Object.create(i) : (n.prototype = i.prototype, new n());
     };
   }(),
-  o = this && this.__decorate || function(t, e, i, n) {
+  __decorate = this && this.__decorate || function(t, e, i, n) {
     var o,
       a = arguments.length,
       s = a < 3 ? e : null === n ? n = Object.getOwnPropertyDescriptor(e, i) : n;
@@ -44,7 +44,7 @@ var n = this && this.__extends || function() {
     }
     return s;
   },
-  a = this && this.__awaiter || function(t, e, i, n) {
+  __awaiter = this && this.__awaiter || function(t, e, i, n) {
     return new(i || (i = Promise))(function(o, a) {
       function s(t) {
         try {
@@ -74,7 +74,7 @@ var n = this && this.__extends || function() {
       c((n = n.apply(t, e || [])).next());
     });
   },
-  s = this && this.__generator || function(t, e) {
+  __generator = this && this.__generator || function(t, e) {
     var i,
       n,
       o,
@@ -177,10 +177,10 @@ var n = this && this.__extends || function() {
       };
     }
   };
-Object.defineProperty(i, "__esModule", {
+Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
-var r,
+var EPlayerState,
   GamePlayManager = require("./GamePlayManager"),
   StringUtil = require("./StringUtil"),
   GameCardSprite = require("./GameCardSprite"),
@@ -199,160 +199,160 @@ var r,
   GameConfigManager = require("./GameConfigManager"),
   GameUtils = require("./GameUtils"),
   GameController = require("./GameController"),
-  A = cc._decorator,
-  P = A.ccclass,
-  M = A.property;
-(function(t) {
-  t.INVITE = "INVITE";
-  t.EMPTY = "EMPTY";
-  t.SPECTATOR = "SPECTATOR";
-  t.PLAYING = "PLAYING";
-  t.IN_GAME = "IN_GAME";
-})(r = i.EPlayerState || (i.EPlayerState = {}));
-(function(t) {
-  t[t.NONE = -1] = "NONE";
-  t[t.FOLD = 1] = "FOLD";
-  t[t.CALL = 2] = "CALL";
-  t[t.CHECK = 3] = "CHECK";
-  t[t.BET = 4] = "BET";
-  t[t.ALL_IN = 5] = "ALL_IN";
-  t[t.TURN = 6] = "TURN";
-})(i.EPlayerStatus || (i.EPlayerStatus = {}));
-var O = function(t) {
-  function e() {
-    var e = null !== t && t.apply(this, arguments) || this;
-    e.lbName = null;
-    e.lbMoney = null;
-    e.text = "hello";
-    e.shakeDiskBets = [];
-    e._currentBet = 0;
-    e.shakeDiskCoins = [];
-    e.positionIndex = 0;
-    e.isPlaying = false;
-    e.pos = cc.Vec2.ZERO;
-    e.totalPhom = 0;
-    e.tableBetUI = null;
-    e.listCards = [];
-    e.PositionUI = 0;
-    e.listAnPhom = [];
-    e.BigBlindIcon = null;
-    e.smallBlindIcon = null;
-    e.deadlerIcon = null;
-    e.iconHost = null;
-    e.iconQuit = null;
-    e.iconnReady = null;
-    e.cards = [];
-    e.indexPos = 0;
-    e.currentBetLb = null;
-    e.kickButton = null;
-    e.coins = [];
-    e.bubbleFxPos = null;
-    e.bubbleFxPrefab = null;
-    e.bubbleFx = null;
-    e.bubbleChat = null;
-    e.bubbleSpecial = null;
-    e.winEffectPrefab = null;
-    e.winTextEffectPrefab = null;
-    e.loseTextEffectPrefab = null;
-    e.upbaiEffectPrefab = null;
-    e.textResultPrefab = null;
-    e.countDownProgressTo = null;
-    e.chatIconView = null;
-    e.nodePlayerAvatar = null;
-    e.nodePlayerName = null;
-    e.playerStatusUI = null;
-    e.borderInfo = null;
-    e.avarta = null;
-    e.skeletonEffect = null;
-    e.skeletonCountDown = null;
-    e.listCardOnHandTL = [];
-    e.iconDola = null;
-    e.widthCutString = 125;
-    e.mauBinhSoBai = false;
-    e.binhLung = false;
-    e.mauBinh = false;
-    e.pointSapLang = 0;
-    e.pointSapHam = 0;
-    e.pointSoBinh = 0;
-    e.totalPoint = 0;
-    e.binhPoint = -1;
-    e.soChiResult = [];
-    e.playerModel = null;
-    e.currentTotalPoint = 0;
-    e.winEffectNode = null;
-    e.textEffectNode = null;
-    e.userDisplayName = "";
-    e.isAnDanh = false;
-    e.isShowAnimBonusMoney = false;
-    e.cardsDaDanhRa = [];
-    e.nodeMoneyFX = null;
-    e.layerChatBubble = null;
-    return e;
+  ccDecorator = cc._decorator,
+  ccclass = ccDecorator.ccclass,
+  property = ccDecorator.property;
+(function(EPlayerState) {
+  EPlayerState.INVITE = "INVITE";
+  EPlayerState.EMPTY = "EMPTY";
+  EPlayerState.SPECTATOR = "SPECTATOR";
+  EPlayerState.PLAYING = "PLAYING";
+  EPlayerState.IN_GAME = "IN_GAME";
+})(EPlayerState = moduleExports.EPlayerState || (moduleExports.EPlayerState = {}));
+(function(EPlayerStatus) {
+  EPlayerStatus[EPlayerStatus.NONE = -1] = "NONE";
+  EPlayerStatus[EPlayerStatus.FOLD = 1] = "FOLD";
+  EPlayerStatus[EPlayerStatus.CALL = 2] = "CALL";
+  EPlayerStatus[EPlayerStatus.CHECK = 3] = "CHECK";
+  EPlayerStatus[EPlayerStatus.BET = 4] = "BET";
+  EPlayerStatus[EPlayerStatus.ALL_IN = 5] = "ALL_IN";
+  EPlayerStatus[EPlayerStatus.TURN = 6] = "TURN";
+})(moduleExports.EPlayerStatus || (moduleExports.EPlayerStatus = {}));
+var PlayerView = function(_super) {
+  function PlayerView() {
+    var _this = null !== _super && _super.apply(this, arguments) || this;
+    _this.lbName = null;
+    _this.lbMoney = null;
+    _this.text = "hello";
+    _this.shakeDiskBets = [];
+    _this._currentBet = 0;
+    _this.shakeDiskCoins = [];
+    _this.positionIndex = 0;
+    _this.isPlaying = false;
+    _this.pos = cc.Vec2.ZERO;
+    _this.totalPhom = 0;
+    _this.tableBetUI = null;
+    _this.listCards = [];
+    _this.PositionUI = 0;
+    _this.listAnPhom = [];
+    _this.BigBlindIcon = null;
+    _this.smallBlindIcon = null;
+    _this.deadlerIcon = null;
+    _this.iconHost = null;
+    _this.iconQuit = null;
+    _this.iconnReady = null;
+    _this.cards = [];
+    _this.indexPos = 0;
+    _this.currentBetLb = null;
+    _this.kickButton = null;
+    _this.coins = [];
+    _this.bubbleFxPos = null;
+    _this.bubbleFxPrefab = null;
+    _this.bubbleFx = null;
+    _this.bubbleChat = null;
+    _this.bubbleSpecial = null;
+    _this.winEffectPrefab = null;
+    _this.winTextEffectPrefab = null;
+    _this.loseTextEffectPrefab = null;
+    _this.upbaiEffectPrefab = null;
+    _this.textResultPrefab = null;
+    _this.countDownProgressTo = null;
+    _this.chatIconView = null;
+    _this.nodePlayerAvatar = null;
+    _this.nodePlayerName = null;
+    _this.playerStatusUI = null;
+    _this.borderInfo = null;
+    _this.avarta = null;
+    _this.skeletonEffect = null;
+    _this.skeletonCountDown = null;
+    _this.listCardOnHandTL = [];
+    _this.iconDola = null;
+    _this.widthCutString = 125;
+    _this.mauBinhSoBai = false;
+    _this.binhLung = false;
+    _this.mauBinh = false;
+    _this.pointSapLang = 0;
+    _this.pointSapHam = 0;
+    _this.pointSoBinh = 0;
+    _this.totalPoint = 0;
+    _this.binhPoint = -1;
+    _this.soChiResult = [];
+    _this.playerModel = null;
+    _this.currentTotalPoint = 0;
+    _this.winEffectNode = null;
+    _this.textEffectNode = null;
+    _this.userDisplayName = "";
+    _this.isAnDanh = false;
+    _this.isShowAnimBonusMoney = false;
+    _this.cardsDaDanhRa = [];
+    _this.nodeMoneyFX = null;
+    _this.layerChatBubble = null;
+    return _this;
   }
-  n(e, t);
-  e.prototype.InitData = function(t) {
-    this.userID = t.uid;
-    this.lbName.string = t.dn;
-    this.lbMoney.string = StringUtil.default.formatMoneyNumber(t.m);
+  __extends(PlayerView, _super);
+  PlayerView.prototype.InitData = function(playerInfo) {
+    this.userID = playerInfo.uid;
+    this.lbName.string = playerInfo.dn;
+    this.lbMoney.string = StringUtil.default.formatMoneyNumber(playerInfo.m);
     this.shakeDiskBets = [];
-    for (var e = 0; e < 6; ++e) {
+    for (var betIndex = 0; betIndex < 6; ++betIndex) {
       this.shakeDiskBets.push(0);
     }
     this.processCutLongString();
   };
-  e.prototype.processCutLongString = function() {
-    return a(this, void 0, Promise, function() {
-      return s(this, function(t) {
-        switch (t.label) {
+  PlayerView.prototype.processCutLongString = function() {
+    return __awaiter(this, void 0, Promise, function() {
+      return __generator(this, function(generatorState) {
+        switch (generatorState.label) {
           case 0:
             return [4, GameUtils.delay(50)];
           case 1:
-            return t.sent(), this.lbName.node.getContentSize().width > this.widthCutString && (this.lbName.string = this.lbName
+            return generatorState.sent(), this.lbName.node.getContentSize().width > this.widthCutString && (this.lbName.string = this.lbName
               .string.substring(0, 10) + ".."), [2];
         }
       });
     });
   };
-  e.prototype.addInfo = function(t, e, i, n, o, a, s, r, h, u, d, p, f) {
-    if (void 0 === f) {
-      f = false;
+  PlayerView.prototype.addInfo = function(displayName, userId, isHost, money, playerState, remainingCards, seatIndex, isReady, h, u, assets, avatar, isAnonymous) {
+    if (void 0 === isAnonymous) {
+      isAnonymous = false;
     }
     if (GamePlayManager.default.getInstance().gameID == GameDefine.GameID.BACAY) {
       this.reset();
     }
-    this.userID = e;
+    this.userID = userId;
     if (this.isMine()) {
       this.lbName.string = GamePlayManager.default.getInstance().displayName;
-      this.lbMoney.string = StringUtil.default.formatMoneyNumber(n);
+      this.lbMoney.string = StringUtil.default.formatMoneyNumber(money);
     } else {
-      if (false === f) {
-        this.lbName.string = t;
-        this.lbMoney.string = StringUtil.default.formatMoneyNumber(n);
+      if (false === isAnonymous) {
+        this.lbName.string = displayName;
+        this.lbMoney.string = StringUtil.default.formatMoneyNumber(money);
       }
-      this.userDisplayName = t;
-      this.isAnDanh = f;
+      this.userDisplayName = displayName;
+      this.isAnDanh = isAnonymous;
     }
     this.processCutLongString();
     this.iconQuit.active = false;
     this.shakeDiskBets = [];
-    this.isHost = i;
-    this._money = n;
-    this.moneyUIDangShow = n;
-    this.state = o;
-    this.remainingCards = a;
-    this.sit = s;
-    this.isReady = r;
-    if (void 0 != d.rM) {
-      this._realMoney = d.rM;
+    this.isHost = isHost;
+    this._money = money;
+    this.moneyUIDangShow = money;
+    this.state = playerState;
+    this.remainingCards = remainingCards;
+    this.sit = seatIndex;
+    this.isReady = isReady;
+    if (void 0 != assets.rM) {
+      this._realMoney = assets.rM;
     }
-    for (var g = 0; g < 6; ++g) {
+    for (var betIndex = 0; betIndex < 6; ++betIndex) {
       this.shakeDiskBets.push(0);
     }
     if (null !== this.iconHost && void 0 !== this.iconHost) {
       this.iconHost.active = this.isHost;
     }
-    if (StringUtil.default.isNullOrEmpty(p)) {
-      p = "Avatar0";
+    if (StringUtil.default.isNullOrEmpty(avatar)) {
+      avatar = "Avatar0";
     }
     if (null !== this.avarta && void 0 !== this.avarta) {
       if (this.isMine()) {
@@ -365,20 +365,20 @@ var O = function(t) {
         }
         this.avarta.loadImage(this.avatarUrl);
       } else {
-        if (p.includes("-")) {
-          p = GameUtils.transformAvatarString(p);
+        if (avatar.includes("-")) {
+          avatar = GameUtils.transformAvatarString(avatar);
         }
-        this.avatarUrl = p;
+        this.avatarUrl = avatar;
         if (0 == this.avatarUrl.includes("Avatar") || this.avatarUrl.includes("NaN")) {
           this.avatarUrl = "Avatar" + Math.floor(StringUtil.default.getRandomInt(59));
         }
-        if (false === f) {
+        if (false === isAnonymous) {
           this.avarta.loadImage(this.avatarUrl);
         }
       }
     }
   };
-  e.prototype.showAnDanhWhenDone = function() {
+  PlayerView.prototype.showAnDanhWhenDone = function() {
     if (this.isAnDanh) {
       this.lbName.string = this.userDisplayName;
       this.lbMoney.string = StringUtil.default.formatMoneyNumber(this._money);
@@ -390,98 +390,98 @@ var O = function(t) {
       this.avarta.loadImage(this.avatarUrl);
     }
   };
-  e.prototype.isMine = function() {
+  PlayerView.prototype.isMine = function() {
     return void 0 != this.userID && null != this.userID && 0 == this.userID.localeCompare(GamePlayManager.default.getInstance().userID);
   };
-  e.prototype.setMoney = function(t) {
+  PlayerView.prototype.setMoney = function(money) {
     if (false === this.isAnDanh) {
-      this.lbMoney.string = StringUtil.default.formatMoneyNumber(t);
+      this.lbMoney.string = StringUtil.default.formatMoneyNumber(money);
     }
-    this._money = t;
+    this._money = money;
     this.moneyUIDangShow = this._money;
     if (null != this.playerModel) {
-      this.playerModel.BuyIn = t;
+      this.playerModel.BuyIn = money;
     }
   };
-  e.prototype.stopCountDown = function() {
+  PlayerView.prototype.stopCountDown = function() {
     if (null !== this.countDownProgressTo && void 0 !== this.countDownProgressTo) {
       this.countDownProgressTo.isRuning = false;
       this.countDownProgressTo.setProgress(0);
       this.skeletonCountDown.node.active = false;
     }
   };
-  e.prototype.startCountDown = function(t, e, i) {
-    if (void 0 === e) {
-      e = 0;
+  PlayerView.prototype.startCountDown = function(remainingSeconds, elapsedRatio, i) {
+    if (void 0 === elapsedRatio) {
+      elapsedRatio = 0;
     }
     if (void 0 === i) {
       i = true;
     }
-    this.countDownProgressTo.setProgress(1 - e);
-    this.countDownProgressTo.RunActionProgress(t, 0);
+    this.countDownProgressTo.setProgress(1 - elapsedRatio);
+    this.countDownProgressTo.RunActionProgress(remainingSeconds, 0);
     try {
       this.skeletonCountDown.node.active = true;
-      var n = t;
-      if (e > 0 && e < 1) {
-        n = t * (1 / (1 - e));
+      var fullDuration = remainingSeconds;
+      if (elapsedRatio > 0 && elapsedRatio < 1) {
+        fullDuration = remainingSeconds * (1 / (1 - elapsedRatio));
       }
       this.skeletonCountDown.clearTrack(0);
-      var o = this.skeletonCountDown.setAnimation(0, "DemNguoc10s", false);
-      this.skeletonCountDown.timeScale = o.animationEnd / n;
-      o.trackTime = o.animationEnd * e;
+      var trackEntry = this.skeletonCountDown.setAnimation(0, "DemNguoc10s", false);
+      this.skeletonCountDown.timeScale = trackEntry.animationEnd / fullDuration;
+      trackEntry.trackTime = trackEntry.animationEnd * elapsedRatio;
     } catch (t) {}
   };
-  e.prototype.stopViewAction = function() {
+  PlayerView.prototype.stopViewAction = function() {
     if (null !== this.chatIconView && void 0 !== this.chatIconView) {
       this.chatIconView.active = false;
     }
   };
-  e.prototype.runViewAction = function() {
+  PlayerView.prototype.runViewAction = function() {
     if (null !== this.chatIconView && void 0 !== this.chatIconView) {
       this.chatIconView.active = true;
     }
   };
-  e.prototype.start = function() {};
-  e.prototype.showChat = function(t, e) {
-    var i = this;
-    if (void 0 === e && (e = true), null === this.bubbleChat || void 0 === this.bubbleChat) {
-      var n = cc.instantiate(this.bubbleFxPrefab);
-      n.parent = this.layerChatBubble ? this.layerChatBubble : this.node.parent;
-      n.zIndex = GameZOrder.default.CHAT_BUBLES;
-      this.bubbleChat = n.getComponent(PopBubbleUtil.default);
+  PlayerView.prototype.start = function() {};
+  PlayerView.prototype.showChat = function(message, autoHide) {
+    var _this = this;
+    if (void 0 === autoHide && (autoHide = true), null === this.bubbleChat || void 0 === this.bubbleChat) {
+      var bubbleNode = cc.instantiate(this.bubbleFxPrefab);
+      bubbleNode.parent = this.layerChatBubble ? this.layerChatBubble : this.node.parent;
+      bubbleNode.zIndex = GameZOrder.default.CHAT_BUBLES;
+      this.bubbleChat = bubbleNode.getComponent(PopBubbleUtil.default);
     } else {
       this.bubbleChat.stopAllActions();
     }
-    var o = this.node.position.y + (40 + this.bubbleFxPos.position.y) * this.node.scale;
-    if (o > 320) {
-      o = 320;
+    var rightPosY = this.node.position.y + (40 + this.bubbleFxPos.position.y) * this.node.scale;
+    if (rightPosY > 320) {
+      rightPosY = 320;
     }
-    var a = this.node.position.y + (20 + this.bubbleFxPos.position.y) * this.node.scale;
-    if (a > 320) {
-      a = 320;
+    var leftPosY = this.node.position.y + (20 + this.bubbleFxPos.position.y) * this.node.scale;
+    if (leftPosY > 320) {
+      leftPosY = 320;
     }
-    this.bubbleChat.node.position = new cc.Vec2(this.node.position.x + this.bubbleFxPos.position.x * this.node.scale, o);
-    this.bubbleChat.initPos(new cc.Vec2(this.node.position.x + this.bubbleFxPos.position.x * this.node.scale, o), new cc.Vec2(this.node
-      .position.x - this.bubbleFxPos.position.x * this.node.scale, a));
+    this.bubbleChat.node.position = new cc.Vec2(this.node.position.x + this.bubbleFxPos.position.x * this.node.scale, rightPosY);
+    this.bubbleChat.initPos(new cc.Vec2(this.node.position.x + this.bubbleFxPos.position.x * this.node.scale, rightPosY), new cc.Vec2(this.node
+      .position.x - this.bubbleFxPos.position.x * this.node.scale, leftPosY));
     if (GamePlayManager.default.getInstance().gameID === MessageCardGameHandler.GAME.BACAY && this.isMine()) {
       this.bubbleChat.showBubbleReverse(true);
     } else {
       this.bubbleChat.showBubbleReverse(this.node.position.x > 200);
     }
-    this.bubbleChat.label.string = t;
+    this.bubbleChat.label.string = message;
     this.bubbleChat.node.active = true;
     this.bubbleChat.node.opacity = 255;
     this.bubbleChat.node.scale = .1;
     this.bubbleChat.popOut();
-    if (e) {
+    if (autoHide) {
       this.bubbleChat.node.runAction(cc.sequence(cc.delayTime(5), cc.callFunc(function() {
-        i.bubbleChat.popIn();
+        _this.bubbleChat.popIn();
       })));
     }
   };
-  e.prototype.removeBubbleFx = function(t, e) {
-    if (void 0 === t) {
-      t = false;
+  PlayerView.prototype.removeBubbleFx = function(hideImmediately, e) {
+    if (void 0 === hideImmediately) {
+      hideImmediately = false;
     }
     if (void 0 === e) {
       e = -1;
@@ -489,51 +489,51 @@ var O = function(t) {
     if (null !== this.bubbleFx && void 0 !== this.bubbleFx) {
       this.bubbleFx.node.stopAllActions();
       this.bubbleFx._isPopping = false;
-      if (t) {
+      if (hideImmediately) {
         this.bubbleFx.node.active = false;
       } else {
         this.bubbleFx.popIn();
       }
     }
   };
-  e.prototype.showBubbleFx = function(t, e, i, n, o) {
-    if (void 0 === o && (o = void 0), null === this.bubbleFx || void 0 === this.bubbleFx) {
-      var a = cc.instantiate(this.bubbleFxPrefab);
-      a.parent = this.node.parent;
-      a.zIndex = GameZOrder.default.CHAT_BUBLES;
-      this.bubbleFx = a.getComponent(PopBubbleUtil.default);
+  PlayerView.prototype.showBubbleFx = function(text, e, usePopAnimation, reverse, onFinished) {
+    if (void 0 === onFinished && (onFinished = void 0), null === this.bubbleFx || void 0 === this.bubbleFx) {
+      var bubbleNode = cc.instantiate(this.bubbleFxPrefab);
+      bubbleNode.parent = this.node.parent;
+      bubbleNode.zIndex = GameZOrder.default.CHAT_BUBLES;
+      this.bubbleFx = bubbleNode.getComponent(PopBubbleUtil.default);
     } else {
       this.bubbleFx.node.stopAllActions();
       this.bubbleFx._isPopping = false;
     }
-    var s = this.node.position.y + (40 + this.bubbleFxPos.position.y) * this.node.scale;
-    if (s > 320) {
-      s = 320;
+    var rightPosY = this.node.position.y + (40 + this.bubbleFxPos.position.y) * this.node.scale;
+    if (rightPosY > 320) {
+      rightPosY = 320;
     }
-    var r = s;
-    this.bubbleFx.node.position = new cc.Vec2(this.node.position.x + this.bubbleFxPos.position.x, s);
-    this.bubbleFx.initPos(new cc.Vec2(this.node.position.x + this.bubbleFxPos.position.x, s), new cc.Vec2(this.node.position.x - this
-      .bubbleFxPos.position.x, r));
-    this.bubbleFx.label.string = t;
+    var leftPosY = rightPosY;
+    this.bubbleFx.node.position = new cc.Vec2(this.node.position.x + this.bubbleFxPos.position.x, rightPosY);
+    this.bubbleFx.initPos(new cc.Vec2(this.node.position.x + this.bubbleFxPos.position.x, rightPosY), new cc.Vec2(this.node.position.x - this
+      .bubbleFxPos.position.x, leftPosY));
+    this.bubbleFx.label.string = text;
     this.bubbleFx.node.active = true;
     this.bubbleFx.node.opacity = 255;
-    this.bubbleFx.showBubbleReverse(n);
+    this.bubbleFx.showBubbleReverse(reverse);
     if (GamePlayManager.default.getInstance().gameID === MessageCardGameHandler.GAME.XITO) {
       this.bubbleFx.showBubbleReverse(this.node.position.x < 200);
     }
-    if (i) {
+    if (usePopAnimation) {
       this.bubbleFx.node.scale = .1;
       this.bubbleFx.popOut();
     } else {
       this.bubbleFx.node.scale = 1;
     }
-    if (void 0 != o) {
-      this.bubbleFx.finishPoppingOutCallBack = o;
+    if (void 0 != onFinished) {
+      this.bubbleFx.finishPoppingOutCallBack = onFinished;
     }
   };
-  e.prototype.removeBubbleSpecialFx = function(t, e) {
-    if (void 0 === t) {
-      t = false;
+  PlayerView.prototype.removeBubbleSpecialFx = function(hideImmediately, e) {
+    if (void 0 === hideImmediately) {
+      hideImmediately = false;
     }
     if (void 0 === e) {
       e = -1;
@@ -541,19 +541,19 @@ var O = function(t) {
     if (null !== this.bubbleSpecial && void 0 !== this.bubbleSpecial) {
       this.bubbleSpecial.node.stopAllActions();
       this.bubbleSpecial._isPopping = false;
-      if (t) {
+      if (hideImmediately) {
         this.bubbleSpecial.node.active = false;
       } else {
         this.bubbleSpecial.popIn();
       }
     }
   };
-  e.prototype.showBubbleSpecialFx = function(t, e, i, n, o) {
-    if (void 0 === o && (o = void 0), null === this.bubbleSpecial || void 0 === this.bubbleSpecial) {
-      var a = cc.instantiate(this.bubbleFxPrefab);
-      a.parent = this.node.parent;
-      a.zIndex = GameZOrder.default.CHAT_BUBLES;
-      this.bubbleSpecial = a.getComponent(PopBubbleUtil.default);
+  PlayerView.prototype.showBubbleSpecialFx = function(text, e, usePopAnimation, reverse, onFinished) {
+    if (void 0 === onFinished && (onFinished = void 0), null === this.bubbleSpecial || void 0 === this.bubbleSpecial) {
+      var bubbleNode = cc.instantiate(this.bubbleFxPrefab);
+      bubbleNode.parent = this.node.parent;
+      bubbleNode.zIndex = GameZOrder.default.CHAT_BUBLES;
+      this.bubbleSpecial = bubbleNode.getComponent(PopBubbleUtil.default);
     } else {
       this.bubbleSpecial.node.stopAllActions();
       this.bubbleSpecial._isPopping = false;
@@ -563,204 +563,204 @@ var O = function(t) {
     this.bubbleSpecial.initPos(new cc.Vec2(this.node.position.x + this.bubbleFxPos.position.x, this.node.position.y + (this.bubbleFxPos
       .position.y - 40)), new cc.Vec2(this.node.position.x - this.bubbleFxPos.position.x, this.node.position.y + (this.bubbleFxPos
       .position.y - 40)));
-    if (t == this.bubbleSpecial.label.string) {
-      i = false;
+    if (text == this.bubbleSpecial.label.string) {
+      usePopAnimation = false;
     }
-    this.bubbleSpecial.label.string = t;
+    this.bubbleSpecial.label.string = text;
     this.bubbleSpecial.node.active = true;
     this.bubbleSpecial.node.opacity = 255;
-    this.bubbleSpecial.showBubbleReverse(n);
-    if (i) {
+    this.bubbleSpecial.showBubbleReverse(reverse);
+    if (usePopAnimation) {
       this.bubbleSpecial.node.scale = .1;
       this.bubbleSpecial.popOut();
     } else {
       this.bubbleSpecial.node.scale = 1;
     }
-    if (void 0 != o) {
-      this.bubbleSpecial.finishPoppingOutCallBack = o;
+    if (void 0 != onFinished) {
+      this.bubbleSpecial.finishPoppingOutCallBack = onFinished;
     }
   };
-  e.prototype.getBubbleFx = function() {
+  PlayerView.prototype.getBubbleFx = function() {
     return null;
   };
-  e.prototype.runWinAction = function(t, e) {
-    if (void 0 === e) {
-      e = void 0;
+  PlayerView.prototype.runWinAction = function(duration, onFinished) {
+    if (void 0 === onFinished) {
+      onFinished = void 0;
     }
-    var i = cc.instantiate(this.winEffectPrefab);
-    i.parent = this.node.parent;
-    i.position = this.node.position;
-    i.zIndex = -1;
+    var effectNode = cc.instantiate(this.winEffectPrefab);
+    effectNode.parent = this.node.parent;
+    effectNode.position = this.node.position;
+    effectNode.zIndex = -1;
     if (null != this.winEffectNode && void 0 != this.winEffectNode) {
       this.winEffectNode.active = true;
     }
-    this.winEffectNode = i;
-    i.runAction(cc.sequence(cc.delayTime(t), cc.callFunc(function() {
-      if (i && i.isValid) {
-        i.removeFromParent(true);
+    this.winEffectNode = effectNode;
+    effectNode.runAction(cc.sequence(cc.delayTime(duration), cc.callFunc(function() {
+      if (effectNode && effectNode.isValid) {
+        effectNode.removeFromParent(true);
       }
-      if (void 0 != e) {
-        e();
+      if (void 0 != onFinished) {
+        onFinished();
       }
     })));
   };
-  e.prototype.showBonusMoneyFxForPlayer = function(t, e, i, n) {
-    if (void 0 === n && (n = 25), 0 != t && !this.isShowAnimBonusMoney) {
+  PlayerView.prototype.showBonusMoneyFxForPlayer = function(amount, duration, delay, offsetY) {
+    if (void 0 === offsetY && (offsetY = 25), 0 != amount && !this.isShowAnimBonusMoney) {
       this.isShowAnimBonusMoney = true;
-      var o = cc.instantiate(this.loseTextEffectPrefab);
-      o.parent = this.node.parent;
-      o.zIndex = GameZOrder.default.TOP;
-      var a = this.node.scale;
-      o.position = new cc.Vec2(this.node.position.x, this.node.position.y - n * a);
+      var textNode = cc.instantiate(this.loseTextEffectPrefab);
+      textNode.parent = this.node.parent;
+      textNode.zIndex = GameZOrder.default.TOP;
+      var nodeScale = this.node.scale;
+      textNode.position = new cc.Vec2(this.node.position.x, this.node.position.y - offsetY * nodeScale);
       if (null != this.textEffectNode && void 0 != this.textEffectNode) {
         this.textEffectNode.active = true;
       }
-      this.textEffectNode = o;
-      o.getComponent(BetLabel.default).setNumberWithPrefix(t, false, "+");
-      o.scaleX = 0;
-      o.runAction(cc.sequence(cc.delayTime(i), cc.scaleTo(.2, a), cc.moveBy(.3, new cc.Vec2(0, n * a * 2)), cc.delayTime(e - 1), cc
+      this.textEffectNode = textNode;
+      textNode.getComponent(BetLabel.default).setNumberWithPrefix(amount, false, "+");
+      textNode.scaleX = 0;
+      textNode.runAction(cc.sequence(cc.delayTime(delay), cc.scaleTo(.2, nodeScale), cc.moveBy(.3, new cc.Vec2(0, offsetY * nodeScale * 2)), cc.delayTime(duration - 1), cc
         .fadeOut(.5), cc.callFunc(function() {
-          o.removeFromParent(true);
+          textNode.removeFromParent(true);
         })));
     }
   };
-  e.prototype.showMoneyFxForPlayer = function(t, e, i) {
-    if (void 0 === i && (i = 25), 0 != t) {
-      var n = cc.instantiate(t > 0 ? this.winTextEffectPrefab : this.loseTextEffectPrefab);
-      n.parent = this.node.parent;
-      n.zIndex = GameZOrder.default.TOP;
-      var o = this.node.scale;
-      n.position = new cc.Vec2(this.node.position.x, this.node.position.y - i * o);
+  PlayerView.prototype.showMoneyFxForPlayer = function(amount, duration, offsetY) {
+    if (void 0 === offsetY && (offsetY = 25), 0 != amount) {
+      var textNode = cc.instantiate(amount > 0 ? this.winTextEffectPrefab : this.loseTextEffectPrefab);
+      textNode.parent = this.node.parent;
+      textNode.zIndex = GameZOrder.default.TOP;
+      var nodeScale = this.node.scale;
+      textNode.position = new cc.Vec2(this.node.position.x, this.node.position.y - offsetY * nodeScale);
       if (null != this.textEffectNode && void 0 != this.textEffectNode) {
         this.textEffectNode.active = true;
       }
-      this.textEffectNode = n;
-      n.getComponent(BetLabel.default).setNumber(t, false);
-      n.scaleX = .2 * o;
-      n.runAction(cc.sequence(cc.scaleTo(.2, o), cc.moveBy(.3, new cc.Vec2(0, i * o * 2)), cc.delayTime(e - 1), cc.fadeOut(.5), cc
+      this.textEffectNode = textNode;
+      textNode.getComponent(BetLabel.default).setNumber(amount, false);
+      textNode.scaleX = .2 * nodeScale;
+      textNode.runAction(cc.sequence(cc.scaleTo(.2, nodeScale), cc.moveBy(.3, new cc.Vec2(0, offsetY * nodeScale * 2)), cc.delayTime(duration - 1), cc.fadeOut(.5), cc
         .callFunc(function() {
-          if (n && n.isValid) {
-            n.removeFromParent(true);
+          if (textNode && textNode.isValid) {
+            textNode.removeFromParent(true);
           }
         })));
-      this.nodeMoneyFX = n;
+      this.nodeMoneyFX = textNode;
     }
   };
-  e.prototype.showUpBaiFxForPlayer = function(t, e) {
-    if (void 0 === e) {
-      e = 25;
+  PlayerView.prototype.showUpBaiFxForPlayer = function(duration, offsetY) {
+    if (void 0 === offsetY) {
+      offsetY = 25;
     }
-    var i = cc.instantiate(this.upbaiEffectPrefab);
-    i.parent = this.node.parent;
-    i.zIndex = GameZOrder.default.TOP;
-    var n = this.node.scale;
-    i.position = new cc.Vec2(this.node.position.x, this.node.position.y - e * n);
-    this.textEffectNode = i;
-    i.scaleX = .2 * n;
-    i.runAction(cc.scaleTo(.2, 1 * n));
-    i.runAction(cc.sequence(cc.delayTime(.2), cc.moveBy(.3, new cc.Vec2(0, e * n * 1.8)), cc.delayTime(t - 1), cc.fadeOut(.5), cc
+    var effectNode = cc.instantiate(this.upbaiEffectPrefab);
+    effectNode.parent = this.node.parent;
+    effectNode.zIndex = GameZOrder.default.TOP;
+    var nodeScale = this.node.scale;
+    effectNode.position = new cc.Vec2(this.node.position.x, this.node.position.y - offsetY * nodeScale);
+    this.textEffectNode = effectNode;
+    effectNode.scaleX = .2 * nodeScale;
+    effectNode.runAction(cc.scaleTo(.2, 1 * nodeScale));
+    effectNode.runAction(cc.sequence(cc.delayTime(.2), cc.moveBy(.3, new cc.Vec2(0, offsetY * nodeScale * 1.8)), cc.delayTime(duration - 1), cc.fadeOut(.5), cc
       .callFunc(function() {
-        i.removeFromParent(true);
+        effectNode.removeFromParent(true);
       })));
   };
-  e.prototype.showTextFxResultForPlayer = function(t, e, i) {
-    if (void 0 === i && (i = -35), null !== t && void 0 !== t) {
-      var n = cc.instantiate(this.textResultPrefab);
-      n.parent = this.node;
-      n.scale = .7;
-      n.position = new cc.Vec2(0, i);
-      n.getComponent(cc.Sprite).spriteFrame = t;
-      n.runAction(cc.sequence(cc.scaleTo(.2, 1), cc.delayTime(e - .2 - .2), cc.fadeOut(.2), cc.callFunc(function() {
-        n.removeFromParent(true);
+  PlayerView.prototype.showTextFxResultForPlayer = function(spriteFrame, duration, offsetY) {
+    if (void 0 === offsetY && (offsetY = -35), null !== spriteFrame && void 0 !== spriteFrame) {
+      var resultNode = cc.instantiate(this.textResultPrefab);
+      resultNode.parent = this.node;
+      resultNode.scale = .7;
+      resultNode.position = new cc.Vec2(0, offsetY);
+      resultNode.getComponent(cc.Sprite).spriteFrame = spriteFrame;
+      resultNode.runAction(cc.sequence(cc.scaleTo(.2, 1), cc.delayTime(duration - .2 - .2), cc.fadeOut(.2), cc.callFunc(function() {
+        resultNode.removeFromParent(true);
       })));
     }
   };
-  e.prototype.runToPos = function(t, e) {
-    if (void 0 === e && (e = false), this.node.position.x === GameController.posOutScreen.x && this.node.position.y === GameController.posOutScreen.y && (this.pos
-        .x <= 0 && this.pos.y <= 0 ? this.node.position = new cc.Vec2(-t.width / 2, -t.height / 2) : this.pos.x <= 0 && this.pos.y >=
-        0 ? this.node.position = new cc.Vec2(-t.width / 2, t.height / 2) : this.pos.x >= 0 && this.pos.y <= 0 ? this.node.position =
-        new cc.Vec2(t.width / 2, -t.height / 2) : this.pos.x >= 0 && this.pos.y >= 0 && (this.node.position = new cc.Vec2(t.width / 2, t
-          .height / 2))), this.node.stopAllActions(), e) {
+  PlayerView.prototype.runToPos = function(tableSize, instant) {
+    if (void 0 === instant && (instant = false), this.node.position.x === GameController.posOutScreen.x && this.node.position.y === GameController.posOutScreen.y && (this.pos
+        .x <= 0 && this.pos.y <= 0 ? this.node.position = new cc.Vec2(-tableSize.width / 2, -tableSize.height / 2) : this.pos.x <= 0 && this.pos.y >=
+        0 ? this.node.position = new cc.Vec2(-tableSize.width / 2, tableSize.height / 2) : this.pos.x >= 0 && this.pos.y <= 0 ? this.node.position =
+        new cc.Vec2(tableSize.width / 2, -tableSize.height / 2) : this.pos.x >= 0 && this.pos.y >= 0 && (this.node.position = new cc.Vec2(tableSize.width / 2, tableSize
+          .height / 2))), this.node.stopAllActions(), instant) {
       this.node.position = this.pos;
     } else {
-      var i = cc.moveTo(.3, this.pos);
+      var moveAction = cc.moveTo(.3, this.pos);
       this.node.stopAllActions();
-      this.node.runAction(i);
+      this.node.runAction(moveAction);
     }
   };
-  e.prototype.checkInThisArray = function(t) {
-    for (var e = 0; e < t.length; ++e) {
-      if (0 === this.userID.localeCompare(t[e].userID)) {
+  PlayerView.prototype.checkInThisArray = function(players) {
+    for (var playerIndex = 0; playerIndex < players.length; ++playerIndex) {
+      if (0 === this.userID.localeCompare(players[playerIndex].userID)) {
         return true;
       }
     }
     return false;
   };
-  e.prototype.removeChat = function() {
+  PlayerView.prototype.removeChat = function() {
     if (null !== this.bubbleChat && void 0 !== this.bubbleChat) {
       this.bubbleChat.node.stopAllActions();
       this.bubbleChat.node.removeFromParent(true);
       this.bubbleChat = null;
     }
   };
-  e.prototype.createNewCard = function(t) {
-    var e = cc.instantiate(t);
-    e.parent = this.node.parent;
-    e.position = new cc.Vec2(0, 0);
-    e.zIndex = GameZOrder.default.MIDDLE + this.cards.length;
-    var i = e.getComponent(GameCardSprite.default);
-    i.init(GameCardSpriteType.default.TypeHIDE);
-    this.cards.push(i);
-    e.active = false;
-    return i;
+  PlayerView.prototype.createNewCard = function(cardPrefab) {
+    var cardNode = cc.instantiate(cardPrefab);
+    cardNode.parent = this.node.parent;
+    cardNode.position = new cc.Vec2(0, 0);
+    cardNode.zIndex = GameZOrder.default.MIDDLE + this.cards.length;
+    var cardSprite = cardNode.getComponent(GameCardSprite.default);
+    cardSprite.init(GameCardSpriteType.default.TypeHIDE);
+    this.cards.push(cardSprite);
+    cardNode.active = false;
+    return cardSprite;
   };
-  e.prototype.initPokerCard = function(t) {
-    for (var e = this.cards.length; e < 2; ++e) {
-      this.createNewCard(t);
-    }
-  };
-  e.prototype.initMauBinhCard = function(t) {
-    for (var e = this.cards.length, i = this.isMine(), n = e; n < 13; ++n) {
-      this.createNewCard(t).node.zIndex = i ? GameZOrder.default.MIDDLE_TOP_2 + 1 + n : 15 - n;
+  PlayerView.prototype.initPokerCard = function(cardPrefab) {
+    for (var cardIndex = this.cards.length; cardIndex < 2; ++cardIndex) {
+      this.createNewCard(cardPrefab);
     }
   };
-  e.prototype.initCatteCard = function(t) {
-    for (var e = this.cards.length, i = this.isMine(), n = e; n < 6; ++n) {
-      this.createNewCard(t).node.zIndex = i ? GameZOrder.default.MIDDLE_TOP_2 + 1 + n : 15 - n;
+  PlayerView.prototype.initMauBinhCard = function(cardPrefab) {
+    for (var startIndex = this.cards.length, isMine = this.isMine(), cardIndex = startIndex; cardIndex < 13; ++cardIndex) {
+      this.createNewCard(cardPrefab).node.zIndex = isMine ? GameZOrder.default.MIDDLE_TOP_2 + 1 + cardIndex : 15 - cardIndex;
     }
   };
-  e.prototype.iniBaCayCard = function(t) {
-    for (var e = this.cards.length, i = this.isMine(), n = e; n < 3; ++n) {
-      this.createNewCard(t).node.zIndex = i ? GameZOrder.default.MIDDLE_TOP_2 + 1 + n : 15 - n;
+  PlayerView.prototype.initCatteCard = function(cardPrefab) {
+    for (var startIndex = this.cards.length, isMine = this.isMine(), cardIndex = startIndex; cardIndex < 6; ++cardIndex) {
+      this.createNewCard(cardPrefab).node.zIndex = isMine ? GameZOrder.default.MIDDLE_TOP_2 + 1 + cardIndex : 15 - cardIndex;
     }
   };
-  e.prototype.hideAllCard = function(t) {
-    if (void 0 === t) {
-      t = false;
-    }
-    for (var e = 0; e < this.cards.length; ++e) {
-      var i = this.cards[e];
-      i.node.stopAllActions();
-      i.init(GameCardSpriteType.default.TypeHIDE);
-      i.setColor(cc.Color.WHITE);
-      i.node.position = new cc.Vec2(0, 0);
-      i.node.active = t;
-      i.node.opacity = 255;
+  PlayerView.prototype.iniBaCayCard = function(cardPrefab) {
+    for (var startIndex = this.cards.length, isMine = this.isMine(), cardIndex = startIndex; cardIndex < 3; ++cardIndex) {
+      this.createNewCard(cardPrefab).node.zIndex = isMine ? GameZOrder.default.MIDDLE_TOP_2 + 1 + cardIndex : 15 - cardIndex;
     }
   };
-  e.prototype.setArrayCard = function(t, e) {
-    if (void 0 === e) {
-      e = true;
+  PlayerView.prototype.hideAllCard = function(visible) {
+    if (void 0 === visible) {
+      visible = false;
     }
-    for (var i = 0; i < t.length; ++i) {
-      var n = this.cards[i],
-        o = t[i];
-      if (e) {
-        n.setTextureWithCode(o, GamePlayManager.default.getInstance().gameID);
+    for (var cardIndex = 0; cardIndex < this.cards.length; ++cardIndex) {
+      var cardSprite = this.cards[cardIndex];
+      cardSprite.node.stopAllActions();
+      cardSprite.init(GameCardSpriteType.default.TypeHIDE);
+      cardSprite.setColor(cc.Color.WHITE);
+      cardSprite.node.position = new cc.Vec2(0, 0);
+      cardSprite.node.active = visible;
+      cardSprite.node.opacity = 255;
+    }
+  };
+  PlayerView.prototype.setArrayCard = function(cardCodes, applyTexture) {
+    if (void 0 === applyTexture) {
+      applyTexture = true;
+    }
+    for (var cardIndex = 0; cardIndex < cardCodes.length; ++cardIndex) {
+      var cardSprite = this.cards[cardIndex],
+        cardCode = cardCodes[cardIndex];
+      if (applyTexture) {
+        cardSprite.setTextureWithCode(cardCode, GamePlayManager.default.getInstance().gameID);
       }
     }
   };
-  e.prototype.resetDefaultValueForMauBinh = function() {
+  PlayerView.prototype.resetDefaultValueForMauBinh = function() {
     this.mauBinhSoBai = false;
     this.binhLung = false;
     this.mauBinh = false;
@@ -771,70 +771,70 @@ var O = function(t) {
     this.binhPoint = -1;
     this.soChiResult = [];
   };
-  e.prototype.initXiToCard = function(t) {
-    var e = this.cards.length;
-    if (e < 5) {
-      for (var i = e; i < 5; ++i) {
-        var n = cc.instantiate(t);
-        n.parent = this.node.parent;
-        n.position = new cc.Vec2(0, 0);
-        var o = n.getComponent(GameCardSprite.default);
-        o.init(GameCardSpriteType.default.TypeHIDE);
-        this.cards.push(o);
-        n.active = false;
+  PlayerView.prototype.initXiToCard = function(cardPrefab) {
+    var cardCount = this.cards.length;
+    if (cardCount < 5) {
+      for (var cardIndex = cardCount; cardIndex < 5; ++cardIndex) {
+        var cardNode = cc.instantiate(cardPrefab);
+        cardNode.parent = this.node.parent;
+        cardNode.position = new cc.Vec2(0, 0);
+        var cardSprite = cardNode.getComponent(GameCardSprite.default);
+        cardSprite.init(GameCardSpriteType.default.TypeHIDE);
+        this.cards.push(cardSprite);
+        cardNode.active = false;
       }
     }
   };
-  e.prototype.hideXiToCard = function(t) {
-    if (void 0 === t) {
-      t = false;
+  PlayerView.prototype.hideXiToCard = function(visible) {
+    if (void 0 === visible) {
+      visible = false;
     }
-    for (var e = 0; e < 2; ++e) {
-      var i = this.cards[e];
-      i.node.stopAllActions();
-      i.init(GameCardSpriteType.default.TypeHIDE);
-      i.node.position = new cc.Vec2(0, 0);
-      i.node.active = t;
+    for (var cardIndex = 0; cardIndex < 2; ++cardIndex) {
+      var cardSprite = this.cards[cardIndex];
+      cardSprite.node.stopAllActions();
+      cardSprite.init(GameCardSpriteType.default.TypeHIDE);
+      cardSprite.node.position = new cc.Vec2(0, 0);
+      cardSprite.node.active = visible;
     }
   };
-  e.prototype.setState = function(t) {
-    switch (this.node.active = true, this.nodePlayerAvatar.active = true, this.nodePlayerName.active = true, t) {
-      case r.EMPTY:
+  PlayerView.prototype.setState = function(state) {
+    switch (this.node.active = true, this.nodePlayerAvatar.active = true, this.nodePlayerName.active = true, state) {
+      case EPlayerState.EMPTY:
         this.node.active = false;
         break;
-      case r.INVITE:
+      case EPlayerState.INVITE:
         this.nodePlayerAvatar.active = false;
         this.nodePlayerName.active = false;
         break;
-      case r.IN_GAME:
-      case r.PLAYING:
-      case r.SPECTATOR:
+      case EPlayerState.IN_GAME:
+      case EPlayerState.PLAYING:
+      case EPlayerState.SPECTATOR:
     }
   };
-  e.prototype.moveToPosision = function(t) {
-    var e = this.node.parent.convertToWorldSpaceAR(this.node.position);
-    this.node.parent = t;
-    this.node.position = t.convertToNodeSpaceAR(e);
+  PlayerView.prototype.moveToPosision = function(newParent) {
+    var worldPos = this.node.parent.convertToWorldSpaceAR(this.node.position);
+    this.node.parent = newParent;
+    this.node.position = newParent.convertToNodeSpaceAR(worldPos);
     this.node.runAction(cc.moveTo(.3, cc.Vec2.ZERO));
   };
-  e.prototype.setPhomStatus = function(t) {
-    var e = false;
-    switch (1 != this.indexPos && 3 != this.indexPos || (e = true), t) {
+  PlayerView.prototype.setPhomStatus = function(status) {
+    var reverse = false;
+    switch (1 != this.indexPos && 3 != this.indexPos || (reverse = true), status) {
       case GameDefine.EPhomPlayerStatus.MOM:
-        this.showBubbleFx("M\xf3m", 0, true, e);
+        this.showBubbleFx("M\xf3m", 0, true, reverse);
         break;
       case GameDefine.EPhomPlayerStatus.U:
-        this.showBubbleFx("\xd9", 0, true, e);
+        this.showBubbleFx("\xd9", 0, true, reverse);
         break;
       case GameDefine.EPhomPlayerStatus.AN_CHOT:
-        this.showBubbleFx("\u0102n Ch\u1ed1t", 0, true, e);
+        this.showBubbleFx("\u0102n Ch\u1ed1t", 0, true, reverse);
         break;
       default:
       case GameDefine.EPhomPlayerStatus.NONE:
         return void this.removeBubbleFx();
     }
   };
-  e.prototype.setLiengStatus = function(t) {
+  PlayerView.prototype.setLiengStatus = function(status) {
     if (this.indexPos < 5 && this.indexPos >= 0) {
       this.playerStatusUI.node.x = -100;
       this.playerStatusUI.flipBackground(true);
@@ -843,34 +843,34 @@ var O = function(t) {
       this.playerStatusUI.flipBackground(false);
     }
     this.playerStatusUI.node.y = 70;
-    this.playerStatusUI.setLiengStatus(t);
-    if (t == GameDefine.ELiengPlayState.FOLD) {
+    this.playerStatusUI.setLiengStatus(status);
+    if (status == GameDefine.ELiengPlayState.FOLD) {
       this.showUpBaiFxForPlayer(3);
     }
   };
-  e.prototype.setBaCayStatus = function(t) {};
-  e.prototype.setModel = function(t, e) {
-    if (void 0 === e) {
-      e = true;
+  PlayerView.prototype.setBaCayStatus = function(t) {};
+  PlayerView.prototype.setModel = function(playerModel, updateState) {
+    if (void 0 === updateState) {
+      updateState = true;
     }
-    this.playerModel = t;
-    if (e) {
-      if (t.IsPlaying) {
-        this.setState(r.IN_GAME);
+    this.playerModel = playerModel;
+    if (updateState) {
+      if (playerModel.IsPlaying) {
+        this.setState(EPlayerState.IN_GAME);
       } else {
-        this.setState(r.SPECTATOR);
+        this.setState(EPlayerState.SPECTATOR);
       }
     }
-    this.lbName.string = t.DisplayName;
+    this.lbName.string = playerModel.DisplayName;
     this.processCutLongString();
-    this.setMoney(t.BuyIn);
-    if (t.IsRoomMaster) {
+    this.setMoney(playerModel.BuyIn);
+    if (playerModel.IsRoomMaster) {
       this.iconHost.active = true;
     } else {
       this.iconHost.active = false;
     }
   };
-  e.prototype.reset = function() {
+  PlayerView.prototype.reset = function() {
     if (null != this.tableBetUI) {
       this.tableBetUI.hide();
     }
@@ -890,27 +890,27 @@ var O = function(t) {
       this.textEffectNode.removeFromParent(true);
     }
   };
-  e.prototype.setTableBetUI = function(t, e) {
-    if (void 0 === e && (e = null), void 0 != t && null != t) {
-      if (this.tableBetUI = t, null == e) {
-        var i = this.node.parent.convertToWorldSpaceAR(this.node.getPosition()),
-          n = this.tableBetUI.node.convertToNodeSpaceAR(i);
-        this.tableBetUI.setFromPosition(n);
+  PlayerView.prototype.setTableBetUI = function(tableBetUI, fromPosition) {
+    if (void 0 === fromPosition && (fromPosition = null), void 0 != tableBetUI && null != tableBetUI) {
+      if (this.tableBetUI = tableBetUI, null == fromPosition) {
+        var worldPos = this.node.parent.convertToWorldSpaceAR(this.node.getPosition()),
+          localPos = this.tableBetUI.node.convertToNodeSpaceAR(worldPos);
+        this.tableBetUI.setFromPosition(localPos);
       } else {
-        this.tableBetUI.setFromPosition(e);
+        this.tableBetUI.setFromPosition(fromPosition);
       }
     }
   };
-  e.prototype.showUserInfo = function() {
+  PlayerView.prototype.showUserInfo = function() {
     this.borderInfo.active = false;
   };
-  e.prototype.kickUser = function() {
+  PlayerView.prototype.kickUser = function() {
     this.borderInfo.active = false;
   };
-  e.prototype._kickUser = function() {
+  PlayerView.prototype._kickUser = function() {
     CardGameCommonRequest.default.getInstance().sendKickUser(this.userID);
   };
-  e.prototype.destroyMe = function() {
+  PlayerView.prototype.destroyMe = function() {
     if (null !== this.bubbleFx && void 0 !== this.bubbleFx) {
       this.bubbleFx.node.removeFromParent(true);
     }
@@ -920,8 +920,8 @@ var O = function(t) {
     if (null !== this.bubbleChat && void 0 !== this.bubbleChat) {
       this.bubbleChat.node.removeFromParent(true);
     }
-    this.cards.forEach(function(t) {
-      t.node.removeFromParent(true);
+    this.cards.forEach(function(cardSprite) {
+      cardSprite.node.removeFromParent(true);
     });
     if (null !== this.winEffectNode && void 0 !== this.winEffectNode) {
       this.winEffectNode.active = false;
@@ -934,30 +934,30 @@ var O = function(t) {
     this.removeChat();
     this.node.removeFromParent(true);
   };
-  e.prototype.hideAlllistCardOnHandTL = function() {
-    for (var t = 0; t < this.listCardOnHandTL.length; t++) {
-      if (null != this.listCardOnHandTL[t] && null != this.listCardOnHandTL[t].node) {
-        this.listCardOnHandTL[t].node.active = false;
+  PlayerView.prototype.hideAlllistCardOnHandTL = function() {
+    for (var cardIndex = 0; cardIndex < this.listCardOnHandTL.length; cardIndex++) {
+      if (null != this.listCardOnHandTL[cardIndex] && null != this.listCardOnHandTL[cardIndex].node) {
+        this.listCardOnHandTL[cardIndex].node.active = false;
       }
     }
     this.listCardOnHandTL = [];
   };
-  e.prototype.showPopupUserTableInfo = function() {
+  PlayerView.prototype.showPopupUserTableInfo = function() {
     if (MusicPlayer.default.getInstance().playbtnClick(), this.isAnDanh) {
       CommonPrefabsManager.default.getInstance().showPopupMessageUtil("Ng\u01b0\u1eddi Ch\u01a1i \u1ea8n Danh");
     } else if (!GameConfigManager.default.getInstance().isLoginWebcc || !this.isMine()) {
-      var t = this.moneyUIDangShow;
+      var displayMoney = this.moneyUIDangShow;
       if (!(GamePlayManager.default.getInstance().gameID != GameDefine.GameID.LIENG && GamePlayManager.default.getInstance().gameID != GameDefine.GameID.POKER && GamePlayManager.default
           .getInstance().gameID != GameDefine.GameID.XITO)) {
-        t = this._realMoney;
+        displayMoney = this._realMoney;
       }
-      CommonPrefabsManager.default.getInstance().showPopupUserTableInfo(this.lbName.string, t, this.avatarUrl, this.isMine());
+      CommonPrefabsManager.default.getInstance().showPopupUserTableInfo(this.lbName.string, displayMoney, this.avatarUrl, this.isMine());
     }
   };
-  e.prototype.setPlayerViewBauCua = function() {
-    var t = this.nodePlayerName.getComponent(cc.Sprite);
-    if (null !== t && void 0 !== t) {
-      t.enabled = false;
+  PlayerView.prototype.setPlayerViewBauCua = function() {
+    var nameSprite = this.nodePlayerName.getComponent(cc.Sprite);
+    if (null !== nameSprite && void 0 !== nameSprite) {
+      nameSprite.enabled = false;
     }
     this.lbName.fontSize = 32;
     this.lbName.node.x = 237;
@@ -970,24 +970,24 @@ var O = function(t) {
     this.iconQuit.x = 130;
     this.iconQuit.y = -50;
   };
-  e.prototype.getCardOfMine = function(t, e) {
-    if (void 0 === e) {
-      e = null;
+  PlayerView.prototype.getCardOfMine = function(serverCode, defaultValue) {
+    if (void 0 === defaultValue) {
+      defaultValue = null;
     }
-    for (var i = 0; i < this.cards.length; ++i) {
-      var n = this.cards[i];
-      if (n.serverCode === t) {
-        return n;
+    for (var cardIndex = 0; cardIndex < this.cards.length; ++cardIndex) {
+      var cardSprite = this.cards[cardIndex];
+      if (cardSprite.serverCode === serverCode) {
+        return cardSprite;
       }
     }
-    return e;
+    return defaultValue;
   };
-  e.prototype.blockAllCardTouch = function() {
-    for (var t = 0; t < this.cards.length; ++t) {
-      this.cards[t].setClickEnabled(false, false, null);
+  PlayerView.prototype.blockAllCardTouch = function() {
+    for (var cardIndex = 0; cardIndex < this.cards.length; ++cardIndex) {
+      this.cards[cardIndex].setClickEnabled(false, false, null);
     }
   };
-  e.prototype.onDisable = function() {
+  PlayerView.prototype.onDisable = function() {
     if (this.nodeMoneyFX && this.nodeMoneyFX.isValid) {
       this.nodeMoneyFX.stopAllActions();
       this.nodeMoneyFX.destroy();
@@ -997,39 +997,39 @@ var O = function(t) {
       this.winEffectNode.destroy();
     }
   };
-  e.prototype.setChatLayer = function(t) {
-    this.layerChatBubble = t;
+  PlayerView.prototype.setChatLayer = function(chatLayer) {
+    this.layerChatBubble = chatLayer;
   };
-  o([M(cc.Label)], e.prototype, "lbName", void 0);
-  o([M(cc.Label)], e.prototype, "lbMoney", void 0);
-  o([M], e.prototype, "text", void 0);
-  o([M(cc.Node)], e.prototype, "BigBlindIcon", void 0);
-  o([M(cc.Node)], e.prototype, "smallBlindIcon", void 0);
-  o([M(cc.Node)], e.prototype, "deadlerIcon", void 0);
-  o([M(cc.Node)], e.prototype, "iconHost", void 0);
-  o([M(cc.Node)], e.prototype, "iconQuit", void 0);
-  o([M(cc.Node)], e.prototype, "iconnReady", void 0);
-  o([M(cc.Node)], e.prototype, "kickButton", void 0);
-  o([M([cc.Node])], e.prototype, "coins", void 0);
-  o([M(cc.Node)], e.prototype, "bubbleFxPos", void 0);
-  o([M(cc.Prefab)], e.prototype, "bubbleFxPrefab", void 0);
-  o([M(cc.Prefab)], e.prototype, "winEffectPrefab", void 0);
-  o([M(cc.Prefab)], e.prototype, "winTextEffectPrefab", void 0);
-  o([M(cc.Prefab)], e.prototype, "loseTextEffectPrefab", void 0);
-  o([M(cc.Prefab)], e.prototype, "upbaiEffectPrefab", void 0);
-  o([M(cc.Prefab)], e.prototype, "textResultPrefab", void 0);
-  o([M(ActionProgressTo.default)], e.prototype, "countDownProgressTo", void 0);
-  o([M(cc.Node)], e.prototype, "chatIconView", void 0);
-  o([M(cc.Node)], e.prototype, "nodePlayerAvatar", void 0);
-  o([M(cc.Node)], e.prototype, "nodePlayerName", void 0);
-  o([M(PlayerStatusUI.default)], e.prototype, "playerStatusUI", void 0);
-  o([M(cc.Node)], e.prototype, "borderInfo", void 0);
-  o([M(RemoteSprite.default)], e.prototype, "avarta", void 0);
-  o([M(sp.Skeleton)], e.prototype, "skeletonEffect", void 0);
-  o([M(sp.Skeleton)], e.prototype, "skeletonCountDown", void 0);
-  o([M(cc.Node)], e.prototype, "iconDola", void 0);
-  o([M], e.prototype, "widthCutString", void 0);
-  return e = o([P], e);
+  __decorate([property(cc.Label)], PlayerView.prototype, "lbName", void 0);
+  __decorate([property(cc.Label)], PlayerView.prototype, "lbMoney", void 0);
+  __decorate([property], PlayerView.prototype, "text", void 0);
+  __decorate([property(cc.Node)], PlayerView.prototype, "BigBlindIcon", void 0);
+  __decorate([property(cc.Node)], PlayerView.prototype, "smallBlindIcon", void 0);
+  __decorate([property(cc.Node)], PlayerView.prototype, "deadlerIcon", void 0);
+  __decorate([property(cc.Node)], PlayerView.prototype, "iconHost", void 0);
+  __decorate([property(cc.Node)], PlayerView.prototype, "iconQuit", void 0);
+  __decorate([property(cc.Node)], PlayerView.prototype, "iconnReady", void 0);
+  __decorate([property(cc.Node)], PlayerView.prototype, "kickButton", void 0);
+  __decorate([property([cc.Node])], PlayerView.prototype, "coins", void 0);
+  __decorate([property(cc.Node)], PlayerView.prototype, "bubbleFxPos", void 0);
+  __decorate([property(cc.Prefab)], PlayerView.prototype, "bubbleFxPrefab", void 0);
+  __decorate([property(cc.Prefab)], PlayerView.prototype, "winEffectPrefab", void 0);
+  __decorate([property(cc.Prefab)], PlayerView.prototype, "winTextEffectPrefab", void 0);
+  __decorate([property(cc.Prefab)], PlayerView.prototype, "loseTextEffectPrefab", void 0);
+  __decorate([property(cc.Prefab)], PlayerView.prototype, "upbaiEffectPrefab", void 0);
+  __decorate([property(cc.Prefab)], PlayerView.prototype, "textResultPrefab", void 0);
+  __decorate([property(ActionProgressTo.default)], PlayerView.prototype, "countDownProgressTo", void 0);
+  __decorate([property(cc.Node)], PlayerView.prototype, "chatIconView", void 0);
+  __decorate([property(cc.Node)], PlayerView.prototype, "nodePlayerAvatar", void 0);
+  __decorate([property(cc.Node)], PlayerView.prototype, "nodePlayerName", void 0);
+  __decorate([property(PlayerStatusUI.default)], PlayerView.prototype, "playerStatusUI", void 0);
+  __decorate([property(cc.Node)], PlayerView.prototype, "borderInfo", void 0);
+  __decorate([property(RemoteSprite.default)], PlayerView.prototype, "avarta", void 0);
+  __decorate([property(sp.Skeleton)], PlayerView.prototype, "skeletonEffect", void 0);
+  __decorate([property(sp.Skeleton)], PlayerView.prototype, "skeletonCountDown", void 0);
+  __decorate([property(cc.Node)], PlayerView.prototype, "iconDola", void 0);
+  __decorate([property], PlayerView.prototype, "widthCutString", void 0);
+  return PlayerView = __decorate([ccclass], PlayerView);
 }(cc.Component);
-i.default = O;
+moduleExports.default = PlayerView;
 void 0;

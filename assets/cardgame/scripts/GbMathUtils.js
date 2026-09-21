@@ -1,223 +1,223 @@
-var t = require,
-  e = module,
-  i = exports;
+var requireRef = require,
+  moduleRef = module,
+  moduleExports = exports;
 "use strict";
 
-function n(t, e) {
-  var i = Math.ceil(t),
-    n = Math.floor(e);
-  return Math.floor(Math.random() * (n - i + 1)) + i;
+function randInt(min, max) {
+  var minCeil = Math.ceil(min),
+    maxFloor = Math.floor(max);
+  return Math.floor(Math.random() * (maxFloor - minCeil + 1)) + minCeil;
 }
 
-function o(t, e) {
-  return Math.random() * (e - t) + t;
+function randomInRange(min, max) {
+  return Math.random() * (max - min) + min;
 }
 
-function a(t) {
-  for (var e, i = t.length - 1; i > 0; i--) {
-    var o = n(0, i);
-    e = [t[o], t[i]];
-    t[i] = e[0];
-    t[o] = e[1];
+function shuffleInPlace(array) {
+  for (var swapPair, index = array.length - 1; index > 0; index--) {
+    var randomIndex = randInt(0, index);
+    swapPair = [array[randomIndex], array[index]];
+    array[index] = swapPair[0];
+    array[randomIndex] = swapPair[1];
   }
-  return t;
+  return array;
 }
 
-function s(t) {
-  var e = t.reduce(function(t, e) {
-    return t + Math.max(0, e);
+function weightedIndex(weights) {
+  var totalWeight = weights.reduce(function(sum, weight) {
+    return sum + Math.max(0, weight);
   }, 0);
-  if (e <= 0) {
+  if (totalWeight <= 0) {
     throw new Error("sum(weights) must be > 0");
   }
-  for (var i = Math.random() * e, n = 0; n < t.length; n++) {
-    if ((i -= Math.max(0, t[n])) <= 0) {
-      return n;
+  for (var roll = Math.random() * totalWeight, index = 0; index < weights.length; index++) {
+    if ((roll -= Math.max(0, weights[index])) <= 0) {
+      return index;
     }
   }
-  return t.length - 1;
+  return weights.length - 1;
 }
 
-function r(t, e, i) {
-  return Math.max(e, Math.min(i, t));
+function clamp(value, min, max) {
+  return Math.max(min, Math.min(max, value));
 }
 
-function c(t, e, i) {
-  return t + (e - t) * i;
+function lerp(from, to, ratio) {
+  return from + (to - from) * ratio;
 }
 
-function l(t, e, i) {
-  return (i - t) / (e - t);
+function invLerp(from, to, value) {
+  return (value - from) / (to - from);
 }
 
-function h(t, e) {
-  return (t % e + e) % e;
+function mod(value, modulus) {
+  return (value % modulus + modulus) % modulus;
 }
 
-function u(t, e, i) {
-  return h(t - e, i - e) + e;
+function wrap(value, min, max) {
+  return mod(value - min, max - min) + min;
 }
 
-function d(t) {
-  if (!t.length) {
+function mean(values) {
+  if (!values.length) {
     throw new Error("mean: empty array");
   }
-  return t.reduce(function(t, e) {
-    return t + e;
-  }, 0) / t.length;
+  return values.reduce(function(sum, value) {
+    return sum + value;
+  }, 0) / values.length;
 }
 
-function p(t, e) {
-  if (void 0 === e && (e = 1), t.length - e <= 0) {
+function variance(values, ddof) {
+  if (void 0 === ddof && (ddof = 1), values.length - ddof <= 0) {
     throw new Error("variance: insufficient data");
   }
-  var i = d(t);
-  return t.reduce(function(t, e) {
-    return t + (e - i) * (e - i);
-  }, 0) / (t.length - e);
+  var average = mean(values);
+  return values.reduce(function(sum, value) {
+    return sum + (value - average) * (value - average);
+  }, 0) / (values.length - ddof);
 }
-cc._RF.push(e, "4eaa27PiQlMg43wtQSOjm8+", "GbMathUtils");
-Object.defineProperty(i, "__esModule", {
+cc._RF.push(moduleRef, "4eaa27PiQlMg43wtQSOjm8+", "GbMathUtils");
+Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
-i.randFloat = function(t, e) {
-  return o(t, e);
+moduleExports.randFloat = function(min, max) {
+  return randomInRange(min, max);
 };
-i.randInt = n;
-i.getRandomArbitrary = o;
-i.randBool = function(t) {
-  if (void 0 === t) {
-    t = .5;
+moduleExports.randInt = randInt;
+moduleExports.getRandomArbitrary = randomInRange;
+moduleExports.randBool = function(probability) {
+  if (void 0 === probability) {
+    probability = .5;
   }
-  return Math.random() < t;
+  return Math.random() < probability;
 };
-i.randSign = function() {
+moduleExports.randSign = function() {
   return Math.random() < .5 ? -1 : 1;
 };
-i.randChoice = function(t) {
-  if (!t.length) {
+moduleExports.randChoice = function(array) {
+  if (!array.length) {
     throw new Error("randChoice: empty array");
   }
-  return t[Math.floor(Math.random() * t.length)];
+  return array[Math.floor(Math.random() * array.length)];
 };
-i.shuffleInPlace = a;
-i.sampleWithoutReplacement = function(t, e) {
-  if (e > t.length) {
+moduleExports.shuffleInPlace = shuffleInPlace;
+moduleExports.sampleWithoutReplacement = function(array, count) {
+  if (count > array.length) {
     throw new Error("k > array.length");
   }
-  var i = t.slice();
-  a(i);
-  return i.slice(0, e);
+  var shuffled = array.slice();
+  shuffleInPlace(shuffled);
+  return shuffled.slice(0, count);
 };
-i.weightedIndex = s;
-i.weightedChoice = function(t, e) {
-  if (t.length !== e.length) {
+moduleExports.weightedIndex = weightedIndex;
+moduleExports.weightedChoice = function(items, weights) {
+  if (items.length !== weights.length) {
     throw new Error("items vs weights mismatch");
   }
-  return t[s(e)];
+  return items[weightedIndex(weights)];
 };
-i.randNormal = function(t, e) {
-  if (void 0 === t) {
-    t = 0;
+moduleExports.randNormal = function(meanValue, stdDev) {
+  if (void 0 === meanValue) {
+    meanValue = 0;
   }
-  if (void 0 === e) {
-    e = 1;
+  if (void 0 === stdDev) {
+    stdDev = 1;
   }
-  var i = 1 - Math.random(),
-    n = Math.random();
-  return t + Math.sqrt(-2 * Math.log(i)) * Math.cos(2 * Math.PI * n) * e;
+  var radiusSeed = 1 - Math.random(),
+    angleSeed = Math.random();
+  return meanValue + Math.sqrt(-2 * Math.log(radiusSeed)) * Math.cos(2 * Math.PI * angleSeed) * stdDev;
 };
-i.randInCircle = function(t) {
-  if (void 0 === t) {
-    t = 1;
+moduleExports.randInCircle = function(radius) {
+  if (void 0 === radius) {
+    radius = 1;
   }
-  var e = 2 * Math.PI * Math.random(),
-    i = Math.random() + Math.random(),
-    n = (i > 1 ? 2 - i : i) * t;
+  var angle = 2 * Math.PI * Math.random(),
+    radiusFactorRaw = Math.random() + Math.random(),
+    distance = (radiusFactorRaw > 1 ? 2 - radiusFactorRaw : radiusFactorRaw) * radius;
   return {
-    x: n * Math.cos(e),
-    y: n * Math.sin(e)
+    x: distance * Math.cos(angle),
+    y: distance * Math.sin(angle)
   };
 };
-i.randOnCircle = function(t) {
-  if (void 0 === t) {
-    t = 1;
+moduleExports.randOnCircle = function(radius) {
+  if (void 0 === radius) {
+    radius = 1;
   }
-  var e = 2 * Math.PI * Math.random();
+  var angle = 2 * Math.PI * Math.random();
   return {
-    x: t * Math.cos(e),
-    y: t * Math.sin(e)
+    x: radius * Math.cos(angle),
+    y: radius * Math.sin(angle)
   };
 };
-i.clamp = r;
-i.lerp = c;
-i.invLerp = l;
-i.remap = function(t, e, i, n, o, a) {
-  if (void 0 === a) {
-    a = false;
+moduleExports.clamp = clamp;
+moduleExports.lerp = lerp;
+moduleExports.invLerp = invLerp;
+moduleExports.remap = function(value, inMin, inMax, outMin, outMax, shouldClamp) {
+  if (void 0 === shouldClamp) {
+    shouldClamp = false;
   }
-  var s = l(e, i, t);
-  return c(n, o, a ? r(s, 0, 1) : s);
+  var ratio = invLerp(inMin, inMax, value);
+  return lerp(outMin, outMax, shouldClamp ? clamp(ratio, 0, 1) : ratio);
 };
-i.nearlyEqual = function(t, e, i) {
-  if (void 0 === i) {
-    i = 1e-6;
+moduleExports.nearlyEqual = function(valueA, valueB, epsilon) {
+  if (void 0 === epsilon) {
+    epsilon = 1e-6;
   }
-  return Math.abs(t - e) <= i * Math.max(1, Math.max(Math.abs(t), Math.abs(e)));
+  return Math.abs(valueA - valueB) <= epsilon * Math.max(1, Math.max(Math.abs(valueA), Math.abs(valueB)));
 };
-i.roundTo = function(t, e) {
-  return Math.round(t / e) * e;
+moduleExports.roundTo = function(value, step) {
+  return Math.round(value / step) * step;
 };
-i.snap = function(t, e) {
-  return Math.round(t / e) * e;
+moduleExports.snap = function(value, step) {
+  return Math.round(value / step) * step;
 };
-i.mod = h;
-i.wrap = u;
-i.degToRad = function(t) {
-  return t * Math.PI / 180;
+moduleExports.mod = mod;
+moduleExports.wrap = wrap;
+moduleExports.degToRad = function(degrees) {
+  return degrees * Math.PI / 180;
 };
-i.radToDeg = function(t) {
-  return 180 * t / Math.PI;
+moduleExports.radToDeg = function(radians) {
+  return 180 * radians / Math.PI;
 };
-i.normalizeAngle = function(t) {
-  return u(t, -Math.PI, Math.PI);
+moduleExports.normalizeAngle = function(angle) {
+  return wrap(angle, -Math.PI, Math.PI);
 };
-i.dist2D = function(t, e, i, n) {
-  return Math.hypot(i - t, n - e);
+moduleExports.dist2D = function(x1, y1, x2, y2) {
+  return Math.hypot(x2 - x1, y2 - y1);
 };
-i.smoothstep = function(t, e, i) {
-  var n = r((i - t) / (e - t), 0, 1);
-  return n * n * (3 - 2 * n);
+moduleExports.smoothstep = function(edgeStart, edgeEnd, value) {
+  var ratio = clamp((value - edgeStart) / (edgeEnd - edgeStart), 0, 1);
+  return ratio * ratio * (3 - 2 * ratio);
 };
-i.smootherstep = function(t, e, i) {
-  var n = r((i - t) / (e - t), 0, 1);
-  return n * n * n * (n * (6 * n - 15) + 10);
+moduleExports.smootherstep = function(edgeStart, edgeEnd, value) {
+  var ratio = clamp((value - edgeStart) / (edgeEnd - edgeStart), 0, 1);
+  return ratio * ratio * ratio * (ratio * (6 * ratio - 15) + 10);
 };
-i.mean = d;
-i.variance = p;
-i.stddev = function(t, e) {
-  if (void 0 === e) {
-    e = 1;
+moduleExports.mean = mean;
+moduleExports.variance = variance;
+moduleExports.stddev = function(values, ddof) {
+  if (void 0 === ddof) {
+    ddof = 1;
   }
-  return Math.sqrt(p(t, e));
+  return Math.sqrt(variance(values, ddof));
 };
-i.getRandomPositionInEllipse = function(t, e) {
-  var i = t,
-    n = e,
-    o = Math.min(i.x, n.x),
-    a = Math.max(i.x, n.x),
-    s = Math.min(i.y, n.y),
-    r = Math.max(i.y, n.y),
-    c = .5 * (o + a),
-    l = .5 * (s + r),
-    h = .5 * (a - o),
-    u = .5 * (r - s),
-    d = Math.random() * Math.PI * 2,
-    p = Math.sqrt(Math.random()),
-    f = c + h * p * Math.cos(d),
-    g = l + u * p * Math.sin(d),
-    m = Math.floor(f),
-    y = Math.floor(g);
-  return new cc.Vec2(m, y);
+moduleExports.getRandomPositionInEllipse = function(cornerA, cornerB) {
+  var pointA = cornerA,
+    pointB = cornerB,
+    minX = Math.min(pointA.x, pointB.x),
+    maxX = Math.max(pointA.x, pointB.x),
+    minY = Math.min(pointA.y, pointB.y),
+    maxY = Math.max(pointA.y, pointB.y),
+    centerX = .5 * (minX + maxX),
+    centerY = .5 * (minY + maxY),
+    radiusX = .5 * (maxX - minX),
+    radiusY = .5 * (maxY - minY),
+    angle = Math.random() * Math.PI * 2,
+    radiusFactor = Math.sqrt(Math.random()),
+    rawX = centerX + radiusX * radiusFactor * Math.cos(angle),
+    rawY = centerY + radiusY * radiusFactor * Math.sin(angle),
+    flooredX = Math.floor(rawX),
+    flooredY = Math.floor(rawY);
+  return new cc.Vec2(flooredX, flooredY);
 };
 cc._RF.pop();

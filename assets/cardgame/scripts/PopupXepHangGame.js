@@ -1,9 +1,9 @@
 var t = require,
   e = module,
-  i = exports;
+  moduleExports = exports;
 "use strict";
 void 0;
-var n = this && this.__extends || function() {
+var __extends = this && this.__extends || function() {
     var t = function(e, i) {
       return (t = Object.setPrototypeOf || {
           __proto__: []
@@ -26,7 +26,7 @@ var n = this && this.__extends || function() {
       e.prototype = null === i ? Object.create(i) : (n.prototype = i.prototype, new n());
     };
   }(),
-  o = this && this.__decorate || function(t, e, i, n) {
+  __decorate = this && this.__decorate || function(t, e, i, n) {
     var o,
       a = arguments.length,
       s = a < 3 ? e : null === n ? n = Object.getOwnPropertyDescriptor(e, i) : n;
@@ -44,7 +44,7 @@ var n = this && this.__extends || function() {
     }
     return s;
   };
-Object.defineProperty(i, "__esModule", {
+Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
 var CardPopupBase = require("./CardPopupBase"),
@@ -63,66 +63,66 @@ var CardPopupBase = require("./CardPopupBase"),
   AnalyticsManager = require("./AnalyticsManager"),
   OrientationManager = require("./OrientationManager"),
   BaccaratLiveVariantConfig = require("./BaccaratLiveVariantConfig"),
-  b = cc._decorator,
-  C = b.ccclass,
-  T = b.property,
-  E = function(t) {
-    function e() {
-      var e = null !== t && t.apply(this, arguments) || this;
-      e.nodePopupXepHangGame = null;
-      e.nodePopupDuaTop = null;
-      e.nodePopupLsDuaTop = null;
-      e.txtHang = null;
-      e.txtPoint = null;
-      e.txTotalBet = null;
-      e.lbTimeCountDown = null;
-      e.nodeTotalBet = null;
-      e.nodeLoading = null;
-      e.contend = null;
-      e.contendScrollView = null;
-      e.scrollView = null;
-      e.itemPoint = null;
-      e.itemPointTx = null;
-      e.itemDuaTopPrefab = null;
-      e.itemLsDuaTopPrefab = null;
-      e.arrowNextDayLsDuaTop = null;
-      e.arrowPreDayLsDuaTop = null;
-      e.txtTittle = null;
-      e.lbDateShowLSTop = null;
-      e.nodeFullTop = null;
-      e.tabDuatop = null;
-      e.tabSLDuatop = null;
-      e.listSpriteFrameTab = [];
-      e.nodeSelectDateTime = null;
-      e.lbTimeRequest = null;
-      e.buttonRequestNextDay = null;
-      e.buttonRequestPrevDay = null;
-      e.scrollContentViewTop = -26;
-      e.scrollContentViewBottom = -390;
-      e.extraScrollContentView = 50;
-      e.nodeBoardInfo = null;
-      e.nodeTongThangOn = null;
-      e.nodeSanHuOn = null;
-      e.nodeTuanOn = null;
-      e.nodeNgayOn = null;
-      e.nodeBoardLeft = null;
-      e.txtEmpty = null;
-      e.dataDuatop = null;
-      e.dataLsDuatop = null;
-      e.listCachePoint = [];
-      e.timeViewHistory = "";
-      e.timeViewHistoryNext = "";
-      e.timeViewHistoryPrev = "";
-      e.callBackClose = null;
-      e.txChatColor = [new cc.Color(235, 0, 0, 255), new cc.Color(235, 235, 0, 255), new cc.Color(0, 235, 0, 255), new cc.Color(0, 150, 255,
+  ccDecorator = cc._decorator,
+  ccclass = ccDecorator.ccclass,
+  property = ccDecorator.property,
+  E = function(BaseClass) {
+    function PopupXepHangGame() {
+      var self = null !== BaseClass && BaseClass.apply(this, arguments) || this;
+      self.nodePopupXepHangGame = null;
+      self.nodePopupDuaTop = null;
+      self.nodePopupLsDuaTop = null;
+      self.txtHang = null;
+      self.txtPoint = null;
+      self.txTotalBet = null;
+      self.lbTimeCountDown = null;
+      self.nodeTotalBet = null;
+      self.nodeLoading = null;
+      self.contend = null;
+      self.contendScrollView = null;
+      self.scrollView = null;
+      self.itemPoint = null;
+      self.itemPointTx = null;
+      self.itemDuaTopPrefab = null;
+      self.itemLsDuaTopPrefab = null;
+      self.arrowNextDayLsDuaTop = null;
+      self.arrowPreDayLsDuaTop = null;
+      self.txtTittle = null;
+      self.lbDateShowLSTop = null;
+      self.nodeFullTop = null;
+      self.tabDuatop = null;
+      self.tabSLDuatop = null;
+      self.listSpriteFrameTab = [];
+      self.nodeSelectDateTime = null;
+      self.lbTimeRequest = null;
+      self.buttonRequestNextDay = null;
+      self.buttonRequestPrevDay = null;
+      self.scrollContentViewTop = -26;
+      self.scrollContentViewBottom = -390;
+      self.extraScrollContentView = 50;
+      self.nodeBoardInfo = null;
+      self.nodeTongThangOn = null;
+      self.nodeSanHuOn = null;
+      self.nodeTuanOn = null;
+      self.nodeNgayOn = null;
+      self.nodeBoardLeft = null;
+      self.txtEmpty = null;
+      self.dataDuatop = null;
+      self.dataLsDuatop = null;
+      self.listCachePoint = [];
+      self.timeViewHistory = "";
+      self.timeViewHistoryNext = "";
+      self.timeViewHistoryPrev = "";
+      self.callBackClose = null;
+      self.txChatColor = [new cc.Color(235, 0, 0, 255), new cc.Color(235, 235, 0, 255), new cc.Color(0, 235, 0, 255), new cc.Color(0, 150, 255,
         255), new cc.Color(0, 150, 255, 255), new cc.Color(0, 150, 255, 255), new cc.Color(0, 150, 255, 255), new cc.Color(0, 150, 255,
         255), new cc.Color(0, 150, 255, 255), new cc.Color(0, 150, 255, 255), new cc.Color(0, 150, 255, 255), new cc.Color(0, 150, 255,
         255), new cc.Color(0, 150, 255, 255), new cc.Color(133, 0, 255, 255)];
-      return e;
+      return self;
     }
-    n(e, t);
-    e.prototype.onLoad = function() {
-      t.prototype.onLoad.call(this);
+    __extends(PopupXepHangGame, BaseClass);
+    PopupXepHangGame.prototype.onLoad = function() {
+      BaseClass.prototype.onLoad.call(this);
       this.scrollContentViewCache = this.contendScrollView.position.y;
       this.listCachePoint = [];
       if (0 === GameConfigManager.default.getInstance().tabLeftRankingDefault) {
@@ -140,123 +140,123 @@ var CardPopupBase = require("./CardPopupBase"),
         this.nodeNgayOn.active = true;
       }
     };
-    e.prototype.show = function(e, i) {
-      if (void 0 === e) {
-        e = null;
+    PopupXepHangGame.prototype.show = function(callback, duration) {
+      if (void 0 === callback) {
+        callback = null;
       }
-      if (void 0 === i) {
-        i = .4;
+      if (void 0 === duration) {
+        duration = .4;
       }
       GameUtils.setFpsNormal();
-      t.prototype.show.call(this, e, i);
+      BaseClass.prototype.show.call(this, callback, duration);
       this.node.runAction(cc.sequence(cc.delayTime(.1), cc.callFunc(function() {
         this.setTab(this.gameId);
       }.bind(this))));
     };
-    e.prototype.init = function(t) {
-      this.SetGameID(t);
+    PopupXepHangGame.prototype.init = function(gameIdNumber) {
+      this.SetGameID(gameIdNumber);
       this.txtTittle.string = "\u0110ANG T\u1ea2I...";
     };
-    e.prototype.SetOrientation = function(t) {
-      if (t == OrientationManager.Orientation.Portrait) {
+    PopupXepHangGame.prototype.SetOrientation = function(orientation) {
+      if (orientation == OrientationManager.Orientation.Portrait) {
         this.scrollContentViewBottom = -1 * this.scrollView.node.getContentSize().height;
       }
     };
-    e.prototype.SetGameID = function(t) {
-      if (t == MessageCardGameHandler.GAME.XITO) {
+    PopupXepHangGame.prototype.SetGameID = function(gameIdNumber) {
+      if (gameIdNumber == MessageCardGameHandler.GAME.XITO) {
         this.gameId = MessageCardGameHandler.GAMEID.XITO;
       } else {
-        if (t == MessageCardGameHandler.GAME.BINH) {
+        if (gameIdNumber == MessageCardGameHandler.GAME.BINH) {
           this.gameId = MessageCardGameHandler.GAMEID.BINH;
         } else {
-          if (t == MessageCardGameHandler.GAME.TIENLEN) {
+          if (gameIdNumber == MessageCardGameHandler.GAME.TIENLEN) {
             this.gameId = MessageCardGameHandler.GAMEID.TIENLEN;
           } else {
-            if (t == MessageCardGameHandler.GAME.POKER) {
+            if (gameIdNumber == MessageCardGameHandler.GAME.POKER) {
               this.gameId = MessageCardGameHandler.GAMEID.POKER;
             } else {
-              if (t == MessageCardGameHandler.GAME.LIENG) {
+              if (gameIdNumber == MessageCardGameHandler.GAME.LIENG) {
                 this.gameId = MessageCardGameHandler.GAMEID.LIENG;
               } else {
-                if (t == MessageCardGameHandler.GAME.SAM) {
+                if (gameIdNumber == MessageCardGameHandler.GAME.SAM) {
                   this.gameId = MessageCardGameHandler.GAMEID.SAM;
                 } else {
-                  if (t == MessageCardGameHandler.GAME.XOCDIA) {
+                  if (gameIdNumber == MessageCardGameHandler.GAME.XOCDIA) {
                     this.gameId = MessageCardGameHandler.GAMEID.XOCDIA;
                   } else {
-                    if (t == MessageCardGameHandler.GAME.PHOM) {
+                    if (gameIdNumber == MessageCardGameHandler.GAME.PHOM) {
                       this.gameId = MessageCardGameHandler.GAMEID.PHOM;
                     } else {
-                      if (t == MessageCardGameHandler.GAME.TLMN) {
+                      if (gameIdNumber == MessageCardGameHandler.GAME.TLMN) {
                         this.gameId = MessageCardGameHandler.GAMEID.TLMN;
                       } else {
-                        if (t == MessageCardGameHandler.GAME.MINI_POKER) {
+                        if (gameIdNumber == MessageCardGameHandler.GAME.MINI_POKER) {
                           this.gameId = MessageCardGameHandler.GAMEID.MINI_POKER;
                         } else {
-                          if (t == MessageCardGameHandler.GAME.KIM_CUONG) {
+                          if (gameIdNumber == MessageCardGameHandler.GAME.KIM_CUONG) {
                             this.gameId = MessageCardGameHandler.GAMEID.KIM_CUONG;
                           } else {
-                            if (t == MessageCardGameHandler.GAME.TAIXIU) {
+                            if (gameIdNumber == MessageCardGameHandler.GAME.TAIXIU) {
                               this.gameId = MessageCardGameHandler.GAMEID.TAIXIU;
                             } else {
-                              if (t == MessageCardGameHandler.GAME.TAIXIU_MD5) {
+                              if (gameIdNumber == MessageCardGameHandler.GAME.TAIXIU_MD5) {
                                 this.gameId = MessageCardGameHandler.GAMEID.TAIXIU_MD5;
                               } else {
-                                if (t == MessageCardGameHandler.GAME.UP_DOWN) {
+                                if (gameIdNumber == MessageCardGameHandler.GAME.UP_DOWN) {
                                   this.gameId = MessageCardGameHandler.GAMEID.UP_DOWN;
                                 } else {
-                                  if (t == MessageCardGameHandler.GAME.THAN_TAI) {
+                                  if (gameIdNumber == MessageCardGameHandler.GAME.THAN_TAI) {
                                     this.gameId = MessageCardGameHandler.GAMEID.THAN_TAI;
                                   } else {
-                                    if (t == MessageCardGameHandler.GAME.BAU_CUA) {
+                                    if (gameIdNumber == MessageCardGameHandler.GAME.BAU_CUA) {
                                       this.gameId = MessageCardGameHandler.GAMEID.BAU_CUA;
                                     } else {
-                                      if (t == MessageCardGameHandler.GAME.SICBO) {
+                                      if (gameIdNumber == MessageCardGameHandler.GAME.SICBO) {
                                         this.gameId = MessageCardGameHandler.GAMEID.SICBO;
                                       } else {
-                                        if (t == MessageCardGameHandler.GAME.FOOT_BALL) {
+                                        if (gameIdNumber == MessageCardGameHandler.GAME.FOOT_BALL) {
                                           this.gameId = MessageCardGameHandler.GAMEID.FOOT_BALL;
                                         } else {
-                                          if (t == MessageCardGameHandler.GAME.BACAY) {
+                                          if (gameIdNumber == MessageCardGameHandler.GAME.BACAY) {
                                             this.gameId = MessageCardGameHandler.GAMEID.BACAY;
                                           } else {
-                                            if (t == MessageCardGameHandler.GAME.CATTE) {
+                                            if (gameIdNumber == MessageCardGameHandler.GAME.CATTE) {
                                               this.gameId = MessageCardGameHandler.GAMEID.CATTE;
                                             } else {
-                                              if (t == MessageCardGameHandler.GAME.TAIXIU_LIVESTREAM) {
+                                              if (gameIdNumber == MessageCardGameHandler.GAME.TAIXIU_LIVESTREAM) {
                                                 this.gameId = MessageCardGameHandler.GAMEID.TAIXIU_LIVESTREAM;
                                               } else {
-                                                if (t == MessageCardGameHandler.GAME.AVIATOR) {
+                                                if (gameIdNumber == MessageCardGameHandler.GAME.AVIATOR) {
                                                   this.gameId = MessageCardGameHandler.GAMEID.AVIATOR;
                                                 } else {
-                                                  if (t == MessageCardGameHandler.GAME.TAIXIU_LIVESTREAM) {
+                                                  if (gameIdNumber == MessageCardGameHandler.GAME.TAIXIU_LIVESTREAM) {
                                                     this.gameId = MessageCardGameHandler.GAMEID.TAIXIU_LIVESTREAM;
                                                   } else {
-                                                    if (t == MessageCardGameHandler.GAME.DAO_VANG) {
+                                                    if (gameIdNumber == MessageCardGameHandler.GAME.DAO_VANG) {
                                                       this.gameId = MessageCardGameHandler.GAMEID.DAO_VANG;
                                                     } else {
-                                                      if (t == MessageCardGameHandler.GAME.XDLIVE_V2) {
+                                                      if (gameIdNumber == MessageCardGameHandler.GAME.XDLIVE_V2) {
                                                         this.gameId = MessageCardGameHandler.GAMEID.XDLIVE_V2;
                                                       } else {
-                                                        if (t == MessageCardGameHandler.GAME.TXSTLIVE) {
+                                                        if (gameIdNumber == MessageCardGameHandler.GAME.TXSTLIVE) {
                                                           this.gameId = MessageCardGameHandler.GAMEID.TXSTLIVE;
                                                         } else {
-                                                          if (t == MessageCardGameHandler.GAME.PLINKO) {
+                                                          if (gameIdNumber == MessageCardGameHandler.GAME.PLINKO) {
                                                             this.gameId = MessageCardGameHandler.GAMEID.PLINKO;
                                                           } else {
-                                                            if (t == MessageCardGameHandler.GAME.SICBOLIVE) {
+                                                            if (gameIdNumber == MessageCardGameHandler.GAME.SICBOLIVE) {
                                                               this.gameId = MessageCardGameHandler.GAMEID.SICBO_LIVE;
                                                             } else {
-                                                              if (t == MessageCardGameHandler.GAME.BACCARAT_LIVE || t == BaccaratLiveVariantConfig.BaccaratLiveVariant.gameIDNumber) {
+                                                              if (gameIdNumber == MessageCardGameHandler.GAME.BACCARAT_LIVE || gameIdNumber == BaccaratLiveVariantConfig.BaccaratLiveVariant.gameIDNumber) {
                                                                 this.gameId = BaccaratLiveVariantConfig.BaccaratLiveVariant.gameID;
                                                               } else {
-                                                                if (t == MessageCardGameHandler.GAME.DRAGONTIGER_LIVE) {
+                                                                if (gameIdNumber == MessageCardGameHandler.GAME.DRAGONTIGER_LIVE) {
                                                                   this.gameId = MessageCardGameHandler.GAMEID.DRAGONTIGER_LIVE;
                                                                 } else {
-                                                                  if (t == MessageCardGameHandler.GAME.BAUCUA_LIVE) {
+                                                                  if (gameIdNumber == MessageCardGameHandler.GAME.BAUCUA_LIVE) {
                                                                     this.gameId = MessageCardGameHandler.GAMEID.BAUCUA_LIVE;
                                                                   } else {
-                                                                    if (t == MessageCardGameHandler.GAME.BAUCUA_BONUS) {
+                                                                    if (gameIdNumber == MessageCardGameHandler.GAME.BAUCUA_BONUS) {
                                                                       this.gameId = MessageCardGameHandler.GAMEID.BAUCUA_BONUS;
                                                                     }
                                                                   }
@@ -291,11 +291,11 @@ var CardPopupBase = require("./CardPopupBase"),
         }
       }
     };
-    e.prototype.SetTitleBXH = function(t) {
+    PopupXepHangGame.prototype.SetTitleBXH = function(gameId) {
       this.txtTittle.string = "X\u1ebeP H\u1ea0NG";
     };
-    e.prototype.SetTitleDuaTop = function(t) {
-      switch (t) {
+    PopupXepHangGame.prototype.SetTitleDuaTop = function(gameId) {
+      switch (gameId) {
         case MessageCardGameHandler.GAMEID.XITO:
           this.txtTittle.string = "CAO TH\u1ee6 X\xcc T\u1ed0";
           break;
@@ -375,180 +375,180 @@ var CardPopupBase = require("./CardPopupBase"),
           this.txtTittle.string = "CAO TH\u1ee6 B\u1ea6U CUA BONUS";
       }
     };
-    e.prototype.isEnableChooseDate = function(t) {
-      return 0 == t.localeCompare(MessageCardGameHandler.GAMEID.AVIATOR) || 0 == t.localeCompare(MessageCardGameHandler.GAMEID.DAO_VANG) || 0 == t.localeCompare(MessageCardGameHandler.GAMEID.PLINKO);
+    PopupXepHangGame.prototype.isEnableChooseDate = function(gameId) {
+      return 0 == gameId.localeCompare(MessageCardGameHandler.GAMEID.AVIATOR) || 0 == gameId.localeCompare(MessageCardGameHandler.GAMEID.DAO_VANG) || 0 == gameId.localeCompare(MessageCardGameHandler.GAMEID.PLINKO);
     };
-    e.prototype.isEnableChooseType = function(t) {
-      return !(0 != t.localeCompare(MessageCardGameHandler.GAMEID.TAIXIU) && 0 != t.localeCompare(MessageCardGameHandler.GAMEID.TAIXIU_MD5) && 0 != t.localeCompare(MessageCardGameHandler.GAMEID
-          .TAIXIU_LIVESTREAM) && 0 != t.localeCompare(MessageCardGameHandler.GAMEID.XOCDIA) && 0 != t.localeCompare(MessageCardGameHandler.GAMEID.BAU_CUA) && 0 != t
-        .localeCompare(MessageCardGameHandler.GAMEID.XDLIVE_V2) && 0 != t.localeCompare(MessageCardGameHandler.GAMEID.SICBO_LIVE) && !BaccaratLiveVariantConfig.BaccaratLiveVariant.isBaccaratLiveID(t) &&
-        0 != t.localeCompare(MessageCardGameHandler.GAMEID.DRAGONTIGER_LIVE) && 0 != t.localeCompare(MessageCardGameHandler.GAMEID.BAUCUA_LIVE) && 0 != t.localeCompare(MessageCardGameHandler.GAMEID
+    PopupXepHangGame.prototype.isEnableChooseType = function(gameId) {
+      return !(0 != gameId.localeCompare(MessageCardGameHandler.GAMEID.TAIXIU) && 0 != gameId.localeCompare(MessageCardGameHandler.GAMEID.TAIXIU_MD5) && 0 != gameId.localeCompare(MessageCardGameHandler.GAMEID
+          .TAIXIU_LIVESTREAM) && 0 != gameId.localeCompare(MessageCardGameHandler.GAMEID.XOCDIA) && 0 != gameId.localeCompare(MessageCardGameHandler.GAMEID.BAU_CUA) && 0 != gameId
+        .localeCompare(MessageCardGameHandler.GAMEID.XDLIVE_V2) && 0 != gameId.localeCompare(MessageCardGameHandler.GAMEID.SICBO_LIVE) && !BaccaratLiveVariantConfig.BaccaratLiveVariant.isBaccaratLiveID(gameId) &&
+        0 != gameId.localeCompare(MessageCardGameHandler.GAMEID.DRAGONTIGER_LIVE) && 0 != gameId.localeCompare(MessageCardGameHandler.GAMEID.BAUCUA_LIVE) && 0 != gameId.localeCompare(MessageCardGameHandler.GAMEID
           .BAUCUA_BONUS));
     };
-    e.prototype.onLoadErr = function(t) {
+    PopupXepHangGame.prototype.onLoadErr = function(errorMessage) {
       CommonPrefabsManager.default.getInstance().hideLoading();
-      CommonPrefabsManager.default.getInstance().showPopupMessageUtil(t);
+      CommonPrefabsManager.default.getInstance().showPopupMessageUtil(errorMessage);
     };
-    e.prototype.onClickClose = function() {
+    PopupXepHangGame.prototype.onClickClose = function() {
       this.contendScrollView.active = false;
       this.hide(this.callBackClose);
     };
-    e.prototype.setTab = function(t, e) {
-      if (void 0 === e) {
-        e = "";
+    PopupXepHangGame.prototype.setTab = function(gameId, dateText) {
+      if (void 0 === dateText) {
+        dateText = "";
       }
       this.contendScrollView.scale = 0;
       CommonPrefabsManager.default.getInstance().showLoading();
       if (GameConfigManager.default.getInstance().isLoginWebcc) {
-        this.requestRankingForWebCC(t);
+        this.requestRankingForWebCC(gameId);
       } else {
-        this.requestRanking(t, e);
+        this.requestRanking(gameId, dateText);
       }
     };
-    e.prototype.requestRankingForWebCC = function(t) {
-      var e = this,
-        i = GameConfigManager.default.getInstance().getTopUpDownURL + "?type=turnover&from=0&size=20&gid=" + t;
-      GameHTTPManager.default.getInstance().sendGetHttpRequest(i, function(t) {
-        e.nodeLoading.active = false;
-        var i = e.gameId == MessageCardGameHandler.GAMEID.TAIXIU && GameConfigManager.default.getInstance().isLoginWebcc;
-        if (null == t.event || void 0 == t.event || i) {
-          e.nodePopupXepHangGame.active = true;
-          e.nodePopupDuaTop.active = false;
-          e.nodePopupLsDuaTop.active = false;
-          e.nodeFullTop.active = false;
-          e.txtTittle.node.active = true;
-          e.SetTitleBXH(e.gameId);
-          e.showRank(t);
+    PopupXepHangGame.prototype.requestRankingForWebCC = function(gameId) {
+      var self = this,
+        url = GameConfigManager.default.getInstance().getTopUpDownURL + "?type=turnover&from=0&size=20&gid=" + gameId;
+      GameHTTPManager.default.getInstance().sendGetHttpRequest(url, function(response) {
+        self.nodeLoading.active = false;
+        var isTaiXiuWebCC = self.gameId == MessageCardGameHandler.GAMEID.TAIXIU && GameConfigManager.default.getInstance().isLoginWebcc;
+        if (null == response.event || void 0 == response.event || isTaiXiuWebCC) {
+          self.nodePopupXepHangGame.active = true;
+          self.nodePopupDuaTop.active = false;
+          self.nodePopupLsDuaTop.active = false;
+          self.nodeFullTop.active = false;
+          self.txtTittle.node.active = true;
+          self.SetTitleBXH(self.gameId);
+          self.showRank(response);
         } else {
-          e.startCoundDownTimeDuaTop();
-          e.listConditionReward = t.event.content;
-          e.nodePopupXepHangGame.active = false;
-          e.nodePopupDuaTop.active = true;
-          e.nodeFullTop.active = true;
-          e.txtTittle.node.active = false;
-          e.SetTitleDuaTop(e.gameId);
-          e.dataDuatop = t;
-          e.showDuaTop(t);
+          self.startCoundDownTimeDuaTop();
+          self.listConditionReward = response.event.content;
+          self.nodePopupXepHangGame.active = false;
+          self.nodePopupDuaTop.active = true;
+          self.nodeFullTop.active = true;
+          self.txtTittle.node.active = false;
+          self.SetTitleDuaTop(self.gameId);
+          self.dataDuatop = response;
+          self.showDuaTop(response);
         }
-      }, function(t) {
-        e.txtTittle.string = "";
-        e.onLoadErr(t);
+      }, function(errorMessage) {
+        self.txtTittle.string = "";
+        self.onLoadErr(errorMessage);
       });
     };
-    e.prototype.requestRanking = function(t, e) {
-      var i,
-        n = this;
-      i = {};
-      var o = JSON.stringify(i),
-        a = "";
-      if (this.isEnableChooseDate(t) && (a = "&date=" + (0 == e.length ? this.getFormattedDate(new Date()) : e)), this.isEnableChooseType(
-          t)) {
-        var s = GameConfigManager.default.getInstance().urlRanking,
-          h = "";
+    PopupXepHangGame.prototype.requestRanking = function(gameId, dateText) {
+      var requestBody,
+        self = this;
+      requestBody = {};
+      var requestBodyJson = JSON.stringify(requestBody),
+        dateQuery = "";
+      if (this.isEnableChooseDate(gameId) && (dateQuery = "&date=" + (0 == dateText.length ? this.getFormattedDate(new Date()) : dateText)), this.isEnableChooseType(
+          gameId)) {
+        var url = GameConfigManager.default.getInstance().urlRanking,
+          winPathSuffix = "";
         if (this.nodeTongThangOn.active) {
-          s += "top/";
-          h = "/win";
+          url += "top/";
+          winPathSuffix = "/win";
         } else {
-          s += "top-jp/";
+          url += "top-jp/";
         }
-        s += t + (this.nodeNgayOn.active ? "/daily" : "/weekly") + h;
-        var d = this;
-        GameHTTPManager.default.getInstance().sendGetHttpRequest(s, function(t) {
-          switch (n.nodeLoading.active = false, n.nodeBoardInfo.active = true, n.nodeBoardLeft.active = true, n.gameId) {
+        url += gameId + (this.nodeNgayOn.active ? "/daily" : "/weekly") + winPathSuffix;
+        var selfRankError = this;
+        GameHTTPManager.default.getInstance().sendGetHttpRequest(url, function(response) {
+          switch (self.nodeLoading.active = false, self.nodeBoardInfo.active = true, self.nodeBoardLeft.active = true, self.gameId) {
             case MessageCardGameHandler.GAMEID.SICBO_LIVE:
             case MessageCardGameHandler.GAMEID.TAIXIU_MD5:
             case MessageCardGameHandler.GAMEID.DRAGONTIGER_LIVE:
             case MessageCardGameHandler.GAMEID.BAUCUA_LIVE:
             case MessageCardGameHandler.GAMEID.BAUCUA_BONUS:
-              n.nodeBoardLeft.active = false;
+              self.nodeBoardLeft.active = false;
           }
-          if (BaccaratLiveVariantConfig.BaccaratLiveVariant.isBaccaratLiveID(n.gameId)) {
-            n.nodeBoardLeft.active = false;
+          if (BaccaratLiveVariantConfig.BaccaratLiveVariant.isBaccaratLiveID(self.gameId)) {
+            self.nodeBoardLeft.active = false;
           }
-          n.nodePopupXepHangGame.active = true;
-          n.nodePopupDuaTop.active = false;
-          n.nodePopupLsDuaTop.active = false;
-          n.nodeFullTop.active = false;
-          n.txtTittle.node.active = true;
-          n.SetTitleBXH(n.gameId);
-          n.showRank(t);
+          self.nodePopupXepHangGame.active = true;
+          self.nodePopupDuaTop.active = false;
+          self.nodePopupLsDuaTop.active = false;
+          self.nodeFullTop.active = false;
+          self.txtTittle.node.active = true;
+          self.SetTitleBXH(self.gameId);
+          self.showRank(response);
           CommonPrefabsManager.default.getInstance().hideLoading();
-        }, function(t) {
-          if (d.node) {
-            d.txtTittle.string = "";
-            d.onLoadErr(t);
+        }, function(errorMessage) {
+          if (selfRankError.node) {
+            selfRankError.txtTittle.string = "";
+            selfRankError.onLoadErr(errorMessage);
           }
           CommonPrefabsManager.default.getInstance().hideLoading();
         }, true);
       } else {
-        s = GameConfigManager.default.getInstance().duatopTxURL + "?type=turnover&from=0&size=20&gid=" + t + a;
-        var p = this;
-        GameHTTPManager.default.getInstance().sendPostHttpRequest(s, o, function(t) {
-          n.nodeLoading.active = false;
-          var e = n.gameId == MessageCardGameHandler.GAMEID.TAIXIU && GameConfigManager.default.getInstance().isLoginWebcc;
-          if (null == t.event || void 0 == t.event || e) {
-            n.nodeBoardInfo.active = false;
-            n.nodePopupXepHangGame.active = true;
-            n.nodePopupDuaTop.active = false;
-            n.nodePopupLsDuaTop.active = false;
-            n.nodeFullTop.active = false;
-            n.txtTittle.node.active = true;
-            n.SetTitleBXH(n.gameId);
-            n.showRank(t);
+        url = GameConfigManager.default.getInstance().duatopTxURL + "?type=turnover&from=0&size=20&gid=" + gameId + dateQuery;
+        var selfDuaTopError = this;
+        GameHTTPManager.default.getInstance().sendPostHttpRequest(url, requestBodyJson, function(response) {
+          self.nodeLoading.active = false;
+          var isTaiXiuWebCC = self.gameId == MessageCardGameHandler.GAMEID.TAIXIU && GameConfigManager.default.getInstance().isLoginWebcc;
+          if (null == response.event || void 0 == response.event || isTaiXiuWebCC) {
+            self.nodeBoardInfo.active = false;
+            self.nodePopupXepHangGame.active = true;
+            self.nodePopupDuaTop.active = false;
+            self.nodePopupLsDuaTop.active = false;
+            self.nodeFullTop.active = false;
+            self.txtTittle.node.active = true;
+            self.SetTitleBXH(self.gameId);
+            self.showRank(response);
           } else {
-            n.startCoundDownTimeDuaTop();
-            n.listConditionReward = t.event.content;
-            n.nodeBoardInfo.active = false;
-            n.nodePopupXepHangGame.active = false;
-            n.nodePopupDuaTop.active = true;
-            n.nodeFullTop.active = true;
-            n.txtTittle.node.active = false;
-            n.SetTitleDuaTop(n.gameId);
-            n.dataDuatop = t;
-            n.showDuaTop(t);
+            self.startCoundDownTimeDuaTop();
+            self.listConditionReward = response.event.content;
+            self.nodeBoardInfo.active = false;
+            self.nodePopupXepHangGame.active = false;
+            self.nodePopupDuaTop.active = true;
+            self.nodeFullTop.active = true;
+            self.txtTittle.node.active = false;
+            self.SetTitleDuaTop(self.gameId);
+            self.dataDuatop = response;
+            self.showDuaTop(response);
           }
           CommonPrefabsManager.default.getInstance().hideLoading();
-        }, function(t) {
-          if (p.node) {
-            p.txtTittle.string = "";
-            p.onLoadErr(t);
+        }, function(errorMessage) {
+          if (selfDuaTopError.node) {
+            selfDuaTopError.txtTittle.string = "";
+            selfDuaTopError.onLoadErr(errorMessage);
           }
           CommonPrefabsManager.default.getInstance().hideLoading();
         });
       }
     };
-    e.prototype.requestLsDuaTop = function(t, e) {
-      var i,
-        n = this,
-        o = GameConfigManager.default.getInstance().lsDuatopTxURL + "?event_type=top_reward&gid=" + t + "&date=" + e;
-      i = {};
+    PopupXepHangGame.prototype.requestLsDuaTop = function(gameId, dateText) {
+      var requestBody,
+        self = this,
+        url = GameConfigManager.default.getInstance().lsDuatopTxURL + "?event_type=top_reward&gid=" + gameId + "&date=" + dateText;
+      requestBody = {};
       this.contendScrollView.scale = 0;
       CommonPrefabsManager.default.getInstance().showLoading();
-      var a = JSON.stringify(i);
-      GameHTTPManager.default.getInstance().sendPostHttpRequest(o, a, function(t) {
-        n.dataLsDuatop = t;
-        n.showLsDuaTop(t);
-      }, function(t) {
-        n.txtTittle.string = "";
-        n.onLoadErr(t);
+      var requestBodyJson = JSON.stringify(requestBody);
+      GameHTTPManager.default.getInstance().sendPostHttpRequest(url, requestBodyJson, function(response) {
+        self.dataLsDuatop = response;
+        self.showLsDuaTop(response);
+      }, function(errorMessage) {
+        self.txtTittle.string = "";
+        self.onLoadErr(errorMessage);
       });
     };
-    e.prototype.checkPassTotalBet = function(t, e) {
-      var i = Object.keys(this.listConditionReward).length,
-        n = 0;
-      if (e <= i && e > 0 && t > this.listConditionReward[e.toString()].cond.turnover) {
-        n = this.listConditionReward[e.toString()].gift.money;
+    PopupXepHangGame.prototype.checkPassTotalBet = function(totalBet, rank) {
+      var rewardTierCount = Object.keys(this.listConditionReward).length,
+        rewardMoney = 0;
+      if (rank <= rewardTierCount && rank > 0 && totalBet > this.listConditionReward[rank.toString()].cond.turnover) {
+        rewardMoney = this.listConditionReward[rank.toString()].gift.money;
       } else {
-        if (t > this.listConditionReward[(i - 1).toString()].cond.turnover && e > i) {
-          n = this.listConditionReward[(i - 1).toString()].gift.money;
+        if (totalBet > this.listConditionReward[(rewardTierCount - 1).toString()].cond.turnover && rank > rewardTierCount) {
+          rewardMoney = this.listConditionReward[(rewardTierCount - 1).toString()].gift.money;
         }
       }
-      return n;
+      return rewardMoney;
     };
-    e.prototype.getRewardByRank = function(t) {
-      return t <= Object.keys(this.listConditionReward).length && t > 0 ? this.listConditionReward[t.toString()].gift.money : 0;
+    PopupXepHangGame.prototype.getRewardByRank = function(rank) {
+      return rank <= Object.keys(this.listConditionReward).length && rank > 0 ? this.listConditionReward[rank.toString()].gift.money : 0;
     };
-    e.prototype.onShowLsDuaTopClick = function() {
+    PopupXepHangGame.prototype.onShowLsDuaTopClick = function() {
       MusicPlayer.default.getInstance().playbtnClick();
       this.nodePopupLsDuaTop.active = true;
       this.nodePopupDuaTop.active = false;
@@ -563,7 +563,7 @@ var CardPopupBase = require("./CardPopupBase"),
       }
       AnalyticsManager.default.getInstance().logEvent("ClickButtonTaiXiu", JSON.parse('{"ButtonName":"TabLichSuDuaTopTX"}'));
     };
-    e.prototype.onShowDuaTopClick = function() {
+    PopupXepHangGame.prototype.onShowDuaTopClick = function() {
       MusicPlayer.default.getInstance().playbtnClick();
       this.nodePopupLsDuaTop.active = false;
       this.nodePopupDuaTop.active = true;
@@ -579,104 +579,104 @@ var CardPopupBase = require("./CardPopupBase"),
       }
       AnalyticsManager.default.getInstance().logEvent("ClickButtonTaiXiu", JSON.parse('{"ButtonName":"TabDuaTopTX"}'));
     };
-    e.prototype.getFormattedDate = function(t) {
-      var e = t.getFullYear(),
-        i = (1 + t.getMonth()).toString();
-      i = i.length > 1 ? i : "0" + i;
-      var n = t.getDate().toString();
-      return (n = n.length > 1 ? n : "0" + n) + "/" + i + "/" + e;
+    PopupXepHangGame.prototype.getFormattedDate = function(date) {
+      var year = date.getFullYear(),
+        month = (1 + date.getMonth()).toString();
+      month = month.length > 1 ? month : "0" + month;
+      var day = date.getDate().toString();
+      return (day = day.length > 1 ? day : "0" + day) + "/" + month + "/" + year;
     };
-    e.prototype.getTotalBetMaxCanGet = function(t) {
-      for (var e = 0, i = Object.keys(this.listConditionReward).length; i > 0; i--) {
-        if (t < (e = this.listConditionReward[i.toString()].cond.turnover)) {
-          return e;
+    PopupXepHangGame.prototype.getTotalBetMaxCanGet = function(totalBet) {
+      for (var turnoverTarget = 0, rank = Object.keys(this.listConditionReward).length; rank > 0; rank--) {
+        if (totalBet < (turnoverTarget = this.listConditionReward[rank.toString()].cond.turnover)) {
+          return turnoverTarget;
         }
       }
       return this.listConditionReward[1].cond.turnover;
     };
-    e.prototype.getTotalBetTargetMin = function() {
-      for (var t = 0, e = Object.keys(this.listConditionReward).length; e > 0; e--) {
-        if ((t = this.listConditionReward[e.toString()].cond.turnover) > 0) {
-          return t;
+    PopupXepHangGame.prototype.getTotalBetTargetMin = function() {
+      for (var turnoverTarget = 0, rank = Object.keys(this.listConditionReward).length; rank > 0; rank--) {
+        if ((turnoverTarget = this.listConditionReward[rank.toString()].cond.turnover) > 0) {
+          return turnoverTarget;
         }
       }
       return this.listConditionReward[1].cond.turnover;
     };
-    e.prototype.getTotalBetByRank = function(t) {
-      var e = this.listConditionReward[t.toString()];
-      if (null == e || void 0 == e) {
+    PopupXepHangGame.prototype.getTotalBetByRank = function(rank) {
+      var rewardTier = this.listConditionReward[rank.toString()];
+      if (null == rewardTier || void 0 == rewardTier) {
         return 1e10;
       }
-      var i = e.cond.turnover;
-      if (null == i || void 0 == i || Number.isNaN(i)) {
-        i = 1e10;
+      var turnoverTarget = rewardTier.cond.turnover;
+      if (null == turnoverTarget || void 0 == turnoverTarget || Number.isNaN(turnoverTarget)) {
+        turnoverTarget = 1e10;
       }
-      return i;
+      return turnoverTarget;
     };
-    e.prototype.startCoundDownTimeDuaTop = function() {
+    PopupXepHangGame.prototype.startCoundDownTimeDuaTop = function() {
       this.updateTimeDuaTop();
       this.lbTimeCountDown.schedule(this.updateTimeDuaTop.bind(this), 1, cc.macro.REPEAT_FOREVER, 0);
     };
-    e.prototype.updateTimeDuaTop = function() {
-      var t = new Date();
-      t.setHours(23, 59, 59);
-      var e = Math.floor(t.getTime() / 1e3),
-        i = Math.floor(new Date().getTime() / 1e3),
-        n = (e - i) / 60;
-      this.lbTimeCountDown.string = this.zeroPad(Math.floor(n / 60), 2) + ":" + this.zeroPad(Math.floor(n % 60), 2) + ":" + this.zeroPad((
-        e - i) % 60, 2);
+    PopupXepHangGame.prototype.updateTimeDuaTop = function() {
+      var endOfDay = new Date();
+      endOfDay.setHours(23, 59, 59);
+      var endSeconds = Math.floor(endOfDay.getTime() / 1e3),
+        nowSeconds = Math.floor(new Date().getTime() / 1e3),
+        totalMinutes = (endSeconds - nowSeconds) / 60;
+      this.lbTimeCountDown.string = this.zeroPad(Math.floor(totalMinutes / 60), 2) + ":" + this.zeroPad(Math.floor(totalMinutes % 60), 2) + ":" + this.zeroPad((
+        endSeconds - nowSeconds) % 60, 2);
     };
-    e.prototype.zeroPad = function(t, e) {
-      var i = e - t.toString().length + 1;
-      return Array(+(i > 0 && i)).join("0") + t;
+    PopupXepHangGame.prototype.zeroPad = function(value, width) {
+      var padArraySize = width - value.toString().length + 1;
+      return Array(+(padArraySize > 0 && padArraySize)).join("0") + value;
     };
-    e.prototype.showDuaTop = function(t, e) {
-      if (void 0 === e) {
-        e = false;
+    PopupXepHangGame.prototype.showDuaTop = function(response, showAllItems) {
+      if (void 0 === showAllItems) {
+        showAllItems = false;
       }
-      var i = t.event.user.turnover;
-      this.txTotalBet.string = StringUtil.default.formatMoneyNumberWithVietnameseUnit(i);
-      var n = this.getTotalBetTargetMin();
-      if (n > 0) {
-        var o = StringUtil.default.formatMoneyNumberWithVietnameseUnit(n);
-        cc.sys.localStorage.setItem("TargetTurnOverDuaTop", o);
+      var userTurnover = response.event.user.turnover;
+      this.txTotalBet.string = StringUtil.default.formatMoneyNumberWithVietnameseUnit(userTurnover);
+      var minTargetTurnover = this.getTotalBetTargetMin();
+      if (minTargetTurnover > 0) {
+        var minTargetTurnoverText = StringUtil.default.formatMoneyNumberWithVietnameseUnit(minTargetTurnover);
+        cc.sys.localStorage.setItem("TargetTurnOverDuaTop", minTargetTurnoverText);
       }
-      if (this.nodeTotalBet.active = true, null !== t.data && void 0 !== t.data && t.data.length > 0) {
-        for (var a = 0; a < t.data.length; a++) {
-          var s, c;
+      if (this.nodeTotalBet.active = true, null !== response.data && void 0 !== response.data && response.data.length > 0) {
+        for (var index = 0; index < response.data.length; index++) {
+          var itemNode, itemDuaTop;
           if (this.gameId === MessageCardGameHandler.GAMEID.TAIXIU) {
-            c = (s = cc.instantiate(this.itemDuaTopPrefab)).getComponent(ItemDuaTop.default);
-            if (a < 10 && a < this.txChatColor.length) {
-              c.txtTenHienThi.node.color = this.txChatColor[a];
+            itemDuaTop = (itemNode = cc.instantiate(this.itemDuaTopPrefab)).getComponent(ItemDuaTop.default);
+            if (index < 10 && index < this.txChatColor.length) {
+              itemDuaTop.txtTenHienThi.node.color = this.txChatColor[index];
             } else {
-              c.txtTenHienThi.node.color = this.txChatColor[this.txChatColor.length - 1];
+              itemDuaTop.txtTenHienThi.node.color = this.txChatColor[this.txChatColor.length - 1];
             }
           } else {
-            c = (s = cc.instantiate(this.itemPoint)).getComponent(ItemDuaTop.default);
+            itemDuaTop = (itemNode = cc.instantiate(this.itemPoint)).getComponent(ItemDuaTop.default);
           }
-          s.parent = this.contendScrollView;
-          this.listCachePoint.push(c);
-          var l,
-            h = 0;
-          h = this.checkPassTotalBet(t.data[a].game_stake, a + 1);
-          l = this.getTotalBetByRank(a + 1);
-          var f = false,
-            g = false;
-          if (h > 0) {
-            f = true;
-            g = true;
+          itemNode.parent = this.contendScrollView;
+          this.listCachePoint.push(itemDuaTop);
+          var targetTotalBet,
+            rewardMoney = 0;
+          rewardMoney = this.checkPassTotalBet(response.data[index].game_stake, index + 1);
+          targetTotalBet = this.getTotalBetByRank(index + 1);
+          var isPassTotalBet = false,
+            isRewardHighlighted = false;
+          if (rewardMoney > 0) {
+            isPassTotalBet = true;
+            isRewardHighlighted = true;
           }
-          h = this.getRewardByRank(a + 1);
-          var m = t.data[a].game_winlost;
-          if (m < 0) {
-            m = 0;
+          rewardMoney = this.getRewardByRank(index + 1);
+          var winLost = response.data[index].game_winlost;
+          if (winLost < 0) {
+            winLost = 0;
           }
-          c.loadUI(a + 1, t.data[a].fullname, m, t.data[a].user_id, t.data[a].username, l, h, g, f);
-          if (e) {
-            c.nodeContent.active = true;
+          itemDuaTop.loadUI(index + 1, response.data[index].fullname, winLost, response.data[index].user_id, response.data[index].username, targetTotalBet, rewardMoney, isRewardHighlighted, isPassTotalBet);
+          if (showAllItems) {
+            itemDuaTop.nodeContent.active = true;
           } else {
-            if (a > 7) {
-              c.nodeContent.active = false;
+            if (index > 7) {
+              itemDuaTop.nodeContent.active = false;
             }
           }
         }
@@ -689,56 +689,56 @@ var CardPopupBase = require("./CardPopupBase"),
         CommonPrefabsManager.default.getInstance().hideLoading();
       }
     };
-    e.prototype.onShowLsDuaTopNextClick = function() {
+    PopupXepHangGame.prototype.onShowLsDuaTopNextClick = function() {
       MusicPlayer.default.getInstance().playbtnClick();
       if (null != this.timeViewHistoryNext && "null" != this.timeViewHistoryNext) {
         this.requestLsDuaTop(this.gameId, this.timeViewHistoryNext);
       }
     };
-    e.prototype.onShowLsDuaTopPrevClick = function() {
+    PopupXepHangGame.prototype.onShowLsDuaTopPrevClick = function() {
       MusicPlayer.default.getInstance().playbtnClick();
       if (null != this.timeViewHistoryPrev && "null" != this.timeViewHistoryPrev) {
         this.requestLsDuaTop(this.gameId, this.timeViewHistoryPrev);
       }
     };
-    e.prototype.onShowRankNormalNextClick = function() {
+    PopupXepHangGame.prototype.onShowRankNormalNextClick = function() {
       MusicPlayer.default.getInstance().playbtnClick();
       if (null != this.timeViewHistoryNext && "" != this.timeViewHistoryNext) {
         CommonPrefabsManager.default.getInstance().showLoading();
         this.requestRanking(this.gameId, this.timeViewHistoryNext);
       }
     };
-    e.prototype.onShowRankNormalPrevClick = function() {
+    PopupXepHangGame.prototype.onShowRankNormalPrevClick = function() {
       MusicPlayer.default.getInstance().playbtnClick();
       if (null != this.timeViewHistoryPrev && "" != this.timeViewHistoryPrev) {
         CommonPrefabsManager.default.getInstance().showLoading();
         this.requestRanking(this.gameId, this.timeViewHistoryPrev);
       }
     };
-    e.prototype.onClickShowHelpDuaTop = function() {
+    PopupXepHangGame.prototype.onClickShowHelpDuaTop = function() {
       MusicPlayer.default.getInstance().playbtnClick();
       CommonPrefabsManager.default.getInstance().showLoading();
-      cc.loader.loadRes("Help/PopupHelpDuaTopTaiXiu", function(t, e) {
-        if (CommonPrefabsManager.default.getInstance().hideLoading(), null === e) {
+      cc.loader.loadRes("Help/PopupHelpDuaTopTaiXiu", function(error, prefab) {
+        if (CommonPrefabsManager.default.getInstance().hideLoading(), null === prefab) {
           CommonPrefabsManager.default.getInstance().showPopupMessageUtil("L\u1ed7i 404, Xin Th\u1eed l\u1ea1i!");
         } else {
-          var i = cc.instantiate(e);
-          i.parent = this.node;
-          i.x = 0;
-          i.y = 0;
-          i.zIndex = GameZOrder.default.TOP;
-          i.getComponent(PopupHelpImage.default).show();
+          var popupNode = cc.instantiate(prefab);
+          popupNode.parent = this.node;
+          popupNode.x = 0;
+          popupNode.y = 0;
+          popupNode.zIndex = GameZOrder.default.TOP;
+          popupNode.getComponent(PopupHelpImage.default).show();
         }
       }.bind(this));
       AnalyticsManager.default.getInstance().logEvent("ClickButtonTaiXiu", JSON.parse('{"ButtonName":"ShowHelpDuaTop"}'));
     };
-    e.prototype.showLsDuaTop = function(t, e) {
-      if (void 0 === e && (e = false), null !== t.data && void 0 !== t.data && t.data.length > 0) {
+    PopupXepHangGame.prototype.showLsDuaTop = function(response, showAllItems) {
+      if (void 0 === showAllItems && (showAllItems = false), null !== response.data && void 0 !== response.data && response.data.length > 0) {
         this.contendScrollView.removeAllChildren(true);
-        this.lbDateShowLSTop.string = t.date;
-        this.timeViewHistory = t.date;
-        this.timeViewHistoryNext = t.next;
-        this.timeViewHistoryPrev = t.prev;
+        this.lbDateShowLSTop.string = response.date;
+        this.timeViewHistory = response.date;
+        this.timeViewHistoryNext = response.next;
+        this.timeViewHistoryPrev = response.prev;
         if (null != this.timeViewHistoryNext && "null" != this.timeViewHistoryNext) {
           this.arrowNextDayLsDuaTop.color = cc.Color.WHITE;
         } else {
@@ -749,25 +749,25 @@ var CardPopupBase = require("./CardPopupBase"),
         } else {
           this.arrowPreDayLsDuaTop.color = cc.Color.GRAY;
         }
-        for (var i = 0; i < t.data.length; i++) {
-          var n,
-            o,
-            a = t.data[i].rank;
-          o = this.gameId === MessageCardGameHandler.GAMEID.TAIXIU ? (n = cc.instantiate(this.itemLsDuaTopPrefab)).getComponent(ItemLsDuaTop.default) : (n = cc
+        for (var index = 0; index < response.data.length; index++) {
+          var itemNode,
+            itemLsDuaTop,
+            rank = response.data[index].rank;
+          itemLsDuaTop = this.gameId === MessageCardGameHandler.GAMEID.TAIXIU ? (itemNode = cc.instantiate(this.itemLsDuaTopPrefab)).getComponent(ItemLsDuaTop.default) : (itemNode = cc
             .instantiate(this.itemPoint)).getComponent(ItemLsDuaTop.default);
-          n.parent = this.contendScrollView;
-          this.listCachePoint.push(o);
-          if (a < 10 && a < this.txChatColor.length) {
-            o.txtTenHienThi.node.color = this.txChatColor[a - 1];
+          itemNode.parent = this.contendScrollView;
+          this.listCachePoint.push(itemLsDuaTop);
+          if (rank < 10 && rank < this.txChatColor.length) {
+            itemLsDuaTop.txtTenHienThi.node.color = this.txChatColor[rank - 1];
           } else {
-            o.txtTenHienThi.node.color = this.txChatColor[this.txChatColor.length - 1];
+            itemLsDuaTop.txtTenHienThi.node.color = this.txChatColor[this.txChatColor.length - 1];
           }
-          o.loadUI(a, i, t.data[i].fullname, t.data[i].uid, t.data[i].fullname, t.data[i].gift_money, t.data[i].winlost);
-          if (e) {
-            o.nodeContent.active = true;
+          itemLsDuaTop.loadUI(rank, index, response.data[index].fullname, response.data[index].uid, response.data[index].fullname, response.data[index].gift_money, response.data[index].winlost);
+          if (showAllItems) {
+            itemLsDuaTop.nodeContent.active = true;
           } else {
-            if (i > 7) {
-              o.nodeContent.active = false;
+            if (index > 7) {
+              itemLsDuaTop.nodeContent.active = false;
             }
           }
         }
@@ -780,60 +780,60 @@ var CardPopupBase = require("./CardPopupBase"),
         CommonPrefabsManager.default.getInstance().hideLoading();
       }
     };
-    e.prototype.showRank = function(t) {
-      if (null !== t.data && void 0 !== t.data && t.data.length > 0) {
-        if (t.hasOwnProperty("date") && t.hasOwnProperty("next") && t.hasOwnProperty("prev")) {
-          if (null != this.nodeSelectDateTime && null != t.date) {
+    PopupXepHangGame.prototype.showRank = function(response) {
+      if (null !== response.data && void 0 !== response.data && response.data.length > 0) {
+        if (response.hasOwnProperty("date") && response.hasOwnProperty("next") && response.hasOwnProperty("prev")) {
+          if (null != this.nodeSelectDateTime && null != response.date) {
             this.nodeSelectDateTime.active = true;
-            this.timeViewHistory = t.date;
+            this.timeViewHistory = response.date;
             this.lbTimeRequest.string = this.timeViewHistory;
           }
-          if (null == t.next) {
+          if (null == response.next) {
             this.buttonRequestNextDay.interactable = false;
           } else {
-            this.timeViewHistoryNext = t.next;
+            this.timeViewHistoryNext = response.next;
             this.buttonRequestNextDay.interactable = true;
           }
-          if (null == t.prev) {
+          if (null == response.prev) {
             this.buttonRequestPrevDay.interactable = false;
           } else {
-            this.timeViewHistoryPrev = t.prev;
+            this.timeViewHistoryPrev = response.prev;
             this.buttonRequestPrevDay.interactable = true;
           }
         }
-        for (var e = 0; e < this.listCachePoint.length; e++) {
-          this.listCachePoint[e].node.active = false;
+        for (var cacheIndex = 0; cacheIndex < this.listCachePoint.length; cacheIndex++) {
+          this.listCachePoint[cacheIndex].node.active = false;
         }
-        for (var i = 0; i < t.data.length; i++) {
-          var n,
-            o,
-            a = t.data[i];
-          if (a.total) {
-            a.game_winlost = a.total;
+        for (var index = 0; index < response.data.length; index++) {
+          var itemNode,
+            rankItem,
+            rowData = response.data[index];
+          if (rowData.total) {
+            rowData.game_winlost = rowData.total;
           }
-          if (!(void 0 === a.game_winlost || a.game_winlost < 0)) {
-            if (0 == this.listCachePoint.length || i >= this.listCachePoint.length) {
-              o = (n = this.gameId === MessageCardGameHandler.GAMEID.TAIXIU || this.gameId === MessageCardGameHandler.GAMEID.AVIATOR || this.gameId == MessageCardGameHandler.GAMEID.TAIXIU_MD5 || this
+          if (!(void 0 === rowData.game_winlost || rowData.game_winlost < 0)) {
+            if (0 == this.listCachePoint.length || index >= this.listCachePoint.length) {
+              rankItem = (itemNode = this.gameId === MessageCardGameHandler.GAMEID.TAIXIU || this.gameId === MessageCardGameHandler.GAMEID.AVIATOR || this.gameId == MessageCardGameHandler.GAMEID.TAIXIU_MD5 || this
                 .gameId === MessageCardGameHandler.GAMEID.TAIXIU_LIVESTREAM || this.gameId === MessageCardGameHandler.GAMEID.XOCDIA || this.gameId === MessageCardGameHandler.GAMEID.BAU_CUA || this
                 .gameId === MessageCardGameHandler.GAMEID.DAO_VANG ? cc.instantiate(this.itemPointTx) : cc.instantiate(this.itemPoint)).getComponent(ItemPoint
                 .default);
-              n.parent = this.contendScrollView;
-              this.listCachePoint.push(o);
+              itemNode.parent = this.contendScrollView;
+              this.listCachePoint.push(rankItem);
             } else {
-              o = this.listCachePoint[i];
+              rankItem = this.listCachePoint[index];
             }
             if (!(this.gameId != MessageCardGameHandler.GAMEID.TAIXIU_MD5 && this.gameId !== MessageCardGameHandler.GAMEID.TAIXIU && this.gameId !== MessageCardGameHandler.GAMEID.AVIATOR && this
                 .gameId !== MessageCardGameHandler.GAMEID.TAIXIU_LIVESTREAM && this.gameId !== MessageCardGameHandler.GAMEID.XOCDIA && this.gameId !== MessageCardGameHandler.GAMEID.BAU_CUA && this
                 .gameId !== MessageCardGameHandler.GAMEID.DAO_VANG)) {
-              if (i < 10 && i < this.txChatColor.length) {
-                o.txtTenHienThi.node.color = this.txChatColor[i];
+              if (index < 10 && index < this.txChatColor.length) {
+                rankItem.txtTenHienThi.node.color = this.txChatColor[index];
               } else {
-                o.txtTenHienThi.node.color = this.txChatColor[this.txChatColor.length - 1];
+                rankItem.txtTenHienThi.node.color = this.txChatColor[this.txChatColor.length - 1];
               }
             }
-            o.node.active = true;
-            o.loadUI(i + 1, t.data[i].fullname, t.data[i].game_winlost, t.data[i].uid, t.data[i].username);
-            o.nodeContent.active = !(i > 7);
+            rankItem.node.active = true;
+            rankItem.loadUI(index + 1, response.data[index].fullname, response.data[index].game_winlost, response.data[index].uid, response.data[index].username);
+            rankItem.nodeContent.active = !(index > 7);
           }
         }
         this.scrollView.scrollToTop();
@@ -847,36 +847,36 @@ var CardPopupBase = require("./CardPopupBase"),
           this.buttonRequestPrevDay.interactable = false;
         }
         CommonPrefabsManager.default.getInstance().hideLoading();
-        for (e = 0; e < this.listCachePoint.length; e++) {
-          this.listCachePoint[e].node.active = false;
+        for (cacheIndex = 0; cacheIndex < this.listCachePoint.length; cacheIndex++) {
+          this.listCachePoint[cacheIndex].node.active = false;
         }
         this.nodePopupXepHangGame.active = false;
         this.txtEmpty.node.active = true;
         this.txtEmpty.string = this.nodeTongThangOn.active ? "Ch\u01b0a c\xf3 l\u1ecbch s\u1eed th\u1eafng" :
           "Ch\u01b0a c\xf3 l\u1ecbch s\u1eed n\u1ed5 h\u0169";
-        this.timeViewHistory = t.date;
-        this.lbTimeRequest.string = t.date;
-        this.timeViewHistoryNext = t.next;
-        if (null !== t.next) {
+        this.timeViewHistory = response.date;
+        this.lbTimeRequest.string = response.date;
+        this.timeViewHistoryNext = response.next;
+        if (null !== response.next) {
           this.buttonRequestNextDay.node.active = true;
           this.buttonRequestNextDay.interactable = true;
         }
       }
     };
-    e.prototype.callbackTopPoint = function(t, e) {
-      if (e == cc.ScrollView.EventType.SCROLLING) {
+    PopupXepHangGame.prototype.callbackTopPoint = function(scrollView, eventType) {
+      if (eventType == cc.ScrollView.EventType.SCROLLING) {
         this.updateViewItem();
       }
     };
-    e.prototype.updateViewItem = function() {
+    PopupXepHangGame.prototype.updateViewItem = function() {
       if (!(this.contendScrollView.position.y < this.scrollContentViewCache)) {
-        for (var t = 0; t < this.listCachePoint.length; t++) {
-          if (this.listCachePoint[t].node.position.y + this.contendScrollView.position.y <= this.scrollContentViewTop + this
-            .extraScrollContentView + this.scrollContentViewCache && this.listCachePoint[t].node.position.y + this.contendScrollView
+        for (var index = 0; index < this.listCachePoint.length; index++) {
+          if (this.listCachePoint[index].node.position.y + this.contendScrollView.position.y <= this.scrollContentViewTop + this
+            .extraScrollContentView + this.scrollContentViewCache && this.listCachePoint[index].node.position.y + this.contendScrollView
             .position.y >= this.scrollContentViewBottom - this.extraScrollContentView + this.scrollContentViewCache) {
-            this.listCachePoint[t].nodeContent.active = true;
+            this.listCachePoint[index].nodeContent.active = true;
           } else {
-            this.listCachePoint[t].nodeContent.active = false;
+            this.listCachePoint[index].nodeContent.active = false;
           }
         }
         if (GameUtils.isFpsLow()) {
@@ -884,76 +884,76 @@ var CardPopupBase = require("./CardPopupBase"),
         }
       }
     };
-    e.prototype.getColorOfNameTxMD5 = function(t) {
-      return t < 10 && t < this.txChatColor.length ? this.txChatColor[t] : this.txChatColor[10];
+    PopupXepHangGame.prototype.getColorOfNameTxMD5 = function(index) {
+      return index < 10 && index < this.txChatColor.length ? this.txChatColor[index] : this.txChatColor[10];
     };
-    e.prototype.onClickTongThang = function() {
+    PopupXepHangGame.prototype.onClickTongThang = function() {
       MusicPlayer.default.getInstance().playbtnClick();
       this.nodeTongThangOn.active = true;
       this.nodeSanHuOn.active = false;
       CommonPrefabsManager.default.getInstance().showLoading();
       this.requestRanking(this.gameId, "");
     };
-    e.prototype.onClickSanHu = function() {
+    PopupXepHangGame.prototype.onClickSanHu = function() {
       MusicPlayer.default.getInstance().playbtnClick();
       this.nodeTongThangOn.active = false;
       this.nodeSanHuOn.active = true;
       CommonPrefabsManager.default.getInstance().showLoading();
       this.requestRanking(this.gameId, "");
     };
-    e.prototype.onClickTuan = function() {
+    PopupXepHangGame.prototype.onClickTuan = function() {
       MusicPlayer.default.getInstance().playbtnClick();
       this.nodeTuanOn.active = true;
       this.nodeNgayOn.active = false;
       CommonPrefabsManager.default.getInstance().showLoading();
       this.requestRanking(this.gameId, "");
     };
-    e.prototype.onClickNgay = function() {
+    PopupXepHangGame.prototype.onClickNgay = function() {
       MusicPlayer.default.getInstance().playbtnClick();
       this.nodeTuanOn.active = false;
       this.nodeNgayOn.active = true;
       CommonPrefabsManager.default.getInstance().showLoading();
       this.requestRanking(this.gameId, "");
     };
-    o([T(cc.Node)], e.prototype, "nodePopupXepHangGame", void 0);
-    o([T(cc.Node)], e.prototype, "nodePopupDuaTop", void 0);
-    o([T(cc.Node)], e.prototype, "nodePopupLsDuaTop", void 0);
-    o([T(cc.Label)], e.prototype, "txtHang", void 0);
-    o([T(cc.Label)], e.prototype, "txtPoint", void 0);
-    o([T(cc.Label)], e.prototype, "txTotalBet", void 0);
-    o([T(cc.Label)], e.prototype, "lbTimeCountDown", void 0);
-    o([T(cc.Node)], e.prototype, "nodeTotalBet", void 0);
-    o([T(cc.Node)], e.prototype, "nodeLoading", void 0);
-    o([T(cc.Node)], e.prototype, "contend", void 0);
-    o([T(cc.Node)], e.prototype, "contendScrollView", void 0);
-    o([T(cc.ScrollView)], e.prototype, "scrollView", void 0);
-    o([T(cc.Prefab)], e.prototype, "itemPoint", void 0);
-    o([T(cc.Prefab)], e.prototype, "itemPointTx", void 0);
-    o([T(cc.Prefab)], e.prototype, "itemDuaTopPrefab", void 0);
-    o([T(cc.Prefab)], e.prototype, "itemLsDuaTopPrefab", void 0);
-    o([T(cc.Node)], e.prototype, "arrowNextDayLsDuaTop", void 0);
-    o([T(cc.Node)], e.prototype, "arrowPreDayLsDuaTop", void 0);
-    o([T(cc.Label)], e.prototype, "txtTittle", void 0);
-    o([T(cc.Label)], e.prototype, "lbDateShowLSTop", void 0);
-    o([T(cc.Node)], e.prototype, "nodeFullTop", void 0);
-    o([T(cc.Sprite)], e.prototype, "tabDuatop", void 0);
-    o([T(cc.Sprite)], e.prototype, "tabSLDuatop", void 0);
-    o([T(cc.SpriteFrame)], e.prototype, "listSpriteFrameTab", void 0);
-    o([T(cc.Node)], e.prototype, "nodeSelectDateTime", void 0);
-    o([T(cc.Label)], e.prototype, "lbTimeRequest", void 0);
-    o([T(cc.Button)], e.prototype, "buttonRequestNextDay", void 0);
-    o([T(cc.Button)], e.prototype, "buttonRequestPrevDay", void 0);
-    o([T], e.prototype, "scrollContentViewTop", void 0);
-    o([T], e.prototype, "scrollContentViewBottom", void 0);
-    o([T], e.prototype, "extraScrollContentView", void 0);
-    o([T(cc.Node)], e.prototype, "nodeBoardInfo", void 0);
-    o([T(cc.Node)], e.prototype, "nodeTongThangOn", void 0);
-    o([T(cc.Node)], e.prototype, "nodeSanHuOn", void 0);
-    o([T(cc.Node)], e.prototype, "nodeTuanOn", void 0);
-    o([T(cc.Node)], e.prototype, "nodeNgayOn", void 0);
-    o([T(cc.Node)], e.prototype, "nodeBoardLeft", void 0);
-    o([T(cc.Label)], e.prototype, "txtEmpty", void 0);
-    return e = o([C], e);
+    __decorate([property(cc.Node)], PopupXepHangGame.prototype, "nodePopupXepHangGame", void 0);
+    __decorate([property(cc.Node)], PopupXepHangGame.prototype, "nodePopupDuaTop", void 0);
+    __decorate([property(cc.Node)], PopupXepHangGame.prototype, "nodePopupLsDuaTop", void 0);
+    __decorate([property(cc.Label)], PopupXepHangGame.prototype, "txtHang", void 0);
+    __decorate([property(cc.Label)], PopupXepHangGame.prototype, "txtPoint", void 0);
+    __decorate([property(cc.Label)], PopupXepHangGame.prototype, "txTotalBet", void 0);
+    __decorate([property(cc.Label)], PopupXepHangGame.prototype, "lbTimeCountDown", void 0);
+    __decorate([property(cc.Node)], PopupXepHangGame.prototype, "nodeTotalBet", void 0);
+    __decorate([property(cc.Node)], PopupXepHangGame.prototype, "nodeLoading", void 0);
+    __decorate([property(cc.Node)], PopupXepHangGame.prototype, "contend", void 0);
+    __decorate([property(cc.Node)], PopupXepHangGame.prototype, "contendScrollView", void 0);
+    __decorate([property(cc.ScrollView)], PopupXepHangGame.prototype, "scrollView", void 0);
+    __decorate([property(cc.Prefab)], PopupXepHangGame.prototype, "itemPoint", void 0);
+    __decorate([property(cc.Prefab)], PopupXepHangGame.prototype, "itemPointTx", void 0);
+    __decorate([property(cc.Prefab)], PopupXepHangGame.prototype, "itemDuaTopPrefab", void 0);
+    __decorate([property(cc.Prefab)], PopupXepHangGame.prototype, "itemLsDuaTopPrefab", void 0);
+    __decorate([property(cc.Node)], PopupXepHangGame.prototype, "arrowNextDayLsDuaTop", void 0);
+    __decorate([property(cc.Node)], PopupXepHangGame.prototype, "arrowPreDayLsDuaTop", void 0);
+    __decorate([property(cc.Label)], PopupXepHangGame.prototype, "txtTittle", void 0);
+    __decorate([property(cc.Label)], PopupXepHangGame.prototype, "lbDateShowLSTop", void 0);
+    __decorate([property(cc.Node)], PopupXepHangGame.prototype, "nodeFullTop", void 0);
+    __decorate([property(cc.Sprite)], PopupXepHangGame.prototype, "tabDuatop", void 0);
+    __decorate([property(cc.Sprite)], PopupXepHangGame.prototype, "tabSLDuatop", void 0);
+    __decorate([property(cc.SpriteFrame)], PopupXepHangGame.prototype, "listSpriteFrameTab", void 0);
+    __decorate([property(cc.Node)], PopupXepHangGame.prototype, "nodeSelectDateTime", void 0);
+    __decorate([property(cc.Label)], PopupXepHangGame.prototype, "lbTimeRequest", void 0);
+    __decorate([property(cc.Button)], PopupXepHangGame.prototype, "buttonRequestNextDay", void 0);
+    __decorate([property(cc.Button)], PopupXepHangGame.prototype, "buttonRequestPrevDay", void 0);
+    __decorate([property], PopupXepHangGame.prototype, "scrollContentViewTop", void 0);
+    __decorate([property], PopupXepHangGame.prototype, "scrollContentViewBottom", void 0);
+    __decorate([property], PopupXepHangGame.prototype, "extraScrollContentView", void 0);
+    __decorate([property(cc.Node)], PopupXepHangGame.prototype, "nodeBoardInfo", void 0);
+    __decorate([property(cc.Node)], PopupXepHangGame.prototype, "nodeTongThangOn", void 0);
+    __decorate([property(cc.Node)], PopupXepHangGame.prototype, "nodeSanHuOn", void 0);
+    __decorate([property(cc.Node)], PopupXepHangGame.prototype, "nodeTuanOn", void 0);
+    __decorate([property(cc.Node)], PopupXepHangGame.prototype, "nodeNgayOn", void 0);
+    __decorate([property(cc.Node)], PopupXepHangGame.prototype, "nodeBoardLeft", void 0);
+    __decorate([property(cc.Label)], PopupXepHangGame.prototype, "txtEmpty", void 0);
+    return PopupXepHangGame = __decorate([ccclass], PopupXepHangGame);
   }(CardPopupBase.default);
-i.default = E;
+moduleExports.default = E;
 void 0;
