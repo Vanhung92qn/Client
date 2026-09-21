@@ -29,7 +29,9 @@
  */
 Object.defineProperty(exports, '__esModule', { value: true });
 
-// 3 module này không require ngược lại ai (đã kiểm) nên nạp thẳng ở đầu tệp được.
+// Mấy module này không require ngược lại ai (đã kiểm) nên nạp thẳng ở đầu tệp được.
+// BangGhi cũng vậy: nó không require gì cả, chỉ nhận khung tin từ đúng hai chỗ móc bên dưới.
+var BangGhi = require('./BangGhi');
 var MessageCardGameHandler = require('./MessageCardGameHandler');
 var NhatKy = require('./NhatKy');
 var DongHo = require('./DongHo');
@@ -68,9 +70,22 @@ var WebSocketConnecter = (function () {
             this.ws.onmessage = null;
             this.ws.onclose = null;
         }
+        // ── Móc GHI / PHÁT LẠI (BangGhi.js) ────────────────────────────────────────────────
+        // 🔴 Lúc phát lại thì KHÔNG mở socket thật. Khung vào do BangGhi bơm thẳng vào
+        // `self.onmessage`, khung ra bị `sendData` giữ lại để so. Nếu vẫn mở socket thì phát lại
+        // một ván cũ sẽ gửi CƯỢC THẬT lên máy chủ — mất tiền thật để chạy một phép thử.
+        if (BangGhi.default.dangPhatLai()) {
+            BangGhi.default.ganSocketGia(self);
+            setTimeout(function () { self.onopen({}); }, 0);
+            return;
+        }
+
         this.ws = new WebSocket(this.url);
         this.ws.onopen = function (e) { self.onopen(e); };
-        this.ws.onmessage = function (e) { self.onmessage(e); };
+        this.ws.onmessage = function (e) {
+            BangGhi.default.ghiVao(e && e.data);
+            self.onmessage(e);
+        };
         this.ws.onerror = function (e) {
             // Go88 chủ động close() ngay trong onerror để máy trạng thái đi tiếp bằng onclose.
             self._clientCloseReason = 'transport-error (onerror)';
@@ -86,6 +101,10 @@ var WebSocketConnecter = (function () {
     // Tham số thứ hai của bản gốc chỉ dùng để bật/tắt ghi log telemetry — đã cắt, giữ chỗ
     // để chữ ký hàm không đổi (ping() gọi sendData(chuỗi, false)).
     WebSocketConnecter.prototype.sendData = function (data, _log) {
+        // Ghi TRƯỚC khi gửi, và lúc phát lại thì CHỈ ghi chứ không gửi — xem connectWS.
+        BangGhi.default.ghiRa(data);
+        if (BangGhi.default.dangPhatLai()) return;
+
         if (null != this.ws && this.ws.readyState == WebSocket.OPEN) {
             this.ws.send(data);
         }
