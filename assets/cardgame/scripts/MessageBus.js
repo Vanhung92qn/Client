@@ -155,7 +155,13 @@ var a = require("./EventDispatcher"),
       }
     };
     e._instance = null;
-    return e = i = o([c("MessageBus"), l(-2)], e);
+    // 🔴 `c` (ccclass) gọi KHÔNG kèm tên. Bản gốc viết `c("MessageBus")`, và Cocos 2.4 cảnh báo
+    // mỗi lần nạp project:
+    //     Should not specify class name MessageBus for Component which defines in project.
+    // Component nằm trong project thì Cocos lấy tên lớp theo TÊN TỆP, khai thêm là thừa và dễ
+    // đụng tên. Bỏ đi KHÔNG đổi tên đăng ký (tệp cũng tên MessageBus.js) — đã soát: không
+    // prefab nào gắn component này, và không chỗ nào tra nó theo chuỗi (chỉ dùng `.instance`).
+    return e = i = o([c, l(-2)], e);
   }(cc.Component);
 i.MessageBus = u;
 void 0;

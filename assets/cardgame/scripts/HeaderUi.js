@@ -704,8 +704,14 @@ var r = require("./GamePlayManager"),
     e.isActive = false;
     e.nodeBroadcast = null;
     e.nodeBroadcastBigWin = null;
-    o([M(Boolean)], e.prototype, "isKTEK", void 0);
-    o([M(Boolean)], e.prototype, "allowEnable", void 0);
+    // 🔴 `cc.Boolean`, KHÔNG phải `Boolean` của JS. Bản dịch ngược sinh ra kiểu JS thuần (mã
+    // TypeScript gốc viết `boolean`), Cocos 2.4 không nhận nên cảnh báo mỗi lần nạp project:
+    //     The type of "HeaderUi.isKTEK" must be cc.Boolean, not Boolean.
+    // và ô đó không lưu/đọc được từ prefab. Ở đây vô hại vì KHÔNG prefab nào lưu hai ô này (đã
+    // soát: chúng luôn lấy mặc định isKTEK=false, allowEnable=true) — nhưng để nguyên thì mỗi
+    // lần mở project lại thêm hai dòng cảnh báo, riết rồi không ai đọc cảnh báo nữa.
+    o([M(cc.Boolean)], e.prototype, "isKTEK", void 0);
+    o([M(cc.Boolean)], e.prototype, "allowEnable", void 0);
     o([M(cc.Label)], e.prototype, "nameUserLb", void 0);
     o([M(cc.Label)], e.prototype, "moneyUserLb", void 0);
     o([M(d.default)], e.prototype, "avatar", void 0);
