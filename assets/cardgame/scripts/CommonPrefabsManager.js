@@ -384,7 +384,8 @@ var CommonPrefabsManager = (function () {
             node.parent = cha;
             node.x = 0;
             node.y = 0;
-            node.zIndex = Z_TOP;
+            node.zIndex = tuDong._zTrenCung(cha);
+            tuDong._ghiNhanGan(node, cha, duong);
             khiXong(node);
         });
     };
@@ -421,6 +422,10 @@ var CommonPrefabsManager = (function () {
             node.parent = cha;
             node.x = 0;
             node.y = 0;
+            // 🔴 Trước đây thiếu hẳn dòng zIndex này, nên popup hướng dẫn nằm dưới cả các node
+            // khác của view game — dựng ra nhưng không ai thấy.
+            node.zIndex = tuDong._zTrenCung(cha);
+            tuDong._ghiNhanGan(node, cha, duong);
 
             // Bản gốc gọi getComponent(PopupHelpImage).show(). Tra theo TÊN LỚP thay vì
             // require thẳng, để không kéo script vào tệp này chỉ vì một lời gọi.
@@ -431,10 +436,67 @@ var CommonPrefabsManager = (function () {
     };
 
     /** Lớp để gắn popup: ưu tiên PopupLayer của Roy88, không có thì gắn thẳng vào Canvas. */
+    /**
+     * Node để gắn popup vào.
+     *
+     * 🔴 KHÔNG được dùng `Canvas/PopupLayer` của sảnh Roy88. Lớp đó là con THỨ HAI của Canvas
+     * nên vẽ gần dưới cùng, trong khi view Cào Rùa là con của node LobbyView — nằm SAU trong
+     * danh sách anh em nên vẽ ĐÈ LÊN. Kết quả: popup dựng ra đàng hoàng, không lỗi, không cảnh
+     * báo, mà người chơi KHÔNG THẤY GÌ vì nó nằm dưới cả màn game.
+     * Đo thật 2026-09-21: log có "[BẤM] showPopupSetting" và "nạp prefab …PopupSetting…" rồi
+     * im hẳn — đúng kiểu hỏng im lặng khó nhất, vì mọi dấu hiệu đều báo thành công.
+     *
+     * Đúng ra phải gắn vào GỐC CỦA VIEW GAME (bản gốc Go88 gắn vào
+     * `MiniGameNode.instance.popupNode`, cũng nằm trong cây của game). Lấy qua
+     * `BaseScene.currentScene` — ô tĩnh mà chính onLoad của cảnh game gán.
+     */
     CommonPrefabsManager.prototype._lopPopup = function () {
+        var bs = null;
+        try { bs = require('./BaseScene'); } catch (loi) { bs = null; }
+        var canh = bs && bs.default ? bs.default.currentScene : null;
+        if (canh && canh.node && cc.isValid(canh.node)) return canh.node;
+
+        // Chưa vào game (hoặc cảnh vừa bị huỷ) thì mới dùng lớp popup của sảnh.
+        cc.warn(TAG + ' không có BaseScene.currentScene — gắn popup vào lớp của sảnh, có thể bị che');
         var l = cc.find('Canvas/PopupLayer');
         if (l) return l;
         return cc.Canvas.instance ? cc.Canvas.instance.node : null;
+    };
+
+    /**
+     * zIndex đủ để popup nổi lên trên MỌI anh em hiện có trong `cha`.
+     *
+     * Ghi cứng 100 (GameZOrder.TOP) là không đủ: view game có thể đã có con dùng zIndex lớn hơn
+     * (miniGameLayer của sảnh dùng tới 9999). Tính theo thực tế thì không phải đoán.
+     */
+    CommonPrefabsManager.prototype._zTrenCung = function (cha) {
+        var max = Z_TOP;
+        if (cha && cha.children) {
+            for (var i = 0; i < cha.children.length; i++) {
+                var z = cha.children[i].zIndex || 0;
+                if (z > max) max = z;
+            }
+        }
+        return max + 1;
+    };
+
+    /**
+     * Ghi lại popup vừa gắn ở ĐÂU và trông ra sao.
+     *
+     * Kiểu hỏng khó nhất của popup là "dựng thành công mà không nhìn thấy" — mọi dấu hiệu đều
+     * báo ổn. Nên log phải trả lời đủ: gắn vào node nào, thứ tự vẽ bao nhiêu, node có bật
+     * không, to bao nhiêu, và nằm ở toạ độ màn hình nào.
+     */
+    CommonPrefabsManager.prototype._ghiNhanGan = function (node, cha, duong) {
+        var wp = node.convertToWorldSpaceAR(cc.v2(0, 0));
+        cc.log('%c[POPUP] ' + duong, 'color:#06c;font-weight:bold',
+            '· cha="' + cha.name + '"',
+            '· zIndex=' + node.zIndex + '/' + cha.children.length + ' anh em',
+            '· active=' + node.active,
+            '· cỡ=' + Math.round(node.width) + 'x' + Math.round(node.height),
+            '· opacity=' + node.opacity,
+            '· scale=' + node.scale,
+            '· toạ độ màn hình=(' + Math.round(wp.x) + ',' + Math.round(wp.y) + ')');
     };
 
     /** Go88: showPopupXepHangGame(gameID, orientation, callbackClose). Gọi: RoomController:278, InGameBackPopup:133. */
