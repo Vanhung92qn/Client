@@ -1,9 +1,9 @@
-var t = require,
-  e = module,
-  i = exports;
+var requireRef = require,
+  moduleRef = module,
+  moduleExports = exports;
 "use strict";
 void 0;
-var n = this && this.__extends || function() {
+var __extends = this && this.__extends || function() {
     var t = function(e, i) {
       return (t = Object.setPrototypeOf || {
           __proto__: []
@@ -26,7 +26,7 @@ var n = this && this.__extends || function() {
       e.prototype = null === i ? Object.create(i) : (n.prototype = i.prototype, new n());
     };
   }(),
-  o = this && this.__decorate || function(t, e, i, n) {
+  __decorate = this && this.__decorate || function(t, e, i, n) {
     var o,
       a = arguments.length,
       s = a < 3 ? e : null === n ? n = Object.getOwnPropertyDescriptor(e, i) : n;
@@ -44,164 +44,164 @@ var n = this && this.__extends || function() {
     }
     return s;
   };
-Object.defineProperty(i, "__esModule", {
+Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
 var GameUtils = require("./GameUtils"),
-  s = cc._decorator,
-  r = s.ccclass,
-  c = (s.property, function() {
-    function t() {
+  ccDecorator = cc._decorator,
+  ccclass = ccDecorator.ccclass,
+  PoolObject = (ccDecorator.property, function() {
+    function PoolObject() {
       this.poolName = "";
       this.listObjectUsing = [];
       this.listObjectFree = [];
     }
-    t.prototype.setName = function(t) {
-      this.poolName = t;
+    PoolObject.prototype.setName = function(poolName) {
+      this.poolName = poolName;
     };
-    t.prototype.clear = function() {
+    PoolObject.prototype.clear = function() {
       this.listObjectFree = [];
       this.listObjectUsing = [];
     };
-    t.prototype.getObject = function() {
+    PoolObject.prototype.getObject = function() {
       if (0 == this.listObjectFree.length) {
         return null;
       }
-      var t = this.listObjectFree.pop();
-      this.listObjectUsing.push(t);
-      return t;
+      var obj = this.listObjectFree.pop();
+      this.listObjectUsing.push(obj);
+      return obj;
     };
-    t.prototype.addObject = function(t) {
-      this.listObjectFree.push(t);
-      for (var e = 0; e < this.listObjectUsing.length; e++) {
-        if (t === this.listObjectUsing[e]) {
-          this.listObjectUsing.splice(e, 1);
+    PoolObject.prototype.addObject = function(obj) {
+      this.listObjectFree.push(obj);
+      for (var index = 0; index < this.listObjectUsing.length; index++) {
+        if (obj === this.listObjectUsing[index]) {
+          this.listObjectUsing.splice(index, 1);
           break;
         }
       }
     };
-    t.prototype.addObjectUsing = function(t) {
-      this.listObjectUsing.push(t);
+    PoolObject.prototype.addObjectUsing = function(obj) {
+      this.listObjectUsing.push(obj);
     };
-    t.prototype.resetAllObjectUsing = function() {
-      for (var t = 0; t < this.listObjectUsing.length; t++) {
-        if (null != this.listObjectUsing[t] && void 0 != this.listObjectUsing[t]) {
-          this.listObjectFree.push(this.listObjectUsing[t]);
+    PoolObject.prototype.resetAllObjectUsing = function() {
+      for (var index = 0; index < this.listObjectUsing.length; index++) {
+        if (null != this.listObjectUsing[index] && void 0 != this.listObjectUsing[index]) {
+          this.listObjectFree.push(this.listObjectUsing[index]);
         } else {
-          this.listObjectFree.splice(t, 1);
-          t--;
+          this.listObjectFree.splice(index, 1);
+          index--;
         }
       }
       this.listObjectUsing = [];
     };
-    return t;
+    return PoolObject;
   }());
-i.PoolObject = c;
-var l = function(t) {
-  function e() {
-    return null !== t && t.apply(this, arguments) || this;
+moduleExports.PoolObject = PoolObject;
+var PoolNode = function(_super) {
+  function PoolNode() {
+    return null !== _super && _super.apply(this, arguments) || this;
   }
-  n(e, t);
-  e.prototype.clear = function() {
-    for (var e = 0; e < this.listObjectFree.length; e++) {
-      if (null != this.listObjectFree[e] && void 0 != this.listObjectFree[e]) {
-        this.listObjectFree[e].destroy();
+  __extends(PoolNode, _super);
+  PoolNode.prototype.clear = function() {
+    for (var index = 0; index < this.listObjectFree.length; index++) {
+      if (null != this.listObjectFree[index] && void 0 != this.listObjectFree[index]) {
+        this.listObjectFree[index].destroy();
       }
     }
-    for (e = 0; e < this.listObjectUsing.length; e++) {
-      if (null != this.listObjectUsing[e] && void 0 != this.listObjectUsing[e]) {
-        this.listObjectUsing[e].destroy();
+    for (index = 0; index < this.listObjectUsing.length; index++) {
+      if (null != this.listObjectUsing[index] && void 0 != this.listObjectUsing[index]) {
+        this.listObjectUsing[index].destroy();
       }
     }
-    t.prototype.clear.call(this);
+    _super.prototype.clear.call(this);
   };
-  e.prototype.resetAllObjectUsing = function() {
-    t.prototype.resetAllObjectUsing.call(this);
-    for (var e = 0; e < this.listObjectFree.length; e++) {
-      this.listObjectFree[e].parent = null;
-      this.listObjectFree[e].active = false;
+  PoolNode.prototype.resetAllObjectUsing = function() {
+    _super.prototype.resetAllObjectUsing.call(this);
+    for (var index = 0; index < this.listObjectFree.length; index++) {
+      this.listObjectFree[index].parent = null;
+      this.listObjectFree[index].active = false;
     }
   };
-  e.prototype.getObject = function() {
+  PoolNode.prototype.getObject = function() {
     if (0 == this.listObjectFree.length) {
       return null;
     }
-    var t = this.listObjectFree.pop();
-    this.listObjectUsing.push(t);
-    return null == t.node ? null : (t.active = true, t.opacity = 255, t);
+    var node = this.listObjectFree.pop();
+    this.listObjectUsing.push(node);
+    return null == node.node ? null : (node.active = true, node.opacity = 255, node);
   };
-  e.prototype.addObject = function(e) {
-    t.prototype.addObject.call(this, e);
+  PoolNode.prototype.addObject = function(node) {
+    _super.prototype.addObject.call(this, node);
   };
-  return e;
-}(c);
-i.PoolNode = l;
-var h = function(t) {
-  function e() {
-    return null !== t && t.apply(this, arguments) || this;
+  return PoolNode;
+}(PoolObject);
+moduleExports.PoolNode = PoolNode;
+var PoolComponent = function(_super) {
+  function PoolComponent() {
+    return null !== _super && _super.apply(this, arguments) || this;
   }
-  n(e, t);
-  e.prototype.clear = function() {
+  __extends(PoolComponent, _super);
+  PoolComponent.prototype.clear = function() {
     this.resetAllObjectUsing();
-    for (var e = 0; e < this.listObjectFree.length; e++) {
-      if (null != this.listObjectFree[e].node && void 0 != this.listObjectFree[e].node) {
-        this.listObjectFree[e].node.destroy();
+    for (var index = 0; index < this.listObjectFree.length; index++) {
+      if (null != this.listObjectFree[index].node && void 0 != this.listObjectFree[index].node) {
+        this.listObjectFree[index].node.destroy();
       } else {
-        this.listObjectFree.splice(e, 1);
-        e--;
+        this.listObjectFree.splice(index, 1);
+        index--;
       }
     }
-    t.prototype.clear.call(this);
+    _super.prototype.clear.call(this);
   };
-  e.prototype.resetAllObjectUsing = function() {
-    t.prototype.resetAllObjectUsing.call(this);
-    for (var e = 0; e < this.listObjectFree.length; e++) {
-      if (null != this.listObjectFree[e].node) {
-        this.listObjectFree[e].node.active = false;
-        this.listObjectFree[e].node.parent = null;
+  PoolComponent.prototype.resetAllObjectUsing = function() {
+    _super.prototype.resetAllObjectUsing.call(this);
+    for (var index = 0; index < this.listObjectFree.length; index++) {
+      if (null != this.listObjectFree[index].node) {
+        this.listObjectFree[index].node.active = false;
+        this.listObjectFree[index].node.parent = null;
       } else {
-        this.listObjectFree.splice(e, 1);
-        e--;
+        this.listObjectFree.splice(index, 1);
+        index--;
       }
     }
   };
-  e.prototype.getObject = function() {
+  PoolComponent.prototype.getObject = function() {
     if (0 == this.listObjectFree.length) {
       return null;
     }
-    var t = this.listObjectFree.pop();
-    this.listObjectUsing.push(t);
-    return null == t.node ? null : (t.node.active = true, t);
+    var component = this.listObjectFree.pop();
+    this.listObjectUsing.push(component);
+    return null == component.node ? null : (component.node.active = true, component);
   };
-  e.prototype.addObject = function(e) {
-    e.node.active = false;
-    e.node.parent = null;
-    t.prototype.addObject.call(this, e);
+  PoolComponent.prototype.addObject = function(component) {
+    component.node.active = false;
+    component.node.parent = null;
+    _super.prototype.addObject.call(this, component);
   };
-  return e;
-}(c);
-i.PoolComponent = h;
-var u = function() {
-  function t() {
+  return PoolComponent;
+}(PoolObject);
+moduleExports.PoolComponent = PoolComponent;
+var PoolManager = function() {
+  function PoolManager() {
     this.mapPool = new GameUtils.MapString();
   }
-  var e;
-  e = t;
-  t.getInstance = function() {
-    if (null == e.instance) {
-      e.instance = new e();
+  var PoolManagerClass;
+  PoolManagerClass = PoolManager;
+  PoolManager.getInstance = function() {
+    if (null == PoolManagerClass.instance) {
+      PoolManagerClass.instance = new PoolManagerClass();
     }
-    return e.instance;
+    return PoolManagerClass.instance;
   };
-  t.prototype.addPool = function(t, e) {
-    e.setName(t);
-    this.mapPool.set(t, e);
-    return e;
+  PoolManager.prototype.addPool = function(poolName, pool) {
+    pool.setName(poolName);
+    this.mapPool.set(poolName, pool);
+    return pool;
   };
-  t.prototype.getPool = function(t) {
-    return this.mapPool.get(t);
+  PoolManager.prototype.getPool = function(poolName) {
+    return this.mapPool.get(poolName);
   };
-  return t = e = o([r], t);
+  return PoolManager = PoolManagerClass = __decorate([ccclass], PoolManager);
 }();
-i.PoolManager = u;
+moduleExports.PoolManager = PoolManager;
 void 0;

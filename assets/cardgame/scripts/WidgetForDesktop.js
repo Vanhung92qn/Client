@@ -1,9 +1,9 @@
-var t = require,
-  e = module,
-  i = exports;
+var requireRef = require,
+  moduleRef = module,
+  moduleExports = exports;
 "use strict";
 void 0;
-var n = this && this.__extends || function() {
+var __extends = this && this.__extends || function() {
     var t = function(e, i) {
       return (t = Object.setPrototypeOf || {
           __proto__: []
@@ -26,7 +26,7 @@ var n = this && this.__extends || function() {
       e.prototype = null === i ? Object.create(i) : (n.prototype = i.prototype, new n());
     };
   }(),
-  o = this && this.__decorate || function(t, e, i, n) {
+  __decorate = this && this.__decorate || function(t, e, i, n) {
     var o,
       a = arguments.length,
       s = a < 3 ? e : null === n ? n = Object.getOwnPropertyDescriptor(e, i) : n;
@@ -44,28 +44,28 @@ var n = this && this.__extends || function() {
     }
     return s;
   };
-Object.defineProperty(i, "__esModule", {
+Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
-var a = cc._decorator,
-  s = a.ccclass,
-  r = (a.property, function(t) {
-    function e() {
-      return null !== t && t.apply(this, arguments) || this;
+var ccDecorator = cc._decorator,
+  ccclass = ccDecorator.ccclass,
+  WidgetForDesktop = (ccDecorator.property, function(_super) {
+    function WidgetForDesktop() {
+      return null !== _super && _super.apply(this, arguments) || this;
     }
-    n(e, t);
-    e.prototype.onLoad = function() {
-      var t = this.getComponent(cc.Widget);
-      if (null != t) {
+    __extends(WidgetForDesktop, _super);
+    WidgetForDesktop.prototype.onLoad = function() {
+      var widget = this.getComponent(cc.Widget);
+      if (null != widget) {
         if (cc.sys.platform == cc.sys.DESKTOP_BROWSER) {
-          t.alignMode = cc.Widget.AlignMode.ALWAYS;
+          widget.alignMode = cc.Widget.AlignMode.ALWAYS;
         } else {
-          t.alignMode = cc.Widget.AlignMode.ON_WINDOW_RESIZE;
+          widget.alignMode = cc.Widget.AlignMode.ON_WINDOW_RESIZE;
         }
       }
     };
-    e.prototype.start = function() {};
-    return e = o([s], e);
+    WidgetForDesktop.prototype.start = function() {};
+    return WidgetForDesktop = __decorate([ccclass], WidgetForDesktop);
   }(cc.Component));
-i.default = r;
+moduleExports.default = WidgetForDesktop;
 void 0;

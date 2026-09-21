@@ -1,9 +1,9 @@
-var t = require,
-  e = module,
-  i = exports;
+var requireRef = require,
+  moduleRef = module,
+  moduleExports = exports;
 "use strict";
 void 0;
-var n = this && this.__extends || function() {
+var __extends = this && this.__extends || function() {
     var t = function(e, i) {
       return (t = Object.setPrototypeOf || {
           __proto__: []
@@ -26,7 +26,7 @@ var n = this && this.__extends || function() {
       e.prototype = null === i ? Object.create(i) : (n.prototype = i.prototype, new n());
     };
   }(),
-  o = this && this.__decorate || function(t, e, i, n) {
+  __decorate = this && this.__decorate || function(t, e, i, n) {
     var o,
       a = arguments.length,
       s = a < 3 ? e : null === n ? n = Object.getOwnPropertyDescriptor(e, i) : n;
@@ -44,46 +44,46 @@ var n = this && this.__extends || function() {
     }
     return s;
   };
-Object.defineProperty(i, "__esModule", {
+Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
 var GamePlayManager = require("./GamePlayManager"),
   StringUtil = require("./StringUtil"),
-  r = cc._decorator,
-  c = r.ccclass,
-  l = r.property,
-  h = function(t) {
-    function e() {
-      var e = null !== t && t.apply(this, arguments) || this;
-      e.txtRank = null;
-      e.icoRank = null;
-      e.icoPassTotalBet = null;
-      e.icoFailTotalBet = null;
-      e.lineBreak = null;
-      e.iconGold = null;
-      e.listIconMedal = [];
-      e.animRank = null;
-      e.txtTenHienThi = null;
-      e.txtTongPoint = null;
-      e.txtTargetTotalBet = null;
-      e.txtReward = null;
-      e.spriteLineOn = null;
-      e.selected = null;
-      e.animTop = null;
-      e.nodeContent = null;
-      return e;
+  ccDecorator = cc._decorator,
+  ccclass = ccDecorator.ccclass,
+  property = ccDecorator.property,
+  ItemDuaTop = function(_super) {
+    function ItemDuaTop() {
+      var _this = null !== _super && _super.apply(this, arguments) || this;
+      _this.txtRank = null;
+      _this.icoRank = null;
+      _this.icoPassTotalBet = null;
+      _this.icoFailTotalBet = null;
+      _this.lineBreak = null;
+      _this.iconGold = null;
+      _this.listIconMedal = [];
+      _this.animRank = null;
+      _this.txtTenHienThi = null;
+      _this.txtTongPoint = null;
+      _this.txtTargetTotalBet = null;
+      _this.txtReward = null;
+      _this.spriteLineOn = null;
+      _this.selected = null;
+      _this.animTop = null;
+      _this.nodeContent = null;
+      return _this;
     }
-    n(e, t);
-    e.prototype.loadUI = function(t, e, i, n, o, r, c, l, h) {
-      if (void 0 === c && (c = 0), c > 0 && (this.txtReward.string = StringUtil.default.formatMoneyNumberWithDot(c), this.txtReward.node.active =
-          true, this.iconGold.node.active = true, this.iconGold.spriteFrame = this.listIconMedal[t - 1]), 5 == t && null != this
-        .lineBreak && (this.lineBreak.active = true), this.icoPassTotalBet.active = h, this.icoFailTotalBet.active = !h, l ? (this
+    __extends(ItemDuaTop, _super);
+    ItemDuaTop.prototype.loadUI = function(rank, fullName, winLost, userId, userName, targetTotalBet, rewardMoney, isRewardHighlighted, isPassTotalBet) {
+      if (void 0 === rewardMoney && (rewardMoney = 0), rewardMoney > 0 && (this.txtReward.string = StringUtil.default.formatMoneyNumberWithDot(rewardMoney), this.txtReward.node.active =
+          true, this.iconGold.node.active = true, this.iconGold.spriteFrame = this.listIconMedal[rank - 1]), 5 == rank && null != this
+        .lineBreak && (this.lineBreak.active = true), this.icoPassTotalBet.active = isPassTotalBet, this.icoFailTotalBet.active = !isPassTotalBet, isRewardHighlighted ? (this
           .txtReward.node.opacity = 255, this.iconGold.node.opacity = 255) : (this.txtReward.node.opacity = 80, this.iconGold.node
           .opacity = 80), this.txtTargetTotalBet.node.active = true, this.txtTargetTotalBet.string = StringUtil.default
-        .formatMoneyNumberWithVietnameseUnit(r), !StringUtil.default.isNullOrEmpty(n) && GamePlayManager.default.getInstance().userID.indexOf(n) >= 0 ? this
-        .selected.active = true : this.selected.active = false, void 0 != t && null != t) {
-        if (this.spriteLineOn.active = t % 2 != 0, t <= 3) {
-          switch (this.txtRank.node.active = false, t) {
+        .formatMoneyNumberWithVietnameseUnit(targetTotalBet), !StringUtil.default.isNullOrEmpty(userId) && GamePlayManager.default.getInstance().userID.indexOf(userId) >= 0 ? this
+        .selected.active = true : this.selected.active = false, void 0 != rank && null != rank) {
+        if (this.spriteLineOn.active = rank % 2 != 0, rank <= 3) {
+          switch (this.txtRank.node.active = false, rank) {
             case 1:
               this.icoRank.node.active = false;
               this.animRank.node.active = true;
@@ -106,37 +106,37 @@ var GamePlayManager = require("./GamePlayManager"),
           this.txtRank.node.active = true;
           this.icoRank.node.active = false;
           this.animRank.node.active = false;
-          this.txtRank.string = t.toString();
+          this.txtRank.string = rank.toString();
         }
       }
-      if (StringUtil.default.isNullOrEmpty(e)) {
-        if (StringUtil.default.isNullOrEmpty(o)) {
+      if (StringUtil.default.isNullOrEmpty(fullName)) {
+        if (StringUtil.default.isNullOrEmpty(userName)) {
           this.txtTenHienThi.string = "";
         } else {
-          this.txtTenHienThi.string = o.toString();
+          this.txtTenHienThi.string = userName.toString();
         }
       } else {
-        this.txtTenHienThi.string = e.toString();
+        this.txtTenHienThi.string = fullName.toString();
       }
-      this.txtTongPoint.string = void 0 != i && null != i ? StringUtil.default.formatMoneyNumberWithColom(i) : "0";
+      this.txtTongPoint.string = void 0 != winLost && null != winLost ? StringUtil.default.formatMoneyNumberWithColom(winLost) : "0";
     };
-    o([l(cc.Label)], e.prototype, "txtRank", void 0);
-    o([l(cc.Sprite)], e.prototype, "icoRank", void 0);
-    o([l(cc.Node)], e.prototype, "icoPassTotalBet", void 0);
-    o([l(cc.Node)], e.prototype, "icoFailTotalBet", void 0);
-    o([l(cc.Node)], e.prototype, "lineBreak", void 0);
-    o([l(cc.Sprite)], e.prototype, "iconGold", void 0);
-    o([l(cc.SpriteFrame)], e.prototype, "listIconMedal", void 0);
-    o([l(sp.Skeleton)], e.prototype, "animRank", void 0);
-    o([l(cc.Label)], e.prototype, "txtTenHienThi", void 0);
-    o([l(cc.Label)], e.prototype, "txtTongPoint", void 0);
-    o([l(cc.Label)], e.prototype, "txtTargetTotalBet", void 0);
-    o([l(cc.Label)], e.prototype, "txtReward", void 0);
-    o([l(cc.Node)], e.prototype, "spriteLineOn", void 0);
-    o([l(cc.Node)], e.prototype, "selected", void 0);
-    o([l(sp.SkeletonData)], e.prototype, "animTop", void 0);
-    o([l(cc.Node)], e.prototype, "nodeContent", void 0);
-    return e = o([c], e);
+    __decorate([property(cc.Label)], ItemDuaTop.prototype, "txtRank", void 0);
+    __decorate([property(cc.Sprite)], ItemDuaTop.prototype, "icoRank", void 0);
+    __decorate([property(cc.Node)], ItemDuaTop.prototype, "icoPassTotalBet", void 0);
+    __decorate([property(cc.Node)], ItemDuaTop.prototype, "icoFailTotalBet", void 0);
+    __decorate([property(cc.Node)], ItemDuaTop.prototype, "lineBreak", void 0);
+    __decorate([property(cc.Sprite)], ItemDuaTop.prototype, "iconGold", void 0);
+    __decorate([property(cc.SpriteFrame)], ItemDuaTop.prototype, "listIconMedal", void 0);
+    __decorate([property(sp.Skeleton)], ItemDuaTop.prototype, "animRank", void 0);
+    __decorate([property(cc.Label)], ItemDuaTop.prototype, "txtTenHienThi", void 0);
+    __decorate([property(cc.Label)], ItemDuaTop.prototype, "txtTongPoint", void 0);
+    __decorate([property(cc.Label)], ItemDuaTop.prototype, "txtTargetTotalBet", void 0);
+    __decorate([property(cc.Label)], ItemDuaTop.prototype, "txtReward", void 0);
+    __decorate([property(cc.Node)], ItemDuaTop.prototype, "spriteLineOn", void 0);
+    __decorate([property(cc.Node)], ItemDuaTop.prototype, "selected", void 0);
+    __decorate([property(sp.SkeletonData)], ItemDuaTop.prototype, "animTop", void 0);
+    __decorate([property(cc.Node)], ItemDuaTop.prototype, "nodeContent", void 0);
+    return ItemDuaTop = __decorate([ccclass], ItemDuaTop);
   }(cc.Component);
-i.default = h;
+moduleExports.default = ItemDuaTop;
 void 0;

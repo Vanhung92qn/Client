@@ -1,9 +1,9 @@
-var t = require,
-  e = module,
-  i = exports;
+var requireRef = require,
+  moduleRef = module,
+  moduleExports = exports;
 "use strict";
 void 0;
-Object.defineProperty(i, "__esModule", {
+Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
 
@@ -30,15 +30,15 @@ var CanvasSceneBase = (function () {
   CanvasSceneBase.getBackgroundRatio = function () {
     if (cc.Canvas.instance == null) return 1;
 
-    var dr = cc.Canvas.instance.designResolution;
-    var w = cc.winSize.width;
-    var h = cc.winSize.height;
+    var designResolution = cc.Canvas.instance.designResolution;
+    var screenWidth = cc.winSize.width;
+    var screenHeight = cc.winSize.height;
 
-    return dr.width / w > dr.height / h ? h / dr.height : w / dr.width;
+    return designResolution.width / screenWidth > designResolution.height / screenHeight ? screenHeight / designResolution.height : screenWidth / designResolution.width;
   };
 
   return CanvasSceneBase;
 })();
 
-i.default = CanvasSceneBase;
+moduleExports.default = CanvasSceneBase;
 void 0;

@@ -1,9 +1,9 @@
-var t = require,
-  e = module,
-  i = exports;
+var requireRef = require,
+  moduleRef = module,
+  moduleExports = exports;
 "use strict";
 void 0;
-var n = this && this.__extends || function() {
+var __extends = this && this.__extends || function() {
     var t = function(e, i) {
       return (t = Object.setPrototypeOf || {
           __proto__: []
@@ -26,7 +26,7 @@ var n = this && this.__extends || function() {
       e.prototype = null === i ? Object.create(i) : (n.prototype = i.prototype, new n());
     };
   }(),
-  o = this && this.__decorate || function(t, e, i, n) {
+  __decorate = this && this.__decorate || function(t, e, i, n) {
     var o,
       a = arguments.length,
       s = a < 3 ? e : null === n ? n = Object.getOwnPropertyDescriptor(e, i) : n;
@@ -44,7 +44,7 @@ var n = this && this.__extends || function() {
     }
     return s;
   };
-Object.defineProperty(i, "__esModule", {
+Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
 var CardPopupBase = require("./CardPopupBase"),
@@ -60,100 +60,100 @@ var CardPopupBase = require("./CardPopupBase"),
   GameUtils = require("./GameUtils"),
   FavoriteGameController = require("./FavoriteGameController"),
   MusicPlayer = require("./MusicPlayer"),
-  S = cc._decorator,
-  _ = S.ccclass,
-  v = S.property,
-  b = function(t) {
-    function e() {
-      var e = null !== t && t.apply(this, arguments) || this;
-      e.lbNameGame = null;
-      e.lbMucCuoc = null;
-      e.btnNext = null;
-      e.btnPre = null;
-      e.lbPage = null;
-      e.roomPassword = "";
-      e.roomID = 0;
-      e.serverID = 0;
-      e.gameID = 0;
-      e.bet = 0;
-      e.arrRoomDict = [];
-      e.currentIndex = 0;
-      return e;
+  ccDecorator = cc._decorator,
+  ccclass = ccDecorator.ccclass,
+  property = ccDecorator.property,
+  PopupInveteJoinRoom = function(_super) {
+    function PopupInveteJoinRoom() {
+      var _this = null !== _super && _super.apply(this, arguments) || this;
+      _this.lbNameGame = null;
+      _this.lbMucCuoc = null;
+      _this.btnNext = null;
+      _this.btnPre = null;
+      _this.lbPage = null;
+      _this.roomPassword = "";
+      _this.roomID = 0;
+      _this.serverID = 0;
+      _this.gameID = 0;
+      _this.bet = 0;
+      _this.arrRoomDict = [];
+      _this.currentIndex = 0;
+      return _this;
     }
-    n(e, t);
-    e.prototype.showInvite = function(t, e) {
-      this.arrRoomDict.push(e);
+    __extends(PopupInveteJoinRoom, _super);
+    PopupInveteJoinRoom.prototype.showInvite = function(fromUser, roomInfo) {
+      this.arrRoomDict.push(roomInfo);
       if (1 == this.arrRoomDict.length) {
         this.currentIndex = 0;
         this.show();
       }
       this.displayUI(this.currentIndex);
     };
-    e.prototype.displayUI = function(t) {
+    PopupInveteJoinRoom.prototype.displayUI = function(index) {
       if ("2k" != GameConfigManager.default.getInstance().enviromentName) {
-        var e = this.arrRoomDict[t];
-        this.gameID = parseInt(e.gid);
-        this.roomID = e.rid;
-        this.bet = e.b;
-        this.serverID = e.sid;
-        var i = e.b;
-        if (null !== e.MMBI && void 0 !== e.MMBI) {
-          e.MMBI;
+        var roomInfo = this.arrRoomDict[index];
+        this.gameID = parseInt(roomInfo.gid);
+        this.roomID = roomInfo.rid;
+        this.bet = roomInfo.b;
+        this.serverID = roomInfo.sid;
+        var bet = roomInfo.b;
+        if (null !== roomInfo.MMBI && void 0 !== roomInfo.MMBI) {
+          roomInfo.MMBI;
         }
         this.roomPassword = "";
-        if (null !== e.pwd && void 0 !== e.pwd) {
-          this.roomPassword = e.pwd;
+        if (null !== roomInfo.pwd && void 0 !== roomInfo.pwd) {
+          this.roomPassword = roomInfo.pwd;
         }
-        this.lbMucCuoc.string = StringUtil.default.formatMoneyNumber(i);
-        var n = "";
+        this.lbMucCuoc.string = StringUtil.default.formatMoneyNumber(bet);
+        var gameName = "";
         switch (this.gameID) {
           case MessageCardGameHandler.GAME.TIENLEN:
-            n = "Ti\u1ebfn L\xean \u0110\u1ebfm L\xe1";
+            gameName = "Ti\u1ebfn L\xean \u0110\u1ebfm L\xe1";
             break;
           case MessageCardGameHandler.GAME.TLMN:
-            n = "Ti\u1ebfn L\xean MN";
+            gameName = "Ti\u1ebfn L\xean MN";
             break;
           case MessageCardGameHandler.GAME.SAM:
-            n = "S\xe2m L\u1ed1c";
+            gameName = "S\xe2m L\u1ed1c";
             break;
           case MessageCardGameHandler.GAME.BACAY:
-            n = "C\xe0o R\xf9a";
+            gameName = "C\xe0o R\xf9a";
             break;
           case MessageCardGameHandler.GAME.BINH:
-            n = "M\u1eadu Binh";
+            gameName = "M\u1eadu Binh";
             break;
           case MessageCardGameHandler.GAME.CATTE:
-            n = "Catte";
+            gameName = "Catte";
             break;
           case MessageCardGameHandler.GAME.LIENG:
-            n = "Li\xeang";
+            gameName = "Li\xeang";
             break;
           case MessageCardGameHandler.GAME.POKER:
-            n = "Poker";
+            gameName = "Poker";
             break;
           case MessageCardGameHandler.GAME.XITO:
-            n = "X\xec T\u1ed1";
+            gameName = "X\xec T\u1ed1";
             break;
           case MessageCardGameHandler.GAME.PHOM:
-            n = "Ph\u1ecfm";
+            gameName = "Ph\u1ecfm";
             break;
           case MessageCardGameHandler.GAME.XOCDIA:
-            n = "X\xf3c \u0110\u0129a";
+            gameName = "X\xf3c \u0110\u0129a";
             break;
           case MessageCardGameHandler.GAME.BAU_CUA:
-            n = "B\u1ea7u Cua";
+            gameName = "B\u1ea7u Cua";
             this.lbMucCuoc.string = StringUtil.default.formatMoneyNumber(100);
             break;
           case MessageCardGameHandler.GAME.CHAN_GTS:
-            n = "Ch\u1eafn";
+            gameName = "Ch\u1eafn";
             break;
           case MessageCardGameHandler.GAME.XIDACH:
-            n = "X\xec D\xe1ch";
+            gameName = "X\xec D\xe1ch";
             break;
           default:
-            n = "Kh\xf4ng Bi\u1ebft";
+            gameName = "Kh\xf4ng Bi\u1ebft";
         }
-        this.lbNameGame.string = n;
+        this.lbNameGame.string = gameName;
         if (null != MiniGameNode.default.instance && null !== MiniGameNode.default.instance.taiXiuLiveController && void 0 !== MiniGameNode.default.instance
           .taiXiuLiveController) {
           MiniGameNode.default.instance.taiXiuLiveController.setSizeTVZero();
@@ -163,7 +163,7 @@ var CardPopupBase = require("./CardPopupBase"),
         this.setArrowStatus();
       }
     };
-    e.prototype.onClickClose = function() {
+    PopupInveteJoinRoom.prototype.onClickClose = function() {
       this.hide(function() {
         CommonPrefabsManager.default.getInstance().popupInveteJoinRoom = null;
         if (null != MiniGameNode.default.instance && null !== MiniGameNode.default.instance.taiXiuLiveController && void 0 !== MiniGameNode.default.instance
@@ -172,27 +172,27 @@ var CardPopupBase = require("./CardPopupBase"),
         }
       });
     };
-    e.prototype.onClickBg = function() {};
-    e.prototype.onClickTuCHoiHet = function() {
+    PopupInveteJoinRoom.prototype.onClickBg = function() {};
+    PopupInveteJoinRoom.prototype.onClickTuCHoiHet = function() {
       GameConfigManager.default.getInstance().IsReceiveInvite = false;
       GamePlayManager.default.getInstance().updateChapNhanInvite(false);
       this.onClickClose();
     };
-    e.prototype.onClickOK = function() {
-      var t = this;
+    PopupInveteJoinRoom.prototype.onClickOK = function() {
+      var _this = this;
       GamePlayManager.default.getInstance().checkMinMoney(this.bet, this.gameID, false, function() {
-        t.onClickChapNhan();
+        _this.onClickChapNhan();
       });
     };
-    e.prototype.onClickChapNhan = function() {
+    PopupInveteJoinRoom.prototype.onClickChapNhan = function() {
       if (GameConfigManager.default.getInstance().roomPassword = this.roomPassword, GamePlayManager.default.getInstance().roomID = this.roomID, CommonPrefabsManager.default.getInstance()
         .showLoading(), GamePlayManager.default.getInstance().inviteData = {
           roomID: this.roomID,
           roomPassword: this.roomPassword
         }, this.onClickClose(), GamePlayManager.default.getInstance().timeInvite = Date.now(), null !== BaseScene.default.currentScene && void 0 !== BaseScene.default
         .currentScene && null !== BaseScene.default.currentScene.node && void 0 !== BaseScene.default.currentScene.node) {
-        var t = GameUtils.convertToStringGameID(this.gameID);
-        switch (FavoriteGameController.default.gI() && FavoriteGameController.default.gI().DoSendTrackingGame(t), this.gameID) {
+        var gameIDString = GameUtils.convertToStringGameID(this.gameID);
+        switch (FavoriteGameController.default.gI() && FavoriteGameController.default.gI().DoSendTrackingGame(gameIDString), this.gameID) {
           case MessageCardGameHandler.GAME.LIENG:
             BaseScene.default.currentScene.openSceneGame(GameDefine.GameConfigs.SceneName.Lieng);
             break;
@@ -236,33 +236,33 @@ var CardPopupBase = require("./CardPopupBase"),
         }
       }
     };
-    e.prototype.onDestroy = function() {
+    PopupInveteJoinRoom.prototype.onDestroy = function() {
       CommonPrefabsManager.default.getInstance().popupInveteJoinRoom = null;
     };
-    e.prototype.onNextClick = function() {
+    PopupInveteJoinRoom.prototype.onNextClick = function() {
       MusicPlayer.default.getInstance().playbtnClick();
       if (!(this.currentIndex >= this.arrRoomDict.length - 1)) {
         this.currentIndex += 1;
         this.displayUI(this.currentIndex);
       }
     };
-    e.prototype.onPreClick = function() {
+    PopupInveteJoinRoom.prototype.onPreClick = function() {
       MusicPlayer.default.getInstance().playbtnClick();
       if (!(this.currentIndex <= 0)) {
         this.currentIndex -= 1;
         this.displayUI(this.currentIndex);
       }
     };
-    e.prototype.setArrowStatus = function() {
+    PopupInveteJoinRoom.prototype.setArrowStatus = function() {
       this.btnNext.active = this.currentIndex < this.arrRoomDict.length - 1;
       this.btnPre.active = this.currentIndex > 0;
     };
-    o([v(cc.Label)], e.prototype, "lbNameGame", void 0);
-    o([v(cc.Label)], e.prototype, "lbMucCuoc", void 0);
-    o([v(cc.Node)], e.prototype, "btnNext", void 0);
-    o([v(cc.Node)], e.prototype, "btnPre", void 0);
-    o([v(cc.Label)], e.prototype, "lbPage", void 0);
-    return e = o([_], e);
+    __decorate([property(cc.Label)], PopupInveteJoinRoom.prototype, "lbNameGame", void 0);
+    __decorate([property(cc.Label)], PopupInveteJoinRoom.prototype, "lbMucCuoc", void 0);
+    __decorate([property(cc.Node)], PopupInveteJoinRoom.prototype, "btnNext", void 0);
+    __decorate([property(cc.Node)], PopupInveteJoinRoom.prototype, "btnPre", void 0);
+    __decorate([property(cc.Label)], PopupInveteJoinRoom.prototype, "lbPage", void 0);
+    return PopupInveteJoinRoom = __decorate([ccclass], PopupInveteJoinRoom);
   }(CardPopupBase.default);
-i.default = b;
+moduleExports.default = PopupInveteJoinRoom;
 void 0;

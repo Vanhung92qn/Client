@@ -1,9 +1,9 @@
-var t = require,
-  e = module,
-  i = exports;
+var requireRef = require,
+  moduleRef = module,
+  moduleExports = exports;
 "use strict";
 void 0;
-var n = this && this.__extends || function() {
+var __extends = this && this.__extends || function() {
     var t = function(e, i) {
       return (t = Object.setPrototypeOf || {
           __proto__: []
@@ -26,7 +26,7 @@ var n = this && this.__extends || function() {
       e.prototype = null === i ? Object.create(i) : (n.prototype = i.prototype, new n());
     };
   }(),
-  o = this && this.__decorate || function(t, e, i, n) {
+  __decorate = this && this.__decorate || function(t, e, i, n) {
     var o,
       a = arguments.length,
       s = a < 3 ? e : null === n ? n = Object.getOwnPropertyDescriptor(e, i) : n;
@@ -44,60 +44,60 @@ var n = this && this.__extends || function() {
     }
     return s;
   };
-Object.defineProperty(i, "__esModule", {
+Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
 var StringUtil = require("./StringUtil"),
   GameUtils = require("./GameUtils"),
-  r = cc._decorator,
-  c = r.ccclass,
-  l = r.property,
-  h = function(t) {
-    function e() {
-      var e = null !== t && t.apply(this, arguments) || this;
-      e.label = null;
-      e.chipIconPos = null;
-      e.money = 0;
-      return e;
+  ccDecorator = cc._decorator,
+  ccclass = ccDecorator.ccclass,
+  property = ccDecorator.property,
+  BetLabel = function(_super) {
+    function BetLabel() {
+      var _this = null !== _super && _super.apply(this, arguments) || this;
+      _this.label = null;
+      _this.chipIconPos = null;
+      _this.money = 0;
+      return _this;
     }
-    n(e, t);
-    e.prototype.setNumber = function(t, e) {
-      if (void 0 === e) {
-        e = true;
+    __extends(BetLabel, _super);
+    BetLabel.prototype.setNumber = function(amount, animate) {
+      if (void 0 === animate) {
+        animate = true;
       }
-      if (e) {
-        GameUtils.runAnimationMoney(this.label, this.money, t);
-        this.money = t;
+      if (animate) {
+        GameUtils.runAnimationMoney(this.label, this.money, amount);
+        this.money = amount;
       }
-      this.label.string = StringUtil.default.formatMoneyNumber(t);
-      if (0 === t) {
+      this.label.string = StringUtil.default.formatMoneyNumber(amount);
+      if (0 === amount) {
         this.node.active = false;
         this.label.string = "";
       }
     };
-    e.prototype.setNumberWithPrefix = function(t, e, i) {
-      if (void 0 === e) {
-        e = true;
+    BetLabel.prototype.setNumberWithPrefix = function(amount, animate, prefix) {
+      if (void 0 === animate) {
+        animate = true;
       }
-      if (void 0 === i) {
-        i = "";
+      if (void 0 === prefix) {
+        prefix = "";
       }
-      if (e) {
-        GameUtils.runAnimationMoney(this.label, this.money, t);
-        this.money = t;
+      if (animate) {
+        GameUtils.runAnimationMoney(this.label, this.money, amount);
+        this.money = amount;
       }
-      this.label.string = i + StringUtil.default.formatMoneyNumber(t);
-      if (0 === t) {
+      this.label.string = prefix + StringUtil.default.formatMoneyNumber(amount);
+      if (0 === amount) {
         this.node.active = false;
         this.label.string = "";
       }
     };
-    e.prototype.setText = function(t) {
-      this.label.string = t;
+    BetLabel.prototype.setText = function(text) {
+      this.label.string = text;
     };
-    o([l(cc.Label)], e.prototype, "label", void 0);
-    o([l(cc.Node)], e.prototype, "chipIconPos", void 0);
-    return e = o([c], e);
+    __decorate([property(cc.Label)], BetLabel.prototype, "label", void 0);
+    __decorate([property(cc.Node)], BetLabel.prototype, "chipIconPos", void 0);
+    return BetLabel = __decorate([ccclass], BetLabel);
   }(cc.Component);
-i.default = h;
+moduleExports.default = BetLabel;
 void 0;

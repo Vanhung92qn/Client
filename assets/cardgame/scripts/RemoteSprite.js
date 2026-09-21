@@ -1,9 +1,9 @@
-var t = require,
-  e = module,
-  i = exports;
+var requireRef = require,
+  moduleRef = module,
+  moduleExports = exports;
 "use strict";
 void 0;
-var n = this && this.__extends || function() {
+var __extends = this && this.__extends || function() {
     var t = function(e, i) {
       return (t = Object.setPrototypeOf || {
           __proto__: []
@@ -26,7 +26,7 @@ var n = this && this.__extends || function() {
       e.prototype = null === i ? Object.create(i) : (n.prototype = i.prototype, new n());
     };
   }(),
-  o = this && this.__decorate || function(t, e, i, n) {
+  __decorate = this && this.__decorate || function(t, e, i, n) {
     var o,
       a = arguments.length,
       s = a < 3 ? e : null === n ? n = Object.getOwnPropertyDescriptor(e, i) : n;
@@ -44,71 +44,71 @@ var n = this && this.__extends || function() {
     }
     return s;
   };
-Object.defineProperty(i, "__esModule", {
+Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
 var StringUtil = require("./StringUtil"),
   GamePlayManager = require("./GamePlayManager"),
-  r = cc._decorator,
-  c = r.ccclass,
-  l = r.property,
-  h = function(t) {
-    function e() {
-      var e = null !== t && t.apply(this, arguments) || this;
-      e.textureDefault = null;
-      e.spriteSpriteAtlasDefaul = null;
-      return e;
+  _decorator = cc._decorator,
+  ccclass = _decorator.ccclass,
+  property = _decorator.property,
+  RemoteSprite = function(_super) {
+    function RemoteSprite() {
+      var _this = null !== _super && _super.apply(this, arguments) || this;
+      _this.textureDefault = null;
+      _this.spriteSpriteAtlasDefaul = null;
+      return _this;
     }
-    n(e, t);
-    e.prototype.start = function() {
+    __extends(RemoteSprite, _super);
+    RemoteSprite.prototype.start = function() {
       if (null !== this.spriteFrame && void 0 !== this.spriteFrame) {
         this.textureDefault = this.spriteFrame.getTexture();
       }
     };
-    e.prototype.isDownloaded = function() {
+    RemoteSprite.prototype.isDownloaded = function() {
       return this._isDownloaded;
     };
-    e.prototype.setIsDownloaded = function(t) {
-      this._isDownloaded = t;
+    RemoteSprite.prototype.setIsDownloaded = function(isDownloaded) {
+      this._isDownloaded = isDownloaded;
       if (!this._isDownloaded) {
         this.TextureCacheKey = "";
       }
     };
-    e.prototype.initWithUrl = function(t) {
-      this.DownloadUrl = t;
+    RemoteSprite.prototype.initWithUrl = function(url) {
+      this.DownloadUrl = url;
       this.textureDefault;
     };
-    e.prototype.startDownloading = function(t) {
+    RemoteSprite.prototype.startDownloading = function(forceReload) {
       if (!(null !== this.TextureCacheKey && void 0 !== this.TextureCacheKey && 0 !== this.TextureCacheKey.length)) {
         this.TextureCacheKey = this.DownloadUrl;
       }
-      if (t) {
+      if (forceReload) {
         this._isDownloaded = false;
         this.initWithUrl(this.DownloadUrl);
       }
-      var e = this;
+      var _this = this;
       if (this.DownloadUrl.indexOf("http") >= 0) {
         cc.loader.load({
           url: this.DownloadUrl,
           type: "png"
-        }, function(t, i) {
-          if (!(null !== t && void 0 !== t)) {
-            e.onSpriteFinishDownloading(i);
+        }, function(err, texture) {
+          if (!(null !== err && void 0 !== err)) {
+            _this.onSpriteFinishDownloading(texture);
           }
         });
       } else if (null !== this.spriteSpriteAtlasDefaul && void 0 !== this.spriteSpriteAtlasDefaul) {
-        var i = this.spriteSpriteAtlasDefaul.getSpriteFrame(this.DownloadUrl);
-        if (null !== i && void 0 !== i) {
-          this.spriteFrame = i;
+        var atlasSpriteFrame = this.spriteSpriteAtlasDefaul.getSpriteFrame(this.DownloadUrl);
+        if (null !== atlasSpriteFrame && void 0 !== atlasSpriteFrame) {
+          this.spriteFrame = atlasSpriteFrame;
         }
       }
     };
-    e.prototype.onSpriteFinishDownloading = function(t) {
-      if (t) {
-        this.spriteFrame = new cc.SpriteFrame(t);
+    RemoteSprite.prototype.onSpriteFinishDownloading = function(texture) {
+      if (texture) {
+        this.spriteFrame = new cc.SpriteFrame(texture);
       }
     };
-    e.prototype.loadUserAvarta = function() {
+    RemoteSprite.prototype.loadUserAvarta = function() {
       if (!cc.sys.isNative) {
         window.location.hostname.indexOf("localhost");
       }
@@ -117,17 +117,17 @@ var StringUtil = require("./StringUtil"),
         this.startDownloading(true);
       }
     };
-    e.prototype.loadImage = function(t) {
+    RemoteSprite.prototype.loadImage = function(url) {
       if (!cc.sys.isNative) {
         window.location.hostname.indexOf("localhost");
       }
-      if (!StringUtil.default.isNullOrEmpty(t)) {
-        this.DownloadUrl = t;
+      if (!StringUtil.default.isNullOrEmpty(url)) {
+        this.DownloadUrl = url;
         this.startDownloading(true);
       }
     };
-    o([l(cc.SpriteAtlas)], e.prototype, "spriteSpriteAtlasDefaul", void 0);
-    return e = o([c], e);
+    __decorate([property(cc.SpriteAtlas)], RemoteSprite.prototype, "spriteSpriteAtlasDefaul", void 0);
+    return RemoteSprite = __decorate([ccclass], RemoteSprite);
   }(cc.Sprite);
-i.default = h;
+moduleExports.default = RemoteSprite;
 void 0;

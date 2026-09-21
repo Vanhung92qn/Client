@@ -1,9 +1,9 @@
-var t = require,
-  e = module,
-  i = exports;
+var requireRef = require,
+  moduleRef = module,
+  moduleExports = exports;
 "use strict";
 void 0;
-var n = this && this.__extends || function() {
+var __extends = this && this.__extends || function() {
     var t = function(e, i) {
       return (t = Object.setPrototypeOf || {
           __proto__: []
@@ -26,7 +26,7 @@ var n = this && this.__extends || function() {
       e.prototype = null === i ? Object.create(i) : (n.prototype = i.prototype, new n());
     };
   }(),
-  o = this && this.__decorate || function(t, e, i, n) {
+  __decorate = this && this.__decorate || function(t, e, i, n) {
     var o,
       a = arguments.length,
       s = a < 3 ? e : null === n ? n = Object.getOwnPropertyDescriptor(e, i) : n;
@@ -44,7 +44,7 @@ var n = this && this.__extends || function() {
     }
     return s;
   };
-Object.defineProperty(i, "__esModule", {
+Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
 var StringUtil = require("./StringUtil"),
@@ -52,112 +52,112 @@ var StringUtil = require("./StringUtil"),
   RichTextCustom = require("./RichTextCustom"),
   HeaderUi = require("./HeaderUi"),
   GameConfigManager = require("./GameConfigManager"),
-  h = cc._decorator,
-  u = h.ccclass,
-  d = h.property,
-  p = function(t) {
-    function e() {
-      var e = null !== t && t.apply(this, arguments) || this;
-      e.content = null;
-      e.mainNode = null;
-      e.timeChange = 5;
-      e.speed = 2.5;
-      e.moveLength = 0;
-      e.isUpdatePosition = false;
-      e.isFirstMessage = true;
-      e.listMessages = [];
-      e.listMessageDefault = [];
-      e.timeCheckBroadCast = 0;
-      e.timeCount = 0;
-      e.lastMessageDefaultIndex = -1;
-      e.isSequence = false;
-      e.listBroadCast = [];
-      e.currIndex = 0;
-      return e;
+  ccDecorator = cc._decorator,
+  ccclass = ccDecorator.ccclass,
+  property = ccDecorator.property,
+  BroadCast = function(_super) {
+    function BroadCast() {
+      var _this = null !== _super && _super.apply(this, arguments) || this;
+      _this.content = null;
+      _this.mainNode = null;
+      _this.timeChange = 5;
+      _this.speed = 2.5;
+      _this.moveLength = 0;
+      _this.isUpdatePosition = false;
+      _this.isFirstMessage = true;
+      _this.listMessages = [];
+      _this.listMessageDefault = [];
+      _this.timeCheckBroadCast = 0;
+      _this.timeCount = 0;
+      _this.lastMessageDefaultIndex = -1;
+      _this.isSequence = false;
+      _this.listBroadCast = [];
+      _this.currIndex = 0;
+      return _this;
     }
-    var i;
-    n(e, t);
-    i = e;
-    e.getInstance = function() {
+    var BroadCast_1;
+    __extends(BroadCast, _super);
+    BroadCast_1 = BroadCast;
+    BroadCast.getInstance = function() {
       return this.instance;
     };
-    e.prototype.onLoad = function() {
-      i.instance = this;
+    BroadCast.prototype.onLoad = function() {
+      BroadCast_1.instance = this;
       this.mainNode.active = false;
       this.registryBroadCast();
-      if (i.messageDefault.length > 0) {
-        this.listMessageDefault = i.messageDefault;
+      if (BroadCast_1.messageDefault.length > 0) {
+        this.listMessageDefault = BroadCast_1.messageDefault;
       }
-      var t = GameConfigManager.default.getInstance().broadCastConfig;
-      if (null !== t && void 0 !== t) {
-        if (t.hasOwnProperty("config")) {
-          var e = t.config;
-          if (e.hasOwnProperty("isSequence")) {
-            this.isSequence = e.isSequence;
+      var broadCastConfig = GameConfigManager.default.getInstance().broadCastConfig;
+      if (null !== broadCastConfig && void 0 !== broadCastConfig) {
+        if (broadCastConfig.hasOwnProperty("config")) {
+          var config = broadCastConfig.config;
+          if (config.hasOwnProperty("isSequence")) {
+            this.isSequence = config.isSequence;
           }
         }
-        if (t.hasOwnProperty("listBroadCast")) {
-          this.listBroadCast = t.listBroadCast;
+        if (broadCastConfig.hasOwnProperty("listBroadCast")) {
+          this.listBroadCast = broadCastConfig.listBroadCast;
         }
       }
     };
-    e.prototype.reset = function() {
+    BroadCast.prototype.reset = function() {
       this.isUpdatePosition = false;
       this.timeCheckBroadCast = 0;
       this.timeCount = 0;
       this.lastMessageDefaultIndex = -1;
       this.listMessages = [];
     };
-    e.prototype.start = function() {};
-    e.prototype.disable = function() {};
-    e.prototype.registryBroadCast = function() {};
-    e.prototype.update = function(t) {
+    BroadCast.prototype.start = function() {};
+    BroadCast.prototype.disable = function() {};
+    BroadCast.prototype.registryBroadCast = function() {};
+    BroadCast.prototype.update = function(dt) {
       if ("mu9" == GameConfigManager.default.getInstance().webccBrand) {
-        if (null != i.instance) {
-          i.instance.hide(false);
+        if (null != BroadCast_1.instance) {
+          BroadCast_1.instance.hide(false);
         }
-        if (null != i.instanceBigWin) {
-          i.instanceBigWin.hide(false);
+        if (null != BroadCast_1.instanceBigWin) {
+          BroadCast_1.instanceBigWin.hide(false);
         }
       }
-      this.timeCheckBroadCast += t;
+      this.timeCheckBroadCast += dt;
       if (this.timeCheckBroadCast >= 1) {
         this.timeCheckBroadCast = 0;
         this.checkBroadCast();
       }
       if (this.isUpdatePosition) {
-        this.timeCount += t;
+        this.timeCount += dt;
         if (this.timeCount >= this.timeChange) {
           this.timeCount = 0;
           this.finishShow();
         }
       }
     };
-    e.prototype.checkBroadCast = function() {
+    BroadCast.prototype.checkBroadCast = function() {
       if (null != this.content && 0 == this.isUpdatePosition) {
         this.showBroadCastDefault();
       }
     };
-    e.prototype.showRandom = function() {
-      var t = StringUtil.default.getRandomInt(i.listBroadCastMessage.length);
-      this.show(i.listBroadCastMessage[t]);
+    BroadCast.prototype.showRandom = function() {
+      var randomIndex = StringUtil.default.getRandomInt(BroadCast_1.listBroadCastMessage.length);
+      this.show(BroadCast_1.listBroadCastMessage[randomIndex]);
     };
-    e.prototype.onReceiveBroadCast = function(t) {
-      var e = t.mgs,
-        i = t.params;
-      if (e) {
-        if (e = e.replace(/\t/gi, "      "), void 0 != i && i.length > 0) {
-          for (var n = 0; n < i.length; n++) {
-            var o = i[n];
-            e = n % 2 == 0 ? e.replace(/%c/i, "<color=#ff6600> " + o + "</c>") : e.replace(/%y/i, "<color=#f71e1e> " + o + "</c>");
+    BroadCast.prototype.onReceiveBroadCast = function(broadCastData) {
+      var message = broadCastData.mgs,
+        params = broadCastData.params;
+      if (message) {
+        if (message = message.replace(/\t/gi, "      "), void 0 != params && params.length > 0) {
+          for (var paramIndex = 0; paramIndex < params.length; paramIndex++) {
+            var param = params[paramIndex];
+            message = paramIndex % 2 == 0 ? message.replace(/%c/i, "<color=#ff6600> " + param + "</c>") : message.replace(/%y/i, "<color=#f71e1e> " + param + "</c>");
           }
         }
-        this.listMessages.push(e);
+        this.listMessages.push(message);
         this.show(null);
       }
     };
-    e.prototype.setString = function(t) {
-      this.content.setString(t);
+    BroadCast.prototype.setString = function(text) {
+      this.content.setString(text);
       if (this.isSequence) {
         this.timeChange = this.listBroadCast[this.currIndex].time;
         this.currIndex++;
@@ -166,9 +166,9 @@ var StringUtil = require("./StringUtil"),
         }
       }
     };
-    e.prototype.show = function(t) {
-      if (void 0 === t) {
-        t = null;
+    BroadCast.prototype.show = function(message) {
+      if (void 0 === message) {
+        message = null;
       }
       if (null != MiniGameNode.default.instance) {
         MiniGameNode.default.instance.updateBroadCastPosition();
@@ -178,12 +178,12 @@ var StringUtil = require("./StringUtil"),
         if (this.timeCount > 0 && this.timeCount < this.timeChange) {
           this.isUpdatePosition = true;
         } else {
-          if (null == t || 0 != t.length) {
-            if (null != t) {
+          if (null == message || 0 != message.length) {
+            if (null != message) {
               if (this.mainNode.active && this.isUpdatePosition) {
-                this.listMessages.push(t);
+                this.listMessages.push(message);
               } else {
-                this.setString(t);
+                this.setString(message);
                 this.mainNode.active = true;
                 this.moveLength = this.content.node.getContentSize().width + this.node.getContentSize().width;
                 this.isUpdatePosition = true;
@@ -201,57 +201,57 @@ var StringUtil = require("./StringUtil"),
         this.mainNode.active = false;
       }
     };
-    e.prototype.showBroadCastDefault = function() {
+    BroadCast.prototype.showBroadCastDefault = function() {
       if (0 != this.listBroadCast.length) {
         if (this.listMessages.length > 0) {
           if (0 == this.isUpdatePosition) {
             this.show(this.popMessage());
           }
         } else {
-          var t,
-            e = 0;
+          var text,
+            messageIndex = 0;
           if (this.isSequence) {
-            e = this.currIndex;
+            messageIndex = this.currIndex;
           } else {
-            if (e = StringUtil.default.getRandomInt(this.listBroadCast.length), this.listBroadCast.length > 1) {
-              for (; e == this.lastMessageDefaultIndex;) {
-                e = StringUtil.default.getRandomInt(this.listBroadCast.length);
+            if (messageIndex = StringUtil.default.getRandomInt(this.listBroadCast.length), this.listBroadCast.length > 1) {
+              for (; messageIndex == this.lastMessageDefaultIndex;) {
+                messageIndex = StringUtil.default.getRandomInt(this.listBroadCast.length);
               }
             }
-            this.lastMessageDefaultIndex = e;
+            this.lastMessageDefaultIndex = messageIndex;
           }
-          t = this.listBroadCast[e].text;
-          this.show(t);
+          text = this.listBroadCast[messageIndex].text;
+          this.show(text);
         }
       }
     };
-    e.prototype.popMessage = function() {
+    BroadCast.prototype.popMessage = function() {
       return this.listMessages.length > 0 ? this.listMessages.shift() : (this.showBroadCastDefault(), "");
     };
-    e.prototype.finishShow = function() {
+    BroadCast.prototype.finishShow = function() {
       this.isUpdatePosition = false;
       this.show(this.popMessage());
     };
-    e.prototype.hide = function(t) {
-      if (void 0 === t) {
-        t = false;
+    BroadCast.prototype.hide = function(stopActions) {
+      if (void 0 === stopActions) {
+        stopActions = false;
       }
       this.mainNode.active = false;
       this.isUpdatePosition = false;
-      if (t) {
+      if (stopActions) {
         this.node.stopAllActions();
         this.content.node.stopAllActions();
         this.content.resetOpacityListLabel();
       }
     };
-    e.listBroadCastMessage = [];
-    e.messageDefault = [];
-    e.instance = null;
-    e.instanceBigWin = null;
-    o([d(RichTextCustom.default)], e.prototype, "content", void 0);
-    o([d(cc.Node)], e.prototype, "mainNode", void 0);
-    o([d], e.prototype, "speed", void 0);
-    return e = i = o([u], e);
+    BroadCast.listBroadCastMessage = [];
+    BroadCast.messageDefault = [];
+    BroadCast.instance = null;
+    BroadCast.instanceBigWin = null;
+    __decorate([property(RichTextCustom.default)], BroadCast.prototype, "content", void 0);
+    __decorate([property(cc.Node)], BroadCast.prototype, "mainNode", void 0);
+    __decorate([property], BroadCast.prototype, "speed", void 0);
+    return BroadCast = BroadCast_1 = __decorate([ccclass], BroadCast);
   }(cc.Component);
-i.default = p;
+moduleExports.default = BroadCast;
 void 0;

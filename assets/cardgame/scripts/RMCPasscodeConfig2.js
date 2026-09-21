@@ -1,10 +1,10 @@
-var t = require,
-  e = module,
-  i = exports;
+var requireRef = require,
+  moduleRef = module,
+  moduleExports = exports;
 "use strict";
 void 0;
-var n = this && this.__assign || function() {
-  return (n = Object.assign || function(t) {
+var __assign = this && this.__assign || function() {
+  return (__assign = Object.assign || function(t) {
     for (var e, i = 1, n = arguments.length; i < n; i++) {
       for (var o in e = arguments[i]) {
         if (Object.prototype.hasOwnProperty.call(e, o)) {
@@ -15,16 +15,16 @@ var n = this && this.__assign || function() {
     return t;
   }).apply(this, arguments);
 };
-Object.defineProperty(i, "__esModule", {
+Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
 var GameConfigManager = require("./GameConfigManager"),
-  a = {
+  defaultConfig = {
     enable: true,
     urlAnalytic: ""
   };
-i.getPasscodeConfig = function() {
-  var t = GameConfigManager.default.getInstance().getConfig("passCodeConfig");
-  return n({}, a, t);
+moduleExports.getPasscodeConfig = function() {
+  var config = GameConfigManager.default.getInstance().getConfig("passCodeConfig");
+  return __assign({}, defaultConfig, config);
 };
 void 0;

@@ -1,9 +1,9 @@
-var t = require,
-  e = module,
-  i = exports;
+var requireRef = require,
+  moduleRef = module,
+  moduleExports = exports;
 "use strict";
 void 0;
-var n = this && this.__decorate || function(t, e, i, n) {
+var __decorate = this && this.__decorate || function(t, e, i, n) {
   var o,
     a = arguments.length,
     s = a < 3 ? e : null === n ? n = Object.getOwnPropertyDescriptor(e, i) : n;
@@ -21,46 +21,46 @@ var n = this && this.__decorate || function(t, e, i, n) {
   }
   return s;
 };
-Object.defineProperty(i, "__esModule", {
+Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
-var o = cc._decorator,
-  a = o.ccclass,
-  s = (o.property, function() {
-    function t() {
+var ccDecorator = cc._decorator,
+  ccclass = ccDecorator.ccclass,
+  MessageHandlerBase = (ccDecorator.property, function() {
+    function MessageHandlerBase() {
       this.socket = null;
       this.active = true;
     }
-    var e;
-    e = t;
-    t.setStaticSocket = function(t) {
-      e.staticSocket = t;
+    var MessageHandlerBase_1;
+    MessageHandlerBase_1 = MessageHandlerBase;
+    MessageHandlerBase.setStaticSocket = function(socket) {
+      MessageHandlerBase_1.staticSocket = socket;
     };
-    t.prototype.setSocket = function(t) {
-      this.socket = t;
+    MessageHandlerBase.prototype.setSocket = function(socket) {
+      this.socket = socket;
     };
-    t.prototype.printLog = function(t, e) {
-      if (void 0 === e) {
-        e = true;
+    MessageHandlerBase.prototype.printLog = function(message, shouldLog) {
+      if (void 0 === shouldLog) {
+        shouldLog = true;
       }
     };
-    t.prototype.getTag = function() {
+    MessageHandlerBase.prototype.getTag = function() {
       return "";
     };
-    t.prototype.sendData = function(t) {
+    MessageHandlerBase.prototype.sendData = function(data) {
       if (null != this.socket && void 0 != this.socket) {
-        this.socket.sendData(t);
-        this.printLog("sendData: " + t);
+        this.socket.sendData(data);
+        this.printLog("sendData: " + data);
       } else {
         this.printLog("sendData: socket null or undefined");
       }
     };
-    t.prototype.init = function() {
-      this.socket = e.staticSocket;
+    MessageHandlerBase.prototype.init = function() {
+      this.socket = MessageHandlerBase_1.staticSocket;
     };
-    t.prototype.receiveMessage = function(t, e, i) {};
-    t.staticSocket = null;
-    return t = e = n([a], t);
+    MessageHandlerBase.prototype.receiveMessage = function(cmd, raw, data) {};
+    MessageHandlerBase.staticSocket = null;
+    return MessageHandlerBase = MessageHandlerBase_1 = __decorate([ccclass], MessageHandlerBase);
   }());
-i.default = s;
+moduleExports.default = MessageHandlerBase;
 void 0;

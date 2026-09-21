@@ -1,5 +1,5 @@
-var t = require,
-  e = module,
+var requireRef = require,
+  moduleRef = module,
   moduleExports = exports;
 "use strict";
 void 0;
@@ -285,12 +285,12 @@ var SCENES_WITHOUT_ROOM_SETTINGS = [GameDefine.GameConfigs.SceneName.Lode, GameD
     PopupSetting.prototype.setSettingKey = function(settingKey) {
       return __awaiter(this, void 0, void 0, function() {
         var targetNode, worldPosition, localPosition;
-        return __generator(this, function(a) {
-          switch (a.label) {
+        return __generator(this, function(generatorState) {
+          switch (generatorState.label) {
             case 0:
               return [4, GameUtils.delay(50)];
             case 1:
-              switch (a.sent(), targetNode = null, settingKey) {
+              switch (generatorState.sent(), targetNode = null, settingKey) {
                 case moduleExports.SETTING_KEY_PASSCODE:
                   targetNode = this.nodePasscode;
                   break;

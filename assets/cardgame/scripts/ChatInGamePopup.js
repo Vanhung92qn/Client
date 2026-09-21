@@ -1,9 +1,9 @@
-var t = require,
-  e = module,
-  i = exports;
+var requireRef = require,
+  moduleRef = module,
+  moduleExports = exports;
 "use strict";
 void 0;
-var n = this && this.__extends || function() {
+var __extends = this && this.__extends || function() {
     var t = function(e, i) {
       return (t = Object.setPrototypeOf || {
           __proto__: []
@@ -26,7 +26,7 @@ var n = this && this.__extends || function() {
       e.prototype = null === i ? Object.create(i) : (n.prototype = i.prototype, new n());
     };
   }(),
-  o = this && this.__decorate || function(t, e, i, n) {
+  __decorate = this && this.__decorate || function(t, e, i, n) {
     var o,
       a = arguments.length,
       s = a < 3 ? e : null === n ? n = Object.getOwnPropertyDescriptor(e, i) : n;
@@ -44,7 +44,7 @@ var n = this && this.__extends || function() {
     }
     return s;
   };
-Object.defineProperty(i, "__esModule", {
+Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
 var ChatItem = require("./ChatItem"),
@@ -55,70 +55,70 @@ var ChatItem = require("./ChatItem"),
   GamePlayManager = require("./GamePlayManager"),
   MessageCardGameHandler = require("./MessageCardGameHandler"),
   TabIdolLiveController = require("./TabIdolLiveController"),
-  p = cc._decorator,
-  f = p.ccclass,
-  g = p.property,
-  m = (new cc.Color(61, 253, 255, 255), new cc.Color(235, 118, 0, 255), new cc.Color(255, 45, 45, 255)),
-  y = function(t) {
-    function e() {
-      var e = null !== t && t.apply(this, arguments) || this;
-      e.chatItemPrefab = null;
-      e.contentNode = null;
-      e.contentEmoNode = null;
-      e.contentChatNode = null;
-      e.listItemChat = [];
-      e.editBoxCustomChat = null;
-      e.btnChatEmo = null;
-      e.btnChatText = null;
-      e.tabIdolLiveController = null;
-      e.bonusWebMobileSafari = -40;
-      e.activeBlur = false;
-      e.gameController = null;
-      e.onCloseCallback = function() {};
-      return e;
+  ccDecorator = cc._decorator,
+  ccclass = ccDecorator.ccclass,
+  property = ccDecorator.property,
+  colorChatSystem = (new cc.Color(61, 253, 255, 255), new cc.Color(235, 118, 0, 255), new cc.Color(255, 45, 45, 255)),
+  ChatInGamePopup = function(_super) {
+    function ChatInGamePopup() {
+      var _this = null !== _super && _super.apply(this, arguments) || this;
+      _this.chatItemPrefab = null;
+      _this.contentNode = null;
+      _this.contentEmoNode = null;
+      _this.contentChatNode = null;
+      _this.listItemChat = [];
+      _this.editBoxCustomChat = null;
+      _this.btnChatEmo = null;
+      _this.btnChatText = null;
+      _this.tabIdolLiveController = null;
+      _this.bonusWebMobileSafari = -40;
+      _this.activeBlur = false;
+      _this.gameController = null;
+      _this.onCloseCallback = function() {};
+      return _this;
     }
-    n(e, t);
-    e.prototype.loadData = function(t, e) {
-      if (void 0 === e) {
-        e = [];
+    __extends(ChatInGamePopup, _super);
+    ChatInGamePopup.prototype.loadData = function(defaultChatList, oldChatList) {
+      if (void 0 === oldChatList) {
+        oldChatList = [];
       }
-      for (var i = this.listItemChat.length; i < t.length + e.length; ++i) {
-        var n = cc.instantiate(this.chatItemPrefab);
-        n.parent = this.contentNode;
-        (o = n.getComponent(ChatItem.default)).init(this);
-        this.listItemChat.push(o);
+      for (var index = this.listItemChat.length; index < defaultChatList.length + oldChatList.length; ++index) {
+        var itemNode = cc.instantiate(this.chatItemPrefab);
+        itemNode.parent = this.contentNode;
+        (chatItem = itemNode.getComponent(ChatItem.default)).init(this);
+        this.listItemChat.push(chatItem);
       }
-      for (i = 0; i < e.length; ++i) {
-        if (!(o = this.listItemChat[i]).node.active) {
-          o.node.active = true;
+      for (index = 0; index < oldChatList.length; ++index) {
+        if (!(chatItem = this.listItemChat[index]).node.active) {
+          chatItem.node.active = true;
         }
-        o.setText(e[i]);
-        o.setIsOldChat(true);
+        chatItem.setText(oldChatList[index]);
+        chatItem.setIsOldChat(true);
       }
-      for (i = e.length; i < e.length + t.length; ++i) {
-        if (!(o = this.listItemChat[i]).node.active) {
-          o.node.active = true;
+      for (index = oldChatList.length; index < oldChatList.length + defaultChatList.length; ++index) {
+        if (!(chatItem = this.listItemChat[index]).node.active) {
+          chatItem.node.active = true;
         }
-        o.setText(t[i - e.length]);
-        o.setIsOldChat(false);
+        chatItem.setText(defaultChatList[index - oldChatList.length]);
+        chatItem.setIsOldChat(false);
       }
-      for (i = e.length + t.length; i < this.listItemChat.length; ++i) {
-        var o;
-        (o = this.listItemChat[i]).node.active = false;
+      for (index = oldChatList.length + defaultChatList.length; index < this.listItemChat.length; ++index) {
+        var chatItem;
+        (chatItem = this.listItemChat[index]).node.active = false;
       }
     };
-    e.prototype.show = function(t) {
-      var e = this;
-      if (void 0 === t && (t = true), !(this.node.getNumberOfRunningActions() > 0)) {
-        var i = 0;
+    ChatInGamePopup.prototype.show = function(allowFocus) {
+      var self = this;
+      if (void 0 === allowFocus && (allowFocus = true), !(this.node.getNumberOfRunningActions() > 0)) {
+        var posY = 0;
         if (GamePlayManager.default.getInstance().isWebMobileSafari()) {
-          i = this.bonusWebMobileSafari;
+          posY = this.bonusWebMobileSafari;
         }
-        this.node.position = new cc.Vec2(this.node.parent.width / 2 + this.node.width / 2, i);
+        this.node.position = new cc.Vec2(this.node.parent.width / 2 + this.node.width / 2, posY);
         this.node.runAction(cc.sequence(cc.moveTo(.5, new cc.Vec2(this.node.parent.width / 2 - this.node.width / 2, this.node.position.y))
           .easing(cc.easeExponentialOut()), cc.callFunc(function() {
-            if (cc.sys.platform === cc.sys.DESKTOP_BROWSER && t) {
-              e.editBoxCustomChat.focus();
+            if (cc.sys.platform === cc.sys.DESKTOP_BROWSER && allowFocus) {
+              self.editBoxCustomChat.focus();
             }
           })));
         if (GamePlayManager.default.getInstance().isEmoChat && false === this.contentEmoNode.active || false === GamePlayManager.default.getInstance().isEmoChat &&
@@ -127,40 +127,40 @@ var ChatItem = require("./ChatItem"),
         }
       }
     };
-    e.prototype.blurEdibox = function() {
+    ChatInGamePopup.prototype.blurEdibox = function() {
       this.activeBlur = true;
       this.editBoxCustomChat.blur();
     };
-    e.prototype.hide = function() {
+    ChatInGamePopup.prototype.hide = function() {
       this.onCloseCallback();
       this.node.position = new cc.Vec2(this.node.parent.width / 2 + this.node.width / 2, this.node.position.y);
       this.node.active = false;
       this.activeBlur = false;
     };
-    e.prototype.onEditText = function() {
+    ChatInGamePopup.prototype.onEditText = function() {
       this.editBoxCustomChat.focus();
     };
-    e.prototype.onClickHide = function() {
-      var t = this;
+    ChatInGamePopup.prototype.onClickHide = function() {
+      var self = this;
       MusicPlayer.default.getInstance().playbtnClick(.5);
       if (!(this.node.getNumberOfRunningActions() > 0)) {
         this.onCloseCallback();
         this.node.runAction(cc.sequence(cc.moveTo(.5, new cc.Vec2(this.node.parent.width / 2 + this.node.width / 2, this.node.position.y))
           .easing(cc.easeExponentialOut()), cc.callFunc(function() {
-            t.node.active = false;
+            self.node.active = false;
           })));
       }
     };
-    e.prototype.onClickShowInputField = function() {
+    ChatInGamePopup.prototype.onClickShowInputField = function() {
       MusicPlayer.default.getInstance().playbtnClick(.6);
-      var t = this.editBoxCustomChat.string;
-      if (!StringUtil.default.isNullOrEmpty(t)) {
-        this.sendChat(t);
-        GameConfigManager.default.getInstance().setOldChat(t);
+      var chatText = this.editBoxCustomChat.string;
+      if (!StringUtil.default.isNullOrEmpty(chatText)) {
+        this.sendChat(chatText);
+        GameConfigManager.default.getInstance().setOldChat(chatText);
         this.editBoxCustomChat.string = "";
       }
     };
-    e.prototype.sendChat = function(t) {
+    ChatInGamePopup.prototype.sendChat = function(text) {
       if (GamePlayManager.default.getInstance().gameID !== MessageCardGameHandler.GAME.BAU_CUA && GamePlayManager.default.getInstance().gameID !== MessageCardGameHandler.GAME.XOCDIA) {
         this.onClickHide();
       } else if (cc.sys.platform === cc.sys.DESKTOP_BROWSER && this.scheduleOnce(function() {
@@ -169,40 +169,40 @@ var ChatItem = require("./ChatItem"),
             this.editBoxCustomChat.focus();
           }
         }, .2), null !== this.gameController && void 0 !== this.gameController) {
-        var e = this.gameController.checkSpamChat(t);
-        if (!StringUtil.default.isNullOrEmpty(e)) {
-          return void(null != this.gameController.cardGameTableController && this.gameController.cardGameTableController.loadChat(e, "",
-            true, -1, m, m));
+        var spamWarning = this.gameController.checkSpamChat(text);
+        if (!StringUtil.default.isNullOrEmpty(spamWarning)) {
+          return void(null != this.gameController.cardGameTableController && this.gameController.cardGameTableController.loadChat(spamWarning, "",
+            true, -1, colorChatSystem, colorChatSystem));
         }
       }
-      CardGameCommonRequest.default.getInstance().sendChat(t);
+      CardGameCommonRequest.default.getInstance().sendChat(text);
       GamePlayManager.default.getInstance().lastChatTime = new Date().getTime();
       GamePlayManager.default.getInstance().numChatInGame++;
-      var i = GamePlayManager.default.getInstance().lastChatTime - GamePlayManager.default.getInstance().lastChatTime1Minute;
-      if (i >= 6e4) {
+      var elapsedMs = GamePlayManager.default.getInstance().lastChatTime - GamePlayManager.default.getInstance().lastChatTime1Minute;
+      if (elapsedMs >= 6e4) {
         GamePlayManager.default.getInstance().numChatInGame = 0;
         GamePlayManager.default.getInstance().lastChatTime1Minute = GamePlayManager.default.getInstance().lastChatTime;
       } else {
         if (GamePlayManager.default.getInstance().numChatInGame >= 8) {
-          GamePlayManager.default.getInstance().lockChatInTime = GamePlayManager.default.getInstance().lastChatTime + 6e4 - i;
+          GamePlayManager.default.getInstance().lockChatInTime = GamePlayManager.default.getInstance().lastChatTime + 6e4 - elapsedMs;
           GamePlayManager.default.getInstance().numChatInGame = 0;
           GamePlayManager.default.getInstance().lastChatTime1Minute = GamePlayManager.default.getInstance().lastChatTime;
         }
       }
       GamePlayManager.default.getInstance().countMatchNotInteract = 0;
     };
-    e.prototype.onEditBoxReturn = function() {
+    ChatInGamePopup.prototype.onEditBoxReturn = function() {
       if (this.activeBlur) {
         this.activeBlur = false;
       } else {
         this.onClickShowInputField();
       }
     };
-    e.prototype.onClickEditChat = function() {
+    ChatInGamePopup.prototype.onClickEditChat = function() {
       MusicPlayer.default.getInstance().playbtnClick();
     };
-    e.prototype.ontextChanged = function(t, e, i) {};
-    e.prototype.onCLickOpenEmo = function() {
+    ChatInGamePopup.prototype.ontextChanged = function(text, editbox, customEventData) {};
+    ChatInGamePopup.prototype.onCLickOpenEmo = function() {
       if (this.contentEmoNode.active) {
         this.contentEmoNode.active = false;
         this.contentNode.active = true;
@@ -223,21 +223,21 @@ var ChatItem = require("./ChatItem"),
         GamePlayManager.default.getInstance().isEmoChat = true;
       }
     };
-    e.prototype.setTrackingGameID = function(t) {
+    ChatInGamePopup.prototype.setTrackingGameID = function(gameID) {
       if (this.tabIdolLiveController) {
-        this.tabIdolLiveController.setTrackingGameID(t);
+        this.tabIdolLiveController.setTrackingGameID(gameID);
       }
     };
-    o([g(cc.Prefab)], e.prototype, "chatItemPrefab", void 0);
-    o([g(cc.Node)], e.prototype, "contentNode", void 0);
-    o([g(cc.Node)], e.prototype, "contentEmoNode", void 0);
-    o([g(cc.Node)], e.prototype, "contentChatNode", void 0);
-    o([g(cc.EditBox)], e.prototype, "editBoxCustomChat", void 0);
-    o([g(cc.Node)], e.prototype, "btnChatEmo", void 0);
-    o([g(cc.Node)], e.prototype, "btnChatText", void 0);
-    o([g(TabIdolLiveController.default)], e.prototype, "tabIdolLiveController", void 0);
-    o([g], e.prototype, "bonusWebMobileSafari", void 0);
-    return e = o([f], e);
+    __decorate([property(cc.Prefab)], ChatInGamePopup.prototype, "chatItemPrefab", void 0);
+    __decorate([property(cc.Node)], ChatInGamePopup.prototype, "contentNode", void 0);
+    __decorate([property(cc.Node)], ChatInGamePopup.prototype, "contentEmoNode", void 0);
+    __decorate([property(cc.Node)], ChatInGamePopup.prototype, "contentChatNode", void 0);
+    __decorate([property(cc.EditBox)], ChatInGamePopup.prototype, "editBoxCustomChat", void 0);
+    __decorate([property(cc.Node)], ChatInGamePopup.prototype, "btnChatEmo", void 0);
+    __decorate([property(cc.Node)], ChatInGamePopup.prototype, "btnChatText", void 0);
+    __decorate([property(TabIdolLiveController.default)], ChatInGamePopup.prototype, "tabIdolLiveController", void 0);
+    __decorate([property], ChatInGamePopup.prototype, "bonusWebMobileSafari", void 0);
+    return ChatInGamePopup = __decorate([ccclass], ChatInGamePopup);
   }(cc.Component);
-i.default = y;
+moduleExports.default = ChatInGamePopup;
 void 0;

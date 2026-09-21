@@ -1,9 +1,9 @@
-var t = require,
-  e = module,
-  i = exports;
+var requireRef = require,
+  moduleRef = module,
+  moduleExports = exports;
 "use strict";
 void 0;
-var n = this && this.__extends || function() {
+var __extends = this && this.__extends || function() {
     var t = function(e, i) {
       return (t = Object.setPrototypeOf || {
           __proto__: []
@@ -26,7 +26,7 @@ var n = this && this.__extends || function() {
       e.prototype = null === i ? Object.create(i) : (n.prototype = i.prototype, new n());
     };
   }(),
-  o = this && this.__decorate || function(t, e, i, n) {
+  __decorate = this && this.__decorate || function(t, e, i, n) {
     var o,
       a = arguments.length,
       s = a < 3 ? e : null === n ? n = Object.getOwnPropertyDescriptor(e, i) : n;
@@ -44,221 +44,221 @@ var n = this && this.__extends || function() {
     }
     return s;
   };
-Object.defineProperty(i, "__esModule", {
+Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
-var a = cc._decorator,
-  s = a.ccclass,
-  r = a.property,
-  c = function() {
+var ccDecorator = cc._decorator,
+  ccclass = ccDecorator.ccclass,
+  property = ccDecorator.property,
+  RichTextSegment = function() {
     return function() {
       this.Text = "";
       this.HexaColor = ";";
     };
   }(),
-  l = function(t) {
-    function e() {
-      var e = null !== t && t.apply(this, arguments) || this;
-      e.text = "";
-      e.prefabLabel = null;
-      e.layout = null;
-      e.currentText = "";
-      e.listLabel = [];
-      e.content = null;
-      e.maxLength = 200;
-      e.currLength = 0;
-      return e;
+  RichTextCustom = function(_super) {
+    function RichTextCustom() {
+      var _this = null !== _super && _super.apply(this, arguments) || this;
+      _this.text = "";
+      _this.prefabLabel = null;
+      _this.layout = null;
+      _this.currentText = "";
+      _this.listLabel = [];
+      _this.content = null;
+      _this.maxLength = 200;
+      _this.currLength = 0;
+      return _this;
     }
-    n(e, t);
-    e.prototype.start = function() {};
-    e.prototype.onDestroy = function() {
-      for (var t = 0; t < this.listLabel.length; t++) {
-        if (null != this.listLabel[t] && null != this.listLabel[t].node) {
-          this.listLabel[t].node.destroy();
+    __extends(RichTextCustom, _super);
+    RichTextCustom.prototype.start = function() {};
+    RichTextCustom.prototype.onDestroy = function() {
+      for (var labelIndex = 0; labelIndex < this.listLabel.length; labelIndex++) {
+        if (null != this.listLabel[labelIndex] && null != this.listLabel[labelIndex].node) {
+          this.listLabel[labelIndex].node.destroy();
         }
       }
       this.listLabel = [];
     };
-    e.prototype.setString = function(t) {
-      this.createLabels(t);
+    RichTextCustom.prototype.setString = function(text) {
+      this.createLabels(text);
       if (null != this.layout) {
         this.layout.updateLayout();
       }
     };
-    e.prototype.parseData = function(t) {
-      var e = [],
-        i = t.indexOf("color"),
-        n = -1,
-        o = -1,
-        a = "",
-        s = "",
-        r = 0;
+    RichTextCustom.prototype.parseData = function(rawText) {
+      var segments = [],
+        colorTagIndex = rawText.indexOf("color"),
+        hexStartIndex = -1,
+        tagEndIndex = -1,
+        segmentText = "",
+        hexColor = "",
+        plainTextStart = 0;
       do {
-        if (i >= 0) {
-          for (var l = i; l < t.length; l++) {
-            if ("#" != t[l] || (n = l, -1 == r)) {
-              if (">" == t[l] && (o = l, s = t.substring(n, l)), "<" == t[l]) {
-                a = t.substring(o + 1, l);
-                (u = new c()).Text = a;
-                u.HexaColor = s;
-                e.push(u);
-                for (var h = l; h < t.length; h++) {
-                  if (">" == t[h]) {
-                    r = h + 1;
+        if (colorTagIndex >= 0) {
+          for (var charIndex = colorTagIndex; charIndex < rawText.length; charIndex++) {
+            if ("#" != rawText[charIndex] || (hexStartIndex = charIndex, -1 == plainTextStart)) {
+              if (">" == rawText[charIndex] && (tagEndIndex = charIndex, hexColor = rawText.substring(hexStartIndex, charIndex)), "<" == rawText[charIndex]) {
+                segmentText = rawText.substring(tagEndIndex + 1, charIndex);
+                (segment = new RichTextSegment()).Text = segmentText;
+                segment.HexaColor = hexColor;
+                segments.push(segment);
+                for (var closeTagIndex = charIndex; closeTagIndex < rawText.length; closeTagIndex++) {
+                  if (">" == rawText[closeTagIndex]) {
+                    plainTextStart = closeTagIndex + 1;
                     break;
                   }
                 }
-                a = "";
-                s = "";
-                n = -1;
-                o = -1;
+                segmentText = "";
+                hexColor = "";
+                hexStartIndex = -1;
+                tagEndIndex = -1;
                 break;
               }
             } else {
-              a = t.substring(r, i - 1);
-              (u = new c()).Text = a;
-              u.HexaColor = "";
-              e.push(u);
-              r = -1;
+              segmentText = rawText.substring(plainTextStart, colorTagIndex - 1);
+              (segment = new RichTextSegment()).Text = segmentText;
+              segment.HexaColor = "";
+              segments.push(segment);
+              plainTextStart = -1;
             }
           }
         }
-        if ((i = t.indexOf("color", i + 1)) < 0) {
-          for (l = t.length - 1; l >= 0; l--) {
-            if (">" == t[l]) {
-              o = l;
+        if ((colorTagIndex = rawText.indexOf("color", colorTagIndex + 1)) < 0) {
+          for (charIndex = rawText.length - 1; charIndex >= 0; charIndex--) {
+            if (">" == rawText[charIndex]) {
+              tagEndIndex = charIndex;
               break;
             }
           }
-          var u;
-          a = t.substring(o + 1, t.length);
-          (u = new c()).Text = a;
-          u.HexaColor = "";
-          e.push(u);
+          var segment;
+          segmentText = rawText.substring(tagEndIndex + 1, rawText.length);
+          (segment = new RichTextSegment()).Text = segmentText;
+          segment.HexaColor = "";
+          segments.push(segment);
           break;
         }
-      } while (-1 != i);
-      return e;
+      } while (-1 != colorTagIndex);
+      return segments;
     };
-    e.prototype.createLabels = function(t) {
-      if (t != this.currentText) {
-        for (var e = this.parseData(t), i = 0; i < this.listLabel.length; i++) {
-          this.listLabel[i].node.active = false;
-          this.listLabel[i].node.parent = null;
-          this.listLabel[i].node.color = cc.color(255, 255, 255, 255);
-          this.listLabel[i].string = "";
+    RichTextCustom.prototype.createLabels = function(text) {
+      if (text != this.currentText) {
+        for (var segments = this.parseData(text), index = 0; index < this.listLabel.length; index++) {
+          this.listLabel[index].node.active = false;
+          this.listLabel[index].node.parent = null;
+          this.listLabel[index].node.color = cc.color(255, 255, 255, 255);
+          this.listLabel[index].string = "";
         }
-        if (0 == e.length) {
-          var n = null;
+        if (0 == segments.length) {
+          var label = null;
           if (this.listLabel.length > 0) {
-            n = this.listLabel[0];
+            label = this.listLabel[0];
           }
-          if (null == n) {
-            n = cc.instantiate(this.prefabLabel).getComponent(cc.Label);
-            this.listLabel.push(n);
+          if (null == label) {
+            label = cc.instantiate(this.prefabLabel).getComponent(cc.Label);
+            this.listLabel.push(label);
           }
-          n.node.active = true;
-          n.string = t;
-          n.node.parent = this.node;
+          label.node.active = true;
+          label.string = text;
+          label.node.parent = this.node;
         } else {
           this.currLength = 0;
           this.node.y = 0;
-          var o = 0,
-            a = false;
-          for (i = 0; i < e.length; i++) {
-            var s = e[i];
-            if (0 != s.Text.length) {
-              if ("\n" === s.Text.slice(0, 1) && (s.Text = s.Text.replace("\n", ""), a = true), null != this.content) {
-                for (var r = 0, c = 25, l = this.maxLength, h = 0; h < e.length; h++) {
-                  r += e[h].Text.length;
+          var labelIndex = 0,
+            wrapToNextLine = false;
+          for (index = 0; index < segments.length; index++) {
+            var segment = segments[index];
+            if (0 != segment.Text.length) {
+              if ("\n" === segment.Text.slice(0, 1) && (segment.Text = segment.Text.replace("\n", ""), wrapToNextLine = true), null != this.content) {
+                for (var totalTextLength = 0, fontSize = 25, wrapLimit = this.maxLength, segmentIndex = 0; segmentIndex < segments.length; segmentIndex++) {
+                  totalTextLength += segments[segmentIndex].Text.length;
                 }
-                if (r > 85) {
-                  c -= (r - 85) / 4;
-                  l = r / 2 - 10;
+                if (totalTextLength > 85) {
+                  fontSize -= (totalTextLength - 85) / 4;
+                  wrapLimit = totalTextLength / 2 - 10;
                 }
-                for (var u = s.Text.split(" "), d = 0; d < u.length; d++) {
-                  if (0 != u[d].length) {
-                    n = null;
-                    if (o < this.listLabel.length) {
-                      n = this.listLabel[o];
+                for (var words = segment.Text.split(" "), wordIndex = 0; wordIndex < words.length; wordIndex++) {
+                  if (0 != words[wordIndex].length) {
+                    label = null;
+                    if (labelIndex < this.listLabel.length) {
+                      label = this.listLabel[labelIndex];
                     }
-                    o++;
-                    if (null == n) {
-                      n = cc.instantiate(this.prefabLabel).getComponent(cc.Label);
-                      this.listLabel.push(n);
+                    labelIndex++;
+                    if (null == label) {
+                      label = cc.instantiate(this.prefabLabel).getComponent(cc.Label);
+                      this.listLabel.push(label);
                     }
-                    n.fontSize = c;
-                    n.node.active = true;
-                    n.string = u[d];
-                    this.currLength += n.string.length;
-                    if ("\n" === u[d].slice(0, 1)) {
-                      n.string = u[d] = u[d].replace("\n", "");
-                      a = true;
+                    label.fontSize = fontSize;
+                    label.node.active = true;
+                    label.string = words[wordIndex];
+                    this.currLength += label.string.length;
+                    if ("\n" === words[wordIndex].slice(0, 1)) {
+                      label.string = words[wordIndex] = words[wordIndex].replace("\n", "");
+                      wrapToNextLine = true;
                     }
-                    if (this.currLength >= l || a) {
-                      n.node.parent = this.content;
+                    if (this.currLength >= wrapLimit || wrapToNextLine) {
+                      label.node.parent = this.content;
                       this.node.y = 14;
                       this.content.y = -16;
                     } else {
-                      n.node.parent = this.node;
-                      if ("\n" === u[d].slice(-1)) {
-                        n.string = u[d] = u[d].replace("\n", "");
-                        a = true;
+                      label.node.parent = this.node;
+                      if ("\n" === words[wordIndex].slice(-1)) {
+                        label.string = words[wordIndex] = words[wordIndex].replace("\n", "");
+                        wrapToNextLine = true;
                       }
                     }
-                    n.node.x = 0;
-                    n.node.y = 0;
-                    if (s.HexaColor.length > 0) {
-                      n.node.color = this.node.color.fromHEX(s.HexaColor);
+                    label.node.x = 0;
+                    label.node.y = 0;
+                    if (segment.HexaColor.length > 0) {
+                      label.node.color = this.node.color.fromHEX(segment.HexaColor);
                     } else {
-                      n.node.color = cc.color(255, 255, 255, 255);
+                      label.node.color = cc.color(255, 255, 255, 255);
                     }
                   }
                 }
                 this.doActionFadeInListLabel();
               } else {
-                n = null;
-                if (i < this.listLabel.length) {
-                  n = this.listLabel[i];
+                label = null;
+                if (index < this.listLabel.length) {
+                  label = this.listLabel[index];
                 }
-                if (null == n) {
-                  n = cc.instantiate(this.prefabLabel).getComponent(cc.Label);
-                  this.listLabel.push(n);
+                if (null == label) {
+                  label = cc.instantiate(this.prefabLabel).getComponent(cc.Label);
+                  this.listLabel.push(label);
                 }
-                n.node.active = true;
-                n.string = s.Text;
-                n.node.parent = this.node;
-                n.node.x = 0;
-                n.node.y = 0;
-                if (s.HexaColor.length > 0) {
-                  n.node.color = this.node.color.fromHEX(s.HexaColor);
+                label.node.active = true;
+                label.string = segment.Text;
+                label.node.parent = this.node;
+                label.node.x = 0;
+                label.node.y = 0;
+                if (segment.HexaColor.length > 0) {
+                  label.node.color = this.node.color.fromHEX(segment.HexaColor);
                 } else {
-                  n.node.color = cc.color(255, 255, 255, 255);
+                  label.node.color = cc.color(255, 255, 255, 255);
                 }
               }
             }
           }
         }
-        this.currentText = t;
+        this.currentText = text;
       }
     };
-    e.prototype.doActionFadeInListLabel = function() {
-      for (var t = 0; t < this.listLabel.length; t++) {
-        this.listLabel[t].node.opacity = 0;
-        this.listLabel[t].node.runAction(cc.fadeIn(.5));
+    RichTextCustom.prototype.doActionFadeInListLabel = function() {
+      for (var labelIndex = 0; labelIndex < this.listLabel.length; labelIndex++) {
+        this.listLabel[labelIndex].node.opacity = 0;
+        this.listLabel[labelIndex].node.runAction(cc.fadeIn(.5));
       }
     };
-    e.prototype.resetOpacityListLabel = function() {
-      for (var t = 0; t < this.listLabel.length; t++) {
-        this.listLabel[t].node.opacity = 255;
+    RichTextCustom.prototype.resetOpacityListLabel = function() {
+      for (var labelIndex = 0; labelIndex < this.listLabel.length; labelIndex++) {
+        this.listLabel[labelIndex].node.opacity = 255;
       }
     };
-    o([r], e.prototype, "text", void 0);
-    o([r(cc.Prefab)], e.prototype, "prefabLabel", void 0);
-    o([r(cc.Layout)], e.prototype, "layout", void 0);
-    o([r(cc.Node)], e.prototype, "content", void 0);
-    o([r], e.prototype, "maxLength", void 0);
-    return e = o([s], e);
+    __decorate([property], RichTextCustom.prototype, "text", void 0);
+    __decorate([property(cc.Prefab)], RichTextCustom.prototype, "prefabLabel", void 0);
+    __decorate([property(cc.Layout)], RichTextCustom.prototype, "layout", void 0);
+    __decorate([property(cc.Node)], RichTextCustom.prototype, "content", void 0);
+    __decorate([property], RichTextCustom.prototype, "maxLength", void 0);
+    return RichTextCustom = __decorate([ccclass], RichTextCustom);
   }(cc.Component);
-i.default = l;
+moduleExports.default = RichTextCustom;
 void 0;

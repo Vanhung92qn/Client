@@ -1,9 +1,9 @@
-var t = require,
-  e = module,
-  i = exports;
+var requireRef = require,
+  moduleRef = module,
+  moduleExports = exports;
 "use strict";
 void 0;
-var n = this && this.__extends || function() {
+var __extends = this && this.__extends || function() {
     var t = function(e, i) {
       return (t = Object.setPrototypeOf || {
           __proto__: []
@@ -26,7 +26,7 @@ var n = this && this.__extends || function() {
       e.prototype = null === i ? Object.create(i) : (n.prototype = i.prototype, new n());
     };
   }(),
-  o = this && this.__decorate || function(t, e, i, n) {
+  __decorate = this && this.__decorate || function(t, e, i, n) {
     var o,
       a = arguments.length,
       s = a < 3 ? e : null === n ? n = Object.getOwnPropertyDescriptor(e, i) : n;
@@ -44,27 +44,27 @@ var n = this && this.__extends || function() {
     }
     return s;
   };
-Object.defineProperty(i, "__esModule", {
+Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
 var GameConfigManager = require("./GameConfigManager"),
   EditBoxCustom = require("./EditBoxCustom"),
-  r = cc._decorator,
-  c = r.ccclass,
-  l = r.property,
-  h = function(t) {
-    function e() {
-      var e = null !== t && t.apply(this, arguments) || this;
-      e.isAllowRotate = false;
-      e.fontOnRotate = 20;
-      e.offsetXOnRotate = 25;
-      e.offsetYOnRotate = 0;
-      e.originalFontSize = 0;
-      e.isForceNoScrollStart = false;
-      return e;
+  _decorator = cc._decorator,
+  ccclass = _decorator.ccclass,
+  property = _decorator.property,
+  LabelEditbox = function(_super) {
+    function LabelEditbox() {
+      var _this = null !== _super && _super.apply(this, arguments) || this;
+      _this.isAllowRotate = false;
+      _this.fontOnRotate = 20;
+      _this.offsetXOnRotate = 25;
+      _this.offsetYOnRotate = 0;
+      _this.originalFontSize = 0;
+      _this.isForceNoScrollStart = false;
+      return _this;
     }
-    n(e, t);
-    e.prototype.onLoad = function() {
+    __extends(LabelEditbox, _super);
+    LabelEditbox.prototype.onLoad = function() {
       this.originalFontSize = this.editBox.fontSize;
       this.init();
       if (!(GameConfigManager.default.getInstance().misc.isForceNoAdjustEditBox || false) && this.checkWebMobile()) {
@@ -74,49 +74,49 @@ var GameConfigManager = require("./GameConfigManager"),
       this.setActiveOffsetEdb(this.getScreenType());
       this.maxLength = this.editBox.maxLength;
     };
-    e.prototype.setActiveOffsetEdb = function(t) {
+    LabelEditbox.prototype.setActiveOffsetEdb = function(screenType) {
       if (this.isAllowRotate && this.isForceNoScroll && this.editBox && this.checkWebMobile()) {
-        var e = this.editBox._impl;
-        if (e) {
-          if (t == EditBoxCustom.ScreenType.Portrait) {
-            e.offsetXXX = this.offsetXOnRotate;
-            e.offsetYYY = this.offsetYOnRotate;
-            e.xxforceUpdate = true;
-            e._elem.style.fontSize = this.fontOnRotate + "px";
+        var editBoxImpl = this.editBox._impl;
+        if (editBoxImpl) {
+          if (screenType == EditBoxCustom.ScreenType.Portrait) {
+            editBoxImpl.offsetXXX = this.offsetXOnRotate;
+            editBoxImpl.offsetYYY = this.offsetYOnRotate;
+            editBoxImpl.xxforceUpdate = true;
+            editBoxImpl._elem.style.fontSize = this.fontOnRotate + "px";
           } else {
-            e.offsetXXX = 0;
-            e.offsetYYY = 0;
-            e.xxforceUpdate = true;
-            e._elem.style.fontSize = this.originalFontSize + "px";
+            editBoxImpl.offsetXXX = 0;
+            editBoxImpl.offsetYYY = 0;
+            editBoxImpl.xxforceUpdate = true;
+            editBoxImpl._elem.style.fontSize = this.originalFontSize + "px";
           }
         }
       }
     };
-    e.prototype.onChangeText = function() {
-      t.prototype.onChangeText.call(this);
+    LabelEditbox.prototype.onChangeText = function() {
+      _super.prototype.onChangeText.call(this);
       if (cc.sys.isNative) {
         this.Newlabel.string = "";
         this.needShow = false;
         this.countTime = 0;
       }
     };
-    e.prototype.onAddChar = function() {
-      t.prototype.onAddChar.call(this);
+    LabelEditbox.prototype.onAddChar = function() {
+      _super.prototype.onAddChar.call(this);
       if (cc.sys.isNative) {
         this.Newlabel.string = "";
         this.needShow = false;
         this.countTime = 0;
       }
     };
-    e.prototype.onEndText = function() {
-      t.prototype.onEndText.call(this);
+    LabelEditbox.prototype.onEndText = function() {
+      _super.prototype.onEndText.call(this);
       if (cc.sys.isNative) {
         this.Newlabel.string = "";
         this.needShow = false;
         this.countTime = 0;
       }
     };
-    e.prototype.setScreenType = function() {
+    LabelEditbox.prototype.setScreenType = function() {
       this.screenType = this.getScreenType();
       if (this.screenType == EditBoxCustom.ScreenType.Landscape) {
         this.isForceNoScroll = this.isForceNoScrollStart;
@@ -128,11 +128,11 @@ var GameConfigManager = require("./GameConfigManager"),
         cc.view.resizeWithBrowserSize(true);
       }
     };
-    o([l], e.prototype, "isAllowRotate", void 0);
-    o([l], e.prototype, "fontOnRotate", void 0);
-    o([l], e.prototype, "offsetXOnRotate", void 0);
-    o([l], e.prototype, "offsetYOnRotate", void 0);
-    return e = o([c], e);
+    __decorate([property], LabelEditbox.prototype, "isAllowRotate", void 0);
+    __decorate([property], LabelEditbox.prototype, "fontOnRotate", void 0);
+    __decorate([property], LabelEditbox.prototype, "offsetXOnRotate", void 0);
+    __decorate([property], LabelEditbox.prototype, "offsetYOnRotate", void 0);
+    return LabelEditbox = __decorate([ccclass], LabelEditbox);
   }(EditBoxCustom.default);
-i.default = h;
+moduleExports.default = LabelEditbox;
 void 0;

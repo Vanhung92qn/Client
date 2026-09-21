@@ -1,9 +1,9 @@
-var t = require,
-  e = module,
-  i = exports;
+var requireRef = require,
+  moduleRef = module,
+  moduleExports = exports;
 "use strict";
 void 0;
-var n = this && this.__extends || function() {
+var __extends = this && this.__extends || function() {
     var t = function(e, i) {
       return (t = Object.setPrototypeOf || {
           __proto__: []
@@ -26,7 +26,7 @@ var n = this && this.__extends || function() {
       e.prototype = null === i ? Object.create(i) : (n.prototype = i.prototype, new n());
     };
   }(),
-  o = this && this.__decorate || function(t, e, i, n) {
+  __decorate = this && this.__decorate || function(t, e, i, n) {
     var o,
       a = arguments.length,
       s = a < 3 ? e : null === n ? n = Object.getOwnPropertyDescriptor(e, i) : n;
@@ -44,7 +44,7 @@ var n = this && this.__extends || function() {
     }
     return s;
   };
-Object.defineProperty(i, "__esModule", {
+Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
 var ChatInGamePopup = require("./ChatInGamePopup"),
@@ -60,39 +60,39 @@ var ChatInGamePopup = require("./ChatInGamePopup"),
   MessageCardGameHandler = require("./MessageCardGameHandler"),
   ChatController = require("./ChatController"),
   GameDefine = require("./GameDefine"),
-  S = cc._decorator,
-  _ = S.ccclass,
-  v = S.property,
-  b = function(t) {
-    function e() {
-      var e = null !== t && t.apply(this, arguments) || this;
-      e.chatInGamePopupPrefabs = null;
-      e.chatInGamePopup = null;
-      e.chatController = null;
-      e.inGameBackPopupPrefabs = null;
-      e.lbIdBanChoi = null;
-      e.lbMucCuoc = null;
-      e.lbNameGame = null;
-      e.imageNameGame = null;
-      e.countDownActionProgressTo = null;
-      e.readyBtn = null;
-      e.startBtn = null;
-      e.chatBtn = null;
-      e.backBtn = null;
-      e.inGameBackPopup = null;
-      e.listChatDefaultText = [];
-      e.isPopupInviteShowing = false;
-      e.dearlerSpine = null;
-      e.inviteInGamePopupPrefabs = null;
-      e.inviteInGamePopup = null;
-      e.isAnDanh = false;
-      e.gameController = null;
-      e.allowFocusChatBox = true;
-      e.showBtnChatWhenOpen = false;
-      return e;
+  _decorator = cc._decorator,
+  ccclass = _decorator.ccclass,
+  property = _decorator.property,
+  CardGameTableController = function(_super) {
+    function CardGameTableController() {
+      var _this = null !== _super && _super.apply(this, arguments) || this;
+      _this.chatInGamePopupPrefabs = null;
+      _this.chatInGamePopup = null;
+      _this.chatController = null;
+      _this.inGameBackPopupPrefabs = null;
+      _this.lbIdBanChoi = null;
+      _this.lbMucCuoc = null;
+      _this.lbNameGame = null;
+      _this.imageNameGame = null;
+      _this.countDownActionProgressTo = null;
+      _this.readyBtn = null;
+      _this.startBtn = null;
+      _this.chatBtn = null;
+      _this.backBtn = null;
+      _this.inGameBackPopup = null;
+      _this.listChatDefaultText = [];
+      _this.isPopupInviteShowing = false;
+      _this.dearlerSpine = null;
+      _this.inviteInGamePopupPrefabs = null;
+      _this.inviteInGamePopup = null;
+      _this.isAnDanh = false;
+      _this.gameController = null;
+      _this.allowFocusChatBox = true;
+      _this.showBtnChatWhenOpen = false;
+      return _this;
     }
-    n(e, t);
-    e.prototype.onLoad = function() {
+    __extends(CardGameTableController, _super);
+    CardGameTableController.prototype.onLoad = function() {
       if (cc.sys.platform === cc.sys.DESKTOP_BROWSER) {
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
       }
@@ -102,35 +102,35 @@ var ChatInGamePopup = require("./ChatInGamePopup"),
       cc.director.on(GameConfigManager.default.SHOW_CHAT_BAN_CHUNG, this.onHideChat, this);
       cc.systemEvent.on(GameDefine.GameEventMessage.HideSpamChat, this.onHideSpamChat, this);
     };
-    e.prototype.start = function() {
+    CardGameTableController.prototype.start = function() {
       this.setActiveChatBtn(GameConfigManager.default.getInstance().showChatBanChung);
     };
-    e.prototype.onKeyDown = function(t) {
-      switch (t.keyCode) {
+    CardGameTableController.prototype.onKeyDown = function(event) {
+      switch (event.keyCode) {
         case cc.macro.KEY.enter:
           false === GameConfigManager.default.getInstance().isShowPopupDone && (null !== this.chatInGamePopup && void 0 !== this.chatInGamePopup && this
             .chatInGamePopup.node.active ? this.chatInGamePopup.editBoxCustomChat.focus() : this.onClickBtnChat());
       }
     };
-    e.prototype.onDestroy = function() {
+    CardGameTableController.prototype.onDestroy = function() {
       cc.systemEvent.off(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
       cc.director.off(GameConfigManager.default.SHOW_CHAT_BAN_CHUNG, this.onHideChat, this);
       cc.systemEvent.on(GameDefine.GameEventMessage.HideSpamChat, this.onHideSpamChat, this);
     };
-    e.prototype.init = function(t, e, i, n, o, a) {
-      this.listChatDefaultText = i;
-      this.cmdStart = n;
-      this.onClickExit = o;
+    CardGameTableController.prototype.init = function(gameName, gameNameSpriteFrame, chatDefaultTexts, cmdStart, onClickExit, gameController) {
+      this.listChatDefaultText = chatDefaultTexts;
+      this.cmdStart = cmdStart;
+      this.onClickExit = onClickExit;
       if (null !== this.lbNameGame && void 0 !== this.lbNameGame) {
-        this.lbNameGame.string = t;
+        this.lbNameGame.string = gameName;
       }
       if (null !== this.imageNameGame && void 0 !== this.imageNameGame) {
-        this.imageNameGame.spriteFrame = e;
+        this.imageNameGame.spriteFrame = gameNameSpriteFrame;
       }
-      this.gameController = a;
+      this.gameController = gameController;
       this.initChat();
     };
-    e.prototype.initDefaultData = function() {
+    CardGameTableController.prototype.initDefaultData = function() {
       if (null !== this.readyBtn && void 0 !== this.readyBtn) {
         this.readyBtn.active = false;
       }
@@ -150,15 +150,15 @@ var ChatInGamePopup = require("./ChatInGamePopup"),
         this.chatInGamePopup.hide();
       }
     };
-    e.prototype.onClickBtnChat = function() {
+    CardGameTableController.prototype.onClickBtnChat = function() {
       if (this.gameController.node.activeInHierarchy) {
         if (MusicPlayer.default.getInstance().playbtnClick(.6), this.gameController && this.gameController.isGameAnDanhCheck) {
           CommonPrefabsManager.default.getInstance().showPopupMessageUtil("Kh\xf4ng \u0110\u01b0\u1ee3c Chat Trong B\xe0n \u1ea8n Danh!");
         } else {
           if (null !== this.gameController && void 0 !== this.gameController) {
-            var t = this.gameController.checkSpamChat();
-            if (!StringUtil.default.isNullOrEmpty(t)) {
-              return void CommonPrefabsManager.default.getInstance().showPopupMessageUtil(t);
+            var spamMessage = this.gameController.checkSpamChat();
+            if (!StringUtil.default.isNullOrEmpty(spamMessage)) {
+              return void CommonPrefabsManager.default.getInstance().showPopupMessageUtil(spamMessage);
             }
           }
           if (!(this.chatInGamePopup.node.getNumberOfRunningActions() > 0)) {
@@ -170,58 +170,58 @@ var ChatInGamePopup = require("./ChatInGamePopup"),
         }
       }
     };
-    e.prototype.onHideChat = function(t) {
-      if (null === t || void 0 === t) {
+    CardGameTableController.prototype.onHideChat = function(isChatBtnVisible) {
+      if (null === isChatBtnVisible || void 0 === isChatBtnVisible) {
         this.setActiveChatBtn(true);
       } else {
-        this.setActiveChatBtn(t);
+        this.setActiveChatBtn(isChatBtnVisible);
       }
     };
-    e.prototype.onBackClick = function() {
+    CardGameTableController.prototype.onBackClick = function() {
       if (MusicPlayer.default.getInstance().playbtnClick(), null === this.inGameBackPopup || void 0 === this.inGameBackPopup) {
-        var t = cc.instantiate(this.inGameBackPopupPrefabs);
-        t.parent = this.node.parent;
-        t.zIndex = GameZOrder.default.CHAT_BUBLES + 3;
-        t.position = new cc.Vec2(0, 240);
-        this.inGameBackPopup = t.getComponent(InGameBackPopup.default);
+        var backPopupNode = cc.instantiate(this.inGameBackPopupPrefabs);
+        backPopupNode.parent = this.node.parent;
+        backPopupNode.zIndex = GameZOrder.default.CHAT_BUBLES + 3;
+        backPopupNode.position = new cc.Vec2(0, 240);
+        this.inGameBackPopup = backPopupNode.getComponent(InGameBackPopup.default);
         this.inGameBackPopup.onCloseCallback = this.onHideBackPopup.bind(this);
         this.inGameBackPopup.onExitCallback = this.onClickExit.bind(this);
       }
       if (this.inGameBackPopup.node.active = true, !(this.inGameBackPopup.node.getNumberOfRunningActions() > 0)) {
         this.inGameBackPopup.node.active = true;
-        var e = GameConfigManager.default.getInstance().isBaoQuay,
-          i = 100;
+        var canBaoQuay = GameConfigManager.default.getInstance().isBaoQuay,
+          betAmount = 100;
         if (null !== this.gameController && void 0 !== this.gameController) {
           if (this.gameController.maxUser <= 2) {
-            e = false;
+            canBaoQuay = false;
           }
           if (this.gameController.coPass || this.gameController.bet <= 100 || this.gameController.isGameAnDanhCheck) {
-            e = false;
+            canBaoQuay = false;
           }
-          i = this.gameController.bet;
+          betAmount = this.gameController.bet;
         }
-        this.inGameBackPopup.show(e, i);
+        this.inGameBackPopup.show(canBaoQuay, betAmount);
         this.setActiveBackBtn(false);
       }
     };
-    e.prototype.onHideBackPopup = function() {
+    CardGameTableController.prototype.onHideBackPopup = function() {
       this.setActiveBackBtn(true);
     };
-    e.prototype.setGameConfig = function(t, e, i) {
-      if (void 0 === e && (e = false), void 0 === i && (i = false), null !== this.lbMucCuoc && void 0 !== this.lbMucCuoc && (this
-          .lbMucCuoc.string = StringUtil.default.formatMoneyNumber(t)), null !== this.lbIdBanChoi && void 0 !== this.lbIdBanChoi) {
-        if (false === e) {
-          this.isAnDanh = e;
-          var n = StringUtil.default.getRandomInt(7) + 1,
-            o = StringUtil.default.getRandomInt(7) + 1;
-          if (i) {
+    CardGameTableController.prototype.setGameConfig = function(betAmount, isAnonymous, hasPassword) {
+      if (void 0 === isAnonymous && (isAnonymous = false), void 0 === hasPassword && (hasPassword = false), null !== this.lbMucCuoc && void 0 !== this.lbMucCuoc && (this
+          .lbMucCuoc.string = StringUtil.default.formatMoneyNumber(betAmount)), null !== this.lbIdBanChoi && void 0 !== this.lbIdBanChoi) {
+        if (false === isAnonymous) {
+          this.isAnDanh = isAnonymous;
+          var randomPrefix = StringUtil.default.getRandomInt(7) + 1,
+            randomSuffix = StringUtil.default.getRandomInt(7) + 1;
+          if (hasPassword) {
             this.lbIdBanChoi.string = GamePlayManager.default.getInstance().roomID.toString();
           } else {
             if (GamePlayManager.default.getInstance().roomID < 0) {
               this.lbIdBanChoi.string = "Ch\u1ed1ng V\xe2y";
             } else {
               if (GamePlayManager.default.getInstance().gameID !== MessageCardGameHandler.GAME.POKER) {
-                this.lbIdBanChoi.string = n + GamePlayManager.default.getInstance().roomID.toString() + o;
+                this.lbIdBanChoi.string = randomPrefix + GamePlayManager.default.getInstance().roomID.toString() + randomSuffix;
               } else {
                 this.lbIdBanChoi.string = GamePlayManager.default.getInstance().roomID.toString();
               }
@@ -232,35 +232,35 @@ var ChatInGamePopup = require("./ChatInGamePopup"),
         }
       }
     };
-    e.prototype.setGameId = function(t) {
-      if (void 0 === t && (t = false), t) {
+    CardGameTableController.prototype.setGameId = function(hasPassword) {
+      if (void 0 === hasPassword && (hasPassword = false), hasPassword) {
         this.lbIdBanChoi.string = GamePlayManager.default.getInstance().roomID.toString();
       } else if (true !== this.isAnDanh && (this.isAnDanh = true, null !== this.lbIdBanChoi && void 0 !== this.lbIdBanChoi)) {
         if (GamePlayManager.default.getInstance().roomID < 0) {
           this.lbIdBanChoi.string = "Ch\u1ed1ng V\xe2y";
         } else {
-          var e = StringUtil.default.getRandomInt(7) + 1,
-            i = StringUtil.default.getRandomInt(7) + 1;
-          this.lbIdBanChoi.string = e + GamePlayManager.default.getInstance().roomID.toString() + i;
+          var randomPrefix = StringUtil.default.getRandomInt(7) + 1,
+            randomSuffix = StringUtil.default.getRandomInt(7) + 1;
+          this.lbIdBanChoi.string = randomPrefix + GamePlayManager.default.getInstance().roomID.toString() + randomSuffix;
         }
       }
     };
-    e.prototype.hideReadyBtn = function() {
+    CardGameTableController.prototype.hideReadyBtn = function() {
       if (null !== this.readyBtn && void 0 !== this.readyBtn) {
         this.readyBtn.active = false;
       }
     };
-    e.prototype.setActiveBackBtn = function(t) {
+    CardGameTableController.prototype.setActiveBackBtn = function(isActive) {
       if (this.backBtn) {
-        this.backBtn.active = t;
+        this.backBtn.active = isActive;
       }
     };
-    e.prototype.setActiveChatBtn = function(t) {
+    CardGameTableController.prototype.setActiveChatBtn = function(isActive) {
       if (this.chatBtn) {
-        this.chatBtn.active = t;
+        this.chatBtn.active = isActive;
       }
     };
-    e.prototype.stopProgressStartGame = function() {
+    CardGameTableController.prototype.stopProgressStartGame = function() {
       if (null !== this.startBtn && void 0 !== this.startBtn) {
         this.startBtn.active = false;
       }
@@ -269,119 +269,119 @@ var ChatInGamePopup = require("./ChatInGamePopup"),
         this.countDownActionProgressTo.node.active = false;
       }
     };
-    e.prototype.startBetting = function(t, e) {
+    CardGameTableController.prototype.startBetting = function(remainingTime, totalTime) {
       if (null !== this.countDownActionProgressTo && void 0 !== this.countDownActionProgressTo) {
         this.countDownActionProgressTo.node.active = true;
-        this.countDownActionProgressTo.setProgress(t / e);
-        this.countDownActionProgressTo.RunActionProgress(t, 0);
+        this.countDownActionProgressTo.setProgress(remainingTime / totalTime);
+        this.countDownActionProgressTo.RunActionProgress(remainingTime, 0);
       }
     };
-    e.prototype.sendReady = function() {
+    CardGameTableController.prototype.sendReady = function() {
       MusicPlayer.default.getInstance().playEffect("Sounds/sfx_btn_play");
       CardGameCommonRequest.default.getInstance().sendReady();
     };
-    e.prototype.sendStart = function() {
+    CardGameTableController.prototype.sendStart = function() {
       this.sendStartCmd();
       GamePlayManager.default.getInstance().countMatchNotInteract = 0;
     };
-    e.prototype.sendStartCmd = function() {
+    CardGameTableController.prototype.sendStartCmd = function() {
       MusicPlayer.default.getInstance().playEffect("Sounds/sfx_btn_play");
       CardGameCommonRequest.default.getInstance().sendStart(this.cmdStart);
       this.startBtn.active = false;
     };
-    e.prototype.startGameUI = function() {
+    CardGameTableController.prototype.startGameUI = function() {
       this.startBtn.active = false;
       this.readyBtn.active = false;
       this.stopProgressStartGame();
     };
-    e.prototype.setDearlerAniamtionCallback = function() {
-      var t = this;
+    CardGameTableController.prototype.setDearlerAniamtionCallback = function() {
+      var _this = this;
       this.dearlerSpine.setStartListener(function(t) {});
       this.dearlerSpine.setInterruptListener(function(t) {});
       this.dearlerSpine.setEndListener(function(t) {});
       this.dearlerSpine.setDisposeListener(function(t) {});
-      this.dearlerSpine.setCompleteListener(function(e) {
-        if ("animation" === (e.animation ? e.animation.name : "")) {
-          t.dearlerSpine.clearTrack(1);
-          t.dearlerSpine.setAnimation(0, "Smile", true);
+      this.dearlerSpine.setCompleteListener(function(trackEntry) {
+        if ("animation" === (trackEntry.animation ? trackEntry.animation.name : "")) {
+          _this.dearlerSpine.clearTrack(1);
+          _this.dearlerSpine.setAnimation(0, "Smile", true);
         }
       });
-      this.dearlerSpine.setEventListener(function(t, e) {
-        if (t.animation) {
-          t.animation.name;
+      this.dearlerSpine.setEventListener(function(trackEntry, e) {
+        if (trackEntry.animation) {
+          trackEntry.animation.name;
         }
       });
     };
-    e.prototype.showPlayersToBeInvited = function(t) {
+    CardGameTableController.prototype.showPlayersToBeInvited = function(playerList) {
       if (!this.isPopupInviteShowing) {
-        for (var e = [], i = 0; i < t.length; i++) {
-          var n = t[i];
-          e.push(n.u);
+        for (var userIdList = [], index = 0; index < playerList.length; index++) {
+          var player = playerList[index];
+          userIdList.push(player.u);
         }
-        var o = CommonPrefabsManager.default.getInstance().showPopup2Button();
-        o.onOKClicked = function() {
-          CardGameCommonRequest.default.getInstance().sendInvitePlayers(e);
-          o.hide();
+        var popupInvite = CommonPrefabsManager.default.getInstance().showPopup2Button();
+        popupInvite.onOKClicked = function() {
+          CardGameCommonRequest.default.getInstance().sendInvitePlayers(userIdList);
+          popupInvite.hide();
           this.isPopupInviteShowing = false;
         }.bind(this);
-        o.onCancelClicked = function() {
-          o.hide();
+        popupInvite.onCancelClicked = function() {
+          popupInvite.hide();
           this.isPopupInviteShowing = false;
         }.bind(this);
         this.isPopupInviteShowing = true;
-        o.lbContent.string = "B\u1ea1n c\xf3 mu\u1ed1n r\u1ee7 th\xeam ng\u01b0\u1eddi v\xe0o b\xe0n ch\u01a1i?";
+        popupInvite.lbContent.string = "B\u1ea1n c\xf3 mu\u1ed1n r\u1ee7 th\xeam ng\u01b0\u1eddi v\xe0o b\xe0n ch\u01a1i?";
       }
     };
-    e.prototype.resetPosStartBtn = function() {
+    CardGameTableController.prototype.resetPosStartBtn = function() {
       if (null !== this.startBtn && void 0 !== this.startBtn) {
         this.startBtn.position = this.posBtnStartOriginal;
       }
     };
-    e.prototype.offScreenPosStartBtn = function() {
+    CardGameTableController.prototype.offScreenPosStartBtn = function() {
       if (null !== this.startBtn && void 0 !== this.startBtn) {
         this.startBtn.position = this.posBtnStartOriginal + new cc.Vec2(0, 1e3);
       }
     };
-    e.prototype.handleLeaveRoom = function() {
+    CardGameTableController.prototype.handleLeaveRoom = function() {
       this.isAnDanh = false;
     };
-    e.prototype.initChat = function() {
+    CardGameTableController.prototype.initChat = function() {
       if (null === this.chatInGamePopup || void 0 === this.chatInGamePopup) {
-        var t = cc.instantiate(this.chatInGamePopupPrefabs);
-        t.parent = this.node.parent;
-        t.zIndex = GameZOrder.default.CHAT_BUBLES + 3;
-        this.chatInGamePopup = t.getComponent(ChatInGamePopup.default);
+        var chatPopupNode = cc.instantiate(this.chatInGamePopupPrefabs);
+        chatPopupNode.parent = this.node.parent;
+        chatPopupNode.zIndex = GameZOrder.default.CHAT_BUBLES + 3;
+        this.chatInGamePopup = chatPopupNode.getComponent(ChatInGamePopup.default);
         this.chatInGamePopup.onCloseCallback = this.onHideChat.bind(this);
         this.chatInGamePopup.gameController = this.gameController;
-        this.chatController = t.getComponent(ChatController.default);
+        this.chatController = chatPopupNode.getComponent(ChatController.default);
         if (this.chatController) {
           this.chatController.initCellChat();
         }
       }
     };
-    e.prototype.loadChatHistory = function() {
+    CardGameTableController.prototype.loadChatHistory = function() {
       if (this.chatController) {
         this.chatController.clearChatHistory();
         this.chatController.loadChatHistory(this.gameController.getChatHistory(), this.getCurrentGameID());
       }
     };
-    e.prototype.loadChat = function(t, e, i, n, o, a, s) {
-      if (void 0 === i) {
-        i = "";
+    CardGameTableController.prototype.loadChat = function(chatData, message, displayName, isSystemMessage, rankIndex, nameColor, rankColor) {
+      if (void 0 === displayName) {
+        displayName = "";
       }
-      if (void 0 === n) {
-        n = false;
+      if (void 0 === isSystemMessage) {
+        isSystemMessage = false;
       }
       if (this.chatController) {
-        this.chatController.loadChat(t, e, i, n, o, a, s);
+        this.chatController.loadChat(chatData, message, displayName, isSystemMessage, rankIndex, nameColor, rankColor);
       }
     };
-    e.prototype.onHideSpamChat = function(t) {
+    CardGameTableController.prototype.onHideSpamChat = function(spammerUserId) {
       if (this.chatController) {
-        this.chatController.hideSpamChat(t);
+        this.chatController.hideSpamChat(spammerUserId);
       }
     };
-    e.prototype.getCurrentGameID = function() {
+    CardGameTableController.prototype.getCurrentGameID = function() {
       switch (GamePlayManager.default.getInstance().gameID) {
         case MessageCardGameHandler.GAME.BAU_CUA:
           return MessageCardGameHandler.GAMEID.BAU_CUA;
@@ -391,21 +391,21 @@ var ChatInGamePopup = require("./ChatInGamePopup"),
           return MessageCardGameHandler.GAMEID.TIENLEN;
       }
     };
-    o([v(cc.Prefab)], e.prototype, "chatInGamePopupPrefabs", void 0);
-    o([v(cc.Prefab)], e.prototype, "inGameBackPopupPrefabs", void 0);
-    o([v(cc.Label)], e.prototype, "lbIdBanChoi", void 0);
-    o([v(cc.Label)], e.prototype, "lbMucCuoc", void 0);
-    o([v(cc.Label)], e.prototype, "lbNameGame", void 0);
-    o([v(cc.Sprite)], e.prototype, "imageNameGame", void 0);
-    o([v(ActionProgressTo.default)], e.prototype, "countDownActionProgressTo", void 0);
-    o([v(cc.Node)], e.prototype, "readyBtn", void 0);
-    o([v(cc.Node)], e.prototype, "startBtn", void 0);
-    o([v(cc.Node)], e.prototype, "chatBtn", void 0);
-    o([v(cc.Node)], e.prototype, "backBtn", void 0);
-    o([v(sp.Skeleton)], e.prototype, "dearlerSpine", void 0);
-    o([v(cc.Prefab)], e.prototype, "inviteInGamePopupPrefabs", void 0);
-    o([v], e.prototype, "showBtnChatWhenOpen", void 0);
-    return e = o([_], e);
+    __decorate([property(cc.Prefab)], CardGameTableController.prototype, "chatInGamePopupPrefabs", void 0);
+    __decorate([property(cc.Prefab)], CardGameTableController.prototype, "inGameBackPopupPrefabs", void 0);
+    __decorate([property(cc.Label)], CardGameTableController.prototype, "lbIdBanChoi", void 0);
+    __decorate([property(cc.Label)], CardGameTableController.prototype, "lbMucCuoc", void 0);
+    __decorate([property(cc.Label)], CardGameTableController.prototype, "lbNameGame", void 0);
+    __decorate([property(cc.Sprite)], CardGameTableController.prototype, "imageNameGame", void 0);
+    __decorate([property(ActionProgressTo.default)], CardGameTableController.prototype, "countDownActionProgressTo", void 0);
+    __decorate([property(cc.Node)], CardGameTableController.prototype, "readyBtn", void 0);
+    __decorate([property(cc.Node)], CardGameTableController.prototype, "startBtn", void 0);
+    __decorate([property(cc.Node)], CardGameTableController.prototype, "chatBtn", void 0);
+    __decorate([property(cc.Node)], CardGameTableController.prototype, "backBtn", void 0);
+    __decorate([property(sp.Skeleton)], CardGameTableController.prototype, "dearlerSpine", void 0);
+    __decorate([property(cc.Prefab)], CardGameTableController.prototype, "inviteInGamePopupPrefabs", void 0);
+    __decorate([property], CardGameTableController.prototype, "showBtnChatWhenOpen", void 0);
+    return CardGameTableController = __decorate([ccclass], CardGameTableController);
   }(cc.Component);
-i.default = b;
+moduleExports.default = CardGameTableController;
 void 0;

@@ -1,5 +1,5 @@
-var t = require,
-  e = module,
+var requireRef = require,
+  moduleRef = module,
   moduleExports = exports;
 "use strict";
 void 0;
@@ -515,7 +515,7 @@ var GamePlayManager = require("./GamePlayManager"),
     GameCardSprite.prototype.getSelected = function() {
       return this.node.position.y >= 5;
     };
-    GameCardSprite.prototype.onCardClicked = function(t) {
+    GameCardSprite.prototype.onCardClicked = function(event) {
       if (0 != this.isAllowClick) {
         if (this.isShowSelected) {
           this.setCardSelected(!this.isSelected);

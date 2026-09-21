@@ -1,9 +1,9 @@
-var t = require,
-  e = module,
-  i = exports;
+var requireRef = require,
+  moduleRef = module,
+  moduleExports = exports;
 "use strict";
 void 0;
-var n = this && this.__extends || function() {
+var __extends = this && this.__extends || function() {
     var t = function(e, i) {
       return (t = Object.setPrototypeOf || {
           __proto__: []
@@ -26,7 +26,7 @@ var n = this && this.__extends || function() {
       e.prototype = null === i ? Object.create(i) : (n.prototype = i.prototype, new n());
     };
   }(),
-  o = this && this.__decorate || function(t, e, i, n) {
+  __decorate = this && this.__decorate || function(t, e, i, n) {
     var o,
       a = arguments.length,
       s = a < 3 ? e : null === n ? n = Object.getOwnPropertyDescriptor(e, i) : n;
@@ -44,58 +44,58 @@ var n = this && this.__extends || function() {
     }
     return s;
   };
-Object.defineProperty(i, "__esModule", {
+Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
 var CardPopupBase = require("./CardPopupBase"),
   MusicPlayer = require("./MusicPlayer"),
-  r = cc._decorator,
-  c = r.ccclass,
-  l = r.property,
-  h = function(t) {
-    function e() {
-      var e = null !== t && t.apply(this, arguments) || this;
-      e.listNodeImage = [];
-      e.nodeIntro = null;
-      e.listLbPageCurrent = [];
-      e.spriteButtonPre = [];
-      e.spriteButtonNex = [];
-      e.spriteFrameArrowEnable = null;
-      e.spriteFrameArrowDisable = null;
-      e.currentImage = 0;
-      e.callbackClose = null;
-      e.isActiveClose = false;
-      return e;
+  ccDecorator = cc._decorator,
+  ccclass = ccDecorator.ccclass,
+  property = ccDecorator.property,
+  PopupHelpImage = function(_super) {
+    function PopupHelpImage() {
+      var _this = null !== _super && _super.apply(this, arguments) || this;
+      _this.listNodeImage = [];
+      _this.nodeIntro = null;
+      _this.listLbPageCurrent = [];
+      _this.spriteButtonPre = [];
+      _this.spriteButtonNex = [];
+      _this.spriteFrameArrowEnable = null;
+      _this.spriteFrameArrowDisable = null;
+      _this.currentImage = 0;
+      _this.callbackClose = null;
+      _this.isActiveClose = false;
+      return _this;
     }
-    n(e, t);
-    e.prototype.start = function() {
-      var t = this;
+    __extends(PopupHelpImage, _super);
+    PopupHelpImage.prototype.start = function() {
+      var _this = this;
       this.node.runAction(cc.sequence(cc.delayTime(1), cc.callFunc(function() {
-        t.isActiveClose = true;
+        _this.isActiveClose = true;
       })));
     };
-    e.prototype.onCloseClicked = function() {
+    PopupHelpImage.prototype.onCloseClicked = function() {
       if (this.isActiveClose) {
         this.hide(this.callbackClose);
       }
     };
-    e.prototype.onClickBg = function() {};
-    e.prototype.onClickHideIntro = function() {
+    PopupHelpImage.prototype.onClickBg = function() {};
+    PopupHelpImage.prototype.onClickHideIntro = function() {
       this.hideIntro();
     };
-    e.prototype.setCustomData = function(t) {
-      var e = JSON.parse(t);
-      if (e.hasOwnProperty("hideIntroTxMd5") && this.hideIntro(), e.hasOwnProperty("showTab")) {
-        var i = Number(e.showTab);
-        this.currentImage = i;
+    PopupHelpImage.prototype.setCustomData = function(customDataJson) {
+      var customData = JSON.parse(customDataJson);
+      if (customData.hasOwnProperty("hideIntroTxMd5") && this.hideIntro(), customData.hasOwnProperty("showTab")) {
+        var tabIndex = Number(customData.showTab);
+        this.currentImage = tabIndex;
         this.setPage();
       }
     };
-    e.prototype.hideIntro = function() {
+    PopupHelpImage.prototype.hideIntro = function() {
       this.nodeIntro.active = false;
       this.listNodeImage[0].active = true;
     };
-    e.prototype.onClickNext = function() {
+    PopupHelpImage.prototype.onClickNext = function() {
       if (null != MusicPlayer.default.getInstance()) {
         MusicPlayer.default.getInstance().playbtnClick();
       }
@@ -106,7 +106,7 @@ var CardPopupBase = require("./CardPopupBase"),
         }
       }
     };
-    e.prototype.onClickPre = function() {
+    PopupHelpImage.prototype.onClickPre = function() {
       if (null != MusicPlayer.default.getInstance()) {
         MusicPlayer.default.getInstance().playbtnClick();
       }
@@ -117,7 +117,7 @@ var CardPopupBase = require("./CardPopupBase"),
         }
       }
     };
-    e.prototype.onClicComeTo0 = function() {
+    PopupHelpImage.prototype.onClicComeTo0 = function() {
       if (null != MusicPlayer.default.getInstance()) {
         MusicPlayer.default.getInstance().playbtnClick();
       }
@@ -128,11 +128,11 @@ var CardPopupBase = require("./CardPopupBase"),
         }
       }
     };
-    e.prototype.setPageCurrent = function(t) {
-      this.currentImage = t - 1;
+    PopupHelpImage.prototype.setPageCurrent = function(pageNumber) {
+      this.currentImage = pageNumber - 1;
       this.setPage();
     };
-    e.prototype.setPage = function() {
+    PopupHelpImage.prototype.setPage = function() {
       if (this.currentImage + 1 >= this.listNodeImage.length) {
         this.currentImage = this.listNodeImage.length - 1;
       }
@@ -148,53 +148,53 @@ var CardPopupBase = require("./CardPopupBase"),
           this.setEnabledButtonNext(false);
         }
       }
-      for (var t = 0; t < this.listLbPageCurrent.length; t++) {
-        if (null != this.listLbPageCurrent[t]) {
-          this.listLbPageCurrent[t].string = (this.currentImage + 1).toString();
+      for (var labelIndex = 0; labelIndex < this.listLbPageCurrent.length; labelIndex++) {
+        if (null != this.listLbPageCurrent[labelIndex]) {
+          this.listLbPageCurrent[labelIndex].string = (this.currentImage + 1).toString();
         }
       }
-      for (var e = 0; e < this.listNodeImage.length; ++e) {
-        this.listNodeImage[e].active = this.currentImage === e;
-        if (this.currentImage === e) {
-          this.popup = this.listNodeImage[e];
+      for (var imageIndex = 0; imageIndex < this.listNodeImage.length; ++imageIndex) {
+        this.listNodeImage[imageIndex].active = this.currentImage === imageIndex;
+        if (this.currentImage === imageIndex) {
+          this.popup = this.listNodeImage[imageIndex];
         }
       }
     };
-    e.prototype.setEnabledButtonNext = function(t) {
-      for (var e = 0; e < this.spriteButtonNex.length; e++) {
-        this.spriteButtonNex[e].spriteFrame = t ? this.spriteFrameArrowEnable : this.spriteFrameArrowDisable;
+    PopupHelpImage.prototype.setEnabledButtonNext = function(enabled) {
+      for (var spriteIndex = 0; spriteIndex < this.spriteButtonNex.length; spriteIndex++) {
+        this.spriteButtonNex[spriteIndex].spriteFrame = enabled ? this.spriteFrameArrowEnable : this.spriteFrameArrowDisable;
       }
     };
-    e.prototype.setEnabledButtonPre = function(t) {
-      for (var e = 0; e < this.spriteButtonPre.length; e++) {
-        this.spriteButtonPre[e].spriteFrame = t ? this.spriteFrameArrowEnable : this.spriteFrameArrowDisable;
+    PopupHelpImage.prototype.setEnabledButtonPre = function(enabled) {
+      for (var spriteIndex = 0; spriteIndex < this.spriteButtonPre.length; spriteIndex++) {
+        this.spriteButtonPre[spriteIndex].spriteFrame = enabled ? this.spriteFrameArrowEnable : this.spriteFrameArrowDisable;
       }
     };
-    e.prototype.openURL = function(t, e) {
-      cc.sys.openURL(e);
+    PopupHelpImage.prototype.openURL = function(clickEvent, url) {
+      cc.sys.openURL(url);
     };
-    e.prototype.onChangeTab1 = function() {
+    PopupHelpImage.prototype.onChangeTab1 = function() {
       if (null !== this.listNodeImage && void 0 !== this.listNodeImage && this.listNodeImage.length > 1) {
         this.listNodeImage[0].active = false;
         this.listNodeImage[1].active = true;
         this.popup = this.listNodeImage[1];
       }
     };
-    e.prototype.onChangeTab2 = function() {
+    PopupHelpImage.prototype.onChangeTab2 = function() {
       if (null !== this.listNodeImage && void 0 !== this.listNodeImage && this.listNodeImage.length > 1) {
         this.listNodeImage[0].active = true;
         this.listNodeImage[1].active = false;
         this.popup = this.listNodeImage[0];
       }
     };
-    o([l([cc.Node])], e.prototype, "listNodeImage", void 0);
-    o([l(cc.Node)], e.prototype, "nodeIntro", void 0);
-    o([l([cc.Label])], e.prototype, "listLbPageCurrent", void 0);
-    o([l(cc.Sprite)], e.prototype, "spriteButtonPre", void 0);
-    o([l(cc.Sprite)], e.prototype, "spriteButtonNex", void 0);
-    o([l(cc.SpriteFrame)], e.prototype, "spriteFrameArrowEnable", void 0);
-    o([l(cc.SpriteFrame)], e.prototype, "spriteFrameArrowDisable", void 0);
-    return e = o([c], e);
+    __decorate([property([cc.Node])], PopupHelpImage.prototype, "listNodeImage", void 0);
+    __decorate([property(cc.Node)], PopupHelpImage.prototype, "nodeIntro", void 0);
+    __decorate([property([cc.Label])], PopupHelpImage.prototype, "listLbPageCurrent", void 0);
+    __decorate([property(cc.Sprite)], PopupHelpImage.prototype, "spriteButtonPre", void 0);
+    __decorate([property(cc.Sprite)], PopupHelpImage.prototype, "spriteButtonNex", void 0);
+    __decorate([property(cc.SpriteFrame)], PopupHelpImage.prototype, "spriteFrameArrowEnable", void 0);
+    __decorate([property(cc.SpriteFrame)], PopupHelpImage.prototype, "spriteFrameArrowDisable", void 0);
+    return PopupHelpImage = __decorate([ccclass], PopupHelpImage);
   }(CardPopupBase.default);
-i.default = h;
+moduleExports.default = PopupHelpImage;
 void 0;

@@ -1,15 +1,15 @@
-var t = require,
-  i = exports;
+var requireRef = require,
+  moduleExports = exports;
 "use strict";
 void 0;
-Object.defineProperty(i, "__esModule", {
+Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
-(function(t) {
-  t.CLICK = "CLICK";
-})(i.AnaltyciEventType || (i.AnaltyciEventType = {}));
-var n = function() {
+(function(AnaltyciEventType) {
+  AnaltyciEventType.CLICK = "CLICK";
+})(moduleExports.AnaltyciEventType || (moduleExports.AnaltyciEventType = {}));
+var AnalyticDefine = function() {
   return function() {};
 }();
-i.default = n;
+moduleExports.default = AnalyticDefine;
 void 0;

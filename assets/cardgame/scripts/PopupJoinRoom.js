@@ -1,9 +1,9 @@
-var t = require,
-  e = module,
-  i = exports;
+var requireRef = require,
+  moduleRef = module,
+  moduleExports = exports;
 "use strict";
 void 0;
-var n = this && this.__extends || function() {
+var __extends = this && this.__extends || function() {
     var t = function(e, i) {
       return (t = Object.setPrototypeOf || {
           __proto__: []
@@ -26,7 +26,7 @@ var n = this && this.__extends || function() {
       e.prototype = null === i ? Object.create(i) : (n.prototype = i.prototype, new n());
     };
   }(),
-  o = this && this.__decorate || function(t, e, i, n) {
+  __decorate = this && this.__decorate || function(t, e, i, n) {
     var o,
       a = arguments.length,
       s = a < 3 ? e : null === n ? n = Object.getOwnPropertyDescriptor(e, i) : n;
@@ -44,7 +44,7 @@ var n = this && this.__extends || function() {
     }
     return s;
   };
-Object.defineProperty(i, "__esModule", {
+Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
 var CardPopupBase = require("./CardPopupBase"),
@@ -53,47 +53,47 @@ var CardPopupBase = require("./CardPopupBase"),
   CommonPrefabsManager = require("./CommonPrefabsManager"),
   StringUtil = require("./StringUtil"),
   GameDefine = require("./GameDefine"),
-  u = cc._decorator,
-  d = u.ccclass,
-  p = u.property,
-  f = function(t) {
-    function e() {
-      var e = null !== t && t.apply(this, arguments) || this;
-      e.edbRoomID = null;
-      e.edbPassword = null;
-      return e;
+  ccDecorator = cc._decorator,
+  ccclass = ccDecorator.ccclass,
+  property = ccDecorator.property,
+  PopupJoinRoom = function(_super) {
+    function PopupJoinRoom() {
+      var _this = null !== _super && _super.apply(this, arguments) || this;
+      _this.edbRoomID = null;
+      _this.edbPassword = null;
+      return _this;
     }
-    n(e, t);
-    e.prototype.onLoad = function() {
+    __extends(PopupJoinRoom, _super);
+    PopupJoinRoom.prototype.onLoad = function() {
       cc.systemEvent.on(GameDefine.GameEventMessage.JoinRoom, this.onJoinRoom, this);
     };
-    e.prototype.onDestroy = function() {
+    PopupJoinRoom.prototype.onDestroy = function() {
       cc.systemEvent.off(GameDefine.GameEventMessage.JoinRoom, this.onJoinRoom, this);
     };
-    e.prototype.onJoinRoom = function() {
+    PopupJoinRoom.prototype.onJoinRoom = function() {
       this.hide(null, .4, true, false);
     };
-    e.prototype.btnOKPress = function() {
+    PopupJoinRoom.prototype.btnOKPress = function() {
       if (MusicPlayer.default.getInstance().playbtnClick(), this.edbRoomID.string.length <= 0) {
         CommonPrefabsManager.default.getInstance().showPopupMessageUtil("Vui l\xf2ng nh\u1eadp \u0111\xfang s\u1ed1 b\xe0n");
       } else {
-        var t = parseInt(this.edbRoomID.string);
-        if (Number.isNaN(t)) {
+        var roomID = parseInt(this.edbRoomID.string);
+        if (Number.isNaN(roomID)) {
           CommonPrefabsManager.default.getInstance().showPopupMessageUtil("Vui l\xf2ng nh\u1eadp \u0111\xfang s\u1ed1 b\xe0n");
         } else if (StringUtil.default.isNullOrEmpty(this.edbPassword.string)) {
           CommonPrefabsManager.default.getInstance().showPopupMessageUtil("Vui l\xf2ng nh\u1eadp m\u1eadt kh\u1ea9u");
         } else {
-          var e = GamePlayManager.default.getInstance().gameID;
-          GamePlayManager.default.getInstance().joinRoomWithGameID(t, this.edbPassword.string, e);
+          var gameID = GamePlayManager.default.getInstance().gameID;
+          GamePlayManager.default.getInstance().joinRoomWithGameID(roomID, this.edbPassword.string, gameID);
         }
       }
     };
-    e.prototype.onClickClose = function() {
+    PopupJoinRoom.prototype.onClickClose = function() {
       this.hide();
     };
-    o([p(cc.EditBox)], e.prototype, "edbRoomID", void 0);
-    o([p(cc.EditBox)], e.prototype, "edbPassword", void 0);
-    return e = o([d], e);
+    __decorate([property(cc.EditBox)], PopupJoinRoom.prototype, "edbRoomID", void 0);
+    __decorate([property(cc.EditBox)], PopupJoinRoom.prototype, "edbPassword", void 0);
+    return PopupJoinRoom = __decorate([ccclass], PopupJoinRoom);
   }(CardPopupBase.default);
-i.default = f;
+moduleExports.default = PopupJoinRoom;
 void 0;

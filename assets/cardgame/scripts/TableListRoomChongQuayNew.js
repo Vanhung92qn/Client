@@ -1,5 +1,5 @@
-var t = require,
-  e = module,
+var requireRef = require,
+  moduleRef = module,
   moduleExports = exports;
 "use strict";
 void 0;

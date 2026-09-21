@@ -1,10 +1,10 @@
-var t = require,
-  e = module,
-  i = exports;
+var requireRef = require,
+  moduleRef = module,
+  moduleExports = exports;
 "use strict";
 void 0;
-var n = this && this.__assign || function() {
-  return (n = Object.assign || function(t) {
+var __assign = this && this.__assign || function() {
+  return (__assign = Object.assign || function(t) {
     for (var e, i = 1, n = arguments.length; i < n; i++) {
       for (var o in e = arguments[i]) {
         if (Object.prototype.hasOwnProperty.call(e, o)) {
@@ -15,26 +15,26 @@ var n = this && this.__assign || function() {
     return t;
   }).apply(this, arguments);
 };
-Object.defineProperty(i, "__esModule", {
+Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
 var GameConfigManager = require("./GameConfigManager"),
   GamePlayManager = require("./GamePlayManager"),
-  s = function() {
+  FgIDConfig = function() {
     return function() {
       this.pathInternals = [];
       this.pathInternals = [];
     };
   }();
-i.FgIDConfig = s;
-var r = function() {
-  function t() {}
-  Object.defineProperty(t, "config", {
+moduleExports.FgIDConfig = FgIDConfig;
+var FgIDConfigManager = function() {
+  function FgIDConfigManager() {}
+  Object.defineProperty(FgIDConfigManager, "config", {
     get: function() {
       if (null == this._config || this._config && 0 === this._config.pathInternals.length) {
-        var t = GameConfigManager.default.getInstance().getConfig("fgIDConfig"),
-          e = new s();
-        this._config = n({}, e, t);
+        var serverConfig = GameConfigManager.default.getInstance().getConfig("fgIDConfig"),
+          defaultConfig = new FgIDConfig();
+        this._config = __assign({}, defaultConfig, serverConfig);
         GamePlayManager.default.getInstance().getFingerPrint();
       }
       return this._config;
@@ -42,19 +42,19 @@ var r = function() {
     enumerable: true,
     configurable: true
   });
-  t.checkAddFgIDToHeader = function(t, e) {
-    var i = false;
-    this.config.pathInternals.forEach(function(t) {
-      if (e.includes(t)) {
-        i = true;
+  FgIDConfigManager.checkAddFgIDToHeader = function(xhr, url) {
+    var isMatched = false;
+    this.config.pathInternals.forEach(function(pathInternal) {
+      if (url.includes(pathInternal)) {
+        isMatched = true;
       }
     });
-    if (i) {
-      t.setRequestHeader("X-FG-ID", GamePlayManager.default.getInstance().fingerprint);
+    if (isMatched) {
+      xhr.setRequestHeader("X-FG-ID", GamePlayManager.default.getInstance().fingerprint);
     }
   };
-  t._config = null;
-  return t;
+  FgIDConfigManager._config = null;
+  return FgIDConfigManager;
 }();
-i.FgIDConfigManager = r;
+moduleExports.FgIDConfigManager = FgIDConfigManager;
 void 0;

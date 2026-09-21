@@ -1,9 +1,9 @@
-var t = require,
-  e = module,
-  i = exports;
+var requireRef = require,
+  moduleRef = module,
+  moduleExports = exports;
 "use strict";
 void 0;
-var n = this && this.__extends || function() {
+var __extends = this && this.__extends || function() {
     var t = function(e, i) {
       return (t = Object.setPrototypeOf || {
           __proto__: []
@@ -26,7 +26,7 @@ var n = this && this.__extends || function() {
       e.prototype = null === i ? Object.create(i) : (n.prototype = i.prototype, new n());
     };
   }(),
-  o = this && this.__decorate || function(t, e, i, n) {
+  __decorate = this && this.__decorate || function(t, e, i, n) {
     var o,
       a = arguments.length,
       s = a < 3 ? e : null === n ? n = Object.getOwnPropertyDescriptor(e, i) : n;
@@ -44,34 +44,34 @@ var n = this && this.__extends || function() {
     }
     return s;
   };
-Object.defineProperty(i, "__esModule", {
+Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
-var a = cc._decorator,
-  s = a.ccclass,
-  r = a.property,
-  c = function(t) {
-    function e() {
-      var e = null !== t && t.apply(this, arguments) || this;
-      e.animDealCardExtratime = null;
-      e.animDrawsMatchOfUser = null;
-      return e;
+var ccDecorator = cc._decorator,
+  ccclass = ccDecorator.ccclass,
+  property = ccDecorator.property,
+  BaCayAnimExtratime = function(_super) {
+    function BaCayAnimExtratime() {
+      var _this = null !== _super && _super.apply(this, arguments) || this;
+      _this.animDealCardExtratime = null;
+      _this.animDrawsMatchOfUser = null;
+      return _this;
     }
-    n(e, t);
-    e.prototype.showAnimDealCardExtratime = function() {
+    __extends(BaCayAnimExtratime, _super);
+    BaCayAnimExtratime.prototype.showAnimDealCardExtratime = function() {
       this.animDealCardExtratime.active = true;
       this.delayDetroy();
     };
-    e.prototype.showAnimDrawsMatchOfUser = function() {
+    BaCayAnimExtratime.prototype.showAnimDrawsMatchOfUser = function() {
       this.animDrawsMatchOfUser.active = true;
       this.delayDetroy();
     };
-    e.prototype.delayDetroy = function() {
+    BaCayAnimExtratime.prototype.delayDetroy = function() {
       this.node.runAction(cc.sequence(cc.delayTime(1), cc.removeSelf(true)));
     };
-    o([r(cc.Node)], e.prototype, "animDealCardExtratime", void 0);
-    o([r(cc.Node)], e.prototype, "animDrawsMatchOfUser", void 0);
-    return e = o([s], e);
+    __decorate([property(cc.Node)], BaCayAnimExtratime.prototype, "animDealCardExtratime", void 0);
+    __decorate([property(cc.Node)], BaCayAnimExtratime.prototype, "animDrawsMatchOfUser", void 0);
+    return BaCayAnimExtratime = __decorate([ccclass], BaCayAnimExtratime);
   }(cc.Component);
-i.default = c;
+moduleExports.default = BaCayAnimExtratime;
 void 0;

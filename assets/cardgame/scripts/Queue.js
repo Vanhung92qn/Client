@@ -1,15 +1,15 @@
-var t = require,
-  e = module,
-  i = exports;
+var requireRef = require,
+  moduleRef = module,
+  moduleExports = exports;
 "use strict";
 void 0;
-Object.defineProperty(i, "__esModule", {
+Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
-var n = function() {
-  function t(t) {
-    if (void 0 === t) {
-      t = 10;
+var Queue = function() {
+  function Queue(capacity) {
+    if (void 0 === capacity) {
+      capacity = 10;
     }
     this.headIndex = 0;
     this.tailIndex = 0;
@@ -17,26 +17,26 @@ var n = function() {
     this.initialCapacity = 0;
     this.currentCapacity = 0;
     this.container = [];
-    this.initialCapacity = t;
-    this.currentCapacity = t;
-    this.container.length = t;
+    this.initialCapacity = capacity;
+    this.currentCapacity = capacity;
+    this.container.length = capacity;
   }
-  t.prototype.enqueue = function(t) {
+  Queue.prototype.enqueue = function(item) {
     if (this._length >= this.currentCapacity) {
       this.expand();
     }
-    this.container[this.tailIndex] = t;
+    this.container[this.tailIndex] = item;
     this._length++;
     this.tailIndex++;
     if (this.tailIndex === this.currentCapacity) {
       this.tailIndex = 0;
     }
   };
-  t.prototype.dequeue = function() {
+  Queue.prototype.dequeue = function() {
     if (this._length <= 0) {
       return null;
     }
-    var t = this.container[this.headIndex];
+    var item = this.container[this.headIndex];
     this.headIndex++;
     this._length--;
     if (this.headIndex === this.currentCapacity) {
@@ -45,61 +45,61 @@ var n = function() {
     if (this._length === this.currentCapacity / 4 && this._length > this.initialCapacity) {
       this.shrink();
     }
-    return t;
+    return item;
   };
-  t.prototype.peek = function() {
+  Queue.prototype.peek = function() {
     return 0 === this._length ? null : this.container[this.headIndex];
   };
-  Object.defineProperty(t.prototype, "length", {
+  Object.defineProperty(Queue.prototype, "length", {
     get: function() {
       return this._length;
     },
     enumerable: true,
     configurable: true
   });
-  Object.defineProperty(t.prototype, "isEmpty", {
+  Object.defineProperty(Queue.prototype, "isEmpty", {
     get: function() {
       return this._length <= 0;
     },
     enumerable: true,
     configurable: true
   });
-  t.prototype.indexOf = function(t) {
-    return this.container.indexOf(t);
+  Queue.prototype.indexOf = function(item) {
+    return this.container.indexOf(item);
   };
-  t.prototype.expand = function() {
-    var t = this.headIndex,
-      e = 0,
-      i = [];
-    for (i.length = 2 * this.currentCapacity; e < this.currentCapacity;) {
-      i[e] = this.container[t];
-      e++;
-      if (++t === this.currentCapacity) {
-        t = 0;
+  Queue.prototype.expand = function() {
+    var readIndex = this.headIndex,
+      writeIndex = 0,
+      newContainer = [];
+    for (newContainer.length = 2 * this.currentCapacity; writeIndex < this.currentCapacity;) {
+      newContainer[writeIndex] = this.container[readIndex];
+      writeIndex++;
+      if (++readIndex === this.currentCapacity) {
+        readIndex = 0;
       }
     }
-    this.container = i;
+    this.container = newContainer;
     this.headIndex = 0;
     this.tailIndex = this.currentCapacity;
     this.currentCapacity *= 2;
   };
-  t.prototype.shrink = function() {
-    var t = this.headIndex,
-      e = 0,
-      i = [];
-    for (i.length = this.currentCapacity / 4; e < this.currentCapacity;) {
-      i[e] = this.container[t];
-      e++;
-      if (++t === this.currentCapacity) {
-        t = 0;
+  Queue.prototype.shrink = function() {
+    var readIndex = this.headIndex,
+      writeIndex = 0,
+      newContainer = [];
+    for (newContainer.length = this.currentCapacity / 4; writeIndex < this.currentCapacity;) {
+      newContainer[writeIndex] = this.container[readIndex];
+      writeIndex++;
+      if (++readIndex === this.currentCapacity) {
+        readIndex = 0;
       }
     }
-    this.container = i;
+    this.container = newContainer;
     this.headIndex = 0;
     this.tailIndex = this.currentCapacity;
     this.currentCapacity /= 4;
   };
-  return t;
+  return Queue;
 }();
-i.default = n;
+moduleExports.default = Queue;
 void 0;

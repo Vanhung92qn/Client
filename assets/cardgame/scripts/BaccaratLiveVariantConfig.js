@@ -1,67 +1,67 @@
-var t = require,
-  e = module,
-  i = exports;
+var requireRef = require,
+  moduleRef = module,
+  moduleExports = exports;
 "use strict";
 void 0;
-Object.defineProperty(i, "__esModule", {
+Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
 var GameConfigManager = require("./GameConfigManager"),
   MessageCardGameHandler = require("./MessageCardGameHandler"),
-  a = function() {
-    function t() {}
-    Object.defineProperty(t, "config", {
+  BaccaratLiveVariant = function() {
+    function BaccaratLiveVariant() {}
+    Object.defineProperty(BaccaratLiveVariant, "config", {
       get: function() {
-        var t = GameConfigManager.default.getInstance().getConfig("baccaratLiveReplaceConfig");
-        return t && true === t.enable ? t : null;
+        var config = GameConfigManager.default.getInstance().getConfig("baccaratLiveReplaceConfig");
+        return config && true === config.enable ? config : null;
       },
       enumerable: true,
       configurable: true
     });
-    Object.defineProperty(t, "gameID", {
+    Object.defineProperty(BaccaratLiveVariant, "gameID", {
       get: function() {
-        var t = this.config;
-        return t && t.gameID ? t.gameID : MessageCardGameHandler.GAMEID.BACCARAT_LIVE;
+        var config = this.config;
+        return config && config.gameID ? config.gameID : MessageCardGameHandler.GAMEID.BACCARAT_LIVE;
       },
       enumerable: true,
       configurable: true
     });
-    Object.defineProperty(t, "gameIDNumber", {
+    Object.defineProperty(BaccaratLiveVariant, "gameIDNumber", {
       get: function() {
-        var t = parseInt(this.gameID.replace("vgmn_", ""), 10);
-        return isNaN(t) ? MessageCardGameHandler.GAME.BACCARAT_LIVE : t;
+        var gameIdNumber = parseInt(this.gameID.replace("vgmn_", ""), 10);
+        return isNaN(gameIdNumber) ? MessageCardGameHandler.GAME.BACCARAT_LIVE : gameIdNumber;
       },
       enumerable: true,
       configurable: true
     });
-    Object.defineProperty(t, "pluginName", {
+    Object.defineProperty(BaccaratLiveVariant, "pluginName", {
       get: function() {
-        var t = this.config;
-        return t && t.pluginName ? t.pluginName : "baccarat_live_gateway_plugin";
+        var config = this.config;
+        return config && config.pluginName ? config.pluginName : "baccarat_live_gateway_plugin";
       },
       enumerable: true,
       configurable: true
     });
-    Object.defineProperty(t, "cmdBase", {
+    Object.defineProperty(BaccaratLiveVariant, "cmdBase", {
       get: function() {
-        var t = this.config;
-        return t && t.cmdBase ? t.cmdBase : 19e3;
+        var config = this.config;
+        return config && config.cmdBase ? config.cmdBase : 19e3;
       },
       enumerable: true,
       configurable: true
     });
-    t.toWireCmd = function(t) {
-      var e = this.cmdBase;
-      return 19e3 !== e && t >= 19e3 && t < 2e4 ? e + (t - 19e3) : t;
+    BaccaratLiveVariant.toWireCmd = function(cmd) {
+      var cmdBase = this.cmdBase;
+      return 19e3 !== cmdBase && cmd >= 19e3 && cmd < 2e4 ? cmdBase + (cmd - 19e3) : cmd;
     };
-    t.fromWireCmd = function(t) {
-      var e = this.cmdBase;
-      return 19e3 !== e && t >= e && t < e + 1e3 ? t - e + 19e3 : t;
+    BaccaratLiveVariant.fromWireCmd = function(wireCmd) {
+      var cmdBase = this.cmdBase;
+      return 19e3 !== cmdBase && wireCmd >= cmdBase && wireCmd < cmdBase + 1e3 ? wireCmd - cmdBase + 19e3 : wireCmd;
     };
-    t.isBaccaratLiveID = function(t) {
-      return t === MessageCardGameHandler.GAMEID.BACCARAT_LIVE || t === this.gameID;
+    BaccaratLiveVariant.isBaccaratLiveID = function(gameId) {
+      return gameId === MessageCardGameHandler.GAMEID.BACCARAT_LIVE || gameId === this.gameID;
     };
-    return t;
+    return BaccaratLiveVariant;
   }();
-i.BaccaratLiveVariant = a;
+moduleExports.BaccaratLiveVariant = BaccaratLiveVariant;
 void 0;

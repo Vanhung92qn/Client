@@ -246,6 +246,12 @@ moduleExports.changeParentNode = function(node, newParent, scale) {
     node.scale = scale;
   }
 };
+// 🔴 CẢ NHÁNH FPS DƯỚI ĐÂY ĐÃ TRƠ — cố ý, không phải bỏ sót.
+// Bản bê sang Roy88 không port cơ chế ghìm FPS của Go88: `setFpsNormal`, `setFpsLow`, `setFPS`,
+// `setFpsCurrent`, `setFpsKeepUpdate` đều là hàm RỖNG, nên hằng này gán 60 đúng một lần rồi
+// không ai ghi lại nữa ⇒ `isFpsLow()` LUÔN trả về false.
+// Vẫn còn 3 chỗ gọi tin vào nó (PopupXepHangGame, GamePlayManager ×2) nên KHÔNG xoá — xoá là
+// gãy chỗ gọi. Đổi tên thành hằng viết hoa để ai đọc cũng thấy ngay nó không bao giờ đổi.
 var DEFAULT_FPS = 60;
 
 function isValidJSON(value, requireObject) {

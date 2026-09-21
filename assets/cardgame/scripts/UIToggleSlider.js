@@ -1,9 +1,9 @@
-var t = require,
-  e = module,
-  i = exports;
+var requireRef = require,
+  moduleRef = module,
+  moduleExports = exports;
 "use strict";
 void 0;
-var n = this && this.__extends || function() {
+var __extends = this && this.__extends || function() {
     var t = function(e, i) {
       return (t = Object.setPrototypeOf || {
           __proto__: []
@@ -26,7 +26,7 @@ var n = this && this.__extends || function() {
       e.prototype = null === i ? Object.create(i) : (n.prototype = i.prototype, new n());
     };
   }(),
-  o = this && this.__decorate || function(t, e, i, n) {
+  __decorate = this && this.__decorate || function(t, e, i, n) {
     var o,
       a = arguments.length,
       s = a < 3 ? e : null === n ? n = Object.getOwnPropertyDescriptor(e, i) : n;
@@ -44,53 +44,53 @@ var n = this && this.__extends || function() {
     }
     return s;
   };
-Object.defineProperty(i, "__esModule", {
+Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
-var a = cc._decorator,
-  s = a.ccclass,
-  r = a.property,
-  c = function(t) {
-    function e() {
-      var e = null !== t && t.apply(this, arguments) || this;
-      e.iconChose = null;
-      e.offset = 0;
-      e.moveX = 0;
-      e.isOnSelect = false;
-      e.isMove = true;
-      e.isPreventClick = false;
-      e.onValueChange = function(t) {};
-      return e;
+var ccDecorator = cc._decorator,
+  ccclass = ccDecorator.ccclass,
+  property = ccDecorator.property,
+  UIToggleSlider = function(_super) {
+    function UIToggleSlider() {
+      var _this = null !== _super && _super.apply(this, arguments) || this;
+      _this.iconChose = null;
+      _this.offset = 0;
+      _this.moveX = 0;
+      _this.isOnSelect = false;
+      _this.isMove = true;
+      _this.isPreventClick = false;
+      _this.onValueChange = function(isOn) {};
+      return _this;
     }
-    n(e, t);
-    e.prototype.isOnChange = function(t, e) {
-      if (void 0 === e) {
-        e = true;
+    __extends(UIToggleSlider, _super);
+    UIToggleSlider.prototype.isOnChange = function(isOn, fireCallback) {
+      if (void 0 === fireCallback) {
+        fireCallback = true;
       }
-      if (!(this.isPreventClick || this.isOnSelect === t || this.iconChose.getNumberOfRunningActions() > 0)) {
+      if (!(this.isPreventClick || this.isOnSelect === isOn || this.iconChose.getNumberOfRunningActions() > 0)) {
         if (this.isMove) {
-          this.isOnSelect = t;
+          this.isOnSelect = isOn;
           this.iconChose.runAction(cc.moveTo(.1, new cc.Vec2(this.isOnSelect ? this.moveX : -this.moveX, this.iconChose.position.y)));
         }
-        if (e) {
-          this.onValueChange(t);
+        if (fireCallback) {
+          this.onValueChange(isOn);
         }
       }
     };
-    e.prototype.initStart = function(t) {
+    UIToggleSlider.prototype.initStart = function(isOn) {
       this.moveX = this.node.width / 2 - this.iconChose.width / 2 - this.offset;
-      this.isOnSelect = t;
+      this.isOnSelect = isOn;
       this.iconChose.position = new cc.Vec2(this.isOnSelect ? this.moveX : -1 * this.moveX, this.iconChose.position.y);
     };
-    e.prototype.setPreventClick = function(t) {
-      this.isPreventClick = t;
+    UIToggleSlider.prototype.setPreventClick = function(preventClick) {
+      this.isPreventClick = preventClick;
     };
-    e.prototype.onClick = function() {
+    UIToggleSlider.prototype.onClick = function() {
       this.isOnChange(!this.isOnSelect);
     };
-    o([r(cc.Node)], e.prototype, "iconChose", void 0);
-    o([r], e.prototype, "offset", void 0);
-    return e = o([s], e);
+    __decorate([property(cc.Node)], UIToggleSlider.prototype, "iconChose", void 0);
+    __decorate([property], UIToggleSlider.prototype, "offset", void 0);
+    return UIToggleSlider = __decorate([ccclass], UIToggleSlider);
   }(cc.Component);
-i.default = c;
+moduleExports.default = UIToggleSlider;
 void 0;

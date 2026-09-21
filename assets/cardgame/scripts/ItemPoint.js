@@ -1,9 +1,9 @@
-var t = require,
-  e = module,
-  i = exports;
+var requireRef = require,
+  moduleRef = module,
+  moduleExports = exports;
 "use strict";
 void 0;
-var n = this && this.__extends || function() {
+var __extends = this && this.__extends || function() {
     var t = function(e, i) {
       return (t = Object.setPrototypeOf || {
           __proto__: []
@@ -26,7 +26,7 @@ var n = this && this.__extends || function() {
       e.prototype = null === i ? Object.create(i) : (n.prototype = i.prototype, new n());
     };
   }(),
-  o = this && this.__decorate || function(t, e, i, n) {
+  __decorate = this && this.__decorate || function(t, e, i, n) {
     var o,
       a = arguments.length,
       s = a < 3 ? e : null === n ? n = Object.getOwnPropertyDescriptor(e, i) : n;
@@ -44,34 +44,34 @@ var n = this && this.__extends || function() {
     }
     return s;
   };
-Object.defineProperty(i, "__esModule", {
+Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
 var GamePlayManager = require("./GamePlayManager"),
   StringUtil = require("./StringUtil"),
-  r = cc._decorator,
-  c = r.ccclass,
-  l = r.property,
-  h = function(t) {
-    function e() {
-      var e = null !== t && t.apply(this, arguments) || this;
-      e.txtRank = null;
-      e.icoRank = null;
-      e.animRank = null;
-      e.txtTenHienThi = null;
-      e.txtTongPoint = null;
-      e.spriteLineOn = null;
-      e.selected = null;
-      e.animTop = null;
-      e.nodeContent = null;
-      return e;
+  ccDecorator = cc._decorator,
+  ccclass = ccDecorator.ccclass,
+  property = ccDecorator.property,
+  ItemPoint = function(_super) {
+    function ItemPoint() {
+      var _this = null !== _super && _super.apply(this, arguments) || this;
+      _this.txtRank = null;
+      _this.icoRank = null;
+      _this.animRank = null;
+      _this.txtTenHienThi = null;
+      _this.txtTongPoint = null;
+      _this.spriteLineOn = null;
+      _this.selected = null;
+      _this.animTop = null;
+      _this.nodeContent = null;
+      return _this;
     }
-    n(e, t);
-    e.prototype.loadUI = function(t, e, i, n, o) {
-      if (StringUtil.default.isNullOrEmpty(n) || n != GamePlayManager.default.getInstance().userID ? this.selected.active = false : this.selected.active = true,
-        void 0 != t && null != t) {
-        if (this.spriteLineOn.active = t % 2 != 0, t <= 3) {
-          switch (this.txtRank.node.active = false, t) {
+    __extends(ItemPoint, _super);
+    ItemPoint.prototype.loadUI = function(rank, fullName, totalPoint, userID, userName) {
+      if (StringUtil.default.isNullOrEmpty(userID) || userID != GamePlayManager.default.getInstance().userID ? this.selected.active = false : this.selected.active = true,
+        void 0 != rank && null != rank) {
+        if (this.spriteLineOn.active = rank % 2 != 0, rank <= 3) {
+          switch (this.txtRank.node.active = false, rank) {
             case 1:
               this.icoRank.node.active = false;
               this.animRank.node.active = true;
@@ -94,30 +94,30 @@ var GamePlayManager = require("./GamePlayManager"),
           this.txtRank.node.active = true;
           this.icoRank.node.active = false;
           this.animRank.node.active = false;
-          this.txtRank.string = t.toString();
+          this.txtRank.string = rank.toString();
         }
       }
-      if (StringUtil.default.isNullOrEmpty(e)) {
-        if (StringUtil.default.isNullOrEmpty(o)) {
+      if (StringUtil.default.isNullOrEmpty(fullName)) {
+        if (StringUtil.default.isNullOrEmpty(userName)) {
           this.txtTenHienThi.string = "";
         } else {
-          this.txtTenHienThi.string = o.toString();
+          this.txtTenHienThi.string = userName.toString();
         }
       } else {
-        this.txtTenHienThi.string = e.toString();
+        this.txtTenHienThi.string = fullName.toString();
       }
-      this.txtTongPoint.string = void 0 != i && null != i ? StringUtil.default.formatMoneyNumberWithColom(i) : "0";
+      this.txtTongPoint.string = void 0 != totalPoint && null != totalPoint ? StringUtil.default.formatMoneyNumberWithColom(totalPoint) : "0";
     };
-    o([l(cc.Label)], e.prototype, "txtRank", void 0);
-    o([l(cc.Sprite)], e.prototype, "icoRank", void 0);
-    o([l(sp.Skeleton)], e.prototype, "animRank", void 0);
-    o([l(cc.Label)], e.prototype, "txtTenHienThi", void 0);
-    o([l(cc.Label)], e.prototype, "txtTongPoint", void 0);
-    o([l(cc.Node)], e.prototype, "spriteLineOn", void 0);
-    o([l(cc.Node)], e.prototype, "selected", void 0);
-    o([l(sp.SkeletonData)], e.prototype, "animTop", void 0);
-    o([l(cc.Node)], e.prototype, "nodeContent", void 0);
-    return e = o([c], e);
+    __decorate([property(cc.Label)], ItemPoint.prototype, "txtRank", void 0);
+    __decorate([property(cc.Sprite)], ItemPoint.prototype, "icoRank", void 0);
+    __decorate([property(sp.Skeleton)], ItemPoint.prototype, "animRank", void 0);
+    __decorate([property(cc.Label)], ItemPoint.prototype, "txtTenHienThi", void 0);
+    __decorate([property(cc.Label)], ItemPoint.prototype, "txtTongPoint", void 0);
+    __decorate([property(cc.Node)], ItemPoint.prototype, "spriteLineOn", void 0);
+    __decorate([property(cc.Node)], ItemPoint.prototype, "selected", void 0);
+    __decorate([property(sp.SkeletonData)], ItemPoint.prototype, "animTop", void 0);
+    __decorate([property(cc.Node)], ItemPoint.prototype, "nodeContent", void 0);
+    return ItemPoint = __decorate([ccclass], ItemPoint);
   }(cc.Component);
-i.default = h;
+moduleExports.default = ItemPoint;
 void 0;

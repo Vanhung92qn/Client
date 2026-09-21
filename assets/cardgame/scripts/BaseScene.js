@@ -86,7 +86,7 @@ function caiChuyenHuongCanh() {
 
     var ten = GameDefine.GameConfigs.SceneName;
     var canhGoc = [ten.Lobby, ten.LobbyKTEK, ten.Login, ten.LoginKTEK, ten.NewScene];
-    var laCanhGoc = function (x) { return canhGoc.indexOf(x) >= 0; };
+    var laCanhGoc = function (tenCanh) { return canhGoc.indexOf(tenCanh) >= 0; };
 
     var loadGoc = cc.director.loadScene.bind(cc.director);
     var preloadGoc = cc.director.preloadScene.bind(cc.director);

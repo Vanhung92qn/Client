@@ -1,5 +1,5 @@
-var t = require,
-  e = module,
+var requireRef = require,
+  moduleRef = module,
   moduleExports = exports;
 "use strict";
 void 0;
@@ -66,7 +66,7 @@ var CardPopupBase = require("./CardPopupBase"),
   ccDecorator = cc._decorator,
   ccclass = ccDecorator.ccclass,
   property = ccDecorator.property,
-  E = function(BaseClass) {
+  PopupXepHangGameClass = function(BaseClass) {
     function PopupXepHangGame() {
       var self = null !== BaseClass && BaseClass.apply(this, arguments) || this;
       self.nodePopupXepHangGame = null;
@@ -452,7 +452,6 @@ var CardPopupBase = require("./CardPopupBase"),
           url += "top-jp/";
         }
         url += gameId + (this.nodeNgayOn.active ? "/daily" : "/weekly") + winPathSuffix;
-        var selfRankError = this;
         GameHTTPManager.default.getInstance().sendGetHttpRequest(url, function(response) {
           switch (self.nodeLoading.active = false, self.nodeBoardInfo.active = true, self.nodeBoardLeft.active = true, self.gameId) {
             case MessageCardGameHandler.GAMEID.SICBO_LIVE:
@@ -474,15 +473,14 @@ var CardPopupBase = require("./CardPopupBase"),
           self.showRank(response);
           CommonPrefabsManager.default.getInstance().hideLoading();
         }, function(errorMessage) {
-          if (selfRankError.node) {
-            selfRankError.txtTittle.string = "";
-            selfRankError.onLoadErr(errorMessage);
+          if (self.node) {
+            self.txtTittle.string = "";
+            self.onLoadErr(errorMessage);
           }
           CommonPrefabsManager.default.getInstance().hideLoading();
         }, true);
       } else {
         url = GameConfigManager.default.getInstance().duatopTxURL + "?type=turnover&from=0&size=20&gid=" + gameId + dateQuery;
-        var selfDuaTopError = this;
         GameHTTPManager.default.getInstance().sendPostHttpRequest(url, requestBodyJson, function(response) {
           self.nodeLoading.active = false;
           var isTaiXiuWebCC = self.gameId == MessageCardGameHandler.GAMEID.TAIXIU && GameConfigManager.default.getInstance().isLoginWebcc;
@@ -509,9 +507,9 @@ var CardPopupBase = require("./CardPopupBase"),
           }
           CommonPrefabsManager.default.getInstance().hideLoading();
         }, function(errorMessage) {
-          if (selfDuaTopError.node) {
-            selfDuaTopError.txtTittle.string = "";
-            selfDuaTopError.onLoadErr(errorMessage);
+          if (self.node) {
+            self.txtTittle.string = "";
+            self.onLoadErr(errorMessage);
           }
           CommonPrefabsManager.default.getInstance().hideLoading();
         });
@@ -955,5 +953,5 @@ var CardPopupBase = require("./CardPopupBase"),
     __decorate([property(cc.Label)], PopupXepHangGame.prototype, "txtEmpty", void 0);
     return PopupXepHangGame = __decorate([ccclass], PopupXepHangGame);
   }(CardPopupBase.default);
-moduleExports.default = E;
+moduleExports.default = PopupXepHangGameClass;
 void 0;

@@ -1,5 +1,5 @@
-var t = require,
-  e = module,
+var requireRef = require,
+  moduleRef = module,
   moduleExports = exports;
 "use strict";
 void 0;
@@ -50,7 +50,6 @@ Object.defineProperty(moduleExports, "__esModule", {
 var MessageCardGameHandler = require("./MessageCardGameHandler"),
   PlayerView = require("./PlayerView"),
   GamePlayManager = require("./GamePlayManager"),
-  MessageCardGame = require("./MessageCardGameHandler"),
   StringUtil = require("./StringUtil"),
   GameZOrder = require("./GameZOrder"),
   CardGameCommonRequest = require("./CardGameCommonRequest"),
@@ -279,20 +278,20 @@ var GameController = function(_super) {
     this.showChat(chatData, userId, message, isFromBatch, displayName, chatType);
   };
   GameController.prototype.onReceiveMessage = function(cmd, raw, data, applyGameConfig) {
-    switch (void 0 === applyGameConfig && (applyGameConfig = true), cmd != MessageCardGame.Global_Message.GET_TABLES && GameConfigManager.default.getInstance().enviromentName.includes("pre") && BaseScene
+    switch (void 0 === applyGameConfig && (applyGameConfig = true), cmd != MessageCardGameHandler.Global_Message.GET_TABLES && GameConfigManager.default.getInstance().enviromentName.includes("pre") && BaseScene
       .default.currentSceneName != GameDefine.GameConfigs.SceneName.BauCua && ErrorLogHandler.default.getInstance().addLog(JSON.stringify(data)), cmd) {
-      case MessageCardGame.Global_Message.INGAME_JOIN_TABLE_INFOS:
+      case MessageCardGameHandler.Global_Message.INGAME_JOIN_TABLE_INFOS:
         this.onGetInGameTableInfo(data);
         break;
-      case MessageCardGame.Global_Message.SET_AUTO_READY:
+      case MessageCardGameHandler.Global_Message.SET_AUTO_READY:
         cc.error(data);
         break;
-      case MessageCardGame.Global_Message.INGAME_USER_LEAVE_AND_JOIN_TABLE:
+      case MessageCardGameHandler.Global_Message.INGAME_USER_LEAVE_AND_JOIN_TABLE:
         var joinLeaveType = data.t,
           playerData = data.p;
         1 === joinLeaveType ? this.onUserJoinTable(playerData) : 2 === joinLeaveType && this.onUserLeaveTable(playerData);
         break;
-      case MessageCardGame.Global_Message.UPDATE_BATCH_PLAYER_IN_ROOM:
+      case MessageCardGameHandler.Global_Message.UPDATE_BATCH_PLAYER_IN_ROOM:
         if (null !== data.ps && void 0 !== data.ps) {
           for (var playerIndex = 0; playerIndex < data.ps.length; ++playerIndex) {
             joinLeaveType = data.ps[playerIndex].t;
@@ -308,10 +307,10 @@ var GameController = function(_super) {
         }
         null !== data.tTU && void 0 !== data.tTU && this.setTextUserbanCHung(data.tTU);
         break;
-      case MessageCardGame.Global_Message.INGAME_USER_CHAT:
+      case MessageCardGameHandler.Global_Message.INGAME_USER_CHAT:
         this.processIngameUserChat(data);
         break;
-      case MessageCardGame.Global_Message.BATCH_INGAME_USER_CHAT:
+      case MessageCardGameHandler.Global_Message.BATCH_INGAME_USER_CHAT:
         var batchChatMessages = data.bmgs;
         if (batchChatMessages) {
           for (var chatIndex = 0; chatIndex < batchChatMessages.length; chatIndex++) {
@@ -321,18 +320,18 @@ var GameController = function(_super) {
           }
         }
         break;
-      case MessageCardGame.Global_Message.INGAME_SEND_READY_TO_COUNT_DOWN:
+      case MessageCardGameHandler.Global_Message.INGAME_SEND_READY_TO_COUNT_DOWN:
         this.autoSendReady();
         break;
-      case MessageCardGame.Global_Message.INGAME_USER_READY:
+      case MessageCardGameHandler.Global_Message.INGAME_USER_READY:
         var userId = data.uid;
         this.setReadyForPlayer(userId);
         break;
-      case MessageCardGame.Global_Message.INGAME_UPDATE_MONEY:
+      case MessageCardGameHandler.Global_Message.INGAME_UPDATE_MONEY:
         var moneyList = data.ps;
         this.updateMoneysMsg(moneyList);
         break;
-      case MessageCardGame.Global_Message.REFRESH_MONEY:
+      case MessageCardGameHandler.Global_Message.REFRESH_MONEY:
         var assets = data.As,
           vip = assets.vip,
           gold = assets.gold,
@@ -344,16 +343,16 @@ var GameController = function(_super) {
         GamePlayManager.default.getInstance().goldSafe = goldSafe;
         this.refreshMoney(assets);
         break;
-      case MessageCardGame.Global_Message.BUY_IN:
+      case MessageCardGameHandler.Global_Message.BUY_IN:
         userId = data.uid;
         var money = data.m;
         this.moneyWithdrawalResponse(userId, money);
         break;
-      case MessageCardGame.Global_Message.INGAME_CHANGE_HOST:
+      case MessageCardGameHandler.Global_Message.INGAME_CHANGE_HOST:
         userId = data.uid;
         this.setHostPlayer(userId);
         break;
-      case MessageCardGame.Global_Message.FIND_PLAYERS_TO_INVITE:
+      case MessageCardGameHandler.Global_Message.FIND_PLAYERS_TO_INVITE:
         for (var foundUsers = data.us, inviteUserIds = [], userIndex = 0; userIndex < foundUsers.length; userIndex++) {
           var foundUser = foundUsers[userIndex];
           inviteUserIds.push(foundUser.u);
@@ -362,14 +361,14 @@ var GameController = function(_super) {
         CommonPrefabsManager.default.getInstance().showPopupMessageUtil(
           "H\u1ec7 th\u1ed1ng \u0111\xe3 g\u1eedi l\u1eddi m\u1eddi \u0111\u1ebfn ng\u01b0\u1eddi ch\u01a1i kh\xe1c!");
         break;
-      case MessageCardGame.Global_Message.JOIN_TABLE_INVITATION:
+      case MessageCardGameHandler.Global_Message.JOIN_TABLE_INVITATION:
         if (false === this.node.active && false === GamePlayManager.default.getInstance().iskteckgame) {
           var fromUser = data.fu,
             roomInfo = data.ri;
           CommonPrefabsManager.default.getInstance().showPopupInviRoom(fromUser, roomInfo);
         }
         break;
-      case MessageCardGame.Global_Message.BAO_QUAY:
+      case MessageCardGameHandler.Global_Message.BAO_QUAY:
         StringUtil.default.isNullOrEmpty(data.mgs) ? CommonPrefabsManager.default.getInstance().showPopupMessageUtil(
             "Ch\xfang t\xf4i s\u1ebd s\u1eed l\xfd v\xe0 th\xf4ng b\xe1o qua h\u1ed9p th\u01b0.") : CommonPrefabsManager.default.getInstance()
           .showPopupMessageUtil(data.mgs);
@@ -1112,7 +1111,7 @@ var GameController = function(_super) {
     }
   };
   GameController.prototype.getCmdStart = function() {
-    return MessageCardGame.Global_Message.START_GAME_CARD;
+    return MessageCardGameHandler.Global_Message.START_GAME_CARD;
   };
   GameController.prototype.getNameGame = function() {
     return "";
@@ -1150,7 +1149,7 @@ var GameController = function(_super) {
       ErrorLogHandler.default.getInstance().sendLog([this.getTag(), this._thisPlayerView.userID, "vanchoi"], true);
     }
   };
-  GameController.prototype.onFocus = function(t) {
+  GameController.prototype.onFocus = function(secondsAway) {
     this.isInBgMode = false;
   };
   GameController.prototype.onLostFocus = function() {

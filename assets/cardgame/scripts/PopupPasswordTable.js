@@ -1,9 +1,9 @@
-var t = require,
-  e = module,
-  i = exports;
+var requireRef = require,
+  moduleRef = module,
+  moduleExports = exports;
 "use strict";
 void 0;
-var n = this && this.__extends || function() {
+var __extends = this && this.__extends || function() {
     var t = function(e, i) {
       return (t = Object.setPrototypeOf || {
           __proto__: []
@@ -26,7 +26,7 @@ var n = this && this.__extends || function() {
       e.prototype = null === i ? Object.create(i) : (n.prototype = i.prototype, new n());
     };
   }(),
-  o = this && this.__decorate || function(t, e, i, n) {
+  __decorate = this && this.__decorate || function(t, e, i, n) {
     var o,
       a = arguments.length,
       s = a < 3 ? e : null === n ? n = Object.getOwnPropertyDescriptor(e, i) : n;
@@ -44,44 +44,44 @@ var n = this && this.__extends || function() {
     }
     return s;
   };
-Object.defineProperty(i, "__esModule", {
+Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
 var CardPopupBase = require("./CardPopupBase"),
   GamePlayManager = require("./GamePlayManager"),
   StringUtil = require("./StringUtil"),
   CommonPrefabsManager = require("./CommonPrefabsManager"),
-  l = cc._decorator,
-  h = l.ccclass,
-  u = l.property,
-  d = function(t) {
-    function e() {
-      var e = null !== t && t.apply(this, arguments) || this;
-      e.password = null;
-      e.btnOK = null;
-      e.serverID = 0;
-      return e;
+  ccDecorator = cc._decorator,
+  ccclass = ccDecorator.ccclass,
+  property = ccDecorator.property,
+  PopupPasswordTable = function(_super) {
+    function PopupPasswordTable() {
+      var _this = null !== _super && _super.apply(this, arguments) || this;
+      _this.password = null;
+      _this.btnOK = null;
+      _this.serverID = 0;
+      return _this;
     }
-    n(e, t);
-    e.prototype.btnOKPress = function() {
+    __extends(PopupPasswordTable, _super);
+    PopupPasswordTable.prototype.btnOKPress = function() {
       if (StringUtil.default.isNullOrEmpty(this.password.string)) {
         CommonPrefabsManager.default.getInstance().showPopupMessageUtil("B\u1ea1n ch\u01b0a nh\u1eadp m\u1eadt kh\u1ea9u !");
       } else {
         this.btnOK.interactable = false;
-        var t = this.password.string;
-        GamePlayManager.default.getInstance().joinRoom(GamePlayManager.default.getInstance().roomID, this.serverID, t);
+        var passwordText = this.password.string;
+        GamePlayManager.default.getInstance().joinRoom(GamePlayManager.default.getInstance().roomID, this.serverID, passwordText);
         this.onClickClose();
       }
     };
-    e.prototype.onClickClose = function() {
+    PopupPasswordTable.prototype.onClickClose = function() {
       this.hide();
     };
-    e.prototype.ontextChanged = function(t, e, i) {
-      e.string = StringUtil.default.removeSpecialCharacter(t);
+    PopupPasswordTable.prototype.ontextChanged = function(text, editBox, customEventData) {
+      editBox.string = StringUtil.default.removeSpecialCharacter(text);
     };
-    o([u(cc.EditBox)], e.prototype, "password", void 0);
-    o([u(cc.Button)], e.prototype, "btnOK", void 0);
-    return e = o([h], e);
+    __decorate([property(cc.EditBox)], PopupPasswordTable.prototype, "password", void 0);
+    __decorate([property(cc.Button)], PopupPasswordTable.prototype, "btnOK", void 0);
+    return PopupPasswordTable = __decorate([ccclass], PopupPasswordTable);
   }(CardPopupBase.default);
-i.default = d;
+moduleExports.default = PopupPasswordTable;
 void 0;

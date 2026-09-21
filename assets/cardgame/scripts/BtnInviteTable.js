@@ -1,9 +1,9 @@
-var t = require,
-  e = module,
-  i = exports;
+var requireRef = require,
+  moduleRef = module,
+  moduleExports = exports;
 "use strict";
 void 0;
-var n = this && this.__extends || function() {
+var __extends = this && this.__extends || function() {
     var t = function(e, i) {
       return (t = Object.setPrototypeOf || {
           __proto__: []
@@ -26,7 +26,7 @@ var n = this && this.__extends || function() {
       e.prototype = null === i ? Object.create(i) : (n.prototype = i.prototype, new n());
     };
   }(),
-  o = this && this.__decorate || function(t, e, i, n) {
+  __decorate = this && this.__decorate || function(t, e, i, n) {
     var o,
       a = arguments.length,
       s = a < 3 ? e : null === n ? n = Object.getOwnPropertyDescriptor(e, i) : n;
@@ -44,26 +44,26 @@ var n = this && this.__extends || function() {
     }
     return s;
   };
-Object.defineProperty(i, "__esModule", {
+Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
 var GamePlayManager = require("./GamePlayManager"),
   MusicPlayer = require("./MusicPlayer"),
   CardGameCommonRequest = require("./CardGameCommonRequest"),
   CommonPrefabsManager = require("./CommonPrefabsManager"),
-  l = cc._decorator,
-  h = l.ccclass,
-  u = (l.property, function(t) {
-    function e() {
-      var e = null !== t && t.apply(this, arguments) || this;
-      e.oldClickTime = 0;
-      return e;
+  ccDecorator = cc._decorator,
+  ccclass = ccDecorator.ccclass,
+  BtnInviteTable = (ccDecorator.property, function(_super) {
+    function BtnInviteTable() {
+      var _this = null !== _super && _super.apply(this, arguments) || this;
+      _this.oldClickTime = 0;
+      return _this;
     }
-    n(e, t);
-    e.prototype.onClickInvite = function() {
-      var t = new Date();
-      if (!((t.getTime() - this.oldClickTime) / 1e3 < 2)) {
-        this.oldClickTime = t.getTime();
+    __extends(BtnInviteTable, _super);
+    BtnInviteTable.prototype.onClickInvite = function() {
+      var now = new Date();
+      if (!((now.getTime() - this.oldClickTime) / 1e3 < 2)) {
+        this.oldClickTime = now.getTime();
         MusicPlayer.default.getInstance().playbtnClick();
         if (GamePlayManager.default.getInstance().roomPassword) {
           CommonPrefabsManager.default.getInstance().showPopupMessageUtil(
@@ -73,7 +73,7 @@ var GamePlayManager = require("./GamePlayManager"),
         }
       }
     };
-    return e = o([h], e);
+    return BtnInviteTable = __decorate([ccclass], BtnInviteTable);
   }(cc.Component));
-i.default = u;
+moduleExports.default = BtnInviteTable;
 void 0;

@@ -47,7 +47,7 @@ var ChatController = cc.Class({
     loadChat: function (a, b, c, d, e, f, g) {},
 
     // CardGameTableController.js:381 — hideSpamChat(t)
-    hideSpamChat: function (isHide) {}
+    hideSpamChat: function (spammerUserId) {}
 });
 
 exports.default = ChatController;

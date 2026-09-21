@@ -1,9 +1,9 @@
-var t = require,
-  e = module,
-  i = exports;
+var requireRef = require,
+  moduleRef = module,
+  moduleExports = exports;
 "use strict";
 void 0;
-var n = this && this.__extends || function() {
+var __extends = this && this.__extends || function() {
     var t = function(e, i) {
       return (t = Object.setPrototypeOf || {
           __proto__: []
@@ -26,7 +26,7 @@ var n = this && this.__extends || function() {
       e.prototype = null === i ? Object.create(i) : (n.prototype = i.prototype, new n());
     };
   }(),
-  o = this && this.__decorate || function(t, e, i, n) {
+  __decorate = this && this.__decorate || function(t, e, i, n) {
     var o,
       a = arguments.length,
       s = a < 3 ? e : null === n ? n = Object.getOwnPropertyDescriptor(e, i) : n;
@@ -44,42 +44,42 @@ var n = this && this.__extends || function() {
     }
     return s;
   };
-Object.defineProperty(i, "__esModule", {
+Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
-var a = cc._decorator,
-  s = a.ccclass,
-  r = a.property,
-  c = function(t) {
-    function e() {
-      var e = null !== t && t.apply(this, arguments) || this;
-      e.progressBar = null;
-      e.isRuning = false;
-      e.countTime = 0;
-      e.actionTIme = 0;
-      e.percentTo = 0;
-      e.percentStart = 0;
-      e.percentCount = 0;
-      e.nodeEffect = null;
-      return e;
+var _decorator = cc._decorator,
+  ccclass = _decorator.ccclass,
+  property = _decorator.property,
+  ActionProgressTo = function(_super) {
+    function ActionProgressTo() {
+      var _this = null !== _super && _super.apply(this, arguments) || this;
+      _this.progressBar = null;
+      _this.isRuning = false;
+      _this.countTime = 0;
+      _this.actionTIme = 0;
+      _this.percentTo = 0;
+      _this.percentStart = 0;
+      _this.percentCount = 0;
+      _this.nodeEffect = null;
+      return _this;
     }
-    n(e, t);
-    e.prototype.setProgress = function(t) {
+    __extends(ActionProgressTo, _super);
+    ActionProgressTo.prototype.setProgress = function(progress) {
       if (null != this.progressBar) {
-        this.progressBar.progress = t;
+        this.progressBar.progress = progress;
       }
     };
-    e.prototype.RunActionProgress = function(t, e) {
+    ActionProgressTo.prototype.RunActionProgress = function(duration, targetProgress) {
       this.countTime = 0;
-      this.actionTIme = t;
-      this.percentTo = e;
+      this.actionTIme = duration;
+      this.percentTo = targetProgress;
       this.percentStart = this.progressBar.progress;
-      this.percentCount = e - this.percentStart;
+      this.percentCount = targetProgress - this.percentStart;
       this.isRuning = true;
     };
-    e.prototype.update = function(t) {
+    ActionProgressTo.prototype.update = function(dt) {
       if (this.isRuning) {
-        this.countTime += t;
+        this.countTime += dt;
         if (this.countTime > this.actionTIme) {
           this.countTime = this.actionTIme;
           this.isRuning = false;
@@ -92,12 +92,12 @@ var a = cc._decorator,
         }
       }
     };
-    e.prototype.stopAllActions = function() {
+    ActionProgressTo.prototype.stopAllActions = function() {
       this.isRuning = false;
     };
-    o([r(cc.ProgressBar)], e.prototype, "progressBar", void 0);
-    o([r(cc.Node)], e.prototype, "nodeEffect", void 0);
-    return e = o([s], e);
+    __decorate([property(cc.ProgressBar)], ActionProgressTo.prototype, "progressBar", void 0);
+    __decorate([property(cc.Node)], ActionProgressTo.prototype, "nodeEffect", void 0);
+    return ActionProgressTo = __decorate([ccclass], ActionProgressTo);
   }(cc.Component);
-i.default = c;
+moduleExports.default = ActionProgressTo;
 void 0;

@@ -1,69 +1,69 @@
-var t = require,
-  e = module,
-  i = exports;
+var requireRef = require,
+  moduleRef = module,
+  moduleExports = exports;
 "use strict";
 void 0;
-Object.defineProperty(i, "__esModule", {
+Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
-var n = function() {
-  function t() {
+var EventDispatcher = function() {
+  function EventDispatcher() {
     this._listeners = void 0;
   }
-  t.prototype.clearListeners = function() {
+  EventDispatcher.prototype.clearListeners = function() {
     this._listeners = {};
   };
-  t.prototype.addEventListener = function(t, e) {
-    if (this._listeners || (this._listeners = {}), t in this._listeners) {
-      var i = this._listeners[t];
-      if (i.indexOf(e) < 0) {
-        i.push(e);
+  EventDispatcher.prototype.addEventListener = function(eventType, listener) {
+    if (this._listeners || (this._listeners = {}), eventType in this._listeners) {
+      var listeners = this._listeners[eventType];
+      if (listeners.indexOf(listener) < 0) {
+        listeners.push(listener);
       }
     } else {
-      this._listeners[t] = [e];
+      this._listeners[eventType] = [listener];
     }
   };
-  t.prototype.removeEventListener = function(t, e) {
-    if (this._listeners && t in this._listeners) {
-      var i = this._listeners[t],
-        n = i.indexOf(e);
-      if (n >= 0) {
-        if (1 === i.length) {
-          delete this._listeners[t];
+  EventDispatcher.prototype.removeEventListener = function(eventType, listener) {
+    if (this._listeners && eventType in this._listeners) {
+      var listeners = this._listeners[eventType],
+        index = listeners.indexOf(listener);
+      if (index >= 0) {
+        if (1 === listeners.length) {
+          delete this._listeners[eventType];
         } else {
-          i.splice(n, 1);
+          listeners.splice(index, 1);
         }
       }
     }
   };
-  t.prototype.dispatchEvent = function(t, e) {
+  EventDispatcher.prototype.dispatchEvent = function(event, data) {
     if (!this._listeners) {
       return true;
     }
-    var i = t.type,
-      n = false;
-    if (i in this._listeners) {
-      for (var o = this._listeners[i], a = 0, s = void 0; s = o[a]; a++) {
-        if (s.handlerEvent) {
+    var eventType = event.type,
+      isCanceled = false;
+    if (eventType in this._listeners) {
+      for (var listeners = this._listeners[eventType], index = 0, listener = void 0; listener = listeners[index]; index++) {
+        if (listener.handlerEvent) {
           try {
-            var r = false === s.handlerEvent.call(s, t, e);
-            n = n || r;
-          } catch (t) {
-            console.warn(t);
+            var listenerCanceled = false === listener.handlerEvent.call(listener, event, data);
+            isCanceled = isCanceled || listenerCanceled;
+          } catch (err) {
+            console.warn(err);
           }
         } else {
           try {
-            r = false === s.call(s, t, e);
-            n = n || r;
-          } catch (t) {
-            console.warn(t);
+            listenerCanceled = false === listener.call(listener, event, data);
+            isCanceled = isCanceled || listenerCanceled;
+          } catch (err) {
+            console.warn(err);
           }
         }
       }
     }
-    return !n && !t.defaultPrevented;
+    return !isCanceled && !event.defaultPrevented;
   };
-  return t;
+  return EventDispatcher;
 }();
-i.default = n;
+moduleExports.default = EventDispatcher;
 void 0;

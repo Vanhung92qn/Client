@@ -1,9 +1,9 @@
-var t = require,
-  e = module,
-  i = exports;
+var requireRef = require,
+  moduleRef = module,
+  moduleExports = exports;
 "use strict";
 void 0;
-var n = this && this.__extends || function() {
+var __extends = this && this.__extends || function() {
     var t = function(e, i) {
       return (t = Object.setPrototypeOf || {
           __proto__: []
@@ -26,7 +26,7 @@ var n = this && this.__extends || function() {
       e.prototype = null === i ? Object.create(i) : (n.prototype = i.prototype, new n());
     };
   }(),
-  o = this && this.__decorate || function(t, e, i, n) {
+  __decorate = this && this.__decorate || function(t, e, i, n) {
     var o,
       a = arguments.length,
       s = a < 3 ? e : null === n ? n = Object.getOwnPropertyDescriptor(e, i) : n;
@@ -44,34 +44,34 @@ var n = this && this.__extends || function() {
     }
     return s;
   };
-Object.defineProperty(i, "__esModule", {
+Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
-var a = cc._decorator,
-  s = a.ccclass,
-  r = a.property,
-  c = function(t) {
-    function e() {
-      var e = null !== t && t.apply(this, arguments) || this;
-      e.skeleton = null;
-      return e;
+var _decorator = cc._decorator,
+  ccclass = _decorator.ccclass,
+  property = _decorator.property,
+  EmoScript = function(_super) {
+    function EmoScript() {
+      var _this = null !== _super && _super.apply(this, arguments) || this;
+      _this.skeleton = null;
+      return _this;
     }
-    n(e, t);
-    e.prototype.setAnim = function(t) {
-      var e = this;
+    __extends(EmoScript, _super);
+    EmoScript.prototype.setAnim = function(animName) {
+      var _this = this;
       this.node.active = true;
-      this.skeleton.setAnimation(0, t, true);
+      this.skeleton.setAnimation(0, animName, true);
       this.node.stopAllActions();
       this.node.runAction(cc.sequence(cc.delayTime(5.3333333334), cc.callFunc(function() {
-        e.node.active = false;
+        _this.node.active = false;
       })));
     };
-    e.prototype.hide = function() {
+    EmoScript.prototype.hide = function() {
       this.node.stopAllActions();
       this.node.active = false;
     };
-    o([r(sp.Skeleton)], e.prototype, "skeleton", void 0);
-    return e = o([s], e);
+    __decorate([property(sp.Skeleton)], EmoScript.prototype, "skeleton", void 0);
+    return EmoScript = __decorate([ccclass], EmoScript);
   }(cc.Component);
-i.default = c;
+moduleExports.default = EmoScript;
 void 0;

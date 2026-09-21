@@ -1,9 +1,9 @@
-var t = require,
-  e = module,
-  i = exports;
+var requireRef = require,
+  moduleRef = module,
+  moduleExports = exports;
 "use strict";
 void 0;
-var n = this && this.__extends || function() {
+var __extends = this && this.__extends || function() {
     var t = function(e, i) {
       return (t = Object.setPrototypeOf || {
           __proto__: []
@@ -26,7 +26,7 @@ var n = this && this.__extends || function() {
       e.prototype = null === i ? Object.create(i) : (n.prototype = i.prototype, new n());
     };
   }(),
-  o = this && this.__decorate || function(t, e, i, n) {
+  __decorate = this && this.__decorate || function(t, e, i, n) {
     var o,
       a = arguments.length,
       s = a < 3 ? e : null === n ? n = Object.getOwnPropertyDescriptor(e, i) : n;
@@ -44,44 +44,44 @@ var n = this && this.__extends || function() {
     }
     return s;
   };
-Object.defineProperty(i, "__esModule", {
+Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
 var OrientationManager = require("./OrientationManager"),
   StringUtil = require("./StringUtil"),
-  r = cc._decorator,
-  c = r.ccclass,
-  l = (r.property, function(t) {
-    function e() {
-      var e = null !== t && t.apply(this, arguments) || this;
-      e.tableViewUtils = null;
-      e.index = 0;
-      return e;
+  ccDecorator = cc._decorator,
+  ccclass = ccDecorator.ccclass,
+  TableCell = (ccDecorator.property, function(_super) {
+    function TableCell() {
+      var _this = null !== _super && _super.apply(this, arguments) || this;
+      _this.tableViewUtils = null;
+      _this.index = 0;
+      return _this;
     }
-    n(e, t);
-    e.prototype.initValue = function(t, e, i) {
-      if (void 0 === i) {
-        i = OrientationManager.Orientation.Landscape;
+    __extends(TableCell, _super);
+    TableCell.prototype.initValue = function(data, tableViewUtils, orientation) {
+      if (void 0 === orientation) {
+        orientation = OrientationManager.Orientation.Landscape;
       }
-      this.tableViewUtils = e;
-      this.data = t;
+      this.tableViewUtils = tableViewUtils;
+      this.data = data;
     };
-    e.prototype.setIndex = function(t) {
-      this.index = t;
+    TableCell.prototype.setIndex = function(index) {
+      this.index = index;
     };
-    e.prototype.getNewValueGYB = function(t) {
-      if (StringUtil.default.isNullOrEmpty(t)) {
+    TableCell.prototype.getNewValueGYB = function(rawValue) {
+      if (StringUtil.default.isNullOrEmpty(rawValue)) {
         return "";
       }
       try {
-        var e = JSON.parse(t);
-        if (e && !StringUtil.default.isNullOrEmpty(e.sm)) {
-          return e.sm;
+        var parsed = JSON.parse(rawValue);
+        if (parsed && !StringUtil.default.isNullOrEmpty(parsed.sm)) {
+          return parsed.sm;
         }
-      } catch (t) {}
-      return t;
+      } catch (parseError) {}
+      return rawValue;
     };
-    return e = o([c], e);
+    return TableCell = __decorate([ccclass], TableCell);
   }(cc.Component));
-i.default = l;
+moduleExports.default = TableCell;
 void 0;

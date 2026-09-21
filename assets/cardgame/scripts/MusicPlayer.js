@@ -1,9 +1,9 @@
-var t = require,
-  e = module,
-  i = exports;
+var requireRef = require,
+  moduleRef = module,
+  moduleExports = exports;
 "use strict";
 void 0;
-var n = this && this.__extends || function() {
+var __extends = this && this.__extends || function() {
     var t = function(e, i) {
       return (t = Object.setPrototypeOf || {
           __proto__: []
@@ -26,7 +26,7 @@ var n = this && this.__extends || function() {
       e.prototype = null === i ? Object.create(i) : (n.prototype = i.prototype, new n());
     };
   }(),
-  o = this && this.__decorate || function(t, e, i, n) {
+  __decorate = this && this.__decorate || function(t, e, i, n) {
     var o,
       a = arguments.length,
       s = a < 3 ? e : null === n ? n = Object.getOwnPropertyDescriptor(e, i) : n;
@@ -44,7 +44,7 @@ var n = this && this.__extends || function() {
     }
     return s;
   },
-  a = this && this.__awaiter || function(t, e, i, n) {
+  __awaiter = this && this.__awaiter || function(t, e, i, n) {
     return new(i || (i = Promise))(function(o, a) {
       function s(t) {
         try {
@@ -74,7 +74,7 @@ var n = this && this.__extends || function() {
       c((n = n.apply(t, e || [])).next());
     });
   },
-  s = this && this.__generator || function(t, e) {
+  __generator = this && this.__generator || function(t, e) {
     var i,
       n,
       o,
@@ -177,91 +177,91 @@ var n = this && this.__extends || function() {
       };
     }
   };
-Object.defineProperty(i, "__esModule", {
+Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
 var GameUtils = require("./GameUtils"),
   StringUtil = require("./StringUtil"),
   GameConfigManager = require("./GameConfigManager"),
   RMCThemeConfig = require("./RMCThemeConfig"),
-  u = cc._decorator,
-  d = u.ccclass,
-  p = (u.property, function(t) {
-    function e() {
-      var e = null !== t && t.apply(this, arguments) || this;
-      e.onPlayMusic = false;
-      e.isLostFocus = false;
-      e.countTimeCheckMusic = 0;
-      e.allowPlayBtnClick = true;
-      e.loppEffectId = -1;
-      e.currEffectId = -1;
-      return e;
+  ccDecorator = cc._decorator,
+  ccclass = ccDecorator.ccclass,
+  MusicPlayer = (ccDecorator.property, function(_super) {
+    function MusicPlayer() {
+      var _this = null !== _super && _super.apply(this, arguments) || this;
+      _this.onPlayMusic = false;
+      _this.isLostFocus = false;
+      _this.countTimeCheckMusic = 0;
+      _this.allowPlayBtnClick = true;
+      _this.loppEffectId = -1;
+      _this.currEffectId = -1;
+      return _this;
     }
-    var i;
-    n(e, t);
-    i = e;
-    e.getInstance = function() {
+    var MusicPlayer_1;
+    __extends(MusicPlayer, _super);
+    MusicPlayer_1 = MusicPlayer;
+    MusicPlayer.getInstance = function() {
       if (!(null === this.Instance)) {
         this.Instance;
       }
       return this.Instance;
     };
-    e.prototype.onLoad = function() {
-      i.Instance = this;
+    MusicPlayer.prototype.onLoad = function() {
+      MusicPlayer_1.Instance = this;
     };
-    e.prototype.lateUpdate = function() {
+    MusicPlayer.prototype.lateUpdate = function() {
       if (false !== GameConfigManager.default.getInstance().enableBackgroundMusic && this.onPlayMusic && (this.countTimeCheckMusic += 1, !(this
           .countTimeCheckMusic < 5) && (this.countTimeCheckMusic = 0, cc.audioEngine.isMusicPlaying() && !cc.sys.isNative))) {
-        var t = cc.sys.__audioSupport.context;
-        if ("suspended" === t.state) {
-          t.resume();
+        var audioContext = cc.sys.__audioSupport.context;
+        if ("suspended" === audioContext.state) {
+          audioContext.resume();
         }
       }
     };
-    e.prototype.init = function() {};
-    e.prototype.stopMusic = function() {
+    MusicPlayer.prototype.init = function() {};
+    MusicPlayer.prototype.stopMusic = function() {
       cc.audioEngine.stopMusic();
       GameConfigManager.default.getInstance().currentBgMusic = "";
       GameConfigManager.default.getInstance().isPlayingLobbyMusicBg = false;
     };
-    e.prototype.PauseMusic = function() {
+    MusicPlayer.prototype.PauseMusic = function() {
       cc.audioEngine.pauseMusic();
       this.onPlayMusic = false;
     };
-    e.prototype.ResumeMusic = function() {
+    MusicPlayer.prototype.ResumeMusic = function() {
       if (false !== GameConfigManager.default.getInstance().enableBackgroundMusic) {
         cc.audioEngine.resumeMusic();
         this.onPlayMusic = true;
       }
     };
-    e.prototype.playBackgroundMusic = function(t, e) {
-      if (void 0 === e) {
-        e = 1;
+    MusicPlayer.prototype.playBackgroundMusic = function(musicResPath, volume) {
+      if (void 0 === volume) {
+        volume = 1;
       }
       if (!this.isLostFocus) {
-        if (false !== GameConfigManager.default.getInstance().enableBackgroundMusic && (StringUtil.default.isNullOrEmpty(t) || StringUtil.default.isNullOrEmpty(GameConfigManager.default
-            .getInstance().currentBgMusic) || 0 !== GameConfigManager.default.getInstance().currentBgMusic.localeCompare(t))) {
-          cc.audioEngine.setMusicVolume(e);
-          GameConfigManager.default.getInstance().currentBgMusic = t;
-          cc.loader.loadRes(t, cc.AudioClip, this.playBgMusicWhenLoadDone.bind(this));
+        if (false !== GameConfigManager.default.getInstance().enableBackgroundMusic && (StringUtil.default.isNullOrEmpty(musicResPath) || StringUtil.default.isNullOrEmpty(GameConfigManager.default
+            .getInstance().currentBgMusic) || 0 !== GameConfigManager.default.getInstance().currentBgMusic.localeCompare(musicResPath))) {
+          cc.audioEngine.setMusicVolume(volume);
+          GameConfigManager.default.getInstance().currentBgMusic = musicResPath;
+          cc.loader.loadRes(musicResPath, cc.AudioClip, this.playBgMusicWhenLoadDone.bind(this));
         }
       }
     };
-    e.prototype.playBgMusicWhenLoadDone = function(t, e) {
-      if (null === t || void 0 === t) {
+    MusicPlayer.prototype.playBgMusicWhenLoadDone = function(loadError, audioClip) {
+      if (null === loadError || void 0 === loadError) {
         if (false === GameConfigManager.default.getInstance().enableBackgroundMusic) {
           GameConfigManager.default.getInstance().currentBgMusic = "";
           return void(GameConfigManager.default.getInstance().isPlayingLobbyMusicBg = false);
         }
         cc.audioEngine.stopMusic();
-        cc.audioEngine.playMusic(e, true);
+        cc.audioEngine.playMusic(audioClip, true);
       }
     };
-    e.prototype.playRandomIngameBgMusic = function() {
+    MusicPlayer.prototype.playRandomIngameBgMusic = function() {
       GameConfigManager.default.getInstance().isPlayingLobbyMusicBg = false;
       this.playRandomBackgroundMusic(["Sounds/ig/ig_music_1", "Sounds/ig/ig_music_2", "Sounds/ig/ig_music_3"]);
     };
-    e.prototype.playRandomLobbyMusic = function() {
+    MusicPlayer.prototype.playRandomLobbyMusic = function() {
       if (true !== GameConfigManager.default.getInstance().isPlayingLobbyMusicBg) {
         if (true === GameConfigManager.default.getInstance().enableBackgroundMusic) {
           GameConfigManager.default.getInstance().isPlayingLobbyMusicBg = true;
@@ -272,25 +272,25 @@ var GameUtils = require("./GameUtils"),
         this.playRandomLobbyBgMusic();
       }
     };
-    e.prototype.playRandomBgMusicFromRemoteConfig = function() {
-      var t = GameConfigManager.default.getInstance().listLobbyBgMusic;
-      if (t && t.length > 0) {
-        var e = StringUtil.default.getRandomInt(t.length);
-        this.playBackgroundMusic(t[e]);
+    MusicPlayer.prototype.playRandomBgMusicFromRemoteConfig = function() {
+      var lobbyMusicList = GameConfigManager.default.getInstance().listLobbyBgMusic;
+      if (lobbyMusicList && lobbyMusicList.length > 0) {
+        var randomIndex = StringUtil.default.getRandomInt(lobbyMusicList.length);
+        this.playBackgroundMusic(lobbyMusicList[randomIndex]);
       } else {
         this.playBackgroundMusic("Sounds/lobby/BGM_lobby_default");
       }
     };
-    e.prototype.playRandomBackgroundMusic = function(t) {
-      if (0 !== t.length) {
-        var e = StringUtil.default.getRandomInt(t.length);
-        this.playBackgroundMusic(t[e]);
+    MusicPlayer.prototype.playRandomBackgroundMusic = function(musicResPaths) {
+      if (0 !== musicResPaths.length) {
+        var randomIndex = StringUtil.default.getRandomInt(musicResPaths.length);
+        this.playBackgroundMusic(musicResPaths[randomIndex]);
       }
     };
-    e.prototype.playLoginBgMusic = function() {
+    MusicPlayer.prototype.playLoginBgMusic = function() {
       this.playRandomLobbyBgMusic();
     };
-    e.prototype.playRandomLobbyBgMusic = function() {
+    MusicPlayer.prototype.playRandomLobbyBgMusic = function() {
       switch (RMCThemeConfig.getCurrentTheme()) {
         case RMCThemeConfig.ThemeType.HAPPY_NEW_YEAR:
           this.playBackgroundMusic("Sounds/lobby/BGM-Newyear");
@@ -315,122 +315,122 @@ var GameUtils = require("./GameUtils"),
           this.playRandomBgMusicFromRemoteConfig();
       }
     };
-    e.prototype.stopEffect = function(t) {
-      cc.audioEngine.stopEffect(t);
+    MusicPlayer.prototype.stopEffect = function(effectId) {
+      cc.audioEngine.stopEffect(effectId);
     };
-    e.prototype.stopAllEffect = function() {
+    MusicPlayer.prototype.stopAllEffect = function() {
       cc.audioEngine.stopAllEffects();
     };
-    e.prototype.playEffect = function(t, e, i) {
-      if (void 0 === e) {
-        e = false;
+    MusicPlayer.prototype.playEffect = function(effectResPath, shouldKeepEffectId, unusedCallback) {
+      if (void 0 === shouldKeepEffectId) {
+        shouldKeepEffectId = false;
       }
-      if (void 0 === i) {
-        i = null;
+      if (void 0 === unusedCallback) {
+        unusedCallback = null;
       }
       if (!this.isLostFocus) {
         if (false !== GameConfigManager.default.getInstance().enableSound) {
-          if (0 == e) {
-            cc.loader.loadRes(t, cc.AudioClip, this.playEffectWhenLoadDone.bind(this));
+          if (0 == shouldKeepEffectId) {
+            cc.loader.loadRes(effectResPath, cc.AudioClip, this.playEffectWhenLoadDone.bind(this));
           } else {
-            cc.loader.loadRes(t, cc.AudioClip, this.playEffectWhenLoadDoneWithId.bind(this));
+            cc.loader.loadRes(effectResPath, cc.AudioClip, this.playEffectWhenLoadDoneWithId.bind(this));
           }
         }
       }
     };
-    e.prototype.playEffectWithCallBack = function(t, e) {
-      if (void 0 === e) {
-        e = null;
+    MusicPlayer.prototype.playEffectWithCallBack = function(effectResPath, onPlayed) {
+      if (void 0 === onPlayed) {
+        onPlayed = null;
       }
       if (!this.isLostFocus) {
         if (false !== GameConfigManager.default.getInstance().enableSound) {
-          cc.loader.loadRes(t, cc.AudioClip, function(t, i) {
-            if ((null === t || void 0 === t) && null != i && void 0 != i) {
-              var n = cc.audioEngine.playEffect(i, false);
-              if (e) {
-                e(n);
+          cc.loader.loadRes(effectResPath, cc.AudioClip, function(loadError, audioClip) {
+            if ((null === loadError || void 0 === loadError) && null != audioClip && void 0 != audioClip) {
+              var effectId = cc.audioEngine.playEffect(audioClip, false);
+              if (onPlayed) {
+                onPlayed(effectId);
               }
             }
           });
         }
       }
     };
-    e.prototype.playEffectWithClip = function(t) {
+    MusicPlayer.prototype.playEffectWithClip = function(audioClip) {
       if (!this.isLostFocus) {
-        if (false !== GameConfigManager.default.getInstance().enableSound && null != t && void 0 != t) {
-          cc.audioEngine.playEffect(t, false);
+        if (false !== GameConfigManager.default.getInstance().enableSound && null != audioClip && void 0 != audioClip) {
+          cc.audioEngine.playEffect(audioClip, false);
         }
       }
     };
-    e.prototype.preloadEffect = function(t, e) {
-      cc.audioEngine.preload(t, e);
+    MusicPlayer.prototype.preloadEffect = function(effectResPath, onPreloaded) {
+      cc.audioEngine.preload(effectResPath, onPreloaded);
     };
-    e.prototype.playEffectWhenLoadDone = function(t, e) {
-      if (!(null !== t && void 0 !== t)) {
-        if (null != e && void 0 != e) {
-          cc.audioEngine.playEffect(e, false);
+    MusicPlayer.prototype.playEffectWhenLoadDone = function(loadError, audioClip) {
+      if (!(null !== loadError && void 0 !== loadError)) {
+        if (null != audioClip && void 0 != audioClip) {
+          cc.audioEngine.playEffect(audioClip, false);
         }
       }
     };
-    e.prototype.playEffectWhenLoadDoneWithId = function(t, e) {
-      if (!(null !== t && void 0 !== t)) {
-        if (null != e && void 0 != e) {
-          this.currEffectId = cc.audioEngine.playEffect(e, false);
+    MusicPlayer.prototype.playEffectWhenLoadDoneWithId = function(loadError, audioClip) {
+      if (!(null !== loadError && void 0 !== loadError)) {
+        if (null != audioClip && void 0 != audioClip) {
+          this.currEffectId = cc.audioEngine.playEffect(audioClip, false);
         }
       }
     };
-    e.prototype.playEffectLoop = function(t) {
+    MusicPlayer.prototype.playEffectLoop = function(effectResPath) {
       if (!this.isLostFocus) {
         if (false !== GameConfigManager.default.getInstance().enableSound) {
-          cc.loader.loadRes(t, cc.AudioClip, this.playEffectWhenLoadDoneLoop.bind(this));
+          cc.loader.loadRes(effectResPath, cc.AudioClip, this.playEffectWhenLoadDoneLoop.bind(this));
         }
       }
     };
-    e.prototype.playEffectWhenLoadDoneLoop = function(t, e) {
-      if (!(null !== t && void 0 !== t)) {
-        this.loppEffectId = cc.audioEngine.playEffect(e, true);
+    MusicPlayer.prototype.playEffectWhenLoadDoneLoop = function(loadError, audioClip) {
+      if (!(null !== loadError && void 0 !== loadError)) {
+        this.loppEffectId = cc.audioEngine.playEffect(audioClip, true);
       }
     };
-    e.prototype.stopEffectLoop = function() {
+    MusicPlayer.prototype.stopEffectLoop = function() {
       if (-1 !== this.loppEffectId) {
         cc.audioEngine.stopEffect(this.loppEffectId);
         this.loppEffectId = -1;
       }
     };
-    e.prototype.stopCurrEffect = function() {
+    MusicPlayer.prototype.stopCurrEffect = function() {
       if (-1 !== this.currEffectId) {
         cc.audioEngine.stopEffect(this.currEffectId);
         this.currEffectId = -1;
       }
     };
-    e.prototype.playbtnClick = function(t) {
-      if (void 0 === t) {
-        t = 0;
+    MusicPlayer.prototype.playbtnClick = function(lockSeconds) {
+      if (void 0 === lockSeconds) {
+        lockSeconds = 0;
       }
       if (this.allowPlayBtnClick) {
         this.playEffect("Sounds/sfx_normal_btn");
-        if (0 != t) {
-          this.delayPlayBtnClick(t);
+        if (0 != lockSeconds) {
+          this.delayPlayBtnClick(lockSeconds);
         }
       }
     };
-    e.prototype.playbtnShopClick = function() {
+    MusicPlayer.prototype.playbtnShopClick = function() {
       this.playEffect("Sounds/sfx_btn_shop");
     };
-    e.prototype.delayPlayBtnClick = function(t) {
-      return a(this, void 0, Promise, function() {
-        return s(this, function(e) {
+    MusicPlayer.prototype.delayPlayBtnClick = function(lockSeconds) {
+      return __awaiter(this, void 0, Promise, function() {
+        return __generator(this, function(e) {
           switch (e.label) {
             case 0:
-              return this.allowPlayBtnClick = false, [4, GameUtils.delay(1e3 * t)];
+              return this.allowPlayBtnClick = false, [4, GameUtils.delay(1e3 * lockSeconds)];
             case 1:
               return e.sent(), this.allowPlayBtnClick = true, [2];
           }
         });
       });
     };
-    e.Instance = null;
-    return e = i = o([d], e);
+    MusicPlayer.Instance = null;
+    return MusicPlayer = MusicPlayer_1 = __decorate([ccclass], MusicPlayer);
   }(cc.Component));
-i.default = p;
+moduleExports.default = MusicPlayer;
 void 0;

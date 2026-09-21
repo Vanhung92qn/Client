@@ -1,9 +1,9 @@
-var t = require,
-  e = module,
-  i = exports;
+var requireRef = require,
+  moduleRef = module,
+  moduleExports = exports;
 "use strict";
 void 0;
-Object.defineProperty(i, "__esModule", {
+Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
 
@@ -261,4 +261,4 @@ CardPopupBase.prototype.isDestroyOnHide = true;
 CardPopupBase.prototype.isShowDone = false;
 CardPopupBase.prototype.data = null;
 
-i.default = CardPopupBase;
+moduleExports.default = CardPopupBase;

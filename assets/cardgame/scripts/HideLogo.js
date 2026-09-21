@@ -1,9 +1,9 @@
-var t = require,
-  e = module,
-  i = exports;
+var requireRef = require,
+  moduleRef = module,
+  moduleExports = exports;
 "use strict";
 void 0;
-var n = this && this.__extends || function() {
+var __extends = this && this.__extends || function() {
     var t = function(e, i) {
       return (t = Object.setPrototypeOf || {
           __proto__: []
@@ -26,7 +26,7 @@ var n = this && this.__extends || function() {
       e.prototype = null === i ? Object.create(i) : (n.prototype = i.prototype, new n());
     };
   }(),
-  o = this && this.__decorate || function(t, e, i, n) {
+  __decorate = this && this.__decorate || function(t, e, i, n) {
     var o,
       a = arguments.length,
       s = a < 3 ? e : null === n ? n = Object.getOwnPropertyDescriptor(e, i) : n;
@@ -44,22 +44,22 @@ var n = this && this.__extends || function() {
     }
     return s;
   };
-Object.defineProperty(i, "__esModule", {
+Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
-var a = cc._decorator,
-  s = a.ccclass,
-  r = a.property,
-  c = function(t) {
-    function e() {
-      var e = null !== t && t.apply(this, arguments) || this;
-      e.opacityTarget = 255;
-      e.defaultIsHide = false;
-      return e;
+var _decorator = cc._decorator,
+  ccclass = _decorator.ccclass,
+  property = _decorator.property,
+  HideLogo = function(_super) {
+    function HideLogo() {
+      var _this = null !== _super && _super.apply(this, arguments) || this;
+      _this.opacityTarget = 255;
+      _this.defaultIsHide = false;
+      return _this;
     }
-    n(e, t);
-    e.prototype.onLoad = function() {};
-    e.prototype.start = function() {
+    __extends(HideLogo, _super);
+    HideLogo.prototype.onLoad = function() {};
+    HideLogo.prototype.start = function() {
       if (cc.sys.isBrowser && window.location.hostname.indexOf("localhost") >= 0) {
         this.node.opacity = 0;
       } else {
@@ -68,9 +68,9 @@ var a = cc._decorator,
         }
       }
     };
-    o([r], e.prototype, "opacityTarget", void 0);
-    o([r], e.prototype, "defaultIsHide", void 0);
-    return e = o([s], e);
+    __decorate([property], HideLogo.prototype, "opacityTarget", void 0);
+    __decorate([property], HideLogo.prototype, "defaultIsHide", void 0);
+    return HideLogo = __decorate([ccclass], HideLogo);
   }(cc.Component);
-i.default = c;
+moduleExports.default = HideLogo;
 void 0;

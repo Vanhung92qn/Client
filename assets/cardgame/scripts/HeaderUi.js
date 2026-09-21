@@ -1,9 +1,9 @@
-var t = require,
-  e = module,
-  i = exports;
+var requireRef = require,
+  moduleRef = module,
+  moduleExports = exports;
 "use strict";
 void 0;
-var n = this && this.__extends || function() {
+var __extends = this && this.__extends || function() {
     var t = function(e, i) {
       return (t = Object.setPrototypeOf || {
           __proto__: []
@@ -26,7 +26,7 @@ var n = this && this.__extends || function() {
       e.prototype = null === i ? Object.create(i) : (n.prototype = i.prototype, new n());
     };
   }(),
-  o = this && this.__decorate || function(t, e, i, n) {
+  __decorate = this && this.__decorate || function(t, e, i, n) {
     var o,
       a = arguments.length,
       s = a < 3 ? e : null === n ? n = Object.getOwnPropertyDescriptor(e, i) : n;
@@ -44,7 +44,7 @@ var n = this && this.__extends || function() {
     }
     return s;
   },
-  a = this && this.__awaiter || function(t, e, i, n) {
+  __awaiter = this && this.__awaiter || function(t, e, i, n) {
     return new(i || (i = Promise))(function(o, a) {
       function s(t) {
         try {
@@ -74,7 +74,7 @@ var n = this && this.__extends || function() {
       c((n = n.apply(t, e || [])).next());
     });
   },
-  s = this && this.__generator || function(t, e) {
+  __generator = this && this.__generator || function(t, e) {
     var i,
       n,
       o,
@@ -177,7 +177,7 @@ var n = this && this.__extends || function() {
       };
     }
   };
-Object.defineProperty(i, "__esModule", {
+Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
 var GamePlayManager = require("./GamePlayManager"),
@@ -199,61 +199,61 @@ var GamePlayManager = require("./GamePlayManager"),
   AnalyticService = require("./AnalyticService"),
   AnalyticDefine = require("./AnalyticDefine"),
   RMCThemeConfig = require("./RMCThemeConfig"),
-  A = cc._decorator,
-  P = A.ccclass,
-  M = A.property,
-  O = function(t) {
-    function e() {
-      var e = null !== t && t.apply(this, arguments) || this;
-      e.isKTEK = false;
-      e.allowEnable = true;
-      e.nameUserLb = null;
-      e.moneyUserLb = null;
-      e.avatar = null;
-      e.tempGold = 0;
-      e.btnBack = null;
-      e.nodeRightUI = null;
-      e.nodeKickHoat = null;
-      e.nodeKickHoatBg = null;
-      e.nodeMenuList = null;
-      e.nodeMenuListPublic = null;
-      e.nodeBroadCast = null;
-      e.nodeBroadCastBigWin = null;
-      e.normalLobby = null;
-      e.publicLobby = null;
-      e.logoWebcc = null;
-      e.nodeWebcc = null;
-      e.logoHeader = null;
-      e.nodeDomain = null;
-      e.textKichHoat = null;
-      e.iconVip = null;
-      e.lsNodeNoelDecoration = [];
-      e.lsNodeNewYearDecoration = [];
-      e.lsNodeMoonFestivalDecoration = [];
-      e.lsNode304Decoration = [];
-      e.lsNodeWorldcupDecoration = [];
-      e.lsNodeHalloweenDecoration = [];
-      e.isLoginFB = false;
-      return e;
+  _decorator = cc._decorator,
+  ccclass = _decorator.ccclass,
+  property = _decorator.property,
+  HeaderUi = function(_super) {
+    function HeaderUi() {
+      var _this = null !== _super && _super.apply(this, arguments) || this;
+      _this.isKTEK = false;
+      _this.allowEnable = true;
+      _this.nameUserLb = null;
+      _this.moneyUserLb = null;
+      _this.avatar = null;
+      _this.tempGold = 0;
+      _this.btnBack = null;
+      _this.nodeRightUI = null;
+      _this.nodeKickHoat = null;
+      _this.nodeKickHoatBg = null;
+      _this.nodeMenuList = null;
+      _this.nodeMenuListPublic = null;
+      _this.nodeBroadCast = null;
+      _this.nodeBroadCastBigWin = null;
+      _this.normalLobby = null;
+      _this.publicLobby = null;
+      _this.logoWebcc = null;
+      _this.nodeWebcc = null;
+      _this.logoHeader = null;
+      _this.nodeDomain = null;
+      _this.textKichHoat = null;
+      _this.iconVip = null;
+      _this.lsNodeNoelDecoration = [];
+      _this.lsNodeNewYearDecoration = [];
+      _this.lsNodeMoonFestivalDecoration = [];
+      _this.lsNode304Decoration = [];
+      _this.lsNodeWorldcupDecoration = [];
+      _this.lsNodeHalloweenDecoration = [];
+      _this.isLoginFB = false;
+      return _this;
     }
-    var i;
-    n(e, t);
-    i = e;
-    e.prototype.onLoad = function() {
+    var HeaderUi_1;
+    __extends(HeaderUi, _super);
+    HeaderUi_1 = HeaderUi;
+    HeaderUi.prototype.onLoad = function() {
       MessageBus.MessageBus.instance.addEventListener(MessageType.MessageType.DepositDocumentStatusUpdate, this.onMessageReceived, this);
       MessageBus.MessageBus.instance.addEventListener(MessageType.MessageType.DepositDocumentHideTip, this.onMessageHideTip, this);
       MessageBus.MessageBus.instance.addEventListener(MessageType.MessageType.DepositComplainStatusUpdate, this.onMessageReceived, this);
       MessageBus.MessageBus.instance.addEventListener(MessageType.MessageType.DepositComplainHideTip, this.onMessageHideTip, this);
       cc.director.on(GameDefine.GameEventMessage.ACTIVE_PHONE_SUCCESS, this.onActivePhoneSuccess, this);
     };
-    e.prototype.hideBackButtonOnWebccIfNeeded = function() {
+    HeaderUi.prototype.hideBackButtonOnWebccIfNeeded = function() {
       if (GameConfigManager.default.getInstance().isLoginWebccNoWallet && 0 != StringUtil.default.isNullOrEmpty(GameConfigManager.default.getInstance().webccHomePage) && this
         .btnBack) {
         this.btnBack.active = false;
       }
     };
-    e.prototype.start = function() {
-      if ("FootterRoomUi" == this.node.name && (i.instance = this), null !== GamePlayManager.default.getInstance().displayName && void 0 !== GamePlayManager.default
+    HeaderUi.prototype.start = function() {
+      if ("FootterRoomUi" == this.node.name && (HeaderUi_1.instance = this), null !== GamePlayManager.default.getInstance().displayName && void 0 !== GamePlayManager.default
         .getInstance().displayName && (null != this.nameUserLb && void 0 != this.nameUserLb && (this.nameUserLb.string = GamePlayManager.default
           .getInstance().displayName, this.processUIName()), null != this.moneyUserLb && void 0 != this.moneyUserLb && (this.moneyUserLb
           .string = StringUtil.default.formatMoneyNumberWithColom(GamePlayManager.default.getInstance().gold)), this.tempGold = GamePlayManager.default.getInstance().gold),
@@ -275,65 +275,65 @@ var GamePlayManager = require("./GamePlayManager"),
         } else if (null != this.logoHeader && (this.logoHeader.active = false), null != this.logoWebcc) {
           this.nodeWebcc.active = true;
           this.logoWebcc.node.active = true;
-          var t = GameUtils.getWccBrandUrl(GameConfigManager.default.getInstance().webccBrand, GameUtils.WccBrandImageType.Header280);
-          if (0 == StringUtil.default.isNullOrEmpty(t)) {
-            GameUtils.downloadAndShowImage(this.logoWebcc, t);
+          var webccLogoUrl = GameUtils.getWccBrandUrl(GameConfigManager.default.getInstance().webccBrand, GameUtils.WccBrandImageType.Header280);
+          if (0 == StringUtil.default.isNullOrEmpty(webccLogoUrl)) {
+            GameUtils.downloadAndShowImage(this.logoWebcc, webccLogoUrl);
           }
         }
       }
       if (GameConfigManager.default.getInstance().isLoginWebcc && (null != this.logoHeader && (this.logoHeader.active = false), null != this.logoWebcc)) {
         this.nodeWebcc.active = true;
         this.logoWebcc.node.active = true;
-        t = GameUtils.getWccBrandUrl(GameConfigManager.default.getInstance().webccBrand, GameUtils.WccBrandImageType.Header280);
-        if (0 == StringUtil.default.isNullOrEmpty(t)) {
-          GameUtils.downloadAndShowImage(this.logoWebcc, t);
+        webccLogoUrl = GameUtils.getWccBrandUrl(GameConfigManager.default.getInstance().webccBrand, GameUtils.WccBrandImageType.Header280);
+        if (0 == StringUtil.default.isNullOrEmpty(webccLogoUrl)) {
+          GameUtils.downloadAndShowImage(this.logoWebcc, webccLogoUrl);
         }
       }
       switch (GameConfigManager.default.getInstance().enviromentName.includes("caorua") ? null != this.nodeDomain && (this.nodeDomain.active = true) :
         null != this.nodeDomain && (this.nodeDomain.active = false), RMCThemeConfig.getCurrentTheme()) {
         case RMCThemeConfig.ThemeType.HAPPY_NEW_YEAR:
           if (this.lsNodeNewYearDecoration.length > 0) {
-            for (var e = 0; e < this.lsNodeNewYearDecoration.length; e++) {
-              this.lsNodeNewYearDecoration[e].active = true;
+            for (var decorationIndex = 0; decorationIndex < this.lsNodeNewYearDecoration.length; decorationIndex++) {
+              this.lsNodeNewYearDecoration[decorationIndex].active = true;
             }
           }
           break;
         case RMCThemeConfig.ThemeType.MID_AUTUMN_FESTIVAL:
           if (this.lsNodeMoonFestivalDecoration.length > 0) {
-            for (e = 0; e < this.lsNodeMoonFestivalDecoration.length; e++) {
-              this.lsNodeMoonFestivalDecoration[e].active = true;
+            for (decorationIndex = 0; decorationIndex < this.lsNodeMoonFestivalDecoration.length; decorationIndex++) {
+              this.lsNodeMoonFestivalDecoration[decorationIndex].active = true;
             }
           }
           break;
         case RMCThemeConfig.ThemeType.NOEL:
           if (this.lsNodeNoelDecoration.length > 0) {
-            for (e = 0; e < this.lsNodeNoelDecoration.length; e++) {
-              this.lsNodeNoelDecoration[e].active = true;
+            for (decorationIndex = 0; decorationIndex < this.lsNodeNoelDecoration.length; decorationIndex++) {
+              this.lsNodeNoelDecoration[decorationIndex].active = true;
             }
           }
           break;
         case RMCThemeConfig.ThemeType.VN_304:
           if (this.lsNode304Decoration.length > 0) {
-            for (e = 0; e < this.lsNode304Decoration.length; e++) {
-              this.lsNode304Decoration[e].active = true;
+            for (decorationIndex = 0; decorationIndex < this.lsNode304Decoration.length; decorationIndex++) {
+              this.lsNode304Decoration[decorationIndex].active = true;
             }
           }
           break;
         case RMCThemeConfig.ThemeType.WORLD_CUP:
           if (this.lsNodeWorldcupDecoration.length > 0) {
-            for (e = 0; e < this.lsNodeWorldcupDecoration.length; e++) {
-              this.lsNodeWorldcupDecoration[e].active = true;
+            for (decorationIndex = 0; decorationIndex < this.lsNodeWorldcupDecoration.length; decorationIndex++) {
+              this.lsNodeWorldcupDecoration[decorationIndex].active = true;
             }
           }
         case RMCThemeConfig.ThemeType.HALLOWEEN:
           if (this.lsNodeHalloweenDecoration.length > 0) {
-            for (e = 0; e < this.lsNodeHalloweenDecoration.length; e++) {
-              this.lsNodeHalloweenDecoration[e].active = true;
+            for (decorationIndex = 0; decorationIndex < this.lsNodeHalloweenDecoration.length; decorationIndex++) {
+              this.lsNodeHalloweenDecoration[decorationIndex].active = true;
             }
           }
       }
     };
-    e.prototype.tryShowNodeKichHoat = function() {
+    HeaderUi.prototype.tryShowNodeKichHoat = function() {
       if (this.nodeKickHoat && StringUtil.default.isNullOrEmpty(GamePlayManager.default.getInstance().phoneNumber) && 0 == StringUtil.default.isNullOrEmpty(GamePlayManager.default
           .getInstance().token) && GamePlayManager.default.getInstance().numShowThongBao > 0 && GamePlayManager.default.getInstance().gold < 2001) {
         this.nodeKickHoat.active = true;
@@ -341,16 +341,16 @@ var GamePlayManager = require("./GamePlayManager"),
         this.nodeKickHoatBg.runAction(cc.repeatForever(cc.sequence(cc.scaleTo(.2, 1.1), cc.scaleTo(.2, 1))));
       }
     };
-    e.prototype.hideNodeKichHoat = function() {
+    HeaderUi.prototype.hideNodeKichHoat = function() {
       if (this.nodeKickHoat) {
         this.nodeKickHoatBg.stopAllActions();
         this.nodeKickHoat.active = false;
       }
     };
-    e.prototype.onClickTrangChu = function() {
+    HeaderUi.prototype.onClickTrangChu = function() {
       cc.sys.openURL(GameConfigManager.default.getInstance().homeUrl);
     };
-    e.prototype.updateUI = function() {
+    HeaderUi.prototype.updateUI = function() {
       if (null != this.moneyUserLb && void 0 != this.moneyUserLb) {
         this.moneyUserLb.string = StringUtil.default.formatMoneyNumberWithColom(GamePlayManager.default.getInstance().gold);
       }
@@ -359,19 +359,19 @@ var GamePlayManager = require("./GamePlayManager"),
         this.nodeKickHoat.active = false;
       }
     };
-    e.prototype.onDestroy = function() {
+    HeaderUi.prototype.onDestroy = function() {
       MessageBus.MessageBus.instance.removeEventListener(MessageType.MessageType.DepositDocumentStatusUpdate, this);
       MessageBus.MessageBus.instance.removeEventListener(MessageType.MessageType.DepositDocumentHideTip, this);
       MessageBus.MessageBus.instance.removeEventListener(MessageType.MessageType.DepositComplainStatusUpdate, this);
       MessageBus.MessageBus.instance.removeEventListener(MessageType.MessageType.DepositComplainHideTip, this);
       cc.director.off(GameDefine.GameEventMessage.ACTIVE_PHONE_SUCCESS, this.onActivePhoneSuccess, this);
     };
-    e.prototype.onMessageHideTip = function(t, e) {
+    HeaderUi.prototype.onMessageHideTip = function(event, data) {
       if (!(SessionData.SessionData.isShowingUpdateDocumentTooltip || SessionData.SessionData.isShowingComplainDocumentTooltip)) {
         this.tryShowNodeKichHoat();
       }
     };
-    e.prototype.onMessageReceived = function(t, e) {
+    HeaderUi.prototype.onMessageReceived = function(event, data) {
       if (this && this.isValid) {
         if (SessionData.SessionData.isShowingUpdateDocumentTooltip || SessionData.SessionData.isShowingComplainDocumentTooltip) {
           this.hideNodeKichHoat();
@@ -380,43 +380,43 @@ var GamePlayManager = require("./GamePlayManager"),
         }
       }
     };
-    e.prototype.updateUIName = function() {
+    HeaderUi.prototype.updateUIName = function() {
       this.nameUserLb.string = GamePlayManager.default.getInstance().displayName;
       this.processUIName(true);
     };
-    e.prototype.processUIName = function(t) {
-      if (void 0 === t) {
-        t = false;
+    HeaderUi.prototype.processUIName = function(needExtraDelay) {
+      if (void 0 === needExtraDelay) {
+        needExtraDelay = false;
       }
-      return a(this, void 0, Promise, function() {
-        var e;
-        return s(this, function(i) {
-          switch (i.label) {
+      return __awaiter(this, void 0, Promise, function() {
+        var isDone;
+        return __generator(this, function(generatorState) {
+          switch (generatorState.label) {
             case 0:
-              e = false;
-              i.label = 1;
+              isDone = false;
+              generatorState.label = 1;
             case 1:
-              return e ? [3, 6] : 0 != this.nameUserLb.node.getContentSize().width ? [3, 3] : [4, GameUtils.delay(20)];
+              return isDone ? [3, 6] : 0 != this.nameUserLb.node.getContentSize().width ? [3, 3] : [4, GameUtils.delay(20)];
             case 2:
-              return i.sent(), [3, 1];
+              return generatorState.sent(), [3, 1];
             case 3:
-              return t ? (t = false, [4, GameUtils.delay(20)]) : [3, 5];
+              return needExtraDelay ? (needExtraDelay = false, [4, GameUtils.delay(20)]) : [3, 5];
             case 4:
-              i.sent();
-              i.label = 5;
+              generatorState.sent();
+              generatorState.label = 5;
             case 5:
               return this.nameUserLb.node.getContentSize().width > 240 && (this.nameUserLb.string = this.nameUserLb.string
-                .substring(0, 9) + ".."), e = true, [3, 1];
+                .substring(0, 9) + ".."), isDone = true, [3, 1];
             case 6:
               return [2];
           }
         });
       });
     };
-    e.prototype.showTempMeny = function(t) {
-      this.moneyUserLb.string = StringUtil.default.formatMoneyNumberWithColom(this.tempGold + t);
+    HeaderUi.prototype.showTempMeny = function(deltaGold) {
+      this.moneyUserLb.string = StringUtil.default.formatMoneyNumberWithColom(this.tempGold + deltaGold);
     };
-    e.prototype.updateAvarta = function() {
+    HeaderUi.prototype.updateAvarta = function() {
       if (null !== this.avatar && void 0 !== this.avatar) {
         this.avatar.loadUserAvarta();
         if (null != this.avatar.spriteFrame) {
@@ -424,7 +424,7 @@ var GamePlayManager = require("./GamePlayManager"),
         }
       }
     };
-    e.prototype.onclickBack = function() {
+    HeaderUi.prototype.onclickBack = function() {
       if (!GameConfigManager.default.getInstance().isShowPopupDone) {
         AnalyticService.default.instance.trackCustomQ(AnalyticDefine.AnaltyciEventType.CLICK, "exit_cg_" + GamePlayManager.default.getInstance().gameID);
         if (GameConfigManager.default.getInstance().isLoginWebccNoWallet) {
@@ -452,7 +452,7 @@ var GamePlayManager = require("./GamePlayManager"),
         }
       }
     };
-    e.prototype.onclickHomePage = function() {
+    HeaderUi.prototype.onclickHomePage = function() {
       if (GameConfigManager.default.getInstance().isLoginWebccNoWallet) {
         window.location.href = GameConfigManager.default.getInstance().webccHomePage;
       } else {
@@ -460,12 +460,12 @@ var GamePlayManager = require("./GamePlayManager"),
         cc.sys.openURL(GameConfigManager.default.getInstance().homeUrl);
       }
     };
-    e.prototype.onClickSetting = function() {
+    HeaderUi.prototype.onClickSetting = function() {
       MusicPlayer.default.getInstance().playbtnClick();
       CommonPrefabsManager.default.getInstance().showPopupSetting();
       this.closeMenu();
     };
-    e.prototype.onClickMail = function() {
+    HeaderUi.prototype.onClickMail = function() {
       MusicPlayer.default.getInstance().playbtnClick();
       if (StringUtil.default.isNullOrEmpty(GamePlayManager.default.getInstance().token)) {
         CommonPrefabsManager.default.getInstance().showPopupDangNhap(this.loginWithToken.bind(this));
@@ -477,7 +477,7 @@ var GamePlayManager = require("./GamePlayManager"),
         }
       }
     };
-    e.prototype.onClickTinTuc = function() {
+    HeaderUi.prototype.onClickTinTuc = function() {
       MusicPlayer.default.getInstance().playbtnClick();
       if (GameConfigManager.default.getInstance().isLoginWebccNoWallet) {
         CommonPrefabsManager.default.getInstance().showPopupMessageUtil("T\xednh n\u0103ng s\u1eafp ra m\u1eaft !");
@@ -486,7 +486,7 @@ var GamePlayManager = require("./GamePlayManager"),
         this.closeMenu();
       }
     };
-    e.prototype.onClickBXH = function() {
+    HeaderUi.prototype.onClickBXH = function() {
       MusicPlayer.default.getInstance().playbtnClick();
       if (GameConfigManager.default.getInstance().isLoginWebccNoWallet) {
         CommonPrefabsManager.default.getInstance().showPopupMessageUtil("T\xednh n\u0103ng s\u1eafp ra m\u1eaft !");
@@ -495,13 +495,13 @@ var GamePlayManager = require("./GamePlayManager"),
         this.closeMenu();
       }
     };
-    e.prototype.onClickEditName = function() {
+    HeaderUi.prototype.onClickEditName = function() {
       if (!GameConfigManager.default.getInstance().isLoginWebccNoWallet) {
         MusicPlayer.default.getInstance().playbtnClick();
         CommonPrefabsManager.default.getInstance().showPopupChangeUserDisplayName(this);
       }
     };
-    e.prototype.onClickAddGold = function() {
+    HeaderUi.prototype.onClickAddGold = function() {
       if (!GameConfigManager.default.getInstance().isLoginWebccNoWallet) {
         MusicPlayer.default.getInstance().playbtnShopClick();
         if (!(GameConfigManager.default.getInstance().isShowPopupDone || GameConfigManager.default.getInstance().isLoginWebcc)) {
@@ -509,62 +509,62 @@ var GamePlayManager = require("./GamePlayManager"),
         }
       }
     };
-    e.prototype.onClickAvatar = function() {
+    HeaderUi.prototype.onClickAvatar = function() {
       if (!GameConfigManager.default.getInstance().isLoginWebccNoWallet) {
         MusicPlayer.default.getInstance().playbtnClick();
         CommonPrefabsManager.default.getInstance().showPopupUserInfo();
       }
     };
-    e.prototype.onClickKickHoat = function() {
+    HeaderUi.prototype.onClickKickHoat = function() {
       if (!GameConfigManager.default.getInstance().isLoginWebccNoWallet) {
         MusicPlayer.default.getInstance().playbtnClick();
         CommonPrefabsManager.default.getInstance().showPopupActivePhoneNumber(this.nodeKickHoat);
       }
     };
-    e.prototype.onClickMenu = function() {
+    HeaderUi.prototype.onClickMenu = function() {
       if (!GameConfigManager.default.getInstance().isLoginWebccNoWallet) {
         MusicPlayer.default.getInstance().playbtnClick();
         if (null !== this.nodeMenuList && void 0 !== this.nodeMenuList) {
           this.nodeMenuList.active = !this.nodeMenuList.active;
         }
-        if (null != i.onMenuOpenCallback) {
-          i.onMenuOpenCallback();
+        if (null != HeaderUi_1.onMenuOpenCallback) {
+          HeaderUi_1.onMenuOpenCallback();
         }
       }
     };
-    e.prototype.closeMenu = function() {
+    HeaderUi.prototype.closeMenu = function() {
       if (null !== this.nodeMenuList && void 0 !== this.nodeMenuList) {
         this.nodeMenuList.active = false;
       }
     };
-    e.prototype.setHeaderLobby = function() {
+    HeaderUi.prototype.setHeaderLobby = function() {
       if (!this.isKTEK) {
         this.btnBack.active = false;
       }
     };
-    e.prototype.delayActiveButtonBack = function() {
-      return a(this, void 0, Promise, function() {
-        var t;
-        return s(this, function(e) {
-          switch (e.label) {
+    HeaderUi.prototype.delayActiveButtonBack = function() {
+      return __awaiter(this, void 0, Promise, function() {
+        var backButton;
+        return __generator(this, function(generatorState) {
+          switch (generatorState.label) {
             case 0:
-              return this.btnBack && (t = this.btnBack.getComponent(cc.Button)) ? (t.interactable = false, [4, GameUtils.delay(1e3)]) : [
+              return this.btnBack && (backButton = this.btnBack.getComponent(cc.Button)) ? (backButton.interactable = false, [4, GameUtils.delay(1e3)]) : [
                 2];
             case 1:
-              return e.sent(), t.interactable = true, [2];
+              return generatorState.sent(), backButton.interactable = true, [2];
           }
         });
       });
     };
-    e.prototype.onEnable = function() {
+    HeaderUi.prototype.onEnable = function() {
       if (this.allowEnable) {
-        i.isActive = true;
+        HeaderUi_1.isActive = true;
         this.delayActiveButtonBack();
         if (null != this.nodeBroadCast) {
-          i.nodeBroadcast = this.nodeBroadCast;
+          HeaderUi_1.nodeBroadcast = this.nodeBroadCast;
         }
         if (null != this.nodeBroadCastBigWin) {
-          i.nodeBroadcastBigWin = this.nodeBroadCastBigWin;
+          HeaderUi_1.nodeBroadcastBigWin = this.nodeBroadCastBigWin;
         }
         if (null != BroadCast.default.instance) {
           BroadCast.default.instance.show(null);
@@ -574,10 +574,10 @@ var GamePlayManager = require("./GamePlayManager"),
         }
       }
     };
-    e.prototype.onDisable = function() {
-      i.isActive = false;
-      i.nodeBroadcast = null;
-      i.nodeBroadcastBigWin = null;
+    HeaderUi.prototype.onDisable = function() {
+      HeaderUi_1.isActive = false;
+      HeaderUi_1.nodeBroadcast = null;
+      HeaderUi_1.nodeBroadcastBigWin = null;
       if (null != BroadCast.default.instance) {
         BroadCast.default.instance.hide(true);
         BroadCast.default.instance.node.parent = MiniGameNode.default.instance.topUI;
@@ -587,12 +587,12 @@ var GamePlayManager = require("./GamePlayManager"),
         BroadCast.default.instanceBigWin.node.parent = MiniGameNode.default.instance.topUI;
       }
     };
-    e.prototype.onClickDangNhap = function() {
+    HeaderUi.prototype.onClickDangNhap = function() {
       if (!GameConfigManager.default.getInstance().isLoginWebccNoWallet) {
         CommonPrefabsManager.default.getInstance().showPopupDangNhap(this.loginWithToken.bind(this));
       }
     };
-    e.prototype.onClickDangKy = function() {
+    HeaderUi.prototype.onClickDangKy = function() {
       if (!GameConfigManager.default.getInstance().isLoginWebccNoWallet) {
         if (GameConfigManager.default.getInstance().allowRegister) {
           CommonPrefabsManager.default.getInstance().showPopupDangKy(this.loginWithToken.bind(this));
@@ -601,14 +601,14 @@ var GamePlayManager = require("./GamePlayManager"),
         }
       }
     };
-    e.prototype.onClickFB = function() {
+    HeaderUi.prototype.onClickFB = function() {
       if (MusicPlayer.default.getInstance().playbtnClick(), GameConfigManager.default.getInstance().enviromentName.includes("hit")) {
         CommonPrefabsManager.default.getInstance().showPopupMessageUtil("T\xednh n\u0103ng \u0111ang ph\xe1t tri\u1ec3n");
       } else if (cc.sys.isNative) {
         if (GameConfigManager.default.getInstance().isforcebrand) {
           if (cc.sys.platform == cc.sys.ANDROID) {
-            e = "";
-            e = "&state=" + (StringUtil.default.isNullOrEmpty(GameConfigManager.default.getInstance().aff_id) ? JSON.stringify({
+            stateParam = "";
+            stateParam = "&state=" + (StringUtil.default.isNullOrEmpty(GameConfigManager.default.getInstance().aff_id) ? JSON.stringify({
               app_id: GameConfigManager.default.getInstance().app_id,
               fg: GamePlayManager.default.getInstance().fingerprint
             }) : JSON.stringify({
@@ -616,12 +616,12 @@ var GamePlayManager = require("./GamePlayManager"),
               app_id: GameConfigManager.default.getInstance().app_id,
               fg: GamePlayManager.default.getInstance().fingerprint
             }));
-            i = "https://www.facebook.com/v4.0/dialog/oauth?client_id=" + GameConfigManager.default.getInstance().Appid_FaceBook +
-              "&response_type=token" + e + "&redirect_uri=" + GameConfigManager.default.getInstance().urlFBCallback;
-            cc.sys.openURL(i);
+            facebookOAuthUrl = "https://www.facebook.com/v4.0/dialog/oauth?client_id=" + GameConfigManager.default.getInstance().Appid_FaceBook +
+              "&response_type=token" + stateParam + "&redirect_uri=" + GameConfigManager.default.getInstance().urlFBCallback;
+            cc.sys.openURL(facebookOAuthUrl);
           } else {
-            var t = GameConfigManager.default.getInstance().homeUrl;
-            cc.sys.openURL(t + "?isforcebrand=true");
+            var homeUrl = GameConfigManager.default.getInstance().homeUrl;
+            cc.sys.openURL(homeUrl + "?isforcebrand=true");
           }
         } else {
           if (sdkbox) {
@@ -637,11 +637,11 @@ var GamePlayManager = require("./GamePlayManager"),
           }
         }
       } else {
-        var e = "";
+        var stateParam = "";
         if (!StringUtil.default.isNullOrEmpty(StringUtil.default.getQueryStringValue("aff_id"))) {
           GameConfigManager.default.getInstance().aff_id = StringUtil.default.getQueryStringValue("aff_id");
         }
-        e = "&state=" + (StringUtil.default.isNullOrEmpty(GameConfigManager.default.getInstance().aff_id) ? JSON.stringify({
+        stateParam = "&state=" + (StringUtil.default.isNullOrEmpty(GameConfigManager.default.getInstance().aff_id) ? JSON.stringify({
           app_id: GameConfigManager.default.getInstance().app_id,
           fg: GamePlayManager.default.getInstance().fingerprint
         }) : JSON.stringify({
@@ -649,95 +649,95 @@ var GamePlayManager = require("./GamePlayManager"),
           app_id: GameConfigManager.default.getInstance().app_id,
           fg: GamePlayManager.default.getInstance().fingerprint
         }));
-        var i = "https://www.facebook.com/v4.0/dialog/oauth?client_id=" + GameConfigManager.default.getInstance().Appid_FaceBook +
-          "&response_type=token" + e + "&redirect_uri=" + GameConfigManager.default.getInstance().urlFBCallback;
-        window.location.href = i;
+        var facebookOAuthUrl = "https://www.facebook.com/v4.0/dialog/oauth?client_id=" + GameConfigManager.default.getInstance().Appid_FaceBook +
+          "&response_type=token" + stateParam + "&redirect_uri=" + GameConfigManager.default.getInstance().urlFBCallback;
+        window.location.href = facebookOAuthUrl;
       }
     };
-    e.prototype.loginWithFB = function() {
-      var t = this,
-        e = "";
+    HeaderUi.prototype.loginWithFB = function() {
+      var _this = this,
+        affIdParam = "";
       if (!StringUtil.default.isNullOrEmpty(GameConfigManager.default.getInstance().aff_id)) {
-        e = "&aff_id=" + GameConfigManager.default.getInstance().aff_id;
+        affIdParam = "&aff_id=" + GameConfigManager.default.getInstance().aff_id;
       }
-      GameHTTPManager.default.getInstance().sendGetHttpRequest(GameConfigManager.default.getInstance().urlLoginFB + GameConfigManager.default.getInstance().tokenFB + e + "&app_id=" + GameConfigManager
+      GameHTTPManager.default.getInstance().sendGetHttpRequest(GameConfigManager.default.getInstance().urlLoginFB + GameConfigManager.default.getInstance().tokenFB + affIdParam + "&app_id=" + GameConfigManager
         .default.getInstance().app_id,
-        function(e) {
-          var i = e.data[0].token;
-          t.loginWithToken(i, e.data[0].session_id);
-          GamePlayManager.default.getInstance().username = e.data[0].username;
-          GamePlayManager.default.getInstance().displayName = e.data[0].fullname;
-          if (null !== e.data[0].avatar && void 0 !== e.data[0].avatar) {
-            GamePlayManager.default.getInstance().avaURL = e.data[0].avatar;
+        function(response) {
+          var token = response.data[0].token;
+          _this.loginWithToken(token, response.data[0].session_id);
+          GamePlayManager.default.getInstance().username = response.data[0].username;
+          GamePlayManager.default.getInstance().displayName = response.data[0].fullname;
+          if (null !== response.data[0].avatar && void 0 !== response.data[0].avatar) {
+            GamePlayManager.default.getInstance().avaURL = response.data[0].avatar;
           }
-          if (null !== e.data[0].fb_id && void 0 !== e.data[0].fb_id && 0 !== e.data[0].fb_id.toString().localeCompare("undefined")) {
-            GamePlayManager.default.getInstance().fb_id = e.data[0].fb_id;
+          if (null !== response.data[0].fb_id && void 0 !== response.data[0].fb_id && 0 !== response.data[0].fb_id.toString().localeCompare("undefined")) {
+            GamePlayManager.default.getInstance().fb_id = response.data[0].fb_id;
           }
-          if (void 0 !== e.data[0].aff_id && null !== e.data[0].aff_id) {
-            GameConfigManager.default.getInstance().aff_id = e.data[0].aff_id;
+          if (void 0 !== response.data[0].aff_id && null !== response.data[0].aff_id) {
+            GameConfigManager.default.getInstance().aff_id = response.data[0].aff_id;
           }
         },
-        function(t) {
-          CommonPrefabsManager.default.getInstance().showPopupMessageUtil(t);
-          ErrorLogHandler.default.getInstance().sendLogginError(t);
+        function(errorMessage) {
+          CommonPrefabsManager.default.getInstance().showPopupMessageUtil(errorMessage);
+          ErrorLogHandler.default.getInstance().sendLogginError(errorMessage);
         });
     };
-    e.prototype.loginWithToken = function(t, e) {
-      if (void 0 === t) {
-        t = "";
+    HeaderUi.prototype.loginWithToken = function(token, sessionId) {
+      if (void 0 === token) {
+        token = "";
       }
-      if (void 0 === e) {
-        e = "";
+      if (void 0 === sessionId) {
+        sessionId = "";
       }
       GamePlayManager.default.getInstance().forceLogin = true;
-      GamePlayManager.default.getInstance().tokenTemp = t;
-      GamePlayManager.default.getInstance().session_idTemp = e;
+      GamePlayManager.default.getInstance().tokenTemp = token;
+      GamePlayManager.default.getInstance().session_idTemp = sessionId;
       cc.director.loadScene(GameDefine.GameConfigs.SceneName.Login);
     };
-    e.prototype.onActivePhoneSuccess = function() {
+    HeaderUi.prototype.onActivePhoneSuccess = function() {
       if (this.nodeKickHoat) {
         this.nodeKickHoat.active = false;
       }
     };
-    e.instance = null;
-    e.onMenuOpenCallback = null;
-    e.isActive = false;
-    e.nodeBroadcast = null;
-    e.nodeBroadcastBigWin = null;
+    HeaderUi.instance = null;
+    HeaderUi.onMenuOpenCallback = null;
+    HeaderUi.isActive = false;
+    HeaderUi.nodeBroadcast = null;
+    HeaderUi.nodeBroadcastBigWin = null;
     // 🔴 `cc.Boolean`, KHÔNG phải `Boolean` của JS. Bản dịch ngược sinh ra kiểu JS thuần (mã
     // TypeScript gốc viết `boolean`), Cocos 2.4 không nhận nên cảnh báo mỗi lần nạp project:
     //     The type of "HeaderUi.isKTEK" must be cc.Boolean, not Boolean.
     // và ô đó không lưu/đọc được từ prefab. Ở đây vô hại vì KHÔNG prefab nào lưu hai ô này (đã
     // soát: chúng luôn lấy mặc định isKTEK=false, allowEnable=true) — nhưng để nguyên thì mỗi
     // lần mở project lại thêm hai dòng cảnh báo, riết rồi không ai đọc cảnh báo nữa.
-    o([M(cc.Boolean)], e.prototype, "isKTEK", void 0);
-    o([M(cc.Boolean)], e.prototype, "allowEnable", void 0);
-    o([M(cc.Label)], e.prototype, "nameUserLb", void 0);
-    o([M(cc.Label)], e.prototype, "moneyUserLb", void 0);
-    o([M(RemoteSprite.default)], e.prototype, "avatar", void 0);
-    o([M(cc.Node)], e.prototype, "btnBack", void 0);
-    o([M(cc.Node)], e.prototype, "nodeRightUI", void 0);
-    o([M(cc.Node)], e.prototype, "nodeKickHoat", void 0);
-    o([M(cc.Node)], e.prototype, "nodeKickHoatBg", void 0);
-    o([M(cc.Node)], e.prototype, "nodeMenuList", void 0);
-    o([M(cc.Node)], e.prototype, "nodeMenuListPublic", void 0);
-    o([M(cc.Node)], e.prototype, "nodeBroadCast", void 0);
-    o([M(cc.Node)], e.prototype, "nodeBroadCastBigWin", void 0);
-    o([M(cc.Node)], e.prototype, "normalLobby", void 0);
-    o([M(cc.Node)], e.prototype, "publicLobby", void 0);
-    o([M(cc.Sprite)], e.prototype, "logoWebcc", void 0);
-    o([M(cc.Node)], e.prototype, "nodeWebcc", void 0);
-    o([M(cc.Node)], e.prototype, "logoHeader", void 0);
-    o([M(cc.Node)], e.prototype, "nodeDomain", void 0);
-    o([M(cc.Label)], e.prototype, "textKichHoat", void 0);
-    o([M(cc.Node)], e.prototype, "iconVip", void 0);
-    o([M([cc.Node])], e.prototype, "lsNodeNoelDecoration", void 0);
-    o([M([cc.Node])], e.prototype, "lsNodeNewYearDecoration", void 0);
-    o([M([cc.Node])], e.prototype, "lsNodeMoonFestivalDecoration", void 0);
-    o([M([cc.Node])], e.prototype, "lsNode304Decoration", void 0);
-    o([M([cc.Node])], e.prototype, "lsNodeWorldcupDecoration", void 0);
-    o([M([cc.Node])], e.prototype, "lsNodeHalloweenDecoration", void 0);
-    return e = i = o([P], e);
+    __decorate([property(cc.Boolean)], HeaderUi.prototype, "isKTEK", void 0);
+    __decorate([property(cc.Boolean)], HeaderUi.prototype, "allowEnable", void 0);
+    __decorate([property(cc.Label)], HeaderUi.prototype, "nameUserLb", void 0);
+    __decorate([property(cc.Label)], HeaderUi.prototype, "moneyUserLb", void 0);
+    __decorate([property(RemoteSprite.default)], HeaderUi.prototype, "avatar", void 0);
+    __decorate([property(cc.Node)], HeaderUi.prototype, "btnBack", void 0);
+    __decorate([property(cc.Node)], HeaderUi.prototype, "nodeRightUI", void 0);
+    __decorate([property(cc.Node)], HeaderUi.prototype, "nodeKickHoat", void 0);
+    __decorate([property(cc.Node)], HeaderUi.prototype, "nodeKickHoatBg", void 0);
+    __decorate([property(cc.Node)], HeaderUi.prototype, "nodeMenuList", void 0);
+    __decorate([property(cc.Node)], HeaderUi.prototype, "nodeMenuListPublic", void 0);
+    __decorate([property(cc.Node)], HeaderUi.prototype, "nodeBroadCast", void 0);
+    __decorate([property(cc.Node)], HeaderUi.prototype, "nodeBroadCastBigWin", void 0);
+    __decorate([property(cc.Node)], HeaderUi.prototype, "normalLobby", void 0);
+    __decorate([property(cc.Node)], HeaderUi.prototype, "publicLobby", void 0);
+    __decorate([property(cc.Sprite)], HeaderUi.prototype, "logoWebcc", void 0);
+    __decorate([property(cc.Node)], HeaderUi.prototype, "nodeWebcc", void 0);
+    __decorate([property(cc.Node)], HeaderUi.prototype, "logoHeader", void 0);
+    __decorate([property(cc.Node)], HeaderUi.prototype, "nodeDomain", void 0);
+    __decorate([property(cc.Label)], HeaderUi.prototype, "textKichHoat", void 0);
+    __decorate([property(cc.Node)], HeaderUi.prototype, "iconVip", void 0);
+    __decorate([property([cc.Node])], HeaderUi.prototype, "lsNodeNoelDecoration", void 0);
+    __decorate([property([cc.Node])], HeaderUi.prototype, "lsNodeNewYearDecoration", void 0);
+    __decorate([property([cc.Node])], HeaderUi.prototype, "lsNodeMoonFestivalDecoration", void 0);
+    __decorate([property([cc.Node])], HeaderUi.prototype, "lsNode304Decoration", void 0);
+    __decorate([property([cc.Node])], HeaderUi.prototype, "lsNodeWorldcupDecoration", void 0);
+    __decorate([property([cc.Node])], HeaderUi.prototype, "lsNodeHalloweenDecoration", void 0);
+    return HeaderUi = HeaderUi_1 = __decorate([ccclass], HeaderUi);
   }(cc.Component);
-i.default = O;
+moduleExports.default = HeaderUi;
 void 0;

@@ -1,9 +1,9 @@
-var t = require,
-  e = module,
-  i = exports;
+var requireRef = require,
+  moduleRef = module,
+  moduleExports = exports;
 "use strict";
 void 0;
-var n = this && this.__extends || function() {
+var __extends = this && this.__extends || function() {
     var t = function(e, i) {
       return (t = Object.setPrototypeOf || {
           __proto__: []
@@ -26,7 +26,7 @@ var n = this && this.__extends || function() {
       e.prototype = null === i ? Object.create(i) : (n.prototype = i.prototype, new n());
     };
   }(),
-  o = this && this.__decorate || function(t, e, i, n) {
+  __decorate = this && this.__decorate || function(t, e, i, n) {
     var o,
       a = arguments.length,
       s = a < 3 ? e : null === n ? n = Object.getOwnPropertyDescriptor(e, i) : n;
@@ -44,26 +44,26 @@ var n = this && this.__extends || function() {
     }
     return s;
   };
-Object.defineProperty(i, "__esModule", {
+Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
-var a = cc._decorator,
-  s = a.ccclass,
-  r = (a.property, function(t) {
-    function e() {
-      return null !== t && t.apply(this, arguments) || this;
+var ccDecorator = cc._decorator,
+  ccclass = ccDecorator.ccclass,
+  MaskForDesktop = (ccDecorator.property, function(_super) {
+    function MaskForDesktop() {
+      return null !== _super && _super.apply(this, arguments) || this;
     }
-    n(e, t);
-    e.prototype.onLoad = function() {
+    __extends(MaskForDesktop, _super);
+    MaskForDesktop.prototype.onLoad = function() {
       if (cc.sys.platform != cc.sys.DESKTOP_BROWSER) {
-        var t = this.getComponent(cc.Mask);
-        if (null != t) {
-          t.enabled = false;
+        var mask = this.getComponent(cc.Mask);
+        if (null != mask) {
+          mask.enabled = false;
         }
       }
     };
-    e.prototype.start = function() {};
-    return e = o([s], e);
+    MaskForDesktop.prototype.start = function() {};
+    return MaskForDesktop = __decorate([ccclass], MaskForDesktop);
   }(cc.Component));
-i.default = r;
+moduleExports.default = MaskForDesktop;
 void 0;

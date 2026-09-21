@@ -1,50 +1,50 @@
-var t = require,
-  i = exports;
+var requireRef = require,
+  moduleExports = exports;
 "use strict";
-var n;
+var BRAND_CODE;
 void 0;
-Object.defineProperty(i, "__esModule", {
+Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
-(function(t) {
-  t.BC102 = "bc114102";
-  t.BC103 = "bc114103";
-  t.BC4121 = "bc114121";
-  t.BC2120 = "bc112120";
-  t.BC9070 = "bc119070";
-  t.BC4118 = "bc114118";
-  t.BC8116 = "bc118116";
-  t.BC4114 = "bc114114";
-  t.BC222 = "bc116222";
-  t.BC6111 = "bc116111";
-  t.BC6112 = "bc116112";
-  t.BC6223 = "bc116223";
-  t.BC6224 = "bc116224";
-  t.BC6225 = "bc116225";
-  t.BC6226 = "bc116226";
-  t.BC6227 = "bc116227";
-  t.BC098 = "bc114098";
-})(n = i.BRAND_CODE || (i.BRAND_CODE = {}));
-var o = new Set([n.BC102, n.BC103, n.BC4121, n.BC2120, n.BC9070, n.BC4118, n.BC8116, n.BC4114]),
-  a = new Set([n.BC222, n.BC6111, n.BC6112, n.BC6223, n.BC6224, n.BC6225, n.BC6226, n.BC6227]),
-  s = new Set([n.BC098]),
-  r = function() {
-    function t(t) {
-      this.brandCode = t;
+(function(brandCodeEnum) {
+  brandCodeEnum.BC102 = "bc114102";
+  brandCodeEnum.BC103 = "bc114103";
+  brandCodeEnum.BC4121 = "bc114121";
+  brandCodeEnum.BC2120 = "bc112120";
+  brandCodeEnum.BC9070 = "bc119070";
+  brandCodeEnum.BC4118 = "bc114118";
+  brandCodeEnum.BC8116 = "bc118116";
+  brandCodeEnum.BC4114 = "bc114114";
+  brandCodeEnum.BC222 = "bc116222";
+  brandCodeEnum.BC6111 = "bc116111";
+  brandCodeEnum.BC6112 = "bc116112";
+  brandCodeEnum.BC6223 = "bc116223";
+  brandCodeEnum.BC6224 = "bc116224";
+  brandCodeEnum.BC6225 = "bc116225";
+  brandCodeEnum.BC6226 = "bc116226";
+  brandCodeEnum.BC6227 = "bc116227";
+  brandCodeEnum.BC098 = "bc114098";
+})(BRAND_CODE = moduleExports.BRAND_CODE || (moduleExports.BRAND_CODE = {}));
+var g0BrandCodes = new Set([BRAND_CODE.BC102, BRAND_CODE.BC103, BRAND_CODE.BC4121, BRAND_CODE.BC2120, BRAND_CODE.BC9070, BRAND_CODE.BC4118, BRAND_CODE.BC8116, BRAND_CODE.BC4114]),
+  gThBrandCodes = new Set([BRAND_CODE.BC222, BRAND_CODE.BC6111, BRAND_CODE.BC6112, BRAND_CODE.BC6223, BRAND_CODE.BC6224, BRAND_CODE.BC6225, BRAND_CODE.BC6226, BRAND_CODE.BC6227]),
+  g2BrandCodes = new Set([BRAND_CODE.BC098]),
+  BrandChecker = function() {
+    function BrandChecker(brandCode) {
+      this.brandCode = brandCode;
     }
-    t.prototype.is = function(t) {
-      return this.brandCode === t;
+    BrandChecker.prototype.is = function(brandCode) {
+      return this.brandCode === brandCode;
     };
-    t.prototype.isG0 = function() {
-      return o.has(this.brandCode);
+    BrandChecker.prototype.isG0 = function() {
+      return g0BrandCodes.has(this.brandCode);
     };
-    t.prototype.isGTh = function() {
-      return a.has(this.brandCode);
+    BrandChecker.prototype.isGTh = function() {
+      return gThBrandCodes.has(this.brandCode);
     };
-    t.prototype.isG2 = function() {
-      return s.has(this.brandCode);
+    BrandChecker.prototype.isG2 = function() {
+      return g2BrandCodes.has(this.brandCode);
     };
-    return t;
+    return BrandChecker;
   }();
-i.BrandChecker = r;
+moduleExports.BrandChecker = BrandChecker;
 void 0;

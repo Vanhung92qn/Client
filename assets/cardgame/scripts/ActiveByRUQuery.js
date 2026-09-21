@@ -1,9 +1,9 @@
-var t = require,
-  e = module,
-  i = exports;
+var requireRef = require,
+  moduleRef = module,
+  moduleExports = exports;
 "use strict";
 void 0;
-var n = this && this.__extends || function() {
+var __extends = this && this.__extends || function() {
     var t = function(e, i) {
       return (t = Object.setPrototypeOf || {
           __proto__: []
@@ -26,7 +26,7 @@ var n = this && this.__extends || function() {
       e.prototype = null === i ? Object.create(i) : (n.prototype = i.prototype, new n());
     };
   }(),
-  o = this && this.__decorate || function(t, e, i, n) {
+  __decorate = this && this.__decorate || function(t, e, i, n) {
     var o,
       a = arguments.length,
       s = a < 3 ? e : null === n ? n = Object.getOwnPropertyDescriptor(e, i) : n;
@@ -44,28 +44,28 @@ var n = this && this.__extends || function() {
     }
     return s;
   };
-Object.defineProperty(i, "__esModule", {
+Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
 var GameConfigManager = require("./GameConfigManager"),
   StringUtil = require("./StringUtil"),
-  r = cc._decorator,
-  c = r.ccclass,
-  l = r.property,
-  h = function(t) {
-    function e() {
-      var e = null !== t && t.apply(this, arguments) || this;
-      e.targets = [];
-      e.includeThisNode = true;
-      e.activeStatusToApplyOnMatch = false;
-      e.runOnLoad = true;
-      e.runOnStart = false;
-      e.runOnEnable = true;
-      e.paramName = "ru";
-      return e;
+  ccDecorator = cc._decorator,
+  ccclass = ccDecorator.ccclass,
+  property = ccDecorator.property,
+  ActiveByRUQuery = function(_super) {
+    function ActiveByRUQuery() {
+      var _this = null !== _super && _super.apply(this, arguments) || this;
+      _this.targets = [];
+      _this.includeThisNode = true;
+      _this.activeStatusToApplyOnMatch = false;
+      _this.runOnLoad = true;
+      _this.runOnStart = false;
+      _this.runOnEnable = true;
+      _this.paramName = "ru";
+      return _this;
     }
-    n(e, t);
-    e.prototype.onLoad = function() {
+    __extends(ActiveByRUQuery, _super);
+    ActiveByRUQuery.prototype.onLoad = function() {
       if (cc.sys.isBrowser) {
         this.refreshTargets();
         if (this.runOnLoad) {
@@ -75,7 +75,7 @@ var GameConfigManager = require("./GameConfigManager"),
         this.enabled = false;
       }
     };
-    e.prototype.start = function() {
+    ActiveByRUQuery.prototype.start = function() {
       if (cc.sys.isBrowser) {
         if (this.runOnStart) {
           this.applyStatus();
@@ -84,7 +84,7 @@ var GameConfigManager = require("./GameConfigManager"),
         this.enabled = false;
       }
     };
-    e.prototype.onEnable = function() {
+    ActiveByRUQuery.prototype.onEnable = function() {
       if (cc.sys.isBrowser) {
         if (this.runOnEnable) {
           this.applyStatus();
@@ -93,7 +93,7 @@ var GameConfigManager = require("./GameConfigManager"),
         this.enabled = false;
       }
     };
-    e.prototype.refreshTargets = function() {
+    ActiveByRUQuery.prototype.refreshTargets = function() {
       if (!this.targets) {
         this.targets = [];
       }
@@ -101,22 +101,22 @@ var GameConfigManager = require("./GameConfigManager"),
         this.targets.push(this.node);
       }
     };
-    e.prototype._isQueryMatched = function() {
+    ActiveByRUQuery.prototype._isQueryMatched = function() {
       try {
-        var t = StringUtil.default.getQueryStringValue(this.paramName);
-        return !StringUtil.default.isNullOrEmpty(t);
-      } catch (t) {
-        console.log("Can't get query matched:" + t);
+        var queryValue = StringUtil.default.getQueryStringValue(this.paramName);
+        return !StringUtil.default.isNullOrEmpty(queryValue);
+      } catch (error) {
+        console.log("Can't get query matched:" + error);
         return false;
       }
     };
-    e.prototype.applyStatus = function() {
+    ActiveByRUQuery.prototype.applyStatus = function() {
       if (cc.sys.isBrowser && GameConfigManager.default.getInstance().isWebCC()) {
         if (this.targets && this.targets.length && !this._isQueryMatched()) {
-          for (var t = 0; t < this.targets.length; t++) {
-            if (this.targets[t] && this.targets[t].isValid) {
-              cc.warn("Setting node " + this.targets[t].name + " to " + this.activeStatusToApplyOnMatch);
-              this.targets[t].active = this.activeStatusToApplyOnMatch;
+          for (var index = 0; index < this.targets.length; index++) {
+            if (this.targets[index] && this.targets[index].isValid) {
+              cc.warn("Setting node " + this.targets[index].name + " to " + this.activeStatusToApplyOnMatch);
+              this.targets[index].active = this.activeStatusToApplyOnMatch;
             }
           }
         }
@@ -124,13 +124,13 @@ var GameConfigManager = require("./GameConfigManager"),
         this.enabled = false;
       }
     };
-    o([l([cc.Node])], e.prototype, "targets", void 0);
-    o([l], e.prototype, "includeThisNode", void 0);
-    o([l], e.prototype, "activeStatusToApplyOnMatch", void 0);
-    o([l], e.prototype, "runOnLoad", void 0);
-    o([l], e.prototype, "runOnStart", void 0);
-    o([l], e.prototype, "runOnEnable", void 0);
-    return e = o([c], e);
+    __decorate([property([cc.Node])], ActiveByRUQuery.prototype, "targets", void 0);
+    __decorate([property], ActiveByRUQuery.prototype, "includeThisNode", void 0);
+    __decorate([property], ActiveByRUQuery.prototype, "activeStatusToApplyOnMatch", void 0);
+    __decorate([property], ActiveByRUQuery.prototype, "runOnLoad", void 0);
+    __decorate([property], ActiveByRUQuery.prototype, "runOnStart", void 0);
+    __decorate([property], ActiveByRUQuery.prototype, "runOnEnable", void 0);
+    return ActiveByRUQuery = __decorate([ccclass], ActiveByRUQuery);
   }(cc.Component);
-i.default = h;
+moduleExports.default = ActiveByRUQuery;
 void 0;

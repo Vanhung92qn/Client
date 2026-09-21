@@ -1,21 +1,21 @@
-var t = require,
-  i = exports;
+var requireRef = require,
+  moduleExports = exports;
 "use strict";
-var n;
+var BaCayMessage;
 void 0;
-Object.defineProperty(i, "__esModule", {
+Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
-(function(t) {
-  t[t.DEAL_CARDS = 1500] = "DEAL_CARDS";
-  t[t.UPDATE_ARRANGE_CARDS_STATE = 603] = "UPDATE_ARRANGE_CARDS_STATE";
-  t[t.FINISH_GAME = 1502] = "FINISH_GAME";
-  t[t.START_BETTING = 1503] = "START_BETTING";
-  t[t.REARRANGE_CARDS = 604] = "REARRANGE_CARDS";
-  t[t.INFORM_ROYALTIES = 605] = "INFORM_ROYALTIES";
-  t[t.UPDATE_CURRENT_CARDS_STATE = 606] = "UPDATE_CURRENT_CARDS_STATE";
-  t[t.START = 698] = "START";
-  t[t.ARRANGED = 1504] = "ARRANGED";
-})(n = i.BaCayMessage || (i.BaCayMessage = {}));
-i.default = n;
+(function(BaCayMessage) {
+  BaCayMessage[BaCayMessage.DEAL_CARDS = 1500] = "DEAL_CARDS";
+  BaCayMessage[BaCayMessage.UPDATE_ARRANGE_CARDS_STATE = 603] = "UPDATE_ARRANGE_CARDS_STATE";
+  BaCayMessage[BaCayMessage.FINISH_GAME = 1502] = "FINISH_GAME";
+  BaCayMessage[BaCayMessage.START_BETTING = 1503] = "START_BETTING";
+  BaCayMessage[BaCayMessage.REARRANGE_CARDS = 604] = "REARRANGE_CARDS";
+  BaCayMessage[BaCayMessage.INFORM_ROYALTIES = 605] = "INFORM_ROYALTIES";
+  BaCayMessage[BaCayMessage.UPDATE_CURRENT_CARDS_STATE = 606] = "UPDATE_CURRENT_CARDS_STATE";
+  BaCayMessage[BaCayMessage.START = 698] = "START";
+  BaCayMessage[BaCayMessage.ARRANGED = 1504] = "ARRANGED";
+})(BaCayMessage = moduleExports.BaCayMessage || (moduleExports.BaCayMessage = {}));
+moduleExports.default = BaCayMessage;
 void 0;

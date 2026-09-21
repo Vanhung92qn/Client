@@ -1,9 +1,9 @@
-var t = require,
-  e = module,
-  i = exports;
+var requireRef = require,
+  moduleRef = module,
+  moduleExports = exports;
 "use strict";
 void 0;
-var n = this && this.__extends || function() {
+var __extends = this && this.__extends || function() {
     var t = function(e, i) {
       return (t = Object.setPrototypeOf || {
           __proto__: []
@@ -26,7 +26,7 @@ var n = this && this.__extends || function() {
       e.prototype = null === i ? Object.create(i) : (n.prototype = i.prototype, new n());
     };
   }(),
-  o = this && this.__decorate || function(t, e, i, n) {
+  __decorate = this && this.__decorate || function(t, e, i, n) {
     var o,
       a = arguments.length,
       s = a < 3 ? e : null === n ? n = Object.getOwnPropertyDescriptor(e, i) : n;
@@ -44,63 +44,63 @@ var n = this && this.__extends || function() {
     }
     return s;
   };
-Object.defineProperty(i, "__esModule", {
+Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
 var OrientationManager = require("./OrientationManager"),
   TableCell = require("./TableCell"),
-  r = cc._decorator,
-  c = r.ccclass,
-  l = r.property,
-  h = function(t) {
-    function e() {
-      var e = null !== t && t.apply(this, arguments) || this;
-      e.scrollView = null;
-      e.itemPrefab = null;
-      e.firstItemData = {};
-      e.lastItemData = {};
-      e.itemPosMap = {};
-      e.lastResetItemIndex = null;
-      e.orientation = OrientationManager.Orientation.Landscape;
-      e.listTableCell = [];
-      return e;
+  ccDecorator = cc._decorator,
+  ccclass = ccDecorator.ccclass,
+  property = ccDecorator.property,
+  TableViewUtils = function(_super) {
+    function TableViewUtils() {
+      var _this = null !== _super && _super.apply(this, arguments) || this;
+      _this.scrollView = null;
+      _this.itemPrefab = null;
+      _this.firstItemData = {};
+      _this.lastItemData = {};
+      _this.itemPosMap = {};
+      _this.lastResetItemIndex = null;
+      _this.orientation = OrientationManager.Orientation.Landscape;
+      _this.listTableCell = [];
+      return _this;
     }
-    n(e, t);
-    e.prototype.init = function(t, e, i, n, o) {
-      if (void 0 === o) {
-        o = false;
+    __extends(TableViewUtils, _super);
+    TableViewUtils.prototype.init = function(dataList, e, i, n, playItemAnim) {
+      if (void 0 === playItemAnim) {
+        playItemAnim = false;
       }
       this.content = this.scrollView.content;
-      for (var a = this.listTableCell.length; a < t.length; ++a) {
-        var r = cc.instantiate(this.itemPrefab);
-        r.parent = this.content;
-        (c = r.getComponent(TableCell.default)).setIndex(a);
-        this.listTableCell.push(c);
+      for (var index = this.listTableCell.length; index < dataList.length; ++index) {
+        var cellNode = cc.instantiate(this.itemPrefab);
+        cellNode.parent = this.content;
+        (cell = cellNode.getComponent(TableCell.default)).setIndex(index);
+        this.listTableCell.push(cell);
       }
-      for (a = 0; a < t.length; ++a) {
-        if (!(c = this.listTableCell[a]).node.active) {
-          c.node.active = true;
+      for (index = 0; index < dataList.length; ++index) {
+        if (!(cell = this.listTableCell[index]).node.active) {
+          cell.node.active = true;
         }
-        if (o) {
-          c.node.stopAllActions();
-          c.node.runAction(cc.sequence(cc.scaleTo(.15, 1.05), cc.scaleTo(.15, 1)));
+        if (playItemAnim) {
+          cell.node.stopAllActions();
+          cell.node.runAction(cc.sequence(cc.scaleTo(.15, 1.05), cc.scaleTo(.15, 1)));
         }
-        c.initValue(t[a], this, this.orientation);
+        cell.initValue(dataList[index], this, this.orientation);
       }
-      for (a = t.length; a < this.listTableCell.length; ++a) {
-        var c;
-        (c = this.listTableCell[a]).node.active = false;
+      for (index = dataList.length; index < this.listTableCell.length; ++index) {
+        var cell;
+        (cell = this.listTableCell[index]).node.active = false;
       }
     };
-    e.prototype.hideAllItems = function() {
-      for (var t = 0; t < this.listTableCell.length; t++) {
-        this.listTableCell[t].node.active = false;
+    TableViewUtils.prototype.hideAllItems = function() {
+      for (var index = 0; index < this.listTableCell.length; index++) {
+        this.listTableCell[index].node.active = false;
       }
     };
-    e.prototype.callback = function(t, e) {};
-    o([l(cc.ScrollView)], e.prototype, "scrollView", void 0);
-    o([l(cc.Prefab)], e.prototype, "itemPrefab", void 0);
-    return e = o([c], e);
+    TableViewUtils.prototype.callback = function(t, e) {};
+    __decorate([property(cc.ScrollView)], TableViewUtils.prototype, "scrollView", void 0);
+    __decorate([property(cc.Prefab)], TableViewUtils.prototype, "itemPrefab", void 0);
+    return TableViewUtils = __decorate([ccclass], TableViewUtils);
   }(cc.Component);
-i.default = h;
+moduleExports.default = TableViewUtils;
 void 0;

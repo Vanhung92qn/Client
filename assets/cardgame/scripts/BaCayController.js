@@ -1,5 +1,5 @@
-var t = require,
-  e = module,
+var requireRef = require,
+  moduleRef = module,
   moduleExports = exports;
 "use strict";
 void 0;
@@ -331,6 +331,14 @@ var GameController = require("./GameController"),
       var playerInfos = tableInfo.ps;
       if (this.createListPlayerWhenGetTableInfo(playerInfos), this.updateViewPostions(true), this.state === MessageCardGameHandler.GameState.VIEWING) {
         if (null !== tableInfo.re && void 0 !== tableInfo.re && tableInfo.re) {
+          // `betUserCount` gánh HAI vai, và điều đó chỉ an toàn nhờ cái `break` bên dưới:
+          //   · khởi đầu = playerInfos.length — vừa làm CẬN VÒNG LẶP, vừa làm giá trị MẶC ĐỊNH
+          //     cho số người vẽ chip (dùng khi không tìm thấy mình trong danh sách);
+          //   · tìm thấy mình thì bị gán đè bằng `playerInfo.rr` — tức GÁN ĐÈ ĐÚNG CẬN CỦA VÒNG
+          //     LẶP ĐANG CHẠY. Không nổ, chỉ vì ngay sau đó là `break`.
+          // Đã cân nhắc tách làm hai biến rồi quyết KHÔNG: người đọc vẫn phải nhìn thấy cái
+          // `break` mới yên tâm, nên tách chỉ thêm một biến chứ không thêm bảo đảm nào.
+          // 🔴 Ai bỏ `break` đi thì PHẢI tách biến trước.
           for (var myCardCodes, betUserCount = playerInfos.length, playerIndex = 0; playerIndex < betUserCount; playerIndex++) {
             var playerInfo = playerInfos[playerIndex];
             if (0 === playerInfo.uid.localeCompare(GamePlayManager.default.getInstance().userID)) {
@@ -446,8 +454,8 @@ var GameController = require("./GameController"),
         }
       }
     };
-    BaCayController.prototype.addPlayer = function(displayName, userID, isHost, money, playerState, remainingCards, sit, isReady, l, isAtTable, u, avatar, p) {
-      var player = _super.prototype.addPlayer.call(this, displayName, userID, isHost, money, playerState, remainingCards, sit, isReady, l, isAtTable, u, avatar, p);
+    BaCayController.prototype.addPlayer = function(displayName, userID, isHost, money, playerState, remainingCards, sit, isReady, pid, isAtTable, assets, avatar, accountId) {
+      var player = _super.prototype.addPlayer.call(this, displayName, userID, isHost, money, playerState, remainingCards, sit, isReady, pid, isAtTable, assets, avatar, accountId);
       player.iniBaCayCard(this.prefabsGameCard);
       return player;
     };
@@ -553,9 +561,9 @@ var GameController = require("./GameController"),
       if (0 != extraCardInfos.length) {
         for (var dealOneExtraCard = function(infoIndex) {
             var cardInfo = extraCardInfos[infoIndex],
-              player = controller.getPlayer(cardInfo.uid),
+              player = _this.getPlayer(cardInfo.uid),
               card = null;
-            (card = cc.instantiate(controller.prefabsGameCard).getComponent(GameCardSprite.default)).node.parent = controller.node;
+            (card = cc.instantiate(_this.prefabsGameCard).getComponent(GameCardSprite.default)).node.parent = _this.node;
             if (player.isMine()) {
               card.init(GameCardSpriteType.default.TypeBIG);
               card.node.zIndex = GameZOrder.default.TOP + 10;
@@ -564,8 +572,8 @@ var GameController = require("./GameController"),
               card.node.zIndex = GameZOrder.default.MIDDLE_TOP_2 + 10;
             }
             card.setServerCode(cardInfo.cs);
-            controller.listCardExtratime.push(card);
-            var moveAction = cc.moveTo(.3, controller.getPlayerCardExtratimePosition(player.indexPos, 0, new cc.Vec2(0, 0))),
+            _this.listCardExtratime.push(card);
+            var moveAction = cc.moveTo(.3, _this.getPlayerCardExtratimePosition(player.indexPos, 0, new cc.Vec2(0, 0))),
               cardAction = cc.sequence(moveAction, cc.delayTime(.1), cc.callFunc(function() {
                 if (_this.state === MessageCardGameHandler.GameState.PLAYING) {
                   card.runActionFlip2();
@@ -578,7 +586,7 @@ var GameController = require("./GameController"),
                 card.node.runAction(cc.removeSelf(true));
               }));
             card.node.runAction(cardAction);
-          }, controller = this, index = 0; index < extraCardInfos.length; index++) {
+          }, index = 0; index < extraCardInfos.length; index++) {
           dealOneExtraCard(index);
         }
       }
@@ -685,9 +693,9 @@ var GameController = require("./GameController"),
       GamePlayManager.default.getInstance().countMatchNotInteract = 0;
       AnalyticsManager.default.getInstance().logEvent("ShowAllCardCaoRua", JSON.parse('{"ShowCard":"ClickButtonShowAll"}'));
     };
-    BaCayController.prototype.flipAllCard = function(t) {
-      if (void 0 === t) {
-        t = true;
+    BaCayController.prototype.flipAllCard = function(withAnimation) {
+      if (void 0 === withAnimation) {
+        withAnimation = true;
       }
       this.nodeNanBai.active = false;
       this.showAnim3TayOfMe();
@@ -704,7 +712,7 @@ var GameController = require("./GameController"),
           this.listCardBacks[backIndex].destroy();
         }
         this.listCardBacks = [];
-        this.endFlipCard(t);
+        this.endFlipCard(withAnimation);
         for (var playerIndex = 0; playerIndex < this.playersPlaying.length; ++playerIndex) {
           if (this.playersPlaying[playerIndex].isMine() && this.state === MessageCardGameHandler.GameState.PLAYING) {
             this._khongThaoTac = false;
@@ -713,9 +721,9 @@ var GameController = require("./GameController"),
         }
       }
     };
-    BaCayController.prototype.endFlipCard = function(t) {
-      if (void 0 === t) {
-        t = true;
+    BaCayController.prototype.endFlipCard = function(withAnimation) {
+      if (void 0 === withAnimation) {
+        withAnimation = true;
       }
       this.blackLayer.runAction(cc.fadeOut(.2));
       this.nodeNanBai.active = false;
@@ -787,10 +795,10 @@ var GameController = require("./GameController"),
       }
       return codes;
     };
-    BaCayController.prototype.finishThisGame = function(messageData, e) {
+    BaCayController.prototype.finishThisGame = function(messageData, isReconnect) {
       var _this = this;
-      if (void 0 === e) {
-        e = false;
+      if (void 0 === isReconnect) {
+        isReconnect = false;
       }
       this._dangKetThuc = true;
       for (var playerIndex = 0; playerIndex < this.players.length; playerIndex++) {
@@ -900,8 +908,8 @@ var GameController = require("./GameController"),
       sortedCodes.length;
       return sortedCodes;
     };
-    BaCayController.prototype.showThis = function(t, node) {
-      node.active = true;
+    BaCayController.prototype.showThis = function(node, nodeToShow) {
+      nodeToShow.active = true;
     };
     BaCayController.prototype.setGrayColorThisCard = function(node, card) {
       card.setColor(cc.Color.GRAY);
@@ -920,7 +928,7 @@ var GameController = require("./GameController"),
       });
       this.listEffectSoChi = [];
     };
-    BaCayController.prototype.showResult = function(node, e) {
+    BaCayController.prototype.showResult = function(node, callFuncData) {
       if (0 == this.isDidFlipAllCard) {
         this.flipAllCard();
       }

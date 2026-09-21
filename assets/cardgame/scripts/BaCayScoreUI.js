@@ -1,9 +1,9 @@
-var t = require,
-  e = module,
-  i = exports;
+var requireRef = require,
+  moduleRef = module,
+  moduleExports = exports;
 "use strict";
 void 0;
-var n = this && this.__extends || function() {
+var __extends = this && this.__extends || function() {
     var t = function(e, i) {
       return (t = Object.setPrototypeOf || {
           __proto__: []
@@ -26,7 +26,7 @@ var n = this && this.__extends || function() {
       e.prototype = null === i ? Object.create(i) : (n.prototype = i.prototype, new n());
     };
   }(),
-  o = this && this.__decorate || function(t, e, i, n) {
+  __decorate = this && this.__decorate || function(t, e, i, n) {
     var o,
       a = arguments.length,
       s = a < 3 ? e : null === n ? n = Object.getOwnPropertyDescriptor(e, i) : n;
@@ -44,92 +44,92 @@ var n = this && this.__extends || function() {
     }
     return s;
   };
-Object.defineProperty(i, "__esModule", {
+Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
 var GameZOrder = require("./GameZOrder"),
-  s = cc._decorator,
-  r = s.ccclass,
-  c = s.property,
-  l = function(t) {
-    function e() {
-      var e = null !== t && t.apply(this, arguments) || this;
-      e.lbScore = null;
-      e.atlasScore = null;
-      e.animScrore = null;
-      e.animJQKHeart = null;
-      e.animSameScrore = null;
-      e.myScore = 0;
-      e.isSameScore = false;
-      e.fadeOutCallback = function(t) {};
-      return e;
+  ccDecorator = cc._decorator,
+  ccclass = ccDecorator.ccclass,
+  property = ccDecorator.property,
+  BaCayScoreUI = function(_super) {
+    function BaCayScoreUI() {
+      var _this = null !== _super && _super.apply(this, arguments) || this;
+      _this.lbScore = null;
+      _this.atlasScore = null;
+      _this.animScrore = null;
+      _this.animJQKHeart = null;
+      _this.animSameScrore = null;
+      _this.myScore = 0;
+      _this.isSameScore = false;
+      _this.fadeOutCallback = function(scoreUI) {};
+      return _this;
     }
-    n(e, t);
-    e.prototype.start = function() {
+    __extends(BaCayScoreUI, _super);
+    BaCayScoreUI.prototype.start = function() {
       this.node.zIndex = GameZOrder.default.SCORE_UI;
     };
-    e.prototype.onDestroy = function() {};
-    e.prototype.setScore = function(t, e) {
-      if (void 0 === e) {
-        e = false;
+    BaCayScoreUI.prototype.onDestroy = function() {};
+    BaCayScoreUI.prototype.setScore = function(score, isSameScore) {
+      if (void 0 === isSameScore) {
+        isSameScore = false;
       }
-      this.myScore = t;
+      this.myScore = score;
       this.node.opacity = 0;
       this.animJQKHeart.node.active = false;
       this.animScrore.node.active = false;
-      this.isSameScore = e;
+      this.isSameScore = isSameScore;
       if (null != this.animSameScrore) {
         this.animSameScrore.node.active = false;
       }
     };
-    e.prototype.fade = function(t, e, i, n, o) {
-      var a = this;
-      if (void 0 === i) {
-        i = false;
+    BaCayScoreUI.prototype.fade = function(delay, duration, isMine, isSameScore, hasJqkHeart) {
+      var self = this;
+      if (void 0 === isMine) {
+        isMine = false;
       }
       if (null != this.animSameScrore) {
         this.animSameScrore.node.active = false;
       }
-      this.node.runAction(cc.sequence(cc.delayTime(t), cc.callFunc(function() {
-        if (o) {
-          a.animJQKHeart.node.active = true;
-          a.animJQKHeart.setAnimation(0, "animation", false);
+      this.node.runAction(cc.sequence(cc.delayTime(delay), cc.callFunc(function() {
+        if (hasJqkHeart) {
+          self.animJQKHeart.node.active = true;
+          self.animJQKHeart.setAnimation(0, "animation", false);
         } else {
-          a.animScrore.node.active = true;
-          a.animScrore.setAnimation(0, a.getNameAnimScore(a.myScore, i), false);
+          self.animScrore.node.active = true;
+          self.animScrore.setAnimation(0, self.getNameAnimScore(self.myScore, isMine), false);
         }
       }), cc.delayTime(.15), cc.callFunc(function() {
-        a.animSameScrore.node.active = n;
-      }), cc.delayTime(e + .15), cc.callFunc(this.onFadeOutEnd.bind(this))));
+        self.animSameScrore.node.active = isSameScore;
+      }), cc.delayTime(duration + .15), cc.callFunc(this.onFadeOutEnd.bind(this))));
     };
-    e.prototype.hide = function() {
+    BaCayScoreUI.prototype.hide = function() {
       this.node.runAction(cc.sequence(cc.fadeOut(.4), cc.callFunc(function() {
         this.node.active = false;
         this.node.opacity = 255;
       }.bind(this))));
     };
-    e.prototype.setFadeOutCallback = function(t) {
-      this.fadeOutCallback = t;
+    BaCayScoreUI.prototype.setFadeOutCallback = function(callback) {
+      this.fadeOutCallback = callback;
     };
-    e.prototype.onFadeOutEnd = function() {
+    BaCayScoreUI.prototype.onFadeOutEnd = function() {
       this.node.active = false;
       this.node.opacity = 255;
       if (null != this.fadeOutCallback) {
         this.fadeOutCallback(this);
       }
     };
-    e.prototype.getNameAnimScore = function(t, e) {
-      if (void 0 === e) {
-        e = false;
+    BaCayScoreUI.prototype.getNameAnimScore = function(score, isMine) {
+      if (void 0 === isMine) {
+        isMine = false;
       }
-      return 0 == t ? "bu" : t > 0 && t <= 9 ? t + " diem" : 999 == t && 0 == e ? "3tay2" : 999 == t && e ? "3tay3" : void 0;
+      return 0 == score ? "bu" : score > 0 && score <= 9 ? score + " diem" : 999 == score && 0 == isMine ? "3tay2" : 999 == score && isMine ? "3tay3" : void 0;
     };
-    o([c(cc.Label)], e.prototype, "lbScore", void 0);
-    o([c(cc.SpriteAtlas)], e.prototype, "atlasScore", void 0);
-    o([c(sp.Skeleton)], e.prototype, "animScrore", void 0);
-    o([c(sp.Skeleton)], e.prototype, "animJQKHeart", void 0);
-    o([c(sp.Skeleton)], e.prototype, "animSameScrore", void 0);
-    return e = o([r], e);
+    __decorate([property(cc.Label)], BaCayScoreUI.prototype, "lbScore", void 0);
+    __decorate([property(cc.SpriteAtlas)], BaCayScoreUI.prototype, "atlasScore", void 0);
+    __decorate([property(sp.Skeleton)], BaCayScoreUI.prototype, "animScrore", void 0);
+    __decorate([property(sp.Skeleton)], BaCayScoreUI.prototype, "animJQKHeart", void 0);
+    __decorate([property(sp.Skeleton)], BaCayScoreUI.prototype, "animSameScrore", void 0);
+    return BaCayScoreUI = __decorate([ccclass], BaCayScoreUI);
   }(cc.Component);
-i.default = l;
+moduleExports.default = BaCayScoreUI;
 void 0;

@@ -1,9 +1,9 @@
-var t = require,
-  e = module,
-  i = exports;
+var requireRef = require,
+  moduleRef = module,
+  moduleExports = exports;
 "use strict";
 void 0;
-var n = this && this.__extends || function() {
+var __extends = this && this.__extends || function() {
     var t = function(e, i) {
       return (t = Object.setPrototypeOf || {
           __proto__: []
@@ -26,7 +26,7 @@ var n = this && this.__extends || function() {
       e.prototype = null === i ? Object.create(i) : (n.prototype = i.prototype, new n());
     };
   }(),
-  o = this && this.__decorate || function(t, e, i, n) {
+  __decorate = this && this.__decorate || function(t, e, i, n) {
     var o,
       a = arguments.length,
       s = a < 3 ? e : null === n ? n = Object.getOwnPropertyDescriptor(e, i) : n;
@@ -44,61 +44,61 @@ var n = this && this.__extends || function() {
     }
     return s;
   };
-Object.defineProperty(i, "__esModule", {
+Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
-var a,
-  s = cc._decorator,
-  r = s.ccclass,
-  c = s.property;
-(function(t) {
-  t[t.HEART = 0] = "HEART";
-  t[t.DIAMOND = 1] = "DIAMOND";
-  t[t.CLUB = 2] = "CLUB";
-  t[t.SPADE = 3] = "SPADE";
-})(a = i.TypeParticleCard || (i.TypeParticleCard = {}));
-var l = function(t) {
-  function e() {
-    var e = null !== t && t.apply(this, arguments) || this;
-    e.particleCardPrefab = null;
-    e.parentParticle = null;
-    e.listSpriteFrameParticle = [];
-    return e;
+var TypeParticleCard,
+  ccDecorator = cc._decorator,
+  ccclass = ccDecorator.ccclass,
+  property = ccDecorator.property;
+(function(TypeParticleCard) {
+  TypeParticleCard[TypeParticleCard.HEART = 0] = "HEART";
+  TypeParticleCard[TypeParticleCard.DIAMOND = 1] = "DIAMOND";
+  TypeParticleCard[TypeParticleCard.CLUB = 2] = "CLUB";
+  TypeParticleCard[TypeParticleCard.SPADE = 3] = "SPADE";
+})(TypeParticleCard = moduleExports.TypeParticleCard || (moduleExports.TypeParticleCard = {}));
+var ParticleCaoRua = function(_super) {
+  function ParticleCaoRua() {
+    var _this = null !== _super && _super.apply(this, arguments) || this;
+    _this.particleCardPrefab = null;
+    _this.parentParticle = null;
+    _this.listSpriteFrameParticle = [];
+    return _this;
   }
-  n(e, t);
-  e.prototype.start = function() {};
-  e.prototype.PlayParticle = function(t) {
-    var e = cc.instantiate(this.particleCardPrefab).getComponent(cc.ParticleSystem);
-    switch (t) {
-      case a.HEART:
-        e.spriteFrame = this.listSpriteFrameParticle[0];
-        e.startColor = cc.color(255, 48, 48, 183);
-        e.endColor = cc.color(255, 48, 48, 156);
+  __extends(ParticleCaoRua, _super);
+  ParticleCaoRua.prototype.start = function() {};
+  ParticleCaoRua.prototype.PlayParticle = function(cardSuit) {
+    var particleSystem = cc.instantiate(this.particleCardPrefab).getComponent(cc.ParticleSystem);
+    switch (cardSuit) {
+      case TypeParticleCard.HEART:
+        particleSystem.spriteFrame = this.listSpriteFrameParticle[0];
+        particleSystem.startColor = cc.color(255, 48, 48, 183);
+        particleSystem.endColor = cc.color(255, 48, 48, 156);
         break;
-      case a.DIAMOND:
-        e.spriteFrame = this.listSpriteFrameParticle[1];
-        e.startColor = cc.color(255, 48, 48, 183);
-        e.endColor = cc.color(255, 48, 48, 156);
+      case TypeParticleCard.DIAMOND:
+        particleSystem.spriteFrame = this.listSpriteFrameParticle[1];
+        particleSystem.startColor = cc.color(255, 48, 48, 183);
+        particleSystem.endColor = cc.color(255, 48, 48, 156);
         break;
-      case a.CLUB:
-        e.spriteFrame = this.listSpriteFrameParticle[2];
-        e.startColor = cc.color(0, 0, 0, 183);
-        e.endColor = cc.color(0, 0, 0, 156);
+      case TypeParticleCard.CLUB:
+        particleSystem.spriteFrame = this.listSpriteFrameParticle[2];
+        particleSystem.startColor = cc.color(0, 0, 0, 183);
+        particleSystem.endColor = cc.color(0, 0, 0, 156);
         break;
-      case a.SPADE:
-        e.spriteFrame = this.listSpriteFrameParticle[3];
-        e.startColor = cc.color(0, 0, 0, 183);
-        e.endColor = cc.color(0, 0, 0, 156);
+      case TypeParticleCard.SPADE:
+        particleSystem.spriteFrame = this.listSpriteFrameParticle[3];
+        particleSystem.startColor = cc.color(0, 0, 0, 183);
+        particleSystem.endColor = cc.color(0, 0, 0, 156);
         break;
       default:
-        e.spriteFrame = this.listSpriteFrameParticle[0];
+        particleSystem.spriteFrame = this.listSpriteFrameParticle[0];
     }
-    e.node.parent = this.parentParticle;
+    particleSystem.node.parent = this.parentParticle;
   };
-  o([c(cc.Prefab)], e.prototype, "particleCardPrefab", void 0);
-  o([c(cc.Node)], e.prototype, "parentParticle", void 0);
-  o([c(cc.SpriteFrame)], e.prototype, "listSpriteFrameParticle", void 0);
-  return e = o([r], e);
+  __decorate([property(cc.Prefab)], ParticleCaoRua.prototype, "particleCardPrefab", void 0);
+  __decorate([property(cc.Node)], ParticleCaoRua.prototype, "parentParticle", void 0);
+  __decorate([property(cc.SpriteFrame)], ParticleCaoRua.prototype, "listSpriteFrameParticle", void 0);
+  return ParticleCaoRua = __decorate([ccclass], ParticleCaoRua);
 }(cc.Component);
-i.default = l;
+moduleExports.default = ParticleCaoRua;
 void 0;

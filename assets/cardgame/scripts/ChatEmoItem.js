@@ -1,9 +1,9 @@
-var t = require,
-  e = module,
-  i = exports;
+var requireRef = require,
+  moduleRef = module,
+  moduleExports = exports;
 "use strict";
 void 0;
-var n = this && this.__extends || function() {
+var __extends = this && this.__extends || function() {
     var t = function(e, i) {
       return (t = Object.setPrototypeOf || {
           __proto__: []
@@ -26,7 +26,7 @@ var n = this && this.__extends || function() {
       e.prototype = null === i ? Object.create(i) : (n.prototype = i.prototype, new n());
     };
   }(),
-  o = this && this.__decorate || function(t, e, i, n) {
+  __decorate = this && this.__decorate || function(t, e, i, n) {
     var o,
       a = arguments.length,
       s = a < 3 ? e : null === n ? n = Object.getOwnPropertyDescriptor(e, i) : n;
@@ -44,27 +44,27 @@ var n = this && this.__extends || function() {
     }
     return s;
   };
-Object.defineProperty(i, "__esModule", {
+Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
 var ChatInGamePopup = require("./ChatInGamePopup"),
   GamePlayManager = require("./GamePlayManager"),
-  r = cc._decorator,
-  c = r.ccclass,
-  l = r.property,
-  h = function(t) {
-    function e() {
-      var e = null !== t && t.apply(this, arguments) || this;
-      e.chatInGamePopup = null;
-      return e;
+  ccDecorator = cc._decorator,
+  ccclass = ccDecorator.ccclass,
+  property = ccDecorator.property,
+  ChatEmoItem = function(_super) {
+    function ChatEmoItem() {
+      var _this = null !== _super && _super.apply(this, arguments) || this;
+      _this.chatInGamePopup = null;
+      return _this;
     }
-    n(e, t);
-    e.prototype.onClickThis = function(t, e) {
-      this.chatInGamePopup.sendChat(e);
+    __extends(ChatEmoItem, _super);
+    ChatEmoItem.prototype.onClickThis = function(event, emoText) {
+      this.chatInGamePopup.sendChat(emoText);
       GamePlayManager.default.getInstance().countMatchNotInteract = 0;
     };
-    o([l(ChatInGamePopup.default)], e.prototype, "chatInGamePopup", void 0);
-    return e = o([c], e);
+    __decorate([property(ChatInGamePopup.default)], ChatEmoItem.prototype, "chatInGamePopup", void 0);
+    return ChatEmoItem = __decorate([ccclass], ChatEmoItem);
   }(cc.Component);
-i.default = h;
+moduleExports.default = ChatEmoItem;
 void 0;

@@ -1,9 +1,9 @@
-var t = require,
-  e = module,
-  i = exports;
+var requireRef = require,
+  moduleRef = module,
+  moduleExports = exports;
 "use strict";
 void 0;
-var n = this && this.__extends || function() {
+var __extends = this && this.__extends || function() {
     var t = function(e, i) {
       return (t = Object.setPrototypeOf || {
           __proto__: []
@@ -26,7 +26,7 @@ var n = this && this.__extends || function() {
       e.prototype = null === i ? Object.create(i) : (n.prototype = i.prototype, new n());
     };
   }(),
-  o = this && this.__decorate || function(t, e, i, n) {
+  __decorate = this && this.__decorate || function(t, e, i, n) {
     var o,
       a = arguments.length,
       s = a < 3 ? e : null === n ? n = Object.getOwnPropertyDescriptor(e, i) : n;
@@ -44,29 +44,29 @@ var n = this && this.__extends || function() {
     }
     return s;
   };
-Object.defineProperty(i, "__esModule", {
+Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
-var a = cc._decorator,
-  s = a.ccclass,
-  r = a.property,
-  c = function(t) {
-    function e() {
-      var e = null !== t && t.apply(this, arguments) || this;
-      e.listIconProfap = [];
-      e.iconProfap = null;
-      e.dataMaping = {};
-      return e;
+var ccDecorator = cc._decorator,
+  ccclass = ccDecorator.ccclass,
+  property = ccDecorator.property,
+  ListChatIconConfig = function(_super) {
+    function ListChatIconConfig() {
+      var _this = null !== _super && _super.apply(this, arguments) || this;
+      _this.listIconProfap = [];
+      _this.iconProfap = null;
+      _this.dataMaping = {};
+      return _this;
     }
-    n(e, t);
-    e.prototype.onLoad = function() {
-      for (var t = 1; t <= 14; ++t) {
-        this.dataMaping[":" + t] = t;
+    __extends(ListChatIconConfig, _super);
+    ListChatIconConfig.prototype.onLoad = function() {
+      for (var iconIndex = 1; iconIndex <= 14; ++iconIndex) {
+        this.dataMaping[":" + iconIndex] = iconIndex;
       }
     };
-    o([r([cc.Prefab])], e.prototype, "listIconProfap", void 0);
-    o([r(cc.Prefab)], e.prototype, "iconProfap", void 0);
-    return e = o([s], e);
+    __decorate([property([cc.Prefab])], ListChatIconConfig.prototype, "listIconProfap", void 0);
+    __decorate([property(cc.Prefab)], ListChatIconConfig.prototype, "iconProfap", void 0);
+    return ListChatIconConfig = __decorate([ccclass], ListChatIconConfig);
   }(cc.Component);
-i.default = c;
+moduleExports.default = ListChatIconConfig;
 void 0;

@@ -1,9 +1,9 @@
-var t = require,
-  e = module,
-  i = exports;
+var requireRef = require,
+  moduleRef = module,
+  moduleExports = exports;
 "use strict";
 void 0;
-var n = this && this.__extends || function() {
+var __extends = this && this.__extends || function() {
     var t = function(e, i) {
       return (t = Object.setPrototypeOf || {
           __proto__: []
@@ -26,7 +26,7 @@ var n = this && this.__extends || function() {
       e.prototype = null === i ? Object.create(i) : (n.prototype = i.prototype, new n());
     };
   }(),
-  o = this && this.__decorate || function(t, e, i, n) {
+  __decorate = this && this.__decorate || function(t, e, i, n) {
     var o,
       a = arguments.length,
       s = a < 3 ? e : null === n ? n = Object.getOwnPropertyDescriptor(e, i) : n;
@@ -44,121 +44,121 @@ var n = this && this.__extends || function() {
     }
     return s;
   };
-Object.defineProperty(i, "__esModule", {
+Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
 var GameHTTPManager = require("./GameHTTPManager"),
   GamePlayManager = require("./GamePlayManager"),
   RMCLocalizeConfig = require("./RMCLocalizeConfig"),
   StringUtil = require("./StringUtil"),
-  l = cc._decorator,
-  h = l.ccclass,
-  u = l.property,
-  d = function(t) {
-    function e() {
-      var e = null !== t && t.apply(this, arguments) || this;
-      e.text = null;
-      e.arrayText = [
+  ccDecorator = cc._decorator,
+  ccclass = ccDecorator.ccclass,
+  property = ccDecorator.property,
+  LocalizeManager = function(_super) {
+    function LocalizeManager() {
+      var _this = null !== _super && _super.apply(this, arguments) || this;
+      _this.text = null;
+      _this.arrayText = [
         []
       ];
-      e.langID = 0;
-      return e;
+      _this.langID = 0;
+      return _this;
     }
-    var i;
-    n(e, t);
-    i = e;
-    e.getInstance = function() {
+    var LocalizeManagerClass;
+    __extends(LocalizeManager, _super);
+    LocalizeManagerClass = LocalizeManager;
+    LocalizeManager.getInstance = function() {
       if (!(null !== this.Instance && void 0 !== this.Instance)) {
-        this.Instance = new i();
+        this.Instance = new LocalizeManagerClass();
       }
       return this.Instance;
     };
-    e.prototype.onLoad = function() {
+    LocalizeManager.prototype.onLoad = function() {
       cc.game.addPersistRootNode(this.node);
-      i.Instance = this;
+      LocalizeManagerClass.Instance = this;
       this.langID = GamePlayManager.default.getInstance().language;
       this.arrayText = this.CSVToArray(this.text.text, ",");
     };
-    e.prototype.fetchRemoteLanguageData = function() {
-      var t = RMCLocalizeConfig.getLocalizeConfig();
-      if (t && !StringUtil.default.isNullOrEmpty(t.urlCSV)) {
-        var e = this;
-        GameHTTPManager.default.getInstance().getRawHTTP(t.urlCSV + "?" + new Date().getTime().toString(), function(t) {
-          e.updateCSVContent(t);
-        }, function(t) {});
+    LocalizeManager.prototype.fetchRemoteLanguageData = function() {
+      var localizeConfig = RMCLocalizeConfig.getLocalizeConfig();
+      if (localizeConfig && !StringUtil.default.isNullOrEmpty(localizeConfig.urlCSV)) {
+        var self = this;
+        GameHTTPManager.default.getInstance().getRawHTTP(localizeConfig.urlCSV + "?" + new Date().getTime().toString(), function(csvContent) {
+          self.updateCSVContent(csvContent);
+        }, function(errorInfo) {});
       }
     };
-    e.prototype.updateCSVContent = function(t) {
-      if (t && t.length && t.length > 100) {
+    LocalizeManager.prototype.updateCSVContent = function(csvContent) {
+      if (csvContent && csvContent.length && csvContent.length > 100) {
         try {
-          var e = this.CSVToArray(t, ",");
-          if (e) {
-            this.arrayText = e;
+          var parsedRows = this.CSVToArray(csvContent, ",");
+          if (parsedRows) {
+            this.arrayText = parsedRows;
           }
-        } catch (t) {}
+        } catch (parseError) {}
       }
     };
-    e.prototype.SetLang = function(t) {
-      this.langID = t;
+    LocalizeManager.prototype.SetLang = function(langID) {
+      this.langID = langID;
     };
-    e.prototype.GetLang = function() {
+    LocalizeManager.prototype.GetLang = function() {
       return this.langID;
     };
-    e.prototype.Clean = function() {
+    LocalizeManager.prototype.Clean = function() {
       if (null != this.node) {
         cc.game.removePersistRootNode(this.node);
         this.node.removeFromParent(true);
       }
     };
-    e.prototype.GetKeyValueWithPlaceholders = function(t) {
-      for (var e = [], i = 1; i < arguments.length; i++) {
-        e[i - 1] = arguments[i];
+    LocalizeManager.prototype.GetKeyValueWithPlaceholders = function(key) {
+      for (var placeholderValues = [], argIndex = 1; argIndex < arguments.length; argIndex++) {
+        placeholderValues[argIndex - 1] = arguments[argIndex];
       }
-      return StringUtil.default.replacePlaceholders(this.GetKeyValue(t), e);
+      return StringUtil.default.replacePlaceholders(this.GetKeyValue(key), placeholderValues);
     };
-    e.prototype.GetString = function(t, e, i) {
-      if (void 0 === e) {
-        e = "";
+    LocalizeManager.prototype.GetString = function(key, defaultValue, i) {
+      if (void 0 === defaultValue) {
+        defaultValue = "";
       }
       if (void 0 === i) {
         i = false;
       }
-      var n = this.GetKeyValue(t, i);
-      return null != n && "" != n ? n : e;
+      var value = this.GetKeyValue(key, i);
+      return null != value && "" != value ? value : defaultValue;
     };
-    e.prototype.GetKeyValue = function(t, e) {
-      if (void 0 === e && (e = false), 0 == t.length) {
+    LocalizeManager.prototype.GetKeyValue = function(key, e) {
+      if (void 0 === e && (e = false), 0 == key.length) {
         return "";
       }
-      for (var i = 0; i < this.arrayText.length; i++) {
-        if (this.arrayText[i][0] === t) {
-          var n = this.arrayText[i][this.langID + 2];
-          return n = n.replace(/\\n/g, "\n");
+      for (var rowIndex = 0; rowIndex < this.arrayText.length; rowIndex++) {
+        if (this.arrayText[rowIndex][0] === key) {
+          var value = this.arrayText[rowIndex][this.langID + 2];
+          return value = value.replace(/\\n/g, "\n");
         }
       }
       return "";
     };
-    e.prototype.GetData = function() {
+    LocalizeManager.prototype.GetData = function() {
       return this.arrayText;
     };
-    e.prototype.CSVToArray = function(t, e) {
-      e = e || ",";
-      for (var i = new RegExp("(\\" + e + '|\\r?\\n|\\r|^)(?:"([^"]*(?:""[^"]*)*)"|([^"\\' + e + "\\r\\n]*))", "gi"), n = [
+    LocalizeManager.prototype.CSVToArray = function(csvText, delimiter) {
+      delimiter = delimiter || ",";
+      for (var pattern = new RegExp("(\\" + delimiter + '|\\r?\\n|\\r|^)(?:"([^"]*(?:""[^"]*)*)"|([^"\\' + delimiter + "\\r\\n]*))", "gi"), rows = [
           []
-        ], o = null; o = i.exec(t);) {
-        var a = o[1];
-        if (a.length && a != e && n.push([]), o[2]) {
-          var s = o[2].replace(new RegExp('""', "g"), '"');
+        ], match = null; match = pattern.exec(csvText);) {
+        var matchedDelimiter = match[1];
+        if (matchedDelimiter.length && matchedDelimiter != delimiter && rows.push([]), match[2]) {
+          var cellValue = match[2].replace(new RegExp('""', "g"), '"');
         } else {
-          s = o[3];
+          cellValue = match[3];
         }
-        n[n.length - 1].push(s);
+        rows[rows.length - 1].push(cellValue);
       }
-      return n;
+      return rows;
     };
-    e.Instance = null;
-    o([u(cc.TextAsset)], e.prototype, "text", void 0);
-    return e = i = o([h], e);
+    LocalizeManager.Instance = null;
+    __decorate([property(cc.TextAsset)], LocalizeManager.prototype, "text", void 0);
+    return LocalizeManager = LocalizeManagerClass = __decorate([ccclass], LocalizeManager);
   }(cc.Component);
-i.default = d;
+moduleExports.default = LocalizeManager;
 void 0;

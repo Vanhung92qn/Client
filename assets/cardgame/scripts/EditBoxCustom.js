@@ -1,9 +1,9 @@
-var t = require,
-  e = module,
-  i = exports;
+var requireRef = require,
+  moduleRef = module,
+  moduleExports = exports;
 "use strict";
 void 0;
-var n = this && this.__extends || function() {
+var __extends = this && this.__extends || function() {
     var t = function(e, i) {
       return (t = Object.setPrototypeOf || {
           __proto__: []
@@ -26,7 +26,7 @@ var n = this && this.__extends || function() {
       e.prototype = null === i ? Object.create(i) : (n.prototype = i.prototype, new n());
     };
   }(),
-  o = this && this.__decorate || function(t, e, i, n) {
+  __decorate = this && this.__decorate || function(t, e, i, n) {
     var o,
       a = arguments.length,
       s = a < 3 ? e : null === n ? n = Object.getOwnPropertyDescriptor(e, i) : n;
@@ -44,40 +44,40 @@ var n = this && this.__extends || function() {
     }
     return s;
   };
-Object.defineProperty(i, "__esModule", {
+Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
-var a,
+var ScreenType,
   GameConfigManager = require("./GameConfigManager"),
-  r = cc._decorator,
-  c = r.ccclass,
-  l = r.property;
-(function(t) {
-  t[t.Landscape = 0] = "Landscape";
-  t[t.Portrait = 1] = "Portrait";
-})(a = i.ScreenType || (i.ScreenType = {}));
-var h = function(t) {
-  function e() {
-    var e = null !== t && t.apply(this, arguments) || this;
-    e.isWebMobile = false;
-    e.isPassWord = false;
-    e.Newlabel = null;
-    e.Oldlabel = null;
-    e.editBox = null;
-    e.placeHolder = null;
-    e.placeHolderOpacity = 120;
-    e.isForceNoScroll = false;
-    e.countTime = 0;
-    e.needShow = false;
-    e.currentText = "";
-    e.preText = "";
-    e.isPlaying = false;
-    e.screenType = a.Landscape;
-    e.maxLength = 10;
-    return e;
+  ccDecorator = cc._decorator,
+  ccclass = ccDecorator.ccclass,
+  property = ccDecorator.property;
+(function(ScreenType) {
+  ScreenType[ScreenType.Landscape = 0] = "Landscape";
+  ScreenType[ScreenType.Portrait = 1] = "Portrait";
+})(ScreenType = moduleExports.ScreenType || (moduleExports.ScreenType = {}));
+var EditBoxCustom = function(_super) {
+  function EditBoxCustom() {
+    var _this = null !== _super && _super.apply(this, arguments) || this;
+    _this.isWebMobile = false;
+    _this.isPassWord = false;
+    _this.Newlabel = null;
+    _this.Oldlabel = null;
+    _this.editBox = null;
+    _this.placeHolder = null;
+    _this.placeHolderOpacity = 120;
+    _this.isForceNoScroll = false;
+    _this.countTime = 0;
+    _this.needShow = false;
+    _this.currentText = "";
+    _this.preText = "";
+    _this.isPlaying = false;
+    _this.screenType = ScreenType.Landscape;
+    _this.maxLength = 10;
+    return _this;
   }
-  n(e, t);
-  e.prototype.onLoad = function() {
+  __extends(EditBoxCustom, _super);
+  EditBoxCustom.prototype.onLoad = function() {
     this.init();
     if (!(GameConfigManager.default.getInstance().misc.isForceNoAdjustEditBox || false) && this.checkWebMobile()) {
       this.isForceNoScroll = true;
@@ -86,25 +86,25 @@ var h = function(t) {
     this.setActiveOffsetEdb(this.getScreenType());
     this.maxLength = this.editBox.maxLength;
   };
-  e.prototype.init = function() {
+  EditBoxCustom.prototype.init = function() {
     if (null == this.Oldlabel) {
-      var t = this.editBox.node.getChildByName("TEXT_LABEL");
-      if (!t) {
-        var e = this.editBox.getComponentsInChildren(cc.Label);
-        if (e.length > 0 && (t = e[0].node).name.includes("PLACE") && e.length > 1) {
-          t = e[1].node;
+      var textLabelNode = this.editBox.node.getChildByName("TEXT_LABEL");
+      if (!textLabelNode) {
+        var labels = this.editBox.getComponentsInChildren(cc.Label);
+        if (labels.length > 0 && (textLabelNode = labels[0].node).name.includes("PLACE") && labels.length > 1) {
+          textLabelNode = labels[1].node;
         }
       }
-      this.Oldlabel = t.getComponent(cc.Label);
+      this.Oldlabel = textLabelNode.getComponent(cc.Label);
     }
     if (null == this.placeHolder) {
-      var i = this.editBox.node.getChildByName("PLACE");
-      if (!i) {
-        this.placeHolder = i;
+      var placeHolderNode = this.editBox.node.getChildByName("PLACE");
+      if (!placeHolderNode) {
+        this.placeHolder = placeHolderNode;
       }
     }
   };
-  e.prototype.start = function() {
+  EditBoxCustom.prototype.start = function() {
     this.preText = this.editBox.string;
     this.currentText = this.getStringEdit();
     this.onAddChar();
@@ -112,24 +112,24 @@ var h = function(t) {
       this.setOpacity(this.isForceNoScroll ? 255 : 0);
     }
   };
-  e.prototype.setString = function() {
+  EditBoxCustom.prototype.setString = function() {
     this.currentText = this.getStringEdit();
     this.onAddChar();
   };
-  e.prototype.resetString = function() {
+  EditBoxCustom.prototype.resetString = function() {
     this.editBox.string = this.currentText = this.preText = this.Newlabel.string = "";
   };
-  e.prototype.onChange = function() {
+  EditBoxCustom.prototype.onChange = function() {
     this.onChangeText();
   };
-  e.prototype.onChangeText = function() {
+  EditBoxCustom.prototype.onChangeText = function() {
     this.preText = this.editBox.string;
     this.countTime = 0;
     this.currentText = this.getStringEdit();
     this.onAddChar();
     this.moveUp(false);
   };
-  e.prototype.onAddChar = function() {
+  EditBoxCustom.prototype.onAddChar = function() {
     if (this.checkWebMobile() || cc.sys.isNative) {
       if (this.needShow) {
         if (this.Newlabel) {
@@ -142,10 +142,10 @@ var h = function(t) {
       }
     }
   };
-  e.prototype.onBegan = function() {
+  EditBoxCustom.prototype.onBegan = function() {
     this.onBeginText();
   };
-  e.prototype.onBeginText = function() {
+  EditBoxCustom.prototype.onBeginText = function() {
     if (this.checkWebMobile()) {
       this.setOpacity(this.isForceNoScroll ? 255 : 0);
     }
@@ -159,10 +159,10 @@ var h = function(t) {
     this.moveUp(true);
     this.setActiveOffsetEdb(this.getScreenType());
   };
-  e.prototype.onEnd = function() {
+  EditBoxCustom.prototype.onEnd = function() {
     this.onEndText();
   };
-  e.prototype.onEndText = function() {
+  EditBoxCustom.prototype.onEndText = function() {
     this.preText = this.editBox.string;
     if (this.checkWebMobile()) {
       this.setOpacity(0);
@@ -175,7 +175,7 @@ var h = function(t) {
     this.onAddChar();
     this.moveDown();
   };
-  e.prototype.update = function(t) {
+  EditBoxCustom.prototype.update = function(dt) {
     if (this.checkWebMobile() && this.screenType != this.getScreenType()) {
       this.setScreenType();
     }
@@ -187,7 +187,7 @@ var h = function(t) {
     }
     if (this.isPlaying) {
       if (!(this.isForceNoScroll && !cc.sys.isNative)) {
-        this.countTime += t;
+        this.countTime += dt;
         if (this.countTime > .4) {
           this.countTime -= .4;
           this.onAddChar();
@@ -196,104 +196,104 @@ var h = function(t) {
       }
     }
   };
-  e.prototype.resetValueEditBox = function() {
+  EditBoxCustom.prototype.resetValueEditBox = function() {
     if (this.isForceNoScroll && this.checkWebMobile()) {
       this.editBox.maxLength = this.maxLength;
       this.editBox.string = this.preText;
     }
   };
-  e.prototype.setValueEditBox = function() {
+  EditBoxCustom.prototype.setValueEditBox = function() {
     if (this.isForceNoScroll && this.checkWebMobile()) {
       this.editBox.maxLength = this.maxLength + 3;
       this.editBox.string = this.currentText;
     }
   };
-  e.prototype.checkWebMobile = function() {
+  EditBoxCustom.prototype.checkWebMobile = function() {
     return cc.sys.isBrowser && cc.sys.isMobile;
   };
-  e.prototype.getScreenType = function() {
+  EditBoxCustom.prototype.getScreenType = function() {
     return 90 === window.orientation || -90 === window.orientation ? 0 : 1;
   };
-  e.prototype.moveUp = function(t) {
-    if (!this.isForceNoScroll && this.editBox && this.checkWebMobile() && this.getScreenType() != a.Portrait) {
-      var e = this.editBox.node.y;
-      if (0 === e) {
-        e = this.editBox.node.parent.y;
+  EditBoxCustom.prototype.moveUp = function(useScrollTo) {
+    if (!this.isForceNoScroll && this.editBox && this.checkWebMobile() && this.getScreenType() != ScreenType.Portrait) {
+      var editBoxY = this.editBox.node.y;
+      if (0 === editBoxY) {
+        editBoxY = this.editBox.node.parent.y;
       }
-      var i = window.innerHeight,
-        n = i - (cc.view.getDesignResolutionSize().height / 2 + this.editBox.node.height / 2 + e + 50) * i / cc.view
+      var windowHeight = window.innerHeight,
+        scrollY = windowHeight - (cc.view.getDesignResolutionSize().height / 2 + this.editBox.node.height / 2 + editBoxY + 50) * windowHeight / cc.view
         .getDesignResolutionSize().height;
-      if (n < 0) {
-        n = 0;
+      if (scrollY < 0) {
+        scrollY = 0;
       }
-      if (t) {
-        window.scrollTo(0, n);
+      if (useScrollTo) {
+        window.scrollTo(0, scrollY);
       } else {
-        window.moveTo(0, n);
+        window.moveTo(0, scrollY);
       }
     }
   };
-  e.prototype.moveDown = function() {
+  EditBoxCustom.prototype.moveDown = function() {
     if (this.checkWebMobile()) {
       window.scrollTo(0, 0);
     }
   };
-  e.prototype.setOpacity = function(t) {
+  EditBoxCustom.prototype.setOpacity = function(opacity) {
     if (this.Oldlabel) {
-      var e = this.Oldlabel.node;
-      if (e.opacity !== t) {
-        e.opacity = t;
+      var oldLabelNode = this.Oldlabel.node;
+      if (oldLabelNode.opacity !== opacity) {
+        oldLabelNode.opacity = opacity;
       }
     }
     if (this.checkWebMobile()) {
       if (this.Newlabel) {
-        var i = this.Newlabel,
-          n = 255 - t;
-        if (i.node.opacity !== n) {
-          i.node.opacity = n;
+        var newLabel = this.Newlabel,
+          invertedOpacity = 255 - opacity;
+        if (newLabel.node.opacity !== invertedOpacity) {
+          newLabel.node.opacity = invertedOpacity;
         }
       }
       if (!cc.sys.isNative) {
-        var o = this.editBox._impl;
-        if (o && o._elem.style.opacity !== t) {
-          o._elem.style.opacity = t;
+        var editBoxImpl = this.editBox._impl;
+        if (editBoxImpl && editBoxImpl._elem.style.opacity !== opacity) {
+          editBoxImpl._elem.style.opacity = opacity;
         }
       }
     }
   };
-  e.prototype.setScreenType = function() {
+  EditBoxCustom.prototype.setScreenType = function() {
     this.screenType = this.getScreenType();
     this.setBlur();
     if (!this.isForceNoScroll) {
       cc.view.resizeWithBrowserSize(true);
     }
   };
-  e.prototype.setBlur = function() {
+  EditBoxCustom.prototype.setBlur = function() {
     if (this.checkWebMobile()) {
       if (!(this.isForceNoScroll && this.checkWebMobile())) {
         this.editBox.blur();
       }
     }
   };
-  e.prototype.getStringEdit = function() {
-    var t = this.editBox.string;
+  EditBoxCustom.prototype.getStringEdit = function() {
+    var text = this.editBox.string;
     if (this.isPassWord) {
-      t = "";
-      for (var e = 0; e < this.editBox.string.length; e++) {
-        t += "*";
+      text = "";
+      for (var index = 0; index < this.editBox.string.length; index++) {
+        text += "*";
       }
     }
-    return t;
+    return text;
   };
-  e.prototype.setActiveOffsetEdb = function(t) {};
-  o([l(cc.Boolean)], e.prototype, "isWebMobile", void 0);
-  o([l(cc.Boolean)], e.prototype, "isPassWord", void 0);
-  o([l(cc.Label)], e.prototype, "Newlabel", void 0);
-  o([l(cc.Label)], e.prototype, "Oldlabel", void 0);
-  o([l(cc.EditBox)], e.prototype, "editBox", void 0);
-  o([l(cc.Node)], e.prototype, "placeHolder", void 0);
-  o([l()], e.prototype, "placeHolderOpacity", void 0);
-  return e = o([c], e);
+  EditBoxCustom.prototype.setActiveOffsetEdb = function(screenType) {};
+  __decorate([property(cc.Boolean)], EditBoxCustom.prototype, "isWebMobile", void 0);
+  __decorate([property(cc.Boolean)], EditBoxCustom.prototype, "isPassWord", void 0);
+  __decorate([property(cc.Label)], EditBoxCustom.prototype, "Newlabel", void 0);
+  __decorate([property(cc.Label)], EditBoxCustom.prototype, "Oldlabel", void 0);
+  __decorate([property(cc.EditBox)], EditBoxCustom.prototype, "editBox", void 0);
+  __decorate([property(cc.Node)], EditBoxCustom.prototype, "placeHolder", void 0);
+  __decorate([property()], EditBoxCustom.prototype, "placeHolderOpacity", void 0);
+  return EditBoxCustom = __decorate([ccclass], EditBoxCustom);
 }(cc.Component);
-i.default = h;
+moduleExports.default = EditBoxCustom;
 void 0;

@@ -1,9 +1,9 @@
-var t = require,
-  e = module,
-  i = exports;
+var requireRef = require,
+  moduleRef = module,
+  moduleExports = exports;
 "use strict";
 void 0;
-var n = this && this.__extends || function() {
+var __extends = this && this.__extends || function() {
     var t = function(e, i) {
       return (t = Object.setPrototypeOf || {
           __proto__: []
@@ -26,7 +26,7 @@ var n = this && this.__extends || function() {
       e.prototype = null === i ? Object.create(i) : (n.prototype = i.prototype, new n());
     };
   }(),
-  o = this && this.__decorate || function(t, e, i, n) {
+  __decorate = this && this.__decorate || function(t, e, i, n) {
     var o,
       a = arguments.length,
       s = a < 3 ? e : null === n ? n = Object.getOwnPropertyDescriptor(e, i) : n;
@@ -44,32 +44,32 @@ var n = this && this.__extends || function() {
     }
     return s;
   };
-Object.defineProperty(i, "__esModule", {
+Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
 var StringUtil = require("./StringUtil"),
-  s = cc._decorator,
-  r = s.ccclass,
-  c = s.property,
-  l = function(t) {
-    function e() {
-      var e = null !== t && t.apply(this, arguments) || this;
-      e.label = null;
-      e.icon = null;
-      e.isCheck = false;
-      return e;
+  ccDecorator = cc._decorator,
+  ccclass = ccDecorator.ccclass,
+  property = ccDecorator.property,
+  BetListViewItem = function(_super) {
+    function BetListViewItem() {
+      var _this = null !== _super && _super.apply(this, arguments) || this;
+      _this.label = null;
+      _this.icon = null;
+      _this.isCheck = false;
+      return _this;
     }
-    n(e, t);
-    e.prototype.setText = function(t) {
+    __extends(BetListViewItem, _super);
+    BetListViewItem.prototype.setText = function(betValue) {
       if (false === this.node.active) {
         this.node.active = true;
       }
-      if (-1 != t) {
+      if (-1 != betValue) {
         this.label.node.active = true;
         if (null != this.icon) {
           this.icon.active = true;
         }
-        this.label.string = StringUtil.default.formatMoneyNumber(t);
+        this.label.string = StringUtil.default.formatMoneyNumber(betValue);
         if (this.isCheck) {
           if (this.label.string.length < 6) {
             this.label.fontSize = 30;
@@ -81,12 +81,12 @@ var StringUtil = require("./StringUtil"),
         this.label.node.active = false;
         this.icon.active = false;
       }
-      this.value = t;
+      this.value = betValue;
     };
-    o([c(cc.Label)], e.prototype, "label", void 0);
-    o([c(cc.Node)], e.prototype, "icon", void 0);
-    o([c(cc.Boolean)], e.prototype, "isCheck", void 0);
-    return e = o([r], e);
+    __decorate([property(cc.Label)], BetListViewItem.prototype, "label", void 0);
+    __decorate([property(cc.Node)], BetListViewItem.prototype, "icon", void 0);
+    __decorate([property(cc.Boolean)], BetListViewItem.prototype, "isCheck", void 0);
+    return BetListViewItem = __decorate([ccclass], BetListViewItem);
   }(cc.Component);
-i.default = l;
+moduleExports.default = BetListViewItem;
 void 0;

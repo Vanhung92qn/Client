@@ -1,9 +1,9 @@
-var t = require,
-  e = module,
-  i = exports;
+var requireRef = require,
+  moduleRef = module,
+  moduleExports = exports;
 "use strict";
 void 0;
-var n = this && this.__extends || function() {
+var __extends = this && this.__extends || function() {
     var t = function(e, i) {
       return (t = Object.setPrototypeOf || {
           __proto__: []
@@ -26,7 +26,7 @@ var n = this && this.__extends || function() {
       e.prototype = null === i ? Object.create(i) : (n.prototype = i.prototype, new n());
     };
   }(),
-  o = this && this.__decorate || function(t, e, i, n) {
+  __decorate = this && this.__decorate || function(t, e, i, n) {
     var o,
       a = arguments.length,
       s = a < 3 ? e : null === n ? n = Object.getOwnPropertyDescriptor(e, i) : n;
@@ -44,7 +44,7 @@ var n = this && this.__extends || function() {
     }
     return s;
   };
-Object.defineProperty(i, "__esModule", {
+Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
 var MessageCardGameHandler = require("./MessageCardGameHandler"),
@@ -52,112 +52,112 @@ var MessageCardGameHandler = require("./MessageCardGameHandler"),
   GamePlayManager = require("./GamePlayManager"),
   MessageHandlerBase = require("./MessageHandlerBase"),
   GameConfigManager = require("./GameConfigManager"),
-  h = cc._decorator,
-  u = h.ccclass,
-  d = (h.property, function(t) {
-    function e() {
-      var e = t.call(this) || this;
-      e.onReceiveBuyIn = function(t) {};
-      e.onReceiveJoinRoom = function(t) {};
-      e.onReceiveBookRoom = function(t) {};
-      e.onReceiveTableInfos = function(t) {};
-      e.onReceiveUpdateUser = function(t) {};
-      e.onReceiveListRoom = function(t, e) {};
-      e.onReceiveCreateRoomRespone = function(t) {};
-      e.onReceiveQuickPlay = function(t) {};
-      return e;
+  ccDecorator = cc._decorator,
+  ccclass = ccDecorator.ccclass,
+  RoomMessageHandler = (ccDecorator.property, function(_super) {
+    function RoomMessageHandler() {
+      var _this = _super.call(this) || this;
+      _this.onReceiveBuyIn = function(data) {};
+      _this.onReceiveJoinRoom = function(t) {};
+      _this.onReceiveBookRoom = function(raw) {};
+      _this.onReceiveTableInfos = function(raw) {};
+      _this.onReceiveUpdateUser = function(raw) {};
+      _this.onReceiveListRoom = function(raw, data) {};
+      _this.onReceiveCreateRoomRespone = function(raw) {};
+      _this.onReceiveQuickPlay = function(raw) {};
+      return _this;
     }
-    var i;
-    n(e, t);
-    i = e;
-    e.getInstance = function() {
+    var RoomMessageHandler_1;
+    __extends(RoomMessageHandler, _super);
+    RoomMessageHandler_1 = RoomMessageHandler;
+    RoomMessageHandler.getInstance = function() {
       if (!(null !== this.instance && void 0 !== this.instance)) {
-        this.instance = new i();
+        this.instance = new RoomMessageHandler_1();
         this.instance.init();
       }
       return this.instance;
     };
-    e.prototype.genMessage = function(t, e) {
-      var i = [MessageCardGameHandler.Message.MessageType.RoomPlugin_Type, NetworkConfig.getZoneName(), t, e];
-      return JSON.stringify(i);
+    RoomMessageHandler.prototype.genMessage = function(target, data) {
+      var frame = [MessageCardGameHandler.Message.MessageType.RoomPlugin_Type, NetworkConfig.getZoneName(), target, data];
+      return JSON.stringify(frame);
     };
-    e.prototype.requestListRoom = function(t) {
-      this.printLog("requestListRoom gameID: " + t);
-      var e = [MessageCardGameHandler.Message.MessageType.ZonePlugin_Type, NetworkConfig.getZoneName(), "channelPlugin", {
+    RoomMessageHandler.prototype.requestListRoom = function(gameID) {
+      this.printLog("requestListRoom gameID: " + gameID);
+      var frame = [MessageCardGameHandler.Message.MessageType.ZonePlugin_Type, NetworkConfig.getZoneName(), "channelPlugin", {
         cmd: MessageCardGameHandler.RoomCommand.GET_TABLES,
         aid: 1,
-        gid: t
+        gid: gameID
       }];
-      this.sendData(JSON.stringify(e));
-      GamePlayManager.default.getInstance().gameID = t;
+      this.sendData(JSON.stringify(frame));
+      GamePlayManager.default.getInstance().gameID = gameID;
     };
-    e.prototype.requestBuyIn = function(t) {
-      var e = [MessageCardGameHandler.Message.MessageType.RoomPlugin_Type, NetworkConfig.getZoneName(), GamePlayManager.default.getInstance().roomID, {
+    RoomMessageHandler.prototype.requestBuyIn = function(buyInAmount) {
+      var frame = [MessageCardGameHandler.Message.MessageType.RoomPlugin_Type, NetworkConfig.getZoneName(), GamePlayManager.default.getInstance().roomID, {
         cmd: MessageCardGameHandler.RoomCommand.BUY_IN,
-        m: t
+        m: buyInAmount
       }];
-      this.sendData(JSON.stringify(e));
+      this.sendData(JSON.stringify(frame));
     };
-    e.prototype.requestBookRoom = function(t, e, i) {
-      GamePlayManager.default.getInstance().roomID = t;
-      var n = [MessageCardGameHandler.Message.MessageType.ZonePlugin_Type, "Simms", "channelPlugin", {
+    RoomMessageHandler.prototype.requestBookRoom = function(roomID, e, i) {
+      GamePlayManager.default.getInstance().roomID = roomID;
+      var frame = [MessageCardGameHandler.Message.MessageType.ZonePlugin_Type, "Simms", "channelPlugin", {
         cmd: MessageCardGameHandler.Global_Message.BOOK_ROOM,
-        rid: t
+        rid: roomID
       }];
-      this.sendData(JSON.stringify(n));
+      this.sendData(JSON.stringify(frame));
     };
-    e.prototype.sendAutoReadyPref = function(t) {
+    RoomMessageHandler.prototype.sendAutoReadyPref = function(isAutoReady) {
       if (GameConfigManager.default.getInstance().misc && GameConfigManager.default.getInstance().misc.sendAutoReadyPref) {
-        var e = [MessageCardGameHandler.Message.MessageType.ZonePlugin_Type, "Simms", "channelPlugin", {
+        var frame = [MessageCardGameHandler.Message.MessageType.ZonePlugin_Type, "Simms", "channelPlugin", {
           cmd: MessageCardGameHandler.Global_Message.SET_AUTO_READY,
-          aRd: t + ""
+          aRd: isAutoReady + ""
         }];
-        this.sendData(JSON.stringify(e));
+        this.sendData(JSON.stringify(frame));
       }
     };
-    e.prototype.requestJoinRoom = function(t, e, i, n, o) {
+    RoomMessageHandler.prototype.requestJoinRoom = function(roomID, e, password, n, o) {
       if (void 0 === n) {
         n = "";
       }
       if (void 0 === o) {
         o = "";
       }
-      GamePlayManager.default.getInstance().roomID = t;
-      var s = [MessageCardGameHandler.Message.MessageType.JoinRoom_Type, "Simms", t, i];
-      this.sendData(JSON.stringify(s));
+      GamePlayManager.default.getInstance().roomID = roomID;
+      var frame = [MessageCardGameHandler.Message.MessageType.JoinRoom_Type, "Simms", roomID, password];
+      this.sendData(JSON.stringify(frame));
     };
-    e.prototype.receiveMessage = function(t, e, i) {
-      switch (t) {
+    RoomMessageHandler.prototype.receiveMessage = function(cmd, raw, data) {
+      switch (cmd) {
         case MessageCardGameHandler.RoomCommand.BUY_IN:
           this.printLog("receiveMessage RoomCommand.BUY_IN");
-          null != this.onReceiveBuyIn && this.onReceiveBuyIn(i);
+          null != this.onReceiveBuyIn && this.onReceiveBuyIn(data);
           break;
         case MessageCardGameHandler.RoomCommand.INGAME_JOIN_TABLE_INFOS:
           this.printLog("receiveMessage RoomCommand.JOIN_TABLE_INFOS");
-          null != this.onReceiveTableInfos && this.onReceiveTableInfos(e, i);
+          null != this.onReceiveTableInfos && this.onReceiveTableInfos(raw, data);
           break;
         case MessageCardGameHandler.RoomCommand.INGAME_USER_LEAVE_AND_JOIN_TABLE:
           this.printLog("receiveMessage RoomCommand.USER_LEAVE_AND_JOIN_TABLE");
-          null != this.onReceiveUpdateUser && this.onReceiveUpdateUser(e, i);
+          null != this.onReceiveUpdateUser && this.onReceiveUpdateUser(raw, data);
           break;
         case MessageCardGameHandler.RoomCommand.GET_TABLES:
           this.printLog("receiveMessage RoomCommand.GET_TABLES");
-          null != this.onReceiveListRoom && this.onReceiveListRoom(e, i);
+          null != this.onReceiveListRoom && this.onReceiveListRoom(raw, data);
           break;
         case MessageCardGameHandler.Global_Message.BOOK_ROOM:
-          this.onReceiveBookRoom(e, i);
+          this.onReceiveBookRoom(raw, data);
           break;
         case MessageCardGameHandler.Global_Message.CREATE_TABLE_RESPONSE:
-          this.onReceiveCreateRoomRespone(e, i);
+          this.onReceiveCreateRoomRespone(raw, data);
           break;
         case MessageCardGameHandler.Global_Message.QUICK_PLAY:
         case MessageCardGameHandler.Global_Message.QUICK_PLAY_WITH_BET:
         case MessageCardGameHandler.Global_Message.CREATE_TABLE:
-          this.onReceiveQuickPlay(e, i);
+          this.onReceiveQuickPlay(raw, data);
       }
     };
-    e.instance = null;
-    return e = i = o([u], e);
+    RoomMessageHandler.instance = null;
+    return RoomMessageHandler = RoomMessageHandler_1 = __decorate([ccclass], RoomMessageHandler);
   }(MessageHandlerBase.default));
-i.default = d;
+moduleExports.default = RoomMessageHandler;
 void 0;

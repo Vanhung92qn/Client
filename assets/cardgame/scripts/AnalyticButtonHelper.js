@@ -1,9 +1,9 @@
-var t = require,
-  e = module,
-  i = exports;
+var requireRef = require,
+  moduleRef = module,
+  moduleExports = exports;
 "use strict";
 void 0;
-var n = this && this.__extends || function() {
+var __extends = this && this.__extends || function() {
     var t = function(e, i) {
       return (t = Object.setPrototypeOf || {
           __proto__: []
@@ -26,7 +26,7 @@ var n = this && this.__extends || function() {
       e.prototype = null === i ? Object.create(i) : (n.prototype = i.prototype, new n());
     };
   }(),
-  o = this && this.__decorate || function(t, e, i, n) {
+  __decorate = this && this.__decorate || function(t, e, i, n) {
     var o,
       a = arguments.length,
       s = a < 3 ? e : null === n ? n = Object.getOwnPropertyDescriptor(e, i) : n;
@@ -44,54 +44,54 @@ var n = this && this.__extends || function() {
     }
     return s;
   };
-Object.defineProperty(i, "__esModule", {
+Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
 var AnalyticDefine = require("./AnalyticDefine"),
   AnalyticService = require("./AnalyticService"),
-  r = cc._decorator,
-  c = r.ccclass,
-  l = r.property,
-  h = function(t) {
-    function e() {
-      var e = null !== t && t.apply(this, arguments) || this;
-      e.buttonTarget = null;
-      e.isAutoGetLocalButton = true;
-      e.isAutoAddTrackEventOnClick = true;
-      e._isInit = false;
-      e.cid = null;
-      return e;
+  _decorator = cc._decorator,
+  ccclass = _decorator.ccclass,
+  property = _decorator.property,
+  AnalyticButtonHelper = function(_super) {
+    function AnalyticButtonHelper() {
+      var _this = null !== _super && _super.apply(this, arguments) || this;
+      _this.buttonTarget = null;
+      _this.isAutoGetLocalButton = true;
+      _this.isAutoAddTrackEventOnClick = true;
+      _this._isInit = false;
+      _this.cid = null;
+      return _this;
     }
-    n(e, t);
-    e.prototype.onLoad = function() {
+    __extends(AnalyticButtonHelper, _super);
+    AnalyticButtonHelper.prototype.onLoad = function() {
       this._init();
     };
-    e.prototype.onEnable = function() {
+    AnalyticButtonHelper.prototype.onEnable = function() {
       this._init();
     };
-    e.prototype.onTargetButtonClicked = function(t, e) {
+    AnalyticButtonHelper.prototype.onTargetButtonClicked = function(event, customEventData) {
       AnalyticService.default.instance.trackCustomQ(AnalyticDefine.AnaltyciEventType.CLICK, this.cid);
     };
-    e.prototype._getButton = function() {
+    AnalyticButtonHelper.prototype._getButton = function() {
       if (null == this.buttonTarget) {
         this.buttonTarget = this.node.getComponent(cc.Button);
       }
     };
-    e.prototype._setClickEvent = function() {
+    AnalyticButtonHelper.prototype._setClickEvent = function() {
       if (null != this.buttonTarget) {
-        var t = new cc.Component.EventHandler();
-        t.target = this.node;
-        t.component = "AnalyticButtonHelper";
-        t.handler = "onTargetButtonClicked";
-        t.customEventData = "";
-        this.buttonTarget.clickEvents.push(t);
+        var clickEventHandler = new cc.Component.EventHandler();
+        clickEventHandler.target = this.node;
+        clickEventHandler.component = "AnalyticButtonHelper";
+        clickEventHandler.handler = "onTargetButtonClicked";
+        clickEventHandler.customEventData = "";
+        this.buttonTarget.clickEvents.push(clickEventHandler);
       }
     };
-    e.prototype._init = function(t) {
-      if (void 0 === t) {
-        t = false;
+    AnalyticButtonHelper.prototype._init = function(forceReinit) {
+      if (void 0 === forceReinit) {
+        forceReinit = false;
       }
-      if (t) {
+      if (forceReinit) {
         this._isInit = false;
       }
       if (!this._isInit) {
@@ -104,11 +104,11 @@ var AnalyticDefine = require("./AnalyticDefine"),
         this._isInit = true;
       }
     };
-    o([l(cc.Button)], e.prototype, "buttonTarget", void 0);
-    o([l], e.prototype, "isAutoGetLocalButton", void 0);
-    o([l], e.prototype, "isAutoAddTrackEventOnClick", void 0);
-    o([l], e.prototype, "cid", void 0);
-    return e = o([c], e);
+    __decorate([property(cc.Button)], AnalyticButtonHelper.prototype, "buttonTarget", void 0);
+    __decorate([property], AnalyticButtonHelper.prototype, "isAutoGetLocalButton", void 0);
+    __decorate([property], AnalyticButtonHelper.prototype, "isAutoAddTrackEventOnClick", void 0);
+    __decorate([property], AnalyticButtonHelper.prototype, "cid", void 0);
+    return AnalyticButtonHelper = __decorate([ccclass], AnalyticButtonHelper);
   }(cc.Component);
-i.default = h;
+moduleExports.default = AnalyticButtonHelper;
 void 0;

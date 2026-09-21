@@ -1,9 +1,9 @@
-var t = require,
-  e = module,
-  i = exports;
+var requireRef = require,
+  moduleRef = module,
+  moduleExports = exports;
 "use strict";
 void 0;
-var n = this && this.__decorate || function(t, e, i, n) {
+var __decorate = this && this.__decorate || function(t, e, i, n) {
   var o,
     a = arguments.length,
     s = a < 3 ? e : null === n ? n = Object.getOwnPropertyDescriptor(e, i) : n;
@@ -21,53 +21,53 @@ var n = this && this.__decorate || function(t, e, i, n) {
   }
   return s;
 };
-Object.defineProperty(i, "__esModule", {
+Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
 var GameUtils = require("./GameUtils"),
-  a = cc._decorator,
-  s = a.ccclass;
-a.property;
-(function(t) {
-  t[t.Undefined = -1] = "Undefined";
-  t[t.Portrait = 0] = "Portrait";
-  t[t.Landscape = 1] = "Landscape";
-  t[t.UpsideDown = 2] = "UpsideDown";
-  t[t.LandscapeLeft = 3] = "LandscapeLeft";
-  t[t.Auto = 4] = "Auto";
-})(i.Orientation || (i.Orientation = {}));
-var r = function() {
-  function t() {}
-  t.changeOrientation = function(t) {
+  _decorator = cc._decorator,
+  ccclass = _decorator.ccclass;
+_decorator.property;
+(function(Orientation) {
+  Orientation[Orientation.Undefined = -1] = "Undefined";
+  Orientation[Orientation.Portrait = 0] = "Portrait";
+  Orientation[Orientation.Landscape = 1] = "Landscape";
+  Orientation[Orientation.UpsideDown = 2] = "UpsideDown";
+  Orientation[Orientation.LandscapeLeft = 3] = "LandscapeLeft";
+  Orientation[Orientation.Auto = 4] = "Auto";
+})(moduleExports.Orientation || (moduleExports.Orientation = {}));
+var OrientationManager = function() {
+  function OrientationManager() {}
+  OrientationManager.changeOrientation = function(orientation) {
     if (cc.sys.isNative) {
       if (cc.sys.os === cc.sys.OS_IOS) {
         if (jsb) {
           try {
-            var e = GameUtils.NativeInterop.Instance.getFunctionName("rotateScreen");
-            jsb.reflection.callStaticMethod("AppController", e + ":", t);
-          } catch (t) {}
+            var nativeMethodName = GameUtils.NativeInterop.Instance.getFunctionName("rotateScreen");
+            jsb.reflection.callStaticMethod("AppController", nativeMethodName + ":", orientation);
+          } catch (error) {}
         }
       } else if (cc.sys.os === cc.sys.OS_ANDROID && jsb) {
         try {
-          e = GameUtils.NativeInterop.Instance.getFunctionName("setOrientation");
+          nativeMethodName = GameUtils.NativeInterop.Instance.getFunctionName("setOrientation");
           if (jsb) {
-            jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity", e, "(I)V", t);
+            jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity", nativeMethodName, "(I)V", orientation);
           }
-        } catch (t) {}
+        } catch (error) {}
       }
     }
-    if (0 == t || 2 == t) {
+    if (0 == orientation || 2 == orientation) {
       cc.view.setOrientation(cc.macro.ORIENTATION_PORTRAIT);
     } else {
-      if (1 == t || 3 == t) {
+      if (1 == orientation || 3 == orientation) {
         cc.view.setOrientation(cc.macro.ORIENTATION_LANDSCAPE);
       } else {
         cc.view.setOrientation(cc.macro.ORIENTATION_AUTO);
       }
     }
   };
-  t.prototype.start = function() {};
-  return t = n([s], t);
+  OrientationManager.prototype.start = function() {};
+  return OrientationManager = __decorate([ccclass], OrientationManager);
 }();
-i.default = r;
+moduleExports.default = OrientationManager;
 void 0;

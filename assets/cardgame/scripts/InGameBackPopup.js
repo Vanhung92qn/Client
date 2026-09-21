@@ -1,9 +1,9 @@
-var t = require,
-  e = module,
-  i = exports;
+var requireRef = require,
+  moduleRef = module,
+  moduleExports = exports;
 "use strict";
 void 0;
-var n = this && this.__extends || function() {
+var __extends = this && this.__extends || function() {
     var t = function(e, i) {
       return (t = Object.setPrototypeOf || {
           __proto__: []
@@ -26,7 +26,7 @@ var n = this && this.__extends || function() {
       e.prototype = null === i ? Object.create(i) : (n.prototype = i.prototype, new n());
     };
   }(),
-  o = this && this.__decorate || function(t, e, i, n) {
+  __decorate = this && this.__decorate || function(t, e, i, n) {
     var o,
       a = arguments.length,
       s = a < 3 ? e : null === n ? n = Object.getOwnPropertyDescriptor(e, i) : n;
@@ -44,7 +44,7 @@ var n = this && this.__extends || function() {
     }
     return s;
   };
-Object.defineProperty(i, "__esModule", {
+Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
 var GamePlayManager = require("./GamePlayManager"),
@@ -53,29 +53,29 @@ var GamePlayManager = require("./GamePlayManager"),
   MusicPlayer = require("./MusicPlayer"),
   CardGameCommonRequest = require("./CardGameCommonRequest"),
   RoomMessageHandler = require("./RoomMessageHandler"),
-  u = cc._decorator,
-  d = u.ccclass,
-  p = u.property,
-  f = function(t) {
-    function e() {
-      var e = null !== t && t.apply(this, arguments) || this;
-      e.btnAutoReady = null;
-      e.btnExit = null;
-      e.iconOutRoom = null;
-      e.iconHuyOutRoom = null;
-      e.btnBaoQuay = null;
-      e.bet = 100;
-      e.onCloseCallback = function() {};
-      e.onExitCallback = function() {};
-      return e;
+  ccDecorator = cc._decorator,
+  ccclass = ccDecorator.ccclass,
+  property = ccDecorator.property,
+  InGameBackPopup = function(_super) {
+    function InGameBackPopup() {
+      var _this = null !== _super && _super.apply(this, arguments) || this;
+      _this.btnAutoReady = null;
+      _this.btnExit = null;
+      _this.iconOutRoom = null;
+      _this.iconHuyOutRoom = null;
+      _this.btnBaoQuay = null;
+      _this.bet = 100;
+      _this.onCloseCallback = function() {};
+      _this.onExitCallback = function() {};
+      return _this;
     }
-    n(e, t);
-    e.prototype.show = function(t, e) {
-      if (void 0 === t) {
-        t = true;
+    __extends(InGameBackPopup, _super);
+    InGameBackPopup.prototype.show = function(canBaoQuay, betAmount) {
+      if (void 0 === canBaoQuay) {
+        canBaoQuay = true;
       }
-      if (void 0 === e) {
-        e = 100;
+      if (void 0 === betAmount) {
+        betAmount = 100;
       }
       if (null !== this.btnAutoReady && void 0 !== this.btnAutoReady) {
         this.btnAutoReady.isChecked = GameConfigManager.default.getInstance().autoReady;
@@ -86,59 +86,59 @@ var GamePlayManager = require("./GamePlayManager"),
         cc.easeExponentialOut()));
       if (null !== this.btnBaoQuay && void 0 !== this.btnBaoQuay) {
         this.btnBaoQuay.active = true;
-        if (false === t) {
+        if (false === canBaoQuay) {
           this.btnBaoQuay.active = false;
         }
       }
-      this.bet = e;
+      this.bet = betAmount;
     };
-    e.prototype.onClickHide = function() {
-      var t = this;
+    InGameBackPopup.prototype.onClickHide = function() {
+      var _this = this;
       MusicPlayer.default.getInstance().playbtnClick();
       this.node.stopAllActions();
       this.onCloseCallback();
       this.node.runAction(cc.sequence(cc.moveTo(.5, new cc.Vec2(-this.node.parent.width / 2 - this.node.width / 2, this.node.position.y))
         .easing(cc.easeExponentialOut()), cc.callFunc(function() {
-          t.node.active = false;
+          _this.node.active = false;
         })));
     };
-    e.prototype.onClickExit = function() {
+    InGameBackPopup.prototype.onClickExit = function() {
       this.onClickHide();
       this.onExitCallback();
     };
-    e.prototype.onClickSetting = function() {
+    InGameBackPopup.prototype.onClickSetting = function() {
       this.onClickHide();
       CommonPrefabsManager.default.getInstance().showPopupSetting();
     };
-    e.prototype.onClickAutoReady = function() {
+    InGameBackPopup.prototype.onClickAutoReady = function() {
       GameConfigManager.default.getInstance().setEnableAutoReady(this.btnAutoReady.isChecked);
       RoomMessageHandler.default.getInstance().sendAutoReadyPref(this.btnAutoReady.isChecked);
       MusicPlayer.default.getInstance().playbtnClick();
     };
-    e.prototype.onClickHelp = function() {
+    InGameBackPopup.prototype.onClickHelp = function() {
       CommonPrefabsManager.default.getInstance().showPopupHelpImage(GamePlayManager.default.getInstance().gameID);
       this.onClickHide();
     };
-    e.prototype.onClickBaoQuay = function() {
-      var t = CommonPrefabsManager.default.getInstance().showPopup2Button();
-      t.setContent(GameConfigManager.default.getInstance().textBaoQuay);
-      t.setTextOk("B\xc1O");
-      t.onOKClicked = function() {
-        t.hide();
+    InGameBackPopup.prototype.onClickBaoQuay = function() {
+      var popup = CommonPrefabsManager.default.getInstance().showPopup2Button();
+      popup.setContent(GameConfigManager.default.getInstance().textBaoQuay);
+      popup.setTextOk("B\xc1O");
+      popup.onOKClicked = function() {
+        popup.hide();
         CardGameCommonRequest.default.getInstance().sendBaoQuay();
       }.bind(this);
       this.onClickHide();
     };
-    e.prototype.onClickBXH = function() {
+    InGameBackPopup.prototype.onClickBXH = function() {
       CommonPrefabsManager.default.getInstance().showPopupXepHangGame(GamePlayManager.default.getInstance().gameID);
       this.onClickHide();
     };
-    o([p(cc.Toggle)], e.prototype, "btnAutoReady", void 0);
-    o([p(cc.Sprite)], e.prototype, "btnExit", void 0);
-    o([p(cc.SpriteFrame)], e.prototype, "iconOutRoom", void 0);
-    o([p(cc.SpriteFrame)], e.prototype, "iconHuyOutRoom", void 0);
-    o([p(cc.Node)], e.prototype, "btnBaoQuay", void 0);
-    return e = o([d], e);
+    __decorate([property(cc.Toggle)], InGameBackPopup.prototype, "btnAutoReady", void 0);
+    __decorate([property(cc.Sprite)], InGameBackPopup.prototype, "btnExit", void 0);
+    __decorate([property(cc.SpriteFrame)], InGameBackPopup.prototype, "iconOutRoom", void 0);
+    __decorate([property(cc.SpriteFrame)], InGameBackPopup.prototype, "iconHuyOutRoom", void 0);
+    __decorate([property(cc.Node)], InGameBackPopup.prototype, "btnBaoQuay", void 0);
+    return InGameBackPopup = __decorate([ccclass], InGameBackPopup);
   }(cc.Component);
-i.default = f;
+moduleExports.default = InGameBackPopup;
 void 0;

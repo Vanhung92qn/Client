@@ -1,9 +1,9 @@
-var t = require,
-  e = module,
-  i = exports;
+var requireRef = require,
+  moduleRef = module,
+  moduleExports = exports;
 "use strict";
 void 0;
-var n = this && this.__extends || function() {
+var __extends = this && this.__extends || function() {
     var t = function(e, i) {
       return (t = Object.setPrototypeOf || {
           __proto__: []
@@ -26,7 +26,7 @@ var n = this && this.__extends || function() {
       e.prototype = null === i ? Object.create(i) : (n.prototype = i.prototype, new n());
     };
   }(),
-  o = this && this.__decorate || function(t, e, i, n) {
+  __decorate = this && this.__decorate || function(t, e, i, n) {
     var o,
       a = arguments.length,
       s = a < 3 ? e : null === n ? n = Object.getOwnPropertyDescriptor(e, i) : n;
@@ -44,50 +44,50 @@ var n = this && this.__extends || function() {
     }
     return s;
   };
-Object.defineProperty(i, "__esModule", {
+Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
-var a = cc._decorator,
-  s = a.ccclass,
-  r = a.property,
-  c = function(t) {
-    function e() {
-      var e = null !== t && t.apply(this, arguments) || this;
-      e.uiKitSpriteAtlas = null;
-      e.label = null;
-      e.chatInGamePopup = null;
-      e.bgImage = null;
-      e.currentText = "";
-      return e;
+var ccDecorator = cc._decorator,
+  ccclass = ccDecorator.ccclass,
+  property = ccDecorator.property,
+  ChatItem = function(_super) {
+    function ChatItem() {
+      var _this = null !== _super && _super.apply(this, arguments) || this;
+      _this.uiKitSpriteAtlas = null;
+      _this.label = null;
+      _this.chatInGamePopup = null;
+      _this.bgImage = null;
+      _this.currentText = "";
+      return _this;
     }
-    n(e, t);
-    e.prototype.init = function(t) {
-      this.chatInGamePopup = t;
+    __extends(ChatItem, _super);
+    ChatItem.prototype.init = function(chatInGamePopup) {
+      this.chatInGamePopup = chatInGamePopup;
     };
-    e.prototype.setText = function(t) {
-      if (this.currentText = t, t.length > 23) {
-        var e = t.substr(0, 23);
-        if (0 === t.substr(22, 1).localeCompare(" ")) {
-          e = t.substr(0, 22);
+    ChatItem.prototype.setText = function(text) {
+      if (this.currentText = text, text.length > 23) {
+        var truncatedText = text.substr(0, 23);
+        if (0 === text.substr(22, 1).localeCompare(" ")) {
+          truncatedText = text.substr(0, 22);
         }
-        this.label.string = e + "...";
+        this.label.string = truncatedText + "...";
       } else {
-        this.label.string = t;
+        this.label.string = text;
       }
     };
-    e.prototype.onClickThis = function() {
+    ChatItem.prototype.onClickThis = function() {
       this.chatInGamePopup.sendChat(this.currentText);
     };
-    e.prototype.setIsOldChat = function(t) {
+    ChatItem.prototype.setIsOldChat = function(isOldChat) {
       if (void 0 !== this.uiKitSpriteAtlas && null !== this.uiKitSpriteAtlas) {
-        this.bgImage.spriteFrame = t ? this.uiKitSpriteAtlas.getSpriteFrame("popupChat2") : this.uiKitSpriteAtlas.getSpriteFrame(
+        this.bgImage.spriteFrame = isOldChat ? this.uiKitSpriteAtlas.getSpriteFrame("popupChat2") : this.uiKitSpriteAtlas.getSpriteFrame(
           "popupChat");
       }
     };
-    o([r(cc.SpriteAtlas)], e.prototype, "uiKitSpriteAtlas", void 0);
-    o([r(cc.Label)], e.prototype, "label", void 0);
-    o([r(cc.Sprite)], e.prototype, "bgImage", void 0);
-    return e = o([s], e);
+    __decorate([property(cc.SpriteAtlas)], ChatItem.prototype, "uiKitSpriteAtlas", void 0);
+    __decorate([property(cc.Label)], ChatItem.prototype, "label", void 0);
+    __decorate([property(cc.Sprite)], ChatItem.prototype, "bgImage", void 0);
+    return ChatItem = __decorate([ccclass], ChatItem);
   }(cc.Component);
-i.default = c;
+moduleExports.default = ChatItem;
 void 0;

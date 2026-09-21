@@ -1,9 +1,9 @@
-var t = require,
-  e = module,
-  i = exports;
+var requireRef = require,
+  moduleRef = module,
+  moduleExports = exports;
 "use strict";
 void 0;
-var n = this && this.__decorate || function(t, e, i, n) {
+var __decorate = this && this.__decorate || function(t, e, i, n) {
   var o,
     a = arguments.length,
     s = a < 3 ? e : null === n ? n = Object.getOwnPropertyDescriptor(e, i) : n;
@@ -21,7 +21,7 @@ var n = this && this.__decorate || function(t, e, i, n) {
   }
   return s;
 };
-Object.defineProperty(i, "__esModule", {
+Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
 var WSCardGameHandle = require("./WSCardGameHandle"),
@@ -29,193 +29,193 @@ var WSCardGameHandle = require("./WSCardGameHandle"),
   GamePlayManager = require("./GamePlayManager"),
   WSXDGamesHandle = require("./WSXDGamesHandle"),
   GameConfigManager = require("./GameConfigManager"),
-  l = cc._decorator,
-  h = l.ccclass,
-  u = (l.property, function() {
-    function t() {
+  ccDecorator = cc._decorator,
+  ccclass = ccDecorator.ccclass,
+  CardGameCommonRequest = (ccDecorator.property, function() {
+    function CardGameCommonRequest() {
       this.isCanGetREFRESH_MONEY = true;
     }
-    var e;
-    e = t;
-    t.getInstance = function() {
+    var CardGameCommonRequestClass;
+    CardGameCommonRequestClass = CardGameCommonRequest;
+    CardGameCommonRequest.getInstance = function() {
       if (!(null !== this.Instance && void 0 !== this.Instance)) {
-        this.Instance = new e();
+        this.Instance = new CardGameCommonRequestClass();
         this.Instance.init();
       }
       return this.Instance;
     };
-    t.prototype.init = function() {};
-    t.prototype.getZoneNameWSCard = function() {
+    CardGameCommonRequest.prototype.init = function() {};
+    CardGameCommonRequest.prototype.getZoneNameWSCard = function() {
       return "Simms";
     };
-    t.prototype.getZoneNameWSXD = function() {
+    CardGameCommonRequest.prototype.getZoneNameWSXD = function() {
       return "SimmsRoBe";
     };
-    t.prototype.sendDataWSCard = function(t) {
+    CardGameCommonRequest.prototype.sendDataWSCard = function(data) {
       if (WSCardGameHandle.default.getInstance().isSocketOpen) {
-        WSCardGameHandle.default.getInstance().ws.sendData(t);
+        WSCardGameHandle.default.getInstance().ws.sendData(data);
       }
     };
-    t.prototype.sendDataWSXD = function(t) {
+    CardGameCommonRequest.prototype.sendDataWSXD = function(data) {
       if (WSXDGamesHandle.default.getInstance().isSocketOpen) {
-        WSXDGamesHandle.default.getInstance().ws.sendData(t);
+        WSXDGamesHandle.default.getInstance().ws.sendData(data);
       }
     };
-    t.prototype.getZoneName = function() {
+    CardGameCommonRequest.prototype.getZoneName = function() {
       return GameConfigManager.default.getInstance().canUseSocketXD() ? this.getZoneNameWSXD() : this.getZoneNameWSCard();
     };
-    t.prototype.sendData = function(t) {
+    CardGameCommonRequest.prototype.sendData = function(data) {
       if (GameConfigManager.default.getInstance().canUseSocketXD()) {
-        this.sendDataWSXD(t);
+        this.sendDataWSXD(data);
       } else {
-        this.sendDataWSCard(t);
+        this.sendDataWSCard(data);
       }
     };
-    t.prototype.sendChat = function(t) {
-      var e = [MessageCardGameHandler.Message.MessageType.RoomPlugin_Type, this.getZoneName(), GamePlayManager.default.getInstance().roomID, {
+    CardGameCommonRequest.prototype.sendChat = function(message) {
+      var payload = [MessageCardGameHandler.Message.MessageType.RoomPlugin_Type, this.getZoneName(), GamePlayManager.default.getInstance().roomID, {
         cmd: MessageCardGameHandler.Global_Message.INGAME_USER_CHAT,
-        mgs: t
+        mgs: message
       }];
-      this.sendData(JSON.stringify(e));
+      this.sendData(JSON.stringify(payload));
     };
-    t.prototype.sendLogout = function() {
-      var t = [MessageCardGameHandler.Message.MessageType.LogOut_Type, this.getZoneNameWSCard()];
-      this.sendDataWSCard(JSON.stringify(t));
+    CardGameCommonRequest.prototype.sendLogout = function() {
+      var payload = [MessageCardGameHandler.Message.MessageType.LogOut_Type, this.getZoneNameWSCard()];
+      this.sendDataWSCard(JSON.stringify(payload));
     };
-    t.prototype.sendLeaveRoom = function() {
-      var t = [MessageCardGameHandler.Message.MessageType.LeaveRoom_Type, this.getZoneName(), GamePlayManager.default.getInstance().roomID];
-      this.sendData(JSON.stringify(t));
+    CardGameCommonRequest.prototype.sendLeaveRoom = function() {
+      var payload = [MessageCardGameHandler.Message.MessageType.LeaveRoom_Type, this.getZoneName(), GamePlayManager.default.getInstance().roomID];
+      this.sendData(JSON.stringify(payload));
     };
-    t.prototype.GetListRoom = function() {
-      var t = [MessageCardGameHandler.Message.MessageType.ZonePlugin_Type, this.getZoneName(), "channelPlugin", {
+    CardGameCommonRequest.prototype.GetListRoom = function() {
+      var payload = [MessageCardGameHandler.Message.MessageType.ZonePlugin_Type, this.getZoneName(), "channelPlugin", {
         cmd: MessageCardGameHandler.Global_Message.GET_TABLES,
         aid: "1",
         gid: GamePlayManager.default.getInstance().gameID
       }];
-      this.sendData(JSON.stringify(t));
+      this.sendData(JSON.stringify(payload));
     };
-    t.prototype.sendReady = function() {
-      var t = [MessageCardGameHandler.Message.MessageType.RoomPlugin_Type, this.getZoneName(), GamePlayManager.default.getInstance().roomID, {
+    CardGameCommonRequest.prototype.sendReady = function() {
+      var payload = [MessageCardGameHandler.Message.MessageType.RoomPlugin_Type, this.getZoneName(), GamePlayManager.default.getInstance().roomID, {
         cmd: MessageCardGameHandler.Global_Message.INGAME_USER_READY
       }];
-      this.sendData(JSON.stringify(t));
+      this.sendData(JSON.stringify(payload));
     };
-    t.prototype.sendStart = function(t) {
-      var e = [MessageCardGameHandler.Message.MessageType.RoomPlugin_Type, this.getZoneName(), GamePlayManager.default.getInstance().roomID, {
-        cmd: t
+    CardGameCommonRequest.prototype.sendStart = function(cmd) {
+      var payload = [MessageCardGameHandler.Message.MessageType.RoomPlugin_Type, this.getZoneName(), GamePlayManager.default.getInstance().roomID, {
+        cmd: cmd
       }];
-      this.sendData(JSON.stringify(e));
+      this.sendData(JSON.stringify(payload));
     };
-    t.prototype.sendArranged = function(t, e, i) {
-      if (void 0 === i) {
-        i = -1;
+    CardGameCommonRequest.prototype.sendArranged = function(cmd, userID, cardCode) {
+      if (void 0 === cardCode) {
+        cardCode = -1;
       }
-      var n = null;
-      n = -1 != i ? [MessageCardGameHandler.Message.MessageType.RoomPlugin_Type, this.getZoneName(), GamePlayManager.default.getInstance().roomID, {
-        cmd: t,
-        uid: e,
-        cs: [i]
+      var payload = null;
+      payload = -1 != cardCode ? [MessageCardGameHandler.Message.MessageType.RoomPlugin_Type, this.getZoneName(), GamePlayManager.default.getInstance().roomID, {
+        cmd: cmd,
+        uid: userID,
+        cs: [cardCode]
       }] : [MessageCardGameHandler.Message.MessageType.RoomPlugin_Type, this.getZoneName(), GamePlayManager.default.getInstance().roomID, {
-        cmd: t,
-        uid: e
+        cmd: cmd,
+        uid: userID
       }];
-      this.sendData(JSON.stringify(n));
+      this.sendData(JSON.stringify(payload));
     };
-    t.prototype.sendArrayArranged = function(t, e, i) {
-      if (void 0 === i) {
-        i = [];
+    CardGameCommonRequest.prototype.sendArrayArranged = function(cmd, userID, cardCodes) {
+      if (void 0 === cardCodes) {
+        cardCodes = [];
       }
-      var n = [MessageCardGameHandler.Message.MessageType.RoomPlugin_Type, this.getZoneName(), GamePlayManager.default.getInstance().roomID, {
-        cmd: t,
-        uid: e,
-        cs: i
+      var payload = [MessageCardGameHandler.Message.MessageType.RoomPlugin_Type, this.getZoneName(), GamePlayManager.default.getInstance().roomID, {
+        cmd: cmd,
+        uid: userID,
+        cs: cardCodes
       }];
-      this.sendData(JSON.stringify(n));
+      this.sendData(JSON.stringify(payload));
     };
-    t.prototype.sendInvitePlayers = function(t) {
-      var e = [MessageCardGameHandler.Message.MessageType.ZonePlugin_Type, this.getZoneName(), "channelPlugin", {
+    CardGameCommonRequest.prototype.sendInvitePlayers = function(userIDs) {
+      var payload = [MessageCardGameHandler.Message.MessageType.ZonePlugin_Type, this.getZoneName(), "channelPlugin", {
         cmd: MessageCardGameHandler.Global_Message.ZONE_INVITE_USERS_REQUEST,
         rid: GamePlayManager.default.getInstance().roomID,
-        us: t
+        us: userIDs
       }];
-      this.sendData(JSON.stringify(e));
+      this.sendData(JSON.stringify(payload));
     };
-    t.prototype.sendInvitePlayersKtek = function(t) {
-      var e = [MessageCardGameHandler.Message.MessageType.ZonePlugin_Type, this.getZoneName(), "channelPlugin", {
+    CardGameCommonRequest.prototype.sendInvitePlayersKtek = function(userIDs) {
+      var payload = [MessageCardGameHandler.Message.MessageType.ZonePlugin_Type, this.getZoneName(), "channelPlugin", {
         cmd: MessageCardGameHandler.Global_Message.ZONE_INVITE_USERS_REQUEST,
         rid: GamePlayManager.default.getInstance().roomIDKtek,
-        us: t,
+        us: userIDs,
         tpgid: GamePlayManager.default.getInstance().gameIDKtek,
         tpgrid: GamePlayManager.default.getInstance().roomIDKtek,
         tpgTT: GamePlayManager.default.getInstance().tableTypeKtek,
         rn: "X\xec D\xe1ch",
         b: GamePlayManager.default.getInstance().betKtek
       }];
-      this.sendData(JSON.stringify(e));
+      this.sendData(JSON.stringify(payload));
     };
-    t.prototype.sendGetInviteList = function() {
-      var t = [MessageCardGameHandler.Message.MessageType.ZonePlugin_Type, this.getZoneName(), "channelPlugin", {
+    CardGameCommonRequest.prototype.sendGetInviteList = function() {
+      var payload = [MessageCardGameHandler.Message.MessageType.ZonePlugin_Type, this.getZoneName(), "channelPlugin", {
         cmd: MessageCardGameHandler.Global_Message.FIND_PLAYERS_TO_INVITE,
         rid: GamePlayManager.default.getInstance().roomID
       }];
-      this.sendData(JSON.stringify(t));
+      this.sendData(JSON.stringify(payload));
     };
-    t.prototype.sendGetInviteListKtek = function(t, e) {
-      var i = [MessageCardGameHandler.Message.MessageType.ZonePlugin_Type, this.getZoneName(), "channelPlugin", {
+    CardGameCommonRequest.prototype.sendGetInviteListKtek = function(roomIDKtek, moneyMin) {
+      var payload = [MessageCardGameHandler.Message.MessageType.ZonePlugin_Type, this.getZoneName(), "channelPlugin", {
         cmd: MessageCardGameHandler.Global_Message.FIND_PLAYERS_TO_INVITE,
-        rid: t,
-        mM: e
+        rid: roomIDKtek,
+        mM: moneyMin
       }];
-      this.sendData(JSON.stringify(i));
+      this.sendData(JSON.stringify(payload));
     };
-    t.prototype.sendKickUser = function(t) {
-      var e = [MessageCardGameHandler.Message.MessageType.RoomPlugin_Type, this.getZoneName(), {
+    CardGameCommonRequest.prototype.sendKickUser = function(userID) {
+      var payload = [MessageCardGameHandler.Message.MessageType.RoomPlugin_Type, this.getZoneName(), {
         cmd: 3,
-        uid: t
+        uid: userID
       }];
-      this.sendData(JSON.stringify(e));
+      this.sendData(JSON.stringify(payload));
     };
-    t.prototype.sendRefreshMoney = function() {
+    CardGameCommonRequest.prototype.sendRefreshMoney = function() {
       if (GamePlayManager.default.getInstance().token.length > 0) {
         this.isCanGetREFRESH_MONEY = true;
-        var t = [MessageCardGameHandler.Message.MessageType.ZonePlugin_Type, this.getZoneNameWSCard(), "channelPlugin", {
+        var payload = [MessageCardGameHandler.Message.MessageType.ZonePlugin_Type, this.getZoneNameWSCard(), "channelPlugin", {
           cmd: MessageCardGameHandler.Global_Message.REFRESH_MONEY
         }];
-        this.sendDataWSCard(JSON.stringify(t));
+        this.sendDataWSCard(JSON.stringify(payload));
       }
     };
-    t.prototype.sendPlayerDisplayName = function() {
-      var t = [MessageCardGameHandler.Message.MessageType.ZonePlugin_Type, this.getZoneName(), "channelPlugin", {
+    CardGameCommonRequest.prototype.sendPlayerDisplayName = function() {
+      var payload = [MessageCardGameHandler.Message.MessageType.ZonePlugin_Type, this.getZoneName(), "channelPlugin", {
         cmd: 309,
         dn: GamePlayManager.default.getInstance().displayName
       }];
-      this.sendData(JSON.stringify(t));
+      this.sendData(JSON.stringify(payload));
     };
-    t.prototype.sendBaoQuay = function() {
-      var t = [MessageCardGameHandler.Message.MessageType.RoomPlugin_Type, this.getZoneName(), GamePlayManager.default.getInstance().roomID, {
+    CardGameCommonRequest.prototype.sendBaoQuay = function() {
+      var payload = [MessageCardGameHandler.Message.MessageType.RoomPlugin_Type, this.getZoneName(), GamePlayManager.default.getInstance().roomID, {
         cmd: MessageCardGameHandler.Global_Message.BAO_QUAY
       }];
-      this.sendData(JSON.stringify(t));
+      this.sendData(JSON.stringify(payload));
     };
-    t.prototype.fetchSettingRoom = function() {
-      var t = [MessageCardGameHandler.Message.MessageType.ZonePlugin_Type, this.getZoneName(), "channelPlugin", {
+    CardGameCommonRequest.prototype.fetchSettingRoom = function() {
+      var payload = [MessageCardGameHandler.Message.MessageType.ZonePlugin_Type, this.getZoneName(), "channelPlugin", {
         cmd: MessageCardGameHandler.Global_Message.FETCH_SETTING_ROOM,
         gid: GamePlayManager.default.getInstance().gameID
       }];
-      this.sendData(JSON.stringify(t));
+      this.sendData(JSON.stringify(payload));
     };
-    t.prototype.sendSettingRoom = function(t, e, i) {
-      var n = [MessageCardGameHandler.Message.MessageType.ZonePlugin_Type, this.getZoneName(), "channelPlugin", {
+    CardGameCommonRequest.prototype.sendSettingRoom = function(isUsingNewArrange, e, i) {
+      var payload = [MessageCardGameHandler.Message.MessageType.ZonePlugin_Type, this.getZoneName(), "channelPlugin", {
         cmd: MessageCardGameHandler.Global_Message.SETTING_SORT_CARD,
-        nArr: t,
+        nArr: isUsingNewArrange,
         fINArr: e,
         fPNArr: i,
         gid: GamePlayManager.default.getInstance().gameID
       }];
-      this.sendData(JSON.stringify(n));
+      this.sendData(JSON.stringify(payload));
     };
-    t.Instance = null;
-    return t = e = n([h], t);
+    CardGameCommonRequest.Instance = null;
+    return CardGameCommonRequest = CardGameCommonRequestClass = __decorate([ccclass], CardGameCommonRequest);
   }());
-i.default = u;
+moduleExports.default = CardGameCommonRequest;
 void 0;

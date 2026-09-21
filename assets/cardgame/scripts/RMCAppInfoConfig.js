@@ -1,33 +1,33 @@
-var t = require,
-  i = exports;
+var requireRef = require,
+  moduleExports = exports;
 "use strict";
 void 0;
-Object.defineProperty(i, "__esModule", {
+Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
 var GameConfigManager = require("./GameConfigManager");
 
-function o() {
+function getAppInfoConfig() {
   return GameConfigManager.default.getInstance().getConfig("app_info");
 }
-i.getAppInfoConfig = o;
-i.getBrandCodeConfig = function() {
-  return o().brandCode;
+moduleExports.getAppInfoConfig = getAppInfoConfig;
+moduleExports.getBrandCodeConfig = function() {
+  return getAppInfoConfig().brandCode;
 };
-i.getEnvironmentConfig = function() {
-  return o().env || "";
+moduleExports.getEnvironmentConfig = function() {
+  return getAppInfoConfig().env || "";
 };
-i.getbrandEnvironmentKey = function() {
-  var t = o();
-  return (t && t.brandCode || "") + (t && t.env || "");
+moduleExports.getbrandEnvironmentKey = function() {
+  var appInfo = getAppInfoConfig();
+  return (appInfo && appInfo.brandCode || "") + (appInfo && appInfo.env || "");
 };
-i.getAppIDConfig = function() {
-  return o().app_id;
+moduleExports.getAppIDConfig = function() {
+  return getAppInfoConfig().app_id;
 };
-i.getDownloadURLConfig = function() {
-  return o().download_url;
+moduleExports.getDownloadURLConfig = function() {
+  return getAppInfoConfig().download_url;
 };
-i.getHostURLConfig = function() {
-  return o().host_url;
+moduleExports.getHostURLConfig = function() {
+  return getAppInfoConfig().host_url;
 };
 void 0;

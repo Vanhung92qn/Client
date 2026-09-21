@@ -1,9 +1,9 @@
-var t = require,
-  e = module,
-  i = exports;
+var requireRef = require,
+  moduleRef = module,
+  moduleExports = exports;
 "use strict";
 void 0;
-var n = this && this.__extends || function() {
+var __extends = this && this.__extends || function() {
     var t = function(e, i) {
       return (t = Object.setPrototypeOf || {
           __proto__: []
@@ -26,7 +26,7 @@ var n = this && this.__extends || function() {
       e.prototype = null === i ? Object.create(i) : (n.prototype = i.prototype, new n());
     };
   }(),
-  o = this && this.__decorate || function(t, e, i, n) {
+  __decorate = this && this.__decorate || function(t, e, i, n) {
     var o,
       a = arguments.length,
       s = a < 3 ? e : null === n ? n = Object.getOwnPropertyDescriptor(e, i) : n;
@@ -44,208 +44,208 @@ var n = this && this.__extends || function() {
     }
     return s;
   };
-Object.defineProperty(i, "__esModule", {
+Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
 var ChipCaoRua = require("./ChipCaoRua"),
-  s = cc._decorator,
-  r = s.ccclass,
-  c = s.property,
-  l = function(t) {
-    function e() {
-      var e = null !== t && t.apply(this, arguments) || this;
-      e.chipParent = null;
-      e.positionChipOnTable = null;
-      e.listPrefabChip = [];
-      e.listPosUser = [];
-      e.listChip = [];
-      e.listChipOnTable = [];
-      e.contendSizeChipOnTable = cc.v2(350, 130);
-      return e;
+  ccDecorator = cc._decorator,
+  ccclass = ccDecorator.ccclass,
+  property = ccDecorator.property,
+  ChipCaoRuaController = function(_super) {
+    function ChipCaoRuaController() {
+      var _this = null !== _super && _super.apply(this, arguments) || this;
+      _this.chipParent = null;
+      _this.positionChipOnTable = null;
+      _this.listPrefabChip = [];
+      _this.listPosUser = [];
+      _this.listChip = [];
+      _this.listChipOnTable = [];
+      _this.contendSizeChipOnTable = cc.v2(350, 130);
+      return _this;
     }
-    n(e, t);
-    e.prototype.start = function() {
+    __extends(ChipCaoRuaController, _super);
+    ChipCaoRuaController.prototype.start = function() {
       this.createChipDefault();
     };
-    e.prototype.ClearAllChipInTable = function() {
-      for (var t = 0; t < this.listChipOnTable.length; t++) {
-        this.listChipOnTable[t].node.stopAllActions();
-        this.listChipOnTable[t].node.active = false;
+    ChipCaoRuaController.prototype.ClearAllChipInTable = function() {
+      for (var index = 0; index < this.listChipOnTable.length; index++) {
+        this.listChipOnTable[index].node.stopAllActions();
+        this.listChipOnTable[index].node.active = false;
       }
       if (this.listChipOnTable = [], this.chipParent.childrenCount > 0) {
-        var e = this.chipParent.children;
-        for (t = 0; t < e.length; t++) {
-          e[t].stopAllActions();
-          e[t].active = false;
+        var childNodes = this.chipParent.children;
+        for (index = 0; index < childNodes.length; index++) {
+          childNodes[index].stopAllActions();
+          childNodes[index].active = false;
         }
       }
     };
-    e.prototype.setListPositionOfUser = function(t) {
-      this.listPosUser = t;
+    ChipCaoRuaController.prototype.setListPositionOfUser = function(userPositions) {
+      this.listPosUser = userPositions;
     };
-    e.prototype.BetForAllUser = function(t, e) {
-      for (var i = this.getListPriceWithPrice(e), n = 0; n < t.length; n++) {
-        for (var o = 0; o < i.length; o++) {
-          var a = .4 * Math.random();
-          this.betForUser(t[n].node.position, a, i[o]);
+    ChipCaoRuaController.prototype.BetForAllUser = function(players, betAmount) {
+      for (var chipPrices = this.getListPriceWithPrice(betAmount), playerIndex = 0; playerIndex < players.length; playerIndex++) {
+        for (var chipIndex = 0; chipIndex < chipPrices.length; chipIndex++) {
+          var delay = .4 * Math.random();
+          this.betForUser(players[playerIndex].node.position, delay, chipPrices[chipIndex]);
         }
       }
     };
-    e.prototype.BetForUserReconect = function(t, e) {
-      for (var i = this.getListPriceWithPrice(e), n = 0; n < t; n++) {
-        for (var o = 0; o < i.length; o++) {
-          this.betForUserReconnect(i[o]);
+    ChipCaoRuaController.prototype.BetForUserReconect = function(userCount, betAmount) {
+      for (var chipPrices = this.getListPriceWithPrice(betAmount), userIndex = 0; userIndex < userCount; userIndex++) {
+        for (var chipIndex = 0; chipIndex < chipPrices.length; chipIndex++) {
+          this.betForUserReconnect(chipPrices[chipIndex]);
         }
       }
     };
-    e.prototype.GetChipForUser = function() {
+    ChipCaoRuaController.prototype.GetChipForUser = function() {
       this.getChipForUser();
     };
-    e.prototype.createChipDefault = function() {
-      for (var t = 0; t < 10; t++) {
-        var e = this.createNewChip(1e3);
-        this.listChip.push(e);
+    ChipCaoRuaController.prototype.createChipDefault = function() {
+      for (var index = 0; index < 10; index++) {
+        var chip = this.createNewChip(1e3);
+        this.listChip.push(chip);
       }
     };
-    e.prototype.getIndexChipOnPool = function(t) {
-      for (var e = 0; e < this.listChip.length; e++) {
-        if (null != this.listChip[e].node && void 0 != this.listChip[e].node && 0 == this.listChip[e].node.active && this.listChip[e]
-          .GetPrice() == t) {
-          return e;
+    ChipCaoRuaController.prototype.getIndexChipOnPool = function(price) {
+      for (var index = 0; index < this.listChip.length; index++) {
+        if (null != this.listChip[index].node && void 0 != this.listChip[index].node && 0 == this.listChip[index].node.active && this.listChip[index]
+          .GetPrice() == price) {
+          return index;
         }
       }
       return -1;
     };
-    e.prototype.createNewChip = function(t) {
-      var e = this.getIndexChipInListWithPrice(t),
-        i = cc.instantiate(this.listPrefabChip[e]).getComponent(ChipCaoRua.default);
-      i.node.active = false;
-      i.node.parent = this.chipParent;
-      i.node.position = cc.v2(0, 0);
-      i.SetPrice(t);
-      return i;
+    ChipCaoRuaController.prototype.createNewChip = function(price) {
+      var prefabIndex = this.getIndexChipInListWithPrice(price),
+        chip = cc.instantiate(this.listPrefabChip[prefabIndex]).getComponent(ChipCaoRua.default);
+      chip.node.active = false;
+      chip.node.parent = this.chipParent;
+      chip.node.position = cc.v2(0, 0);
+      chip.SetPrice(price);
+      return chip;
     };
-    e.prototype.sortToStack = function() {
-      for (var t = 0, e = 0; e < this.listChipOnTable.length; e++) {
-        this.listChipOnTable[e].node.stopAllActions();
-        this.listChipOnTable[e].node.runAction(cc.moveTo(.15, cc.v2(this.positionChipOnTable.position.x, this.positionChipOnTable.position
-          .y + t)));
-        t += 5;
+    ChipCaoRuaController.prototype.sortToStack = function() {
+      for (var offsetY = 0, index = 0; index < this.listChipOnTable.length; index++) {
+        this.listChipOnTable[index].node.stopAllActions();
+        this.listChipOnTable[index].node.runAction(cc.moveTo(.15, cc.v2(this.positionChipOnTable.position.x, this.positionChipOnTable.position
+          .y + offsetY)));
+        offsetY += 5;
       }
     };
-    e.prototype.betForUser = function(t, e, i) {
-      if (void 0 === e) {
-        e = 0;
+    ChipCaoRuaController.prototype.betForUser = function(fromPosition, delay, price) {
+      if (void 0 === delay) {
+        delay = 0;
       }
-      var n = this.getIndexChipOnPool(i),
-        o = null;
-      if (n < 0 || void 0 == n || null == n) {
-        o = this.createNewChip(i);
-        this.listChip.push(o);
+      var poolIndex = this.getIndexChipOnPool(price),
+        chip = null;
+      if (poolIndex < 0 || void 0 == poolIndex || null == poolIndex) {
+        chip = this.createNewChip(price);
+        this.listChip.push(chip);
       } else {
-        o = this.listChip[n];
+        chip = this.listChip[poolIndex];
       }
-      o.node.position = t;
-      o.node.active = true;
-      o.node.stopAllActions();
-      o.node.runAction(cc.sequence(cc.delayTime(e), cc.moveTo(.7, cc.v2(this.positionChipOnTable.position.x + Math.random() * this
+      chip.node.position = fromPosition;
+      chip.node.active = true;
+      chip.node.stopAllActions();
+      chip.node.runAction(cc.sequence(cc.delayTime(delay), cc.moveTo(.7, cc.v2(this.positionChipOnTable.position.x + Math.random() * this
         .contendSizeChipOnTable.x - this.contendSizeChipOnTable.x / 2, this.positionChipOnTable.position.y + Math.random() * this
         .contendSizeChipOnTable.y)).easing(cc.easeExponentialOut()), cc.callFunc(function() {})));
-      this.listChipOnTable.push(o);
+      this.listChipOnTable.push(chip);
     };
-    e.prototype.betForUserReconnect = function(t) {
-      var e = this.getIndexChipOnPool(t),
-        i = null;
-      if (e < 0 || void 0 == e || null == e) {
-        i = this.createNewChip(t);
-        this.listChip.push(i);
+    ChipCaoRuaController.prototype.betForUserReconnect = function(price) {
+      var poolIndex = this.getIndexChipOnPool(price),
+        chip = null;
+      if (poolIndex < 0 || void 0 == poolIndex || null == poolIndex) {
+        chip = this.createNewChip(price);
+        this.listChip.push(chip);
       } else {
-        i = this.listChip[e];
+        chip = this.listChip[poolIndex];
       }
-      i.node.position = cc.v2(this.positionChipOnTable.position.x + 250 * Math.random() - 125, this.positionChipOnTable.position.y + 110 *
+      chip.node.position = cc.v2(this.positionChipOnTable.position.x + 250 * Math.random() - 125, this.positionChipOnTable.position.y + 110 *
         Math.random());
-      i.node.active = true;
-      this.listChipOnTable.push(i);
+      chip.node.active = true;
+      this.listChipOnTable.push(chip);
     };
-    e.prototype.getChipForUser = function(t) {
-      var e = this;
-      if (void 0 === t) {
-        t = .6;
+    ChipCaoRuaController.prototype.getChipForUser = function(delay) {
+      var _this = this;
+      if (void 0 === delay) {
+        delay = .6;
       }
-      var i = 0;
+      var userPosIndex = 0;
       if (this.listChipOnTable.length > 25) {
-        t = .2;
+        delay = .2;
       }
-      for (var n = function(n) {
-          o.listChipOnTable[n].node.stopAllActions();
-          o.listChipOnTable[n].node.runAction(cc.sequence(cc.delayTime(t), cc.moveTo(.7, o.listPosUser[i]).easing(cc
+      for (var moveChipToUser = function(chipIndex) {
+          _this.listChipOnTable[chipIndex].node.stopAllActions();
+          _this.listChipOnTable[chipIndex].node.runAction(cc.sequence(cc.delayTime(delay), cc.moveTo(.7, _this.listPosUser[userPosIndex]).easing(cc
           .easeCubicActionIn()), cc.callFunc(function() {
-            e.listChipOnTable[n].node.active = false;
-            if (0 == n) {
-              e.ClearAllChipInTable();
+            _this.listChipOnTable[chipIndex].node.active = false;
+            if (0 == chipIndex) {
+              _this.ClearAllChipInTable();
             }
           })));
-          if (++i >= o.listPosUser.length) {
-            i = 0;
+          if (++userPosIndex >= _this.listPosUser.length) {
+            userPosIndex = 0;
           }
-          if (o.listChipOnTable.length < 25) {
-            t += .05;
+          if (_this.listChipOnTable.length < 25) {
+            delay += .05;
           } else {
-            t += .01;
+            delay += .01;
           }
-        }, o = this, a = this.listChipOnTable.length - 1; a >= 0; a--) {
-        n(a);
+        }, chipIndex = this.listChipOnTable.length - 1; chipIndex >= 0; chipIndex--) {
+        moveChipToUser(chipIndex);
       }
     };
-    e.prototype.getListPriceWithPrice = function(t) {
-      var e = [];
-      if (100 == t) {
-        e.push(100);
+    ChipCaoRuaController.prototype.getListPriceWithPrice = function(betAmount) {
+      var chipPrices = [];
+      if (100 == betAmount) {
+        chipPrices.push(100);
       } else {
-        if (500 == t) {
-          e.push(500);
+        if (500 == betAmount) {
+          chipPrices.push(500);
         } else {
-          if (1e3 == t) {
-            e.push(500);
-            e.push(500);
+          if (1e3 == betAmount) {
+            chipPrices.push(500);
+            chipPrices.push(500);
           } else {
-            if (2e3 == t) {
-              e.push(100);
-              e.push(500);
-              e.push(500);
+            if (2e3 == betAmount) {
+              chipPrices.push(100);
+              chipPrices.push(500);
+              chipPrices.push(500);
             } else {
-              if (5e3 == t) {
-                e.push(500);
-                e.push(500);
-                e.push(500);
-                e.push(500);
-                e.push(500);
+              if (5e3 == betAmount) {
+                chipPrices.push(500);
+                chipPrices.push(500);
+                chipPrices.push(500);
+                chipPrices.push(500);
+                chipPrices.push(500);
               } else {
-                if (1e4 == t) {
-                  e.push(5e3);
-                  e.push(1e3);
-                  e.push(1e3);
-                  e.push(1e3);
-                  e.push(1e3);
-                  e.push(1e3);
+                if (1e4 == betAmount) {
+                  chipPrices.push(5e3);
+                  chipPrices.push(1e3);
+                  chipPrices.push(1e3);
+                  chipPrices.push(1e3);
+                  chipPrices.push(1e3);
+                  chipPrices.push(1e3);
                 } else {
-                  if (2e4 == t) {
-                    e.push(1e4);
-                    e.push(5e3);
-                    e.push(1e3);
-                    e.push(1e3);
-                    e.push(1e3);
-                    e.push(1e3);
-                    e.push(1e3);
+                  if (2e4 == betAmount) {
+                    chipPrices.push(1e4);
+                    chipPrices.push(5e3);
+                    chipPrices.push(1e3);
+                    chipPrices.push(1e3);
+                    chipPrices.push(1e3);
+                    chipPrices.push(1e3);
+                    chipPrices.push(1e3);
                   } else {
-                    if (5e4 == t) {
-                      e.push(1e4);
-                      e.push(1e4);
-                      e.push(1e4);
-                      e.push(5e3);
-                      e.push(5e3);
-                      e.push(5e3);
-                      e.push(5e3);
+                    if (5e4 == betAmount) {
+                      chipPrices.push(1e4);
+                      chipPrices.push(1e4);
+                      chipPrices.push(1e4);
+                      chipPrices.push(5e3);
+                      chipPrices.push(5e3);
+                      chipPrices.push(5e3);
+                      chipPrices.push(5e3);
                     }
                   }
                 }
@@ -254,16 +254,16 @@ var ChipCaoRua = require("./ChipCaoRua"),
           }
         }
       }
-      return e;
+      return chipPrices;
     };
-    e.prototype.getIndexChipInListWithPrice = function(t) {
-      return 100 == t ? 0 : 500 == t ? 1 : 1e3 == t ? 2 : 5e3 == t ? 3 : 1e4 == t ? 4 : 5e4 == t ? 5 : 1e5 == t ? 6 : 5e5 == t ? 7 :
-        1e6 == t ? 8 : 0;
+    ChipCaoRuaController.prototype.getIndexChipInListWithPrice = function(price) {
+      return 100 == price ? 0 : 500 == price ? 1 : 1e3 == price ? 2 : 5e3 == price ? 3 : 1e4 == price ? 4 : 5e4 == price ? 5 : 1e5 == price ? 6 : 5e5 == price ? 7 :
+        1e6 == price ? 8 : 0;
     };
-    o([c(cc.Node)], e.prototype, "chipParent", void 0);
-    o([c(cc.Node)], e.prototype, "positionChipOnTable", void 0);
-    o([c(cc.Prefab)], e.prototype, "listPrefabChip", void 0);
-    return e = o([r], e);
+    __decorate([property(cc.Node)], ChipCaoRuaController.prototype, "chipParent", void 0);
+    __decorate([property(cc.Node)], ChipCaoRuaController.prototype, "positionChipOnTable", void 0);
+    __decorate([property(cc.Prefab)], ChipCaoRuaController.prototype, "listPrefabChip", void 0);
+    return ChipCaoRuaController = __decorate([ccclass], ChipCaoRuaController);
   }(cc.Component);
-i.default = l;
+moduleExports.default = ChipCaoRuaController;
 void 0;

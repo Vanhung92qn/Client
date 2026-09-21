@@ -1,9 +1,9 @@
-var t = require,
-  e = module,
-  i = exports;
+var requireRef = require,
+  moduleRef = module,
+  moduleExports = exports;
 "use strict";
 void 0;
-var n = this && this.__extends || function() {
+var __extends = this && this.__extends || function() {
     var t = function(e, i) {
       return (t = Object.setPrototypeOf || {
           __proto__: []
@@ -26,7 +26,7 @@ var n = this && this.__extends || function() {
       e.prototype = null === i ? Object.create(i) : (n.prototype = i.prototype, new n());
     };
   }(),
-  o = this && this.__decorate || function(t, e, i, n) {
+  __decorate = this && this.__decorate || function(t, e, i, n) {
     var o,
       a = arguments.length,
       s = a < 3 ? e : null === n ? n = Object.getOwnPropertyDescriptor(e, i) : n;
@@ -44,7 +44,7 @@ var n = this && this.__extends || function() {
     }
     return s;
   };
-Object.defineProperty(i, "__esModule", {
+Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
 var AnalyticDefine = require("./AnalyticDefine"),
@@ -57,69 +57,69 @@ var AnalyticDefine = require("./AnalyticDefine"),
   TableCell = require("./TableCell"),
   CommonPrefabsManager = require("./CommonPrefabsManager"),
   MessageCardGameHandler = require("./MessageCardGameHandler"),
-  g = cc._decorator,
-  m = g.ccclass,
-  y = g.property,
-  S = function(t) {
-    function e() {
-      var e = null !== t && t.apply(this, arguments) || this;
-      e.lbMucCuoc = null;
-      e.lbSoNguoi = null;
-      e.isHpwd = false;
-      e.lbMucTienCuocMin = null;
-      e.iconLock = null;
-      e.processBar = null;
-      e.iconBanXOcDia = null;
-      e.iconBanVip = null;
-      e.bgSprite = null;
-      e.bgSpine = null;
-      e.spriteBanChung = null;
-      e.listspriteBanChungXocDia = [];
-      e.listAnim = ["ANIMBANHO", "ANIMBANSU", "ANIMBANPHUNG"];
-      e.listAnimBanThuong = ["ANIMBANLONG"];
-      e.indextempe = 0;
-      e.oldTienCuocToiThieu = 0;
-      return e;
+  ccDecorator = cc._decorator,
+  ccclass = ccDecorator.ccclass,
+  property = ccDecorator.property,
+  TableCellRoomXocDia = function(_super) {
+    function TableCellRoomXocDia() {
+      var _this = null !== _super && _super.apply(this, arguments) || this;
+      _this.lbMucCuoc = null;
+      _this.lbSoNguoi = null;
+      _this.isHpwd = false;
+      _this.lbMucTienCuocMin = null;
+      _this.iconLock = null;
+      _this.processBar = null;
+      _this.iconBanXOcDia = null;
+      _this.iconBanVip = null;
+      _this.bgSprite = null;
+      _this.bgSpine = null;
+      _this.spriteBanChung = null;
+      _this.listspriteBanChungXocDia = [];
+      _this.listAnim = ["ANIMBANHO", "ANIMBANSU", "ANIMBANPHUNG"];
+      _this.listAnimBanThuong = ["ANIMBANLONG"];
+      _this.indextempe = 0;
+      _this.oldTienCuocToiThieu = 0;
+      return _this;
     }
-    n(e, t);
-    e.prototype.initValue = function(e, i) {
-      if (t.prototype.initValue.call(this, e, i), this.isHpwd = e.hpwd, this.lbMucCuoc.string = StringUtil.default.formatMoneyNumber(e.b), this
-        .lbSoNguoi.string = Math.max(0, e.uC) + "/" + e.Mu, null !== e.jpa && void 0 !== e.jpa || (this.lbMucTienCuocMin.string = StringUtil
-          .default.formatMoneyNumber(e.mM)), this.iconLock.active = e.hpwd, this.processBar.progress = e.uC / e.Mu, this.lbMucTienCuocMin
-        .node.x = 22, e.Mu >= 1e3 && GamePlayManager.default.getInstance().gameID === MessageCardGameHandler.GAME.XOCDIA) {
+    __extends(TableCellRoomXocDia, _super);
+    TableCellRoomXocDia.prototype.initValue = function(roomData, tableViewUtils) {
+      if (_super.prototype.initValue.call(this, roomData, tableViewUtils), this.isHpwd = roomData.hpwd, this.lbMucCuoc.string = StringUtil.default.formatMoneyNumber(roomData.b), this
+        .lbSoNguoi.string = Math.max(0, roomData.uC) + "/" + roomData.Mu, null !== roomData.jpa && void 0 !== roomData.jpa || (this.lbMucTienCuocMin.string = StringUtil
+          .default.formatMoneyNumber(roomData.mM)), this.iconLock.active = roomData.hpwd, this.processBar.progress = roomData.uC / roomData.Mu, this.lbMucTienCuocMin
+        .node.x = 22, roomData.Mu >= 1e3 && GamePlayManager.default.getInstance().gameID === MessageCardGameHandler.GAME.XOCDIA) {
         this.lbMucCuoc.node.active = false;
-        this.lbSoNguoi.string = Math.max(0, e.uC).toString();
+        this.lbSoNguoi.string = Math.max(0, roomData.uC).toString();
         this.processBar.progress = 0;
-        if (null !== e.jpa && void 0 !== e.jpa) {
-          GameUtils.runAnimationMoneyWithColom(this.lbMucTienCuocMin, this.oldTienCuocToiThieu, e.jpa, 4.5);
-          this.oldTienCuocToiThieu = e.jpa;
+        if (null !== roomData.jpa && void 0 !== roomData.jpa) {
+          GameUtils.runAnimationMoneyWithColom(this.lbMucTienCuocMin, this.oldTienCuocToiThieu, roomData.jpa, 4.5);
+          this.oldTienCuocToiThieu = roomData.jpa;
           this.lbMucTienCuocMin.node.x = 27;
         } else {
           this.lbMucTienCuocMin.string = StringUtil.default.formatMoneyNumberWithColom(this.oldTienCuocToiThieu);
         }
         if (null !== this.iconBanXOcDia && void 0 !== this.iconBanXOcDia) {
           this.iconBanXOcDia.active = true;
-          this.iconBanXOcDia.width = 186 * (.3 + Math.min(.5, e.uC / 600));
+          this.iconBanXOcDia.width = 186 * (.3 + Math.min(.5, roomData.uC / 600));
         }
-        var n = false;
+        var useSpecialAnim = false;
         this.indextempe = 0;
         if (this.index < GameConfigManager.default.getInstance().listImageXDBanChung.length) {
           this.indextempe = GameConfigManager.default.getInstance().listImageXDBanChung[this.index];
-          n = this.indextempe < 0;
+          useSpecialAnim = this.indextempe < 0;
           this.indextempe = Math.abs(this.indextempe) - 1;
-          if (n) {
+          if (useSpecialAnim) {
             this.bgSprite.node.active = false;
             if (false === this.bgSpine.node.active) {
               this.bgSpine.node.active = true;
             }
             if (this.indextempe < this.listAnim.length) {
               this.setRoomAnim(this.listAnim[this.indextempe]);
-              GamePlayManager.default.getInstance().setXocDiaIconBG(this.listAnim[this.indextempe], e.rid);
+              GamePlayManager.default.getInstance().setXocDiaIconBG(this.listAnim[this.indextempe], roomData.rid);
             }
           } else {
             if (this.indextempe < this.listAnimBanThuong.length) {
               this.setRoomAnim(this.listAnimBanThuong[this.indextempe]);
-              GamePlayManager.default.getInstance().setXocDiaIconBG(this.listAnimBanThuong[this.indextempe], e.rid);
+              GamePlayManager.default.getInstance().setXocDiaIconBG(this.listAnimBanThuong[this.indextempe], roomData.rid);
             } else {
               if (false === this.bgSprite.node.active) {
                 this.bgSprite.node.active = true;
@@ -135,7 +135,7 @@ var AnalyticDefine = require("./AnalyticDefine"),
           this.bgSprite.spriteFrame = this.spriteBanChung;
           this.bgSpine.node.active = false;
         }
-        if (e.b > GameConfigManager.default.getInstance().banVipMinBet) {
+        if (roomData.b > GameConfigManager.default.getInstance().banVipMinBet) {
           if (!this.iconBanVip.active) {
             this.iconBanVip.active = true;
           }
@@ -155,16 +155,16 @@ var AnalyticDefine = require("./AnalyticDefine"),
         this.iconBanVip.active = false;
       }
     };
-    e.prototype.setRoomAnim = function(t) {
+    TableCellRoomXocDia.prototype.setRoomAnim = function(animName) {
       this.bgSprite.node.active = false;
       if (false === this.bgSpine.node.active) {
         this.bgSpine.node.active = true;
       }
-      if (!StringUtil.default.isNullOrEmpty(t)) {
-        this.bgSpine.setAnimation(0, t, true);
+      if (!StringUtil.default.isNullOrEmpty(animName)) {
+        this.bgSpine.setAnimation(0, animName, true);
       }
     };
-    e.prototype.onClickChoseRoom = function() {
+    TableCellRoomXocDia.prototype.onClickChoseRoom = function() {
       if (GamePlayManager.default.getInstance().roomID = this.data.rid, AnalyticService.default.instance.trackCustomQ(AnalyticDefine.AnaltyciEventType.CLICK, "join_cg_" + GamePlayManager
           .default.getInstance().gameID), -1 === this.data.rid) {
         CommonPrefabsManager.default.getInstance().showLoading();
@@ -188,18 +188,18 @@ var AnalyticDefine = require("./AnalyticDefine"),
       MusicPlayer.default.getInstance().playbtnClick();
       GamePlayManager.default.getInstance().idTamBanMd5 = this.indextempe;
     };
-    o([y(cc.Label)], e.prototype, "lbMucCuoc", void 0);
-    o([y(cc.Label)], e.prototype, "lbSoNguoi", void 0);
-    o([y(cc.Label)], e.prototype, "lbMucTienCuocMin", void 0);
-    o([y(cc.Node)], e.prototype, "iconLock", void 0);
-    o([y(cc.ProgressBar)], e.prototype, "processBar", void 0);
-    o([y(cc.Node)], e.prototype, "iconBanXOcDia", void 0);
-    o([y(cc.Node)], e.prototype, "iconBanVip", void 0);
-    o([y(cc.Sprite)], e.prototype, "bgSprite", void 0);
-    o([y(sp.Skeleton)], e.prototype, "bgSpine", void 0);
-    o([y(cc.SpriteFrame)], e.prototype, "spriteBanChung", void 0);
-    o([y([cc.SpriteFrame])], e.prototype, "listspriteBanChungXocDia", void 0);
-    return e = o([m], e);
+    __decorate([property(cc.Label)], TableCellRoomXocDia.prototype, "lbMucCuoc", void 0);
+    __decorate([property(cc.Label)], TableCellRoomXocDia.prototype, "lbSoNguoi", void 0);
+    __decorate([property(cc.Label)], TableCellRoomXocDia.prototype, "lbMucTienCuocMin", void 0);
+    __decorate([property(cc.Node)], TableCellRoomXocDia.prototype, "iconLock", void 0);
+    __decorate([property(cc.ProgressBar)], TableCellRoomXocDia.prototype, "processBar", void 0);
+    __decorate([property(cc.Node)], TableCellRoomXocDia.prototype, "iconBanXOcDia", void 0);
+    __decorate([property(cc.Node)], TableCellRoomXocDia.prototype, "iconBanVip", void 0);
+    __decorate([property(cc.Sprite)], TableCellRoomXocDia.prototype, "bgSprite", void 0);
+    __decorate([property(sp.Skeleton)], TableCellRoomXocDia.prototype, "bgSpine", void 0);
+    __decorate([property(cc.SpriteFrame)], TableCellRoomXocDia.prototype, "spriteBanChung", void 0);
+    __decorate([property([cc.SpriteFrame])], TableCellRoomXocDia.prototype, "listspriteBanChungXocDia", void 0);
+    return TableCellRoomXocDia = __decorate([ccclass], TableCellRoomXocDia);
   }(TableCell.default);
-i.default = S;
+moduleExports.default = TableCellRoomXocDia;
 void 0;

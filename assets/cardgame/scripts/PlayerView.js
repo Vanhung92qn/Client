@@ -1,5 +1,5 @@
-var t = require,
-  e = module,
+var requireRef = require,
+  moduleRef = module,
   moduleExports = exports;
 "use strict";
 void 0;
@@ -313,7 +313,7 @@ var PlayerView = function(_super) {
       });
     });
   };
-  PlayerView.prototype.addInfo = function(displayName, userId, isHost, money, playerState, remainingCards, seatIndex, isReady, h, u, assets, avatar, isAnonymous) {
+  PlayerView.prototype.addInfo = function(displayName, userId, isHost, money, playerState, remainingCards, seatIndex, isReady, pid, accountId, assets, avatar, isAnonymous) {
     if (void 0 === isAnonymous) {
       isAnonymous = false;
     }
@@ -429,7 +429,7 @@ var PlayerView = function(_super) {
       var trackEntry = this.skeletonCountDown.setAnimation(0, "DemNguoc10s", false);
       this.skeletonCountDown.timeScale = trackEntry.animationEnd / fullDuration;
       trackEntry.trackTime = trackEntry.animationEnd * elapsedRatio;
-    } catch (t) {}
+    } catch (err) {}
   };
   PlayerView.prototype.stopViewAction = function() {
     if (null !== this.chatIconView && void 0 !== this.chatIconView) {
@@ -848,7 +848,7 @@ var PlayerView = function(_super) {
       this.showUpBaiFxForPlayer(3);
     }
   };
-  PlayerView.prototype.setBaCayStatus = function(t) {};
+  PlayerView.prototype.setBaCayStatus = function(status) {};
   PlayerView.prototype.setModel = function(playerModel, updateState) {
     if (void 0 === updateState) {
       updateState = true;

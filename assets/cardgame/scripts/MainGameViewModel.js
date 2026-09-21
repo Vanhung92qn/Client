@@ -1,9 +1,9 @@
-var t = require,
-  e = module,
-  i = exports;
+var requireRef = require,
+  moduleRef = module,
+  moduleExports = exports;
 "use strict";
 void 0;
-var n = this && this.__extends || function() {
+var __extends = this && this.__extends || function() {
     var t = function(e, i) {
       return (t = Object.setPrototypeOf || {
           __proto__: []
@@ -26,7 +26,7 @@ var n = this && this.__extends || function() {
       e.prototype = null === i ? Object.create(i) : (n.prototype = i.prototype, new n());
     };
   }(),
-  o = this && this.__decorate || function(t, e, i, n) {
+  __decorate = this && this.__decorate || function(t, e, i, n) {
     var o,
       a = arguments.length,
       s = a < 3 ? e : null === n ? n = Object.getOwnPropertyDescriptor(e, i) : n;
@@ -44,7 +44,7 @@ var n = this && this.__extends || function() {
     }
     return s;
   };
-Object.defineProperty(i, "__esModule", {
+Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
 var RoomController = require("./RoomController"),
@@ -59,34 +59,34 @@ var RoomController = require("./RoomController"),
   AnalyticService = require("./AnalyticService"),
   AnalyticDefine = require("./AnalyticDefine"),
   VersionController = require("./VersionController"),
-  y = cc._decorator,
-  S = y.ccclass,
-  _ = y.property,
-  v = function(t) {
-    function e() {
-      var e = null !== t && t.apply(this, arguments) || this;
-      e.roomController = null;
-      e.prefabRoomScene = null;
-      e.mainUiNode = null;
-      e.mainGameController = null;
-      e.timeTurnRemain = 0;
-      e.isMyTurn = false;
-      e.isPlaying = false;
-      return e;
+  ccDecorator = cc._decorator,
+  ccclass = ccDecorator.ccclass,
+  property = ccDecorator.property,
+  MainGameViewModel = function(_super) {
+    function MainGameViewModel() {
+      var _this = null !== _super && _super.apply(this, arguments) || this;
+      _this.roomController = null;
+      _this.prefabRoomScene = null;
+      _this.mainUiNode = null;
+      _this.mainGameController = null;
+      _this.timeTurnRemain = 0;
+      _this.isMyTurn = false;
+      _this.isPlaying = false;
+      return _this;
     }
-    n(e, t);
-    e.prototype.playBackgroundMusic = function() {
+    __extends(MainGameViewModel, _super);
+    MainGameViewModel.prototype.playBackgroundMusic = function() {
       MusicPlayer.default.getInstance().playRandomLobbyMusic();
     };
-    e.prototype.onLoad = function() {
-      if (t.prototype.onLoad.call(this), this.node.width = cc.winSize.width, this.node.height = cc.winSize.height, null !== this
+    MainGameViewModel.prototype.onLoad = function() {
+      if (_super.prototype.onLoad.call(this), this.node.width = cc.winSize.width, this.node.height = cc.winSize.height, null !== this
         .prefabRoomScene && void 0 !== this.prefabRoomScene) {
-        var e = cc.instantiate(this.prefabRoomScene);
-        if (e.parent = this.mainUiNode, this.roomController = e.getComponent(RoomController.default), e.active = false, this.roomController.walkUp(
+        var roomSceneNode = cc.instantiate(this.prefabRoomScene);
+        if (roomSceneNode.parent = this.mainUiNode, this.roomController = roomSceneNode.getComponent(RoomController.default), roomSceneNode.active = false, this.roomController.walkUp(
             this), this.roomController.isFade = true, cc.sys.platform === cc.sys.MOBILE_BROWSER) {
-          var i = e.getComponent(cc.Widget);
-          if (null !== i && void 0 !== i) {
-            i.target = this.node;
+          var widget = roomSceneNode.getComponent(cc.Widget);
+          if (null !== widget && void 0 !== widget) {
+            widget.target = this.node;
           }
         }
         GamePlayManager.default.getInstance().isListRoomScene = true;
@@ -98,44 +98,44 @@ var RoomController = require("./RoomController"),
       this.getlistRoomData();
       CommonPrefabsManager.default.getInstance().showLoading(true);
     };
-    e.prototype.getlistRoomData = function() {
+    MainGameViewModel.prototype.getlistRoomData = function() {
       CardGameCommonRequest.default.getInstance().GetListRoom();
     };
-    e.prototype.onFocus = function(e) {
-      this.timeLostFocus = e;
-      if (null != this.mainGameController && null != this.mainGameController._thisPlayerView && e >= 5) {
-        t.prototype.onFocus.call(this, e);
+    MainGameViewModel.prototype.onFocus = function(secondsAway) {
+      this.timeLostFocus = secondsAway;
+      if (null != this.mainGameController && null != this.mainGameController._thisPlayerView && secondsAway >= 5) {
+        _super.prototype.onFocus.call(this, secondsAway);
       }
       if (null !== this.mainGameController && void 0 !== this.mainGameController) {
-        this.mainGameController.onFocus(e);
+        this.mainGameController.onFocus(secondsAway);
       }
     };
-    e.prototype.onLostFocus = function() {
-      if (t.prototype.onLostFocus.call(this), null !== this.mainGameController && void 0 !== this.mainGameController && this
+    MainGameViewModel.prototype.onLostFocus = function() {
+      if (_super.prototype.onLostFocus.call(this), null !== this.mainGameController && void 0 !== this.mainGameController && this
         .mainGameController.onLostFocus(), this.isMyTurn = false, this.isPlaying = false, null != this.mainGameController) {
-        var e = this.mainGameController._thisPlayerView;
-        if (void 0 != e && null != e && e.isPlaying) {
+        var thisPlayerView = this.mainGameController._thisPlayerView;
+        if (void 0 != thisPlayerView && null != thisPlayerView && thisPlayerView.isPlaying) {
           this.isPlaying = true;
-          if (e.countDownProgressTo.isRuning) {
+          if (thisPlayerView.countDownProgressTo.isRuning) {
             this.isMyTurn = true;
-            this.timeTurnRemain = e.countDownProgressTo.actionTIme - e.countDownProgressTo.countTime;
+            this.timeTurnRemain = thisPlayerView.countDownProgressTo.actionTIme - thisPlayerView.countDownProgressTo.countTime;
           }
         }
       }
     };
-    e.prototype.onTokenExpired = function() {
-      t.prototype.onTokenExpired.call(this);
+    MainGameViewModel.prototype.onTokenExpired = function() {
+      _super.prototype.onTokenExpired.call(this);
     };
-    e.prototype.onReceiveMessage = function(e, i, n, o) {
-      if (void 0 === o) {
-        o = true;
+    MainGameViewModel.prototype.onReceiveMessage = function(cmd, raw, data, applyGameConfig) {
+      if (void 0 === applyGameConfig) {
+        applyGameConfig = true;
       }
-      t.prototype.onReceiveMessage.call(this, e, i, n, o);
+      _super.prototype.onReceiveMessage.call(this, cmd, raw, data, applyGameConfig);
       if (null != this.mainGameController && this.mainGameController.node.active) {
-        this.mainGameController.onReceiveMessage(e, i, n, o);
+        this.mainGameController.onReceiveMessage(cmd, raw, data, applyGameConfig);
       }
     };
-    e.prototype.showListRoomScene = function() {
+    MainGameViewModel.prototype.showListRoomScene = function() {
       if (this.mainGameController.node.active) {
         this.mainGameController.node.stopAllActions();
         this.mainGameController.hide();
@@ -146,109 +146,109 @@ var RoomController = require("./RoomController"),
       CardGameCommonRequest.default.getInstance().GetListRoom();
       VersionController.default.getInstance().CheckForceUpdateByCurrentScene();
     };
-    e.prototype.checkAndShowListRoom = function(t) {
-      if (!(void 0 !== t.lr && null !== t.lr)) {
+    MainGameViewModel.prototype.checkAndShowListRoom = function(userInfo) {
+      if (!(void 0 !== userInfo.lr && null !== userInfo.lr)) {
         this.showListRoomScene();
       }
     };
-    e.prototype.onUserInfoRespone = function(e, i) {
-      if (void 0 === i) {
-        i = true;
+    MainGameViewModel.prototype.onUserInfoRespone = function(data, applyGameConfig) {
+      if (void 0 === applyGameConfig) {
+        applyGameConfig = true;
       }
-      t.prototype.onUserInfoRespone.call(this, e, i);
+      _super.prototype.onUserInfoRespone.call(this, data, applyGameConfig);
       this.resetTimeLostFocus();
-      this.checkAndShowListRoom(e);
+      this.checkAndShowListRoom(data);
     };
-    e.prototype.onWSCardLeaveRoom = function(t) {
-      if (null !== t && void 0 !== t && t[1] && null !== this.mainGameController && void 0 !== this.mainGameController && this
+    MainGameViewModel.prototype.onWSCardLeaveRoom = function(message) {
+      if (null !== message && void 0 !== message && message[1] && null !== this.mainGameController && void 0 !== this.mainGameController && this
         .mainGameController.node.active) {
-        var e = t[4];
-        this.mainGameController.LeaveRoomMessage = t;
-        if (3 === e) {
+        var leaveReason = message[4];
+        this.mainGameController.LeaveRoomMessage = message;
+        if (3 === leaveReason) {
           this.mainGameController._forcedToLeaveRoom = true;
         } else {
           this.mainGameController.handleLeaveRoomResponse();
         }
       }
     };
-    e.prototype.onGetListTableSuccess = function(t, e) {
-      var i = this;
-      if (null !== e.rs || void 0 !== e.rs || 0 === e.rs.length !== null || !this.isPlaying || null !== e.rs && void 0 !== e.rs && 0 !== e
+    MainGameViewModel.prototype.onGetListTableSuccess = function(raw, data) {
+      var _this = this;
+      if (null !== data.rs || void 0 !== data.rs || 0 === data.rs.length !== null || !this.isPlaying || null !== data.rs && void 0 !== data.rs && 0 !== data
         .rs.length && !this.isPlaying) {
-        for (var n = 0; n < e.rs.length; ++n) {
-          for (var o = n + 1; o < e.rs.length; ++o) {
-            var a = e.rs[n],
-              s = e.rs[o];
-            if (a.b > s.b) {
-              var r = a;
-              e.rs[n] = s;
-              e.rs[o] = r;
+        for (var roomIndex = 0; roomIndex < data.rs.length; ++roomIndex) {
+          for (var compareIndex = roomIndex + 1; compareIndex < data.rs.length; ++compareIndex) {
+            var roomA = data.rs[roomIndex],
+              roomB = data.rs[compareIndex];
+            if (roomA.b > roomB.b) {
+              var swapTemp = roomA;
+              data.rs[roomIndex] = roomB;
+              data.rs[compareIndex] = swapTemp;
             }
           }
         }
-        if (null !== e.pR && void 0 !== e.pR) {
-          for (n = 0; n < e.pR.length; ++n) {
-            for (o = n + 1; o < e.pR.length; ++o) {
-              a = e.pR[n];
-              s = e.pR[o];
-              if (a.b > s.b) {
-                r = a;
-                e.pR[n] = s;
-                e.pR[o] = r;
+        if (null !== data.pR && void 0 !== data.pR) {
+          for (roomIndex = 0; roomIndex < data.pR.length; ++roomIndex) {
+            for (compareIndex = roomIndex + 1; compareIndex < data.pR.length; ++compareIndex) {
+              roomA = data.pR[roomIndex];
+              roomB = data.pR[compareIndex];
+              if (roomA.b > roomB.b) {
+                swapTemp = roomA;
+                data.pR[roomIndex] = roomB;
+                data.pR[compareIndex] = swapTemp;
               }
             }
           }
         }
-        if (null !== e.srs && void 0 !== e.srs) {
-          for (n = 0; n < e.srs.length; ++n) {
-            for (o = n + 1; o < e.srs.length; ++o) {
-              a = e.srs[n];
-              s = e.srs[o];
-              if (a.b > s.b) {
-                r = a;
-                e.srs[n] = s;
-                e.srs[o] = r;
+        if (null !== data.srs && void 0 !== data.srs) {
+          for (roomIndex = 0; roomIndex < data.srs.length; ++roomIndex) {
+            for (compareIndex = roomIndex + 1; compareIndex < data.srs.length; ++compareIndex) {
+              roomA = data.srs[roomIndex];
+              roomB = data.srs[compareIndex];
+              if (roomA.b > roomB.b) {
+                swapTemp = roomA;
+                data.srs[roomIndex] = roomB;
+                data.srs[compareIndex] = swapTemp;
               }
             }
           }
         }
-        var c = 0;
+        var delaySeconds = 0;
         if (this.roomController.isFade) {
-          c = .3;
+          delaySeconds = .3;
         }
-        this.node.runAction(cc.sequence(cc.delayTime(c), cc.callFunc(function() {
-          if (i.roomController.isFade) {
+        this.node.runAction(cc.sequence(cc.delayTime(delaySeconds), cc.callFunc(function() {
+          if (_this.roomController.isFade) {
             CommonPrefabsManager.default.getInstance().hideLoading();
           }
-          i.roomController.updateRoom(e);
+          _this.roomController.updateRoom(data);
         })));
       }
     };
-    e.prototype.onErrorMessage = function(t, e) {
-      if (null !== e && void 0 !== e) {
-        var i = "";
-        if (null !== e.mgs && void 0 !== e.mgs) {
-          i = e.mgs;
+    MainGameViewModel.prototype.onErrorMessage = function(raw, data) {
+      if (null !== data && void 0 !== data) {
+        var errorMessage = "";
+        if (null !== data.mgs && void 0 !== data.mgs) {
+          errorMessage = data.mgs;
         }
-        if (0 != i.length) {
-          CommonPrefabsManager.default.getInstance().showPopupMessageUtil(i);
+        if (0 != errorMessage.length) {
+          CommonPrefabsManager.default.getInstance().showPopupMessageUtil(errorMessage);
           CommonPrefabsManager.default.getInstance().hideLoading();
           GameConfigManager.default.getInstance().isShowPopupDone = false;
         }
       }
     };
-    e.prototype.showGameList = function(t) {
+    MainGameViewModel.prototype.showGameList = function(message) {
       AnalyticService.default.instance.trackCustomQ(AnalyticDefine.AnaltyciEventType.CLICK, "leave_cg_" + GamePlayManager.default.getInstance().gameID);
-      var e = "";
-      if (2 === t[2]) {
-        e = t[5];
+      var messageText = "";
+      if (2 === message[2]) {
+        messageText = message[5];
       }
       this.mainGameController.node.stopAllActions();
       this.mainGameController.hide();
       this.roomController.node.active = true;
       this.playBackgroundMusic();
-      if (e.length > 0) {
-        CommonPrefabsManager.default.getInstance().showPopupMessageUtil(e);
+      if (messageText.length > 0) {
+        CommonPrefabsManager.default.getInstance().showPopupMessageUtil(messageText);
       }
       this.roomController.isFade = false;
       CardGameCommonRequest.default.getInstance().GetListRoom();
@@ -260,13 +260,13 @@ var RoomController = require("./RoomController"),
       GamePlayManager.default.getInstance().spinAutoXocDia = false;
       VersionController.default.getInstance().CheckForceUpdateByCurrentScene();
     };
-    e.prototype.onWSCardJoinRoom = function(t) {
-      var e = t[1];
+    MainGameViewModel.prototype.onWSCardJoinRoom = function(message) {
+      var isSuccess = message[1];
       CommonPrefabsManager.default.getInstance().showLoading(true);
       GameConfigManager.default.getInstance().isShowPopupDone = false;
-      if (e) {
+      if (isSuccess) {
         cc.systemEvent.emit(GameDefine.GameEventMessage.JoinRoom);
-        GamePlayManager.default.getInstance().roomID = t[3];
+        GamePlayManager.default.getInstance().roomID = message[3];
         this.mainGameController.walkUpBase(this);
         MusicPlayer.default.getInstance().playRandomIngameBgMusic();
         GameConfigManager.default.getInstance().isLobbyMusicBg = false;
@@ -277,13 +277,13 @@ var RoomController = require("./RoomController"),
         }
       } else {
         CommonPrefabsManager.default.getInstance().hideLoading();
-        CommonPrefabsManager.default.getInstance().showPopupMessageUtil(t[4]);
+        CommonPrefabsManager.default.getInstance().showPopupMessageUtil(message[4]);
       }
     };
-    e.prototype.checkAndShowtestData = function(t) {};
-    o([_(cc.Prefab)], e.prototype, "prefabRoomScene", void 0);
-    o([_(cc.Node)], e.prototype, "mainUiNode", void 0);
-    return e = o([S], e);
+    MainGameViewModel.prototype.checkAndShowtestData = function(t) {};
+    __decorate([property(cc.Prefab)], MainGameViewModel.prototype, "prefabRoomScene", void 0);
+    __decorate([property(cc.Node)], MainGameViewModel.prototype, "mainUiNode", void 0);
+    return MainGameViewModel = __decorate([ccclass], MainGameViewModel);
   }(BaseScene.default);
-i.default = v;
+moduleExports.default = MainGameViewModel;
 void 0;

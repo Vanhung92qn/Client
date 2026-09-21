@@ -1,9 +1,9 @@
-var t = require,
-  e = module,
-  i = exports;
+var requireRef = require,
+  moduleRef = module,
+  moduleExports = exports;
 "use strict";
 void 0;
-var n = this && this.__decorate || function(t, e, i, n) {
+var __decorate = this && this.__decorate || function(t, e, i, n) {
   var o,
     a = arguments.length,
     s = a < 3 ? e : null === n ? n = Object.getOwnPropertyDescriptor(e, i) : n;
@@ -21,24 +21,24 @@ var n = this && this.__decorate || function(t, e, i, n) {
   }
   return s;
 };
-Object.defineProperty(i, "__esModule", {
+Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
-var o = cc._decorator,
-  a = o.ccclass,
-  s = (o.property, function() {
-    function t() {}
-    var e;
-    e = t;
-    t.reset = function() {
-      e.isShowingUpdateDocumentTooltip = false;
-      e.isShowingComplainDocumentTooltip = false;
-      e.isHandledShowNotifyStatus = false;
+var ccDecorator = cc._decorator,
+  ccclass = ccDecorator.ccclass,
+  SessionData = (ccDecorator.property, function() {
+    function SessionData() {}
+    var SessionData_1;
+    SessionData_1 = SessionData;
+    SessionData.reset = function() {
+      SessionData_1.isShowingUpdateDocumentTooltip = false;
+      SessionData_1.isShowingComplainDocumentTooltip = false;
+      SessionData_1.isHandledShowNotifyStatus = false;
     };
-    t.isShowingUpdateDocumentTooltip = false;
-    t.isShowingComplainDocumentTooltip = false;
-    t.isHandledShowNotifyStatus = false;
-    return t = e = n([a], t);
+    SessionData.isShowingUpdateDocumentTooltip = false;
+    SessionData.isShowingComplainDocumentTooltip = false;
+    SessionData.isHandledShowNotifyStatus = false;
+    return SessionData = SessionData_1 = __decorate([ccclass], SessionData);
   }());
-i.SessionData = s;
+moduleExports.SessionData = SessionData;
 void 0;

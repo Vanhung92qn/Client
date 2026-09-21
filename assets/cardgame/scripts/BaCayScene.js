@@ -1,9 +1,9 @@
-var t = require,
-  e = module,
-  i = exports;
+var requireRef = require,
+  moduleRef = module,
+  moduleExports = exports;
 "use strict";
 void 0;
-var n = this && this.__extends || function() {
+var __extends = this && this.__extends || function() {
     var t = function(e, i) {
       return (t = Object.setPrototypeOf || {
           __proto__: []
@@ -26,7 +26,7 @@ var n = this && this.__extends || function() {
       e.prototype = null === i ? Object.create(i) : (n.prototype = i.prototype, new n());
     };
   }(),
-  o = this && this.__decorate || function(t, e, i, n) {
+  __decorate = this && this.__decorate || function(t, e, i, n) {
     var o,
       a = arguments.length,
       s = a < 3 ? e : null === n ? n = Object.getOwnPropertyDescriptor(e, i) : n;
@@ -44,36 +44,36 @@ var n = this && this.__extends || function() {
     }
     return s;
   };
-Object.defineProperty(i, "__esModule", {
+Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
 var BaCayController = require("./BaCayController"),
   GamePlayManager = require("./GamePlayManager"),
   MessageCardGameHandler = require("./MessageCardGameHandler"),
   MainGameViewModel = require("./MainGameViewModel"),
-  l = cc._decorator,
-  h = l.ccclass,
-  u = l.property,
-  d = function(t) {
-    function e() {
-      var e = null !== t && t.apply(this, arguments) || this;
-      e.prefabBaCayScene = null;
-      e.baCayController = null;
-      return e;
+  ccDecorator = cc._decorator,
+  ccclass = ccDecorator.ccclass,
+  property = ccDecorator.property,
+  BaCayScene = function(_super) {
+    function BaCayScene() {
+      var _this = null !== _super && _super.apply(this, arguments) || this;
+      _this.prefabBaCayScene = null;
+      _this.baCayController = null;
+      return _this;
     }
-    n(e, t);
-    e.prototype.onLoad = function() {
+    __extends(BaCayScene, _super);
+    BaCayScene.prototype.onLoad = function() {
       GamePlayManager.default.getInstance().gameID = MessageCardGameHandler.GAME.BACAY;
-      var e = cc.instantiate(this.prefabBaCayScene);
-      e.parent = this.mainUiNode;
-      this.baCayController = e.getComponent(BaCayController.default);
+      var sceneNode = cc.instantiate(this.prefabBaCayScene);
+      sceneNode.parent = this.mainUiNode;
+      this.baCayController = sceneNode.getComponent(BaCayController.default);
       this.baCayController.mainGameViewModel = this;
       this.mainGameController = this.baCayController;
-      e.active = false;
-      t.prototype.onLoad.call(this);
+      sceneNode.active = false;
+      _super.prototype.onLoad.call(this);
     };
-    o([u(cc.Prefab)], e.prototype, "prefabBaCayScene", void 0);
-    return e = o([h], e);
+    __decorate([property(cc.Prefab)], BaCayScene.prototype, "prefabBaCayScene", void 0);
+    return BaCayScene = __decorate([ccclass], BaCayScene);
   }(MainGameViewModel.default);
-i.default = d;
+moduleExports.default = BaCayScene;
 void 0;
