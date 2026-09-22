@@ -46251,7 +46251,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "btnLTMNSolo",
+    "_name": "btnTrong",
     "_objFlags": 0,
     "_parent": {
       "__id__": 961
@@ -46264,7 +46264,7 @@
         "__id__": 980
       }
     ],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 988
@@ -46980,7 +46980,7 @@
     "component": "",
     "_componentId": "2a420qeAGJAN5CQHMpCOjDb",
     "handler": "joinGameClicked",
-    "customEventData": "66"
+    "customEventData": ""
   },
   {
     "__type__": "cc.Node",

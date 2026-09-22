@@ -58,8 +58,11 @@
         { value: '2',  label: 'THREE_KINGDOM',     bundleName: 'tk',            mainPrefab: 'prefabs/tkView',             deps: ['slots_core']    },
 
         // ── CARD GAMES ──────────────────────────────────────────────
-        // Bộ cũ dùng chung bundle `cardgame_core`; bộ mới (.NET 10) dùng `cardroom`.
-        { value: '51', label: 'BA_CAY',            bundleName: '3cay',          mainPrefab: 'prefabs/3CLobby',            deps: ['cardgame_core'] },
+        // Họ game bài .NET 10 bê từ Go88 — tất cả dùng chung bundle `cardroom`.
+        // Bộ game bài .NET Framework cũ (3cay/maubinh/tienlenMN/tienlenMNSoLo/poker) và bundle
+        // dùng chung `cardgame_core` của nó đã bị XOÁ ngày 2026-09-22 — cả 4 game đều đã chết
+        // (Poker 226 ván, TLMN 25 ván, Mậu Binh 0 ván) và tên bundle của chúng đang chiếm chỗ
+        // của bản mới. Baccarat là game bài cũ DUY NHẤT còn giữ.
         { value: '117',label: 'CAO_RUA',           bundleName: 'caorua',        mainPrefab: 'prefabs/CaoRuaView',         deps: ['cardroom']      },
         { value: '201',label: 'LIENG',             bundleName: 'lieng',         mainPrefab: 'prefabs/LiengView',          deps: ['cardroom']      },
         { value: '202',label: 'XI_TO',             bundleName: 'xito',          mainPrefab: 'prefabs/XiToView',           deps: ['cardroom']      },
@@ -69,11 +72,7 @@
         { value: '206',label: 'TLMN_GO',              bundleName: 'tlmn',            mainPrefab: 'prefabs/TlmnView',               deps: ['cardroom']      },
         { value: '207',label: 'SAM_LOC_GO',           bundleName: 'samloc',          mainPrefab: 'prefabs/SamLocView',             deps: ['cardroom']      },
         { value: '208',label: 'XAP_XAM',              bundleName: 'xapxam',          mainPrefab: 'prefabs/XapXamView',             deps: ['cardroom']      },
-        { value: '19', label: 'BACCARAT',          bundleName: 'bacarat',       mainPrefab: 'prefabs/BaCaratView',        deps: ['cardgame_core'] },
-        { value: '55', label: 'MAU_BINH',          bundleName: 'maubinh',       mainPrefab: 'prefabs/MBLobby',            deps: ['cardgame_core'] },
-        { value: '54', label: 'TIEN_LEN_MN',       bundleName: 'tienlenMN',     mainPrefab: 'prefabs/TLMNLobby',          deps: ['cardgame_core'] },
-        { value: '66', label: 'TIEN_LEN_MN_SOLO',  bundleName: 'tienlenMNSoLo', mainPrefab: 'prefabs/TLMNSoLoLobby',      deps: ['cardgame_core'] },
-        { value: '57', label: 'POKER_TEXAS',       bundleName: 'poker',         mainPrefab: 'prefabs/pokerView',          deps: ['cardgame_core'] },
+        { value: '19', label: 'BACCARAT',          bundleName: 'bacarat',       mainPrefab: 'prefabs/BaCaratView',        deps: []                },
     ];
 
     // ═══════════════════════════════════════════════════════════════

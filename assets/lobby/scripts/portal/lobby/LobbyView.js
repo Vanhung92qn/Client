@@ -678,12 +678,15 @@ var netConfig = require("NetConfig");
         MAP[cc.GameId.DRAGON_BALL]      = { node: 'nodeSlotsView',      popup: false, progress: 'progressDragonBall',     label: 'lbLoadingDragonBall',     name: 'Dragon Ball' };
         MAP[cc.GameId.COWBOY]           = { node: 'nodeSlotsView',      popup: false, progress: 'progressCowboy',         label: 'lbLoadingCowboy',         name: 'Cowboy' };
         MAP[cc.GameId.THREE_KINGDOM]    = { node: 'nodeSlotsView',      popup: false, progress: 'progressTK',             label: 'lbLoadingTK',             name: 'Three Kingdom' };
-        MAP[cc.GameId.POKER_TEXAS]      = { node: 'nodeSlotsView',      popup: false, progress: 'progressPoker',          label: 'lbLoadingPoker',          name: 'Poker Texas' };
-        MAP[cc.GameId.BA_CAY]           = { node: 'nodeSlotsView',      popup: false, progress: 'progressThreeCards',     label: 'lbLoadingThreeCards',     name: 'Ba Cây' };
+        // 🔴 Bốn mục dưới dùng lại THANH TẢI của bản game bài cũ (đã xoá). Không phải chắp vá:
+        // mỗi thanh tải là một node NẰM TRONG chính cái nút ngoài sảnh (loading_3cay nằm trong
+        // btn3Cay), mà bản mới đã chiếm đúng những nút đó. Trỏ lại là dùng đúng chỗ.
+        // Liêng/Xì Tố/Cát Tê/Phỏm/Sâm Lốc chưa có thanh tải riêng → rơi về vòng xoay chung.
+        MAP[cc.GameId.POKER_TEXAS_GO]   = { node: 'nodeSlotsView',      popup: false, progress: 'progressPoker',          label: 'lbLoadingPoker',          name: 'Poker Texas' };
+        MAP[cc.GameId.CAO_RUA]          = { node: 'nodeSlotsView',      popup: false, progress: 'progressThreeCards',     label: 'lbLoadingThreeCards',     name: 'Cào Rùa' };
         MAP[cc.GameId.BACCARAT]         = { node: 'nodeSlotsView',      popup: false, progress: 'progressBaccarat',       label: 'lbLoadingBaccarat',       name: 'Baccarat' };
-        MAP[cc.GameId.MAU_BINH]         = { node: 'nodeSlotsView',      popup: false, progress: 'progressMB',             label: 'lbLoadingMB',             name: 'Mậu Binh' };
-        MAP[cc.GameId.TIEN_LEN_MN]      = { node: 'nodeSlotsView',      popup: false, progress: 'progressTLMN',           label: 'lbLoadingTLMN',           name: 'Tiến Lên MN' };
-        MAP[cc.GameId.TIEN_LEN_MN_SOLO] = { node: 'nodeSlotsView',      popup: false, progress: 'progressTLMNSolo',       label: 'lbLoadingTLMNSolo',       name: 'Tiến Lên MN Solo' };
+        MAP[cc.GameId.XAP_XAM]          = { node: 'nodeSlotsView',      popup: false, progress: 'progressMB',             label: 'lbLoadingMB',             name: 'Mậu Binh' };
+        MAP[cc.GameId.TLMN_GO]          = { node: 'nodeSlotsView',      popup: false, progress: 'progressTLMN',           label: 'lbLoadingTLMN',           name: 'Tiến Lên MN' };
       }
       return MAP[gameId] || null;
     },
@@ -1405,181 +1408,6 @@ var netConfig = require("NetConfig");
           break;
 
         //CARD GAME
-        case cc.GameId.POKER_TEXAS:
-          if (this.nodeSlotsView !== null) return;
-
-          cc.RoomController.getInstance().setGameId(gameId);
-          this.isLoading = true;
-          var self = this;
-          //Bat loading
-          self.lbLoadingPoker.node.parent.active = true;
-          var percent = 0;
-          cc.loader.loadRes(
-            "poker/prefabs/pokerView",
-            function (a, b, c) {
-              var tempPercent = Math.round((100 * a) / b);
-
-              //dam bao cho % ko bi lui lai (do quy trinh dem asset khi load)
-              if (tempPercent > percent) {
-                percent = tempPercent;
-              }
-              self.progressPoker.progress = a / b;
-              self.lbLoadingPoker.string = `${parseInt((a / b) * 100)}%`;
-            },
-            function (err, prefab) {
-              //Load xong
-              self.isLoading = false;
-              //Tat loading
-              self.lbLoadingPoker.node.parent.active = false;
-              //Tao game
-              self.nodeSlotsView = self.createView(prefab);
-
-              self.activeNodeLobby(false);
-              self.activeNodeTopBar(true);
-            }
-          );
-          break;
-
-        case cc.GameId.BA_CAY:
-          if (this.nodeSlotsView !== null) return;
-
-          cc.RoomController.getInstance().setGameId(gameId);
-          this.isLoading = true;
-          var self = this;
-          //Bat loading
-          self.lbLoadingThreeCards.node.parent.active = true;
-          var percent = 0;
-          cc.loader.loadRes(
-            "3cay/prefabs/3CLobby",
-            function (a, b, c) {
-              var tempPercent = Math.round((100 * a) / b);
-
-              //dam bao cho % ko bi lui lai (do quy trinh dem asset khi load)
-              if (tempPercent > percent) {
-                percent = tempPercent;
-              }
-              self.progressThreeCards.progress = a / b;
-              self.lbLoadingThreeCards.string = `${parseInt((a / b) * 100)}%`;
-            },
-            function (err, prefab) {
-              //Load xong
-              self.isLoading = false;
-              //Tat loading
-              self.lbLoadingThreeCards.node.parent.active = false;
-              //Tao game
-              self.nodeSlotsView = self.createView(prefab);
-
-              self.activeNodeLobby(false);
-              self.activeNodeTopBar(true);
-            }
-          );
-          break;
-
-        case cc.GameId.TIEN_LEN_MN:
-          if (this.nodeSlotsView !== null) return;
-
-          cc.RoomController.getInstance().setGameId(gameId);
-          this.isLoading = true;
-          var self = this;
-          //Bat loading
-          self.lbLoadingTLMN.node.parent.active = true;
-          var percent = 0;
-          cc.loader.loadRes(
-            "tienlenMN/prefabs/TLMNLobby",
-            function (a, b, c) {
-              var tempPercent = Math.round((100 * a) / b);
-
-              //dam bao cho % ko bi lui lai (do quy trinh dem asset khi load)
-              if (tempPercent > percent) {
-                percent = tempPercent;
-              }
-              self.progressTLMN.progress = a / b;
-              self.lbLoadingTLMN.string = `${parseInt((a / b) * 100)}%`;
-            },
-            function (err, prefab) {
-              //Load xong
-              self.isLoading = false;
-              //Tat loading
-              self.lbLoadingTLMN.node.parent.active = false;
-              //Tao game
-              self.nodeSlotsView = self.createView(prefab);
-
-              self.activeNodeLobby(false);
-              self.activeNodeTopBar(true);
-            }
-          );
-          break;
-
-        case cc.GameId.TIEN_LEN_MN_SOLO:
-          if (this.nodeSlotsView !== null) return;
-
-          cc.RoomController.getInstance().setGameId(gameId);
-          this.isLoading = true;
-          var self = this;
-          //Bat loading
-          self.lbLoadingTLMNSolo.node.parent.active = true;
-          var percent = 0;
-          cc.loader.loadRes(
-            "tienlenMNSoLo/prefabs/TLMNSoLoLobby",
-            function (a, b, c) {
-              var tempPercent = Math.round((100 * a) / b);
-
-              //dam bao cho % ko bi lui lai (do quy trinh dem asset khi load)
-              if (tempPercent > percent) {
-                percent = tempPercent;
-              }
-              self.progressTLMNSolo.progress = a / b;
-              self.lbLoadingTLMNSolo.string = `${parseInt((a / b) * 100)}%`;
-            },
-            function (err, prefab) {
-              //Load xong
-              self.isLoading = false;
-              //Tat loading
-              self.lbLoadingTLMNSolo.node.parent.active = false;
-              //Tao game
-              self.nodeSlotsView = self.createView(prefab);
-
-              self.activeNodeLobby(false);
-              self.activeNodeTopBar(true);
-            }
-          );
-          break;
-
-        case cc.GameId.MAU_BINH:
-          if (this.nodeSlotsView !== null) return;
-
-          cc.RoomController.getInstance().setGameId(gameId);
-          this.isLoading = true;
-          var self = this;
-          //Bat loading
-          self.lbLoadingMB.node.parent.active = true;
-          var percent = 0;
-          cc.loader.loadRes(
-            "maubinh/prefabs/MBLobby",
-            function (a, b, c) {
-              var tempPercent = Math.round((100 * a) / b);
-
-              //dam bao cho % ko bi lui lai (do quy trinh dem asset khi load)
-              if (tempPercent > percent) {
-                percent = tempPercent;
-              }
-              self.progressMB.progress = a / b;
-              self.lbLoadingMB.string = `${parseInt((a / b) * 100)}%`;
-            },
-            function (err, prefab) {
-              //Load xong
-              self.isLoading = false;
-              //Tat loading
-              self.lbLoadingMB.node.parent.active = false;
-              //Tao game
-              self.nodeSlotsView = self.createView(prefab);
-
-              self.activeNodeLobby(false);
-              self.activeNodeTopBar(true);
-            }
-          );
-          break;
-
         case cc.GameId.BACCARAT:
           if (this.nodeSlotsView !== null) return;
 
@@ -2072,19 +1900,6 @@ var netConfig = require("NetConfig");
           case cc.GameId.XOC_XOC:
             this.createDynamicView(cc.GameId.XOC_XOC);
             break;
-          case cc.GameId.POKER_TEXAS:
-          case cc.GameId.BA_CAY:
-          case cc.GameId.TIEN_LEN_MN:
-          case cc.GameId.TIEN_LEN_MN_SOLO:
-            if (cc.BalanceController.getInstance().getBalance() < 10000) {
-              cc.PopupController.getInstance().showMessage(
-                "Bạn không đủ tiền để vào phòng. Tối thiểu cần 10.000"
-              );
-              return;
-            } else {
-              this.createDynamicView(gameId.toString());
-            }
-            break;
           // Cào Rùa — bản Ba Cây bê từ Go88. 🔴 Mỗi game PHẢI có một case ở đây: thiếu thì
           // bấm biểu tượng ngoài sảnh rơi xuống nhánh mặc định và KHÔNG có gì xảy ra, không
           // báo lỗi. Bundle đã đăng ký ở GameBundleConfig không tự sinh ra lối vào.
@@ -2149,16 +1964,6 @@ var netConfig = require("NetConfig");
             break;
           case cc.GameId.XAP_XAM:
             this.createDynamicView(cc.GameId.XAP_XAM);
-            break;
-          case cc.GameId.MAU_BINH:
-            if (cc.BalanceController.getInstance().getBalance() < 30000) {
-              cc.PopupController.getInstance().showMessage(
-                "Bạn không đủ tiền để vào phòng. Tối thiểu cần 30.000"
-              );
-              return;
-            } else {
-              this.createDynamicView(gameId.toString());
-            }
             break;
           //MINI game
           case cc.GameId.TAI_XIU:

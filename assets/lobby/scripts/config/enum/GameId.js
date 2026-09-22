@@ -31,8 +31,23 @@
         PHOENIX: '116', // Hỏa Phụng (crash game phượng hoàng)
         BACCARAT: '19',
 
+        // ════════════════════════════════════════════════════════════════════════════════
+        //  🔴 NAM MA DUOI DAY LA GAME DA BI XOA — DUNG DUNG CHO VIEC MOI
+        //     BA_CAY 51 · TIEN_LEN_MN 54 · MAU_BINH 55 · POKER_TEXAS 57 · TIEN_LEN_MN_SOLO 66
+        //
+        //  Bundle, prefab va script cua chung da bi xoa khoi repo (2026-09-22). Ban thay the
+        //  nam o dai 200+: CAO_RUA 117 · TLMN_GO 206 · XAP_XAM 208 · POKER_TEXAS_GO 203.
+        //
+        //  VI SAO VAN GIU LAI NAM MA NAY: Config.js dung chung de tra ma -> TEN HIEN THI
+        //  (Config.js:379-396). Lich su giao dich cua nguoi choi van con nhung van cu, xoa
+        //  ma di thi lich su hien "Game#55" thay vi "Mau Binh".
+        //
+        //  🔴 VIET cc.GameId.MAU_BINH TRONG MA MOI LA SAI — no tra 55, mot game khong con
+        //  bundle. Ban dang muon la XAP_XAM (208). Bay nay DA SAP MOT LAN voi PHOM (xem
+        //  ghi chu o PHOM_CU ben duoi).
+        // ════════════════════════════════════════════════════════════════════════════════
         BA_CAY: '51',
-        CAO_RUA: '117', // Ba Cay be tu Go88 — chay song song voi BA_CAY cu (51) cho toi khi thay han
+        CAO_RUA: '117', // Cao Rua = Ba Cay be tu Go88. Thay han BA_CAY (51) — ban do da bi xoa.
         // Lieng be tu Go88, backend .NET 10. Dung CHUNG mot so voi so sach ben server
         // (Protocol.cs: LiengGo88 = 201) — co y, de khong lap lai canh lech 117-vs-200 cua
         // Cao Rua. So nay la khoa cua TEN_MIEN_THEO_GAME trong cardgame/scripts/GameConfigManager.js.
