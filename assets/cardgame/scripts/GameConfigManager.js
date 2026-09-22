@@ -109,6 +109,8 @@ var TEN_MIEN_THEO_GAME = {
   201: "lieng",
   // Xi To. Backend chua viet; ten mien da dat truoc de khi dung dich vu chi phai dat dung ten.
   202: "xito",
+  // Poker Texas. Ten mien phai khac han ten mien cua POKER_TEXAS (57) cu neu ban cu con song.
+  203: "pokertexas",
 };
 
 /**

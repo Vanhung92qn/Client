@@ -116,5 +116,36 @@ gameDangMo = null;
 soSanh('GameController: khong gui log go roi', cfg.enviromentName.indexOf('pre') >= 0, false);
 soSanh('PopupInvete: khong phai ban 2k', '2k' != cfg.enviromentName, true);
 
+// ── MOI MUC TRONG BANG PHAI GIAI RA DUOC ────────────────────────────────────────────────
+// KHONG liet ke tay tung game o day. Liet ke tay nghia la moi game be sau deu phai nho sua
+// phep thu, va cai gi phai nho thi som muon cung quen — luc do phep thu van bao "TAT CA DUNG"
+// trong khi game moi nhat chua he duoc kiem. Doc thang BANG trong ma nguon roi kiem tung muc.
+console.log('\n=== moi muc trong TEN_MIEN_THEO_GAME phai giai ra duoc ===');
+{
+    const ma = fs.readFileSync(DUONG_DAN, 'utf8');
+    const than = /var TEN_MIEN_THEO_GAME = \{([\s\S]*?)\n\};/.exec(ma);
+    if (!than) {
+        loi++;
+        console.log('SAI  khong doc duoc bang TEN_MIEN_THEO_GAME tu ma nguon');
+    } else {
+        const muc = [...than[1].matchAll(/^\s*(\d+)\s*:\s*"([^"]+)"\s*,/gm)];
+        // Chot chong "phep thu chay tren so khong": neu bieu thuc doc bang hong, muc rong va
+        // vong lap duoi day khong kiem gi ca — ma van im lang di qua.
+        if (muc.length < 2) {
+            loi++;
+            console.log('SAI  bang chi doc duoc %d muc — bieu thuc doc bang hong', muc.length);
+        }
+        const daThay = new Set();
+        for (const [, gid, ten] of muc) {
+            if (daThay.has(gid)) { loi++; console.log('SAI  ma game %s khai HAI LAN', gid); }
+            daThay.add(gid);
+            gameDangMo = gid;
+            soSanh('game ' + gid + ' -> ' + ten, cfg.getWsCardUrl(),
+                'wss://' + ten + '.bay789x.me/websocket');
+        }
+        console.log('   (da kiem %d game)', muc.length);
+    }
+}
+
 console.log('\n' + (loi === 0 ? 'TAT CA DUNG' : loi + ' PHEP SAI'));
 process.exit(loi === 0 ? 0 : 1);

@@ -43,6 +43,10 @@
         // 🔴 Cap phat o day va o Protocol.cs ben server PHAI khop nhau. Cao Rua (117 vs 200) la
         // canh lech duy nhat con lai, do lich su; se gom khi dung lai pager game bai.
         XI_TO: '202',
+        // Poker Texas be tu Go88. CUNG bien the voi POKER_TEXAS (57) cu cua Roy88 — da doi
+        // chieu trong ma: PokerController.js co flop/preflop/blind/dealer. Hai ban chay song
+        // song toi khi dung lai pager, nen bundle phai khac ten: `pokertexas` vs `poker`.
+        POKER_TEXAS_GO: '203',
         PHOM: '52',
         POKER_HK: '53',
         TIEN_LEN_MN: '54',

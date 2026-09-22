@@ -2126,6 +2126,12 @@ var netConfig = require("NetConfig");
           case cc.GameId.XI_TO:
             this.createDynamicView(cc.GameId.XI_TO);
             break;
+          // Poker Texas bê từ Go88. Cùng lý do với Xì Tố: chưa có backend nên chưa có thang
+          // cược, và client nhận thang đó từ server chứ không mang sẵn. Không dựng cổng bằng
+          // một con số tự nghĩ ra.
+          case cc.GameId.POKER_TEXAS_GO:
+            this.createDynamicView(cc.GameId.POKER_TEXAS_GO);
+            break;
           case cc.GameId.MAU_BINH:
             if (cc.BalanceController.getInstance().getBalance() < 30000) {
               cc.PopupController.getInstance().showMessage(
