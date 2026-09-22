@@ -159,6 +159,32 @@
         },
 
         /**
+         * Danh sách BUNDLE DÙNG CHUNG — bundle được khai trong `deps` của ít nhất một game
+         * (cardroom, cardroom_binhthuong, cardroom_chongquay, slots_core…).
+         *
+         * Vì sao API này nằm ở ĐÂY: chỉ tệp này biết `deps`. Nơi khác muốn biết "bundle nào là
+         * hạ tầng dùng chung" thì phải HỎI, không được ghi cứng một danh sách tên — thêm bundle
+         * chung mới là lại phải nhớ sửa, và cái gì phải nhớ thì sớm muộn cũng quên.
+         *
+         * `BundleLoader` dùng nó để cho bundle dùng chung ngưỡng thu hồi dài hơn: nó đắt để tải
+         * lại (cardroom 23 MB) và gần như chắc chắn được dùng lại.
+         *
+         * @returns {string[]} không trùng, theo thứ tự gặp lần đầu
+         */
+        getSharedBundles: function () {
+            _ensureMap();
+            var ra = [];
+            var keys = Object.keys(_map);
+            for (var i = 0; i < keys.length; i++) {
+                var deps = _map[keys[i]].deps || [];
+                for (var k = 0; k < deps.length; k++) {
+                    if (ra.indexOf(deps[k]) < 0) ra.push(deps[k]);
+                }
+            }
+            return ra;
+        },
+
+        /**
          * [DEBUG] Trả về danh sách toàn bộ configs đã đăng ký.
          * Chỉ dùng trong development/debug, không gọi ở production.
          * @returns {Array}

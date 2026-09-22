@@ -33,6 +33,11 @@
             this._activeGame = null;       // bundle game ĐANG mở → GC né, không release (tránh vỡ game)
             this._activeDeps = [];         // deps của game đang mở → GC cũng phải né (xem gcIdleBundles)
             this._idleThreshold = 45000;   // 45s không dùng → auto release (giảm từ 120s: iOS RAM)
+            // Bundle DÙNG CHUNG (cardroom, cardroom_binhthuong, slots_core…) sống lâu hơn hẳn:
+            // nó đắt để tải lại (cardroom 23 MB) và chắc chắn được dùng lại nếu người chơi còn
+            // ở khu game bài. 5 phút — vẫn thu hồi được nếu họ bỏ đi thật.
+            this._idleThresholdDungChung = 300000;
+            this._dsDungChung = null;      // nhớ sau lần tra đầu (đọc từ GameBundleConfig)
             this._gcInterval = 30000;      // Check GC mỗi 30s
             this._gcScheduled = false;     // Flag để tránh schedule nhiều lần
             
@@ -99,25 +104,45 @@
                 callback && callback(err, bundle);
             };
 
-            // [#1] Tải deps + bundle game SONG SONG (trước đây tuần tự) → cold-open
-            //  nhanh hơn (deps không phải chờ nhau). silent=true: không hiện busy
-            //  spinner ở đây vì LobbyView đã có thanh loading THẬT (tránh 2 chỉ báo).
-            var all = deps.concat([bundleName]);
-            var loadedCount = 0;
-            this._loadBundlesParallel(all, function (err) {
-                if (err) { onAllDone(err, null); return; }
+            // ── 🔴 DEPS PHẢI NẠP XONG TRƯỚC BUNDLE GAME — KHÔNG ĐƯỢC SONG SONG ──────────
+            //
+            // Trước đây chỗ này nạp deps + bundle game SONG SONG cho cold-open nhanh hơn. Điều
+            // đó an toàn CHỪNG NÀO bundle chỉ chứa TÀI SẢN. Từ lúc bundle chứa SCRIPT thì không
+            // còn an toàn, và cách nó hỏng là thứ tệ nhất: NGẪU NHIÊN THEO TỐC ĐỘ MẠNG.
+            //
+            // Cơ chế, đọc thẳng từ bản build (`build/web-mobile/assets/main/index.*.js`):
+            //     var a = "function" == typeof __require && __require;   // require của gói nạp TRƯỚC
+            //     if (!u && a) return a(b, !0);                          // không thấy thì hỏi gói đó
+            // Mỗi gói bắt lấy `__require` của gói nạp NGAY TRƯỚC làm dự phòng ⇒ một CHUỖI THEO
+            // THỨ TỰ NẠP. Gói nạp sau với tới được gói nạp trước, KHÔNG ngược lại.
+            //
+            // Nên nếu `index.js` của bundle game chạy trước `cardroom`, chuỗi dự phòng của nó
+            // không có cardroom, và mọi `require` sang script dùng chung ném
+            // "Cannot find module" — ở một tệp khác hẳn tệp vừa sửa. Máy nhanh không tái hiện.
+            //
+            // Deps cũng nạp TUẦN TỰ theo đúng thứ tự khai, vì dep sau có thể cần dep trước.
+            // Giá: thêm 1–2 lượt đi-về lúc mở game LẦN ĐẦU; sau đó bundle nằm trong cache.
+            // Đổi lại một lớp lỗi không tái hiện được — đáng.
+            var tongBuoc = deps.length + 1;
+            var self2 = this;
+            this._loadBundlesSequential(deps, function (errDeps) {
+                if (errDeps) { onAllDone(errDeps, null); return; }
+                onProgress && onProgress(deps.length / tongBuoc);
                 if (logEnabled) {
                     var dtDeps = Date.now() - t0;
-                    console.log('[GAME] DEPS_DONE', label, '+' + dtDeps + 'ms (parallel)');
+                    console.log('[GAME] DEPS_DONE', label, '+' + dtDeps + 'ms (tuần tự)');
                     if (typeof window !== 'undefined') {
                         window.__GAME_LOG__.push({ t: dtDeps, tag: 'DEPS_DONE', game: label, deps: deps });
                     }
                 }
-                onAllDone(null, cc.assetManager.getBundle(bundleName));
-            }, function () {
-                loadedCount++;
-                onProgress && onProgress(loadedCount / all.length);
-            }, true);
+                self2._loadSingleBundle(bundleName, function (err) {
+                    if (err) { onAllDone(err, null); return; }
+                    onProgress && onProgress(1);
+                    onAllDone(null, cc.assetManager.getBundle(bundleName));
+                }, true);
+            }, function (xong) {
+                onProgress && onProgress(xong / tongBuoc);
+            }, true /* silent: LobbyView đã có thanh loading THẬT, tránh 2 chỉ báo */);
         };
 
         // Mac dinh BAT log. Opt-out: ?gamelog=0 hoac localStorage 'gamelog' = '0'.
@@ -169,9 +194,13 @@
             if (cc.assetManager.getBundle(config.bundleName)) { this._markUsed(config.bundleName); done && done(); return; }
 
             var self = this;
+            // 🔴 Cũng phải TUẦN TỰ, cùng lý do với `loadGame`: chuỗi `__require` của các gói
+            // được dựng theo THỨ TỰ NẠP. Prefetch mà nạp bundle game trước dep của nó thì
+            // module nằm trong dep không bao giờ tra được — và vì đây là đường chạy NGẦM,
+            // lỗi sẽ hiện ra lúc người chơi bấm vào game chứ không phải lúc prefetch.
             var all = (config.deps || []).concat([config.bundleName]);
             console.log('[BundleLoader] Prefetch (ngầm): ' + config.bundleName);
-            this._loadBundlesParallel(all, function (err) {
+            this._loadBundlesSequential(all, function (err) {
                 if (err) console.warn('[BundleLoader] Prefetch lỗi: ' + config.bundleName, err);
                 else { self._markUsed(config.bundleName); console.log('[BundleLoader] Prefetch xong: ' + config.bundleName); }
                 done && done();
@@ -263,6 +292,26 @@
         };
 
         /**
+         * Bundle này có phải BUNDLE DÙNG CHUNG không — tức được khai trong `deps` của ít nhất
+         * một game. Đọc thẳng từ `GameBundleConfig` chứ KHÔNG ghi cứng danh sách tên: thêm
+         * bundle chung mới (như `cardroom_binhthuong`, `cardroom_chongquay`) thì không phải
+         * nhớ sửa chỗ này — và cái gì phải nhớ thì sớm muộn cũng quên.
+         */
+        BundleLoader.prototype._laBundleDungChung = function (bundleName) {
+            if (this._dsDungChung) return this._dsDungChung.indexOf(bundleName) >= 0;
+            var ds = null;
+            try {
+                if (cc.GameBundleConfig && cc.GameBundleConfig.getSharedBundles) {
+                    ds = cc.GameBundleConfig.getSharedBundles();
+                }
+            } catch (e) { /* config chưa dựng xong — lần GC sau hỏi lại */ }
+            // Chưa hỏi được thì coi như bundle thường: thu hồi sớm còn hơn giữ nhầm RAM.
+            if (!ds || !ds.length) return false;
+            this._dsDungChung = ds;
+            return ds.indexOf(bundleName) >= 0;
+        };
+
+        /**
          * Garbage collect idle bundles - giải phóng bundle không dùng lâu
          * 🎯 Đây là CORE của memory management trong game production
          */
@@ -296,9 +345,26 @@
                     continue;
                 }
 
+                // 🔴 BUNDLE DÙNG CHUNG ĐƯỢC SỐNG LÂU HƠN BUNDLE GAME.
+                //
+                // Lá chắn `_activeDeps` ở trên chỉ che khi ĐANG Ở TRONG GAME. Lúc người chơi
+                // thoát ra sảnh, `releaseGame` đặt `_activeGame = null` ⇒ lá chắn mất ⇒ 45 giây
+                // sau `cardroom` bị thu hồi. Mở game bài thứ hai là tải lại 23 MB.
+                //
+                // Triệu chứng người chơi thấy: "game bài thứ hai mở chậm hơn game đầu" — rất dễ
+                // bị đổ oan cho mạng hoặc cho server.
+                //
+                // Bundle dùng chung khác bundle game ở hai điểm: nó ĐẮT để tải lại, và nó CHẮC
+                // CHẮN được dùng lại nếu người chơi còn ở khu game bài. Nên cho nó ngưỡng dài
+                // hơn hẳn thay vì ghim vĩnh viễn — vẫn thu hồi được nếu người chơi bỏ đi thật,
+                // không phá mục tiêu tiết kiệm RAM trên iOS.
+                var nguong = this._laBundleDungChung(bundleName)
+                    ? this._idleThresholdDungChung
+                    : this._idleThreshold;
+
                 // Nếu idle quá lâu → release
                 var idleTime = now - this._lastUsed[bundleName];
-                if (idleTime > this._idleThreshold) {
+                if (idleTime > nguong) {
                     console.log('[BundleLoader] GC: Releasing idle bundle "' + bundleName + '" (idle: ' + Math.round(idleTime/1000) + 's)');
                     this._releaseSingleBundle(bundleName);
                     delete this._lastUsed[bundleName];
@@ -392,7 +458,9 @@
         // ─────────────────────────────────────────────────────
         //  PRIVATE: Load một danh sách bundles tuần tự (deps)
         // ─────────────────────────────────────────────────────
-        BundleLoader.prototype._loadBundlesSequential = function (bundleNames, callback) {
+        // `onEach` gọi sau MỖI bundle xong (để vẽ tiến độ); `silent` = không bật vòng xoay
+        // (đường prefetch ngầm và đường có thanh loading riêng đều cần im lặng).
+        BundleLoader.prototype._loadBundlesSequential = function (bundleNames, callback, onEach, silent) {
             var self = this;
             var index = 0;
 
@@ -404,32 +472,12 @@
                 var name = bundleNames[index++];
                 self._loadSingleBundle(name, function (err) {
                     if (err) { callback && callback(err); return; }
+                    onEach && onEach(index, bundleNames.length);
                     loadNext();
-                });
+                }, silent);
             }
 
             loadNext();
-        };
-
-        // ─────────────────────────────────────────────────────
-        //  [#1] PRIVATE: Load danh sách bundles SONG SONG (cold-open nhanh hơn).
-        //  callback(err) khi TẤT CẢ xong (hoặc lỗi đầu tiên). onEach(name) gọi
-        //  mỗi khi 1 bundle xong (để báo progress). silent: không hiện busy.
-        // ─────────────────────────────────────────────────────
-        BundleLoader.prototype._loadBundlesParallel = function (bundleNames, callback, onEach, silent) {
-            if (!bundleNames || !bundleNames.length) { callback && callback(null); return; }
-            var self = this;
-            var remaining = bundleNames.length;
-            var errored = false;
-            bundleNames.forEach(function (name) {
-                self._loadSingleBundle(name, function (err) {
-                    if (errored) return;
-                    if (err) { errored = true; callback && callback(err); return; }
-                    onEach && onEach(name);
-                    remaining--;
-                    if (remaining === 0) callback && callback(null);
-                }, silent);
-            });
         };
 
         // ─────────────────────────────────────────────────────
