@@ -83,7 +83,15 @@ var a = cc._decorator,
     };
     o([r(cc.Node)], e.prototype, "textSpr", void 0);
     o([r(cc.SpriteAtlas)], e.prototype, "textureAtlas", void 0);
-    o([r(String)], e.prototype, "prefix", void 0);
+    // 🔴 cc.String, KHÔNG phải String thuần của JavaScript.
+    //
+    // Cocos 2.4 từ chối thẳng: The type of "TextToImage.prefix" must be cc.String, not String.
+    // Bản dịch ngược sinh ra `String` vì mã TypeScript gốc khai `@property` với kiểu `string`,
+    // và bộ dịch ngược ánh xạ nó sang hàm dựng của JavaScript. Cả ba kiểu nguyên thuỷ đều dính:
+    //   String → cc.String · Number → cc.Float (hoặc cc.Integer) · Boolean → cc.Boolean
+    //
+    // Đã soát toàn bộ script đã bê: đây là chỗ DUY NHẤT.
+    o([r(cc.String)], e.prototype, "prefix", void 0);
     return e = o([s], e);
   }(cc.Component);
 i.default = c;
