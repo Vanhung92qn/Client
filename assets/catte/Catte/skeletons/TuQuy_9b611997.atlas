@@ -1,0 +1,27 @@
+
+TuQuy_9b611997.png
+size: 560,558
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+A1
+  rotate: false
+  xy: 2, 331
+  size: 556, 225
+  orig: 556, 225
+  offset: 0, 0
+  index: -1
+A2
+  rotate: false
+  xy: 2, 104
+  size: 556, 225
+  orig: 556, 225
+  offset: 0, 0
+  index: -1
+Light
+  rotate: false
+  xy: 2, 32
+  size: 99, 70
+  orig: 99, 70
+  offset: 0, 0
+  index: -1

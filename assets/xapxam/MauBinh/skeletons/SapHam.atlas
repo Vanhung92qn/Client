@@ -1,0 +1,55 @@
+
+SapHam.png
+size: 196,196
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+A1
+  rotate: false
+  xy: 2, 150
+  size: 150, 44
+  orig: 150, 44
+  offset: 0, 0
+  index: -1
+A2
+  rotate: false
+  xy: 2, 104
+  size: 150, 44
+  orig: 150, 44
+  offset: 0, 0
+  index: -1
+Border
+  rotate: false
+  xy: 2, 64
+  size: 110, 38
+  orig: 110, 38
+  offset: 0, 0
+  index: -1
+Light
+  rotate: false
+  xy: 154, 176
+  size: 25, 18
+  orig: 25, 18
+  offset: 0, 0
+  index: -1
+THUA
+  rotate: false
+  xy: 2, 33
+  size: 91, 29
+  orig: 91, 29
+  offset: 0, 0
+  index: -1
+THUA2
+  rotate: false
+  xy: 2, 2
+  size: 91, 29
+  orig: 91, 29
+  offset: 0, 0
+  index: -1
+ThuaSapHam
+  rotate: false
+  xy: 114, 53
+  size: 49, 49
+  orig: 49, 49
+  offset: 0, 0
+  index: -1

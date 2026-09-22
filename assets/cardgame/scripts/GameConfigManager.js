@@ -111,6 +111,11 @@ var TEN_MIEN_THEO_GAME = {
   202: "xito",
   // Poker Texas. Ten mien phai khac han ten mien cua POKER_TEXAS (57) cu neu ban cu con song.
   203: "pokertexas",
+  204: "catte", // Catte (Cat te)
+  205: "phom", // Phom
+  206: "tlmn", // Tien Len Mien Nam
+  207: "samloc", // Sam Loc
+  208: "xapxam", // Mau Binh (Xap Xam)
 };
 
 /**

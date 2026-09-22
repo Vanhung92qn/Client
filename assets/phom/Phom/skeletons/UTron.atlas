@@ -1,0 +1,83 @@
+
+UTron.png
+size: 326,326
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+1
+  rotate: true
+  xy: 256, 35
+  size: 39, 58
+  orig: 39, 58
+  offset: 0, 0
+  index: -1
+2
+  rotate: true
+  xy: 102, 79
+  size: 37, 48
+  orig: 37, 48
+  offset: 0, 0
+  index: -1
+3
+  rotate: true
+  xy: 2, 77
+  size: 39, 48
+  orig: 39, 48
+  offset: 0, 0
+  index: -1
+4
+  rotate: false
+  xy: 210, 58
+  size: 44, 58
+  orig: 44, 58
+  offset: 0, 0
+  index: -1
+5
+  rotate: true
+  xy: 52, 78
+  size: 38, 48
+  orig: 38, 48
+  offset: 0, 0
+  index: -1
+7
+  rotate: true
+  xy: 189, 118
+  size: 206, 72
+  orig: 206, 72
+  offset: 0, 0
+  index: -1
+8
+  rotate: false
+  xy: 2, 2
+  size: 206, 72
+  orig: 206, 72
+  offset: 0, 0
+  index: -1
+Blur
+  rotate: true
+  xy: 263, 76
+  size: 71, 54
+  orig: 71, 54
+  offset: 0, 0
+  index: -1
+Border
+  rotate: true
+  xy: 263, 149
+  size: 175, 60
+  orig: 175, 60
+  offset: 0, 0
+  index: -1
+efWin
+  rotate: false
+  xy: 2, 145
+  size: 185, 179
+  orig: 185, 179
+  offset: 0, 0
+  index: -1
+light
+  rotate: false
+  xy: 210, 10
+  size: 41, 46
+  orig: 41, 46
+  offset: 0, 0
+  index: -1

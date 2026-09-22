@@ -1,0 +1,55 @@
+
+6 La Nho Hon 6.png
+size: 731,729
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+1
+  rotate: false
+  xy: 409, 314
+  size: 79, 115
+  orig: 79, 115
+  offset: 0, 0
+  index: -1
+2
+  rotate: false
+  xy: 514, 455
+  size: 69, 114
+  orig: 69, 114
+  offset: 0, 0
+  index: -1
+3
+  rotate: false
+  xy: 2, 29
+  size: 101, 136
+  orig: 101, 136
+  offset: 0, 0
+  index: -1
+A1
+  rotate: false
+  xy: 2, 369
+  size: 405, 200
+  orig: 405, 200
+  offset: 0, 0
+  index: -1
+A11
+  rotate: false
+  xy: 2, 571
+  size: 727, 156
+  orig: 727, 156
+  offset: 0, 0
+  index: -1
+A2
+  rotate: false
+  xy: 2, 167
+  size: 405, 200
+  orig: 405, 200
+  offset: 0, 0
+  index: -1
+Light
+  rotate: false
+  xy: 409, 431
+  size: 103, 138
+  orig: 103, 138
+  offset: 0, 0
+  index: -1

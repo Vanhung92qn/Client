@@ -1,0 +1,167 @@
+[
+  {
+    "__type__": "cc.Prefab",
+    "_name": "PhomRank",
+    "data": {
+      "__id__": 1
+    }
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "PhomRank",
+    "_children": [
+      {
+        "__id__": 2
+      }
+    ],
+    "_level": 1,
+    "_components": [
+      {
+        "__id__": 4
+      }
+    ],
+    "_prefab": {
+      "__id__": 5
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 171,
+      "height": 42
+    },
+    "_trs": {
+      "__type__": "TypedArray",
+      "ctor": "Float64Array",
+      "array": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1
+      ]
+    }
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "Spine",
+    "_parent": {
+      "__id__": 1
+    },
+    "_level": 2,
+    "_components": [
+      {
+        "__id__": 3
+      }
+    ],
+    "_prefab": {
+      "__id__": 6
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 462,
+      "height": 447
+    },
+    "_trs": {
+      "__type__": "TypedArray",
+      "ctor": "Float64Array",
+      "array": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0.25,
+        0.25,
+        1
+      ]
+    }
+  },
+  {
+    "__type__": "sp.Skeleton",
+    "node": {
+      "__id__": 2
+    },
+    "_materials": [
+      {
+        "__uuid__": "7afd064b-113f-480e-b793-8817d19f63c3"
+      }
+    ],
+    "_preCacheMode": 0,
+    "_N$skeletonData": {
+      "__uuid__": "a463b9a0-1ec7-4392-a0d9-b7cffdccf089"
+    }
+  },
+  {
+    "__type__": "0164fy3DZlJEKIAlrgbLwji",
+    "node": {
+      "__id__": 1
+    },
+    "listEffect": [
+      {
+        "__uuid__": "9c61a659-7108-4efe-8855-4865857ea1c2"
+      },
+      {
+        "__uuid__": "1bdf994d-b6a2-447f-a48d-ec9e374f10da"
+      },
+      {
+        "__uuid__": "ff0a27c8-e2e4-49b4-a31f-a937e2abbab5"
+      },
+      {
+        "__uuid__": "84dfcd7a-f6a5-476a-915f-1944f57ac5db"
+      },
+      {
+        "__uuid__": "3df82e81-c3b1-4206-8dfe-48b15f56f10d"
+      },
+      {
+        "__uuid__": "eda7a517-e858-4439-a0f1-a118d8956d37"
+      },
+      {
+        "__uuid__": "e18b77ae-db11-49ba-97e3-74d0c5baff4f"
+      },
+      {
+        "__uuid__": "240708b1-e2b4-4ffb-8f30-8ab3a6e33bd3"
+      },
+      {
+        "__uuid__": "b2c4febe-9d5f-4b5f-b7f4-7003140510d1"
+      },
+      {
+        "__uuid__": "a463b9a0-1ec7-4392-a0d9-b7cffdccf089"
+      },
+      {
+        "__uuid__": "8535b136-fb63-4053-93fb-4a3c24254341"
+      },
+      {
+        "__uuid__": "2b0f2d01-7ffd-405b-985a-d13efb8f0601"
+      }
+    ],
+    "spine": {
+      "__id__": 3
+    }
+  },
+  {
+    "__type__": "cc.PrefabInfo",
+    "root": {
+      "__id__": 1
+    },
+    "asset": {
+      "__uuid__": "3903acad-cf76-4826-87b9-3fc41ac286fa"
+    },
+    "fileId": "8889ZxUQpOR5bQz+JOXSg9"
+  },
+  {
+    "__type__": "cc.PrefabInfo",
+    "root": {
+      "__id__": 1
+    },
+    "asset": {
+      "__uuid__": "3903acad-cf76-4826-87b9-3fc41ac286fa"
+    },
+    "fileId": "cd//ohRvxBoaOcOo8SAkoI"
+  }
+]

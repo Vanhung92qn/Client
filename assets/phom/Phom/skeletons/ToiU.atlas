@@ -1,0 +1,41 @@
+
+ToiU.png
+size: 245,245
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+A1
+  rotate: false
+  xy: 189, 112
+  size: 39, 58
+  orig: 39, 58
+  offset: 0, 0
+  index: -1
+Blur
+  rotate: true
+  xy: 189, 172
+  size: 71, 54
+  orig: 71, 54
+  offset: 0, 0
+  index: -1
+Border
+  rotate: false
+  xy: 2, 2
+  size: 175, 60
+  orig: 175, 60
+  offset: 0, 0
+  index: -1
+Light
+  rotate: true
+  xy: 189, 70
+  size: 40, 28
+  orig: 40, 28
+  offset: 0, 0
+  index: -1
+efWin
+  rotate: false
+  xy: 2, 64
+  size: 185, 179
+  orig: 185, 179
+  offset: 0, 0
+  index: -1

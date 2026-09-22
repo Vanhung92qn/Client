@@ -1,0 +1,48 @@
+
+3DoiThong_3Bich.png
+size: 358,356
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+3ich
+  rotate: false
+  xy: 283, 254
+  size: 73, 100
+  orig: 73, 100
+  offset: 0, 0
+  index: -1
+A1
+  rotate: false
+  xy: 2, 47
+  size: 222, 126
+  orig: 222, 126
+  offset: 0, 0
+  index: -1
+A2
+  rotate: true
+  xy: 226, 21
+  size: 222, 126
+  orig: 222, 126
+  offset: 0, 0
+  index: -1
+Bich
+  rotate: false
+  xy: 189, 245
+  size: 92, 109
+  orig: 92, 109
+  offset: 0, 0
+  index: -1
+Light
+  rotate: true
+  xy: 2, 4
+  size: 41, 55
+  orig: 41, 55
+  offset: 0, 0
+  index: -1
+efWin
+  rotate: false
+  xy: 2, 175
+  size: 185, 179
+  orig: 185, 179
+  offset: 0, 0
+  index: -1

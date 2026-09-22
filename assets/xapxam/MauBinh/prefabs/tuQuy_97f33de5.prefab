@@ -1,0 +1,126 @@
+[
+  {
+    "__type__": "cc.Prefab",
+    "_name": "tuQuy",
+    "data": {
+      "__id__": 1
+    }
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "tuQuy",
+    "_children": [
+      {
+        "__id__": 2
+      }
+    ],
+    "_level": 6,
+    "_components": [
+      {
+        "__id__": 3
+      }
+    ],
+    "_prefab": {
+      "__id__": 4
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 213,
+      "height": 54
+    },
+    "_zIndex": 0,
+    "_trs": {
+      "__type__": "TypedArray",
+      "ctor": "Float64Array",
+      "array": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1
+      ]
+    }
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "New Node",
+    "_parent": {
+      "__id__": 1
+    },
+    "_level": 3,
+    "_components": [
+      {
+        "__id__": 5
+      }
+    ],
+    "_prefab": {
+      "__id__": 6
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 706,
+      "height": 246
+    },
+    "_zIndex": 0,
+    "_trs": {
+      "__type__": "TypedArray",
+      "ctor": "Float64Array",
+      "array": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0.25,
+        0.25,
+        0.25
+      ]
+    }
+  },
+  {
+    "__type__": "cc.Sprite",
+    "node": {
+      "__id__": 1
+    },
+    "_spriteFrame": {
+      "__uuid__": "e53d19d0-8b08-4c66-a2b4-22dabd773d7a"
+    }
+  },
+  {
+    "__type__": "cc.PrefabInfo",
+    "root": {
+      "__id__": 1
+    },
+    "asset": {
+      "__uuid__": "97f33de5-08f5-4fbf-ad98-98a1f3efc5fb"
+    },
+    "fileId": "946ZHM77xMPIZaXF2fgBXM"
+  },
+  {
+    "__type__": "sp.Skeleton",
+    "node": {
+      "__id__": 2
+    },
+    "defaultAnimation": "animation",
+    "_N$skeletonData": {
+      "__uuid__": "f8a7fa0b-9095-4bee-b72f-20960dd53b8c"
+    }
+  },
+  {
+    "__type__": "cc.PrefabInfo",
+    "root": {
+      "__id__": 1
+    },
+    "asset": {
+      "__uuid__": "97f33de5-08f5-4fbf-ad98-98a1f3efc5fb"
+    },
+    "fileId": "4eqfM37H9D+7kPZUN+CM+3"
+  }
+]

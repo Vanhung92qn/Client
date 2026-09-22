@@ -1,0 +1,132 @@
+
+SanhRong.png
+size: 526,526
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+1
+  rotate: true
+  xy: 42, 2
+  size: 33, 48
+  orig: 33, 48
+  offset: 0, 0
+  index: -1
+2
+  rotate: false
+  xy: 418, 277
+  size: 40, 60
+  orig: 40, 60
+  offset: 0, 0
+  index: -1
+3
+  rotate: false
+  xy: 418, 229
+  size: 32, 46
+  orig: 32, 46
+  offset: 0, 0
+  index: -1
+4
+  rotate: true
+  xy: 92, 2
+  size: 33, 46
+  orig: 33, 46
+  offset: 0, 0
+  index: -1
+5
+  rotate: false
+  xy: 303, 340
+  size: 34, 46
+  orig: 34, 46
+  offset: 0, 0
+  index: -1
+6
+  rotate: false
+  xy: 2, 7
+  size: 38, 61
+  orig: 38, 61
+  offset: 0, 0
+  index: -1
+7
+  rotate: true
+  xy: 418, 195
+  size: 32, 46
+  orig: 32, 46
+  offset: 0, 0
+  index: -1
+8
+  rotate: false
+  xy: 303, 388
+  size: 35, 48
+  orig: 35, 48
+  offset: 0, 0
+  index: -1
+A1
+  rotate: true
+  xy: 2, 127
+  size: 309, 61
+  orig: 309, 61
+  offset: 0, 0
+  index: -1
+A2
+  rotate: false
+  xy: 2, 438
+  size: 338, 86
+  orig: 338, 86
+  offset: 0, 0
+  index: -1
+Dragon
+  rotate: true
+  xy: 65, 238
+  size: 198, 125
+  orig: 198, 125
+  offset: 0, 0
+  index: -1
+Dragon1A
+  rotate: true
+  xy: 303, 143
+  size: 194, 113
+  orig: 194, 113
+  offset: 0, 0
+  index: -1
+Dragon2
+  rotate: true
+  xy: 65, 37
+  size: 199, 113
+  orig: 199, 113
+  offset: 0, 0
+  index: -1
+Dragon2A
+  rotate: false
+  xy: 290, 31
+  size: 205, 110
+  orig: 205, 110
+  offset: 0, 0
+  index: -1
+Dragon3
+  rotate: true
+  xy: 192, 219
+  size: 217, 109
+  orig: 217, 109
+  offset: 0, 0
+  index: -1
+Dragon4
+  rotate: true
+  xy: 180, 4
+  size: 213, 108
+  orig: 213, 108
+  offset: 0, 0
+  index: -1
+Light
+  rotate: false
+  xy: 2, 70
+  size: 41, 55
+  orig: 41, 55
+  offset: 0, 0
+  index: -1
+efWin
+  rotate: true
+  xy: 342, 339
+  size: 185, 179
+  orig: 185, 179
+  offset: 0, 0
+  index: -1

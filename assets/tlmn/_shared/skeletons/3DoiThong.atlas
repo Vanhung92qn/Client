@@ -1,0 +1,27 @@
+
+3DoiThong.png
+size: 269,267
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+A1
+  rotate: false
+  xy: 2, 139
+  size: 222, 126
+  orig: 222, 126
+  offset: 0, 0
+  index: -1
+A2
+  rotate: false
+  xy: 2, 11
+  size: 222, 126
+  orig: 222, 126
+  offset: 0, 0
+  index: -1
+Light
+  rotate: false
+  xy: 226, 210
+  size: 41, 55
+  orig: 41, 55
+  offset: 0, 0
+  index: -1

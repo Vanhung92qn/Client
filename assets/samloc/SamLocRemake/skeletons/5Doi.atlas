@@ -1,0 +1,69 @@
+
+5Doi.png
+size: 269,269
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+1
+  rotate: false
+  xy: 153, 40
+  size: 30, 46
+  orig: 30, 46
+  offset: 0, 0
+  index: -1
+2
+  rotate: true
+  xy: 153, 2
+  size: 36, 46
+  orig: 36, 46
+  offset: 0, 0
+  index: -1
+3
+  rotate: true
+  xy: 185, 46
+  size: 38, 56
+  orig: 38, 56
+  offset: 0, 0
+  index: -1
+4
+  rotate: false
+  xy: 247, 221
+  size: 11, 46
+  orig: 11, 46
+  offset: 0, 0
+  index: -1
+5
+  rotate: true
+  xy: 189, 142
+  size: 125, 56
+  orig: 125, 56
+  offset: 0, 0
+  index: -1
+6
+  rotate: false
+  xy: 2, 11
+  size: 149, 75
+  orig: 149, 75
+  offset: 0, 0
+  index: -1
+Blur
+  rotate: false
+  xy: 189, 86
+  size: 71, 54
+  orig: 71, 54
+  offset: 0, 0
+  index: -1
+Light
+  rotate: false
+  xy: 201, 8
+  size: 40, 36
+  orig: 40, 36
+  offset: 0, 0
+  index: -1
+efWin
+  rotate: false
+  xy: 2, 88
+  size: 185, 179
+  orig: 185, 179
+  offset: 0, 0
+  index: -1

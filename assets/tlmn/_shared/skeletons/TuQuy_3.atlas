@@ -1,0 +1,41 @@
+
+TuQuy_3.png
+size: 215,215
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+2A
+  rotate: false
+  xy: 2, 2
+  size: 73, 100
+  orig: 73, 100
+  offset: 0, 0
+  index: -1
+2B
+  rotate: false
+  xy: 77, 2
+  size: 73, 100
+  orig: 73, 100
+  offset: 0, 0
+  index: -1
+A1
+  rotate: false
+  xy: 2, 104
+  size: 204, 52
+  orig: 204, 52
+  offset: 0, 0
+  index: -1
+A2
+  rotate: false
+  xy: 2, 158
+  size: 206, 55
+  orig: 206, 55
+  offset: 0, 0
+  index: -1
+Light
+  rotate: false
+  xy: 152, 74
+  size: 40, 28
+  orig: 40, 28
+  offset: 0, 0
+  index: -1

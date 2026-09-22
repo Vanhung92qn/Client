@@ -1,0 +1,55 @@
+
+AnSam.png
+size: 239,237
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+1
+  rotate: false
+  xy: 2, 13
+  size: 74, 54
+  orig: 74, 54
+  offset: 0, 0
+  index: -1
+2
+  rotate: true
+  xy: 179, 7
+  size: 114, 55
+  orig: 114, 55
+  offset: 0, 0
+  index: -1
+4
+  rotate: false
+  xy: 2, 180
+  size: 205, 55
+  orig: 205, 55
+  offset: 0, 0
+  index: -1
+5
+  rotate: false
+  xy: 2, 123
+  size: 205, 55
+  orig: 205, 55
+  offset: 0, 0
+  index: -1
+Blur
+  rotate: false
+  xy: 78, 13
+  size: 71, 54
+  orig: 71, 54
+  offset: 0, 0
+  index: -1
+Border
+  rotate: false
+  xy: 2, 69
+  size: 175, 52
+  orig: 175, 52
+  offset: 0, 0
+  index: -1
+Light
+  rotate: true
+  xy: 209, 195
+  size: 40, 28
+  orig: 40, 28
+  offset: 0, 0
+  index: -1

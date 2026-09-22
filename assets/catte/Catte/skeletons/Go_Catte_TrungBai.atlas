@@ -1,0 +1,132 @@
+
+Go_Catte_TrungBai.png
+size: 441,441
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Banner
+  rotate: false
+  xy: 2, 387
+  size: 282, 52
+  orig: 282, 52
+  offset: 0, 0
+  index: -1
+Banner1
+  rotate: false
+  xy: 2, 291
+  size: 236, 51
+  orig: 236, 51
+  offset: 0, 0
+  index: -1
+Banner2
+  rotate: false
+  xy: 2, 212
+  size: 205, 38
+  orig: 205, 38
+  offset: 0, 0
+  index: -1
+Bich
+  rotate: false
+  xy: 233, 2
+  size: 110, 118
+  orig: 110, 118
+  offset: 0, 0
+  index: -1
+Chuon
+  rotate: false
+  xy: 2, 91
+  size: 117, 119
+  orig: 117, 119
+  offset: 0, 0
+  index: -1
+Co
+  rotate: true
+  xy: 121, 91
+  size: 119, 110
+  orig: 119, 110
+  offset: 0, 0
+  index: -1
+Cup
+  rotate: false
+  xy: 240, 242
+  size: 123, 61
+  orig: 123, 61
+  offset: 0, 0
+  index: -1
+GietTung
+  rotate: false
+  xy: 286, 366
+  size: 140, 27
+  orig: 140, 27
+  offset: 0, 0
+  index: -1
+Ro
+  rotate: false
+  xy: 233, 122
+  size: 112, 118
+  orig: 112, 118
+  offset: 0, 0
+  index: -1
+TrungBich
+  rotate: false
+  xy: 2, 252
+  size: 220, 37
+  orig: 220, 37
+  offset: 0, 0
+  index: -1
+TrungChuon
+  rotate: false
+  xy: 2, 344
+  size: 264, 41
+  orig: 264, 41
+  offset: 0, 0
+  index: -1
+TrungCo
+  rotate: false
+  xy: 240, 305
+  size: 188, 31
+  orig: 188, 31
+  offset: 0, 0
+  index: -1
+TrungRo
+  rotate: false
+  xy: 2, 6
+  size: 187, 37
+  orig: 187, 37
+  offset: 0, 0
+  index: -1
+VangTung
+  rotate: false
+  xy: 268, 338
+  size: 156, 26
+  orig: 156, 26
+  offset: 0, 0
+  index: -1
+XoBich
+  rotate: false
+  xy: 286, 395
+  size: 145, 44
+  orig: 145, 44
+  offset: 0, 0
+  index: -1
+XoChuon
+  rotate: false
+  xy: 2, 45
+  size: 189, 44
+  orig: 189, 44
+  offset: 0, 0
+  index: -1
+XoCo
+  rotate: true
+  xy: 347, 127
+  size: 113, 44
+  orig: 113, 44
+  offset: 0, 0
+  index: -1
+XoRo
+  rotate: true
+  xy: 345, 8
+  size: 112, 44
+  orig: 112, 44
+  offset: 0, 0
+  index: -1

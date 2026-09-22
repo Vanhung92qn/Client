@@ -1,0 +1,27 @@
+
+XamChi.png
+size: 154,152
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+A1
+  rotate: false
+  xy: 2, 115
+  size: 150, 35
+  orig: 150, 35
+  offset: 0, 0
+  index: -1
+A2
+  rotate: false
+  xy: 2, 78
+  size: 150, 35
+  orig: 150, 35
+  offset: 0, 0
+  index: -1
+Light
+  rotate: false
+  xy: 2, 58
+  size: 25, 18
+  orig: 25, 18
+  offset: 0, 0
+  index: -1

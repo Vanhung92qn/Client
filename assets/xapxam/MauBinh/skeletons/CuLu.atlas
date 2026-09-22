@@ -1,0 +1,27 @@
+
+CuLu.png
+size: 111,109
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+A1
+  rotate: false
+  xy: 2, 66
+  size: 107, 41
+  orig: 107, 41
+  offset: 0, 0
+  index: -1
+A2
+  rotate: false
+  xy: 2, 23
+  size: 107, 41
+  orig: 107, 41
+  offset: 0, 0
+  index: -1
+Light
+  rotate: false
+  xy: 2, 3
+  size: 25, 18
+  orig: 25, 18
+  offset: 0, 0
+  index: -1

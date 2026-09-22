@@ -47,7 +47,16 @@
         // chieu trong ma: PokerController.js co flop/preflop/blind/dealer. Hai ban chay song
         // song toi khi dung lai pager, nen bundle phai khac ten: `pokertexas` vs `poker`.
         POKER_TEXAS_GO: '203',
-        PHOM: '52',
+        CATTE: '204', // Catte (Cat te)
+        PHOM_GO: '205', // Phom
+        TLMN_GO: '206', // Tien Len Mien Nam
+        SAM_LOC_GO: '207', // Sam Loc
+        XAP_XAM: '208', // Mau Binh (Xap Xam)
+        // 🔴 Doi ten y het truong hop LIENG_CU: game Phom .NET Framework nay da chet va
+        // khong dong nao tham chieu toi. Giu ten "PHOM" la dat bay — va bay do da sap
+        // ngay: toi vua khai PHOM: '205' cho ban moi, thanh ra MOT doi tuong co HAI khoa
+        // trung ten, JS lay cai CUOI nen game moi thanh vo hinh. kiem-tra.js bat duoc.
+        PHOM_CU: '52',
         POKER_HK: '53',
         TIEN_LEN_MN: '54',
         MAU_BINH: '55',

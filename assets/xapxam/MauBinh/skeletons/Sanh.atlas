@@ -1,0 +1,27 @@
+
+Sanh.png
+size: 102,102
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+A1
+  rotate: false
+  xy: 2, 62
+  size: 91, 38
+  orig: 91, 38
+  offset: 0, 0
+  index: -1
+A2
+  rotate: false
+  xy: 2, 22
+  size: 91, 38
+  orig: 91, 38
+  offset: 0, 0
+  index: -1
+Light
+  rotate: false
+  xy: 2, 2
+  size: 25, 18
+  orig: 25, 18
+  offset: 0, 0
+  index: -1

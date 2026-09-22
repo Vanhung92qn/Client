@@ -1,0 +1,66 @@
+[
+  {
+    "__type__": "cc.Prefab",
+    "_name": "\bMauBinh3Sanh",
+    "data": {
+      "__id__": 1
+    }
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "\bMauBinh3Sanh",
+    "_objFlags": 512,
+    "_level": 2,
+    "_components": [
+      {
+        "__id__": 2
+      }
+    ],
+    "_prefab": {
+      "__id__": 3
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 488,
+      "height": 447
+    },
+    "_trs": {
+      "__type__": "TypedArray",
+      "ctor": "Float64Array",
+      "array": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0.4,
+        0.4,
+        1
+      ]
+    }
+  },
+  {
+    "__type__": "sp.Skeleton",
+    "node": {
+      "__id__": 1
+    },
+    "defaultAnimation": "animation",
+    "_preCacheMode": 0,
+    "_animationName": "animation",
+    "_N$skeletonData": {
+      "__uuid__": "c4cc4fd2-7ccc-4fec-92a9-abf336366347"
+    }
+  },
+  {
+    "__type__": "cc.PrefabInfo",
+    "root": {
+      "__id__": 1
+    },
+    "asset": {
+      "__uuid__": "cb9d0f39-c93a-46a8-aa0f-4df61def3582"
+    },
+    "fileId": "84U//j/vpGmqnfMegNWcGX"
+  }
+]

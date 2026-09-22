@@ -1,0 +1,64 @@
+[
+  {
+    "__type__": "cc.Prefab",
+    "_name": "SanhRongDongHoa",
+    "data": {
+      "__id__": 1
+    }
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "SanhRongDongHoa",
+    "_level": 2,
+    "_components": [
+      {
+        "__id__": 2
+      }
+    ],
+    "_prefab": {
+      "__id__": 3
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 845,
+      "height": 521.94
+    },
+    "_zIndex": 0,
+    "_trs": {
+      "__type__": "TypedArray",
+      "ctor": "Float64Array",
+      "array": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0.4,
+        0.4,
+        1
+      ]
+    }
+  },
+  {
+    "__type__": "sp.Skeleton",
+    "node": {
+      "__id__": 1
+    },
+    "defaultAnimation": "animation",
+    "_N$skeletonData": {
+      "__uuid__": "51bf2a8c-13b7-43c5-b7f8-97bc69c35eb2"
+    }
+  },
+  {
+    "__type__": "cc.PrefabInfo",
+    "root": {
+      "__id__": 1
+    },
+    "asset": {
+      "__id__": 0
+    },
+    "fileId": "08tYm/sURPv6eaOYB64n/J"
+  }
+]

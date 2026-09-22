@@ -1,0 +1,27 @@
+
+TuQuy_3db25418.png
+size: 226,224
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+A1
+  rotate: false
+  xy: 2, 132
+  size: 222, 90
+  orig: 222, 90
+  offset: 0, 0
+  index: -1
+A2
+  rotate: false
+  xy: 2, 40
+  size: 222, 90
+  orig: 222, 90
+  offset: 0, 0
+  index: -1
+Light
+  rotate: false
+  xy: 2, 10
+  size: 40, 28
+  orig: 40, 28
+  offset: 0, 0
+  index: -1

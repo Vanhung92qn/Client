@@ -1,0 +1,55 @@
+
+SapLang.png
+size: 182,182
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+A1
+  rotate: false
+  xy: 2, 142
+  size: 178, 38
+  orig: 178, 38
+  offset: 0, 0
+  index: -1
+A2
+  rotate: false
+  xy: 2, 102
+  size: 178, 38
+  orig: 178, 38
+  offset: 0, 0
+  index: -1
+Border
+  rotate: false
+  xy: 2, 62
+  size: 110, 38
+  orig: 110, 38
+  offset: 0, 0
+  index: -1
+Light
+  rotate: true
+  xy: 162, 75
+  size: 25, 18
+  orig: 25, 18
+  offset: 0, 0
+  index: -1
+THUA
+  rotate: false
+  xy: 2, 32
+  size: 91, 28
+  orig: 91, 28
+  offset: 0, 0
+  index: -1
+THUA2
+  rotate: false
+  xy: 2, 2
+  size: 91, 28
+  orig: 91, 28
+  offset: 0, 0
+  index: -1
+ThuaSapLang
+  rotate: false
+  xy: 114, 54
+  size: 46, 46
+  orig: 46, 46
+  offset: 0, 0
+  index: -1

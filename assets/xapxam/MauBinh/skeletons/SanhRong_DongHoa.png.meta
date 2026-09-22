@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "b383b61f-0b56-4e2e-ac77-fa03bb63affa",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 356,
+  "height": 354,
+  "platformSettings": {},
+  "subMetas": {
+    "SanhRong_DongHoa": {
+      "ver": "1.0.6",
+      "uuid": "8da2bf7a-5e4c-191a-85c9-9d8412da5e59",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "b383b61f-0b56-4e2e-ac77-fa03bb63affa",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": -0.5,
+      "trimX": 2,
+      "trimY": 3,
+      "width": 352,
+      "height": 349,
+      "rawWidth": 356,
+      "rawHeight": 354,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

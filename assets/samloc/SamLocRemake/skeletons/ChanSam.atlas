@@ -1,0 +1,55 @@
+
+ChanSam.png
+size: 283,283
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+1
+  rotate: false
+  xy: 2, 32
+  size: 145, 63
+  orig: 145, 63
+  offset: 0, 0
+  index: -1
+2
+  rotate: false
+  xy: 149, 37
+  size: 114, 56
+  orig: 114, 56
+  offset: 0, 0
+  index: -1
+4
+  rotate: false
+  xy: 2, 217
+  size: 275, 64
+  orig: 275, 64
+  offset: 0, 0
+  index: -1
+5
+  rotate: false
+  xy: 2, 151
+  size: 275, 64
+  orig: 275, 64
+  offset: 0, 0
+  index: -1
+Blur
+  rotate: false
+  xy: 179, 95
+  size: 71, 54
+  orig: 71, 54
+  offset: 0, 0
+  index: -1
+Border
+  rotate: false
+  xy: 2, 97
+  size: 175, 52
+  orig: 175, 52
+  offset: 0, 0
+  index: -1
+Light
+  rotate: false
+  xy: 2, 2
+  size: 40, 28
+  orig: 40, 28
+  offset: 0, 0
+  index: -1

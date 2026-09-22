@@ -2132,6 +2132,24 @@ var netConfig = require("NetConfig");
           case cc.GameId.POKER_TEXAS_GO:
             this.createDynamicView(cc.GameId.POKER_TEXAS_GO);
             break;
+          // Năm game bài còn lại bê từ Go88. Cùng lý do với Xì Tố và Poker: chưa có backend
+          // nên chưa có thang cược, mà client nhận thang đó từ server chứ không mang sẵn.
+          // Không dựng cổng kiểm số dư bằng một con số tự nghĩ ra.
+          case cc.GameId.CATTE:
+            this.createDynamicView(cc.GameId.CATTE);
+            break;
+          case cc.GameId.PHOM_GO:
+            this.createDynamicView(cc.GameId.PHOM_GO);
+            break;
+          case cc.GameId.TLMN_GO:
+            this.createDynamicView(cc.GameId.TLMN_GO);
+            break;
+          case cc.GameId.SAM_LOC_GO:
+            this.createDynamicView(cc.GameId.SAM_LOC_GO);
+            break;
+          case cc.GameId.XAP_XAM:
+            this.createDynamicView(cc.GameId.XAP_XAM);
+            break;
           case cc.GameId.MAU_BINH:
             if (cc.BalanceController.getInstance().getBalance() < 30000) {
               cc.PopupController.getInstance().showMessage(

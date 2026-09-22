@@ -1,0 +1,90 @@
+
+Maubinh_quickguide.png
+size: 300,300
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+arow30
+  rotate: true
+  xy: 175, 179
+  size: 27, 50
+  orig: 29, 52
+  offset: 1, 1
+  index: -1
+arrow100
+  rotate: true
+  xy: 227, 186
+  size: 27, 50
+  orig: 29, 52
+  offset: 1, 1
+  index: -1
+arrow60
+  rotate: true
+  xy: 123, 177
+  size: 29, 50
+  orig: 31, 52
+  offset: 1, 1
+  index: -1
+click 100
+  rotate: true
+  xy: 202, 120
+  size: 57, 59
+  orig: 59, 61
+  offset: 1, 1
+  index: -1
+click 30
+  rotate: false
+  xy: 2, 177
+  size: 119, 119
+  orig: 121, 121
+  offset: 1, 1
+  index: -1
+click 60
+  rotate: true
+  xy: 213, 215
+  size: 81, 84
+  orig: 86, 86
+  offset: 1, 1
+  index: -1
+drag
+  rotate: false
+  xy: 2, 4
+  size: 113, 59
+  orig: 113, 59
+  offset: 0, 0
+  index: -1
+hand holding 2
+  rotate: true
+  xy: 108, 78
+  size: 97, 92
+  orig: 97, 92
+  offset: 0, 0
+  index: -1
+hand holding1
+  rotate: false
+  xy: 117, 2
+  size: 81, 74
+  orig: 81, 74
+  offset: 0, 0
+  index: -1
+hand swipe
+  rotate: false
+  xy: 200, 2
+  size: 79, 74
+  orig: 79, 74
+  offset: 0, 0
+  index: -1
+mouse click
+  rotate: false
+  xy: 123, 208
+  size: 88, 88
+  orig: 88, 88
+  offset: 0, 0
+  index: -1
+mouse holding
+  rotate: false
+  xy: 2, 65
+  size: 104, 110
+  orig: 104, 110
+  offset: 0, 0
+  index: -1

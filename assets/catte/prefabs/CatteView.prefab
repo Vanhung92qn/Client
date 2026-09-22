@@ -1,0 +1,176 @@
+[
+  {
+    "__type__": "cc.Prefab",
+    "_name": "",
+    "_objFlags": 0,
+    "_native": "",
+    "data": {
+      "__id__": 1
+    },
+    "optimizationPolicy": 0,
+    "asyncLoadAssets": false,
+    "readonly": false
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "CatteView",
+    "_children": [
+      {
+        "__id__": 2
+      },
+      {
+        "__id__": 4
+      }
+    ],
+    "_level": 1,
+    "_components": [
+      {
+        "__id__": 5
+      }
+    ],
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 1560,
+      "height": 720
+    },
+    "_trs": {
+      "__type__": "TypedArray",
+      "ctor": "Float64Array",
+      "array": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "_parent": null,
+    "_prefab": {
+      "__id__": 6
+    }
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "MainUI",
+    "_parent": {
+      "__id__": 1
+    },
+    "_level": 2,
+    "_components": [
+      {
+        "__id__": 3
+      }
+    ],
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 1560,
+      "height": 719
+    },
+    "_trs": {
+      "__type__": "TypedArray",
+      "ctor": "Float64Array",
+      "array": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "_prefab": {
+      "__id__": 7
+    }
+  },
+  {
+    "__type__": "3ec9dZLp6FIiZyjKV0G8noy",
+    "node": {
+      "__id__": 2
+    }
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "MusicPlayer",
+    "_parent": {
+      "__id__": 1
+    },
+    "_level": 2,
+    "_components": [],
+    "_trs": {
+      "__type__": "TypedArray",
+      "ctor": "Float64Array",
+      "array": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "_prefab": {
+      "__id__": 8
+    }
+  },
+  {
+    "__type__": "acde5NBjQpCYrGWzhh7uWcb",
+    "node": {
+      "__id__": 1
+    },
+    "prefabRoomScene": {
+      "__uuid__": "9280ec6a-86ce-4b01-aa0b-33ad867242a9"
+    },
+    "mainUiNode": {
+      "__id__": 2
+    },
+    "prefabController": {
+      "__uuid__": "63bbb5b4-eef6-43aa-ac54-0bb81e2771a5"
+    }
+  },
+  {
+    "__type__": "cc.PrefabInfo",
+    "root": {
+      "__id__": 1
+    },
+    "asset": {
+      "__id__": 0
+    },
+    "fileId": "",
+    "sync": false
+  },
+  {
+    "__type__": "cc.PrefabInfo",
+    "root": {
+      "__id__": 1
+    },
+    "asset": {
+      "__id__": 0
+    },
+    "fileId": "B0rolXiHPpO3FcmQjiStbq",
+    "sync": false
+  },
+  {
+    "__type__": "cc.PrefabInfo",
+    "root": {
+      "__id__": 1
+    },
+    "asset": {
+      "__id__": 0
+    },
+    "fileId": "PFM4gaz1VsTC5IUN0athYz",
+    "sync": false
+  }
+]
