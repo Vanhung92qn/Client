@@ -86,22 +86,67 @@ function mayHat() {
 // ⚠️ WS_CARD_PATH chua doi chieu duoc voi backend (backend dang viet). Sai thi sua DUNG 1 dong nay.
 var WS_CARD_PATH = "websocket"; // dung y duong dan cua Go88 that: wss://<host>/websocket
 
-// Ten mien con cua backend Cao Rua. Phai khac 'bacay.' — xem ly do o getWsCardUrl().
-// Backend dang ky truc tiep tren HTTP.SYS (khong qua IIS), cau hinh o
-// CardGame/src/CardGame.Server/appsettings.Test.json -> Hosting:HttpSysPrefixes.
-var WS_CARD_SUBDOMAIN = "caorua.";
+// ── GAME BAI NAO DANG MO -> BACKEND CUA GAME DO ─────────────────────────────────────────
+// 🔴 MOI GAME MOT TIEN TRINH, MOT TEN MIEN. Quyet dinh nay nam o
+//    CardGame/src/CardGame.Server/Program.cs:181 — "MOT TIEN TRINH PHUC VU MOT GAME, co y".
+//    Backend dang ky truc tiep tren HTTP.SYS (khong qua IIS): appsettings.Test.json ->
+//    Hosting:HttpSysPrefixes.
+//
+// Truoc day cho nay la `var WS_CARD_SUBDOMAIN = "caorua."`. Voi DUNG MOT game thi khong sao;
+// tu game thu hai tro di no la bay im lang thuoc loai nguy hiem nhat. Tep nay nam trong
+// `cardgame/scripts/` — tang DUNG CHUNG cho moi game bai be tu Go88 — nen Lieng se noi vao
+// may chu Cao Rua, bat tay THANH CONG, va nguoi choi ngoi vao ban cua game minh khong chon.
+// Khong co thong bao loi nao, va day la duong co TIEN THAT di qua.
+//
+// Khoa la GameId phia CLIENT (assets/lobby/scripts/config/enum/GameId.js), vi do la so ma
+// `cc.RoomController.setGameId()` nhan duoc luc mo game.
+// 🔴 Them game bai moi = them DUNG MOT dong o day.
+var TEN_MIEN_THEO_GAME = {
+  // Cao Rua (Ba Cay be tu Go88). So so sach ben server la 200, lech voi 117 nay vi ly do lich
+  // su; se gom ve mot so khi dung lai pager game bai ngoai sanh.
+  117: "caorua",
+  // Lieng. Client va so sach server cung la 201 — game moi thi khong de lech nua.
+  201: "lieng",
+};
 
 /**
- * Goc HTTP cua backend Cao Rua — CUNG MOT may chu voi WebSocket, chi khac giao thuc.
+ * Ten mien con cua backend game bai DANG MO, vd "lieng".
+ * Tra ve null khi chua biet (chua vao game nao, hoac game chua khai o bang tren).
+ * Nguoi goi TU quyet dinh: duong co tien di qua thi phai no, duong trang tri thi chiu rong.
+ */
+function tenMienGameBai() {
+  if (!cc.RoomController || !cc.RoomController.getInstance) return null;
+  var gid = cc.RoomController.getInstance().getGameId();
+  if (gid === null || gid === undefined) return null;
+  return TEN_MIEN_THEO_GAME[gid] || null;
+}
+
+/** Nhu tren, nhung NO ngay thay vi doan — dung cho duong co tien di qua. */
+function tenMienGameBaiBatBuoc() {
+  var ten = tenMienGameBai();
+  if (ten) return ten;
+  var gid = cc.RoomController && cc.RoomController.getInstance
+    ? cc.RoomController.getInstance().getGameId()
+    : "(khong co RoomController)";
+  var loi =
+    "[cardgame] Khong biet game " + gid + " chay tren backend nao. " +
+    "Them mot dong vao TEN_MIEN_THEO_GAME trong GameConfigManager.js. " +
+    "KHONG tu tro ve caorua: lam vay la day nguoi choi vao nham game.";
+  cc.error(loi);
+  throw new Error(loi);
+}
+
+/**
+ * Goc HTTP cua backend game bai dang mo — CUNG MOT may chu voi WebSocket, chi khac giao thuc.
  * Dung cho cac endpoint REST (bang xep hang...). Cho ghi de bang ?apicard=... de chay thu cuc bo,
  * giong het cach ?wscard=... lam voi WebSocket.
  */
-function gocApiCaoRua() {
+function gocApiGameBai() {
   if (cc.sys.isBrowser && window.location && window.location.search) {
     var m = /[?&]apicard=([^&]+)/.exec(window.location.search);
     if (m) return decodeURIComponent(m[1]).replace(/\/+$/, "");
   }
-  return "https://" + WS_CARD_SUBDOMAIN + s.HOST;
+  return "https://" + tenMienGameBaiBatBuoc() + "." + s.HOST;
 }
 
 var r = (function () {
@@ -163,7 +208,9 @@ var r = (function () {
     //   · lsDuatopTxURL   : lich su dua top, chi mo tu man dua top ma ta khong bat
     // Giu ba o rong: neu sau nay co nhanh nao song day, no se hong RO RANG (URL rong) thay vi
     // am tham ban yeu cau sang ha tang ban goc.
-    this.duatopTxURL = gocApiCaoRua() + "/api/duatop";
+    // duatopTxURL KHONG dat o day nua — no da thanh getter (cuoi tep). Ly do: singleton nay
+    // co the duoc tao TRUOC khi nguoi choi bam vao game nao; ghep URL ngay luc do la ghim
+    // chet game dau tien, moi game sau deu hoi nham bang xep hang cua game do.
     this.getTopUpDownURL = "";
     this.urlRanking = "";
     this.lsDuatopTxURL = "";
@@ -226,7 +273,9 @@ var r = (function () {
     //      · GameController.js:282/405/1149 chi gui log go roi khi ten chua "pre" -> khong gui.
     //      · HeaderUi.js:605 re nhanh khi ten chua "hit"                          -> khong re.
     //    Do la dung y: khong ban bat cu thu gi sang ha tang ban goc.
-    this.enviromentName = "caorua";
+    //
+    // 🔴 Cung KHONG dat o day nua (xem getter cuoi tep): chuoi nay phai theo game DANG MO,
+    //    ma luc dung singleton thi chua biet game nao.
     // isforcebrand = false thi GameUtils.showPopupNewBrandInfo() thoat ngay o dong dau
     // (GameUtils.js:969), nen 4 o duoi day khong bao gio duoc doc. Giu rong de chac chan
     // KHONG co URL Go88 nao lot ra ngoai (GameUtils.js:985 lam cc.sys.openURL).
@@ -512,9 +561,36 @@ var r = (function () {
     // 🔴 KHONG dung cc.SubdomainName.THREE_CARDS ('bacay.'): ten mien con do la SERVER BA CAY CU
     // (game 51) van dang chay cho nguoi choi, noi giao thuc Roy88 hoan toan khac. Tro vao do thi
     // client Go88 gui khung Simms sang mot server khong hieu no — hong im lang, va te hon nua la
-    // dam vao he dang song. Cao Rua co ten mien con RIENG.
-    return "wss://" + WS_CARD_SUBDOMAIN + s.HOST + "/" + WS_CARD_PATH;
+    // dam vao he dang song. Moi game bai be tu Go88 co ten mien con RIENG.
+    return "wss://" + tenMienGameBaiBatBuoc() + "." + s.HOST + "/" + WS_CARD_PATH;
   };
+
+  // ── HAI O TINH THEO GAME DANG MO ────────────────────────────────────────────────────────
+  // Ca hai truoc day la thuoc tinh dat trong ham dung. Chuyen thanh getter vi singleton nay
+  // co the ra doi truoc khi biet game nao se mo — dat san la ghim chet game dau tien.
+  //
+  // Hai o nay CO Y khac nhau khi chua biet game:
+  //   · duatopTxURL  -> chuoi RONG. Dung y da co san trong tep (xem 3 o URL de rong ben tren):
+  //     nhanh nao song day thi hong RO RANG chu khong am tham ban sang ha tang ban goc.
+  //   · getWsCardUrl -> NO. Do la duong co tien that di qua; doan sai o do la dat nguoi choi
+  //     vao ban cua game khac.
+  Object.defineProperty(t.prototype, "duatopTxURL", {
+    get: function () {
+      return tenMienGameBai() ? gocApiGameBai() + "/api/duatop" : "";
+    },
+    enumerable: true,
+    configurable: true,
+  });
+
+  // Tra chuoi rong khi chua vao game: moi cho doc deu la .includes()/.indexOf()/so sanh chuoi,
+  // nen chuoi rong cho ra dung ket qua "khong re nhanh nao" ma khong lam no bat cu thu gi.
+  Object.defineProperty(t.prototype, "enviromentName", {
+    get: function () {
+      return tenMienGameBai() || "";
+    },
+    enumerable: true,
+    configurable: true,
+  });
 
   t.getInstance = function () {
     if (!(null !== this.Instance && void 0 !== this.Instance)) {

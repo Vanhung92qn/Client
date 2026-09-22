@@ -2099,6 +2099,22 @@ var netConfig = require("NetConfig");
               this.createDynamicView(cc.GameId.CAO_RUA);
             }
             break;
+          // Liêng — game bài thứ hai bê từ Go88, dùng chung khung `cardroom` với Cào Rùa.
+          // Mức tối thiểu 1.000 = mức cược rẻ nhất (100) × 10. Số 10 là LUẬT MUA CHIP tối thiểu
+          // của Liêng chứ không phải con số tự đặt: LiengGame.TienToiThieuDeNgoi = cuoc * 10.
+          // 🔴 Liêng là game ĐẦU TIÊN có VÍ BÀN — vào bàn là mua chip ngay. Đặt số này thấp hơn
+          // server thì người chơi qua được cổng sảnh rồi bị từ chối đúng lúc ngồi xuống, mà
+          // client không có thông báo nào cho tình huống đó.
+          case cc.GameId.LIENG:
+            if (cc.BalanceController.getInstance().getBalance() < 1000) {
+              cc.PopupController.getInstance().showMessage(
+                "Bạn không đủ tiền để vào phòng. Tối thiểu cần 1.000"
+              );
+              return;
+            } else {
+              this.createDynamicView(cc.GameId.LIENG);
+            }
+            break;
           case cc.GameId.MAU_BINH:
             if (cc.BalanceController.getInstance().getBalance() < 30000) {
               cc.PopupController.getInstance().showMessage(

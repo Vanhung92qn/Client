@@ -33,6 +33,10 @@
 
         BA_CAY: '51',
         CAO_RUA: '117', // Ba Cay be tu Go88 — chay song song voi BA_CAY cu (51) cho toi khi thay han
+        // Lieng be tu Go88, backend .NET 10. Dung CHUNG mot so voi so sach ben server
+        // (Protocol.cs: LiengGo88 = 201) — co y, de khong lap lai canh lech 117-vs-200 cua
+        // Cao Rua. So nay la khoa cua TEN_MIEN_THEO_GAME trong cardgame/scripts/GameConfigManager.js.
+        LIENG: '201',
         PHOM: '52',
         POKER_HK: '53',
         TIEN_LEN_MN: '54',
@@ -40,7 +44,12 @@
         TIEN_LEN_MB: '56',
         POKER_TEXAS: '57',
         SAM_LOC: '58',
-        LIENG: '59',
+        // 🔴 Doi ten tu LIENG thanh LIENG_CU. Game Lieng .NET Framework nay da chet, va khong
+        // mot dong nao trong client tham chieu toi no (da soat). De no giu ten "LIENG" la dat
+        // bay: ai viet cc.GameId.LIENG sau nay se tro vao ban da chet thay vi ban dang chay.
+        // Ben server phan biet y het the — Protocol.cs: Lieng (59) hien thi "Lieng (cu)",
+        // LiengGo88 (201) hien thi "Lieng".
+        LIENG_CU: '59',
         CHAN: '60',
         BA_CAY_GA: '61',
         BA_CAY_BIEN: '62',
