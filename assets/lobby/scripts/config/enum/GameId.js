@@ -37,6 +37,12 @@
         // (Protocol.cs: LiengGo88 = 201) — co y, de khong lap lai canh lech 117-vs-200 cua
         // Cao Rua. So nay la khoa cua TEN_MIEN_THEO_GAME trong cardgame/scripts/GameConfigManager.js.
         LIENG: '201',
+        // Xi To be tu Go88. Dai 200+ danh rieng cho ho game bai .NET 10, cap phat theo thu tu be:
+        //   200 CaoRua · 201 Lieng · 202 XiTo · 203 Poker · 204 Catte · 205 Phom · 206 TLMN
+        //   207 SamLoc · 208 MauBinh
+        // 🔴 Cap phat o day va o Protocol.cs ben server PHAI khop nhau. Cao Rua (117 vs 200) la
+        // canh lech duy nhat con lai, do lich su; se gom khi dung lai pager game bai.
+        XI_TO: '202',
         PHOM: '52',
         POKER_HK: '53',
         TIEN_LEN_MN: '54',

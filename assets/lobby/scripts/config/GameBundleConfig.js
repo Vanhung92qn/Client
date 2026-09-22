@@ -62,6 +62,7 @@
         { value: '51', label: 'BA_CAY',            bundleName: '3cay',          mainPrefab: 'prefabs/3CLobby',            deps: ['cardgame_core'] },
         { value: '117',label: 'CAO_RUA',           bundleName: 'caorua',        mainPrefab: 'prefabs/CaoRuaView',         deps: ['cardroom']      },
         { value: '201',label: 'LIENG',             bundleName: 'lieng',         mainPrefab: 'prefabs/LiengView',          deps: ['cardroom']      },
+        { value: '202',label: 'XI_TO',             bundleName: 'xito',          mainPrefab: 'prefabs/XiToView',           deps: ['cardroom']      },
         { value: '19', label: 'BACCARAT',          bundleName: 'bacarat',       mainPrefab: 'prefabs/BaCaratView',        deps: ['cardgame_core'] },
         { value: '55', label: 'MAU_BINH',          bundleName: 'maubinh',       mainPrefab: 'prefabs/MBLobby',            deps: ['cardgame_core'] },
         { value: '54', label: 'TIEN_LEN_MN',       bundleName: 'tienlenMN',     mainPrefab: 'prefabs/TLMNLobby',          deps: ['cardgame_core'] },

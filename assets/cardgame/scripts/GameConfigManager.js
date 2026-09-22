@@ -107,6 +107,8 @@ var TEN_MIEN_THEO_GAME = {
   117: "caorua",
   // Lieng. Client va so sach server cung la 201 — game moi thi khong de lech nua.
   201: "lieng",
+  // Xi To. Backend chua viet; ten mien da dat truoc de khi dung dich vu chi phai dat dung ten.
+  202: "xito",
 };
 
 /**

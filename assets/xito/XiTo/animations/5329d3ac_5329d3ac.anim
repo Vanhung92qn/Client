@@ -1,0 +1,61 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "showPopup",
+  "_duration": 0.2857142857142857,
+  "sample": 70,
+  "curveData": {
+    "paths": {
+      "BgPopup": {
+        "props": {
+          "position": [
+            {
+              "frame": 0,
+              "value": [
+                0,
+                -150,
+                0
+              ]
+            },
+            {
+              "frame": 0.2857142857142857,
+              "value": [
+                0,
+                0
+              ]
+            }
+          ],
+          "scale": [
+            {
+              "frame": 0,
+              "value": {
+                "__type__": "cc.Vec2",
+                "x": 0.5,
+                "y": 0.5
+              }
+            },
+            {
+              "frame": 0.2857142857142857,
+              "value": {
+                "__type__": "cc.Vec2",
+                "x": 1,
+                "y": 1
+              }
+            }
+          ]
+        }
+      }
+    },
+    "props": {
+      "opacity": [
+        {
+          "frame": 0,
+          "value": 0
+        },
+        {
+          "frame": 0.2857142857142857,
+          "value": 255
+        }
+      ]
+    }
+  }
+}

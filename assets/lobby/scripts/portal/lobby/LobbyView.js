@@ -2115,6 +2115,17 @@ var netConfig = require("NetConfig");
               this.createDynamicView(cc.GameId.LIENG);
             }
             break;
+          // Xì Tố — bê từ Go88, backend .NET 10 chưa viết.
+          // 🔴 CỐ Ý KHÔNG có cổng kiểm số dư như Cào Rùa (300) và Liêng (1.000). Hai con số đó
+          // lấy từ LUẬT THẬT của từng game (Cào Rùa: cược × 3 vì J♥Q♥K♥ trả gấp 3; Liêng:
+          // cược × 10 là mức mua chip tối thiểu). Xì Tố chưa có backend nên chưa có thang cược,
+          // và client Go88 KHÔNG mang thang đó theo — nó nhận từ server. Đặt đại một số ở đây là
+          // dựng một cái cổng không dựa trên gì cả: chặn nhầm người đủ tiền, hoặc cho qua người
+          // thiếu tiền rồi để họ bị từ chối lúc ngồi xuống mà không hiểu vì sao.
+          // Server vẫn là cổng thật. Điền số này khi backend Xì Tố định xong thang cược.
+          case cc.GameId.XI_TO:
+            this.createDynamicView(cc.GameId.XI_TO);
+            break;
           case cc.GameId.MAU_BINH:
             if (cc.BalanceController.getInstance().getBalance() < 30000) {
               cc.PopupController.getInstance().showMessage(

@@ -1,0 +1,61 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "hidePopup",
+  "_duration": 0.42857142857142855,
+  "sample": 70,
+  "curveData": {
+    "props": {
+      "opacity": [
+        {
+          "frame": 0.14285714285714285,
+          "value": 255
+        },
+        {
+          "frame": 0.42857142857142855,
+          "value": 0
+        }
+      ]
+    },
+    "paths": {
+      "BgPopup": {
+        "props": {
+          "position": [
+            {
+              "frame": 0.14285714285714285,
+              "value": [
+                0,
+                0
+              ]
+            },
+            {
+              "frame": 0.42857142857142855,
+              "value": [
+                0,
+                -150,
+                0
+              ]
+            }
+          ],
+          "scale": [
+            {
+              "frame": 0.14285714285714285,
+              "value": {
+                "__type__": "cc.Vec2",
+                "x": 1,
+                "y": 1
+              }
+            },
+            {
+              "frame": 0.42857142857142855,
+              "value": {
+                "__type__": "cc.Vec2",
+                "x": 0.3,
+                "y": 0.3
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}
