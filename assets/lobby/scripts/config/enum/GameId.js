@@ -32,57 +32,48 @@
         BACCARAT: '19',
 
         // ════════════════════════════════════════════════════════════════════════════════
-        //  🔴 NAM MA DUOI DAY LA GAME DA BI XOA — DUNG DUNG CHO VIEC MOI
-        //     BA_CAY 51 · TIEN_LEN_MN 54 · MAU_BINH 55 · POKER_TEXAS 57 · TIEN_LEN_MN_SOLO 66
+        //  HO GAME BAI .NET 10 — be tu Go88, dai ma 200+
         //
-        //  Bundle, prefab va script cua chung da bi xoa khoi repo (2026-09-22). Ban thay the
-        //  nam o dai 200+: CAO_RUA 117 · TLMN_GO 206 · XAP_XAM 208 · POKER_TEXAS_GO 203.
+        //  Cap phat theo thu tu be, va PHAI khop voi so sach ben server (Protocol.cs):
+        //     200 CaoRua · 201 Lieng · 202 XiTo · 203 Poker · 204 Catte
+        //     205 Phom   · 206 TLMN  · 207 SamLoc · 208 MauBinh
+        //  Cao Rua la canh lech duy nhat: client 117 vs so sach 200, do lich su.
         //
-        //  VI SAO VAN GIU LAI NAM MA NAY: Config.js dung chung de tra ma -> TEN HIEN THI
-        //  (Config.js:379-396). Lich su giao dich cua nguoi choi van con nhung van cu, xoa
-        //  ma di thi lich su hien "Game#55" thay vi "Mau Binh".
-        //
-        //  🔴 VIET cc.GameId.MAU_BINH TRONG MA MOI LA SAI — no tra 55, mot game khong con
-        //  bundle. Ban dang muon la XAP_XAM (208). Bay nay DA SAP MOT LAN voi PHOM (xem
-        //  ghi chu o PHOM_CU ben duoi).
+        //  Cac so nay cung la KHOA cua TEN_MIEN_THEO_GAME trong
+        //  cardgame/scripts/GameConfigManager.js — moi game mot tien trinh, mot ten mien.
         // ════════════════════════════════════════════════════════════════════════════════
-        BA_CAY: '51',
-        CAO_RUA: '117', // Cao Rua = Ba Cay be tu Go88. Thay han BA_CAY (51) — ban do da bi xoa.
-        // Lieng be tu Go88, backend .NET 10. Dung CHUNG mot so voi so sach ben server
-        // (Protocol.cs: LiengGo88 = 201) — co y, de khong lap lai canh lech 117-vs-200 cua
-        // Cao Rua. So nay la khoa cua TEN_MIEN_THEO_GAME trong cardgame/scripts/GameConfigManager.js.
+        CAO_RUA: '117',      // Cao Rua = Ba Cay be tu Go88
         LIENG: '201',
-        // Xi To be tu Go88. Dai 200+ danh rieng cho ho game bai .NET 10, cap phat theo thu tu be:
-        //   200 CaoRua · 201 Lieng · 202 XiTo · 203 Poker · 204 Catte · 205 Phom · 206 TLMN
-        //   207 SamLoc · 208 MauBinh
-        // 🔴 Cap phat o day va o Protocol.cs ben server PHAI khop nhau. Cao Rua (117 vs 200) la
-        // canh lech duy nhat con lai, do lich su; se gom khi dung lai pager game bai.
         XI_TO: '202',
-        // Poker Texas be tu Go88. CUNG bien the voi POKER_TEXAS (57) cu cua Roy88 — da doi
-        // chieu trong ma: PokerController.js co flop/preflop/blind/dealer. Hai ban chay song
-        // song toi khi dung lai pager, nen bundle phai khac ten: `pokertexas` vs `poker`.
-        POKER_TEXAS_GO: '203',
-        CATTE: '204', // Catte (Cat te)
-        PHOM_GO: '205', // Phom
-        TLMN_GO: '206', // Tien Len Mien Nam
-        SAM_LOC_GO: '207', // Sam Loc
-        XAP_XAM: '208', // Mau Binh (Xap Xam)
-        // 🔴 Doi ten y het truong hop LIENG_CU: game Phom .NET Framework nay da chet va
-        // khong dong nao tham chieu toi. Giu ten "PHOM" la dat bay — va bay do da sap
-        // ngay: toi vua khai PHOM: '205' cho ban moi, thanh ra MOT doi tuong co HAI khoa
-        // trung ten, JS lay cai CUOI nen game moi thanh vo hinh. kiem-tra.js bat duoc.
+        POKER_TEXAS: '203',  // Texas Hold'em — PokerController.js co flop/preflop/blind/dealer
+        CATTE: '204',
+        PHOM: '205',
+        TIEN_LEN_MN: '206',
+        SAM_LOC: '207',
+        MAU_BINH: '208',     // con goi la Xap Xam
+
+        // ════════════════════════════════════════════════════════════════════════════════
+        //  🔴 MOI KHOA `*_CU` DUOI DAY LA GAME DA CHET — BUNDLE VA SCRIPT DA BI XOA (2026-09-22)
+        //
+        //  Chung KHONG mo duoc nua. Ban thay the deu nam o dai 200+ ngay ben tren, va da
+        //  LAY LAI dung ten dep: MAU_BINH, TIEN_LEN_MN, POKER_TEXAS, SAM_LOC, PHOM, LIENG.
+        //
+        //  VI SAO VAN GIU LAI: Config.js:379-396 dung chung de tra ma -> TEN HIEN THI. Lich su
+        //  giao dich cua nguoi choi van con nhung van cu; xoa ma di thi lich su hien "Game#55"
+        //  thay vi "Mau Binh".
+        //
+        //  🔴 DUNG dung chung cho viec moi. Bay "mot doi tuong hai khoa trung ten" DA SAP MOT
+        //  LAN: khai PHOM: '205' canh PHOM: '52' thi JS lay cai CUOI, va game moi thanh vo hinh
+        //  ma khong mot dong loi nao. kiem-tra.js bat duoc, nhung dung trong cho vao do.
+        // ════════════════════════════════════════════════════════════════════════════════
+        BA_CAY_CU: '51',
         PHOM_CU: '52',
         POKER_HK: '53',
-        TIEN_LEN_MN: '54',
-        MAU_BINH: '55',
+        TIEN_LEN_MN_CU: '54',
+        MAU_BINH_CU: '55',
         TIEN_LEN_MB: '56',
-        POKER_TEXAS: '57',
-        SAM_LOC: '58',
-        // 🔴 Doi ten tu LIENG thanh LIENG_CU. Game Lieng .NET Framework nay da chet, va khong
-        // mot dong nao trong client tham chieu toi no (da soat). De no giu ten "LIENG" la dat
-        // bay: ai viet cc.GameId.LIENG sau nay se tro vao ban da chet thay vi ban dang chay.
-        // Ben server phan biet y het the — Protocol.cs: Lieng (59) hien thi "Lieng (cu)",
-        // LiengGo88 (201) hien thi "Lieng".
+        POKER_TEXAS_CU: '57',
+        SAM_LOC_CU: '58',
         LIENG_CU: '59',
         CHAN: '60',
         BA_CAY_GA: '61',
@@ -92,7 +83,7 @@
 
         TIEN_LEN_MN_NHAT_AN_TAT: '64',
         MAYA_QUEST: '65',
-        TIEN_LEN_MN_SOLO: '66',
+        TIEN_LEN_MN_SOLO_CU: '66',
         SAM_LOC_SOLO: '67',
         LODE: '21',
         VIETLOT: '22',

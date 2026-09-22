@@ -13,19 +13,16 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "XapXamView",
+    "_name": "TienLenMNView",
     "_children": [
       {
         "__id__": 2
-      },
-      {
-        "__id__": 4
       }
     ],
     "_level": 1,
     "_components": [
       {
-        "__id__": 5
+        "__id__": 4
       }
     ],
     "_contentSize": {
@@ -51,16 +48,16 @@
     },
     "_parent": null,
     "_prefab": {
-      "__id__": 6
+      "__id__": 5
     }
   },
   {
     "__type__": "cc.Node",
-    "_name": "MainUI",
+    "_name": "MainUINode",
     "_parent": {
       "__id__": 1
     },
-    "_level": 2,
+    "_level": 1,
     "_components": [
       {
         "__id__": 3
@@ -69,14 +66,14 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 1560,
-      "height": 719
+      "height": 720
     },
     "_trs": {
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        0,
-        0,
+        null,
+        5.684341886080802e-14,
         0,
         0,
         0,
@@ -88,7 +85,7 @@
       ]
     },
     "_prefab": {
-      "__id__": 7
+      "__id__": 6
     }
   },
   {
@@ -98,35 +95,7 @@
     }
   },
   {
-    "__type__": "cc.Node",
-    "_name": "MusicPlayer",
-    "_parent": {
-      "__id__": 1
-    },
-    "_level": 2,
-    "_components": [],
-    "_trs": {
-      "__type__": "TypedArray",
-      "ctor": "Float64Array",
-      "array": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        1,
-        1,
-        1,
-        1
-      ]
-    },
-    "_prefab": {
-      "__id__": 8
-    }
-  },
-  {
-    "__type__": "866132rU+BJ0rVTgrKqoDmZ",
+    "__type__": "01898V0MK1Cqq3g/VgBjDhe",
     "node": {
       "__id__": 1
     },
@@ -136,8 +105,8 @@
     "mainUiNode": {
       "__id__": 2
     },
-    "prefabMauBinhController": {
-      "__uuid__": "a6386f3e-2b9e-4703-8343-30b6bc9e510c"
+    "prefabTLMNRemakeScene": {
+      "__uuid__": "5ed96a79-0e90-4540-80dd-b913b421849d"
     }
   },
   {
@@ -159,18 +128,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "mgAD0qkEuyIKCedU4A7Qz7",
-    "sync": false
-  },
-  {
-    "__type__": "cc.PrefabInfo",
-    "root": {
-      "__id__": 1
-    },
-    "asset": {
-      "__id__": 0
-    },
-    "fileId": "AQwWjR8G+fCPSaFpvYtfQ8",
+    "fileId": "oUa8kapuZNfxAYYMcBaT9c",
     "sync": false
   }
 ]

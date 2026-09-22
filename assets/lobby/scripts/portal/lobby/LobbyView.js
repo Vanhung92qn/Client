@@ -682,11 +682,11 @@ var netConfig = require("NetConfig");
         // mỗi thanh tải là một node NẰM TRONG chính cái nút ngoài sảnh (loading_3cay nằm trong
         // btn3Cay), mà bản mới đã chiếm đúng những nút đó. Trỏ lại là dùng đúng chỗ.
         // Liêng/Xì Tố/Cát Tê/Phỏm/Sâm Lốc chưa có thanh tải riêng → rơi về vòng xoay chung.
-        MAP[cc.GameId.POKER_TEXAS_GO]   = { node: 'nodeSlotsView',      popup: false, progress: 'progressPoker',          label: 'lbLoadingPoker',          name: 'Poker Texas' };
+        MAP[cc.GameId.POKER_TEXAS]   = { node: 'nodeSlotsView',      popup: false, progress: 'progressPoker',          label: 'lbLoadingPoker',          name: 'Poker Texas' };
         MAP[cc.GameId.CAO_RUA]          = { node: 'nodeSlotsView',      popup: false, progress: 'progressThreeCards',     label: 'lbLoadingThreeCards',     name: 'Cào Rùa' };
         MAP[cc.GameId.BACCARAT]         = { node: 'nodeSlotsView',      popup: false, progress: 'progressBaccarat',       label: 'lbLoadingBaccarat',       name: 'Baccarat' };
-        MAP[cc.GameId.XAP_XAM]          = { node: 'nodeSlotsView',      popup: false, progress: 'progressMB',             label: 'lbLoadingMB',             name: 'Mậu Binh' };
-        MAP[cc.GameId.TLMN_GO]          = { node: 'nodeSlotsView',      popup: false, progress: 'progressTLMN',           label: 'lbLoadingTLMN',           name: 'Tiến Lên MN' };
+        MAP[cc.GameId.MAU_BINH]          = { node: 'nodeSlotsView',      popup: false, progress: 'progressMB',             label: 'lbLoadingMB',             name: 'Mậu Binh' };
+        MAP[cc.GameId.TIEN_LEN_MN]          = { node: 'nodeSlotsView',      popup: false, progress: 'progressTLMN',           label: 'lbLoadingTLMN',           name: 'Tiến Lên MN' };
       }
       return MAP[gameId] || null;
     },
@@ -1944,8 +1944,8 @@ var netConfig = require("NetConfig");
           // Poker Texas bê từ Go88. Cùng lý do với Xì Tố: chưa có backend nên chưa có thang
           // cược, và client nhận thang đó từ server chứ không mang sẵn. Không dựng cổng bằng
           // một con số tự nghĩ ra.
-          case cc.GameId.POKER_TEXAS_GO:
-            this.createDynamicView(cc.GameId.POKER_TEXAS_GO);
+          case cc.GameId.POKER_TEXAS:
+            this.createDynamicView(cc.GameId.POKER_TEXAS);
             break;
           // Năm game bài còn lại bê từ Go88. Cùng lý do với Xì Tố và Poker: chưa có backend
           // nên chưa có thang cược, mà client nhận thang đó từ server chứ không mang sẵn.
@@ -1953,17 +1953,17 @@ var netConfig = require("NetConfig");
           case cc.GameId.CATTE:
             this.createDynamicView(cc.GameId.CATTE);
             break;
-          case cc.GameId.PHOM_GO:
-            this.createDynamicView(cc.GameId.PHOM_GO);
+          case cc.GameId.PHOM:
+            this.createDynamicView(cc.GameId.PHOM);
             break;
-          case cc.GameId.TLMN_GO:
-            this.createDynamicView(cc.GameId.TLMN_GO);
+          case cc.GameId.TIEN_LEN_MN:
+            this.createDynamicView(cc.GameId.TIEN_LEN_MN);
             break;
-          case cc.GameId.SAM_LOC_GO:
-            this.createDynamicView(cc.GameId.SAM_LOC_GO);
+          case cc.GameId.SAM_LOC:
+            this.createDynamicView(cc.GameId.SAM_LOC);
             break;
-          case cc.GameId.XAP_XAM:
-            this.createDynamicView(cc.GameId.XAP_XAM);
+          case cc.GameId.MAU_BINH:
+            this.createDynamicView(cc.GameId.MAU_BINH);
             break;
           //MINI game
           case cc.GameId.TAI_XIU:

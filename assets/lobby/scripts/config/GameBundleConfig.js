@@ -30,32 +30,32 @@
         // ── MINIGAMES ───────────────────────────────────────────────
         //  LƯU Ý: bundleName phải khớp tên folder trong assets/, prefab khớp tên file thật.
         //  Đường dẫn được sync từ cc.loader.loadRes() cũ trong LobbyView.js.
-        { value: '8',  label: 'TAI_XIU',           bundleName: 'taixiu',        mainPrefab: 'prefabs/taixiuView',         deps: []                },
-        { value: '68', label: 'TAI_XIU_MD5',       bundleName: 'taixiumd5',     mainPrefab: 'prefabs/taixiuMd5View',      deps: []                },
-        { value: '81', label: 'TAI_XIU_SIEU_TOC',  bundleName: 'taixiusieutoc', mainPrefab: 'prefabs/taiXiuSieuTocView',  deps: []                },
-        { value: '63', label: 'XOC_XOC',           bundleName: 'xocxoc',        mainPrefab: 'prefabs/xocxocView',         deps: []                },
-        { value: '20', label: 'BAUCUA',            bundleName: 'baucua',        mainPrefab: 'prefabs/BauCuaView',         deps: []                },
-        { value: '14', label: 'DRAGON_TIGER',      bundleName: 'dragontiger',   mainPrefab: 'prefabs/dragonTigerView',    deps: []                },
-        { value: '110',label: 'CHICKEN_FIGHT',     bundleName: 'chickenFight',  mainPrefab: 'prefabs/chickenFightView',   deps: []                },
-        { value: '109',label: 'XENG_777',          bundleName: 'xeng777',       mainPrefab: 'xeng777View',                deps: []                },
-        { value: '115',label: 'AVIATOR',           bundleName: 'aviator',       mainPrefab: 'AviatorView',                deps: []                },
-        { value: '116',label: 'PHOENIX',           bundleName: 'phoenix',       mainPrefab: 'PhoenixView',                deps: []                },
-        { value: '70', label: 'SICBO',             bundleName: 'sicbo',         mainPrefab: 'prefabs/SicBoView',          deps: []                },
-        { value: '21', label: 'LODE',              bundleName: 'lode',          mainPrefab: 'prefabs/LoDeLobby',          deps: []                },
-        { value: '11', label: 'MINI_POKER',        bundleName: 'minipoker',     mainPrefab: 'prefabs/minipokerView',      deps: []                },
-        { value: '23', label: 'SHOOT_FISH',        bundleName: 'shootFish',     mainPrefab: 'prefabs/ShootFish',          deps: []                },
+        { value: '8',   label: 'TAI_XIU',           bundleName: 'taixiu',        mainPrefab: 'prefabs/taixiuView',        deps: []                    },
+        { value: '68',  label: 'TAI_XIU_MD5',       bundleName: 'taixiumd5',     mainPrefab: 'prefabs/taixiuMd5View',     deps: []                    },
+        { value: '81',  label: 'TAI_XIU_SIEU_TOC',  bundleName: 'taixiusieutoc', mainPrefab: 'prefabs/taiXiuSieuTocView', deps: []                    },
+        { value: '63',  label: 'XOC_XOC',           bundleName: 'xocxoc',        mainPrefab: 'prefabs/xocxocView',        deps: []                    },
+        { value: '20',  label: 'BAUCUA',            bundleName: 'baucua',        mainPrefab: 'prefabs/BauCuaView',        deps: []                    },
+        { value: '14',  label: 'DRAGON_TIGER',      bundleName: 'dragontiger',   mainPrefab: 'prefabs/dragonTigerView',   deps: []                    },
+        { value: '110', label: 'CHICKEN_FIGHT',     bundleName: 'chickenFight',  mainPrefab: 'prefabs/chickenFightView',  deps: []                    },
+        { value: '109', label: 'XENG_777',          bundleName: 'xeng777',       mainPrefab: 'xeng777View',               deps: []                    },
+        { value: '115', label: 'AVIATOR',           bundleName: 'aviator',       mainPrefab: 'AviatorView',               deps: []                    },
+        { value: '116', label: 'PHOENIX',           bundleName: 'phoenix',       mainPrefab: 'PhoenixView',               deps: []                    },
+        { value: '70',  label: 'SICBO',             bundleName: 'sicbo',         mainPrefab: 'prefabs/SicBoView',         deps: []                    },
+        { value: '21',  label: 'LODE',              bundleName: 'lode',          mainPrefab: 'prefabs/LoDeLobby',         deps: []                    },
+        { value: '11',  label: 'MINI_POKER',        bundleName: 'minipoker',     mainPrefab: 'prefabs/minipokerView',     deps: []                    },
+        { value: '23',  label: 'SHOOT_FISH',        bundleName: 'shootFish',     mainPrefab: 'prefabs/ShootFish',         deps: []                    },
 
         // ── SLOTS (load slots_core trước) ───────────────────────────
         //  GAINHAY / THUONG_HAI: bundle chưa tồn tại → tạm comment.
-        { value: '4',  label: 'EGYPT',             bundleName: 'egypt',         mainPrefab: 'prefabs/egyptView',          deps: ['slots_core']    },
-        { value: '1',  label: 'AQUARIUM',          bundleName: 'aquarium',      mainPrefab: 'prefabs/aquariumView',       deps: ['slots_core']    },
-        { value: '15', label: 'DRAGON_BALL',       bundleName: 'dragonball',    mainPrefab: 'prefabs/dbView',             deps: ['slots_core']    },
-        { value: '3',  label: 'COWBOY',            bundleName: 'cowboy',        mainPrefab: 'prefabs/cbView',             deps: ['slots_core']    },
+        { value: '4',   label: 'EGYPT',             bundleName: 'egypt',         mainPrefab: 'prefabs/egyptView',         deps: ['slots_core']        },
+        { value: '1',   label: 'AQUARIUM',          bundleName: 'aquarium',      mainPrefab: 'prefabs/aquariumView',      deps: ['slots_core']        },
+        { value: '15',  label: 'DRAGON_BALL',       bundleName: 'dragonball',    mainPrefab: 'prefabs/dbView',            deps: ['slots_core']        },
+        { value: '3',   label: 'COWBOY',            bundleName: 'cowboy',        mainPrefab: 'prefabs/cbView',            deps: ['slots_core']        },
         // { value: '17', label: 'GAINHAY',           bundleName: 'gainhay',       mainPrefab: 'prefabs/GainHayView',        deps: ['slots_core']    },
         // { value: '16', label: 'THUONG_HAI',        bundleName: 'thuonghai',     mainPrefab: 'prefabs/ThuongHaiView',      deps: ['slots_core']    },
-        { value: '7',  label: 'SEVEN77',           bundleName: '777',           mainPrefab: 'prefabs/777View',            deps: ['slots_core']    },
-        { value: '12', label: 'BLOCK_BUSTER',      bundleName: 'tq',            mainPrefab: 'prefabs/tqView',             deps: ['slots_core']    },
-        { value: '2',  label: 'THREE_KINGDOM',     bundleName: 'tk',            mainPrefab: 'prefabs/tkView',             deps: ['slots_core']    },
+        { value: '7',   label: 'SEVEN77',           bundleName: '777',           mainPrefab: 'prefabs/777View',           deps: ['slots_core']        },
+        { value: '12',  label: 'BLOCK_BUSTER',      bundleName: 'tq',            mainPrefab: 'prefabs/tqView',            deps: ['slots_core']        },
+        { value: '2',   label: 'THREE_KINGDOM',     bundleName: 'tk',            mainPrefab: 'prefabs/tkView',            deps: ['slots_core']        },
 
         // ── CARD GAMES ──────────────────────────────────────────────
         // Họ game bài .NET 10 bê từ Go88 — tất cả dùng chung bundle `cardroom`.
@@ -63,16 +63,16 @@
         // dùng chung `cardgame_core` của nó đã bị XOÁ ngày 2026-09-22 — cả 4 game đều đã chết
         // (Poker 226 ván, TLMN 25 ván, Mậu Binh 0 ván) và tên bundle của chúng đang chiếm chỗ
         // của bản mới. Baccarat là game bài cũ DUY NHẤT còn giữ.
-        { value: '117',label: 'CAO_RUA',           bundleName: 'caorua',        mainPrefab: 'prefabs/CaoRuaView',         deps: ['cardroom']      },
-        { value: '201',label: 'LIENG',             bundleName: 'lieng',         mainPrefab: 'prefabs/LiengView',          deps: ['cardroom']      },
-        { value: '202',label: 'XI_TO',             bundleName: 'xito',          mainPrefab: 'prefabs/XiToView',           deps: ['cardroom']      },
-        { value: '203',label: 'POKER_TEXAS_GO',    bundleName: 'pokertexas',    mainPrefab: 'prefabs/PokerTexasView',     deps: ['cardroom']      },
-        { value: '204',label: 'CATTE',                bundleName: 'catte',           mainPrefab: 'prefabs/CatteView',              deps: ['cardroom']      },
-        { value: '205',label: 'PHOM_GO',              bundleName: 'phom',            mainPrefab: 'prefabs/PhomView',               deps: ['cardroom']      },
-        { value: '206',label: 'TLMN_GO',              bundleName: 'tlmn',            mainPrefab: 'prefabs/TlmnView',               deps: ['cardroom']      },
-        { value: '207',label: 'SAM_LOC_GO',           bundleName: 'samloc',          mainPrefab: 'prefabs/SamLocView',             deps: ['cardroom']      },
-        { value: '208',label: 'XAP_XAM',              bundleName: 'xapxam',          mainPrefab: 'prefabs/XapXamView',             deps: ['cardroom']      },
-        { value: '19', label: 'BACCARAT',          bundleName: 'bacarat',       mainPrefab: 'prefabs/BaCaratView',        deps: []                },
+        { value: '117', label: 'CAO_RUA',           bundleName: 'caorua',        mainPrefab: 'prefabs/CaoRuaView',        deps: ['cardroom']          },
+        { value: '201', label: 'LIENG',             bundleName: 'lieng',         mainPrefab: 'prefabs/LiengView',         deps: ['cardroom']          },
+        { value: '202', label: 'XI_TO',             bundleName: 'xito',          mainPrefab: 'prefabs/XiToView',          deps: ['cardroom']          },
+        { value: '203', label: 'POKER_TEXAS',       bundleName: 'poker',         mainPrefab: 'prefabs/PokerView',         deps: ['cardroom']          },
+        { value: '204', label: 'CATTE',             bundleName: 'catte',         mainPrefab: 'prefabs/CatteView',         deps: ['cardroom']          },
+        { value: '205', label: 'PHOM',              bundleName: 'phom',          mainPrefab: 'prefabs/PhomView',          deps: ['cardroom']          },
+        { value: '206', label: 'TIEN_LEN_MN',       bundleName: 'tienlenMN',     mainPrefab: 'prefabs/TienLenMNView',     deps: ['cardroom']          },
+        { value: '207', label: 'SAM_LOC',           bundleName: 'samloc',        mainPrefab: 'prefabs/SamLocView',        deps: ['cardroom']          },
+        { value: '208', label: 'MAU_BINH',          bundleName: 'maubinh',       mainPrefab: 'prefabs/MauBinhView',       deps: ['cardroom']          },
+        { value: '19',  label: 'BACCARAT',          bundleName: 'bacarat',       mainPrefab: 'prefabs/BaCaratView',       deps: []                    },
     ];
 
     // ═══════════════════════════════════════════════════════════════

@@ -45,10 +45,15 @@ function napThat() {
         apply: () => noiGiCungCo,
         construct: () => noiGiCungCo,
     });
+    // 🔴 Nhận MỌI tên module lạ, không chỉ dạng `./X`.
+    // Mã đã bê nay gọi phụ thuộc bằng TÊN TRẦN (`require("StringUtil")`) — Cocos giải module
+    // theo basename, và dạng `./X` gãy im lặng trong chế độ preview. Bản đầu của phép thử này
+    // chỉ chấp nhận `ten.startsWith('.')` nên sau khi đổi 678 lời gọi, nó NÉM ngay lúc nạp.
+    // Và lần đó tôi chỉ `grep` một mục trong kết quả nên không thấy nó đã chết — phép thử
+    // không in gì trông y như phép thử đạt.
     const req = (ten) => {
         if (moduleGia[ten]) return moduleGia[ten];
-        if (ten.startsWith('.')) return noiGiCungCo;
-        throw new Error('phep thu chua gia lap module: ' + ten);
+        return noiGiCungCo;
     };
     const boc = new Function('require', 'module', 'exports', 'cc', ma);
     boc(req, mod, exp, cc);

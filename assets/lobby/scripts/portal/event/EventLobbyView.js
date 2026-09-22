@@ -114,15 +114,15 @@ var portalConfig = require('PortalConfig');
                     return this.nodeLogoBaccarat;
 
                     //card game
-                case cc.GameId.POKER_TEXAS:
+                case cc.GameId.POKER_TEXAS_CU:
                     return this.nodeLogoPoker;
-                case cc.GameId.BA_CAY:
+                case cc.GameId.BA_CAY_CU:
                     return this.nodeLogoThreeCards;
-                case cc.GameId.MAU_BINH:
+                case cc.GameId.MAU_BINH_CU:
                     return this.nodeLogoMB;
-                case cc.GameId.TIEN_LEN_MN:
+                case cc.GameId.TIEN_LEN_MN_CU:
                     return this.nodeLogoTLMN;
-                case cc.GameId.TIEN_LEN_MN_SOLO:
+                case cc.GameId.TIEN_LEN_MN_SOLO_CU:
                     return this.nodeLogoTLMNSolo;
 
                 default:

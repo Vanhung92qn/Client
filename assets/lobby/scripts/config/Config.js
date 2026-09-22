@@ -376,22 +376,22 @@ var netConfig = require('NetConfig');
                 case cc.GameId.BAUCUA:
                     return cc.GameName.BAU_CUA;
                     //game bai chia phong
-                case cc.GameId.BA_CAY:
+                case cc.GameId.BA_CAY_CU:
                     return cc.GameName.BA_CAY;
                 case cc.GameId.BA_CAY_GA:
                     return cc.GameName.BA_CAY_GA;
                 case cc.GameId.BA_CAY_BIEN:
                     return cc.GameName.BA_CAY_BIEN;
 
-                case cc.GameId.POKER_TEXAS:
+                case cc.GameId.POKER_TEXAS_CU:
                     return cc.GameName.POKER_TEXAS;
 
-                case cc.GameId.TIEN_LEN_MN:
+                case cc.GameId.TIEN_LEN_MN_CU:
                     return cc.GameName.TIEN_LEN_MN;
-                case cc.GameId.TIEN_LEN_MN_SOLO:
+                case cc.GameId.TIEN_LEN_MN_SOLO_CU:
                     return cc.GameName.TIEN_LEN_MN_SOLO;
 
-                case cc.GameId.MAU_BINH:
+                case cc.GameId.MAU_BINH_CU:
                     return cc.GameName.MAU_BINH;
 
                 case cc.GameId.LODE:
@@ -485,9 +485,9 @@ var netConfig = require('NetConfig');
                     return cc.SubdomainName.BACCARAT;
                 case cc.HubName.TLMNHub:
                     switch (cc.RoomController.getInstance().getGameId().toString()) {
-                        case cc.GameId.TIEN_LEN_MN:
+                        case cc.GameId.TIEN_LEN_MN_CU:
                             return cc.SubdomainName.TLMN;
-                        case cc.GameId.TIEN_LEN_MN_SOLO:
+                        case cc.GameId.TIEN_LEN_MN_SOLO_CU:
                             return cc.SubdomainName.TLMN_SOLO;
                     }
                     case cc.HubName.ShootFishHub:
