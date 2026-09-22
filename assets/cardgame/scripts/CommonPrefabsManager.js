@@ -38,7 +38,7 @@ var _cfgMod = null;
 function _docCauHinh() {
     if (null === _cfgMod) {
         try {
-            _cfgMod = require('./GameConfigManager');
+            _cfgMod = require('GameConfigManager');
         } catch (loi) {
             return null;
         }
@@ -50,7 +50,7 @@ var _gpMod = null;
 function _docNguoiChoi() {
     if (null === _gpMod) {
         try {
-            _gpMod = require('./GamePlayManager');
+            _gpMod = require('GamePlayManager');
         } catch (loi) {
             return null;
         }
@@ -452,7 +452,7 @@ var CommonPrefabsManager = (function () {
      */
     CommonPrefabsManager.prototype._lopPopup = function () {
         var bs = null;
-        try { bs = require('./BaseScene'); } catch (loi) { bs = null; }
+        try { bs = require('BaseScene'); } catch (loi) { bs = null; }
         var canh = bs && bs.default ? bs.default.currentScene : null;
         if (canh && canh.node && cc.isValid(canh.node)) return canh.node;
 
@@ -893,7 +893,7 @@ function nhanGia(onSet) {
 
     /** Lấy GameConfigManager mà không tạo phụ thuộc vòng lúc nạp module. */
     function GameConfigManagerCuaToi() {
-        return require('./GameConfigManager').default.getInstance();
+        return require('GameConfigManager').default.getInstance();
     }
 
     /**

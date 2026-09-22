@@ -19,7 +19,7 @@ Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
 var ThemeType,
-  GameConfigManager = require("./GameConfigManager");
+  GameConfigManager = require("GameConfigManager");
 (function(ThemeType) {
   ThemeType[ThemeType.DEFAULT = 0] = "DEFAULT";
   ThemeType[ThemeType.EURO = 1] = "EURO";

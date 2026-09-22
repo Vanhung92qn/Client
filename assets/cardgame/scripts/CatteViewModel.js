@@ -47,12 +47,12 @@ var n = this && this.__extends || function() {
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-var a = require("./MainGameViewModel"),
-  s = require("./GamePlayManager"),
-  r = require("./MessageCardGameHandler"),
-  c = require("./CatteController"),
-  l = require("./BaseScene"),
-  h = require("./GameDefine"),
+var a = require("MainGameViewModel"),
+  s = require("GamePlayManager"),
+  r = require("MessageCardGameHandler"),
+  c = require("CatteController"),
+  l = require("BaseScene"),
+  h = require("GameDefine"),
   u = cc._decorator,
   d = u.ccclass,
   p = u.property,

@@ -47,7 +47,7 @@ var __extends = this && this.__extends || function() {
 Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
-var GameUtils = require("./GameUtils"),
+var GameUtils = require("GameUtils"),
   ccDecorator = cc._decorator,
   ccclass = ccDecorator.ccclass,
   PoolObject = (ccDecorator.property, function() {

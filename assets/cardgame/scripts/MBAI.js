@@ -6,7 +6,7 @@ void 0;
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-var n = require("./MauBinhCheckCard"),
+var n = require("MauBinhCheckCard"),
   o = function() {
     function t() {}
     t.getInstance = function() {

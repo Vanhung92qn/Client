@@ -48,11 +48,11 @@ Object.defineProperty(i, "__esModule", {
   value: true
 });
 var a,
-  s = require("./MessageHandlerBase"),
-  r = require("./GamePlayManager"),
-  c = require("./MessageCardGameHandler"),
-  l = require("./NetworkConfig"),
-  h = require("./TableMessageHandler"),
+  s = require("MessageHandlerBase"),
+  r = require("GamePlayManager"),
+  c = require("MessageCardGameHandler"),
+  l = require("NetworkConfig"),
+  h = require("TableMessageHandler"),
   u = cc._decorator,
   d = u.ccclass;
 u.property;

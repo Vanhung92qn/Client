@@ -31,9 +31,9 @@ Object.defineProperty(i, "__esModule", {
 //  toi giua van moi chet — nen doi chieu bang danh sach, khong bang cam giac.
 // ─────────────────────────────────────────────────────────────────────────────
 
-var StringUtil = require("./StringUtil"),
-  GamePlayManager = require("./GamePlayManager"),
-  GameDefine = require("./GameDefine"),
+var StringUtil = require("StringUtil"),
+  GamePlayManager = require("GamePlayManager"),
+  GameDefine = require("GameDefine"),
   // NetConfig la NGUON DUY NHAT cua Roy88 cho ten mien (assets/config/network/NetConfig.js).
   // Require theo ten tran nhu code Roy88 dang lam (vd lobby/scripts/cardgame/3cay/BCView.js:5).
   s = t("NetConfig");
@@ -66,7 +66,7 @@ var _mp = null;
 function mayHat() {
   if (null === _mp) {
     try {
-      _mp = require("./MusicPlayer");
+      _mp = require("MusicPlayer");
     } catch (loi) {
       return null;
     }

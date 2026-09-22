@@ -47,7 +47,7 @@ var n = this && this.__extends || function() {
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-var a = require("./StringUtil"),
+var a = require("StringUtil"),
   s = cc._decorator,
   r = s.ccclass,
   c = s.property,

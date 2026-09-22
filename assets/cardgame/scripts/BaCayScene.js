@@ -47,10 +47,10 @@ var __extends = this && this.__extends || function() {
 Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
-var BaCayController = require("./BaCayController"),
-  GamePlayManager = require("./GamePlayManager"),
-  MessageCardGameHandler = require("./MessageCardGameHandler"),
-  MainGameViewModel = require("./MainGameViewModel"),
+var BaCayController = require("BaCayController"),
+  GamePlayManager = require("GamePlayManager"),
+  MessageCardGameHandler = require("MessageCardGameHandler"),
+  MainGameViewModel = require("MainGameViewModel"),
   ccDecorator = cc._decorator,
   ccclass = ccDecorator.ccclass,
   property = ccDecorator.property,

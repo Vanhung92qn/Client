@@ -24,7 +24,7 @@ var __decorate = this && this.__decorate || function(t, e, i, n) {
 Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
-var GameUtils = require("./GameUtils"),
+var GameUtils = require("GameUtils"),
   _decorator = cc._decorator,
   ccclass = _decorator.ccclass;
 _decorator.property;

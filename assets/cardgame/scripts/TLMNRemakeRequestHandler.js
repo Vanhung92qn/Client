@@ -24,10 +24,10 @@ var n = this && this.__decorate || function(t, e, i, n) {
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-var o = require("./GamePlayManager"),
-  a = require("./MessageCardGameHandler"),
-  s = require("./WSCardGameHandle"),
-  r = require("./TLMNRemakeMessage"),
+var o = require("GamePlayManager"),
+  a = require("MessageCardGameHandler"),
+  s = require("WSCardGameHandle"),
+  r = require("TLMNRemakeMessage"),
   c = cc._decorator,
   l = c.ccclass,
   h = (c.property, function() {

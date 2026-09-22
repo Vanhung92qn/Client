@@ -180,10 +180,10 @@ var __extends = this && this.__extends || function() {
 Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
-var GameUtils = require("./GameUtils"),
-  StringUtil = require("./StringUtil"),
-  GameConfigManager = require("./GameConfigManager"),
-  RMCThemeConfig = require("./RMCThemeConfig"),
+var GameUtils = require("GameUtils"),
+  StringUtil = require("StringUtil"),
+  GameConfigManager = require("GameConfigManager"),
+  RMCThemeConfig = require("RMCThemeConfig"),
   ccDecorator = cc._decorator,
   ccclass = ccDecorator.ccclass,
   MusicPlayer = (ccDecorator.property, function(_super) {

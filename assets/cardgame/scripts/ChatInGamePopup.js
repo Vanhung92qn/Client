@@ -47,14 +47,14 @@ var __extends = this && this.__extends || function() {
 Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
-var ChatItem = require("./ChatItem"),
-  CardGameCommonRequest = require("./CardGameCommonRequest"),
-  StringUtil = require("./StringUtil"),
-  MusicPlayer = require("./MusicPlayer"),
-  GameConfigManager = require("./GameConfigManager"),
-  GamePlayManager = require("./GamePlayManager"),
-  MessageCardGameHandler = require("./MessageCardGameHandler"),
-  TabIdolLiveController = require("./TabIdolLiveController"),
+var ChatItem = require("ChatItem"),
+  CardGameCommonRequest = require("CardGameCommonRequest"),
+  StringUtil = require("StringUtil"),
+  MusicPlayer = require("MusicPlayer"),
+  GameConfigManager = require("GameConfigManager"),
+  GamePlayManager = require("GamePlayManager"),
+  MessageCardGameHandler = require("MessageCardGameHandler"),
+  TabIdolLiveController = require("TabIdolLiveController"),
   ccDecorator = cc._decorator,
   ccclass = ccDecorator.ccclass,
   property = ccDecorator.property,

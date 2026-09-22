@@ -23,13 +23,13 @@ Object.defineProperty(exports, '__esModule', { value: true });
 // Cùng bộ require như bản gốc, chỉ còn những module ĐÃ được bê sang.
 // Lưu ý: CardGameCommonRequest cũng require ngược lại tệp này — vòng tròn này có sẵn trong
 // bản gốc Go88 và không sao, vì ta chỉ chạm `.default` lúc gọi hàm chứ không lúc nạp module.
-var MessageCardGameHandler = require('./MessageCardGameHandler');
-var CardGameCommonRequest = require('./CardGameCommonRequest');
-var GameConfigManager = require('./GameConfigManager');
-var CommonPrefabsManager = require('./CommonPrefabsManager');
-var GameUtils = require('./GameUtils');
-var MusicPlayer = require('./MusicPlayer');
-var StringUtil = require('./StringUtil');
+var MessageCardGameHandler = require('MessageCardGameHandler');
+var CardGameCommonRequest = require('CardGameCommonRequest');
+var GameConfigManager = require('GameConfigManager');
+var CommonPrefabsManager = require('CommonPrefabsManager');
+var GameUtils = require('GameUtils');
+var MusicPlayer = require('MusicPlayer');
+var StringUtil = require('StringUtil');
 
 var GamePlayManager = (function () {
 

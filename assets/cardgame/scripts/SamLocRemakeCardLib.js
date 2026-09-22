@@ -6,8 +6,8 @@ void 0;
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-var n = require("./GameCard"),
-  o = require("./GameDefine");
+var n = require("GameCard"),
+  o = require("GameDefine");
 
 function a(t, e, i, n, o, s, r) {
   if (n == i) {

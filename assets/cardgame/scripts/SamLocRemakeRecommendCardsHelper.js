@@ -6,11 +6,11 @@ void 0;
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-var n = require("./GameCardSprite"),
-  o = require("./SamLocRemakeCardLib"),
-  a = require("./SamLocRemakeGetCardsHeigherHelper"),
-  s = require("./SamLocRemakeCardsTypeHelper"),
-  r = require("./SamLocRemakeConstant");
+var n = require("GameCardSprite"),
+  o = require("SamLocRemakeCardLib"),
+  a = require("SamLocRemakeGetCardsHeigherHelper"),
+  s = require("SamLocRemakeCardsTypeHelper"),
+  r = require("SamLocRemakeConstant");
 i.getRecommendCards = function(t, e) {
   o.sortVector(t, false);
   var s = [];

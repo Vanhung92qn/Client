@@ -18,8 +18,8 @@ var __assign = this && this.__assign || function() {
 Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
-var GameConfigManager = require("./GameConfigManager"),
-  GamePlayManager = require("./GamePlayManager"),
+var GameConfigManager = require("GameConfigManager"),
+  GamePlayManager = require("GamePlayManager"),
   FgIDConfig = function() {
     return function() {
       this.pathInternals = [];

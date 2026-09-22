@@ -47,10 +47,10 @@ var n = this && this.__extends || function() {
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-var a = require("./CardPopupBase"),
-  s = require("./CommonPrefabsManager"),
-  r = require("./MiniGameNode"),
-  c = require("./GameDefine"),
+var a = require("CardPopupBase"),
+  s = require("CommonPrefabsManager"),
+  r = require("MiniGameNode"),
+  c = require("GameDefine"),
   l = cc._decorator,
   h = l.ccclass,
   u = l.property,

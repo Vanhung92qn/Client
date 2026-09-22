@@ -47,8 +47,8 @@ var n = this && this.__extends || function() {
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-var a = require("./StringUtil"),
-  s = require("./MessageCardGameHandler"),
+var a = require("StringUtil"),
+  s = require("MessageCardGameHandler"),
   r = cc._decorator,
   c = r.ccclass,
   l = r.property,

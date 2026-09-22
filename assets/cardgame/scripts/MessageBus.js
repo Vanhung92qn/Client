@@ -47,8 +47,8 @@ var __extends = this && this.__extends || function() {
 Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
-var EventDispatcher = require("./EventDispatcher"),
-  Queue = require("./Queue"),
+var EventDispatcher = require("EventDispatcher"),
+  Queue = require("Queue"),
   _decorator = cc._decorator,
   ccclass = _decorator.ccclass,
   executionOrder = (_decorator.property, _decorator.executionOrder),

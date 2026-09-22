@@ -47,8 +47,8 @@ var __extends = this && this.__extends || function() {
 Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
-var AnalyticDefine = require("./AnalyticDefine"),
-  AnalyticService = require("./AnalyticService"),
+var AnalyticDefine = require("AnalyticDefine"),
+  AnalyticService = require("AnalyticService"),
   _decorator = cc._decorator,
   ccclass = _decorator.ccclass,
   property = _decorator.property,

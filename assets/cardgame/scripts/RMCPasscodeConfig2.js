@@ -18,7 +18,7 @@ var __assign = this && this.__assign || function() {
 Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
-var GameConfigManager = require("./GameConfigManager"),
+var GameConfigManager = require("GameConfigManager"),
   defaultConfig = {
     enable: true,
     urlAnalytic: ""

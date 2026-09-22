@@ -47,11 +47,11 @@ var __extends = this && this.__extends || function() {
 Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
-var GamePlayManager = require("./GamePlayManager"),
-  MessageCardGameHandler = require("./MessageCardGameHandler"),
-  GameCardSpriteType = require("./GameCardSpriteType"),
-  XiToRequestHandler = require("./XiToRequestHandler"),
-  GameDefine = require("./GameDefine"),
+var GamePlayManager = require("GamePlayManager"),
+  MessageCardGameHandler = require("MessageCardGameHandler"),
+  GameCardSpriteType = require("GameCardSpriteType"),
+  XiToRequestHandler = require("XiToRequestHandler"),
+  GameDefine = require("GameDefine"),
   ccDecorator = cc._decorator,
   ccclass = ccDecorator.ccclass,
   property = ccDecorator.property,

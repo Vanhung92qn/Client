@@ -47,11 +47,11 @@ var __extends = this && this.__extends || function() {
 Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
-var StringUtil = require("./StringUtil"),
-  MiniGameNode = require("./MiniGameNode"),
-  RichTextCustom = require("./RichTextCustom"),
-  HeaderUi = require("./HeaderUi"),
-  GameConfigManager = require("./GameConfigManager"),
+var StringUtil = require("StringUtil"),
+  MiniGameNode = require("MiniGameNode"),
+  RichTextCustom = require("RichTextCustom"),
+  HeaderUi = require("HeaderUi"),
+  GameConfigManager = require("GameConfigManager"),
   ccDecorator = cc._decorator,
   ccclass = ccDecorator.ccclass,
   property = ccDecorator.property,

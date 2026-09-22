@@ -6,7 +6,7 @@ void 0;
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-var n = require("./TLMNRemakeCardLib");
+var n = require("TLMNRemakeCardLib");
 
 function o(t) {
   if (t.length < 3) {

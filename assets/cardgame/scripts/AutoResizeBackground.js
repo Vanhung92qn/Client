@@ -47,7 +47,7 @@ var __extends = this && this.__extends || function() {
 Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
-var CanvasScene = require("./CanvasScene"),
+var CanvasScene = require("CanvasScene"),
   ccDecorator = cc._decorator,
   ccclass = ccDecorator.ccclass,
   AutoResizeBackground = (ccDecorator.property, function(_super) {

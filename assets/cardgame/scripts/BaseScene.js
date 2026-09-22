@@ -140,18 +140,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 Object.defineProperty(exports, "__esModule", { value: true });
 
-var MessageCardGameHandler = require("./MessageCardGameHandler");
-var WSCardGameHandle = require("./WSCardGameHandle");
-var GamePlayManager = require("./GamePlayManager");
-var CommonPrefabsManager = require("./CommonPrefabsManager");
-var GameConfigManager = require("./GameConfigManager");
-var BroadCast = require("./BroadCast");
-var HeaderUi = require("./HeaderUi");
-var StringUtil = require("./StringUtil");
-var GameDefine = require("./GameDefine");
-var MusicPlayer = require("./MusicPlayer");
-var NhatKy = require("./NhatKy");
-var SessionData = require("./SessionData");
+var MessageCardGameHandler = require("MessageCardGameHandler");
+var WSCardGameHandle = require("WSCardGameHandle");
+var GamePlayManager = require("GamePlayManager");
+var CommonPrefabsManager = require("CommonPrefabsManager");
+var GameConfigManager = require("GameConfigManager");
+var BroadCast = require("BroadCast");
+var HeaderUi = require("HeaderUi");
+var StringUtil = require("StringUtil");
+var GameDefine = require("GameDefine");
+var MusicPlayer = require("MusicPlayer");
+var NhatKy = require("NhatKy");
+var SessionData = require("SessionData");
 
 var decorator = cc._decorator,
     ccclass = decorator.ccclass,

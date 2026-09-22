@@ -6,8 +6,8 @@ void 0;
 Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
-var GameConfigManager = require("./GameConfigManager"),
-  MessageCardGameHandler = require("./MessageCardGameHandler"),
+var GameConfigManager = require("GameConfigManager"),
+  MessageCardGameHandler = require("MessageCardGameHandler"),
   BaccaratLiveVariant = function() {
     function BaccaratLiveVariant() {}
     Object.defineProperty(BaccaratLiveVariant, "config", {

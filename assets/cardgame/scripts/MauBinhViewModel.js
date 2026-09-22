@@ -47,14 +47,14 @@ var n = this && this.__extends || function() {
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-var a = require("./MainGameViewModel"),
-  s = require("./GamePlayManager"),
-  r = require("./MessageCardGameHandler"),
-  c = require("./MauBinhController"),
-  l = require("./GameConfigManager"),
-  h = require("./CommonPrefabsManager"),
-  u = require("./MiniGameNode"),
-  d = require("./CardPopupBase");
+var a = require("MainGameViewModel"),
+  s = require("GamePlayManager"),
+  r = require("MessageCardGameHandler"),
+  c = require("MauBinhController"),
+  l = require("GameConfigManager"),
+  h = require("CommonPrefabsManager"),
+  u = require("MiniGameNode"),
+  d = require("CardPopupBase");
 i.KEY_MAU_BINH_SORT_NEW_CARD_INTRODUCE = "KEY_MAU_BINH_SORT_NEW_CARD_INTRODUCE";
 var p = cc._decorator,
   f = p.ccclass,

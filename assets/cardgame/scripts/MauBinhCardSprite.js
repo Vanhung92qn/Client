@@ -47,7 +47,7 @@ var n = this && this.__extends || function() {
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-var a = require("./GameCardSprite"),
+var a = require("GameCardSprite"),
   s = cc._decorator,
   r = s.ccclass,
   c = (s.property, function(t) {

@@ -6,8 +6,8 @@ void 0;
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-var n = require("./TLMNRemakeCardsTypeHelper"),
-  o = require("./TLMNRemakeRecommendCardsHelper");
+var n = require("TLMNRemakeCardsTypeHelper"),
+  o = require("TLMNRemakeRecommendCardsHelper");
 
 function a(t, e, i, n) {
   s(t, e, i, 0, [], 0, n);

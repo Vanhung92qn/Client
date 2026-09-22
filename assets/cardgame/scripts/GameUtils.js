@@ -24,13 +24,13 @@ var __decorate = this && this.__decorate || function(t, e, i, n) {
 Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
-var StringUtil = require("./StringUtil"),
-  GameConfigManager = require("./GameConfigManager"),
-  CommonPrefabsManager = require("./CommonPrefabsManager"),
-  GamePlayManager = require("./GamePlayManager"),
-  MessageCardGameHandler = require("./MessageCardGameHandler"),
-  GbBrandChecker = require("./GbBrandChecker"),
-  RMCAppInfoConfig = require("./RMCAppInfoConfig"),
+var StringUtil = require("StringUtil"),
+  GameConfigManager = require("GameConfigManager"),
+  CommonPrefabsManager = require("CommonPrefabsManager"),
+  GamePlayManager = require("GamePlayManager"),
+  MessageCardGameHandler = require("MessageCardGameHandler"),
+  GbBrandChecker = require("GbBrandChecker"),
+  RMCAppInfoConfig = require("RMCAppInfoConfig"),
   ccDecorator = cc._decorator,
   ccclass = ccDecorator.ccclass,
   moneyTickInterval = (ccDecorator.property, .07),

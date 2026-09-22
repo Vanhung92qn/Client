@@ -47,9 +47,9 @@ var n = this && this.__extends || function() {
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-var a = require("./GameZOrder"),
-  s = require("./GamePlayManager"),
-  r = require("./CardGameCommonRequest"),
+var a = require("GameZOrder"),
+  s = require("GamePlayManager"),
+  r = require("CardGameCommonRequest"),
   c = cc._decorator,
   l = c.ccclass,
   h = c.property,

@@ -48,7 +48,7 @@ Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
 var ScreenType,
-  GameConfigManager = require("./GameConfigManager"),
+  GameConfigManager = require("GameConfigManager"),
   ccDecorator = cc._decorator,
   ccclass = ccDecorator.ccclass,
   property = ccDecorator.property;

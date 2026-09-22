@@ -24,10 +24,10 @@ var __decorate = this && this.__decorate || function(t, e, i, n) {
 Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
-var WSCardGameHandle = require("./WSCardGameHandle"),
-  MessageCardGameHandler = require("./MessageCardGameHandler"),
-  GamePlayManager = require("./GamePlayManager"),
-  BaCayMessage = require("./BaCayMessage"),
+var WSCardGameHandle = require("WSCardGameHandle"),
+  MessageCardGameHandler = require("MessageCardGameHandler"),
+  GamePlayManager = require("GamePlayManager"),
+  BaCayMessage = require("BaCayMessage"),
   ccDecorator = cc._decorator,
   ccclass = ccDecorator.ccclass,
   BaCayRequest = (ccDecorator.property, function() {

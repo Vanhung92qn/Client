@@ -6,7 +6,7 @@ void 0;
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-var n = require("./GameDefine"),
+var n = require("GameDefine"),
   o = function() {
     function t(t, e) {
       this.resourceName = null;

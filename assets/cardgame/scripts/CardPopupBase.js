@@ -63,7 +63,7 @@ var _cfg = null;
 function cauHinh() {
   if (null === _cfg) {
     try {
-      _cfg = require("./GameConfigManager");
+      _cfg = require("GameConfigManager");
     } catch (loi) {
       return null;
     }
@@ -75,7 +75,7 @@ var _nhac = null;
 function mayHat() {
   if (null === _nhac) {
     try {
-      _nhac = require("./MusicPlayer");
+      _nhac = require("MusicPlayer");
     } catch (loi) {
       return null;
     }

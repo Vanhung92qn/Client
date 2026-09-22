@@ -6,7 +6,7 @@ void 0;
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-var n = require("./SamLocRemakeCardLib");
+var n = require("SamLocRemakeCardLib");
 
 function o(t) {
   n.sortVector(t, true);

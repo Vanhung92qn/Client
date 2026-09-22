@@ -5,7 +5,7 @@ void 0;
 Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
-var GameConfigManager = require("./GameConfigManager");
+var GameConfigManager = require("GameConfigManager");
 
 function getAppInfoConfig() {
   return GameConfigManager.default.getInstance().getConfig("app_info");

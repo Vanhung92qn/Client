@@ -47,8 +47,8 @@ var __extends = this && this.__extends || function() {
 Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
-var ChatInGamePopup = require("./ChatInGamePopup"),
-  GamePlayManager = require("./GamePlayManager"),
+var ChatInGamePopup = require("ChatInGamePopup"),
+  GamePlayManager = require("GamePlayManager"),
   ccDecorator = cc._decorator,
   ccclass = ccDecorator.ccclass,
   property = ccDecorator.property,

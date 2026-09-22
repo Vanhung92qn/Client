@@ -47,9 +47,9 @@ var n = this && this.__extends || function() {
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-var a = require("./PoolManager"),
-  s = require("./BetListViewItem"),
-  r = require("./MusicPlayer"),
+var a = require("PoolManager"),
+  s = require("BetListViewItem"),
+  r = require("MusicPlayer"),
   c = cc._decorator,
   l = c.ccclass,
   h = c.property,

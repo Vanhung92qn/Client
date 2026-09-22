@@ -47,8 +47,8 @@ var __extends = this && this.__extends || function() {
 Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
-var OrientationManager = require("./OrientationManager"),
-  TableCell = require("./TableCell"),
+var OrientationManager = require("OrientationManager"),
+  TableCell = require("TableCell"),
   ccDecorator = cc._decorator,
   ccclass = ccDecorator.ccclass,
   property = ccDecorator.property,

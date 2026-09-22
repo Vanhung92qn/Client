@@ -31,12 +31,12 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 // Mấy module này không require ngược lại ai (đã kiểm) nên nạp thẳng ở đầu tệp được.
 // BangGhi cũng vậy: nó không require gì cả, chỉ nhận khung tin từ đúng hai chỗ móc bên dưới.
-var BangGhi = require('./BangGhi');
-var MessageCardGameHandler = require('./MessageCardGameHandler');
-var NhatKy = require('./NhatKy');
-var DongHo = require('./DongHo');
-var MessageHandlerBase = require('./MessageHandlerBase');
-var GameDefine = require('./GameDefine');
+var BangGhi = require('BangGhi');
+var MessageCardGameHandler = require('MessageCardGameHandler');
+var NhatKy = require('NhatKy');
+var DongHo = require('DongHo');
+var MessageHandlerBase = require('MessageHandlerBase');
+var GameDefine = require('GameDefine');
 
 /* ------------------------------------------------------------------ *
  * Bọc WebSocket — thay `WebSocketConnecter` của Go88.
@@ -238,7 +238,7 @@ var WSCardGameHandle = (function () {
         if (this.urlServer && this.urlServer.length > 0) {
             return this.urlServer;
         }
-        var GameConfigManager = require('./GameConfigManager');
+        var GameConfigManager = require('GameConfigManager');
         this.urlServer = GameConfigManager.default.getInstance().getWsCardUrl();
         return this.urlServer;
     };
@@ -541,7 +541,7 @@ var WSCardGameHandle = (function () {
 
         // Bản gốc còn đóng kèm socket TechPlay + Xóc Đĩa. TechPlay không bê; Xóc Đĩa giữ lại
         // cho đúng hình dạng (lớp giả của nó không bao giờ mở nên đây là no-op).
-        require('./WSXDGamesHandle').default.getInstance().closeSocket(false);
+        require('WSXDGamesHandle').default.getInstance().closeSocket(false);
     };
 
     WSCardGameHandle.prototype.onWSError = function (e) {
@@ -721,7 +721,7 @@ var WSCardGameHandle = (function () {
                 break;
             case MessageCardGameHandler.Global_Message.MESSAGES_AND_NEWS:
                 // require muộn: BroadCast là Component và kéo theo GameConfigManager/MiniGameNode.
-                require('./BroadCast').default.listBroadCastMessage = obj.bcm;
+                require('BroadCast').default.listBroadCastMessage = obj.bcm;
                 break;
             case MessageCardGameHandler.Global_Message.BROADCAST_MESSAGES:
                 break;

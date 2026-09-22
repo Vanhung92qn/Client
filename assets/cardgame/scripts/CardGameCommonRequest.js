@@ -24,11 +24,11 @@ var __decorate = this && this.__decorate || function(t, e, i, n) {
 Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
-var WSCardGameHandle = require("./WSCardGameHandle"),
-  MessageCardGameHandler = require("./MessageCardGameHandler"),
-  GamePlayManager = require("./GamePlayManager"),
-  WSXDGamesHandle = require("./WSXDGamesHandle"),
-  GameConfigManager = require("./GameConfigManager"),
+var WSCardGameHandle = require("WSCardGameHandle"),
+  MessageCardGameHandler = require("MessageCardGameHandler"),
+  GamePlayManager = require("GamePlayManager"),
+  WSXDGamesHandle = require("WSXDGamesHandle"),
+  GameConfigManager = require("GameConfigManager"),
   ccDecorator = cc._decorator,
   ccclass = ccDecorator.ccclass,
   CardGameCommonRequest = (ccDecorator.property, function() {

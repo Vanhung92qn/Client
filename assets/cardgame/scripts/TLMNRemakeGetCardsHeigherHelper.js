@@ -6,8 +6,8 @@ void 0;
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-var n = require("./TLMNRemakeCardLib"),
-  o = require("./TLMNRemakeCardsTypeHelper");
+var n = require("TLMNRemakeCardLib"),
+  o = require("TLMNRemakeCardsTypeHelper");
 
 function a(t) {
   n.sortVector(t, true);

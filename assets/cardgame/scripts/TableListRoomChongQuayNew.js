@@ -48,11 +48,11 @@ Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
 var RoomType,
-  TableViewUtils = require("./TableViewUtils"),
-  GamePlayManager = require("./GamePlayManager"),
-  MessageCardGameHandler = require("./MessageCardGameHandler"),
-  CardGameCommonRequest = require("./CardGameCommonRequest"),
-  GameConfigManager = require("./GameConfigManager"),
+  TableViewUtils = require("TableViewUtils"),
+  GamePlayManager = require("GamePlayManager"),
+  MessageCardGameHandler = require("MessageCardGameHandler"),
+  CardGameCommonRequest = require("CardGameCommonRequest"),
+  GameConfigManager = require("GameConfigManager"),
   decorator = cc._decorator,
   ccclass = decorator.ccclass,
   property = decorator.property;

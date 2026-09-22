@@ -6,10 +6,10 @@ void 0;
 Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
-var LocalizeManager = require("./LocalizeManager"),
-  StringUtil = require("./StringUtil"),
-  FgIDConfigManager = require("./FgIDConfigManager"),
-  GamePlayManager = require("./GamePlayManager"),
+var LocalizeManager = require("LocalizeManager"),
+  StringUtil = require("StringUtil"),
+  FgIDConfigManager = require("FgIDConfigManager"),
+  GamePlayManager = require("GamePlayManager"),
   defaultErrorMsg = "Kh\xf4ng th\u1ec3 k\u1ebft n\u1ed1i \u0111\u1ebfn m\xe1y ch\u1ee7, xin h\xe3y th\u1eed l\u1ea1i.",
   msgTimeoutError = "K\u1ebft n\u1ed1i \u0111\u1ebfn m\xe1y ch\u1ee7 th\u1ea5t b\u1ea1i!",
   GameHTTPManager = function() {

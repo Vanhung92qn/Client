@@ -6,11 +6,11 @@ void 0;
 Object.defineProperty(i, "__esModule", {
   value: true
 });
-var n = require("./GameCardSprite"),
-  o = require("./TLMNRemakeCardLib"),
-  a = require("./TLMNRemakeGetCardsHeigherHelper"),
-  s = require("./TLMNRemakeCardsTypeHelper"),
-  r = require("./TLMNRemakeConstant");
+var n = require("GameCardSprite"),
+  o = require("TLMNRemakeCardLib"),
+  a = require("TLMNRemakeGetCardsHeigherHelper"),
+  s = require("TLMNRemakeCardsTypeHelper"),
+  r = require("TLMNRemakeConstant");
 i.getRecommendCards = function(t, e) {
   o.sortVector(t, false);
   var s = [];

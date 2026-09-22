@@ -47,10 +47,10 @@ var __extends = this && this.__extends || function() {
 Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
-var GameHTTPManager = require("./GameHTTPManager"),
-  GamePlayManager = require("./GamePlayManager"),
-  RMCLocalizeConfig = require("./RMCLocalizeConfig"),
-  StringUtil = require("./StringUtil"),
+var GameHTTPManager = require("GameHTTPManager"),
+  GamePlayManager = require("GamePlayManager"),
+  RMCLocalizeConfig = require("RMCLocalizeConfig"),
+  StringUtil = require("StringUtil"),
   ccDecorator = cc._decorator,
   ccclass = ccDecorator.ccclass,
   property = ccDecorator.property,

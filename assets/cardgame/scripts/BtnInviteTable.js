@@ -47,10 +47,10 @@ var __extends = this && this.__extends || function() {
 Object.defineProperty(moduleExports, "__esModule", {
   value: true
 });
-var GamePlayManager = require("./GamePlayManager"),
-  MusicPlayer = require("./MusicPlayer"),
-  CardGameCommonRequest = require("./CardGameCommonRequest"),
-  CommonPrefabsManager = require("./CommonPrefabsManager"),
+var GamePlayManager = require("GamePlayManager"),
+  MusicPlayer = require("MusicPlayer"),
+  CardGameCommonRequest = require("CardGameCommonRequest"),
+  CommonPrefabsManager = require("CommonPrefabsManager"),
   ccDecorator = cc._decorator,
   ccclass = ccDecorator.ccclass,
   BtnInviteTable = (ccDecorator.property, function(_super) {
