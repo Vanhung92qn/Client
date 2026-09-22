@@ -1,0 +1,13 @@
+{
+  "ver": "1.1.3",
+  "uuid": "be611fd4-a650-498e-9ccd-8fbe2b629cb3",
+  "importer": "folder",
+  "isBundle": true,
+  "bundleName": "cardroom_chongquay",
+  "priority": 5,
+  "compressionType": {},
+  "optimizeHotUpdate": {},
+  "inlineSpriteFrames": {},
+  "isRemoteBundle": {},
+  "subMetas": {}
+}

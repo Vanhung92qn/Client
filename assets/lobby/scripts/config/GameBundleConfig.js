@@ -63,15 +63,15 @@
         // dùng chung `cardgame_core` của nó đã bị XOÁ ngày 2026-09-22 — cả 4 game đều đã chết
         // (Poker 226 ván, TLMN 25 ván, Mậu Binh 0 ván) và tên bundle của chúng đang chiếm chỗ
         // của bản mới. Baccarat là game bài cũ DUY NHẤT còn giữ.
-        { value: '117', label: 'CAO_RUA',           bundleName: 'caorua',        mainPrefab: 'prefabs/CaoRuaView',        deps: ['cardroom']          },
-        { value: '201', label: 'LIENG',             bundleName: 'lieng',         mainPrefab: 'prefabs/LiengView',         deps: ['cardroom']          },
-        { value: '202', label: 'XI_TO',             bundleName: 'xito',          mainPrefab: 'prefabs/XiToView',          deps: ['cardroom']          },
-        { value: '203', label: 'POKER_TEXAS',       bundleName: 'poker',         mainPrefab: 'prefabs/PokerView',         deps: ['cardroom']          },
-        { value: '204', label: 'CATTE',             bundleName: 'catte',         mainPrefab: 'prefabs/CatteView',         deps: ['cardroom']          },
-        { value: '205', label: 'PHOM',              bundleName: 'phom',          mainPrefab: 'prefabs/PhomView',          deps: ['cardroom']          },
-        { value: '206', label: 'TIEN_LEN_MN',       bundleName: 'tienlenMN',     mainPrefab: 'prefabs/TienLenMNView',     deps: ['cardroom']          },
-        { value: '207', label: 'SAM_LOC',           bundleName: 'samloc',        mainPrefab: 'prefabs/SamLocView',        deps: ['cardroom']          },
-        { value: '208', label: 'MAU_BINH',          bundleName: 'maubinh',       mainPrefab: 'prefabs/MauBinhView',       deps: ['cardroom']          },
+        { value: '117', label: 'CAO_RUA',           bundleName: 'caorua',        mainPrefab: 'prefabs/CaoRuaView',        deps: ['cardroom', 'cardroom_chongquay']          },
+        { value: '201', label: 'LIENG',             bundleName: 'lieng',         mainPrefab: 'prefabs/LiengView',         deps: ['cardroom', 'cardroom_binhthuong']          },
+        { value: '202', label: 'XI_TO',             bundleName: 'xito',          mainPrefab: 'prefabs/XiToView',          deps: ['cardroom', 'cardroom_binhthuong']          },
+        { value: '203', label: 'POKER_TEXAS',       bundleName: 'poker',         mainPrefab: 'prefabs/PokerView',         deps: ['cardroom', 'cardroom_binhthuong']          },
+        { value: '204', label: 'CATTE',             bundleName: 'catte',         mainPrefab: 'prefabs/CatteView',         deps: ['cardroom', 'cardroom_chongquay']          },
+        { value: '205', label: 'PHOM',              bundleName: 'phom',          mainPrefab: 'prefabs/PhomView',          deps: ['cardroom', 'cardroom_chongquay']          },
+        { value: '206', label: 'TIEN_LEN_MN',       bundleName: 'tienlenMN',     mainPrefab: 'prefabs/TienLenMNView',     deps: ['cardroom', 'cardroom_chongquay']          },
+        { value: '207', label: 'SAM_LOC',           bundleName: 'samloc',        mainPrefab: 'prefabs/SamLocView',        deps: ['cardroom', 'cardroom_chongquay']          },
+        { value: '208', label: 'MAU_BINH',          bundleName: 'maubinh',       mainPrefab: 'prefabs/MauBinhView',       deps: ['cardroom', 'cardroom_chongquay']          },
         { value: '19',  label: 'BACCARAT',          bundleName: 'bacarat',       mainPrefab: 'prefabs/BaCaratView',       deps: []                    },
     ];
 
