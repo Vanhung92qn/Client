@@ -204,8 +204,27 @@ var BaseScene = (function (_super) {
         // nằm trong bộ đã bê (nó thuộc khung khởi động của Go88, kéo theo cả cây hạ tầng).
         // Không có dòng này thì isNeedLogin mãi là false, socket không bao giờ mở, và game
         // đứng im ở màn danh sách bàn mà không báo một lỗi nào.
-        if (!wsCard.isSocketOpen) {
-            wsCard.connectWS(GameConfigManager.default.getInstance().getWsCardUrl());
+        //
+        // 🔴 "Socket đang mở" KHÔNG có nghĩa là "mở tới đúng máy chủ". Chốt cũ chỉ hỏi
+        // `if (!wsCard.isSocketOpen)`, nên mở game bài thứ hai trong cùng một phiên là DÙNG LẠI
+        // socket của game trước: bắt tay thành công, đăng nhập thành công, người chơi ngồi vào
+        // bàn của game khác vẽ bằng giao diện game này, và TIỀN THẬT chạy sai sổ. Không một
+        // dòng lỗi nào. Đo được ngày 2026-09-24: mở Liêng rồi mở Cát Tê thì Cát Tê hiện bàn
+        // Liêng (cược 100, 6 người) với toàn bài úp; mở Liêng rồi mở Tiến Lên MN thì bàn Liêng
+        // 5–9 ghế làm vỡ mảng ghế của TLMN (chỉ khai POS2/POS3/POS4) và ném ở
+        // getViewPositionOfPlayer vì phép chia dư ra số ÂM.
+        //
+        // Nên phải so với máy chủ mà socket ĐANG THỰC SỰ nối tới, chứ không chỉ hỏi nó có mở
+        // hay không. getUrlServer() trả '' khi game chưa có backend — khi đó KHÔNG nối, và nói
+        // thẳng ra. Thà báo không nối được còn hơn để người chơi đánh nhầm máy chủ.
+        var diaChiCan = wsCard.getUrlServer();
+        var diaChiDangNoi = (wsCard.ws && wsCard.ws.url) ? wsCard.ws.url : '';
+
+        if (!diaChiCan) {
+            cc.error('[BaseScene] game này chưa có backend game bài — không mở socket. ' +
+                'Thêm một dòng vào TEN_MIEN_THEO_GAME (GameConfigManager.js) khi dịch vụ đã dựng.');
+        } else if (!wsCard.isSocketOpen || diaChiDangNoi !== diaChiCan) {
+            wsCard.connectWS(diaChiCan);
         }
 
         wsCard.onReceiveMessage = this.onReceiveMessage.bind(this);

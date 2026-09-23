@@ -1,4 +1,4 @@
-'use strict';
+﻿'use strict';
 /*
  * WSCardGameHandle — LỚP GIẢ (shim) thay cho trục cùng tên của Go88.
  *
@@ -138,6 +138,12 @@ var WSCardGameHandle = (function () {
         this.name = 'Socket Card';
         this.CMD_PING_SIMMS = '';
         this.urlServer = '';
+        // Which game `urlServer` was resolved for. One process serves one card game, so the
+        // address changes with the game — see getUrlServer for what went wrong without this.
+        this._urlServerGameId = null;
+        // Last game we already reported as having no backend, so update() does not spam the
+        // console 60 times a second.
+        this._urlErrorGameId = null;
         this.ws = null;
         this.cm_login = '';
         this.isSocketOpen = false;
@@ -234,13 +240,94 @@ var WSCardGameHandle = (function () {
      * ⚠️ require MUỘN (không để đầu tệp) vì GameConfigManager cũng require ngược WSCardGameHandle
      * — nạp vòng tròn ở đầu tệp sẽ nhận về exports rỗng.
      */
+    /**
+     * Client-side game id of the card game currently open, or null when unknown.
+     * This is the key the server address depends on — see getUrlServer.
+     */
+    WSCardGameHandle.prototype._currentCardGameId = function () {
+        if (!cc.RoomController || !cc.RoomController.getInstance) return null;
+        var id = cc.RoomController.getInstance().getGameId();
+        return (id === undefined) ? null : id;
+    };
+
+    /**
+     * Pin the cached address to the game it was resolved for.
+     * Callers that already know the address (connectWS) use this instead of re-deriving it,
+     * so the cache and the live socket can never disagree about which server we are on.
+     */
+    WSCardGameHandle.prototype.setUrlServer = function (url) {
+        if (!url || url.length === 0) return;
+        this.urlServer = url;
+        this._urlServerGameId = this._currentCardGameId();
+    };
+
+    /**
+     * Address of the backend for the card game currently open.
+     *
+     * 🔴 THE CACHE IS KEYED ON THE GAME, NOT JUST ON "IS IT SET". This used to be a plain
+     * `if (this.urlServer) return this.urlServer;`, and because this class is a singleton the
+     * first card game opened after a page load owned the address for the rest of the session.
+     * Open Lieng, leave, open Catte, and Catte talked to the LIENG server: the handshake
+     * succeeded, login succeeded, the player was seated at a Lieng table drawn with Catte
+     * artwork, and 🔴 real money moved through the wrong game's ledger. Nothing logged an error.
+     *
+     * GameConfigManager.js:95 warns about exactly this failure ("Lieng se noi vao may chu Cao
+     * Rua … day la duong co TIEN THAT di qua") and the author did fix the game->subdomain table.
+     * This cache, one layer below, quietly defeated that fix.
+     *
+     * It also produced a crash that looked completely unrelated: a Lieng table seats 5 or 9,
+     * while Tien Len MN only declares seat layouts POS2/POS3/POS4. With 5+ players TLMN falls
+     * back to POS2 (length 2) and computes (playerIndex + 2 - myIndex) % 2, which goes NEGATIVE
+     * in JavaScript — `-1 % 2 === -1` — so POS2[-1] is undefined and
+     * TLMNRemakeController.getViewPositionOfPlayer dies on `.position` of undefined.
+     *
+     * Returns '' when the address cannot be resolved. getWsCardUrl() throws for a game with no
+     * entry in TEN_MIEN_THEO_GAME, and update() calls this every frame, so the throw is caught
+     * and reported once per game instead of 60 times a second. An empty address makes update()
+     * bail out early, which is the honest outcome: no backend, no connection.
+     */
     WSCardGameHandle.prototype.getUrlServer = function () {
-        if (this.urlServer && this.urlServer.length > 0) {
+        var gameId = this._currentCardGameId();
+
+        if (this.urlServer && this.urlServer.length > 0 && this._urlServerGameId === gameId) {
             return this.urlServer;
         }
+
         var GameConfigManager = require('GameConfigManager');
-        this.urlServer = GameConfigManager.default.getInstance().getWsCardUrl();
+        var url;
+        try {
+            url = GameConfigManager.default.getInstance().getWsCardUrl();
+        } catch (err) {
+            if (this._urlErrorGameId !== gameId) {
+                this._urlErrorGameId = gameId;
+                cc.error('[WSCardGameHandle] không biết game ' + gameId + ' chạy trên backend nào — ' +
+                    'không mở kết nối. ' + (err && err.message ? err.message : err));
+            }
+            this.urlServer = '';
+            this._urlServerGameId = gameId;
+            return '';
+        }
+
+        this.urlServer = url;
+        this._urlServerGameId = gameId;
+        this._urlErrorGameId = null;
         return this.urlServer;
+    };
+
+    /**
+     * Close a socket that is still attached to another game's backend.
+     *
+     * The auto-reconnect machinery has to be disarmed first: onWSClose dials `cm_login` again
+     * whenever isReconnectOnClose is set, which would walk straight back into the server we are
+     * trying to leave. `isSocketOpen` is cleared here rather than waiting for onWSClose, because
+     * the caller opens the replacement socket immediately and WebSocketConnecter.connectWS
+     * detaches the old handlers — so onWSClose may never fire for this socket at all.
+     */
+    WSCardGameHandle.prototype._dropSocketOfOtherServer = function (reason) {
+        this.isReconnectOnClose = false;
+        this.closeSocket(false, reason);
+        this.isSocketOpen = false;
+        this.isSocketLogined = false;
     };
 
     /* --------------------------- vòng lặp mỗi khung hình --------------------------- */
@@ -383,8 +470,36 @@ var WSCardGameHandle = (function () {
         return token ? token : '';
     };
 
-    // Dựng khung đăng nhập Simms và mở kết nối. Ở Go88 việc này do LoadingScene.js:688 làm.
-    WSCardGameHandle.prototype.connectWS = function () {
+    /**
+     * Build the Simms login frame and open the connection. Go88 does this in LoadingScene.js:688.
+     *
+     * 🔴 THE `url` ARGUMENT IS REAL. It used to be declared `function ()` while the only caller
+     * wrote `connectWS(GameConfigManager.getInstance().getWsCardUrl())` — so the address was
+     * computed, passed, and silently dropped on the floor. That is precisely why the stale-server
+     * bug stayed invisible for so long: the call site reads as if it selects the backend per game.
+     *
+     * Passing an address that differs from the current one closes the old socket first. Without
+     * that, a player leaving Lieng for another card game kept the Lieng socket open, stayed
+     * seated at the Lieng table server-side, and kept trading real money there under a different
+     * game's UI.
+     *
+     * @param {string} [url] backend to connect to; falls back to getUrlServer() when omitted.
+     */
+    WSCardGameHandle.prototype.connectWS = function (url) {
+        // Compare against the address the LIVE socket is attached to (WebSocketConnecter.url),
+        // never against `this.urlServer`: getUrlServer() refreshes that cache as a side effect,
+        // so by the time a caller gets here the cache may already hold the new address while the
+        // socket is still talking to the old server.
+        var liveUrl = (this.ws && this.ws.url) ? this.ws.url : '';
+        if (url && url.length > 0 && liveUrl && liveUrl !== url) {
+            if (this.isSocketOpen || (this.ws && this.ws.ws)) {
+                cc.warn('[WSCardGameHandle] đổi máy chủ: ' + liveUrl + ' -> ' + url +
+                    ' — đóng socket cũ trước khi nối lại');
+                this._dropSocketOfOtherServer('switch card server');
+            }
+        }
+        this.setUrlServer(url);
+
         this.timeConnectAfterClose = 5;
         this.isReconnectOnClose = true;
         this.isNeedReconnect = true;
