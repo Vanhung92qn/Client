@@ -115,9 +115,7 @@ var TEN_MIEN_THEO_GAME = {
   205: "phom", // Phom
   206: "tienlen", // Tien Len Mien Nam
   207: "samloc", // Sam Loc
-  // 🔴 "maubinh88" chu KHONG phai "maubinh": ten mien maubinh.bay789x.me da thuoc site IIS
-  // cua Mau Binh .NET Framework CU (C:\IIS\API\cMauBinh) va no VAN DANG CHAY.
-  208: "maubinh88", // Mau Binh (Xap Xam)
+  208: "maubinh", // Mau Binh (Xap Xam)
 };
 
 /**
