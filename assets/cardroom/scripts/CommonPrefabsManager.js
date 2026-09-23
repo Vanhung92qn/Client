@@ -73,12 +73,21 @@ var CommonPrefabsManager = (function () {
         // Go88 tự tắt loading sau `timeout` giây (tham số thứ 3 của showLoading, mặc định 20).
         // Giữ lại vì đây là cái phanh chống kẹt vòng xoay khi backend không trả lời.
         this._loadingWatchdog = null;
+
+        // Buy-in prefab, kept in memory so showPopupBuyIn can stay synchronous — its four
+        // callers all read `popupBuyIn` on the very next statement. See showPopupBuyIn.
+        this._buyInPrefab = null;
+        this._buyInPreloading = false;
     }
 
     CommonPrefabsManager.getInstance = function () {
         if (!this._instance) {
             this._instance = new CommonPrefabsManager();
         }
+        // Kick the preload on every call, not just on construction: the very first getInstance()
+        // can land before BundleLoader has `cardroom` up, and then there would be no second
+        // chance. Both guards inside make repeat calls free.
+        this._instance._preloadBuyInPrefab();
         return this._instance;
     };
 
@@ -857,15 +866,149 @@ function nhanGia(onSet) {
     };
 
     /**
-     * Popup buy-in. Ba Cây KHÔNG dùng buy-in (MMBI = mMBI = 0 — đo trên dây), nhánh này chỉ
-     * tồn tại cho Liêng/Poker/Xì Tố sau này. Trả về đối tượng có `password.node` vì BaseScene
-     * đọc tiếp `.password.node.active`; thiếu là ném TypeError ngay dòng sau.
+     * Buy-in popup — how many chips the player carries to the table.
+     * Original: CommonPrefabsManager.js:494-515. Callers: BaseScene.js:572 (clicked a table row),
+     * LiengController.js:338, PokerController.js:1454, XiToController.js:1562.
+     *
+     * 🔴 THIS FUNCTION MUST FINISH SYNCHRONOUSLY. Every one of the four callers reads
+     * `CommonPrefabsManager.getInstance().popupBuyIn` on the STATEMENT RIGHT AFTER the call —
+     * BaseScene sets `.password.node.active`, the three game controllers assign `.onHandleBuyIn`.
+     * Load the prefab asynchronously here and `popupBuyIn` is undefined for that statement, which
+     * is a hard TypeError in BaseScene and a silently dead OK button in the three controllers.
+     * The original got this for free: `commonPrefabs.prefabBuyIn` is an @property, so the prefab
+     * was already in memory with the scene. The Roy88 equivalent of "in memory with the scene" is
+     * "in memory with the bundle", which is what `_preloadBuyInPrefab` below arranges.
+     *
+     * Ba Cay never reaches this (MMBI = mMBI = 0 on the wire, so no buy-in step) — it is Lieng,
+     * Poker and Xi To that need it. Until 2026-09-24 this was a stub that only logged, which is
+     * why those three could not enter a table at all: no popup, no OK button, so the join frame
+     * `[3, zone, rid, pwd, null, {m}]` was never sent. Nothing threw; the game just sat there.
+     *
+     * @param {number} maxBuyIn upper bound, wire field `MMBI`
+     * @param {number} minBuyIn lower bound, wire field `mMBI`
+     * @param {number} bet      table bet, used as the step between selectable amounts
+     * @param {boolean} [autoJoin=false] true when the player clicked a table and still has to
+     *                  join it, so OK must join AND buy in; false when already seated.
      */
-    CommonPrefabsManager.prototype.showPopupBuyIn = function (maxBuyIn, minBuyIn, bet, tuHien) {
-        cc.log('%c[BẤM] showPopupBuyIn', 'color:#0a0;font-weight:bold', '· tham số:', maxBuyIn, minBuyIn, bet);
-        cc.warn('[caorua] showPopupBuyIn chưa làm (Ba Cây không dùng buy-in): ' + minBuyIn + '–' + maxBuyIn);
-        this.popupBuyIn = { password: { node: { active: false } }, hide: function () {} };
+    CommonPrefabsManager.prototype.showPopupBuyIn = function (maxBuyIn, minBuyIn, bet, autoJoin) {
+        if (void 0 === autoJoin) autoJoin = false;
+        cc.log('%c[BẤM] showPopupBuyIn', 'color:#0a0;font-weight:bold', '· tham số:', maxBuyIn, minBuyIn, bet, autoJoin);
+
+        // Selectable amounts: min, then min + bet, + bet, … while <= max. Copied from the
+        // original loop verbatim — note it is `<= maxBuyIn`, so max itself is offered only when
+        // it lands exactly on the step grid. Do not "improve" this: the server validates the
+        // amount and the grid is what Go88's own popup offers.
+        var betList = [];
+        betList.push(minBuyIn);
+        for (var amount = minBuyIn + bet; amount <= maxBuyIn;) {
+            betList.push(amount);
+            amount += bet;
+        }
+
+        var prefab = this._getBuyInPrefab();
+        if (!prefab) {
+            // Cold path. Should be unreachable: _preloadBuyInPrefab() runs at getInstance() and
+            // the popup cannot be asked for until a table row is clicked, which is at minimum one
+            // network round-trip later. Shout, do not fail quietly — a silent stub here is exactly
+            // what cost three games their entry for days.
+            cc.error(TAG + ' popup buy-in CHƯA nạp xong prefab — không mở được. ' +
+                'Kiểm prefabs/PopupBuyIn_4e0c736a có nằm trong bundle "' + BUNDLE_CHUNG + '" không.');
+            this._preloadBuyInPrefab();
+            this.showPopupMessageUtil('Chưa tải xong dữ liệu. Thử lại nhé!');
+            return null;
+        }
+
+        // Original reuses the node while it is still valid. We cannot: CardPopupBase.hide()
+        // destroys the node (isDestroyOnHide, see CardPopupBase.js:207) because Roy88 does not
+        // port GamePlayManager.arrayPopup, the stack that used to own that lifetime. So a fresh
+        // instance per open, and the isValid guard below still matters for a double open.
+        if (!this.popupBuyIn || !this.popupBuyIn.isValid || !this.popupBuyIn.node || !this.popupBuyIn.node.isValid) {
+            var parent = this._lopPopup();
+            if (!parent) {
+                cc.warn(TAG + ' không tìm được lớp để gắn popup buy-in');
+                return null;
+            }
+
+            var node = cc.instantiate(prefab);
+            node.parent = parent;
+            node.x = 0;
+            node.y = 0;
+            node.zIndex = this._zTrenCung(parent);
+            this._ghiNhanGan(node, parent, 'prefabs/PopupBuyIn_4e0c736a');
+
+            var BuyInViewController = require('BuyInViewController');
+            this.popupBuyIn = node.getComponent(BuyInViewController.default);
+            if (!this.popupBuyIn) {
+                cc.error(TAG + ' PopupBuyIn dựng được nhưng KHÔNG có component BuyInViewController — ' +
+                    'prefab và script lệch uuid. Xem .meta của cả hai.');
+                node.destroy();
+                return null;
+            }
+        }
+
+        // Order matters and is the original's: show() first, then loadData(). Reversed, show()
+        // resets scale/opacity after loadData has already built the amount tiles.
+        this.popupBuyIn.show();
+
+        var player = _docNguoiChoi();
+        if (this.popupBuyIn.lblMoney && player) {
+            this.popupBuyIn.lblMoney.string = (player.gold || 0).toLocaleString();
+        }
+        this.popupBuyIn.loadData(
+            betList,
+            player ? player.roomID : undefined,
+            player ? player.serverID : undefined,
+            autoJoin);
+
         return this.popupBuyIn;
+    };
+
+    /**
+     * Synchronous handle on the buy-in prefab, or null if it is not in memory yet.
+     * `bundle.get()` is the synchronous half of the asset manager: it returns an asset only when
+     * it has already been loaded, and never starts a load itself.
+     */
+    CommonPrefabsManager.prototype._getBuyInPrefab = function () {
+        if (this._buyInPrefab && this._buyInPrefab.isValid) return this._buyInPrefab;
+
+        var bundle = cc.assetManager.getBundle(BUNDLE_CHUNG);
+        if (!bundle) return null;
+
+        this._buyInPrefab = bundle.get('prefabs/PopupBuyIn_4e0c736a', cc.Prefab);
+        return this._buyInPrefab || null;
+    };
+
+    /**
+     * Pull the buy-in prefab into memory ahead of time, so showPopupBuyIn can stay synchronous.
+     *
+     * Called from getInstance(), i.e. as soon as any card game touches this shim — long before a
+     * table row can be clicked. Safe to call repeatedly: bundle.load() de-duplicates, and the
+     * isValid check above short-circuits once it is cached.
+     *
+     * 🔴 The prefab lives in `cardroom` and nothing references it by uuid, so no dependency graph
+     * pulls it in. It is only ever reached through this string path — which is also why the
+     * project's uuid-integrity scan reports zero broken references while this popup is broken.
+     * It sat in the `phom` bundle until 2026-09-24; the loader only ever looks in BUNDLE_CHUNG,
+     * so not even Phom itself could open it.
+     */
+    CommonPrefabsManager.prototype._preloadBuyInPrefab = function () {
+        if (this._buyInPrefab && this._buyInPrefab.isValid) return;
+        if (this._buyInPreloading) return;
+
+        var bundle = cc.assetManager.getBundle(BUNDLE_CHUNG);
+        if (!bundle) return;   // bundle not up yet; getInstance() will try again on the next game open
+
+        var self = this;
+        this._buyInPreloading = true;
+        bundle.load('prefabs/PopupBuyIn_4e0c736a', cc.Prefab, function (err, prefab) {
+            self._buyInPreloading = false;
+            if (err || !prefab) {
+                cc.error(TAG + ' nạp trước prefab buy-in THẤT BẠI: ' + (err && err.message ? err.message : err));
+                return;
+            }
+            self._buyInPrefab = prefab;
+            cc.log(TAG + ' đã nạp sẵn prefab buy-in');
+        });
     };
 
     /**
