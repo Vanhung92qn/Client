@@ -52,19 +52,35 @@ i.isThreeOfAKind = function(t) {
 i.isFourOfAKind = function(t) {
   return 4 == t.length && t[0].N == t[1].N && t[1].N == t[2].N && t[2].N == t[3].N;
 };
+// VA 2026-09-23: chot loai HEO o day von la MA CHET.
+// Ban goc Go88 viet `t.forEach(function(t){ if (15 == t.N) return false; })` — `return` ben
+// trong forEach KHONG lam gi ca, nen client VAN nhan K-K-A-A-2-2 la ba doi thong.
+// Hau qua neu de nguyen: Q-Q-K-K-A-A-2-2 la BON doi thong CAO NHAT co the, khong bo nao chat
+// duoc, thanh bai bat kha chien bai. Va client con TU MAU THUAN: no cho RA DAU VONG bang bo
+// do nhung KHONG cho dung no de chat heo le (getHigherThreePairs loc dung o :185).
+// Chu du an da chot: doi thong DUNG O AT. Backend cung cam (TienLenLuat.LaDoiThong).
 i.isThreePairsStraight = function(t) {
-  return 6 == t.length && (t.forEach(function(t) {
-    if (15 == t.N) {
+  if (6 != t.length) {
+    return false;
+  }
+  for (var k = 0; k < t.length; k++) {
+    if (15 == t[k].N) {
       return false;
     }
-  }), t[0].N == t[1].N && t[1].N == t[2].N - 1 && t[1].N == t[3].N - 1 && t[1].N == t[4].N - 2 && t[1].N == t[5].N - 2);
+  }
+  return t[0].N == t[1].N && t[1].N == t[2].N - 1 && t[1].N == t[3].N - 1 && t[1].N == t[4].N - 2 && t[1].N == t[5].N - 2;
 };
+// VA 2026-09-23 — cung ly do voi isThreePairsStraight o tren.
 i.isFourPairsStraight = function(t) {
-  return 8 == t.length && (t.forEach(function(t) {
-    if (15 == t.N) {
+  if (8 != t.length) {
+    return false;
+  }
+  for (var k = 0; k < t.length; k++) {
+    if (15 == t[k].N) {
       return false;
     }
-  }), t[0].N == t[1].N && t[1].N == t[2].N - 1 && t[1].N == t[3].N - 1 && t[1].N == t[4].N - 2 && t[1].N == t[5].N - 2 && t[1].N == t[
-    6].N - 3 && t[1].N == t[7].N - 3);
+  }
+  return t[0].N == t[1].N && t[1].N == t[2].N - 1 && t[1].N == t[3].N - 1 && t[1].N == t[4].N - 2 && t[1].N == t[5].N - 2 && t[1].N == t[
+    6].N - 3 && t[1].N == t[7].N - 3;
 };
 void 0;
