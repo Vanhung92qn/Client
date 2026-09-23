@@ -4,7 +4,7 @@
   "importer": "folder",
   "isBundle": true,
   "bundleName": "cardroom",
-  "priority": 5,
+  "priority": 3,
   "compressionType": {},
   "optimizeHotUpdate": {},
   "inlineSpriteFrames": {},
